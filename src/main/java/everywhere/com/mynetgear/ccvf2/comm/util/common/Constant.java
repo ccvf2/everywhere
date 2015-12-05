@@ -6,6 +6,12 @@
  */
 package everywhere.com.mynetgear.ccvf2.comm.util.common;
 
+/**
+ * @author 배성욱
+ * @createDate 2015. 12. 6.
+ * @described 클래스전체의 하는(큰)일을 적어주세요.
+ * @reference class
+ */
 public class Constant {
 	/** 개발자 로그 : 개발자 전용*/
 	public static final String LOG_ID1 = "★★★log★★★  ";
@@ -19,11 +25,16 @@ public class Constant {
 
 	/** YN : Y  */
 	public static final String SYNB_YN_Y= "Y";
+	/** YN : N  */
 	public static final String SYNB_YN_N= "N";
+	
 	/** CRUD : C*/
 	public static final String SYNB_CRUD_C= "C";
+	/** CRUD : R*/
 	public static final String SYNB_CRUD_R= "R";
+	/** CRUD : U*/
 	public static final String SYNB_CRUD_U= "U";
+	/** CRUD : D*/
 	public static final String SYNB_CRUD_D= "D";
 	
 	/** NULLSTRING : "" */
@@ -52,7 +63,7 @@ public class Constant {
 	/** String Numbr : 0 */
 	public static final String SYNB_NUM_0= "0";
 	
-	
+
 	/** 회원등급:관리자 */
 	public static final String MEMBER_LEVEL_ADMIN = "ADMIN";
 	/** 회원등급:일반사용자 */

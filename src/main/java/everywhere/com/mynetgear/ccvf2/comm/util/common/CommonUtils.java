@@ -1,9 +1,3 @@
-/**
- * @author 배성욱
- * @createDate 2015. 12. 5.
- * @described 공통처리를 유틸리티
- * @reference CommonUtils-class
- */
 package everywhere.com.mynetgear.ccvf2.comm.util.common;
 
 import java.util.Iterator;
@@ -11,6 +5,12 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+/**
+ * @author 배성욱
+ * @createDate 2015. 12. 5.
+ * @described 공통처리를 유틸리티
+ * @reference CommonUtils-class
+ */
 public class CommonUtils {
 
 	/**
@@ -64,7 +64,9 @@ public class CommonUtils {
 		return error;
 	}
 
-	/** SQL 인젝션 구문 삭제 **/
+	/** SQL 인젝션 구문 삭제 
+	 * @param text 
+	 * @return **/
 	public String sqlInjectionDelete(String text) {
 		String[] ch = { "'", "\"", "-", "(", ")", "<", ">", "=", "*", "/", "+", "user_tables", "user_table_coulmns",
 				"table_name", "column_name", "syscolumns", "union", "select", "insert", "drop", "update", "and", "or",
@@ -84,7 +86,10 @@ public class CommonUtils {
 		return text;
 	}
 
-	/** SQL 인젝션 구문 검사 **/
+	/** SQL 인젝션 구문 검사 
+	 * @param text 
+	 * @param param 
+	 * @return **/
 	public static String sqlInjectionCheck(String text, String param) {
 		String[] ch = { "'", "\"", "-", "(", ")", "<", ">", "=", "*", "/", "+", "user_tables", "user_table_coulmns",
 				"table_name", "column_name", "syscolumns", "union", "select", "insert", "drop", "update", "and", "or",
@@ -99,7 +104,9 @@ public class CommonUtils {
 		return "";
 	}
 
-	/** XSS 공격 구문제거 **/
+	/** XSS 공격 구문제거 
+	 * @param text 
+	 * @return **/
 	public String xssDelete(String text) {
 		String[] ch = { "javascript", "eval", "onabort", "vbscript", "innerHTML", "onactivate", "expression", "charset",
 				"onafterprint", "applet", "document", "onafterupdate", "meta", "string", "onbefore", "xml", "create",
@@ -132,7 +139,9 @@ public class CommonUtils {
 		return text;
 	}
 
-	/** XSS 공격 구문 검사 **/
+	/** XSS 공격 구문 검사 
+	 * @param text 
+	 * @return **/
 	public String xssCheck(String text) {
 		if (text == null)
 			return "";
@@ -166,7 +175,10 @@ public class CommonUtils {
 		return "";
 	}
 
-	/** XSS 공격 구문 검사 **/
+	/** XSS 공격 구문 검사 
+	 * @param text 
+	 * @param pram 
+	 * @return **/
 	public String xssCheck(String text, String pram) {
 		if (text == null)
 			return "";
@@ -251,7 +263,9 @@ public class CommonUtils {
 	}
 	
 	
-	/**업로드 파일 확장자 검사**/
+	/**업로드 파일 확장자 검사
+	 * @param name 
+	 * @return **/
 	public String fileExtensionCheck(String name)
 	{		
 		if(name == null)

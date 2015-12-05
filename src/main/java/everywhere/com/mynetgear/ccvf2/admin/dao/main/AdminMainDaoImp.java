@@ -14,6 +14,12 @@ import org.springframework.transaction.TransactionDefinition;
 import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.support.DefaultTransactionDefinition;
 
+/**
+ * @author 배성욱
+ * @createDate 2015. 12. 6.
+ * @described 관리자메인 데이터베이스 작업
+ * @reference class
+ */
 @Component
 public class AdminMainDaoImp implements AdminMainDao {
 	@Autowired
