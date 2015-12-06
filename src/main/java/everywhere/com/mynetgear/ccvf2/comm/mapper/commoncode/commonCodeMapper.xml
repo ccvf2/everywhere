@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="everywhere.com.mynetgear.ccvf2.comm.mapper.commoncode">
+
+	<resultMap type="everywhere.com.mynetgear.ccvf2.comm.dto.commoncode.CommonCodeDto" id="codeMap">
+		<result property="code_no" column="CODE_NO" />
+		<result property="code" column="CODE" />
+		<result property="code_name" column="CODE_NAME" />
+		<result property="code_group" column="CODE_GROUP" />
+		<result property="code_group_name" column="CODE_GROUP_NAME" />
+		<result property="code_sort" column="CODE_SORT" />
+	</resultMap>
+	<!-- 코드등록 -->
+	<insert id="insert_code_info" parameterType="everywhere.com.mynetgear.ccvf2.comm.dto.commoncode.CommonCodeDto">
+		INSERT INTO
+			TBL_COMMON_CODE
+		(
+			CODE_NO
+			, CODE
+			, CODE_NAME
+			, CODE_GROUP
+			, CODE_GROUP_NAME
+		)
+		VALUES
+		(
+			TBL_COMMON_CODE_CODE_NO_SEQ.nextval
+			,#{code}
+			,#{code_name}
+			,#{code_group}
+			,#{code_group_name}
+		)
+	</insert>
+
+	<!-- 코드목록 불러오기 -->
+	<select id="selectList_code_info" resultMap="codeMap">
+		SELECT
+			code_no
+			,code
+			,code_name
+			,code_group
+			,code_group_name
+			,code_sort
+		FROM
+			tbl_common_code
+	</select>
+
+
+	<select id="select_code_info_seq" resultType="int">
+		SELECT
+			code_no
+			,code
+			,code_name
+			,code_group
+			,code_group_name
+			,code_sort
+		FROM
+			tbl_common_code
+		WHERE
+			code_no=#{value}
+	</select>
+
+	<select id="select_code_info_code" resultType="String">
+		SELECT
+		 	code_no
+			,code
+			,code_name
+			,code_group
+			,code_group_name
+			,code_sort
+		FROM
+			tbl_common_code
+		WHERE
+			code=#{value}
+	</select>
+	
+	<select id="select_code_info_groupname" resultType="java.util.HashMap">
+		SELECT
+		 	code_no
+			,code
+			,code_name
+			,code_group
+			,code_group_name
+			,code_sort
+		FROM
+			tbl_common_code
+		WHERE
+			code_group_name=#{code_group_name}
+		AND
+			code_name=#{code_name}
+	</select>
+</mapper>
