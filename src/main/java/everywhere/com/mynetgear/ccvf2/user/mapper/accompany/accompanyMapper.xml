@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 동행구하기 게시판의 mapper -->
+<mapper namespace="everywhere.com.mynetgear.ccvf2.user.mapper.accompany">
+
+<!-- 	<resultMap type="" id="fileBoardDto">
+		<result property="boardNumber" column="board_number"/>
+		<result property="writer" column="writer"/>
+	</resultMap> -->
+	
+	<insert id="insertAccompany" parameterType="com.mynetgear.ccvf2.user.dto.accompany.AccompanyDto">
+		insert into tbl_accompany (accompany_no, mem_no, write_date, start_date, end_date, title, content, accompany_status_code, gender_code, use_yn)
+		values(accompany_no_seq.nextval, #{mem_no}, sysdate, #{start_date}, #{end_date}, #{title}, #{content}, #{accompany_status_code}, #{gender_code}, #{use_yn})
+	</insert>
+</mapper>
