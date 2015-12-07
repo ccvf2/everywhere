@@ -110,4 +110,22 @@ public class AccompanyDto {
 		this.gender = gender;
 	}
 
+	/**
+	 * @author 곽성국	
+	 * @createDate 2015. 12. 7.
+	 * @described 테스트용 DTO 프린터
+	 */
+	public void printAll() {
+		System.out.println("accompany_no: " + this.accompany_no);
+		System.out.println("writer_num: " + this.writer_num);
+		System.out.println("write_date: " + this.write_date);
+		System.out.println("start_date: " + this.start_date);
+		System.out.println("end_date: " + this.end_date);
+		System.out.println("title: " + this.title);
+		System.out.println("content: " + this.content);
+		System.out.println("accompany_status_code: " + this.accompany_status_code);
+		//System.out.println("reply: " + this.reply.size());
+		System.out.println("use_yn: " + this.use_yn);
+		System.out.println("gender: " + this.gender);
+	}
 }
