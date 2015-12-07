@@ -10,6 +10,7 @@
 		<result property="code_group" column="CODE_GROUP" />
 		<result property="code_group_name" column="CODE_GROUP_NAME" />
 		<result property="code_sort" column="CODE_SORT" />
+		<result property="code_value" column="CODE_VALUE" />
 	</resultMap>
 	<!-- 코드등록 -->
 	<insert id="insert_code_info" parameterType="everywhere.com.mynetgear.ccvf2.comm.dto.commoncode.CommonCodeDto">
@@ -21,6 +22,8 @@
 			, CODE_NAME
 			, CODE_GROUP
 			, CODE_GROUP_NAME
+			, CODE_VALUE
+			, CODE_REGDATE
 		)
 		VALUES
 		(
@@ -29,6 +32,8 @@
 			,#{code_name}
 			,#{code_group}
 			,#{code_group_name}
+			,#{code_value}
+			,sysdate
 		)
 	</insert>
 
@@ -41,6 +46,8 @@
 			,code_group
 			,code_group_name
 			,code_sort
+			,code_value
+			,code_regdate
 		FROM
 			tbl_common_code
 	</select>
@@ -54,6 +61,8 @@
 			,code_group
 			,code_group_name
 			,code_sort
+			,code_value
+			,code_regdate
 		FROM
 			tbl_common_code
 		WHERE
@@ -68,6 +77,8 @@
 			,code_group
 			,code_group_name
 			,code_sort
+			,code_value
+			,code_regdate
 		FROM
 			tbl_common_code
 		WHERE
@@ -82,6 +93,8 @@
 			,code_group
 			,code_group_name
 			,code_sort
+			,code_value
+			,code_regdate
 		FROM
 			tbl_common_code
 		WHERE
