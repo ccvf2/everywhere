@@ -8,7 +8,7 @@
 <body>
 
  <a href="/admin/main/main.do">어드민메인페이지</a>
- <a href="/user/main/register.do">회원가입</a>
+ <a href="/user/member/register.do">회원가입</a>
 
 </body>
 </html>
