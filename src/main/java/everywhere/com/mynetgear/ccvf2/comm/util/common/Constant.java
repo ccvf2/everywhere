@@ -61,9 +61,8 @@ public class Constant {
 	/** String Numbr : 9 */
 	public static final String SYNB_NUM_9= "9";
 	/** String Numbr : 0 */
-	public static final String SYNB_NUM_0= "0";
+	public static final String SYNB_NUM_0= "0";	
 	
-
 	/** 회원등급:관리자 */
 	public static final String MEMBER_LEVEL_ADMIN = "ADMIN";
 	/** 회원등급:일반사용자 */
