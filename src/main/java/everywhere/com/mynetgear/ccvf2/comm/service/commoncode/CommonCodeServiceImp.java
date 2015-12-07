@@ -48,10 +48,12 @@ public class CommonCodeServiceImp implements CommonCodeService {
 			mav.addObject("result", result);
 		}else if (StringUtils.equalsIgnoreCase(Constant.SYNB_CRUD_U, code_CRUD)) {
 			//코드 수정
-			System.out.println(Constant.LOG_ID3+"구현안됨");
+			System.out.println(Constant.LOG_ID3+"수정으로 들어옴");
+			result=commonCodeDao.updateCommonCodeInfo(dto);
 		}else if (StringUtils.equalsIgnoreCase(Constant.SYNB_CRUD_D, code_CRUD)) {
 			//코드 삭제
-			System.out.println(Constant.LOG_ID3+"구현안됨");
+			System.out.println(Constant.LOG_ID3+"삭제로 들어옴");
+			result=commonCodeDao.deleteCommonCodeInfo(dto);
 		}else{
 			System.out.println(Constant.LOG_ID3+"구현안됨");
 			//에러
