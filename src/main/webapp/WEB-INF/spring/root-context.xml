@@ -19,7 +19,7 @@
 		<property name="mapperLocations">
 			<list>
 				<value>classpath:/everywhere/com/mynetgear/ccvf2/admin/mapper/main/adminMainMapper.xml</value>
-				<!-- <value>classpath:/everywhere/com/mynetgear/ccvf2/user/mapper/member/MemberMapper.xml</value> -->
+				<value>classpath:/everywhere/com/mynetgear/ccvf2/user/mapper/member/memberMapper.xml</value>
 				<value>classpath:/everywhere/com/mynetgear/ccvf2/comm/mapper/commoncode/commonCodeMapper.xml</value>
 			</list>
 		</property>
