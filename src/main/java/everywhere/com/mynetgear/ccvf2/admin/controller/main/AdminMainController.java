@@ -32,4 +32,5 @@ public class AdminMainController {
 		adminMainService.mainPage(mav);
 		return mav;
 	}
+
 }
