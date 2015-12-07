@@ -32,7 +32,7 @@ public class MemberController {
 	 */
 	@RequestMapping(value="/user/member/register.do", method=RequestMethod.GET)
 	public ModelAndView register(HttpServletRequest request, HttpServletResponse response) {
-		return new ModelAndView("/user/member/register.do");
+		return new ModelAndView("/user/member/register");
 		
 	}
 

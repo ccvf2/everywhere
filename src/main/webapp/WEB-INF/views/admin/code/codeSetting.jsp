@@ -6,8 +6,8 @@
 <meta charset="UTF-8">
 <title>타이틀 입력</title>
 <%-- <c:set var="root" value="http://${pageContext.request.serverName}:${pageContext.request.localPort}"/> --%>
-<!-- <script type="text/javascript" src="./../../../../script/common/jquery-1.11.3.js"></script> -->
-<script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+<script type="text/javascript" src="./../../../../script/common/jquery-1.11.3.js"></script>
+<!-- <script src="//code.jquery.com/jquery-1.11.3.min.js"></script> -->
 <script type="text/javascript">
 	//코드 수정하기.
 	function codeSelect(code_no,code,code_name,code_group,code_group_name,code_value){
