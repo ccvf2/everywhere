@@ -1,5 +1,7 @@
 package everywhere.com.mynetgear.ccvf2.admin.controller.main;
 
+import java.io.File;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -62,4 +64,28 @@ public class AdminMainController {
 		commonCodeService.callCodeSetting(mav);
 		return mav;
 	}
+	
+	
+	
+	
+	/** 파일 테스트 */
+	@RequestMapping(value="/test/test.do", method=RequestMethod.GET)
+	public ModelAndView filetest() {
+		System.out.println("파일테스트 입력요청 GET");
+		ModelAndView mav= new ModelAndView();
+		mav.setViewName("/admin/code/TESTFILE");
+		return mav;
+	}
+	
+	/** 파일 테스트 */
+	@RequestMapping(value="/test/test.do", method=RequestMethod.POST)
+	public ModelAndView filetest(HttpServletRequest request, HttpServletResponse response) {
+		ModelAndView mav= new ModelAndView();
+		System.out.println("파일테스트 입력요청 post");
+		//File file= (File)request.getParameter("file");
+		//mav.addObject("request",request);
+		return null;
+	}
+	
+	
 }
