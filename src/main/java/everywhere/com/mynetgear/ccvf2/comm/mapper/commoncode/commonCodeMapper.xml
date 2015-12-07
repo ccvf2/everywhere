@@ -36,6 +36,30 @@
 			,sysdate
 		)
 	</insert>
+	
+	<!-- 코드 내용수정 -->
+	<update id="update_code_info" parameterType="everywhere.com.mynetgear.ccvf2.comm.dto.commoncode.CommonCodeDto">
+		UPDATE
+			TBL_COMMON_CODE
+		SET 
+			CODE=#{code}
+			, CODE_NAME=#{code_name}
+			, CODE_GROUP=#{code_group}
+			, CODE_GROUP_NAME=#{code_group_name}
+			, CODE_VALUE=#{code_value}
+		WHERE
+			CODE_NO=#{code_no}
+	</update>
+	
+	<!-- 코드 내용삭제 -->
+	<delete id="delete_code_info" parameterType="everywhere.com.mynetgear.ccvf2.comm.dto.commoncode.CommonCodeDto">
+		DELETE
+		FROM
+			TBL_COMMON_CODE
+		WHERE
+			CODE_NO=#{code_no}
+	</delete>
+
 
 	<!-- 코드목록 불러오기 -->
 	<select id="selectList_code_info" resultMap="codeMap">
@@ -50,6 +74,9 @@
 			,code_regdate
 		FROM
 			tbl_common_code
+		ORDER BY
+			code_no
+		DESC 
 	</select>
 
 
