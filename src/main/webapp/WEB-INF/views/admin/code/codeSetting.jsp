@@ -5,9 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>타이틀 입력</title>
-<%-- <c:set var="root" value="http://${pageContext.request.serverName}:${pageContext.request.localPort}"/> --%>
-<script type="text/javascript" src="./../../../../script/common/jquery-1.11.3.js"></script>
-<!-- <script src="//code.jquery.com/jquery-1.11.3.min.js"></script> -->
+<script type="text/javascript" src="/script/common/jquery-1.11.3.js"></script>
 <script type="text/javascript">
 	//코드 수정하기.
 	function codeSelect(code_no,code,code_name,code_group,code_group_name,code_value){
@@ -27,6 +25,7 @@
 		$("#code_CRUD").val("C"); 
 		$("#codeForm").submit(); 
 	}
+	
 	//화면에서 폼전송 버튼을 눌럿을 때
 	function updateCcodeFormSubmin(){
 		$("#code_CRUD").val("U"); 
