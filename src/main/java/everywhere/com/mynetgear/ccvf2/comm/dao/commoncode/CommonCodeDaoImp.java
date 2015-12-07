@@ -29,13 +29,24 @@ public class CommonCodeDaoImp implements CommonCodeDao {
 	public int insertCommonCodeInfo(CommonCodeDto dto) {
 		return sqlTemplate.insert("insert_code_info", dto);
 	}
+	/** 코드 수정시 */
+	@Override
+	public int updateCommonCodeInfo(CommonCodeDto dto) {
+		return sqlTemplate.update("update_code_info", dto);
+	}
+	
+	/** 코드 삭제 */
+	@Override
+	public int deleteCommonCodeInfo(CommonCodeDto dto) {
+		return sqlTemplate.update("delete_code_info", dto);
+	}
+	
 	
 	/** 코드 목록가져오기 */
 	@Override
 	public List<CommonCodeDto> getListCommonCodeInfo() {
 		return sqlTemplate.selectList("selectList_code_info");
 	}
-	
 	
 	
 	
@@ -56,5 +67,6 @@ public class CommonCodeDaoImp implements CommonCodeDao {
 		map.put("code_name", code_name);
 		return sqlTemplate.selectOne("select_code_info_groupname", map);
 	}
+
 	
 }

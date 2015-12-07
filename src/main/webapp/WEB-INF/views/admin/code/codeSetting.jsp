@@ -5,11 +5,36 @@
 <head>
 <meta charset="UTF-8">
 <title>타이틀 입력</title>
-<%-- <c:set var="root" value="http://${pageContext.request.serverName}:${pageContext.request.localPort}"/>
-<script type="text/javascript" src="/script/common/jquery-1.11.3.js"></script> --%>
+<%-- <c:set var="root" value="http://${pageContext.request.serverName}:${pageContext.request.localPort}"/> --%>
+<!-- <script type="text/javascript" src="./../../../../script/common/jquery-1.11.3.js"></script> -->
+<script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
 <script type="text/javascript">
-	function codeSelect(code_no,code_name,code_group,code_group_name,code_value){
-		/* $("#code").val(code_no); */
+	//코드 수정하기.
+	function codeSelect(code_no,code,code_name,code_group,code_group_name,code_value){
+		$(function() {
+		 	$("#code_no").val(code_no);
+		 	$("#code").val(code);
+		 	$("#code_name").val(code_name);
+		 	$("#code_group").val(code_group);
+		 	$("#code_group_name").val(code_group_name);
+		 	$("#code_value").val(code_value);
+		})
+	}
+	
+	
+	//화면에서 폼전송 버튼을 눌럿을 때
+	function insertCcodeFormSubmin(){
+		$("#code_CRUD").val("C"); 
+		$("#codeForm").submit(); 
+	}
+	//화면에서 폼전송 버튼을 눌럿을 때
+	function updateCcodeFormSubmin(){
+		$("#code_CRUD").val("U"); 
+		$("#codeForm").submit(); 
+	}
+	function deleteCodeFormSubmin(){
+		$("#code_CRUD").val("d"); 
+		$("#codeForm").submit(); 
 	}
 </script>
 </head>
@@ -23,9 +48,9 @@
 
 
 <%-- root:${root} --%>
-	<form action="/admin/commoncode/code.do" method="post">
-	<input type="hidden" name="code_CRUD" value="C">
-	<input type="hidden" name="code_no" value="0">
+	<form action="/admin/commoncode/code.do" method="post" id="codeForm">
+	<input type="hidden" name="code_CRUD" id="code_CRUD" value="C">
+	<input type="hidden" name="code_no" id="code_no" value="0">
 		<table>
 			<tr>
 				<th>고유코드</th>
@@ -38,7 +63,7 @@
 				</td>
 				<th>코드그룹</th>
 				<td>
-					<input type="text" name="code_group" maxlength="5" id="code_group" />
+					<input type="text" name="code_group" maxlength="10" id="code_group" />
 				</td>
 				<th>코드그룹명</th>
 				<td>
@@ -50,7 +75,9 @@
 				</td>
 			</tr>
 		</table>
-		<input type="submit" value="전송">
+		<input type="button" value="수정" onclick="updateCcodeFormSubmin()">
+		<input type="button" value="삭제" onclick="deleteCodeFormSubmin()">
+		<input type="button" value="등록" onclick="insertCcodeFormSubmin()">
 	</form>
 	
 	
@@ -70,7 +97,7 @@
 		<c:forEach var="list" items="${codeList}">
 		<tr>
 			<td>
-				<a href="javascript:codeSelect('${list.code_no}','${list.code_name}','${list.code_group}','${list.code_group_name}','${list.code_value}')">
+				<a href="javascript:codeSelect('${list.code_no}','${list.code}','${list.code_name}','${list.code_group}','${list.code_group_name}','${list.code_value}')">
 					<c:out value="${list.code_no}"/>
 				</a>
 			</td>
