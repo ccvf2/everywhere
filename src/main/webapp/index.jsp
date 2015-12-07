@@ -6,8 +6,9 @@
 <title>Insert title here</title>
 </head>
 <body>
-<script type="text/javascript">
- location.href="/admin/main/main.do";
-</script>
+
+ <a href="/admin/main/main.do">어드민메인페이지</a>
+ <a href="/user/main/register.do">회원가입</a>
+
 </body>
 </html>

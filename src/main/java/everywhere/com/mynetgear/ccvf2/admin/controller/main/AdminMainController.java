@@ -36,15 +36,17 @@ public class AdminMainController {
 	@RequestMapping(value="/admin/main/main.do", method=RequestMethod.GET)
 	public ModelAndView mainPage() {
 		ModelAndView mav= new ModelAndView();
+		
 		System.out.println("컨트롤러");
 		adminMainService.mainPage(mav);
 		return mav;
 	}
+
 	
 	
 	
 	
-	
+
 	@RequestMapping(value="/admin/commoncode/code.do", method=RequestMethod.GET)
 	public ModelAndView showCode() {
 		ModelAndView mav= new ModelAndView();
