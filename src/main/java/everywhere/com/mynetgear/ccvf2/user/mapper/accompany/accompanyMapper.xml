@@ -9,7 +9,7 @@
 		<result property="writer" column="writer"/>
 	</resultMap> -->
 	
-	<insert id="insertAccompany" parameterType="com.mynetgear.ccvf2.user.dto.accompany.AccompanyDto">
+	<insert id="insertAccompany" parameterType="everywhere.com.mynetgear.ccvf2.user.dto.accompany.AccompanyDto">
 		insert into tbl_accompany (accompany_no, mem_no, write_date, start_date, end_date, title, content, accompany_status_code, gender_code, use_yn)
 		values(accompany_no_seq.nextval, #{mem_no}, sysdate, #{start_date}, #{end_date}, #{title}, #{content}, #{accompany_status_code}, #{gender_code}, #{use_yn})
 	</insert>

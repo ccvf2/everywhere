@@ -50,13 +50,12 @@ public class AccompanyServiceImp implements AccompanyService {
 		AccompanyDto accompanyDto = new AccompanyDto();
 		
 		/*글쓴이: 임시라 변경 필요*/
-		accompanyDto.setWriter_num(1);
+		accompanyDto.setWriter_num(10);
 		
 		String start_date = request.getParameter("start_date");
 		String end_date = request.getParameter("end_date");
 		
-		//System.out.println("blah:"+start_date);
-		/*여행 시작일 - 여행 종료일*/
+		/*여행 시작일 - 여행 종료일 Date 형식으로 변경*/
 		try {
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 			accompanyDto.setStart_date(sdf.parse(start_date));
@@ -79,9 +78,12 @@ public class AccompanyServiceImp implements AccompanyService {
 		accompanyDto.setAccompany_status_code(Constant.SYNB_YN_N);
 		
 		accompanyDto.setUse_yn(Constant.SYNB_YN_Y);
-		//int check = accompanyDao.insertAccompany(accompanyDto);
 		
-		//EverywhereAspect.logger.info(EverywhereAspect.logMsg + check);
+		accompanyDto.printAll();
+		int check = accompanyDao.insertAccompany(accompanyDto);
+		
+		
+		EverywhereAspect.logger.info(EverywhereAspect.logMsg + check);
 		
 		//mav.addObject("check", check);
 		//mav.setViewName("user/accompany/accompanyWriteOk");
