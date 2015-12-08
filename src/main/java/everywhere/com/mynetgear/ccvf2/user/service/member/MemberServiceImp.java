@@ -12,6 +12,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.ModelAndView;
 
 import everywhere.com.mynetgear.ccvf2.user.dao.member.MemberDao;
+import everywhere.com.mynetgear.ccvf2.user.dto.member.MemberDto;
 
 /**
  * @author 김준호
@@ -52,6 +53,26 @@ public class MemberServiceImp implements MemberService {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+
+	@Override
+	public void registerOk(ModelAndView mav) {
+		Map<String, Object> map=mav.getModelMap();
+		HttpServletRequest request=(HttpServletRequest)map.get("request");
+		MemberDto memberDto=(MemberDto)map.get("memberDto");
+		
+		memberDto.setMem_level_code("user");
+		memberDto.setMem_p_status_code("N");
+		memberDto.setMem_profile_photo("null");
+		memberDto.setMem_status_code("N");
+
+		System.out.println("registerOk memberDto:"+memberDto.toString());
+		int check=memberDao.registerOk(memberDto);
+		System.out.println("registerOk check:"+check);
+		
+		mav.addObject("check", check);
+		mav.setViewName("/user/member/registerOk");
+		
 	}
 
 }

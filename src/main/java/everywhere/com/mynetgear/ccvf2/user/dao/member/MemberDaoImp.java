@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.PlatformTransactionManager;
 
-import everywhere.com.mynetgear.ccvf2.comm.aop.EverywhereAspect;
+import everywhere.com.mynetgear.ccvf2.user.dto.member.MemberDto;
 
 /**
  * @author 김준호
@@ -25,6 +25,11 @@ public class MemberDaoImp implements MemberDao {
 		String mem_email=sqlTemplate.selectOne("everywhere.com.mynetgear.ccvf2.user.mapper.member.emailCheck", email);
 		System.out.println("MemberDaoImp mem_email:"+mem_email);
 		return mem_email;
+	}
+
+	@Override
+	public int registerOk(MemberDto memberDto) {
+		return sqlTemplate.insert("everywhere.com.mynetgear.ccvf2.user.mapper.member.memberRegist", memberDto);
 	}
 
 }
