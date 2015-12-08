@@ -7,6 +7,7 @@ import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang.StringUtils;
+import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
@@ -19,6 +20,7 @@ import everywhere.com.mynetgear.ccvf2.comm.util.common.Constant;
  * @described 공통 파일 업로드 관련 클래스
  * @reference class
  */
+@Component
 public class CommonFileIOServiceImp implements CommonFileIOService {
 
 	/**

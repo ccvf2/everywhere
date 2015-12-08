@@ -7,8 +7,8 @@ import everywhere.com.mynetgear.ccvf2.comm.dto.common.CommonFileIODto;
 /**
  * @author 배성욱
  * @createDate 2015. 12. 8.
- * @described 클래스전체의 하는(큰)일을 적어주세요.
- * @reference class
+ * @described 공통파일 서비스 인터페이스
+ * @reference interface
  */
 public interface CommonFileIOService {
 	/**
