@@ -22,6 +22,8 @@
 				<value>classpath:/everywhere/com/mynetgear/ccvf2/user/mapper/member/memberMapper.xml</value>
 				<value>classpath:/everywhere/com/mynetgear/ccvf2/comm/mapper/commoncode/commonCodeMapper.xml</value>
 				<value>classpath:/everywhere/com/mynetgear/ccvf2/user/mapper/spot/spotMapper.xml</value>
+				<value>classpath:/everywhere/com/mynetgear/ccvf2/user/mapper/accompany/accompanyMapper.xml</value>
+
 			</list>
 		</property>
 	</bean>
