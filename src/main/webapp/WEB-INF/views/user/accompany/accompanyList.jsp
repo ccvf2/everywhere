@@ -42,7 +42,7 @@
 					<td><a href ="/user/accompany/accompanyRead.do?accompany_no=${accompanyDto.accompany_no}&currentPage=${currentPage}">${accompanyDto.title}</a></td>
 					<td>${accompanyDto.mem_no}</td>
 					<td><fmt:formatDate pattern="MM-dd" value="${accompanyDto.write_date}"/></td>
-					<td>${accompanyDto.accompany_no}</td>
+					<td>${accompanyDto.hits}</td>
 				</tr>
 		   </c:forEach>
 		</table>

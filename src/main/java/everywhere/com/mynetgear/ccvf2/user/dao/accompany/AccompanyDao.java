@@ -39,4 +39,13 @@ public interface AccompanyDao {
 	 */
 	List<AccompanyDto> getAccompanyList(int startRow, int endRow);
 
+	/**
+	 * @author 곽성국	
+	 * @createDate 2015. 12. 8.
+	 * @described 동행구하기 게시판 읽기
+	 * @param accompany_no
+	 * @return
+	 */
+	AccompanyDto readAccompany(int accompany_no);
+
 }

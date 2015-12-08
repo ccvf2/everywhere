@@ -133,10 +133,14 @@ public class AccompanyServiceImp implements AccompanyService {
 		Map<String, Object> map = mav.getModelMap();
 		HttpServletRequest request = (HttpServletRequest) map.get("request");
 		int accompany_no = Integer.parseInt(request.getParameter("accompany_no"));
-		int currentPage = Integer.parseInt(request.getParameter("current_page"));
+		int currentPage = Integer.parseInt(request.getParameter("currentPage"));
 		
 		EverywhereAspect.logger.info(EverywhereAspect.logMsg + accompany_no + "\t" + currentPage);
 		
+		AccompanyDto accompanyDto = accompanyDao.readAccompany(accompany_no);
+		//accompanyDto.printAll();
 		
+		mav.addObject("accompanyDto", accompanyDto);
+		mav.setViewName("user/accompany/accompanyRead");
 	}
 }
