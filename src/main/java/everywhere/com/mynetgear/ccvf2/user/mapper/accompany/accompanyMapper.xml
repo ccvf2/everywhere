@@ -4,13 +4,69 @@
 <!-- 동행구하기 게시판의 mapper -->
 <mapper namespace="everywhere.com.mynetgear.ccvf2.user.mapper.accompany">
 
-<!-- 	<resultMap type="" id="fileBoardDto">
-		<result property="boardNumber" column="board_number"/>
-		<result property="writer" column="writer"/>
-	</resultMap> -->
+ 	<resultMap type="everywhere.com.mynetgear.ccvf2.user.dto.accompany.AccompanyDto" id="accompanyMap">
+		<result property="accompany_no" column="ACCOMPANY_NO"/>
+		<result property="mem_no" column="MEM_NO"/>
+		<result property="write_date" column="WRITE_DATE"/>
+		<result property="start_date" column="START_DATE"/>
+		<result property="end_date" column="END_DATE"/>
+		<result property="title" column="TITLE"/>
+		<result property="content" column="CONTENT"/>
+		<result property="accompany_status_code" column="ACCOMPANY_STATUS_CODE"/>
+		<result property="use_yn" column="USE_YN"/>
+		<result property="gender_code" column="GENDER_CODE"/>
+	</resultMap> 
 	
+	<!-- 동행구하기 게시판 쓰기 -->
 	<insert id="insertAccompany" parameterType="everywhere.com.mynetgear.ccvf2.user.dto.accompany.AccompanyDto">
-		insert into tbl_accompany (accompany_no, mem_no, write_date, start_date, end_date, title, content, accompany_status_code, gender_code, use_yn)
-		values(accompany_no_seq.nextval, #{mem_no}, sysdate, #{start_date}, #{end_date}, #{title}, #{content}, #{accompany_status_code}, #{gender_code}, #{use_yn})
+		insert into
+			tbl_accompany
+		(
+			accompany_no,
+			mem_no,
+			write_date,
+			start_date,
+		 	end_date,
+		 	title,
+		 	content,
+		 	accompany_status_code,
+		    gender_code,
+		    use_yn
+		)
+		values
+		(
+			accompany_no_seq.nextval,
+			#{mem_no},
+			sysdate,
+			#{start_date},
+			#{end_date},
+			#{title},
+			#{content},
+			#{accompany_status_code},
+			#{gender_code},
+			#{use_yn}
+		)
 	</insert>
+	
+	<!-- 게시물 개수 가져오기 -->
+	<select id="getAccompanyCount" resultType="int">
+		select count(*) from tbl_accompany
+	</select>
+	
+	<!-- 한 페이지에 표시할 게시글 리스트 -->
+	<select id="getAccompanyList" parameterType="java.util.Map" resultMap="accompanyMap">
+		<![CDATA[
+			select * 
+			from (
+				SELECT ROWNUM rnum, b.* 
+				FROM (
+					SELECT * 
+					FROM tbl_accompany 
+					ORDER BY accompany_no desc
+				)b
+			)
+			where rnum >= #{startRow}
+			and rnum <= #{endRow}
+		]]>
+	</select>
 </mapper>

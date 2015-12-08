@@ -26,8 +26,27 @@ public class AccompanyController {
 	
 	/**
 	 * @author 곽성국	
+	 * @createDate 2015. 12. 8.
+	 * @described 테스트용 메인 페이지 메핑
+	 * @param request
+	 * @param response
+	 * @return
+	 */
+	@RequestMapping(value="/user/accompany/accompanyMain.do" ,method=RequestMethod.GET)
+	public ModelAndView mainAccompany(HttpServletRequest request, HttpServletResponse response) {
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("request", request);
+		accompanyService.mainAccompany(mav);
+		
+		return mav;
+	}
+	
+	/**
+	 * @author 곽성국	
 	 * @createDate 2015. 12. 7.
 	 * @described 동행구하기 게시판 쓰기
+	 * @param request
+	 * @param response
 	 * @return
 	 */
 	@RequestMapping(value="/user/accompany/accompanyWrite.do" ,method=RequestMethod.GET)
@@ -38,11 +57,13 @@ public class AccompanyController {
 		
 		return mav;
 	}
-	
+
 	/**
 	 * @author 곽성국	
-	 * @createDate 2015. 12. 7.
+	 * @createDate 2015. 12. 8.
 	 * @described 동행구하기 게시판 쓰기 확인
+	 * @param request
+	 * @param response
 	 * @return
 	 */
 	@RequestMapping(value="/user/accompany/accompanyWriteOk.do" ,method=RequestMethod.POST)
@@ -53,4 +74,39 @@ public class AccompanyController {
 		
 		return mav;
 	}
+	
+	/**
+	 * @author 곽성국	
+	 * @createDate 2015. 12. 8.
+	 * @described 동행구하기 리스트
+	 * @param request
+	 * @param response
+	 * @return
+	 */
+	@RequestMapping(value="/user/accompany/accompanyList.do" ,method=RequestMethod.GET)
+	public ModelAndView getAccompanyList(HttpServletRequest request, HttpServletResponse response) {
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("request", request);
+		accompanyService.getAccompanyList(mav);
+		
+		return mav;
+	}
+	
+	/**
+	 * @author 곽성국	
+	 * @createDate 2015. 12. 8.
+	 * @described 동행구하기 읽기
+	 * @param request
+	 * @param response
+	 * @return
+	 */
+	@RequestMapping(value="/user/accompany/accompanyRead.do" ,method=RequestMethod.GET)
+	public ModelAndView readAccompany(HttpServletRequest request, HttpServletResponse response) {
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("request", request);
+		accompanyService.readAccompany(mav);
+		
+		return mav;
+	}
+	
 }

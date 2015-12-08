@@ -7,6 +7,7 @@
 <title>타이틀 입력</title>
 </head>
 <body>
- <a href="/user/accompany/accompanyWrite.do">동행구하기 글쓰기</a>
+  <a href="/user/accompany/accompanyWrite.do">동행구하기 글쓰기</a>
+  <a href="/user/accompany/accompanyList.do">동행구하기 리스트</a>
 </body>
 </html>
