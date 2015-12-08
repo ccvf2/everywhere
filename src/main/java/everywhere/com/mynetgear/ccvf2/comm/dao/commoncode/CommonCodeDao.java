@@ -19,6 +19,22 @@ public interface CommonCodeDao {
 	 * @return int 
 	 */
 	public int insertCommonCodeInfo(CommonCodeDto dto);
+	/**
+	 * @author 배성욱
+	 * @createDate 2015. 12. 7.
+	 * @described 코드내용 수정
+	 * @param dto 
+	 * @return int 
+	 */
+	public int updateCommonCodeInfo(CommonCodeDto dto);
+	/**
+	 * @author 배성욱
+	 * @createDate 2015. 12. 7.
+	 * @described 코드내용 삭제
+	 * @param dto 
+	 * @return int 
+	 */
+	public int deleteCommonCodeInfo(CommonCodeDto dto);
 	
 	/**
 	 * @author 배성욱
