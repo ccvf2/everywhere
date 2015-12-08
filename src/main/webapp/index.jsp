@@ -12,6 +12,7 @@
  <a href="/admin/commoncode/code.do">관리자-공통코드(거이완료)</a>
  <a href="/test/test.do">파일테스트</a>
  <a href="/common/replyList.do">공통댓글</a>
+ <a href="/user/accompany/accompanyMain.do">회원동행구하기</a>
 
 </body>
 </html>
