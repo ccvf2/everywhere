@@ -34,5 +34,14 @@
 	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
 		<property name="dataSource" ref="DataSource"/>
 	</bean>
+	
+	
+<!-- 	<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">    
+		<property name="locations" value="/WEB-INF/attachConfig/attachFileAddress.properties"/>    
+		<property name="fileEncoding" value="UTF-8"/>
+	</bean> -->
+	
+
+	
 
 </beans>
