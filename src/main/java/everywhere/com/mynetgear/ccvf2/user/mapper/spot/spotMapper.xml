@@ -2,7 +2,41 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="everywhere.com.mynetgear.ccvf2.user.mapper.spot">
-	<select id="selectList_country_code" resultType="String">
-		select code_name from TBL_COMMON_CODE where code_group='B0001'
+	
+	<resultMap type="everywhere.com.mynetgear.ccvf2.comm.dto.commoncode.CommonCodeDto" id="codeMap">
+		<result property="code" column="CODE" />
+		<result property="code_name" column="CODE_NAME" />
+		<result property="code_value" column="CODE_VALUE" />
+	</resultMap>
+
+	<select id="selectList_country_code" resultMap="codeMap">
+		select code, code_name, code_value from TBL_COMMON_CODE where code_group='B0000'
 	</select>
+	
+	<select id="selectList_spot_code" resultMap="codeMap">
+		select code, code_name, code_value from TBL_COMMON_CODE where code_group='T0001'
+	</select>
+	
+	<select id="selectList_city_code" resultMap="codeMap" parameterType="String">
+		select code, code_name, code_value from TBL_COMMON_CODE where code_group=#{country_code}
+	</select>
+	
+	<insert id="insert_spot" parameterType="everywhere.com.mynetgear.ccvf2.user.dto.spot.SpotDto">
+		insert into tbl_spot values(
+		TBL_SPOT_SPOT_NO_SEQ.nextval, #{mem_no}, #{country_code}, #{city_code}, #{spot_name}, 
+		#{spot_type_code}, #{mem_level_code}, #{spot_note}, null, #{spot_addr}, #{spot_lat}, #{spot_long}, #{total_star_score}, #{count_star_score}
+		)	
+	</insert>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 </mapper>
