@@ -11,7 +11,7 @@ import java.util.List;
  */
 public class AccompanyDto {
 	private int accompany_no;
-	private int writer_num;
+	private int mem_no;
 	private Date write_date;
 	private Date start_date;
 	private Date end_date;
@@ -20,7 +20,8 @@ public class AccompanyDto {
 	private String accompany_status_code;
 	private List<Object> reply;
 	private String use_yn;
-	private String gender;
+	private String gender_code;
+	private int hits;
 
 	public int getAccompany_no() {
 		return accompany_no;
@@ -28,14 +29,6 @@ public class AccompanyDto {
 
 	public void setAccompany_no(int accompany_no) {
 		this.accompany_no = accompany_no;
-	}
-
-	public int getWriter_num() {
-		return writer_num;
-	}
-
-	public void setWriter_num(int writer_num) {
-		this.writer_num = writer_num;
 	}
 
 	public Date getWrite_date() {
@@ -102,30 +95,48 @@ public class AccompanyDto {
 		this.use_yn = use_yn;
 	}
 
-	public String getGender() {
-		return gender;
+	public int getMem_no() {
+		return mem_no;
 	}
 
-	public void setGender(String gender) {
-		this.gender = gender;
+	public void setMem_no(int mem_no) {
+		this.mem_no = mem_no;
 	}
+
+	public String getGender_code() {
+		return gender_code;
+	}
+
+	public void setGender_code(String gender_code) {
+		this.gender_code = gender_code;
+	}
+
 
 	/**
-	 * @author 곽성국	
+	 * @author 곽성국
 	 * @createDate 2015. 12. 7.
 	 * @described 테스트용 DTO 프린터
 	 */
 	public void printAll() {
 		System.out.println("accompany_no: " + this.accompany_no);
-		System.out.println("writer_num: " + this.writer_num);
+		System.out.println("mem_no: " + this.mem_no);
 		System.out.println("write_date: " + this.write_date);
 		System.out.println("start_date: " + this.start_date);
 		System.out.println("end_date: " + this.end_date);
 		System.out.println("title: " + this.title);
 		System.out.println("content: " + this.content);
 		System.out.println("accompany_status_code: " + this.accompany_status_code);
-		//System.out.println("reply: " + this.reply.size());
+		// System.out.println("reply: " + this.reply.size());
 		System.out.println("use_yn: " + this.use_yn);
-		System.out.println("gender: " + this.gender);
+		System.out.println("gender_code: " + this.gender_code);
+		System.out.println("hits:" + this.hits);
+	}
+
+	public int getHits() {
+		return hits;
+	}
+
+	public void setHits(int hits) {
+		this.hits = hits;
 	}
 }

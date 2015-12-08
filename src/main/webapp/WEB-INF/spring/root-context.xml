@@ -21,6 +21,7 @@
 				<value>classpath:/everywhere/com/mynetgear/ccvf2/admin/mapper/main/adminMainMapper.xml</value>
 				<value>classpath:/everywhere/com/mynetgear/ccvf2/user/mapper/member/memberMapper.xml</value>
 				<value>classpath:/everywhere/com/mynetgear/ccvf2/comm/mapper/commoncode/commonCodeMapper.xml</value>
+				<value>classpath:/everywhere/com/mynetgear/ccvf2/user/mapper/accompany/accompanyMapper.xml</value>
 			</list>
 		</property>
 	</bean>
@@ -34,5 +35,14 @@
 	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
 		<property name="dataSource" ref="DataSource"/>
 	</bean>
+	
+	
+<!-- 	<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">    
+		<property name="locations" value="/WEB-INF/attachConfig/attachFileAddress.properties"/>    
+		<property name="fileEncoding" value="UTF-8"/>
+	</bean> -->
+	
+
+	
 
 </beans>

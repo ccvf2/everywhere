@@ -3,15 +3,21 @@ package everywhere.com.mynetgear.ccvf2.admin.controller.main;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import everywhere.com.mynetgear.ccvf2.admin.service.main.AdminMainService;
+import everywhere.com.mynetgear.ccvf2.comm.dto.common.CommonFileIODto;
 import everywhere.com.mynetgear.ccvf2.comm.dto.commoncode.CommonCodeDto;
+import everywhere.com.mynetgear.ccvf2.comm.service.common.CommonFileIOService;
+import everywhere.com.mynetgear.ccvf2.comm.service.common.CommonFileIOServiceImp;
 import everywhere.com.mynetgear.ccvf2.comm.service.commoncode.CommonCodeService;
+import everywhere.com.mynetgear.ccvf2.comm.util.common.Constant;
 
 /**
  * @author 배성욱
@@ -26,6 +32,8 @@ public class AdminMainController {
 	@Autowired
 	private CommonCodeService commonCodeService;
 
+	@Value("${attach.temp.path}")
+	private String tempPath;
 	/**
 	 * @author 배성욱
 	 * @createDate 2015. 12. 5.
@@ -65,23 +73,41 @@ public class AdminMainController {
 	
 	
 	/** 파일 테스트 */
-	@RequestMapping(value="/test/test.do", method=RequestMethod.GET)
+	@RequestMapping(value="/test/test2.do", method=RequestMethod.GET)
 	public ModelAndView filetest() {
 		System.out.println("파일테스트 입력요청 GET");
 		ModelAndView mav= new ModelAndView();
+		System.out.println(Constant.LOG_ID3+this.tempPath);
 		mav.setViewName("/admin/code/TESTFILE");
 		return mav;
 	}
 	
-	/** 파일 테스트 */
+	/** 파일 테스트 
+	 * @param request 
+	 * @param response 
+	 * @return */
 	@RequestMapping(value="/test/test.do", method=RequestMethod.POST)
 	public ModelAndView filetest(HttpServletRequest request, HttpServletResponse response) {
 		ModelAndView mav= new ModelAndView();
 		System.out.println("파일테스트 입력요청 post");
-		//File file= (File)request.getParameter("file");
-		//mav.addObject("request",request);
+		String param = request.getParameter("crud");
+		String savePath = request.getParameter("savePath");
+		String fileName = request.getParameter("fileName");
+		CommonFileIOService dsdr= new CommonFileIOServiceImp();
+		if(StringUtils.equals(param, Constant.SYNB_CRUD_C)){
+			CommonFileIODto dtoa= dsdr.requestWriteFileAndDTO(request, "file", tempPath);
+		}else{
+			boolean dtoa= dsdr.requestDeleteFile(savePath, fileName);
+			System.out.println(dtoa);
+		}
+		
+		
 		return null;
 	}
 	
+	
+/*	public return_type name() {
+		
+	}*/
 	
 }
