@@ -6,8 +6,8 @@ import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.stereotype.Component;
-import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.TransactionDefinition;
 import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.support.DefaultTransactionDefinition;
@@ -24,8 +24,8 @@ import everywhere.com.mynetgear.ccvf2.user.dto.accompany.AccompanyDto;
 public class AccompanyDaoImp implements AccompanyDao {
 	@Autowired
 	private SqlSessionTemplate sqlTemplate;
-	
-	private PlatformTransactionManager transactionManager;
+	@Autowired
+	private DataSourceTransactionManager transactionManager;
 
 	@Override
 	public int insertAccompany(AccompanyDto accompanyDto) {
