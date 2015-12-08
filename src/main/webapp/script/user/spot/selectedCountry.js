@@ -1,20 +1,24 @@
 /**
  * 
  */
+var values = [];
 function readCityToServer(){
 	var countrycode = document.getElementById("selectCountry").value;
-	var url = "/user/spot/selectCountry.do";
 	var params = "country_code=" + countrycode;
-	
+	var url = "/user/spot/selectCountry.do?" + params;
 	$.ajax({
 		url:url,
-		type:"get",
+		type:"post",
 		dataType:"text",
 		success:function(data){
-			alert(data);
-			var result = data.split(",");
-			var bunho = result[0];
-			var reply = result[1];
+			var result = data.split("|");
+			var str = "";
+			for(i = 0; i < result.length-1; i++){
+				var code = result[i].split(",");
+				str+="<option value='"+code[0]+"'>" + code[1] + "</option>";				
+			}
+			$("#selectCity").empty(); 
+			$("#selectCity").prepend(str);
 			
 		},
 		error:function(xhr, status, errorMsg){

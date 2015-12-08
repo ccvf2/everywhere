@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import everywhere.com.mynetgear.ccvf2.comm.util.common.Constant;
+import everywhere.com.mynetgear.ccvf2.user.dto.spot.SpotDto;
 import everywhere.com.mynetgear.ccvf2.user.service.spot.SpotService;
 
 /**
@@ -37,11 +39,20 @@ public class SpotController {
 	
 	@RequestMapping(value="/user/spot/selectCountry.do", method=RequestMethod.POST)
 	public ModelAndView readCityList(HttpServletRequest request, HttpServletResponse response){
-		System.out.println("hahaha");
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("request", request);
 		mav.addObject("response", response);
 		spotService.readCityList(mav);
+		return null;
+	}
+	
+	@RequestMapping(value="/user/spot/addSpotWrite.do", method=RequestMethod.POST)
+	public ModelAndView addSpotWrite(HttpServletRequest request, HttpServletResponse response, SpotDto spotDto){
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("request", request);
+		mav.addObject("spotDto", spotDto);
+		spotService.addSpotWrite(mav);
+		
 		return null;
 	}
 }

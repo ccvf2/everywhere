@@ -6,33 +6,35 @@
 <meta charset="UTF-8">
 <title>타이틀 입력</title>
 <script type="text/javascript" src="/script/common/jquery-1.11.3.js"></script>
-<script type="text/javascript" src="${root}/script/user/spot/selectedCountry.js"></script>
+<script type="text/javascript" src="/script/user/spot/selectedCountry.js"></script>
 </head>
 <body>
 	<div>
-		<div>		
-			<select id="selectCountry" onchange="readCityToServer()">
+		<form class="addSpotStyle" action="/user/spot/addSpotWrite.do" method="post" onsubmit="return guestForm(this)" enctype="multipart/form-data">
+			<input type="hidden" name="mem_no" value="1">			
+			<input type="hidden" name="mem_level_code" value="M0002">
+			<select name="country_code" id="selectCountry" onchange="readCityToServer()">
 				<c:forEach var="country" items="${countryList}" >
-					  <option value="${country}">${country}</option>
-				</c:forEach>
+					  <option value="${country.code}">${country.code_name}</option>
+				</c:forEach>                                                                     
 			</select>
 				
-			<select id="selectCity">
+			<select name="city_code" id="selectCity">
 				<option> select </option>
 			</select>
-			<select>
-				  <option value="volvo">숙박</option>
-				  <option value="saab">교통</option>
-				  <option value="mercedes">관광지</option>
-				  <option value="audi">공연</option>
-				  <option value="audi">쇼핑</option>
-				  <option value="audi">액티비티</option>
-				  <option value="audi">교통</option>
+			<select name="spot_type_code">
+				 <c:forEach var="spotType" items="${spotTypeList}" >
+					  <option value="${spotType.code}">${spotType.code_name}</option>
+				</c:forEach>         
 			</select> <br/>
-			명소명 : <input type="text" name="placename" value="장소명"> <br/>
-			한줄설명 : <input type="text" name="placememo" value="명소를 한마디로 설명한다면?"> <br/>
+			명소명 : <input type="text" name="spot_name" value="경북궁"> <br/>
+			한줄설명 : <input type="text" name="spot_note" value="조선 시대 임금님이 살았던 궁"> <br/>
 			Image : <input type="file">
-		</div>
-	</div>
+			주소 : <input type="text" name="spot_addr" value="서울특별시 종로구 사직로 161"/> <br/>
+			위도 : <input type="text" name="spot_lat" value="37.579617"/>
+			경도 : <input type="text" name="spot_long" value="126.9748523"/> <br/>
+			<input type="submit" value="추가"/>
+		</form>
+	</div>	
 </body>
 </html>

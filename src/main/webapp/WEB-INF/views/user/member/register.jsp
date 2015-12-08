@@ -6,6 +6,32 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" type="text/css" href="">
+<script type="text/javascript" src="/script/common/jquery-1.11.3.js"></script>
+<script type="text/javascript">
+	$(function() {	
+		$("#email").keyup(function(){
+			var email=$("#email").val();
+			if(email.length>=13) {
+				$.ajax({
+					url:"emailCheck.ajax?email="+email,
+					type:"get",
+					dataType:"text",
+					success:function(data){
+						//alert(data);
+						if(data==0) {
+							$("#emailCheck").text("사용가능한 이메일입니다.");
+						} else {
+							$("#emailCheck").text("이미 사용중인 이메일입니다.");
+						}
+					},
+					error:function(xhr, status, errorMsg){
+						alert(xhr+","+status+","+errorMsg);
+					}
+				});
+			}
+		});
+	});
+</script>
 </head>
 <body>
 	<div align="center">
@@ -18,9 +44,9 @@
 			<div class="line">
 				<label class="title">이메일</label>
 				<span class="content">
-					<input type="text" name="email" />	
-					<input type="button" value="이메일중복" onclick=""/>
+					<input type="text" name="email" id="email"/>
 				</span>
+				<div id="emailCheck"></div>
 			</div>
 			
 			<div class="line">
