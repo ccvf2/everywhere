@@ -7,6 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.PlatformTransactionManager;
 
+import everywhere.com.mynetgear.ccvf2.comm.dto.commoncode.CommonCodeDto;
+import everywhere.com.mynetgear.ccvf2.user.dto.spot.SpotDto;
+
 /**
  * @author 안희진
  * @createDate 2015. 12. 7.
@@ -22,8 +25,23 @@ public class SpotDaoImp implements SpotDao {
 	private PlatformTransactionManager transactionManager;
 	
 	@Override
-	public List<String> getCountryList() {
+	public List<CommonCodeDto> getCountryList() {
 		return sqlTemplate.selectList("selectList_country_code");
+	}
+
+	@Override
+	public List<CommonCodeDto> getCityList(String country_code) {
+		return sqlTemplate.selectList("selectList_city_code", country_code);
+	}
+
+	@Override
+	public List<CommonCodeDto> getSpotTypeList() {
+		return sqlTemplate.selectList("selectList_spot_code");
+	}
+
+	@Override
+	public int insertSpot(SpotDto spotDto) {
+		return sqlTemplate.insert("insert_spot", spotDto);
 	}
 	
 }

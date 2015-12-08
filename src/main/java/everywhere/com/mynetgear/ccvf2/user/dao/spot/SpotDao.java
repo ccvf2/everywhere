@@ -2,6 +2,9 @@ package everywhere.com.mynetgear.ccvf2.user.dao.spot;
 
 import java.util.List;
 
+import everywhere.com.mynetgear.ccvf2.comm.dto.commoncode.CommonCodeDto;
+import everywhere.com.mynetgear.ccvf2.user.dto.spot.SpotDto;
+
 public interface SpotDao {
 
 	/**
@@ -10,5 +13,8 @@ public interface SpotDao {
 	 * @described 국가코드 목록 가져오기
 	 * @return
 	 */
-	public List<String> getCountryList();
+	public List<CommonCodeDto> getCountryList();
+	public List<CommonCodeDto> getSpotTypeList();
+	public List<CommonCodeDto> getCityList(String country_code);
+	public int insertSpot(SpotDto spotDto);
 }
