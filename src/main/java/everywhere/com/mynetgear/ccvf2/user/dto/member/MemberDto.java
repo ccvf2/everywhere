@@ -14,10 +14,12 @@ public class MemberDto {
 	private String mem_pwd;
 	private String mem_name;
 	private String mem_phone;
-	private String mem_level;
-	private Date mem_regdate;
 	private String mem_interest;
-	private Date updatedate;
+	private String mem_status_code;
+	private String mem_level_code;
+	private String mem_p_status_code;
+	private String mem_profile_photo;
+	private Date mem_reg_date;
 	
 	public int getMem_no() {
 		return mem_no;
@@ -25,61 +27,85 @@ public class MemberDto {
 	public void setMem_no(int mem_no) {
 		this.mem_no = mem_no;
 	}
-	
 	public String getMem_email() {
 		return mem_email;
 	}
 	public void setMem_email(String mem_email) {
 		this.mem_email = mem_email;
 	}
-	
 	public String getMem_pwd() {
 		return mem_pwd;
 	}
 	public void setMem_pwd(String mem_pwd) {
 		this.mem_pwd = mem_pwd;
 	}
-	
 	public String getMem_name() {
 		return mem_name;
 	}
 	public void setMem_name(String mem_name) {
 		this.mem_name = mem_name;
 	}
-	
 	public String getMem_phone() {
 		return mem_phone;
 	}
 	public void setMem_phone(String mem_phone) {
 		this.mem_phone = mem_phone;
 	}
-	
-	public String getMem_level() {
-		return mem_level;
-	}
-	public void setMem_level(String mem_level) {
-		this.mem_level = mem_level;
-	}
-	
-	public Date getMem_regdate() {
-		return mem_regdate;
-	}
-	public void setMem_regdate(Date mem_regdate) {
-		this.mem_regdate = mem_regdate;
-	}
-	
 	public String getMem_interest() {
 		return mem_interest;
 	}
 	public void setMem_interest(String mem_interest) {
 		this.mem_interest = mem_interest;
 	}
-	
-	public Date getUpdatedate() {
-		return updatedate;
+	public String getMem_status_code() {
+		return mem_status_code;
 	}
-	public void setUpdatedate(Date updatedate) {
-		this.updatedate = updatedate;
+	public void setMem_status_code(String mem_status_code) {
+		this.mem_status_code = mem_status_code;
 	}
-	
+	public String getMem_level_code() {
+		return mem_level_code;
+	}
+	public void setMem_level_code(String mem_level_code) {
+		this.mem_level_code = mem_level_code;
+	}
+	public String getMem_p_status_code() {
+		return mem_p_status_code;
+	}
+	public void setMem_p_status_code(String mem_p_status_code) {
+		this.mem_p_status_code = mem_p_status_code;
+	}
+	public String getMem_profile_photo() {
+		return mem_profile_photo;
+	}
+	public void setMem_profile_photo(String mem_profile_photo) {
+		this.mem_profile_photo = mem_profile_photo;
+	}
+	public Date getMem_reg_date() {
+		return mem_reg_date;
+	}
+	public void setMem_reg_date(Date mem_reg_date) {
+		this.mem_reg_date = mem_reg_date;
+	}
+	public String toString() {
+		String sentence="mem_no:"+mem_no+"\nmem_email:"+mem_email+"\nmem_pwd:"+mem_pwd+"\nmem_name:"+mem_name+"\nmem_phone:"+mem_phone
+				+"\nmem_interest:"+mem_interest+"\nmem_status_code:"+mem_status_code+"\nmem_level_code:"+mem_level_code
+				+"\nmem_p_status_code:"+mem_p_status_code+"\nmem_profile_photo:"+mem_profile_photo+"\nmem_reg_date:"+mem_reg_date;
+		return sentence;
+	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

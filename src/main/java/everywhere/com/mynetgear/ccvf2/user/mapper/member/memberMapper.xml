@@ -6,4 +6,9 @@
 	<select id="emailCheck" parameterType="String" resultType="string">
 		select mem_email from tbl_member where mem_email=#{email}
 	</select>
+	
+	<insert id="memberRegist" parameterType="everywhere.com.mynetgear.ccvf2.user.dto.member.MemberDto">
+		insert into tbl_member values
+		(tbl_member_mem_no_seq.nextval,#{mem_email},#{mem_pwd},#{mem_name},#{mem_phone},#{mem_interest},#{mem_status_code},#{mem_level_code},#{mem_p_status_code},#{mem_profile_photo},sysdate)
+	</insert>
 </mapper>

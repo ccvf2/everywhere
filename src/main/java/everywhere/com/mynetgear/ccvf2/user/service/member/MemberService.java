@@ -16,5 +16,12 @@ public interface MemberService {
 	 * @param mav
 	 */
 	public void emailCheck(ModelAndView mav);
+	/**
+	 * @author 김준호
+	 * @createDate 2015. 12. 8.
+	 * @described 회원가입
+	 * @param mav
+	 */
+	public void registerOk(ModelAndView mav);
 
 }

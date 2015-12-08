@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import everywhere.com.mynetgear.ccvf2.comm.aop.EverywhereAspect;
+import everywhere.com.mynetgear.ccvf2.user.dto.member.MemberDto;
 import everywhere.com.mynetgear.ccvf2.user.service.member.MemberService;
 
 /**
@@ -46,13 +46,30 @@ public class MemberController {
 	 */
 	@RequestMapping(value="/user/member/emailCheck.ajax",  method=RequestMethod.GET)
 	public ModelAndView emailCheck(HttpServletRequest request, HttpServletResponse response) {
-		EverywhereAspect.logger.info(EverywhereAspect.logMsg+","+"Controller");
 		ModelAndView mav=new ModelAndView();
 		mav.addObject("request", request);
 		mav.addObject("response", response);
 		memberService.emailCheck(mav);
 		
 		return null;
+	}
+	
+	/**
+	 * @author 김준호
+	 * @createDate 2015. 12. 8.
+	 * @described 회원가입
+	 * @param request
+	 * @param response
+	 * @return
+	 */
+	@RequestMapping(value="/user/member/register.do", method=RequestMethod.POST)
+	public ModelAndView registerOk(HttpServletRequest request, HttpServletResponse response, MemberDto memberDto) {
+		ModelAndView mav=new ModelAndView();
+		mav.addObject("request", request);
+		mav.addObject("memberDto", memberDto);
+		memberService.registerOk(mav);
+		
+		return mav;
 	}
 
 }

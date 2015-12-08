@@ -1,5 +1,7 @@
 package everywhere.com.mynetgear.ccvf2.user.dao.member;
 
+import everywhere.com.mynetgear.ccvf2.user.dto.member.MemberDto;
+
 /**
  * @author 김준호
  * @createDate 2015. 12. 7.
@@ -15,5 +17,13 @@ public interface MemberDao {
 	 * @return
 	 */
 	public String emailCheck(String email);
+	/**
+	 * @author 김준호
+	 * @createDate 2015. 12. 8.
+	 * @described 회원가입
+	 * @param memberDto
+	 * @return
+	 */
+	public int registerOk(MemberDto memberDto);
 
 }
