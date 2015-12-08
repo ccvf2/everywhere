@@ -41,6 +41,8 @@ public class Constant {
 	public static final String SYNB_NULL = "";
 	/** NULLSTRING : " " */
 	public static final String SYNB_NULL_SPACE = " ";
+	/** DOTSTRING : "." */
+	public static final String SYNB_DOT = ".";
 
 	/** String Numbr : 1 */
 	public static final String SYNB_NUM_1 = "1";
