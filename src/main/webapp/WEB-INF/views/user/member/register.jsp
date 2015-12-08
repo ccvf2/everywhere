@@ -32,6 +32,34 @@
 		});
 	});
 </script>
+<script type="text/javascript">
+	var checked=false;
+	function registerForm(form) {
+		
+		 //alert("ok1");
+		
+		var check=false;
+		var str="";
+		for(var i=0; i<form.interestValue.length;i++) {
+			if(form.interestValue[i].checked==true) {
+				str += form.interestValue[i].value + ",";
+				check=true;
+			}
+			
+		}
+		
+		 //alert(str);
+		if(check==false) {
+			alert("하나라도 체크하세요");
+			form.interestValue[0].focus();
+			return false;
+		}
+		
+		form.mem_interest.value=str;
+		
+		//return false;
+	}
+</script>
 </head>
 <body>
 	<div align="center">
@@ -39,12 +67,12 @@
 	</div>
 
 	<div align="center">
-		<form class="form_style" name="memberForm" action="" 
+		<form class="form_style" name="memberForm" action="/user/member/register.do" 
 			method="post" onsubmit="return registerForm(this)">
 			<div class="line">
 				<label class="title">이메일</label>
 				<span class="content">
-					<input type="text" name="email" id="email"/>
+					<input type="text" name="mem_email" id="email"/>
 				</span>
 				<div id="emailCheck"></div>
 			</div>
@@ -52,14 +80,14 @@
 			<div class="line">
 				<label  class="title">비밀번호</label>
 				<span class="content">
-					<input type="password" name="password" />
+					<input type="password" name="mem_pwd" />
 				</span>
 			</div>
 	
 			<div class="line">
 				<label class="title">이름</label>
 				<span class="content">
-					<input type="text" name="name"/>
+					<input type="text" name="mem_name"/>
 				</span>
 			</div>
 		
@@ -74,8 +102,8 @@
 						<option>018</option>
 						<option>019</option>
 					</select>
-					<input type="text" name="phone" size="10" />
-					<input type="button" value="번호인증하기" onclick="#">
+					<input type="text" name="mem_phone" size="10" />
+					<input type="button" value="번호인증하기" onclick="">
 				</span>
 			</div>
 	
@@ -86,7 +114,7 @@
 					<input type="checkbox" name="interestValue" value="단체여행"/> 단체여행 &nbsp;
 					<input type="checkbox" name="interestValue" value="국내여행"/> 국내여행 &nbsp;
 					<input type="checkbox" name="interestValue" value="해외여행"/> 해외여행 &nbsp;
-					<input type="hidden" name="interest"/>
+					<input type="hidden" name="mem_interest"/>
 				</span>
 			</div>
 			
