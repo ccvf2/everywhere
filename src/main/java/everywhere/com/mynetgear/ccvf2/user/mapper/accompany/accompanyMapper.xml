@@ -15,6 +15,7 @@
 		<result property="accompany_status_code" column="ACCOMPANY_STATUS_CODE"/>
 		<result property="use_yn" column="USE_YN"/>
 		<result property="gender_code" column="GENDER_CODE"/>
+		<result property="mem_name" column="MEM_NAME"/>		
 	</resultMap> 
 	
 	<!-- 동행구하기 게시판 쓰기 -->
@@ -56,24 +57,41 @@
 	<!-- 한 페이지에 표시할 게시글 리스트 -->
 	<select id="getAccompanyList" parameterType="java.util.Map" resultMap="accompanyMap">
 		<![CDATA[
-			select * 
-			from (
-				SELECT ROWNUM rnum, b.* 
-				FROM (
-					SELECT * 
-					FROM tbl_accompany 
-					ORDER BY accompany_no desc
-				)b
-			)
-			where rnum >= #{startRow}
-			and rnum <= #{endRow}
+			select accompany.rnum,
+			  accompany.accompany_no,
+			  accompany.mem_no, 
+			  accompany.write_date, 
+			  accompany.start_date, 
+			  accompany.end_date, 
+			  accompany.title, 
+			  accompany.content,
+			  accompany.attach_file, 
+			  accompany.accompany_status_code, 
+			  accompany.gender_code, 
+			  accompany.use_yn, 
+			  accompany.hits,
+			  member.mem_name
+			from (select * 
+						from (
+							SELECT ROWNUM rnum, b.* 
+							FROM (
+								SELECT * 
+								FROM tbl_accompany 
+								ORDER BY accompany_no desc
+							)b
+							)
+				where rnum >= #{startRow}
+				and rnum <= #{endRow}
+				) accompany, 
+				  tbl_member member
+			where accompany.mem_no = member.mem_no
 		]]>
 	</select>
 	
 	<select id="readAccompany" parameterType="int" resultMap="accompanyMap">
-		select * 
-		from tbl_accompany 
-		where accompany_no = #{accompany_no}
+		select *
+		from tbl_accompany
+		where accompany_no=#{accompany_no}
 	</select>
 	
 	<update id="updateAccompanyHits" parameterType="int">
@@ -83,9 +101,22 @@
 	</update>
 	
 	<select id="getOneAccompany" parameterType="int" resultMap="accompanyMap">
-		select *
-		from tbl_accompany
-		where accompany_no=#{accompany_no}
+		select  accompany.accompany_no,
+			  accompany.mem_no, 
+			  accompany.write_date, 
+			  accompany.start_date, 
+			  accompany.end_date, 
+			  accompany.title, 
+			  accompany.content,
+			  accompany.attach_file, 
+			  accompany.accompany_status_code, 
+			  accompany.gender_code, 
+			  accompany.use_yn, 
+			  accompany.hits,
+			  member.mem_name
+		from tbl_accompany accompany, tbl_member member
+		where accompany.mem_no = member.mem_no
+		and accompany.accompany_no=#{accompany_no}
 	</select>
 	
 </mapper>
