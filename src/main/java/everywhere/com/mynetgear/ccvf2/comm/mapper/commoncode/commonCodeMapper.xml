@@ -87,9 +87,9 @@
 				</choose>
 		</where>
 		ORDER BY
-			code_no
-		DESC
-		 
+			code_group DESC
+			, code_sort ASC
+			, code_name ASC
 	</select>
 
 	<!-- 코드내용 1건  -->
