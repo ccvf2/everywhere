@@ -40,7 +40,7 @@
 				<tr>
 					<td>${accompanyDto.accompany_no}</td>
 					<td><a href ="/user/accompany/accompanyRead.do?accompany_no=${accompanyDto.accompany_no}&currentPage=${currentPage}">${accompanyDto.title}</a></td>
-					<td>${accompanyDto.mem_no}</td>
+					<td>${accompanyDto.mem_name}</td>
 					<td><fmt:formatDate pattern="MM-dd" value="${accompanyDto.write_date}"/></td>
 					<td>${accompanyDto.hits}</td>
 				</tr>
@@ -76,6 +76,8 @@
 			</c:if>
 		</div>
 	</c:if>
+	
+	<button type="button" class="btn btn-primary" onclick="location.href='/user/accompany/accompanyWrite.do'">글쓰기</button>
 	
 	<script type="text/javascript" src="/script/common/jquery-1.11.3.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->

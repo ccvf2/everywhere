@@ -12,6 +12,7 @@ import java.util.List;
 public class AccompanyDto {
 	private int accompany_no;
 	private int mem_no;
+	private String mem_name;
 	private Date write_date;
 	private Date start_date;
 	private Date end_date;
@@ -130,6 +131,7 @@ public class AccompanyDto {
 		System.out.println("use_yn: " + this.use_yn);
 		System.out.println("gender_code: " + this.gender_code);
 		System.out.println("hits:" + this.hits);
+		System.out.println("mem_name" + this.mem_name);
 	}
 
 	public int getHits() {
@@ -138,5 +140,13 @@ public class AccompanyDto {
 
 	public void setHits(int hits) {
 		this.hits = hits;
+	}
+
+	public String getMem_name() {
+		return mem_name;
+	}
+
+	public void setMem_name(String mem_name) {
+		this.mem_name = mem_name;
 	}
 }

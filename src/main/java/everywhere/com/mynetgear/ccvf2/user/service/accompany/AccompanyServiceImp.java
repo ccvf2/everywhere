@@ -9,9 +9,12 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import everywhere.com.mynetgear.ccvf2.comm.aop.EverywhereAspect;
+import everywhere.com.mynetgear.ccvf2.comm.dto.common.CommonFileIODto;
+import everywhere.com.mynetgear.ccvf2.comm.service.common.CommonFileIOServiceImp;
 import everywhere.com.mynetgear.ccvf2.comm.util.common.CommonUtils;
 import everywhere.com.mynetgear.ccvf2.comm.util.common.Constant;
 import everywhere.com.mynetgear.ccvf2.user.dao.accompany.AccompanyDao;
@@ -53,11 +56,11 @@ public class AccompanyServiceImp implements AccompanyService {
 	@Override
 	public void insertOkAccompany(ModelAndView mav) {
 		Map<String, Object> map = mav.getModelMap();
-		HttpServletRequest request = (HttpServletRequest) map.get("request");
+		MultipartHttpServletRequest request = (MultipartHttpServletRequest) map.get("request");
 		AccompanyDto accompanyDto = new AccompanyDto();
 		
 		/*글쓴이: 임시라 변경 필요*/
-		accompanyDto.setMem_no(10);
+		accompanyDto.setMem_no(12);
 		
 		String start_date = request.getParameter("start_date");
 		String end_date = request.getParameter("end_date");
@@ -88,6 +91,11 @@ public class AccompanyServiceImp implements AccompanyService {
 		
 		
 		EverywhereAspect.logger.info(EverywhereAspect.logMsg + check);
+		
+		
+	/*	CommonFileIOServiceImp nd=new CommonFileIOServiceImp();
+		CommonFileIODto filedto= nd.requestWriteFileAndDTO(request, "file", savePath);*/
+		
 		
 		mav.addObject("check", check);
 		mav.setViewName("user/accompany/accompanyWriteOk");
@@ -121,6 +129,10 @@ public class AccompanyServiceImp implements AccompanyService {
 		}
 		EverywhereAspect.logger.info(EverywhereAspect.logMsg + accompanyList.size());
 		
+//		mem_name테스터
+//		for(int i = 0; i<accompanyList.size(); i++) {
+//			EverywhereAspect.logger.info(EverywhereAspect.logMsg + accompanyList.get(0).getMem_name());
+//		}
 		mav.addObject("count", count);
 		mav.addObject("boardSize", boardSize);
 		mav.addObject("currentPage", currentPage);
@@ -138,9 +150,18 @@ public class AccompanyServiceImp implements AccompanyService {
 		EverywhereAspect.logger.info(EverywhereAspect.logMsg + accompany_no + "\t" + currentPage);
 		
 		AccompanyDto accompanyDto = accompanyDao.readAccompany(accompany_no);
-		//accompanyDto.printAll();
+		accompanyDto.printAll();
 		
 		mav.addObject("accompanyDto", accompanyDto);
 		mav.setViewName("user/accompany/accompanyRead");
+	}
+
+	@Override
+	public void deleteAccompany(ModelAndView mav) {
+		Map<String, Object> map = mav.getModelMap();
+		HttpServletRequest request = (HttpServletRequest) map.get("request");
+		int accompany_no = Integer.parseInt(request.getParameter("accompany_no"));
+		
+		EverywhereAspect.logger.info(EverywhereAspect.logMsg + accompany_no);
 	}
 }
