@@ -115,9 +115,11 @@ public class AdminMainController {
 		return null;
 	}
 	
-	
-/*	public return_type name() {
-		
-	}*/
+	@RequestMapping(value="/test/reply.do", method=RequestMethod.GET)
+	public ModelAndView commonReply(HttpServletRequest request, HttpServletResponse response) {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("/common/reply/commonReply");
+		return mav;
+	}
 	
 }

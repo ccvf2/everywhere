@@ -30,8 +30,14 @@ public class SpotServiceImp implements SpotService{
 
 	@Override
 	public void addSpotPage(ModelAndView mav) {
-		List<CommonCodeDto> countryList = commonCodeDao.getListByGroupCode("B0000");
-		List<CommonCodeDto> spotTypeList = commonCodeDao.getListByGroupCode("T0001");
+		CommonCodeDto codeDto = new CommonCodeDto();
+		
+		codeDto.setCode_group("B0000");
+		List<CommonCodeDto> countryList = commonCodeDao.getListCommonCodeInfo(codeDto);
+		
+		codeDto.setCode_group("T0001");
+		List<CommonCodeDto> spotTypeList = commonCodeDao.getListCommonCodeInfo(codeDto);
+		
 		mav.addObject("countryList", countryList);
 		mav.addObject("spotTypeList", spotTypeList);
 		mav.setViewName("/user/spot/addSpotPage");
@@ -43,8 +49,11 @@ public class SpotServiceImp implements SpotService{
 		HttpServletRequest request = (HttpServletRequest)map.get("request");
 		HttpServletResponse response = (HttpServletResponse)map.get("response");
 		String country_code = request.getParameter("country_code");
-		System.out.println("country_code : " + country_code);
-		List<CommonCodeDto> cityList = commonCodeDao.getListByGroupCode(country_code);
+		
+		CommonCodeDto codeDto = new CommonCodeDto();
+		codeDto.setCode_group(country_code);
+		List<CommonCodeDto> cityList = commonCodeDao.getListCommonCodeInfo(codeDto);
+		
 		if(cityList.size() > 0){
 			String result = "";
 			for(int i = 0; i < cityList.size(); i++){
@@ -66,8 +75,8 @@ public class SpotServiceImp implements SpotService{
 	@Override
 	public void insertSpot(ModelAndView mav) {
 		Map<String, Object> map=mav.getModelMap();
-		SpotDto spotDto = (SpotDto)map.get("spotDto");
 		
+		SpotDto spotDto = (SpotDto)map.get("spotDto");		
 		int result = spotDao.insertSpot(spotDto);
 		System.out.println("result : " + result);
 		
@@ -77,8 +86,14 @@ public class SpotServiceImp implements SpotService{
 	@Override
 	public void getSpotList(ModelAndView mav) {
 		List<SpotDto> spotList = spotDao.getSpotList();
-		List<CommonCodeDto> countryList = commonCodeDao.getListByGroupCode("B0000");
-		List<CommonCodeDto> spotTypeList = commonCodeDao.getListByGroupCode("T0001");
+		
+		CommonCodeDto codeDto = new CommonCodeDto();
+		codeDto.setCode_group("B0000");
+		List<CommonCodeDto> countryList = commonCodeDao.getListCommonCodeInfo(codeDto);
+		
+		codeDto.setCode_group("T0001");
+		List<CommonCodeDto> spotTypeList = commonCodeDao.getListCommonCodeInfo(codeDto);
+		
 		mav.addObject("countryList", countryList);
 		mav.addObject("spotTypeList", spotTypeList);
 		mav.addObject("spotList", spotList);
@@ -92,9 +107,17 @@ public class SpotServiceImp implements SpotService{
 		int spot_no = Integer.parseInt(request.getParameter("spot_no"));
 		
 		SpotDto spotDto = spotDao.getOneSpot(spot_no);
-		String countryName = commonCodeDao.getCodeName(spotDto.getCountry_code());
-		String cityName = commonCodeDao.getCodeName(spotDto.getCity_code());
-		String spot_type = commonCodeDao.getCodeName(spotDto.getSpot_type_code());
+		CommonCodeDto codeDto = new CommonCodeDto();
+		
+		codeDto = commonCodeDao.getOneCommonCodeInfo(spotDto.getCountry_code());
+		String countryName = codeDto.getCode_name();
+		
+		codeDto = commonCodeDao.getOneCommonCodeInfo(spotDto.getCity_code());
+		String cityName = codeDto.getCode_name();
+		
+		codeDto = commonCodeDao.getOneCommonCodeInfo(spotDto.getSpot_type_code());
+		String spot_type = codeDto.getCode_name();
+		
 		mav.addObject("spotDto", spotDto);
 		mav.addObject("countryName", countryName);
 		mav.addObject("cityName", cityName);
@@ -109,9 +132,14 @@ public class SpotServiceImp implements SpotService{
 		int spot_no = Integer.parseInt(request.getParameter("spot_no"));
 		
 		SpotDto spotDto = spotDao.getOneSpot(spot_no);
-		List<CommonCodeDto> countryList = commonCodeDao.getListByGroupCode("B0000");
-		List<CommonCodeDto> cityList = commonCodeDao.getListByGroupCode(spotDto.getCountry_code());
-		List<CommonCodeDto> spotTypeList = commonCodeDao.getListByGroupCode("T0001");
+		CommonCodeDto codeDto = new CommonCodeDto();
+		codeDto.setCode_group("B0000");
+		List<CommonCodeDto> countryList = commonCodeDao.getListCommonCodeInfo(codeDto);
+		codeDto.setCode_group(spotDto.getCountry_code());
+		List<CommonCodeDto> cityList = commonCodeDao.getListCommonCodeInfo(codeDto);
+		codeDto.setCode_group("T0001");
+		List<CommonCodeDto> spotTypeList = commonCodeDao.getListCommonCodeInfo(codeDto);
+		
 		mav.addObject("countryList", countryList);
 		mav.addObject("cityList", cityList);
 		mav.addObject("spotTypeList", spotTypeList);
