@@ -10,13 +10,13 @@
 <c:if test="${check>0}">
 	<script type="text/javascript">
 		alert("게시글이 작성되었습니다.");
-		location.href="/user/accompany/accompanyMain.do";
+		location.href="/user/accompany/accompanyList.do";
 	</script>
 </c:if>
 <c:if test="${check==0}">
 	<script type="text/javascript">
 		alert("게시물 작성에 실패하였습니다.");
-		location.href="/user/accompany/accompanyMain.do";
+		location.href="/user/accompany/accompanyList.do";
 	</script>
 </c:if>
 </body>

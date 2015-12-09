@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <title>Bootstrap 101 Template</title>
+    <title>여행 동행구하기</title>
 
     <!-- Bootstrap -->
     <link href="/script/common/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -20,17 +20,33 @@
     <![endif]-->
   </head>
   <body>
-  	<c:if test="${check>0}">
-  		<script type="text/javascript">
-  			location.href="/user/accompany/accompanyList.do";
-  		</script>
-  	</c:if>
-	<c:if test="${check==0}">
-  		<script type="text/javascript">
-  			alert("게시글을 삭제하는 도중 오류가 발생하였습니다.");
-  			location.href="/user/accompany/accompanyList.do";
-  		</script>
-  	</c:if>
+   	<form action="/user/accompany/accompanyWriteOk.do" method="post" onsubmit="" enctype="multipart/form-data">
+		<input type="hidden" name="accompany_no" value="" />
+		<input type="hidden" name="mem_no" value="" />
+		<label>제목</label>
+		<input type="text" name="title"><br/>
+		<br/>
+		<label>시작일</label>
+		<input type="text" name="start_date" id="start_date" />
+		
+		<label>종료일</label>
+		<input type="text" name="end_date" id="end_date" />
+		<input type="radio"	name="gender_code" value="1">남 
+		<input type="radio"	name="gender_code" value="2">여 
+		<input type="radio"	name="gender_code" value="3" checked="checked">둘 다 
+		<br/><br />
+		<label>내용</label>
+		<textarea rows="14" cols="67" name="content"></textarea>
+		<br/>
+		<br/>
+		<label class="title">파일명</label>
+		<input type="file" name="file"/>
+			
+		<br/>
+		<br/>
+		<input type="submit" value="글쓰기" />
+		<input type="button" value="취소" onclick="location.href='/user/accompany/accompanyList.do'" />
+	</form>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script type="text/javascript" src="/script/common/jquery-1.11.3.js"></script>

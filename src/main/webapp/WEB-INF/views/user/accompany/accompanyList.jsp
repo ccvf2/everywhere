@@ -8,7 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <title>Bootstrap 101 Template</title>
+    <title>동행구하기 게시판</title>
 
     <!-- Bootstrap -->
     <link href="/script/common/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -76,6 +76,8 @@
 			</c:if>
 		</div>
 	</c:if>
+	
+	<button type="button" class="btn btn-primary" onclick="location.href='/user/accompany/accompanyWrite.do'">글쓰기</button>
 	
 	<script type="text/javascript" src="/script/common/jquery-1.11.3.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
