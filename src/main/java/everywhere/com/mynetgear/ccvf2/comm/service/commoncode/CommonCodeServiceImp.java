@@ -28,6 +28,7 @@ public class CommonCodeServiceImp implements CommonCodeService {
 	
 	@Override
 	public void callCodeSettingPage(ModelAndView mav) {
+		CommonCodeDto dto = new CommonCodeDto();
 		List<CommonCodeDto> list=commonCodeDao.getListCommonCodeInfo();
 		mav.addObject("codeList", list);
 		mav.setViewName("/admin/code/codeSetting");
