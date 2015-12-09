@@ -77,7 +77,7 @@ public interface CommonCodeDao {
 	 * @param code_name 
 	 * @return CommonCodeDto
 	 */
-	public CommonCodeDto getOneCommonCodeInfo(String code_group_name, String code_name);
+	/*public CommonCodeDto getOneCommonCodeInfo(String code_group_name, String code_name);*/
 	
 	/**
 	 * @author 안희진
@@ -86,7 +86,7 @@ public interface CommonCodeDao {
 	 * @param code_group 
 	 * @return CommonCodeDto
 	 */
-	public List<CommonCodeDto> getListByGroupCode(String code_group);
+	/*public List<CommonCodeDto> getListByGroupCode(String code_group);*/
 	/**
 	 * @author 안희진
 	 * @createDate 2015. 12. 9.
@@ -94,5 +94,5 @@ public interface CommonCodeDao {
 	 * @param code 
 	 * @return String
 	 */
-	public String getCodeName(String code);
+	/*public String getCodeName(String code);*/
 }
