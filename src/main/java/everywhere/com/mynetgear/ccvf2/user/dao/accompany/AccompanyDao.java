@@ -68,4 +68,13 @@ public interface AccompanyDao {
 	 */
 	int deleteAccompany(int accompany_no, int mem_no);
 
+	/**
+	 * @author 곽성국	
+	 * @createDate 2015. 12. 9.
+	 * @described 동행 구하기 게시판 수정
+	 * @param accompanyDto
+	 * @return
+	 */
+	int updateAccompany(AccompanyDto accompanyDto);
+
 }

@@ -92,8 +92,11 @@
 				}
 			}
 		</script>
-			
 		<br/><br />
+		
+		<!-- 동행구함 여부 -->
+		
+		
 		<label>내용</label>
 		<textarea rows="14" cols="67" name="content">${accompanyDto.content}</textarea>
 		<br/>

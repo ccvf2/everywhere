@@ -147,11 +147,18 @@ public class AccompanyController {
 		return mav;
 	}
 	
+	/**
+	 * @author 곽성국	
+	 * @createDate 2015. 12. 9.
+	 * @described 동행구하기 수정 ok
+	 * @param request
+	 * @param response
+	 * @return
+	 */
 	@RequestMapping(value="/user/accompany/accompanyUpdateOk.do" ,method=RequestMethod.POST)
-	public ModelAndView updateOkAccompany(HttpServletRequest request, HttpServletResponse response, AccompanyDto accompanyDto) {
+	public ModelAndView updateOkAccompany(HttpServletRequest request, HttpServletResponse response) {
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("request", request);
-		mav.addObject("accompanyDto", accompanyDto);
 		accompanyService.updateOkAccompany(mav);
 		
 		return mav;

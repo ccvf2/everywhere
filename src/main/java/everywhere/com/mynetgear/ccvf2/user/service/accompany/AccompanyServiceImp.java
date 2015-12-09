@@ -235,9 +235,40 @@ public class AccompanyServiceImp implements AccompanyService {
 	public void updateOkAccompany(ModelAndView mav) {
 		Map<String, Object> map = mav.getModelMap();
 		MultipartHttpServletRequest request = (MultipartHttpServletRequest) map.get("request");
-		AccompanyDto accompanyDto = (AccompanyDto) map.get("accompanyDto");
+		
+		AccompanyDto accompanyDto = new AccompanyDto();
+		accompanyDto.setAccompany_no(Integer.parseInt(request.getParameter("accompany_no")));
+		accompanyDto.setMem_no(Integer.parseInt(request.getParameter("mem_no")));
+		
+		/*여행 시작일 - 여행 종료일 Date 형식으로 변경*/
+		try {
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+			accompanyDto.setStart_date(sdf.parse(request.getParameter("start_date")));
+			accompanyDto.setEnd_date(sdf.parse(request.getParameter("end_date")));
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		/*성별 코드: 1. 남자, 2. 여자, 3. 둘다*/
+		accompanyDto.setGender_code(request.getParameter("gender_code"));
+		
+		/*제목 및 HTML제거*/
+		accompanyDto.setTitle(CommonUtils.deleteHTML(request.getParameter("title")));
+		/*내용 및 HTML 제거*/
+		accompanyDto.setContent(CommonUtils.deleteHTML(request.getParameter("content")));
+		
+		/*동행 구함 상태 수정 필요*/
+		accompanyDto.setAccompany_status_code(Constant.SYNB_YN_N);
+		
+		accompanyDto.printAll();
+		
+		int check = accompanyDao.updateAccompany(accompanyDto);
 		
 		
+		EverywhereAspect.logger.info(EverywhereAspect.logMsg + check);
+		
+		
+	/*	CommonFileIOServiceImp nd=new CommonFileIOServiceImp();
+		CommonFileIODto filedto= nd.requestWriteFileAndDTO(request, "file", savePath);*/
 		
 		
 		mav.setViewName("user/accompany/accompanyUpdateOk");
