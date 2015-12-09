@@ -40,4 +40,13 @@ public interface CommonFileIOService {
 	 */
 	public boolean requestDeleteFile(String savePath, String fileName);
 	
+	
+	/**
+	 * @author 배성욱
+	 * @createDate 2015. 12. 9.
+	 * @described 파일내용을 데이터베이스 insert
+	 * @param commonFileIODto
+	 * @return
+	 */
+	public int insertFileInfo(CommonFileIODto commonFileIODto);
 }
