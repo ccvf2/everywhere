@@ -62,7 +62,7 @@
 
 
 	<!-- 코드목록 불러오기 -->
-	<select id="selectList_code_info" resultMap="codeMap">
+	<select id="selectList_code_info" resultMap="codeMap" parameterType="everywhere.com.mynetgear.ccvf2.comm.dto.commoncode.CommonCodeDto">
 		SELECT
 			code_no
 			,code
@@ -74,9 +74,22 @@
 			,code_regdate
 		FROM
 			tbl_common_code
+		<where>
+				<choose>
+					<when test="code_group != ''">
+					AND code_group=#{code_group}
+					</when>
+					<when test="code_group_name != ''">
+					AND code_group_name=#{code_group_name}
+					</when>
+					<otherwise>
+					</otherwise>
+				</choose>
+		</where>
 		ORDER BY
 			code_no
-		DESC 
+		DESC
+		 
 	</select>
 
 

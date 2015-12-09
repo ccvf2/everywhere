@@ -26,13 +26,24 @@ public class CommonCodeServiceImp implements CommonCodeService {
 	@Autowired
 	private CommonCodeDao commonCodeDao;
 	
+	/**
+	 * @author 배성욱
+	 * @createDate 2015. 12. 7.
+	 * @described 공통코드 관리자 페이지로 이동합니다.
+	 */
 	@Override
 	public void callCodeSettingPage(ModelAndView mav) {
+		CommonCodeDto dto = new CommonCodeDto();
 		List<CommonCodeDto> list=commonCodeDao.getListCommonCodeInfo();
 		mav.addObject("codeList", list);
 		mav.setViewName("/admin/code/codeSetting");
 	}
 
+	/**
+	 * @author 배성욱
+	 * @createDate 2015. 12. 7.
+	 * @described 공통코드 관리자 페이지로 에서 입력,수정 삭제 합니다.
+	 */
 	@Override
 	public void callCodeSetting(ModelAndView mav) {
 		Map<String, Object> map = mav.getModelMap();
@@ -61,7 +72,30 @@ public class CommonCodeServiceImp implements CommonCodeService {
 		callCodeSettingPage(mav);
 	}
 
-
+//-------------------------------------------------------------------------------------------
 	
-
+	/**
+	 * @author 배성욱
+	 * @createDate 2015. 12. 7.
+	 * @described 공통코드 불러 옵니다.인자 값으로 "코드그룹"을 보내야 합니다.
+	 */
+	public List<CommonCodeDto> getListCodeListGroup(String code_group) {
+		CommonCodeDto dto= new CommonCodeDto();
+		code_group=StringUtils.deleteWhitespace(code_group);
+		dto.setCode_group(code_group);
+		List<CommonCodeDto> list=commonCodeDao.getListCommonCodeInfo(dto);
+		return list;
+	}
+	/**
+	 * @author 배성욱
+	 * @createDate 2015. 12. 7.
+	 * @described 공통코드 불러 옵니다.인자 값으로 "코드그룹이름"을 보내야 합니다.
+	 */
+	public List<CommonCodeDto> getListCodeListGroupName(String code_group_name) {
+		CommonCodeDto dto= new CommonCodeDto();
+		code_group_name=StringUtils.deleteWhitespace(code_group_name);
+		dto.setCode_group_name(code_group_name);
+		List<CommonCodeDto> list=commonCodeDao.getListCommonCodeInfo(dto);
+		return list;
+	}
 }

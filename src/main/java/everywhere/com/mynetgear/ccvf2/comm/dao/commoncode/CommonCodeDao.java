@@ -43,6 +43,13 @@ public interface CommonCodeDao {
 	 * @return
 	 */
 	public List<CommonCodeDto> getListCommonCodeInfo();
+	/**
+	 * @author 배성욱
+	 * @createDate 2015. 12. 7.
+	 * @described 코드목록가져오기(매개변수가 있는 타입)
+	 * @return
+	 */
+	public List<CommonCodeDto> getListCommonCodeInfo(CommonCodeDto dto);
 	
 	
 	
