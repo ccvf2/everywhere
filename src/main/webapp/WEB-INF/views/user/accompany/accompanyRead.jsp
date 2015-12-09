@@ -13,7 +13,7 @@
 		function deleteFunc(accompany_no){
 			var deleteyn=confirm("정말로 삭제하시겠습니까?");
 			if(deleteyn==true){
-				location.href="location.href='/user/accompany/accompanyDelete.do";
+				location.href="/user/accompany/accompanyDelete.do?accompany_no="+accompany_no;
 			}
 		}
 	</script>
@@ -48,14 +48,19 @@
   	</c:if><br/>
   	
   	<label>글쓴이</label>
-  	<!-- 글쓴이 번호를 글쓴이로 변환 필요 -->
   	${accompanyDto.mem_name}<br/>
   	<br/>
   	
   	<label>내용</label>
   	${accompanyDto.content}<br/><br/>
   	<button type="button" class="btn btn-default" onclick="location.href='/user/accompany/accompanyList.do'">글목록</button>
-	<button type="button" class="btn btn-danger" onclick="deleteFunc('${accompanyDto.accompany_no}')">글삭제</button>
+  	
+  	<!-- 글쓴이만 삭제 및 수정이 보이도록 -->
+  	<c:if test="${ownerCheck>0}">
+  		<button type="button" class="btn btn-warning">수정</button>
+		<button type="button" class="btn btn-danger" onclick="deleteFunc('${accompanyDto.accompany_no}')">글삭제</button>
+  	</c:if>
+  	
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script type="text/javascript" src="/script/common/jquery-1.11.3.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->

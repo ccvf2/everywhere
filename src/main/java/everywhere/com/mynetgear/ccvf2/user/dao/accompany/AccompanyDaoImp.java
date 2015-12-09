@@ -28,7 +28,6 @@ public class AccompanyDaoImp implements AccompanyDao {
 	@Autowired
 	private PlatformTransactionManager transactionManager;
 
-
 	@Override
 	public int insertAccompany(AccompanyDto accompanyDto) {
 		//EverywhereAspect.logger.info(EverywhereAspect.logMsg +accompanyDto.getEnd_date());
@@ -72,5 +71,23 @@ public class AccompanyDaoImp implements AccompanyDao {
 		
 		return board;
 	}
+
+	@Override
+	public int checkUserAccompany(int accompany_no, int mem_no) {
+		Map<String, Integer> hMap = new HashMap<String, Integer>();
+		hMap.put("accompany_no", accompany_no);
+		hMap.put("mem_no", mem_no);
+		return sqlTemplate.selectOne("everywhere.com.mynetgear.ccvf2.user.mapper.accompany.checkUserAccompany", hMap);
+	}
+
+	@Override
+	public int deleteAccompany(int accompany_no, int mem_no) {
+		Map<String, Integer> hMap = new HashMap<String, Integer>();
+		hMap.put("accompany_no", accompany_no);
+		hMap.put("mem_no", mem_no);
+		return sqlTemplate.delete("everywhere.com.mynetgear.ccvf2.user.mapper.accompany.deleteAccompany", hMap);
+	}
+	
+	
 	
 }

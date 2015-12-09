@@ -52,7 +52,7 @@ public interface AccompanyService {
 
 	/**
 	 * @author 곽성국	
-	 * @createDate 2015. 12. 8.
+	 * @createDate 2015. 12. 9.
 	 * @described 동행구하기 delete
 	 * @param mav
 	 */
