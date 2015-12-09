@@ -20,14 +20,13 @@ public class CommonFileIODto {
 	/** 파일 : 사용자자 업로드한 파일명 */
 	private String real_name="";
 	/** 파일 : 서버에 실제저장 파일명 */
-	private String saved_name="";
+	private String save_name="";
 	/** 파일 : 서버에 실제저장 파일위치 */
-	private String saved_path="";
+	private String save_path="";
 	/** 파일 : 파일크기 */
-	private long size=0;
+	private long file_size=0;
 	/** 파일 : 파일객체 */
 	private File file=null;
-	
 	
 	public int getFile_no() {
 		return file_no;
@@ -59,23 +58,23 @@ public class CommonFileIODto {
 	public void setReal_name(String real_name) {
 		this.real_name = real_name;
 	}
-	public String getSaved_name() {
-		return saved_name;
+	public String getSave_name() {
+		return save_name;
 	}
-	public void setSaved_name(String saved_name) {
-		this.saved_name = saved_name;
+	public void setSave_name(String save_name) {
+		this.save_name = save_name;
 	}
-	public String getSaved_path() {
-		return saved_path;
+	public String getSave_path() {
+		return save_path;
 	}
-	public void setSaved_path(String saved_path) {
-		this.saved_path = saved_path;
+	public void setSave_path(String save_path) {
+		this.save_path = save_path;
 	}
-	public long getSize() {
-		return size;
+	public long getFile_size() {
+		return file_size;
 	}
-	public void setSize(long size) {
-		this.size = size;
+	public void setFile_size(long file_size) {
+		this.file_size = file_size;
 	}
 	public File getFile() {
 		return file;
@@ -83,9 +82,6 @@ public class CommonFileIODto {
 	public void setFile(File file) {
 		this.file = file;
 	}
-
-	
-	
 	
 	
 }

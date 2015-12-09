@@ -71,4 +71,6 @@ public interface CommonCodeDao {
 	 * @return CommonCodeDto
 	 */
 	public CommonCodeDto getOneCommonCodeInfo(String code_group_name, String code_name);
+	
+	public List<CommonCodeDto> getListByGroupCode(String code_group);
 }

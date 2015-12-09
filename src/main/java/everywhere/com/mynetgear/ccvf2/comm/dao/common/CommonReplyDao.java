@@ -1,7 +1,6 @@
 package everywhere.com.mynetgear.ccvf2.comm.dao.common;
 
 import java.util.List;
-import java.util.Map;
 
 import everywhere.com.mynetgear.ccvf2.comm.dto.common.CommonReplyDto;
 

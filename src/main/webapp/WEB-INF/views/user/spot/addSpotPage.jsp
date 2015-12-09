@@ -27,12 +27,12 @@
 					  <option value="${spotType.code}">${spotType.code_name}</option>
 				</c:forEach>         
 			</select> <br/>
-			명소명 : <input type="text" name="spot_name" value="경북궁"> <br/>
-			한줄설명 : <input type="text" name="spot_note" value="조선 시대 임금님이 살았던 궁"> <br/>
+			명소명 : <input type="text" name="spot_name"/> <br/>
+			한줄설명 : <input type="text" name="spot_note"/> <br/>
 			Image : <input type="file">
-			주소 : <input type="text" name="spot_addr" value="서울특별시 종로구 사직로 161"/> <br/>
-			위도 : <input type="text" name="spot_lat" value="37.579617"/>
-			경도 : <input type="text" name="spot_long" value="126.9748523"/> <br/>
+			주소 : <input type="text" name="spot_addr"/> <br/>
+			위도 : <input type="text" name="spot_lat"/>
+			경도 : <input type="text" name="spot_long"/> <br/>
 			<input type="submit" value="추가"/>
 		</form>
 	</div>	

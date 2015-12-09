@@ -25,23 +25,33 @@ public class SpotDaoImp implements SpotDao {
 	private PlatformTransactionManager transactionManager;
 	
 	@Override
-	public List<CommonCodeDto> getCountryList() {
-		return sqlTemplate.selectList("selectList_country_code");
-	}
-
-	@Override
-	public List<CommonCodeDto> getCityList(String country_code) {
-		return sqlTemplate.selectList("selectList_city_code", country_code);
-	}
-
-	@Override
-	public List<CommonCodeDto> getSpotTypeList() {
-		return sqlTemplate.selectList("selectList_spot_code");
-	}
-
-	@Override
 	public int insertSpot(SpotDto spotDto) {
 		return sqlTemplate.insert("insert_spot", spotDto);
+	}
+
+	@Override
+	public List<SpotDto> getSpotList() {
+		return sqlTemplate.selectList("select_spot_all_list");
+	}
+
+	@Override
+	public SpotDto getOneSpot(int spot_no) {
+		return sqlTemplate.selectOne("select_one_spot", spot_no);
+	}
+
+	@Override
+	public int updateSpot(SpotDto spotDto) {
+		return sqlTemplate.update("update_spot", spotDto);
+	}
+
+	@Override
+	public String getCodeName(String code) {
+		return sqlTemplate.selectOne("select_code_name", code);
+	}
+
+	@Override
+	public int deleteSpot(int spot_no) {
+		return sqlTemplate.delete("delete_spot", spot_no);
 	}
 	
 }

@@ -5,7 +5,7 @@ var values = [];
 function readCityToServer(){
 	var countrycode = document.getElementById("selectCountry").value;
 	var params = "country_code=" + countrycode;
-	var url = "/user/spot/selectCountry.do?" + params;
+	var url = "/user/spot/selectCountry.ajax?" + params;
 	$.ajax({
 		url:url,
 		type:"post",

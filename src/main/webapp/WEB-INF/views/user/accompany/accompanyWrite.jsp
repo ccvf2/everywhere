@@ -50,8 +50,7 @@
 </script>
 </head>
 <body>
-	<form action="/user/accompany/accompanyWriteOk.do" method="post"
-		onsubmit="">
+	<form action="/user/accompany/accompanyWriteOk.do" method="post" onsubmit="" enctype="multipart/form-data">
 		<input type="hidden" name="accompany_no" value="" />
 		<input type="hidden" name="mem_no" value="" />
 		<label>제목</label>
@@ -68,7 +67,11 @@
 		<br/><br />
 		<label>내용</label>
 		<textarea rows="14" cols="67" name="content"></textarea>
-
+		<br/>
+		<br/>
+		<label class="title">파일명</label>
+		<input type="file" name="file"/>
+			
 		<br/>
 		<br/>
 		<input type="submit" value="글쓰기" />
