@@ -37,7 +37,7 @@ public class SpotController {
 		return mav;
 	}
 	
-	@RequestMapping(value="/user/spot/selectCountry.do", method=RequestMethod.POST)
+	@RequestMapping(value="/user/spot/selectCountry.ajax", method=RequestMethod.POST)
 	public ModelAndView readCityList(HttpServletRequest request, HttpServletResponse response){
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("request", request);
@@ -47,12 +47,51 @@ public class SpotController {
 	}
 	
 	@RequestMapping(value="/user/spot/addSpotWrite.do", method=RequestMethod.POST)
-	public ModelAndView addSpotWrite(HttpServletRequest request, HttpServletResponse response, SpotDto spotDto){
+	public ModelAndView insertSpot(HttpServletRequest request, HttpServletResponse response, SpotDto spotDto){
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("request", request);
 		mav.addObject("spotDto", spotDto);
-		spotService.addSpotWrite(mav);
+		spotService.insertSpot(mav);
 		
 		return null;
+	}
+	
+	@RequestMapping(value="/user/spot/spotListPage.do", method=RequestMethod.GET)
+	public ModelAndView getSpotList(HttpServletRequest request, HttpServletResponse response){
+		ModelAndView mav = new ModelAndView();
+		spotService.getSpotList(mav);
+		return mav;
+	}
+
+	@RequestMapping(value="/user/spot/spotReadPage.do", method=RequestMethod.GET)
+	public ModelAndView getOneSpot(HttpServletRequest request, HttpServletResponse response){
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("request", request);
+		spotService.getOneSpot(mav);
+		return mav;
+	}
+	
+	@RequestMapping(value="/user/spot/updateSpot.do", method=RequestMethod.GET)
+	public ModelAndView updateSpot(HttpServletRequest request, HttpServletResponse response){
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("request", request);
+		spotService.updateSpot(mav);
+		return mav;
+	}
+	
+	@RequestMapping(value="/user/spot/spotUpdatePage.do", method=RequestMethod.POST)
+	public ModelAndView updateSpot(HttpServletRequest request, HttpServletResponse response, SpotDto spotDto){
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("spotDto", spotDto);
+		spotService.updateOkSpot(mav);
+		return mav;
+	}
+	
+	@RequestMapping(value="/user/spot/delete.do", method=RequestMethod.GET)
+	public ModelAndView deleteSpot(HttpServletRequest request, HttpServletResponse response){
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("request", request);
+		spotService.deleteSpot(mav);
+		return mav;
 	}
 }

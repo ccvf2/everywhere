@@ -13,8 +13,10 @@ public interface SpotDao {
 	 * @described 국가코드 목록 가져오기
 	 * @return
 	 */
-	public List<CommonCodeDto> getCountryList();
-	public List<CommonCodeDto> getSpotTypeList();
-	public List<CommonCodeDto> getCityList(String country_code);
 	public int insertSpot(SpotDto spotDto);
+	public List<SpotDto> getSpotList();
+	public SpotDto getOneSpot(int spot_no);
+	public int updateSpot(SpotDto spotDto);
+	public String getCodeName(String code);
+	public int deleteSpot(int spot_no);
 }

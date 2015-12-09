@@ -129,4 +129,12 @@
 		AND
 			code_name=#{code_name}
 	</select>
+	
+	<select id="select_code_name" resultType="String" parameterType="String">
+		select code_name from TBL_COMMON_CODE where code=#{code}
+	</select>
+	
+	<select id="select_by_code_group" resultType="everywhere.com.mynetgear.ccvf2.comm.dto.commoncode.CommonCodeDto" parameterType="String">
+		select code, code_name, code_value from TBL_COMMON_CODE where code_group=#{code_group}
+	</select>
 </mapper>
