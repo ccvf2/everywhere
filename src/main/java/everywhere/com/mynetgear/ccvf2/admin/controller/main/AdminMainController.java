@@ -31,6 +31,8 @@ public class AdminMainController {
 	private AdminMainService adminMainService;
 	@Autowired
 	private CommonCodeService commonCodeService;
+	@Autowired
+	private CommonFileIOService commonFileIOService;
 
 	@Value("${attach.temp.path}")
 	private String tempPath;
@@ -95,7 +97,15 @@ public class AdminMainController {
 		String fileName = request.getParameter("fileName");
 		CommonFileIOService dsdr= new CommonFileIOServiceImp();
 		if(StringUtils.equals(param, Constant.SYNB_CRUD_C)){
-			CommonFileIODto dtoa= dsdr.requestWriteFileAndDTO(request, "file", tempPath);
+			
+			CommonFileIODto commonFileIODto= dsdr.requestWriteFileAndDTO(request, "file", tempPath);
+			//CommonFileIODto가 null 이면 파일이 작성되지 않은것이다.
+			if(commonFileIODto!=null){
+				commonFileIODto.setType_code("a");
+				commonFileIODto.setWrite_no(1);
+				commonFileIOService.insertFileInfo(commonFileIODto);
+			}
+			
 		}else{
 			boolean dtoa= dsdr.requestDeleteFile(savePath, fileName);
 			System.out.println(dtoa);

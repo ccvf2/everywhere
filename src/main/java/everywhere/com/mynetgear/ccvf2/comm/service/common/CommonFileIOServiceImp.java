@@ -7,9 +7,12 @@ import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import everywhere.com.mynetgear.ccvf2.comm.dao.common.CommonFileIODao;
 import everywhere.com.mynetgear.ccvf2.comm.dto.common.CommonFileIODto;
 import everywhere.com.mynetgear.ccvf2.comm.util.common.Constant;
 
@@ -19,8 +22,10 @@ import everywhere.com.mynetgear.ccvf2.comm.util.common.Constant;
  * @described 공통 파일 업로드 관련 클래스
  * @reference class
  */
+@Component
 public class CommonFileIOServiceImp implements CommonFileIOService {
-
+@Autowired
+private CommonFileIODao commonFileIODao;
 	/**
 	 * @author 배성욱
 	 * @createDate 2015. 12. 8.
@@ -43,12 +48,12 @@ public class CommonFileIOServiceImp implements CommonFileIOService {
 
 				// DTO에 삽입
 				returnDto.setReal_name(realFileName);
-				returnDto.setExtension(extension);
-				returnDto.setSaved_name("_" + System.currentTimeMillis() + Constant.SYNB_DOT + extension);
-				returnDto.setSaved_path(savePath);
-				returnDto.setSize(upFile.getSize());
+				returnDto.setExtension(StringUtils.upperCase(extension));
+				returnDto.setSave_name("_" + System.currentTimeMillis());
+				returnDto.setSave_path(savePath);
+				returnDto.setFile_size(upFile.getSize());
 				File path = new File(savePath);
-				File file = new File(path, returnDto.getSaved_name() + Constant.SYNB_DOT);
+				File file = new File(path, returnDto.getSave_name() + Constant.SYNB_DOT+returnDto.getExtension());
 				returnDto.setFile(file);
 
 				upFile.transferTo(file);
@@ -96,5 +101,30 @@ public class CommonFileIOServiceImp implements CommonFileIOService {
 		}
 		return result;
 	}
+
+
+
+	
+	/**
+	 * @author 배성욱
+	 * @createDate 2015. 12. 9.
+	 * @described 파일내용을 데이터베이스에 insert
+	 */
+	@Override
+	public int insertFileInfo(CommonFileIODto commonFileIODto) {
+		int result=0;
+		result=commonFileIODao.insertFileInfo(commonFileIODto);
+		//파일 업로드 실패 시 삭제처리
+		if(result==0){
+			String fullpath=commonFileIODto.getSave_path()+
+					commonFileIODto.getSave_name()+
+					Constant.SYNB_DOT+
+					commonFileIODto.getExtension(); 
+			requestDeleteFile(fullpath);
+		}
+		return result;
+	}
+	
+	
 
 }

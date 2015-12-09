@@ -25,7 +25,9 @@ public class AccompanyDaoImp implements AccompanyDao {
 	@Autowired
 	private SqlSessionTemplate sqlTemplate;
 	
+	@Autowired
 	private PlatformTransactionManager transactionManager;
+
 
 	@Override
 	public int insertAccompany(AccompanyDto accompanyDto) {
