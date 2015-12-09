@@ -72,9 +72,15 @@ public class CommonCodeDaoImp implements CommonCodeDao {
 		map.put("code_name", code_name);
 		return sqlTemplate.selectOne("select_code_info_groupname", map);
 	}
+	
 	@Override
 	public List<CommonCodeDto> getListByGroupCode(String code_group) {
 		return sqlTemplate.selectList("select_by_code_group", code_group);
+	}
+	
+	@Override
+	public String getCodeName(String code) {
+		return sqlTemplate.selectOne("select_code_name", code);
 	}
 
 	
