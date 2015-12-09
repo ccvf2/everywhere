@@ -62,7 +62,7 @@ public class CommonCodeDaoImp implements CommonCodeDao {
 	public CommonCodeDto getOneCommonCodeInfo(int code_no) {
 		CommonCodeDto dto= new CommonCodeDto();
 		dto.setCode_no(code_no);
-		return sqlTemplate.selectOne("select_code_info_seq", dto);
+		return sqlTemplate.selectOne("selectOne_code_info", dto);
 	}
 	/** 코드 1건 가져오기 */
 	@Override
@@ -70,7 +70,7 @@ public class CommonCodeDaoImp implements CommonCodeDao {
 		CommonCodeDto dto= new CommonCodeDto();
 		code = StringUtils.deleteWhitespace(code);
 		dto.setCode(code);
-		return sqlTemplate.selectOne("select_code_info_code", dto);
+		return sqlTemplate.selectOne("selectOne_code_info", dto);
 	}
 /*	@Override
 	public CommonCodeDto getOneCommonCodeInfo(String code_group_name, String code_name) {
