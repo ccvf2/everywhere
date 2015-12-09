@@ -77,8 +77,6 @@
 		</div>
 	</c:if>
 	
-	<button type="button" class="btn btn-primary" onclick="location.href='/user/accompany/accompanyWrite.do'">글쓰기</button>
-	
 	<script type="text/javascript" src="/script/common/jquery-1.11.3.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="/script/common/bootstrap/js/bootstrap.min.js"></script>
