@@ -28,6 +28,7 @@ public class AccompanyDaoImp implements AccompanyDao {
 	@Autowired
 	private PlatformTransactionManager transactionManager;
 
+
 	@Override
 	public int insertAccompany(AccompanyDto accompanyDto) {
 		//EverywhereAspect.logger.info(EverywhereAspect.logMsg +accompanyDto.getEnd_date());

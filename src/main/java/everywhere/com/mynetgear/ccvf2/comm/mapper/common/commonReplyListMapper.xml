@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="everywhere.com.mynetgear.ccvf2.comm.mapper.common.commonReplyListMapper">
+	
+	<resultMap type="everywhere.com.mynetgear.ccvf2.comm.dto.common.CommonReplyDto" id="replyMap">
+		<!-- <result property="code" column="CODE" />
+		<result property="code_name" column="CODE_NAME" />
+		<result property="code_value" column="CODE_VALUE" /> -->
+	</resultMap>
+
+	<select id="select_Common_list_reply" parameterType="everywhere.com.mynetgear.ccvf2.comm.dto.common.CommonReplyDto" resultType="everywhere.com.mynetgear.ccvf2.comm.dto.common.CommonReplyDto">
+		SELECT REPLY_NO
+			, MEM_NO
+			, TYPE_CODE
+			, ITEM_NO
+			, REPLY_CONTENT
+			, REPLY_WRITER_NAME
+			, REPLY_WRITE_DATE
+			,USE_YN 
+		FROM 
+			TBL_COMMON_REPLY
+		WHERE
+			TYPE_CODE = #{type_code}
+		AND
+			ITEM_NO = #{item_no}
+		AND
+			USE_YN = #{use_yn}
+	</select>
+	
+</mapper>
