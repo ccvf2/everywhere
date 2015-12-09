@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -13,8 +14,6 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import everywhere.com.mynetgear.ccvf2.comm.aop.EverywhereAspect;
-import everywhere.com.mynetgear.ccvf2.comm.dto.common.CommonFileIODto;
-import everywhere.com.mynetgear.ccvf2.comm.service.common.CommonFileIOServiceImp;
 import everywhere.com.mynetgear.ccvf2.comm.util.common.CommonUtils;
 import everywhere.com.mynetgear.ccvf2.comm.util.common.Constant;
 import everywhere.com.mynetgear.ccvf2.user.dao.accompany.AccompanyDao;
@@ -144,14 +143,23 @@ public class AccompanyServiceImp implements AccompanyService {
 	public void readAccompany(ModelAndView mav) {
 		Map<String, Object> map = mav.getModelMap();
 		HttpServletRequest request = (HttpServletRequest) map.get("request");
+		HttpSession session = request.getSession();
+		
 		int accompany_no = Integer.parseInt(request.getParameter("accompany_no"));
 		int currentPage = Integer.parseInt(request.getParameter("currentPage"));
 		
 		EverywhereAspect.logger.info(EverywhereAspect.logMsg + accompany_no + "\t" + currentPage);
 		
 		AccompanyDto accompanyDto = accompanyDao.readAccompany(accompany_no);
-		accompanyDto.printAll();
+		// accompanyDto.printAll();
 		
+		// 세션에서 회원no 가져옴
+		//int mem_no = (Integer) session.getAttribute("mem_no");
+		// 세션이 없으므로 임시로 64로 둠
+		int mem_no=64;
+		int ownerCheck = accompanyDao.checkUserAccompany(accompany_no, mem_no);
+		
+		mav.addObject("ownerCheck", ownerCheck);
 		mav.addObject("accompanyDto", accompanyDto);
 		mav.setViewName("user/accompany/accompanyRead");
 	}
@@ -160,8 +168,24 @@ public class AccompanyServiceImp implements AccompanyService {
 	public void deleteAccompany(ModelAndView mav) {
 		Map<String, Object> map = mav.getModelMap();
 		HttpServletRequest request = (HttpServletRequest) map.get("request");
+		HttpSession session = request.getSession();
+		
+		
+		// 세션 회원no 가져옴
+		//String mem_no = (String) session.getAttribute("mem_no");
 		int accompany_no = Integer.parseInt(request.getParameter("accompany_no"));
 		
+		// 세션에서 회원no 가져옴
+		//int mem_no = (Integer) session.getAttribute("mem_no");
+		// 세션이 없으므로 임시로 64로 둠
+		int mem_no=64;
+		
+		//게시글 write mem_no와 세션의 mem_no가 일치할때
+	
+		int check =	accompanyDao.deleteAccompany(accompany_no, mem_no);
+		
 		EverywhereAspect.logger.info(EverywhereAspect.logMsg + accompany_no);
+		
+		
 	}
 }

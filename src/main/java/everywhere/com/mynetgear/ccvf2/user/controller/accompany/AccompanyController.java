@@ -9,8 +9,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import everywhere.com.mynetgear.ccvf2.comm.dto.common.CommonFileIODto;
-import everywhere.com.mynetgear.ccvf2.comm.service.common.CommonFileIOServiceImp;
 import everywhere.com.mynetgear.ccvf2.user.service.accompany.AccompanyService;
 
 
@@ -113,6 +111,15 @@ public class AccompanyController {
 	}
 	
 	
+	/**
+	 * @author 곽성국	
+	 * @createDate 2015. 12. 9.
+	 * @described 동행구하기 삭제
+	 * @param request
+	 * @param response
+	 * @return
+	 */
+
 	@RequestMapping(value="/user/accompany/accompanyDelete.do" ,method=RequestMethod.GET)
 	public ModelAndView deleteAccompany(HttpServletRequest request, HttpServletResponse response) {
 		ModelAndView mav = new ModelAndView();

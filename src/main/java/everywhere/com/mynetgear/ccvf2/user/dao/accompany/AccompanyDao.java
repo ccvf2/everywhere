@@ -48,4 +48,24 @@ public interface AccompanyDao {
 	 */
 	AccompanyDto readAccompany(int accompany_no);
 
+	/**
+	 * @author 곽성국	
+	 * @createDate 2015. 12. 9.
+	 * @described 세션 mem_no과 동행구하기 게시글 mem_no를 비교
+	 * @param accompany_no
+	 * @param mem_no 
+	 * @return
+	 */
+	int checkUserAccompany(int accompany_no, int mem_no);
+
+	/**
+	 * @author 곽성국	
+	 * @createDate 2015. 12. 9.
+	 * @described 동행구하기 게시판 삭제
+	 * @param accompany_no
+	 * @param mem_no
+	 * @return
+	 */
+	int deleteAccompany(int accompany_no, int mem_no);
+
 }

@@ -32,4 +32,9 @@ public class MemberDaoImp implements MemberDao {
 		return sqlTemplate.insert("everywhere.com.mynetgear.ccvf2.user.mapper.member.memberRegist", memberDto);
 	}
 
+	@Override
+	public MemberDto memberRead(int mem_no) {
+		return sqlTemplate.selectOne("everywhere.com.mynetgear.ccvf2.user.mapper.member.memberRead", mem_no);
+	}
+
 }

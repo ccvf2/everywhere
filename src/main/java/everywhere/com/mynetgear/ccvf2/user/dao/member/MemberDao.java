@@ -25,5 +25,13 @@ public interface MemberDao {
 	 * @return
 	 */
 	public int registerOk(MemberDto memberDto);
+	/**
+	 * @author 김준호
+	 * @createDate 2015. 12. 9.
+	 * @described 회원정보보기
+	 * @param mem_no
+	 * @return
+	 */
+	public MemberDto memberRead(int mem_no);
 
 }

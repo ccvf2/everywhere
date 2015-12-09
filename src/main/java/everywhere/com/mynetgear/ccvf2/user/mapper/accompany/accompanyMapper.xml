@@ -88,18 +88,21 @@
 		]]>
 	</select>
 	
+	<!-- 게시글 읽기 -->
 	<select id="readAccompany" parameterType="int" resultMap="accompanyMap">
 		select *
 		from tbl_accompany
 		where accompany_no=#{accompany_no}
 	</select>
 	
+	<!-- 게시글 조회수 증가 -->
 	<update id="updateAccompanyHits" parameterType="int">
 		update tbl_accompany
 		set hits=hits + 1
 		where accompany_no = #{accompany_no}
 	</update>
 	
+	<!-- 게시글 가져오기 -->
 	<select id="getOneAccompany" parameterType="int" resultMap="accompanyMap">
 		select  accompany.accompany_no,
 			  accompany.mem_no, 
@@ -119,4 +122,18 @@
 		and accompany.accompany_no=#{accompany_no}
 	</select>
 	
+	<!-- 세션 mem_id와 게시글 mem_id비교 -->
+	<select id="checkUserAccompany" parameterType="java.util.Map" resultType="int">
+		select count(*) 
+		from tbl_accompany
+		where accompany_no=#{accompany_no}
+		and mem_no=#{mem_no}
+	</select>
+	
+	<!--  게시물 삭제 -->
+	<delete id="deleteAccompany" parameterType="java.util.Map">
+		delete from tbl_accompany
+		where accompany_no=#{accompany_no}
+		and mem_no=#{mem_no}
+	</delete>
 </mapper>

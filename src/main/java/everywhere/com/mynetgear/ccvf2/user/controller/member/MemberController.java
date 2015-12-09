@@ -71,5 +71,22 @@ public class MemberController {
 		
 		return mav;
 	}
+	
+	/**
+	 * @author 김준호
+	 * @createDate 2015. 12. 9.
+	 * @described 회원정보보기
+	 * @param request
+	 * @param response
+	 * @return
+	 */
+	@RequestMapping(value="/user/member/memberRead.do", method=RequestMethod.GET)
+	public ModelAndView memberRead(HttpServletRequest request, HttpServletResponse response) {
+		ModelAndView mav=new ModelAndView();
+		mav.addObject("request", request);
+		memberService.memberRead(mav);
+		
+		return mav;
+	}
 
 }

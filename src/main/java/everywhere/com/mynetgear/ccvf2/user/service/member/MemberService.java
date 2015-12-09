@@ -23,5 +23,12 @@ public interface MemberService {
 	 * @param mav
 	 */
 	public void registerOk(ModelAndView mav);
+	/**
+	 * @author 김준호
+	 * @createDate 2015. 12. 9.
+	 * @described 회원정보보기
+	 * @param mav
+	 */
+	public void memberRead(ModelAndView mav);
 
 }
