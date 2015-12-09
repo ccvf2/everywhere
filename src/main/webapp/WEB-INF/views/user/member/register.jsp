@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>회원가입</title>
 <link rel="stylesheet" type="text/css" href="">
 <script type="text/javascript" src="/script/common/jquery-1.11.3.js"></script>
 <script type="text/javascript">
@@ -56,8 +56,6 @@
 		}
 		
 		form.mem_interest.value=str;
-		
-		//return false;
 	}
 </script>
 </head>
@@ -94,15 +92,7 @@
 			<div class="line">
 				<label class="title">핸드폰번호</label>
 				<span class="content">
-					<select>
-						<option>010</option>
-						<option>011</option>
-						<option>016</option>
-						<option>017</option>
-						<option>018</option>
-						<option>019</option>
-					</select>
-					<input type="text" name="mem_phone" size="10" />
+					<input type="text" name="mem_phone" size="11" />
 					<input type="button" value="번호인증하기" onclick="">
 				</span>
 			</div>

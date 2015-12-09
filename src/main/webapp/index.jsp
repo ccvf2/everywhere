@@ -9,7 +9,8 @@
 
  <a href="/admin/main/main.do">어드민메인페이지</a>
  <a href="/user/member/register.do">회원가입</a>
- <a href="/admin/commoncode/code.do">관리자-공통코드(거이완료)</a>
+ <a href="/user/member/memberRead.do?mem_no=64">회원정보보기</a>
+ <a href="/admin/commoncode/code.do">관리자-공통코드(거의완료)</a>
  <a href="/test/test.do">파일테스트</a>
  <a href="/common/replyList.do">공통댓글</a>
  <a href="/user/accompany/accompanyMain.do">회원동행구하기</a>
