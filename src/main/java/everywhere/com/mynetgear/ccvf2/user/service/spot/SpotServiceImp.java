@@ -92,9 +92,9 @@ public class SpotServiceImp implements SpotService{
 		int spot_no = Integer.parseInt(request.getParameter("spot_no"));
 		
 		SpotDto spotDto = spotDao.getOneSpot(spot_no);
-		String countryName = spotDao.getCodeName(spotDto.getCountry_code());
-		String cityName = spotDao.getCodeName(spotDto.getCity_code());
-		String spot_type = spotDao.getCodeName(spotDto.getSpot_type_code());
+		String countryName = commonCodeDao.getCodeName(spotDto.getCountry_code());
+		String cityName = commonCodeDao.getCodeName(spotDto.getCity_code());
+		String spot_type = commonCodeDao.getCodeName(spotDto.getSpot_type_code());
 		mav.addObject("spotDto", spotDto);
 		mav.addObject("countryName", countryName);
 		mav.addObject("cityName", cityName);

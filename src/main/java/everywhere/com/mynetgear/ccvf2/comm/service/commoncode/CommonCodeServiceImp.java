@@ -72,14 +72,14 @@ public class CommonCodeServiceImp implements CommonCodeService {
 		callCodeSettingPage(mav);
 	}
 
-//-------------------------------------------------------------------------------------------
+//------------------------------------아래듸 매소드 들을 끌어다 쓰세여~^^-------------------------------------------------------
 	
 	/**
 	 * @author 배성욱
 	 * @createDate 2015. 12. 7.
-	 * @described 공통코드 불러 옵니다.인자 값으로 "코드그룹"을 보내야 합니다.
+	 * @described 공통코드목록을 불러 옵니다.인자 값으로 "코드그룹(String code_group)"을 보내야 합니다.
 	 */
-	public List<CommonCodeDto> getListCodeListGroup(String code_group) {
+	public List<CommonCodeDto> getListCodeGroup(String code_group) {
 		CommonCodeDto dto= new CommonCodeDto();
 		code_group=StringUtils.deleteWhitespace(code_group);
 		dto.setCode_group(code_group);
@@ -89,13 +89,38 @@ public class CommonCodeServiceImp implements CommonCodeService {
 	/**
 	 * @author 배성욱
 	 * @createDate 2015. 12. 7.
-	 * @described 공통코드 불러 옵니다.인자 값으로 "코드그룹이름"을 보내야 합니다.
+	 * @described 공통코드목록을 불러 옵니다.인자 값으로 "코드그룹이름(String code_group_name)"을 보내야 합니다.
 	 */
-	public List<CommonCodeDto> getListCodeListGroupName(String code_group_name) {
+	public List<CommonCodeDto> getListCodeGroupName(String code_group_name) {
 		CommonCodeDto dto= new CommonCodeDto();
 		code_group_name=StringUtils.deleteWhitespace(code_group_name);
 		dto.setCode_group_name(code_group_name);
 		List<CommonCodeDto> list=commonCodeDao.getListCommonCodeInfo(dto);
 		return list;
+	}
+
+	/**
+	 * @author 배성욱
+	 * @param code_group_name 
+	 * @return 
+	 * @createDate 2015. 12. 9.
+	 * @described 공통코드1건을 불러 옵니다.인자 값으로 "고유코드(String code)"을 보내야 합니다.
+	 */
+	@Override
+	public CommonCodeDto getOneCodeGroup(String code) {
+		code=StringUtils.deleteWhitespace(code);
+		return commonCodeDao.getOneCommonCodeInfo(code);
+	}
+
+	/**
+	 * @author 배성욱
+	 * @param code_group_name 
+	 * @return 
+	 * @createDate 2015. 12. 9.
+	 * @described 공통코드1건을 불러 옵니다.인자 값으로 "고유코드(int code_no)"을 보내야 합니다.
+	 */
+	@Override
+	public CommonCodeDto getOneCodeGroup(int code_no) {
+		return commonCodeDao.getOneCommonCodeInfo(code_no);
 	}
 }

@@ -43,12 +43,7 @@ public class SpotDaoImp implements SpotDao {
 	public int updateSpot(SpotDto spotDto) {
 		return sqlTemplate.update("update_spot", spotDto);
 	}
-
-	@Override
-	public String getCodeName(String code) {
-		return sqlTemplate.selectOne("select_code_name", code);
-	}
-
+	
 	@Override
 	public int deleteSpot(int spot_no) {
 		return sqlTemplate.delete("delete_spot", spot_no);
