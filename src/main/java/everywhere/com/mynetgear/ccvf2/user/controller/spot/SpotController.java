@@ -30,7 +30,7 @@ public class SpotController {
 	 * @described 장소 추가 화면 페이지
 	 * @return
 	 */
-	@RequestMapping(value="/user/spot/addSpotPage.do", method=RequestMethod.GET)
+	/*@RequestMapping(value="/user/spot/addSpotPage.do", method=RequestMethod.GET)
 	public ModelAndView addSpotPage(HttpServletRequest request, HttpServletResponse response){
 		ModelAndView mav = new ModelAndView();
 		spotService.addSpotPage(mav);
@@ -82,6 +82,7 @@ public class SpotController {
 	@RequestMapping(value="/user/spot/spotUpdatePage.do", method=RequestMethod.POST)
 	public ModelAndView updateSpot(HttpServletRequest request, HttpServletResponse response, SpotDto spotDto){
 		ModelAndView mav = new ModelAndView();
+		b
 		mav.addObject("spotDto", spotDto);
 		spotService.updateOkSpot(mav);
 		return mav;
@@ -93,5 +94,5 @@ public class SpotController {
 		mav.addObject("request", request);
 		spotService.deleteSpot(mav);
 		return mav;
-	}
+	}*/
 }
