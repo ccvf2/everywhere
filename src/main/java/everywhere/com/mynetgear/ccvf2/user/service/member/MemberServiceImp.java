@@ -58,7 +58,6 @@ public class MemberServiceImp implements MemberService {
 	@Override
 	public void registerOk(ModelAndView mav) {
 		Map<String, Object> map=mav.getModelMap();
-		HttpServletRequest request=(HttpServletRequest)map.get("request");
 		MemberDto memberDto=(MemberDto)map.get("memberDto");
 		
 		memberDto.setMem_level_code("user");
@@ -71,8 +70,21 @@ public class MemberServiceImp implements MemberService {
 		System.out.println("registerOk check:"+check);
 		
 		mav.addObject("check", check);
-		mav.setViewName("/user/member/registerOk");
+		mav.setViewName("/user/member/registerOk");	
+	}
+
+	@Override
+	public void memberRead(ModelAndView mav) {
+		Map<String, Object> map=mav.getModelMap();
+		HttpServletRequest request=(HttpServletRequest)map.get("request");
+		int mem_no=Integer.parseInt(request.getParameter("mem_no"));
+		System.out.println("memberRead mem_no:"+mem_no);
 		
+		MemberDto memberDto=memberDao.memberRead(mem_no);
+		System.out.println("memberRead memberDto:"+memberDto.toString());
+		
+		mav.addObject("memberDto", memberDto);
+		mav.setViewName("/user/member/memberRead");
 	}
 
 }
