@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import everywhere.com.mynetgear.ccvf2.comm.service.commoncode.CommonCodeService;
+import everywhere.com.mynetgear.ccvf2.user.dto.accompany.AccompanyDto;
 import everywhere.com.mynetgear.ccvf2.user.service.accompany.AccompanyService;
 
 
@@ -146,6 +147,14 @@ public class AccompanyController {
 		return mav;
 	}
 	
-	
+	@RequestMapping(value="/user/accompany/accompanyUpdateOk.do" ,method=RequestMethod.POST)
+	public ModelAndView updateOkAccompany(HttpServletRequest request, HttpServletResponse response, AccompanyDto accompanyDto) {
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("request", request);
+		mav.addObject("accompanyDto", accompanyDto);
+		accompanyService.updateOkAccompany(mav);
+		
+		return mav;
+	}
 
 }

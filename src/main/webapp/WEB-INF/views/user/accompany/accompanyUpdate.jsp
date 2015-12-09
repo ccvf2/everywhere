@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -18,25 +20,82 @@
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+    
+		    
+	
+	<script type="text/javascript">
+		$(function() {
+			$("#start_date").datepicker({
+				dateFormat : "yy-mm-dd",
+				defaultDate : "+1w",
+				changeMonth : true,
+				numberOfMonths : 3,
+				prevText: '이전 달',
+			    nextText: '다음 달',
+			    monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
+			    monthNamesShort: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
+			    dayNames: ['일','월','화','수','목','금','토'],
+			    dayNamesShort: ['일','월','화','수','목','금','토'],
+			    dayNamesMin: ['일','월','화','수','목','금','토'],
+				onClose : function(selectedDate) {
+					$("#end_date").datepicker("option", "minDate", selectedDate);
+				}
+			});
+			$("#end_date").datepicker({
+				dateFormat : "yy-mm-dd",
+				defaultDate : "+1w",
+				changeMonth : true,
+				numberOfMonths : 3,
+				prevText: '이전 달',
+			    nextText: '다음 달',
+			    monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
+			    monthNamesShort: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
+			    dayNames: ['일','월','화','수','목','금','토'],
+			    dayNamesShort: ['일','월','화','수','목','금','토'],
+			    dayNamesMin: ['일','월','화','수','목','금','토'],
+				onClose : function(selectedDate) {
+					$("#start_date").datepicker("option", "maxDate", selectedDate);
+				}
+			});
+			
+		});
+		
+		
+	</script>
   </head>
   <body>
-   	<form action="/user/accompany/accompanyWriteOk.do" method="post" onsubmit="" enctype="multipart/form-data">
+   	<form name="accompanyForm" action="/user/accompany/accompanyUpdateOk.do" method="post" onsubmit="" enctype="multipart/form-data">
 		<input type="hidden" name="accompany_no" value="" />
 		<input type="hidden" name="mem_no" value="" />
 		<label>제목</label>
-		<input type="text" name="title"><br/>
+		<input type="text" name="title" value="${accompanyDto.title}"><br/>
 		<br/>
+		
+		<fmt:formatDate var="start_date" pattern="yyyy-MM-dd" value="${accompanyDto.start_date}"/>
+  		<fmt:formatDate var="end_date" pattern="yyyy-MM-dd" value="${accompanyDto.end_date}"/>
+  		
 		<label>시작일</label>
-		<input type="text" name="start_date" id="start_date" />
+		<input type="text" name="start_date" id="start_date" value="${start_date}"/>
 		
 		<label>종료일</label>
-		<input type="text" name="end_date" id="end_date" />
-		<input type="radio"	name="gender_code" value="1">남 
-		<input type="radio"	name="gender_code" value="2">여 
-		<input type="radio"	name="gender_code" value="3" checked="checked">둘 다 
+		<input type="text" name="end_date" id="end_date" value="${end_date}"/><br/>
+		
+		
+		<c:forEach var="gender_code" items="${genderList}">
+			<!-- 성별코드 일치시 -->
+			<input type="radio"	name="gender_code" value="${gender_code.code}" id="gender_id_${gender_code.code}">${gender_code.code_name}
+		</c:forEach>
+		<script type="text/javascript">
+			for(var i=0;i<accompanyForm.gender_code.length;i++){
+				if(accompanyForm.gender_code[i].value=="${accompanyDto.gender_code}") {
+					accompanyForm.gender_code[i].checked=true;
+				}
+			}
+		</script>
+			
 		<br/><br />
 		<label>내용</label>
-		<textarea rows="14" cols="67" name="content"></textarea>
+		<textarea rows="14" cols="67" name="content">${accompanyDto.content}</textarea>
 		<br/>
 		<br/>
 		<label class="title">파일명</label>
@@ -44,8 +103,8 @@
 			
 		<br/>
 		<br/>
-		<input type="submit" value="글쓰기" />
-		<input type="button" value="취소" onclick="location.href='/user/accompany/accompanyList.do'" />
+		<input type="submit" value="글 수정" />
+		<input type="button" value="취소" onclick="location.href='/user/accompany/accompanyList.do?pageNumber=${currentPage}'" />
 	</form>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->

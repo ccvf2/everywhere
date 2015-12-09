@@ -63,17 +63,32 @@
 				<c:set var="endPage" value="${pageCount }"/>
 			</c:if>
 			
-			<c:if test="${startPage > pageBlock}">
-				<a href="/user/accompany/accompanyList.do?pageNumber=${currentPage-pageBlock}" role="button" class="btn btn-default">이전</a>
-			</c:if>
-			
-			<c:forEach var="i" begin="${startPage}" end="${endPage}">
-				<a href="/user/accompany/accompanyList.do?pageNumber=${i}" role="button" class="btn btn-default">${i}</a>
-			</c:forEach>
-			
-			<c:if test="${endPage < pageCount }">
-				<a href="/user/accompany/accompanyList.do?pageNumber=${currentPage+pageBlock}" role="button" class="btn btn-default">다음</a>
-			</c:if>
+			<!-- 페이징 -->
+			<nav>
+			  <ul class="pagination">
+			  	<c:if test="${startPage > pageBlock}">
+				  	<a href="/user/accompany/accompanyList.do?pageNumber=${currentPage-pageBlock}" aria-label="Previous">
+				        <span aria-hidden="true">&laquo;</span>
+			     	</a>
+				</c:if>
+			    <c:forEach var="i" begin="${startPage}" end="${endPage}">
+					 <c:if test="${i!=currentPage}">
+					 	<li><a href="/user/accompany/accompanyList.do?pageNumber=${i}" role="button" class="btn btn-default">${i}</a></li>
+					 </c:if>
+					 <c:if test="${i==currentPage}">
+					 	<li class="active"><a href="/user/accompany/accompanyList.do?pageNumber=${i}" role="button" class="btn btn-default">${i}</a></li>
+					 </c:if>
+				</c:forEach>
+				
+		  		<c:if test="${endPage < pageCount }">
+		  			<li>
+				      <a href="/user/accompany/accompanyList.do?pageNumber=${currentPage+pageBlock}" aria-label="Next">
+				        <span aria-hidden="true">&raquo;</span>
+				      </a>
+				    </li>
+				</c:if>
+			  </ul>
+			</nav>
 		</div>
 	</c:if>
 	

@@ -2,6 +2,7 @@ package everywhere.com.mynetgear.ccvf2.user.service.accompany;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -16,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 import everywhere.com.mynetgear.ccvf2.comm.aop.EverywhereAspect;
 import everywhere.com.mynetgear.ccvf2.comm.dao.commoncode.CommonCodeDao;
 import everywhere.com.mynetgear.ccvf2.comm.dto.commoncode.CommonCodeDto;
+import everywhere.com.mynetgear.ccvf2.comm.service.commoncode.CommonCodeService;
 import everywhere.com.mynetgear.ccvf2.comm.util.common.CommonUtils;
 import everywhere.com.mynetgear.ccvf2.comm.util.common.Constant;
 import everywhere.com.mynetgear.ccvf2.user.dao.accompany.AccompanyDao;
@@ -35,7 +37,7 @@ public class AccompanyServiceImp implements AccompanyService {
 
 	
 	@Autowired
-	private CommonCodeDao commonCodeDao;
+	private CommonCodeService commonCodeService;
 	
 	@Override
 	public void mainAccompany(ModelAndView mav) {
@@ -48,13 +50,14 @@ public class AccompanyServiceImp implements AccompanyService {
 		HttpServletRequest request = (HttpServletRequest) map.get("request");
 		
 		
-		//List<CommonCodeDto> genderList = commonCodeDao.getOneCommonCodeInfo("G0001");
+		List<CommonCodeDto> genderList = commonCodeService.getListCodeGroup("G0001");
 		
 		//게시판 번호 가져오는 것으로 바꿀 예정
 		int accompany_no = 4;
 		
 		EverywhereAspect.logger.info(EverywhereAspect.logMsg + accompany_no);
 		
+		mav.addObject("genderList", genderList);
 		mav.addObject("accompany_no", accompany_no);
 		mav.setViewName("user/accompany/accompanyWrite");
 	}
@@ -206,9 +209,11 @@ public class AccompanyServiceImp implements AccompanyService {
 		HttpSession session = request.getSession();
 		
 		int accompany_no = Integer.parseInt(request.getParameter("accompany_no"));
-		int currentPage = Integer.parseInt(request.getParameter("currentPage"));
+		int currentPage = Integer.parseInt(request.getParameter("pageNumber"));
 		
 		EverywhereAspect.logger.info(EverywhereAspect.logMsg + accompany_no + "\t" + currentPage);
+		
+		List<CommonCodeDto> genderList = commonCodeService.getListCodeGroup("G0001");
 		
 		AccompanyDto accompanyDto = accompanyDao.readAccompany(accompany_no);
 		// accompanyDto.printAll();
@@ -219,8 +224,22 @@ public class AccompanyServiceImp implements AccompanyService {
 		int mem_no=64;
 		int ownerCheck = accompanyDao.checkUserAccompany(accompany_no, mem_no);
 		
+		mav.addObject("currentPage", currentPage);
+		mav.addObject("genderList", genderList);
 		mav.addObject("ownerCheck", ownerCheck);
 		mav.addObject("accompanyDto", accompanyDto);
-		mav.setViewName("user/accompany/accompanyRead");
+		mav.setViewName("user/accompany/accompanyUpdate");
+	}
+
+	@Override
+	public void updateOkAccompany(ModelAndView mav) {
+		Map<String, Object> map = mav.getModelMap();
+		MultipartHttpServletRequest request = (MultipartHttpServletRequest) map.get("request");
+		AccompanyDto accompanyDto = (AccompanyDto) map.get("accompanyDto");
+		
+		
+		
+		
+		mav.setViewName("user/accompany/accompanyUpdateOk");
 	}
 }
