@@ -33,5 +33,13 @@ public interface MemberDao {
 	 * @return
 	 */
 	public MemberDto memberRead(int mem_no);
+	/**
+	 * @author 김준호
+	 * @createDate 2015. 12. 9.
+	 * @described 회원정보수정
+	 * @param memberDto
+	 * @return
+	 */
+	public int memberUpdate(MemberDto memberDto);
 
 }

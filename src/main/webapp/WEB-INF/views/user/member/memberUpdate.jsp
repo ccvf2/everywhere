@@ -8,31 +8,6 @@
 <link rel="stylesheet" type="text/css" href="">
 <script type="text/javascript" src="/script/common/jquery-1.11.3.js"></script>
 <script type="text/javascript">
-	$(function() {	
-		$("#email").keyup(function(){
-			var email=$("#email").val();
-			if(email.length>=13) {
-				$.ajax({
-					url:"emailCheck.ajax?email="+email,
-					type:"get",
-					dataType:"text",
-					success:function(data){
-						//alert(data);
-						if(data==0) {
-							$("#emailCheck").text("사용가능한 이메일입니다.");
-						} else {
-							$("#emailCheck").text("이미 사용중인 이메일입니다.");
-						}
-					},
-					error:function(xhr, status, errorMsg){
-						alert(xhr+","+status+","+errorMsg);
-					}
-				});
-			}
-		});
-	});
-</script>
-<script type="text/javascript">
 	var checked=false;
 	function registerForm(form) {
 		
@@ -65,14 +40,15 @@
 	</div>
 
 	<div align="center">
-		<form class="form_style" name="memberForm" action="/user/member/register.do" 
+		<form class="form_style" name="memberForm" action="/user/member/memberUpdate.do" 
 			method="post" onsubmit="return registerForm(this)">
+			<input type="hidden" name="mem_no" value="${memberDto.mem_no}"/>
 			<div class="line">
 				<label class="title">이메일</label>
 				<span class="content">
-					<input type="text" name="mem_email" id="email" value="${memberDto.mem_email}" disabled="disabled"/>
+					<input type="text" value="${memberDto.mem_email}" disabled="disabled"/>
+					<input type="hidden" name="mem_email" value="${memberDto.mem_email}"/>
 				</span>
-				<div id="emailCheck"></div>
 			</div>
 			
 			<div class="line">
@@ -85,7 +61,8 @@
 			<div class="line">
 				<label class="title">이름</label>
 				<span class="content">
-					<input type="text" name="mem_name" value="${memberDto.mem_name}" disabled="disabled"/>
+					<input type="text" value="${memberDto.mem_name}" disabled="disabled"/>
+					<input type="hidden" name="mem_name" value="${memberDto.mem_name}"/>
 				</span>
 			</div>
 		

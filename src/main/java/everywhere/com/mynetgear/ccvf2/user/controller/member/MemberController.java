@@ -47,6 +47,7 @@ public class MemberController {
 	@RequestMapping(value="/user/member/emailCheck.ajax",  method=RequestMethod.GET)
 	public ModelAndView emailCheck(HttpServletRequest request, HttpServletResponse response) {
 		ModelAndView mav=new ModelAndView();
+		
 		mav.addObject("request", request);
 		mav.addObject("response", response);
 		memberService.emailCheck(mav);
@@ -60,11 +61,13 @@ public class MemberController {
 	 * @described 회원가입
 	 * @param request
 	 * @param response
+	 * @param memberDto 
 	 * @return
 	 */
 	@RequestMapping(value="/user/member/register.do", method=RequestMethod.POST)
 	public ModelAndView registerOk(HttpServletRequest request, HttpServletResponse response, MemberDto memberDto) {
 		ModelAndView mav=new ModelAndView();
+		
 		mav.addObject("request", request);
 		mav.addObject("memberDto", memberDto);
 		memberService.registerOk(mav);
@@ -83,8 +86,54 @@ public class MemberController {
 	@RequestMapping(value="/user/member/memberRead.do", method=RequestMethod.GET)
 	public ModelAndView memberRead(HttpServletRequest request, HttpServletResponse response) {
 		ModelAndView mav=new ModelAndView();
+		
 		mav.addObject("request", request);
 		memberService.memberRead(mav);
+		
+		return mav;
+	}
+	
+	/**
+	 * @author 김준호
+	 * @createDate 2015. 12. 9.
+	 * @described 회원정보수정
+	 * @param request
+	 * @param response
+	 * @param memberDto
+	 * @return
+	 */
+	@RequestMapping(value="/user/member/memberUpdate.do", method=RequestMethod.GET)
+	public ModelAndView memberUpdate(HttpServletRequest request, HttpServletResponse response, MemberDto memberDto) {
+		ModelAndView mav=new ModelAndView();
+		mav.addObject("request", request);
+		mav.addObject("memberDto", memberDto);
+		
+		int mem_no=Integer.parseInt(request.getParameter("mem_no"));
+		System.out.println("memberController update mem_no:"+mem_no);
+		
+		mav.addObject("mem_no", mem_no);
+		memberService.memberUpdate(mav);
+		
+		return mav;
+	}
+	
+	/**
+	 * @author 김준호
+	 * @createDate 2015. 12. 9.
+	 * @described 회원정보수정
+	 * @param request
+	 * @param response
+	 * @param memberDto
+	 * @return
+	 */
+	@RequestMapping(value="/user/member/memberUpdate.do", method=RequestMethod.POST)
+	public ModelAndView memberUpdateOk(HttpServletRequest request, HttpServletResponse response, MemberDto memberDto) {
+		ModelAndView mav=new ModelAndView();
+		mav.addObject("request", request);
+		mav.addObject("memberDto", memberDto);
+		System.out.println("memberController updateOk memberDto:"+memberDto.toString());
+		
+		memberService.memberUpdateOk(mav);
 		
 		return mav;
 	}

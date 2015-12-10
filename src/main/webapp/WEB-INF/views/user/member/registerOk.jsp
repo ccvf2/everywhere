@@ -10,13 +10,13 @@
 <body>
 	<c:if test="${check>0}">
 		<script type="text/javascript">
-			alert("회원가입 완료 되었습니다.");
+			alert("회원가입이 완료 되었습니다.");
 			location.href="/user/member/register.do";
 		</script>
 	</c:if>
 	<c:if test="${check==0}">
 		<script type="text/javascript">
-			alert("회원가입 완료되지 않았습니다.");
+			alert("회원가입이 완료되지 않았습니다.");
 			location.href="/user/member/register.do";
 		</script>
 	</c:if>

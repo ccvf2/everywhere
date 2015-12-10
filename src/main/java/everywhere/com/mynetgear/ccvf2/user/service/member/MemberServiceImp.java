@@ -77,6 +77,7 @@ public class MemberServiceImp implements MemberService {
 	public void memberRead(ModelAndView mav) {
 		Map<String, Object> map=mav.getModelMap();
 		HttpServletRequest request=(HttpServletRequest)map.get("request");
+		
 		int mem_no=Integer.parseInt(request.getParameter("mem_no"));
 		System.out.println("memberRead mem_no:"+mem_no);
 		
@@ -85,6 +86,45 @@ public class MemberServiceImp implements MemberService {
 		
 		mav.addObject("memberDto", memberDto);
 		mav.setViewName("/user/member/memberRead");
+	}
+
+	@Override
+	public void memberUpdate(ModelAndView mav) {
+		Map<String, Object> map=mav.getModelMap();
+		HttpServletRequest request=(HttpServletRequest)map.get("request");
+		MemberDto memberDto=(MemberDto)map.get("memberDto");
+		
+		int mem_no=Integer.parseInt(request.getParameter("mem_no"));
+		
+		System.out.println("memberService update mem_no:"+mem_no);
+		memberDto.setMem_no(mem_no);
+		
+		memberDto=memberDao.memberRead(mem_no);
+		System.out.println("memberUpdate memberDto:"+memberDto.toString());
+		
+		mav.addObject("memberDto", memberDto);
+		mav.setViewName("user/member/memberUpdate");
+		
+		
+		
+	}
+
+	@Override
+	public void memberUpdateOk(ModelAndView mav) {
+		Map<String, Object> map=mav.getModelMap();
+		HttpServletRequest request=(HttpServletRequest)map.get("request");
+		MemberDto memberDto=(MemberDto)map.get("memberDto");
+		System.out.println("memberUpdateOk memberDto:"+memberDto.toString());
+		
+		int check=memberDao.memberUpdate(memberDto);
+		System.out.println("memberUpdate check:"+check);
+		
+		int mem_no=Integer.parseInt(request.getParameter("mem_no"));
+		memberDto=memberDao.memberRead(mem_no);
+		
+		mav.addObject("check", check);
+		mav.addObject("memberDto", memberDto);
+		mav.setViewName("user/member/memberUpdateOk");
 	}
 
 }
