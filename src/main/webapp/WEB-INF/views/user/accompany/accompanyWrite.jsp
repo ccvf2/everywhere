@@ -89,7 +89,7 @@
 		<input type="text" name="end_date" id="end_date" /><br/>
 		
 		<c:forEach var="gender_code" items="${genderList}">
-			<input type="radio"	name="gender_code" value="${gender_code.code}">${gender_code.code_name}
+			<input type="radio"	name="gender_code" value="${gender_code.code_value}">${gender_code.code_name}
 		</c:forEach>
 		
 		<br/><br />

@@ -12,6 +12,7 @@ import org.springframework.transaction.TransactionDefinition;
 import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.support.DefaultTransactionDefinition;
 
+import everywhere.com.mynetgear.ccvf2.comm.util.common.Constant;
 import everywhere.com.mynetgear.ccvf2.user.dto.accompany.AccompanyDto;
 
 /**
@@ -42,15 +43,18 @@ public class AccompanyDaoImp implements AccompanyDao {
 
 	@Override
 	public List<AccompanyDto> getAccompanyList(int startRow, int endRow) {
-		Map<String, Integer> hMap = new HashMap<String, Integer>();
+		Map<String, Object> hMap = new HashMap<String, Object>();
 		hMap.put("startRow", startRow);
 		hMap.put("endRow", endRow);
-		
+		hMap.put("use_yn", Constant.SYNB_YN_Y);
 		return sqlTemplate.selectList("everywhere.com.mynetgear.ccvf2.user.mapper.accompany.getAccompanyList", hMap);
 	}
 
 	@Override
 	public AccompanyDto readAccompany(int accompany_no) {
+		Map<String, Object> hMap = new HashMap<String, Object>();
+		hMap.put("accompany_no", accompany_no);
+		hMap.put("use_yn", Constant.SYNB_YN_Y);
 		AccompanyDto board = null;
 		
 		//트렌젝션 구동에 핖요한 객체
@@ -61,7 +65,7 @@ public class AccompanyDaoImp implements AccompanyDao {
 			// 조회수 증가
 			sqlTemplate.update("everywhere.com.mynetgear.ccvf2.user.mapper.accompany.updateAccompanyHits", accompany_no);
 			// 읽기
-			board = sqlTemplate.selectOne("everywhere.com.mynetgear.ccvf2.user.mapper.accompany.getOneAccompany", accompany_no);
+			board = sqlTemplate.selectOne("everywhere.com.mynetgear.ccvf2.user.mapper.accompany.getOneAccompany", hMap);
 			
 			transactionManager.commit(status);
 		} catch (Exception e) {
@@ -82,15 +86,17 @@ public class AccompanyDaoImp implements AccompanyDao {
 
 	@Override
 	public int deleteAccompany(int accompany_no, int mem_no) {
-		Map<String, Integer> hMap = new HashMap<String, Integer>();
+		Map<String, Object> hMap = new HashMap<String, Object>();
 		hMap.put("accompany_no", accompany_no);
 		hMap.put("mem_no", mem_no);
-		return sqlTemplate.delete("everywhere.com.mynetgear.ccvf2.user.mapper.accompany.deleteAccompany", hMap);
+		//삭제이므로 글을 보이지 않게 한다.
+		hMap.put("use_yn", Constant.SYNB_YN_N);
+		return sqlTemplate.update("everywhere.com.mynetgear.ccvf2.user.mapper.accompany.deleteAccompany", hMap);
 	}
 
 	@Override
 	public int updateAccompany(AccompanyDto accompanyDto) {
-		// TODO Auto-generated method stub
+		
 		return 0;
 	}
 	

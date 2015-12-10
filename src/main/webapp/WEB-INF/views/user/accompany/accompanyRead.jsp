@@ -37,15 +37,12 @@
   	<br/>
   	
   	<label>구하는 성별</label>
-  	<c:if test="${accompanyDto.gender_code==1}">
-  		남자
-  	</c:if>
-  	<c:if test="${accompanyDto.gender_code==2}">
-  		여자
-  	</c:if>
-  	<c:if test="${accompanyDto.gender_code==3}">
-  		무관
-  	</c:if><br/>
+  	<c:forEach var="gender_code" items="${genderList}">
+		<c:if test="${accompanyDto.gender_code==gender_code.code_value}">
+  			${gender_code.code_name}
+  		</c:if>
+	</c:forEach>
+  	<br/>
   	
   	<label>글쓴이</label>
   	${accompanyDto.mem_name}<br/>
