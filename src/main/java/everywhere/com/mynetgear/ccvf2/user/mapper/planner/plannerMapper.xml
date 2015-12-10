@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="everywhere.com.mynetgear.ccvf2.user.mapper.planner">
+	<select id="get_planner_seq_no" resultType="int">
+		select tbl_planner_planner_no_seq.nextVal from dual
+	</select>
+	
+	<insert id="planner_insert" parameterType="everywhere.com.mynetgear.ccvf2.user.dto.planner.PlannerDto">
+		insert into tbl_planner(
+			planner_no, 
+			mem_no, 
+			planner_ba_code, 
+			title, 
+			start_date, 
+			end_date, 
+			reg_date, 
+			use_yn)
+		 values(
+		 	#{planner_no}, 
+		 	#{mem_no}, 
+		 	#{planner_ba_code}, 
+		 	#{title}, 
+		 	#{start_date}, 
+		 	#{end_date}, 
+		 	sysdate, 
+		 	#{use_yn})	
+	</insert>
+	
+	<select id="get_planner_list_by_mem_no" resultType="everywhere.com.mynetgear.ccvf2.user.dto.planner.PlannerDto" parameterType="int">
+		select * from tbl_planner where mem_no=#{mem_no}
+	</select> 
+
+	<select id="get_planner_item" resultType="everywhere.com.mynetgear.ccvf2.user.dto.planner.PlannerDto" parameterType="int">
+		select * from tbl_planner where planner_no=#{planner_no}
+	</select> 
+	
+	<update id="planner_update" parameterType="everywhere.com.mynetgear.ccvf2.user.dto.planner.PlannerDto">
+		update tbl_planner set title=#{title}, memo=#{memo}, start_date=#{start_date}, end_date=#{end_date} where planner_no=#{planner_no}
+	</update>
+</mapper>

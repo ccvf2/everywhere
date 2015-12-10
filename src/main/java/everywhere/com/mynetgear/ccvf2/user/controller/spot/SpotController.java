@@ -46,12 +46,12 @@ public class SpotController {
 		return null;
 	}
 	
-	@RequestMapping(value="/user/spot/selectCountrySpot.ajax", method=RequestMethod.GET)
-	public ModelAndView readCountrySpotList(HttpServletRequest request, HttpServletResponse response){
+	@RequestMapping(value="/user/spot/selectSpotList.ajax", method=RequestMethod.GET)
+	public ModelAndView selectSpotList(HttpServletRequest request, HttpServletResponse response){
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("request", request);
 		mav.addObject("response", response);
-		spotService.readCountrySpotList(mav);
+		spotService.selectSpotList(mav);
 		return null;
 	}
 	
