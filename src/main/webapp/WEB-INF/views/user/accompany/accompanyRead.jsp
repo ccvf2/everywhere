@@ -28,6 +28,8 @@
     <![endif]-->
   </head>
   <body>
+  	<label>조회수</label>
+  	${accompanyDto.hits}<br/><br/>
   	<label>제목</label>
   	${accompanyDto.title}
   	<br/>
@@ -38,7 +40,7 @@
   	
   	<label>구하는 성별</label>
   	<c:forEach var="gender_code" items="${genderList}">
-		<c:if test="${accompanyDto.gender_code==gender_code.code_value}">
+		<c:if test="${accompanyDto.gender_code==gender_code.code}">
   			${gender_code.code_name}
   		</c:if>
 	</c:forEach>

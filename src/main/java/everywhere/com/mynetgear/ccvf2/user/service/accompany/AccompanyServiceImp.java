@@ -50,8 +50,12 @@ public class AccompanyServiceImp implements AccompanyService {
 		Map<String, Object> map = mav.getModelMap();
 		HttpServletRequest request = (HttpServletRequest) map.get("request");
 		
+		// 성별 코드 가져옴
 		List<CommonCodeDto> genderList = commonCodeService.getListCodeGroup("G0001");
-		
+		// 게시글 종류 코드 가져옴
+		List<CommonCodeDto> postTypeList = commonCodeService.getListCodeGroup("H0001");
+				
+		mav.addObject("postTypeList", postTypeList);
 		mav.addObject("genderList", genderList);
 		mav.setViewName("user/accompany/accompanyWrite");
 	}
@@ -94,7 +98,7 @@ public class AccompanyServiceImp implements AccompanyService {
 				accompanyDto.setGender_code(gender_code);
 				
 				/*기본값으로 동행은 구해지지 않았다*/
-				accompanyDto.setAccompany_status_code(Constant.SYNB_YN_N);
+				accompanyDto.setAccompany_status_code(Constant.ACCOMPANY_TYPE_OBTAINING);
 				
 				/*여행 시작일 - 여행 종료일 Date 형식으로 변경*/
 				try {
@@ -157,7 +161,11 @@ public class AccompanyServiceImp implements AccompanyService {
 //			EverywhereAspect.logger.info(EverywhereAspect.logMsg + accompanyList.get(0).getMem_name());
 //		}
 		
+		//게시글 종류 코드 가져옴
+		List<CommonCodeDto> postTypeList = commonCodeService.getListCodeGroup("H0001");
+				
 		mav.addObject("count", count);
+		mav.addObject("postTypeList", postTypeList);
 		mav.addObject("boardSize", boardSize);
 		mav.addObject("currentPage", currentPage);
 		mav.addObject("accompanyList", accompanyList);
@@ -186,6 +194,10 @@ public class AccompanyServiceImp implements AccompanyService {
 		//성별 코드 가져옴
 		List<CommonCodeDto> genderList = commonCodeService.getListCodeGroup("G0001");
 		
+		//게시글 종류 코드 가져옴
+		List<CommonCodeDto> postTypeList = commonCodeService.getListCodeGroup("H0001");
+		
+		mav.addObject("postTypeList", postTypeList);
 		mav.addObject("genderList", genderList);
 		mav.addObject("ownerCheck", ownerCheck);
 		mav.addObject("currentPage", currentPage);
@@ -251,42 +263,72 @@ public class AccompanyServiceImp implements AccompanyService {
 	public void updateOkAccompany(ModelAndView mav) {
 		Map<String, Object> map = mav.getModelMap();
 		MultipartHttpServletRequest request = (MultipartHttpServletRequest) map.get("request");
-		
+		int check = 0;
 		AccompanyDto accompanyDto = new AccompanyDto();
 		accompanyDto.setAccompany_no(Integer.parseInt(request.getParameter("accompany_no")));
 		accompanyDto.setMem_no(Integer.parseInt(request.getParameter("mem_no")));
 		
-		/*여행 시작일 - 여행 종료일 Date 형식으로 변경*/
+		/*글쓴이: 임시라 변경 필요*/
+//		int mem_no = request.getParameter("mem_no");
+		String mem_no = "64";
+		String start_date = request.getParameter("start_date");
+		String end_date = request.getParameter("end_date");
+		String gender_code = request.getParameter("gender_code");
+		String title = request.getParameter("title");
+		String content = request.getParameter("content");
+
 		try {
-			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-			accompanyDto.setStart_date(sdf.parse(request.getParameter("start_date")));
-			accompanyDto.setEnd_date(sdf.parse(request.getParameter("end_date")));
-		} catch (ParseException e) {
+			if(mem_no.equals(Constant.SYNB_NULL)) {
+				EverywhereAspect.logger.info(EverywhereAspect.logMsg + "회원 정보가 없음");
+			} else if (!(gender_code.equals(Constant.ACCOMPANY_GENDER_BOTH) || gender_code.equals(Constant.ACCOMPANY_GENDER_MALE) || gender_code.equals(Constant.ACCOMPANY_GENDER_FEMALE))){
+				EverywhereAspect.logger.info(EverywhereAspect.logMsg + "gender_code Error");
+			} else if (title.equals(Constant.SYNB_NULL)) {
+				EverywhereAspect.logger.info(EverywhereAspect.logMsg + "제목은 반드시 입력되어야함 ");
+			} else if (content.equals(Constant.SYNB_NULL)) {
+				EverywhereAspect.logger.info(EverywhereAspect.logMsg + "내용이 입력되지 않았습니다.");
+			} else {
+				// 실제 구현부
+				
+				accompanyDto.setMem_no(Integer.parseInt(mem_no));
+				/*제목 및 HTML제거*/
+				accompanyDto.setTitle(CommonUtils.deleteHTML(title));
+				/*내용 및 HTML 제거*/
+				accompanyDto.setContent(CommonUtils.deleteHTML(content));
+				
+				/*성별 코드: 1. 남자, 2. 여자, 3. 둘다*/
+				accompanyDto.setGender_code(gender_code);
+				
+				/*기본값으로 동행은 구해지지 않았다*/
+				accompanyDto.setAccompany_status_code(request.getParameter("accompany_status_code"));
+				
+				/*여행 시작일 - 여행 종료일 Date 형식으로 변경*/
+				try {
+					SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+					accompanyDto.setStart_date(sdf.parse(start_date));
+					accompanyDto.setEnd_date(sdf.parse(end_date));
+				} catch (ParseException e) {
+					e.printStackTrace();
+				}
+				
+				accompanyDto.setUse_yn(Constant.SYNB_YN_Y);
+				
+				//테스트 용
+				accompanyDto.printAll();
+				
+//				파일 추가 필요
+				/*	CommonFileIOServiceImp nd=new CommonFileIOServiceImp();
+					CommonFileIODto filedto= nd.requestWriteFileAndDTO(request, "file", savePath);*/
+					
+				accompanyDto.printAll();
+				check = accompanyDao.updateAccompany(accompanyDto);
+				EverywhereAspect.logger.info(EverywhereAspect.logMsg + check);
+			}
+		} catch (Exception e) {
 			e.printStackTrace();
+		} finally {
+			mav.addObject("check", check);
+			mav.setViewName("user/accompany/accompanyUpdateOk");
 		}
-		/*성별 코드: 1. 남자, 2. 여자, 3. 둘다*/
-		accompanyDto.setGender_code(request.getParameter("gender_code"));
 		
-		/*제목 및 HTML제거*/
-		accompanyDto.setTitle(CommonUtils.deleteHTML(request.getParameter("title")));
-		/*내용 및 HTML 제거*/
-		accompanyDto.setContent(CommonUtils.deleteHTML(request.getParameter("content")));
-		
-		/*동행 구함 상태 수정 필요*/
-		accompanyDto.setAccompany_status_code(Constant.SYNB_YN_N);
-		
-		accompanyDto.printAll();
-		
-		int check = accompanyDao.updateAccompany(accompanyDto);
-		
-		
-		EverywhereAspect.logger.info(EverywhereAspect.logMsg + check);
-		
-		
-	/*	CommonFileIOServiceImp nd=new CommonFileIOServiceImp();
-		CommonFileIODto filedto= nd.requestWriteFileAndDTO(request, "file", savePath);*/
-		
-		
-		mav.setViewName("user/accompany/accompanyUpdateOk");
 	}
 }

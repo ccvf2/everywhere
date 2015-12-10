@@ -10,43 +10,8 @@
 <script type="text/javascript" src="/script/common/jquery-ui/jquery-ui.js"></script>
 <link rel="stylesheet" type="text/css" href="/script/common/jquery-ui/jquery-ui.css" />
 
+<script type="text/javascript" src="/script/common/datepicker.js"></script>
 <script type="text/javascript">
-	$(function() {
-		$("#start_date").datepicker({
-			dateFormat : "yy-mm-dd",
-			defaultDate : "+1w",
-			changeMonth : true,
-			numberOfMonths : 3,
-			prevText: '이전 달',
-		    nextText: '다음 달',
-		    monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
-		    monthNamesShort: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
-		    dayNames: ['일','월','화','수','목','금','토'],
-		    dayNamesShort: ['일','월','화','수','목','금','토'],
-		    dayNamesMin: ['일','월','화','수','목','금','토'],
-			onClose : function(selectedDate) {
-				$("#end_date").datepicker("option", "minDate", selectedDate);
-			}
-		});
-		$("#end_date").datepicker({
-			dateFormat : "yy-mm-dd",
-			defaultDate : "+1w",
-			changeMonth : true,
-			numberOfMonths : 3,
-			prevText: '이전 달',
-		    nextText: '다음 달',
-		    monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
-		    monthNamesShort: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
-		    dayNames: ['일','월','화','수','목','금','토'],
-		    dayNamesShort: ['일','월','화','수','목','금','토'],
-		    dayNamesMin: ['일','월','화','수','목','금','토'],
-			onClose : function(selectedDate) {
-				$("#start_date").datepicker("option", "maxDate", selectedDate);
-			}
-		});
-
-	});
-	
 	function writeCheck() {
 		//성별 체크 확인
 		if ($("input[name='gender_code']:checked").length > 0){
@@ -89,10 +54,18 @@
 		<input type="text" name="end_date" id="end_date" /><br/>
 		
 		<c:forEach var="gender_code" items="${genderList}">
-			<input type="radio"	name="gender_code" value="${gender_code.code_value}">${gender_code.code_name}
+			<input type="radio"	name="gender_code" value="${gender_code.code}">${gender_code.code_name}
 		</c:forEach>
-		
 		<br/><br />
+		
+		<!-- 동행구함 여부 -->
+		<select name="accompany_status_code">
+			<c:forEach var="postType" items="${postTypeList}">
+				<option value="${postType.code}">${postType.code_name}</option>
+			</c:forEach>
+		</select>
+		<br/><br/>
+		
 		<label>내용</label>
 		<textarea rows="14" cols="67" name="content"></textarea>
 		<br/>

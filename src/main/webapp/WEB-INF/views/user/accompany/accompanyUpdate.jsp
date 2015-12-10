@@ -95,7 +95,12 @@
 		<br/><br />
 		
 		<!-- 동행구함 여부 -->
-		
+		<select name="accompany_status_code">
+		  <option value="volvo">Volvo</option>
+		  <option value="saab">Saab</option>
+		  <option value="opel">Opel</option>
+		  <option value="audi">Audi</option>
+		</select>
 		
 		<label>내용</label>
 		<textarea rows="14" cols="67" name="content">${accompanyDto.content}</textarea>
