@@ -1,5 +1,7 @@
 package everywhere.com.mynetgear.ccvf2.user.service.visitor;
 
+import org.springframework.web.servlet.ModelAndView;
+
 /**
  * @author 김준호
  * @createDate 2015. 12. 10.
@@ -7,5 +9,12 @@ package everywhere.com.mynetgear.ccvf2.user.service.visitor;
  * @reference class
  */
 public interface VisitorService {
+	/**
+	 * @author 김준호
+	 * @createDate 2015. 12. 10.
+	 * @described 방명록작성
+	 * @param mav
+	 */
+	public void visitorWrite(ModelAndView mav);
 
 }

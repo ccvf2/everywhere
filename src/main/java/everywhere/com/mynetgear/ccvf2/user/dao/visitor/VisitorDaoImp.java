@@ -1,8 +1,13 @@
 package everywhere.com.mynetgear.ccvf2.user.dao.visitor;
 
+import java.util.HashMap;
+import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import everywhere.com.mynetgear.ccvf2.user.dto.visitor.VisitorDto;
 
 /**
  * @author 김준호
@@ -14,5 +19,19 @@ import org.springframework.stereotype.Component;
 public class VisitorDaoImp implements VisitorDao {
 	@Autowired
 	private SqlSessionTemplate sqlTemplate;
+
+	@Override
+	public int getVisitorCount() {
+		return sqlTemplate.selectOne("everywhere.com.mynetgear.ccvf2.user.mapper.visitor.visitorCount");
+	}
+
+	@Override
+	public List<VisitorDto> getVisitorList(int startRow, int endRow) {
+		HashMap<String, Integer> hMap=new HashMap<String, Integer>();
+		hMap.put("startRow", startRow);
+		hMap.put("endRow", endRow);
+		
+		return sqlTemplate.selectOne("everywhere.com.mynetgear.ccvf2.user.mapper.visitor.visitorList", hMap);
+	}
 
 }

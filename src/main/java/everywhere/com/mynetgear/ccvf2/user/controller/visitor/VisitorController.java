@@ -32,7 +32,11 @@ public class VisitorController {
 	 */
 	@RequestMapping(value="/user/visitor/visitorWrite.do", method=RequestMethod.GET)
 	public ModelAndView visitorWrite(HttpServletRequest request, HttpServletResponse response) {
-		return new ModelAndView("/user/visitor/visitorWrite");
+		ModelAndView mav=new ModelAndView();
+		mav.addObject("request", request);
+		visitorService.visitorWrite(mav);
+		
+		return mav;
 	}
 
 }
