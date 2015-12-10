@@ -12,10 +12,13 @@
  <a href="/user/member/memberRead.do?mem_no=64">회원정보보기</a>
  <a href="/user/member/memberUpdate.do?mem_no=64">회원정보수정</a>
  <a href="/user/member/memberDelete.do?mem_no=64">회원정보삭제</a>
+ <a href="/user/visitor/visitorWrite.do">방명록쓰기</a>
  <a href="/admin/commoncode/code.do">관리자-공통코드(거의완료)</a>
  <a href="/test/test.do">파일테스트</a>
  <a href="/test/reply.do">공통댓글</a>
  <a href="/user/accompany/accompanyMain.do">회원동행구하기</a>
-
+ <a href="/user/planner/plannerCreate.do">스케줄</a>
+ <a href="/user/planner/plannerList.do?mem_no=64">스케줄 목록</a>
+ 
 </body>
 </html>
