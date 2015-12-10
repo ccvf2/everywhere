@@ -43,6 +43,8 @@ public class Constant {
 	public static final String SYNB_NULL_SPACE = " ";
 	/** DOTSTRING : "." */
 	public static final String SYNB_DOT = ".";
+	/** COMMASTRING : "," */
+	public static final String SYNB_COMMA = ",";
 
 	/** String Numbr : 1 */
 	public static final String SYNB_NUM_1 = "1";
@@ -69,12 +71,17 @@ public class Constant {
 	public static final String MEMBER_LEVEL_ADMIN = "ADMIN";
 	/** 회원등급:일반사용자 */
 	public static final String MEMBER_LEVEL_USER = "USER";
+	
+	/**메일 컨덴츠 타입: text*/
+	public static final String MAIL_CONTENT_TYPE_TEXT = "text";
+	/**메일 컨덴츠 타입: html*/
+	public static final String MAIL_CONTENT_TYPE_HTML = "html";
 
 	/**여행동행구하기 성별: 남*/
 	public static final String ACCOMPANY_GENDER_MALE = "G0001";
 	/**여행동행구하기 성별: 여*/
 	public static final String ACCOMPANY_GENDER_FEMALE = "G0002";
-	/**여행동행구하기 성별: 둘다*/
+
 	public static final String ACCOMPANY_GENDER_BOTH = "G0003";
 	
 	/** 회원 계정 상태: 비활성 */

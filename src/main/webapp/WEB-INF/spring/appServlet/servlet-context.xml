@@ -46,5 +46,25 @@
             </beans:list>
         </beans:property>
 		</beans:bean>
+		
+		
+		
+	<!-- Spring mail configuration -->
+	<beans:bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+	     <beans:property name="host" value="ccvf2.mynetgear.com" />
+	     <beans:property name="port" value="25" />
+	     <beans:property name="username" value="admin" />
+	     <beans:property name="password" value="66107e7" />
+	     <beans:property name="defaultEncoding" value="UTF-8" />
+	
+	     <beans:property name="javaMailProperties">
+	        <beans:props>
+	            <beans:prop key="mail.transport.protocol">SMTP</beans:prop>
+	            <beans:prop key="mail.smtp.auth">true</beans:prop>
+	            <beans:prop key="mail.smtp.starttls.enable">false</beans:prop>
+	        </beans:props>
+	     </beans:property>
+	</beans:bean>
+		
 	
 </beans:beans>
