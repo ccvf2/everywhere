@@ -85,14 +85,16 @@
 				) accompany, 
 				  tbl_member member
 			where accompany.mem_no = member.mem_no
+			and accompany.use_yn=#{use_yn}
 		]]>
 	</select>
 	
 	<!-- 게시글 읽기 -->
-	<select id="readAccompany" parameterType="int" resultMap="accompanyMap">
+	<select id="readAccompany" parameterType="java.util.Map" resultMap="accompanyMap">
 		select *
 		from tbl_accompany
 		where accompany_no=#{accompany_no}
+		and use_yn=#{use_yn}
 	</select>
 	
 	<!-- 게시글 조회수 증가 -->
@@ -131,9 +133,10 @@
 	</select>
 	
 	<!--  게시물 삭제 -->
-	<delete id="deleteAccompany" parameterType="java.util.Map">
-		delete from tbl_accompany
+	<update id="deleteAccompany" parameterType="java.util.Map">
+		update tbl_accompany
+		set use_yn=#{use_yn}
 		where accompany_no=#{accompany_no}
 		and mem_no=#{mem_no}
-	</delete>
+	</update>
 </mapper>
