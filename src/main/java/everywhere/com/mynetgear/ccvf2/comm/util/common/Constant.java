@@ -76,4 +76,18 @@ public class Constant {
 	public static final String ACCOMPANY_GENDER_FEMALE = "2";
 	/**여행동행구하기 성별: 둘다*/
 	public static final String ACCOMPANY_GENDER_BOTH = "3";
+	
+	/** 회원 계정 상태: 비활성 */
+	public static final String MEMBER_STATUS_LOCK = "M1001";
+	/** 회원 계정 상태: 활성 */
+	public static final String MEMBER_STATUS_ACTIVE = "M1002";
+	/** 회원 계정 상태: 삭제 */
+	public static final String MEMBER_STATUS_WITHDRAW = "M1003";
+	/** 회원 계정 상태: 휴면 */
+	public static final String MEMBER_STATUS_DORMANT = "M1004";
+	
+	/** 핸드폰 인증 상태: 활성 */
+	public static final String MEMBER_P_STATUS_ACTIVE = "M2001";
+	/** 핸드폰 인증 상태: 비활성 */
+	public static final String MEMBER_P_STATUS_LOCK = "M2002";
 }

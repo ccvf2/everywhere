@@ -19,4 +19,8 @@
 	<update id="memberUpdate" parameterType="everywhere.com.mynetgear.ccvf2.user.dto.member.MemberDto">
 		update tbl_member set mem_pwd=#{mem_pwd},mem_phone=#{mem_phone},mem_interest=#{mem_interest} where mem_no=#{mem_no}
 	</update>
+	
+	<update id="memberDelete" parameterType="everywhere.com.mynetgear.ccvf2.user.dto.member.MemberDto">
+		update tbl_member set mem_status_code=#{mem_status_code} where mem_no=#{mem_no} and mem_pwd=#{mem_pwd}
+	</update>
 </mapper>

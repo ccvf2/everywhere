@@ -105,12 +105,13 @@ public class MemberController {
 	@RequestMapping(value="/user/member/memberUpdate.do", method=RequestMethod.GET)
 	public ModelAndView memberUpdate(HttpServletRequest request, HttpServletResponse response, MemberDto memberDto) {
 		ModelAndView mav=new ModelAndView();
-		mav.addObject("request", request);
-		mav.addObject("memberDto", memberDto);
 		
 		int mem_no=Integer.parseInt(request.getParameter("mem_no"));
 		System.out.println("memberController update mem_no:"+mem_no);
 		
+		mav.addObject("request", request);
+		mav.addObject("memberDto", memberDto);
+		System.out.println("memberController update memberDto:"+memberDto.toString());
 		mav.addObject("mem_no", mem_no);
 		memberService.memberUpdate(mav);
 		
@@ -129,11 +130,57 @@ public class MemberController {
 	@RequestMapping(value="/user/member/memberUpdate.do", method=RequestMethod.POST)
 	public ModelAndView memberUpdateOk(HttpServletRequest request, HttpServletResponse response, MemberDto memberDto) {
 		ModelAndView mav=new ModelAndView();
+		
 		mav.addObject("request", request);
 		mav.addObject("memberDto", memberDto);
 		System.out.println("memberController updateOk memberDto:"+memberDto.toString());
-		
 		memberService.memberUpdateOk(mav);
+		
+		return mav;
+	}
+	
+	/**
+	 * @author 김준호
+	 * @createDate 2015. 12. 10.
+	 * @described 회원삭제
+	 * @param request
+	 * @param response
+	 * @param memberDto
+	 * @return
+	 */
+	@RequestMapping(value="/user/member/memberDelete.do", method=RequestMethod.GET)
+	public ModelAndView memberDelete(HttpServletRequest request, HttpServletResponse response, MemberDto memberDto) {
+		ModelAndView mav=new ModelAndView();
+		
+		int mem_no=Integer.parseInt(request.getParameter("mem_no"));
+		System.out.println("memberController delete mem_no:"+mem_no);
+		
+		mav.addObject("request", request);
+		mav.addObject("memberDto", memberDto);
+		System.out.println("memberController delete memberDto:"+memberDto.toString());
+		mav.addObject("mem_no", mem_no);
+		memberService.memberDelete(mav);
+		
+		return mav;
+	}
+	
+	/**
+	 * @author 김준호
+	 * @createDate 2015. 12. 10.
+	 * @described 회원삭제
+	 * @param request
+	 * @param response
+	 * @param memberDto
+	 * @return
+	 */
+	@RequestMapping(value="/user/member/memberDelete.do", method=RequestMethod.POST)
+	public ModelAndView memberDeleteOk(HttpServletRequest request, HttpServletResponse response, MemberDto memberDto) {
+		ModelAndView mav=new ModelAndView();
+		
+		mav.addObject("request", request);
+		mav.addObject("memberDto", memberDto);
+		System.out.println("memberController deleteOk memberDto:"+memberDto.toString());
+		memberService.memberDeleteOk(mav);
 		
 		return mav;
 	}
