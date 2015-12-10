@@ -14,7 +14,8 @@ public interface SpotDao {
 	 * @return
 	 */
 	public int insertSpot(SpotDto spotDto);
-	public List<SpotDto> getSpotList();
+	public List<SpotDto> getSpotAllList();
+	public List<SpotDto> getSpotList(SpotDto spotDto);
 	public SpotDto getOneSpot(int spot_no);
 	public int updateSpot(SpotDto spotDto);
 	public int deleteSpot(int spot_no);

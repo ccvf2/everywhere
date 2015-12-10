@@ -2,13 +2,15 @@
  * 
  */
 var values = [];
-function readCityToServer(){
+
+//명소 쓰기 페이지에서 나라 선택할때 해당 도시 가져오기
+function readCityList(){
 	var countrycode = document.getElementById("selectCountry").value;
 	var params = "country_code=" + countrycode;
 	var url = "/user/spot/selectCountry.ajax?" + params;
 	$.ajax({
 		url:url,
-		type:"post",
+		type:"get",
 		dataType:"text",
 		success:function(data){
 			var result = data.split("|");
@@ -24,6 +26,48 @@ function readCityToServer(){
 		error:function(xhr, status, errorMsg){
 			alert(xhr+","+status+","+errorMsg);
 		}
-		
 	})
+}
+
+function readCountrySpotList(){
+	readCityList();
+	var countrycode = document.getElementById("selectCountry").value;
+	var params = "country_code=" + countrycode;
+	var url = "/user/spot/selectCountrySpot.ajax?" + params;
+	$.ajax({
+		url:url,
+		type:"get",
+		dataType:"text",
+		success:function(data){
+			var str="";
+			if(data != ""){
+				var obj = JSON.parse(data);
+				for(i = 0; i < obj.spot.length; i++){
+					str+="<li><div><a href='/user/spot/spotReadPage.do?spot_no="+obj.spot[i].spot_no+"'> "+obj.spot[i].spot_name+"</a>"+obj.spot[i].spot_note+"</div></li>";	
+				}
+			}
+			$("#spotList").empty(); 
+			$("#spotList").prepend(str);
+		},
+		error:function(xhr, status, errorMsg){
+			alert(xhr+","+status+","+errorMsg);
+		}
+	})
+}
+
+//명소 업데이트 자바스크립트
+function updateSpot(spot_no){
+	var urlName="/user/spot/updateSpot.do?spot_no="+spot_no;
+	location.href=urlName;
+}
+
+//명소 삭제 자바스크립트
+function deleteSpot(spot_no){
+	var urlName="/user/spot/delete.do?spot_no="+spot_no;
+	var check = confirm("삭제하시겠습니까?");
+	if (check == true) {
+		location.href=urlName;
+	} else {
+	   	alert("취소하셨습니다");
+	}
 }
