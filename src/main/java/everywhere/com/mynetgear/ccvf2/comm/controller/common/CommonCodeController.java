@@ -2,6 +2,7 @@ package everywhere.com.mynetgear.ccvf2.comm.controller.common;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -45,9 +46,9 @@ public class CommonCodeController {
 		String code_group = request.getParameter("code_group"); 
 		List<CommonCodeDto> list= commonCodeService.getListCodeGroup(code_group);
 		JSONArray jsonArray = new JSONArray();
+		JSONObject rootObj = new JSONObject();
 		for (int i = 0; i < list.size(); i++) {
-			CommonCodeDto dto = list.get(i);
-			JSONObject rootObj = new JSONObject();
+			CommonCodeDto dto = list.get(i);			
 			JSONObject obj = new JSONObject();
 			obj.put("code_no", dto.getCode_no());
 			obj.put("code", dto.getCode());
@@ -56,16 +57,15 @@ public class CommonCodeController {
 			obj.put("code_group_name", dto.getCode_group_name());
 			obj.put("code_sort", dto.getCode_sort());
 			obj.put("code_value", dto.getCode_value());
-			obj.put("code_regdate", dto.getCode_regdate());
-			rootObj.put(i, obj);
-			jsonArray.add(i, rootObj);
+			obj.put("code_regdate", "\""+dto.getCode_regdate()+"\"");
+			jsonArray.add(obj);
 		}
 
-		String test = jsonArray.toJSONString();
+		rootObj.put("common_code", jsonArray);
+		String test = rootObj.toJSONString();
 		System.out.println(test);
-		response.setContentType("application/html;charset=UTF-8");
+		response.setContentType("application/json;charset=UTF-8");
 		PrintWriter out = response.getWriter();
 		out.print(test);
-
 	}
 }
