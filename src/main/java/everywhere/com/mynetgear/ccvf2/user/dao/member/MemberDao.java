@@ -41,5 +41,13 @@ public interface MemberDao {
 	 * @return
 	 */
 	public int memberUpdate(MemberDto memberDto);
+	/**
+	 * @author 김준호
+	 * @createDate 2015. 12. 10.
+	 * @described 회원삭제
+	 * @param memberDto
+	 * @return
+	 */
+	public int memberDelete(MemberDto memberDto);
 
 }

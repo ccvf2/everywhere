@@ -44,5 +44,19 @@ public interface MemberService {
 	 * @param mav
 	 */
 	public void memberUpdateOk(ModelAndView mav);
+	/**
+	 * @author 김준호
+	 * @createDate 2015. 12. 10.
+	 * @described 회원삭제
+	 * @param mav
+	 */
+	public void memberDelete(ModelAndView mav);
+	/**
+	 * @author 김준호
+	 * @createDate 2015. 12. 10.
+	 * @described 회원삭제
+	 * @param mav
+	 */
+	public void memberDeleteOk(ModelAndView mav);
 
 }

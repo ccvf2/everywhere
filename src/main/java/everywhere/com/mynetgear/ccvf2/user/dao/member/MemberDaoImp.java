@@ -3,7 +3,6 @@ package everywhere.com.mynetgear.ccvf2.user.dao.member;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.transaction.PlatformTransactionManager;
 
 import everywhere.com.mynetgear.ccvf2.user.dto.member.MemberDto;
 
@@ -17,8 +16,6 @@ import everywhere.com.mynetgear.ccvf2.user.dto.member.MemberDto;
 public class MemberDaoImp implements MemberDao {
 	@Autowired
 	private SqlSessionTemplate sqlTemplate;
-	@Autowired
-	private PlatformTransactionManager transactionManager;
 
 	@Override
 	public String emailCheck(String email) {
@@ -40,6 +37,11 @@ public class MemberDaoImp implements MemberDao {
 	@Override
 	public int memberUpdate(MemberDto memberDto) {
 		return sqlTemplate.update("everywhere.com.mynetgear.ccvf2.user.mapper.member.memberUpdate", memberDto);
+	}
+
+	@Override
+	public int memberDelete(MemberDto memberDto) {
+		return sqlTemplate.update("everywhere.com.mynetgear.ccvf2.user.mapper.member.memberDelete", memberDto);
 	}
 
 }

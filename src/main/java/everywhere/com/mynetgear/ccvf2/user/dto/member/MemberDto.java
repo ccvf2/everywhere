@@ -9,17 +9,17 @@ import java.util.Date;
  * @reference class
  */
 public class MemberDto {
-	private int mem_no;
-	private String mem_email;
-	private String mem_pwd;
-	private String mem_name;
-	private String mem_phone;
-	private String mem_interest;
-	private String mem_status_code;
-	private String mem_level_code;
-	private String mem_p_status_code;
-	private String mem_profile_photo;
-	private Date mem_reg_date;
+	private int mem_no;                // 회원번호
+	private String mem_email;          // 회원이메일
+	private String mem_pwd;            // 회원비밀번호
+	private String mem_name;           // 회원이름
+	private String mem_phone;          // 핸드폰번호
+	private String mem_interest;       // 관심사항
+	private String mem_status_code;    // 계정상태
+	private String mem_level_code;     // 회원등급
+	private String mem_p_status_code;  // 인증번호상태
+	private String mem_profile_photo;  // 프로필사진
+	private Date mem_reg_date;         // 회원등록일
 	
 	public int getMem_no() {
 		return mem_no;
@@ -93,6 +93,7 @@ public class MemberDto {
 				+"\nmem_p_status_code:"+mem_p_status_code+"\nmem_profile_photo:"+mem_profile_photo+"\nmem_reg_date:"+mem_reg_date;
 		return sentence;
 	}
+	
 }
 
 

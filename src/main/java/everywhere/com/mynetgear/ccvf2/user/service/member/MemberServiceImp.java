@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.ModelAndView;
 
+import everywhere.com.mynetgear.ccvf2.comm.util.common.Constant;
 import everywhere.com.mynetgear.ccvf2.user.dao.member.MemberDao;
 import everywhere.com.mynetgear.ccvf2.user.dto.member.MemberDto;
 
@@ -35,7 +36,7 @@ public class MemberServiceImp implements MemberService {
 		// EverywhereAspect.logger.info(EverywhereAspect.logger+","+email);
 		
 		String mem_email=memberDao.emailCheck(email);
-		System.out.println("emailCheck mem_email:"+mem_email);
+		System.out.println("memberService emailCheck mem_email:"+mem_email);
 		// EverywhereAspect.logger.info(EverywhereAspect.logger+","+mem_email);
 		
 		int check=0;
@@ -44,7 +45,7 @@ public class MemberServiceImp implements MemberService {
 		}else{
 			check=0;
 		}
-		System.out.println("emailCheck check:"+check);
+		System.out.println("memberService emailCheck check:"+check);
 		
 		try {
 			response.setContentType("application/html;charset=utf-8");
@@ -60,14 +61,14 @@ public class MemberServiceImp implements MemberService {
 		Map<String, Object> map=mav.getModelMap();
 		MemberDto memberDto=(MemberDto)map.get("memberDto");
 		
-		memberDto.setMem_level_code("user");
-		memberDto.setMem_p_status_code("N");
+		memberDto.setMem_level_code(Constant.MEMBER_LEVEL_USER);
+		memberDto.setMem_p_status_code(Constant.MEMBER_P_STATUS_ACTIVE);
 		memberDto.setMem_profile_photo("null");
-		memberDto.setMem_status_code("N");
-
-		System.out.println("registerOk memberDto:"+memberDto.toString());
+		memberDto.setMem_status_code(Constant.MEMBER_STATUS_LOCK);
+		System.out.println("memberService registerOk memberDto:"+memberDto.toString());
+		
 		int check=memberDao.registerOk(memberDto);
-		System.out.println("registerOk check:"+check);
+		System.out.println("memberService registerOk check:"+check);
 		
 		mav.addObject("check", check);
 		mav.setViewName("/user/member/registerOk");	
@@ -79,10 +80,10 @@ public class MemberServiceImp implements MemberService {
 		HttpServletRequest request=(HttpServletRequest)map.get("request");
 		
 		int mem_no=Integer.parseInt(request.getParameter("mem_no"));
-		System.out.println("memberRead mem_no:"+mem_no);
+		System.out.println("memberService read mem_no:"+mem_no);
 		
 		MemberDto memberDto=memberDao.memberRead(mem_no);
-		System.out.println("memberRead memberDto:"+memberDto.toString());
+		System.out.println("memberService read memberDto:"+memberDto.toString());
 		
 		mav.addObject("memberDto", memberDto);
 		mav.setViewName("/user/member/memberRead");
@@ -95,18 +96,14 @@ public class MemberServiceImp implements MemberService {
 		MemberDto memberDto=(MemberDto)map.get("memberDto");
 		
 		int mem_no=Integer.parseInt(request.getParameter("mem_no"));
-		
 		System.out.println("memberService update mem_no:"+mem_no);
 		memberDto.setMem_no(mem_no);
 		
 		memberDto=memberDao.memberRead(mem_no);
-		System.out.println("memberUpdate memberDto:"+memberDto.toString());
+		System.out.println("memberService update memberDto:"+memberDto.toString());
 		
 		mav.addObject("memberDto", memberDto);
 		mav.setViewName("user/member/memberUpdate");
-		
-		
-		
 	}
 
 	@Override
@@ -114,10 +111,10 @@ public class MemberServiceImp implements MemberService {
 		Map<String, Object> map=mav.getModelMap();
 		HttpServletRequest request=(HttpServletRequest)map.get("request");
 		MemberDto memberDto=(MemberDto)map.get("memberDto");
-		System.out.println("memberUpdateOk memberDto:"+memberDto.toString());
+		System.out.println("memberService updateOk memberDto:"+memberDto.toString());
 		
 		int check=memberDao.memberUpdate(memberDto);
-		System.out.println("memberUpdate check:"+check);
+		System.out.println("memberService updateOk check:"+check);
 		
 		int mem_no=Integer.parseInt(request.getParameter("mem_no"));
 		memberDto=memberDao.memberRead(mem_no);
@@ -125,6 +122,41 @@ public class MemberServiceImp implements MemberService {
 		mav.addObject("check", check);
 		mav.addObject("memberDto", memberDto);
 		mav.setViewName("user/member/memberUpdateOk");
+	}
+
+	@Override
+	public void memberDelete(ModelAndView mav) {
+		Map<String, Object> map=mav.getModelMap();
+		HttpServletRequest request=(HttpServletRequest)map.get("request");
+		MemberDto memberDto=(MemberDto)map.get("memberDto");
+		
+		int mem_no=Integer.parseInt(request.getParameter("mem_no"));
+		System.out.println("memberService delete mem_no:"+mem_no);
+		memberDto.setMem_no(mem_no);
+		
+		memberDto=memberDao.memberRead(mem_no);
+		System.out.println("memberServiceImp delete memberDto:"+memberDto.toString());
+		
+		mav.addObject("memberDto", memberDto);
+		mav.setViewName("user/member/memberDelete");
+	}
+
+	@Override
+	public void memberDeleteOk(ModelAndView mav) {
+		Map<String, Object> map=mav.getModelMap();
+		HttpServletRequest request=(HttpServletRequest)map.get("request");
+		MemberDto memberDto=(MemberDto)map.get("memberDto");
+		
+		int mem_no=Integer.parseInt(request.getParameter("mem_no"));
+		memberDto.setMem_no(mem_no);
+		memberDto.setMem_status_code(Constant.MEMBER_STATUS_WITHDRAW);
+		
+		int check=memberDao.memberDelete(memberDto);
+		System.out.println("memberService deleteOk check:"+check);
+		
+		mav.addObject("check", check);
+		mav.addObject("memberDto", memberDto);
+		mav.setViewName("user/member/memberDeleteOk");
 	}
 
 }
