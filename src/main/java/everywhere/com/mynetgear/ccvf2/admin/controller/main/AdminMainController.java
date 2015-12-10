@@ -11,13 +11,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+
 import everywhere.com.mynetgear.ccvf2.admin.service.main.AdminMainService;
 import everywhere.com.mynetgear.ccvf2.comm.dto.common.CommonFileIODto;
+import everywhere.com.mynetgear.ccvf2.comm.dto.common.MailVO;
 import everywhere.com.mynetgear.ccvf2.comm.dto.commoncode.CommonCodeDto;
 import everywhere.com.mynetgear.ccvf2.comm.service.common.CommonFileIOService;
 import everywhere.com.mynetgear.ccvf2.comm.service.common.CommonFileIOServiceImp;
 import everywhere.com.mynetgear.ccvf2.comm.service.commoncode.CommonCodeService;
 import everywhere.com.mynetgear.ccvf2.comm.util.common.Constant;
+import testpa.MailSend;
 
 /**
  * @author 배성욱
@@ -74,12 +77,19 @@ public class AdminMainController {
 	
 	
 	
-	/** 파일 테스트 */
+	/** 파일 테스트 
+	 * @throws Exception */
 	@RequestMapping(value="/test/test2.do", method=RequestMethod.GET)
-	public ModelAndView filetest() {
+	public ModelAndView filetest() throws Exception {
 		System.out.println("파일테스트 입력요청 GET");
 		ModelAndView mav= new ModelAndView();
 		System.out.println(Constant.LOG_ID3+this.tempPath);
+
+		//MailUtil mail = new MailUtil();
+		//mail.name();
+		MailSend mail = new MailSend();
+		MailVO vo =new MailVO();
+		mail.mailSender(vo);
 		mav.setViewName("/admin/code/TESTFILE");
 		return mav;
 	}
