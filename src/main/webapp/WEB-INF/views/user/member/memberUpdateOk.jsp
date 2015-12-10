@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>타이틀 입력</title>
+<title>회원정보수정</title>
 </head>
 <body>
 	<c:if test="${check>0}">
