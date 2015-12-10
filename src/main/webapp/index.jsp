@@ -15,6 +15,8 @@
  <a href="/test/test.do">파일테스트</a>
  <a href="/test/reply.do">공통댓글</a>
  <a href="/user/accompany/accompanyMain.do">회원동행구하기</a>
-
+ <a href="/user/planner/plannerCreate.do">스케줄</a>
+ <a href="/user/planner/plannerList.do?mem_no=64">스케줄 목록</a>
+ 
 </body>
 </html>
