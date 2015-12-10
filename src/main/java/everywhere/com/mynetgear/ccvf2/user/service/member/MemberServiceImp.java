@@ -104,9 +104,6 @@ public class MemberServiceImp implements MemberService {
 		
 		mav.addObject("memberDto", memberDto);
 		mav.setViewName("user/member/memberUpdate");
-		
-		
-		
 	}
 
 	@Override
