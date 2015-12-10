@@ -71,11 +71,11 @@ public class Constant {
 	public static final String MEMBER_LEVEL_USER = "USER";
 
 	/**여행동행구하기 성별: 남*/
-	public static final String ACCOMPANY_GENDER_MALE = "1";
+	public static final String ACCOMPANY_GENDER_MALE = "G0001";
 	/**여행동행구하기 성별: 여*/
-	public static final String ACCOMPANY_GENDER_FEMALE = "2";
+	public static final String ACCOMPANY_GENDER_FEMALE = "G0002";
 	/**여행동행구하기 성별: 둘다*/
-	public static final String ACCOMPANY_GENDER_BOTH = "3";
+	public static final String ACCOMPANY_GENDER_BOTH = "G0003";
 	
 	/** 회원 계정 상태: 비활성 */
 	public static final String MEMBER_STATUS_LOCK = "M1001";
@@ -90,4 +90,12 @@ public class Constant {
 	public static final String MEMBER_P_STATUS_ACTIVE = "M2001";
 	/** 핸드폰 인증 상태: 비활성 */
 	public static final String MEMBER_P_STATUS_LOCK = "M2002";
+	
+	/**여행동행구하기 게시글 종류: 구하는 중*/
+	public static final String ACCOMPANY_TYPE_OBTAINING = "H0001";
+	/**여행동행구하기 게시글 종류: 구함*/
+	public static final String ACCOMPANY_TYPE_COMPLETED = "H0002";
+	/**여행동행구하기 게시글 종류: 공지*/
+	public static final String ACCOMPANY_TYPE_NOTICE = "H0003";
+	
 }

@@ -2,12 +2,14 @@ package everywhere.com.mynetgear.ccvf2.comm.controller.common;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang.StringUtils;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,16 +50,21 @@ public class CommonCodeController {
 		JSONArray jsonArray = new JSONArray();
 		JSONObject rootObj = new JSONObject();
 		for (int i = 0; i < list.size(); i++) {
-			CommonCodeDto dto = list.get(i);			
+			CommonCodeDto dto = list.get(i);
+			
+			//DTO의 Date객체를 문자화
+			SimpleDateFormat transFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			String dateStr = transFormat.format(dto.getCode_regdate());
+
 			JSONObject obj = new JSONObject();
 			obj.put("code_no", dto.getCode_no());
-			obj.put("code", dto.getCode());
-			obj.put("code_name", dto.getCode_name());
-			obj.put("code_group", dto.getCode_group());
-			obj.put("code_group_name", dto.getCode_group_name());
+			obj.put("code", StringUtils.clean(dto.getCode()));
+			obj.put("code_name", StringUtils.clean(dto.getCode_name()));
+			obj.put("code_group", StringUtils.clean(dto.getCode_group()));
+			obj.put("code_group_name", StringUtils.clean(dto.getCode_group_name()));
 			obj.put("code_sort", dto.getCode_sort());
-			obj.put("code_value", dto.getCode_value());
-			obj.put("code_regdate", "\""+dto.getCode_regdate()+"\"");
+			obj.put("code_value", StringUtils.clean(dto.getCode_value()));
+			obj.put("code_regdate", dateStr);
 			jsonArray.add(obj);
 		}
 
