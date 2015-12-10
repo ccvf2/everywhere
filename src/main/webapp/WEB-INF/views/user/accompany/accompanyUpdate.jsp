@@ -21,52 +21,15 @@
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
     
-		    
+	<script type="text/javascript" src="/script/common/datepicker.js"></script>	    
 	
-	<script type="text/javascript">
-		$(function() {
-			$("#start_date").datepicker({
-				dateFormat : "yy-mm-dd",
-				defaultDate : "+1w",
-				changeMonth : true,
-				numberOfMonths : 3,
-				prevText: '이전 달',
-			    nextText: '다음 달',
-			    monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
-			    monthNamesShort: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
-			    dayNames: ['일','월','화','수','목','금','토'],
-			    dayNamesShort: ['일','월','화','수','목','금','토'],
-			    dayNamesMin: ['일','월','화','수','목','금','토'],
-				onClose : function(selectedDate) {
-					$("#end_date").datepicker("option", "minDate", selectedDate);
-				}
-			});
-			$("#end_date").datepicker({
-				dateFormat : "yy-mm-dd",
-				defaultDate : "+1w",
-				changeMonth : true,
-				numberOfMonths : 3,
-				prevText: '이전 달',
-			    nextText: '다음 달',
-			    monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
-			    monthNamesShort: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
-			    dayNames: ['일','월','화','수','목','금','토'],
-			    dayNamesShort: ['일','월','화','수','목','금','토'],
-			    dayNamesMin: ['일','월','화','수','목','금','토'],
-				onClose : function(selectedDate) {
-					$("#start_date").datepicker("option", "maxDate", selectedDate);
-				}
-			});
-			
-		});
-		
-		
-	</script>
+
   </head>
   <body>
    	<form name="accompanyForm" action="/user/accompany/accompanyUpdateOk.do" method="post" onsubmit="" enctype="multipart/form-data">
-		<input type="hidden" name="accompany_no" value="" />
-		<input type="hidden" name="mem_no" value="" />
+		<input type="hidden" name="accompany_no" value="${accompanyDto.accompany_no}"/>
+		<input type="hidden" name="mem_no" value="${accompanyDto.mem_no}" />
+		<input type="hidden" name="currentPage" value="${currentPage}"/>
 		<label>제목</label>
 		<input type="text" name="title" value="${accompanyDto.title}"><br/>
 		<br/>
@@ -96,11 +59,11 @@
 		
 		<!-- 동행구함 여부 -->
 		<select name="accompany_status_code">
-		  <option value="volvo">Volvo</option>
-		  <option value="saab">Saab</option>
-		  <option value="opel">Opel</option>
-		  <option value="audi">Audi</option>
+			<c:forEach var="postType" items="${postTypeList}">
+				<option value="${postType.code}">${postType.code_name}</option>
+			</c:forEach>
 		</select>
+		<br/><br/>
 		
 		<label>내용</label>
 		<textarea rows="14" cols="67" name="content">${accompanyDto.content}</textarea>

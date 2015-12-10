@@ -23,7 +23,6 @@
 				<value>classpath:/everywhere/com/mynetgear/ccvf2/comm/mapper/commoncode/commonCodeMapper.xml</value>
 				<value>classpath:/everywhere/com/mynetgear/ccvf2/user/mapper/spot/spotMapper.xml</value>
 				<value>classpath:/everywhere/com/mynetgear/ccvf2/user/mapper/accompany/accompanyMapper.xml</value>
-				<value>classpath:/everywhere/com/mynetgear/ccvf2/user/mapper/planner/plannerMapper.xml</value>
 				<value>classpath:/everywhere/com/mynetgear/ccvf2/comm/mapper/common/commonFileIOMapper.xml</value>
 				<value>classpath:/everywhere/com/mynetgear/ccvf2/user/mapper/visitor/visitorMapper.xml</value>
 			</list>

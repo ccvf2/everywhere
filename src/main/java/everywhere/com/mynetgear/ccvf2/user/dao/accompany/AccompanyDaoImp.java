@@ -32,7 +32,6 @@ public class AccompanyDaoImp implements AccompanyDao {
 	@Override
 	public int insertAccompany(AccompanyDto accompanyDto) {
 		//EverywhereAspect.logger.info(EverywhereAspect.logMsg +accompanyDto.getEnd_date());
-		 
 		return sqlTemplate.insert("everywhere.com.mynetgear.ccvf2.user.mapper.accompany.insertAccompany", accompanyDto);
 	}
 
@@ -97,7 +96,7 @@ public class AccompanyDaoImp implements AccompanyDao {
 	@Override
 	public int updateAccompany(AccompanyDto accompanyDto) {
 		
-		return 0;
+		return sqlTemplate.update("everywhere.com.mynetgear.ccvf2.user.mapper.accompany.updateAccompany", accompanyDto);
 	}
 	
 	

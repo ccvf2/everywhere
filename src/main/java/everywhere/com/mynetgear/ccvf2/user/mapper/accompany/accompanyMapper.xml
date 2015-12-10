@@ -139,4 +139,15 @@
 		where accompany_no=#{accompany_no}
 		and mem_no=#{mem_no}
 	</update>
+	
+	<update id="updateAccompany" parameterType="everywhere.com.mynetgear.ccvf2.user.dto.accompany.AccompanyDto">
+		UPDATE tbl_accompany
+		SET start_date=#{start_date},
+			end_date=#{end_date},
+		    title=#{title},
+		    content=#{content},
+		    accompany_status_code=#{accompany_status_code},
+		    gender_code=#{gender_code}
+		WHERE accompany_no=#{accompany_no}
+	</update>
 </mapper>

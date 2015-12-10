@@ -44,6 +44,10 @@
 	<form name="accompanyForm" action="/user/accompany/accompanyWriteOk.do" method="post" onsubmit="return writeCheck()" enctype="multipart/form-data">
 		<input type="hidden" name="accompany_no" value="" />
 		<input type="hidden" name="mem_no" value="" />
+		
+		<label>종류</label>
+		
+		<br/>
 		<label>제목</label>
 		<input type="text" name="title"><br/>
 		<br/>
@@ -57,14 +61,6 @@
 			<input type="radio"	name="gender_code" value="${gender_code.code}">${gender_code.code_name}
 		</c:forEach>
 		<br/><br />
-		
-		<!-- 동행구함 여부 -->
-		<select name="accompany_status_code">
-			<c:forEach var="postType" items="${postTypeList}">
-				<option value="${postType.code}">${postType.code_name}</option>
-			</c:forEach>
-		</select>
-		<br/><br/>
 		
 		<label>내용</label>
 		<textarea rows="14" cols="67" name="content"></textarea>
