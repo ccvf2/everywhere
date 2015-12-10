@@ -30,7 +30,12 @@ public class SpotDaoImp implements SpotDao {
 	}
 
 	@Override
-	public List<SpotDto> getSpotList() {
+	public List<SpotDto> getSpotList(SpotDto spotDto) {
+		return sqlTemplate.selectList("select_spot_list", spotDto);
+	}
+	
+	@Override
+	public List<SpotDto> getSpotAllList() {
 		return sqlTemplate.selectList("select_spot_all_list");
 	}
 
