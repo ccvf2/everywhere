@@ -71,9 +71,9 @@ public class Constant {
 	public static final String MEMBER_LEVEL_USER = "USER";
 
 	/**여행동행구하기 성별: 남*/
-	public static final String ACCOMPANY_GENDER_MALE = "1";
+	public static final String ACCOMPANY_GENDER_MALE = "MALE";
 	/**여행동행구하기 성별: 여*/
-	public static final String ACCOMPANY_GENDER_FEMALE = "2";
+	public static final String ACCOMPANY_GENDER_FEMALE = "FEMALE";
 	/**여행동행구하기 성별: 둘다*/
-	public static final String ACCOMPANY_GENDER_BOTH = "3";
+	public static final String ACCOMPANY_GENDER_BOTH = "BOTH";
 }
