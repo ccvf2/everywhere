@@ -5,12 +5,14 @@
 <head>
 <meta charset="UTF-8">
 <title>타이틀 입력</title>
+<script type="text/javascript" src="/script/common/jquery-1.11.3.js"></script>
+<script type="text/javascript" src="/script/user/spot/selectedCountry.js"></script>
 </head>
 <body>
 	<div>
 		<input type="hidden" name="mem_no" value="1">			
 			<input type="hidden" name="mem_level_code" value="M0002">
-			<select name="country_code" id="selectCountry" onchange="readCityToServer()">
+			<select name="country_code" id="selectCountry" onchange="readCountrySpotList()">
 				<option value=""> ---- </option>
 				<c:forEach var="country" items="${countryList}" >
 					  <option value="${country.code}">${country.code_name}</option>
@@ -27,7 +29,7 @@
 			</select>
 	</div>
 	<div>
-		<ul>
+		<ul id="spotList">
 		<c:forEach var="spot" items="${spotList}">
 			<li>
 				<div>

@@ -4,19 +4,17 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>타이틀 입력</title>
+<title>수정 확인</title>
 </head>
 <body>
-<c:if test="${check>0}">
+<c:if test="">
 	<script type="text/javascript">
-		alert("게시글이 작성되었습니다.");
-		location.href="/user/accompany/accompanyList.do";
+	
 	</script>
 </c:if>
-<c:if test="${check==0}">
+<c:if test="">
 	<script type="text/javascript">
-		alert("게시물 작성에 실패하였습니다.");
-		location.href="/user/accompany/accompanyList.do";
+		alert("글을 수정하는 도중에 에러가 발생하였습니다.");
 	</script>
 </c:if>
 </body>

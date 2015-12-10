@@ -58,4 +58,20 @@ public interface AccompanyService {
 	 */
 	void deleteAccompany(ModelAndView mav);
 
+	/**
+	 * @author 곽성국	
+	 * @createDate 2015. 12. 9.
+	 * @described 동행구하기 update
+	 * @param mav
+	 */
+	void updateAccompany(ModelAndView mav);
+
+	/**
+	 * @author 곽성국	
+	 * @createDate 2015. 12. 9.
+	 * @described 동행구하기 updateOK
+	 * @param mav
+	 */
+	void updateOkAccompany(ModelAndView mav);
+
 }

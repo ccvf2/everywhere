@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import everywhere.com.mynetgear.ccvf2.comm.service.commoncode.CommonCodeService;
+import everywhere.com.mynetgear.ccvf2.user.dto.accompany.AccompanyDto;
 import everywhere.com.mynetgear.ccvf2.user.service.accompany.AccompanyService;
 
 
@@ -22,8 +24,7 @@ import everywhere.com.mynetgear.ccvf2.user.service.accompany.AccompanyService;
 public class AccompanyController {
 	@Autowired
 	private AccompanyService accompanyService;
-	
-	
+
 	/**
 	 * @author 곽성국	
 	 * @createDate 2015. 12. 8.
@@ -128,4 +129,39 @@ public class AccompanyController {
 		
 		return mav;
 	}
+	
+	/**
+	 * @author 곽성국	
+	 * @createDate 2015. 12. 9.
+	 * @described 동행구하기 수정
+	 * @param request
+	 * @param response
+	 * @return
+	 */
+	@RequestMapping(value="/user/accompany/accompanyUpdate.do" ,method=RequestMethod.GET)
+	public ModelAndView updateAccompany(HttpServletRequest request, HttpServletResponse response) {
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("request", request);
+		accompanyService.updateAccompany(mav);
+		
+		return mav;
+	}
+	
+	/**
+	 * @author 곽성국	
+	 * @createDate 2015. 12. 9.
+	 * @described 동행구하기 수정 ok
+	 * @param request
+	 * @param response
+	 * @return
+	 */
+	@RequestMapping(value="/user/accompany/accompanyUpdateOk.do" ,method=RequestMethod.POST)
+	public ModelAndView updateOkAccompany(HttpServletRequest request, HttpServletResponse response) {
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("request", request);
+		accompanyService.updateOkAccompany(mav);
+		
+		return mav;
+	}
+
 }

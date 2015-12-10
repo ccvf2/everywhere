@@ -53,11 +53,12 @@
   	
   	<label>내용</label>
   	${accompanyDto.content}<br/><br/>
-  	<button type="button" class="btn btn-default" onclick="location.href='/user/accompany/accompanyList.do'">글목록</button>
+  	<button type="button" class="btn btn-default" onclick="location.href='/user/accompany/accompanyList.do?pageNumber=${currentPage}'">글목록</button>
+  	
   	
   	<!-- 글쓴이만 삭제 및 수정이 보이도록 -->
   	<c:if test="${ownerCheck>0}">
-  		<button type="button" class="btn btn-warning">수정</button>
+  		<button type="button" class="btn btn-warning" onclick="location.href='/user/accompany/accompanyUpdate.do?accompany_no=${accompanyDto.accompany_no}&pageNumber=${currentPage}'">수정</button>
 		<button type="button" class="btn btn-danger" onclick="deleteFunc('${accompanyDto.accompany_no}')">글삭제</button>
   	</c:if>
   	

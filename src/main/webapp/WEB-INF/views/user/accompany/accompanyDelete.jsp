@@ -20,7 +20,17 @@
     <![endif]-->
   </head>
   <body>
-   
+  	<c:if test="${check>0}">
+  		<script type="text/javascript">
+  			location.href="/user/accompany/accompanyList.do";
+  		</script>
+  	</c:if>
+	<c:if test="${check==0}">
+  		<script type="text/javascript">
+  			alert("게시글을 삭제하는 도중 오류가 발생하였습니다.");
+  			location.href="/user/accompany/accompanyList.do";
+  		</script>
+  	</c:if>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script type="text/javascript" src="/script/common/jquery-1.11.3.js"></script>

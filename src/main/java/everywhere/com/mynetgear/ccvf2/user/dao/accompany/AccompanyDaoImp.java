@@ -87,6 +87,12 @@ public class AccompanyDaoImp implements AccompanyDao {
 		hMap.put("mem_no", mem_no);
 		return sqlTemplate.delete("everywhere.com.mynetgear.ccvf2.user.mapper.accompany.deleteAccompany", hMap);
 	}
+
+	@Override
+	public int updateAccompany(AccompanyDto accompanyDto) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 	
 	
 	

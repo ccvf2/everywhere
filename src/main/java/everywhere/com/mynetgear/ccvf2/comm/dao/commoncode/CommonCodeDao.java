@@ -43,6 +43,13 @@ public interface CommonCodeDao {
 	 * @return
 	 */
 	public List<CommonCodeDto> getListCommonCodeInfo();
+	/**
+	 * @author 배성욱
+	 * @createDate 2015. 12. 7.
+	 * @described 코드목록가져오기(매개변수가 있는 타입)
+	 * @return
+	 */
+	public List<CommonCodeDto> getListCommonCodeInfo(CommonCodeDto dto);
 	
 	
 	
@@ -70,7 +77,22 @@ public interface CommonCodeDao {
 	 * @param code_name 
 	 * @return CommonCodeDto
 	 */
-	public CommonCodeDto getOneCommonCodeInfo(String code_group_name, String code_name);
+	/*public CommonCodeDto getOneCommonCodeInfo(String code_group_name, String code_name);*/
 	
-	public List<CommonCodeDto> getListByGroupCode(String code_group);
+	/**
+	 * @author 안희진
+	 * @createDate 2015. 12. 9.
+	 * @described 코드그룹으로 코드리스트 가져오기
+	 * @param code_group 
+	 * @return CommonCodeDto
+	 */
+	/*public List<CommonCodeDto> getListByGroupCode(String code_group);*/
+	/**
+	 * @author 안희진
+	 * @createDate 2015. 12. 9.
+	 * @described 코드 값으로 코드 이릅 가져오기
+	 * @param code 
+	 * @return String
+	 */
+	/*public String getCodeName(String code);*/
 }

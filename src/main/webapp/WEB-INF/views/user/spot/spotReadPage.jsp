@@ -5,24 +5,19 @@
 <head>
 <meta charset="UTF-8">
 <title>타이틀 입력</title>
-<script type="text/javascript">
-	function updateSpot(spot_no){
-		var urlName="/user/spot/updateSpot.do?spot_no="+spot_no;
-		location.href=urlName;
-	}
-	function deleteSpot(spot_no){
-		var urlName="/user/spot/delete.do?spot_no="+spot_no;
-		var check = confirm("삭제하시겠습니까?");
-		if (check == true) {
-			location.href=urlName;
-		} else {
-		   	alert("취소하셨습니다");
-		}
-		
-	}
-</script>
+<script type="text/javascript" src="/script/user/spot/selectedCountry.js"></script>
+<script type="text/javascript" src="/script/user/spot/googleMap.js"></script>
+<script async defer src="https://maps.googleapis.com/maps/api/js?sensor=true"></script>
+<style type="text/css">
+#map {
+   height: 500px;
+   width: 500px;
+}
+</style>
 </head>
-<body>
+<body  leftmargin="0" marginwidth="0" topmargin="0" marginheight="0"
+   onload="markInitialize('${spotDto.spot_lat}','${spotDto.spot_long }', '${spotDto.spot_name }');">
+	<div id="map"></div>
 	<div>
 		<c:set var="mem_no" value="1"/>
 		<input type="hidden" name="mem_no" value="1">
