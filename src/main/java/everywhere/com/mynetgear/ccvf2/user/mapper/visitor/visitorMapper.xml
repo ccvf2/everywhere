@@ -3,4 +3,23 @@
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="everywhere.com.mynetgear.ccvf2.user.mapper.visitor">
+	<resultMap type="everywhere.com.mynetgear.ccvf2.user.dto.visitor.VisitorDto" id="visitorDto">
+		<result property="visitor_no" column="visitor_no"/>
+		<result property="mem_no" column="mem_no"/>
+		<result property="visitor_content" column="visitor_content"/>
+		<result property="visitor_write_date" column="visitor_write_date"/>
+		<result property="visitor_status_code" column="visitor_status_code"/>
+	</resultMap>
+	
+	<select id="visitorCount" resultType="int">
+		select count(*) from tbl_visitor
+	</select>
+	
+	<select id="visitorList" parameterType="java.util.HashMap" resultMap="visitorDto">
+		<![CDATA[
+			select * from (select rownum rnum, a.* from
+						  (select * from tbl_visitor order by visitor_no desc) a)
+			where rnum >= #{startRow} and rnum <= #{endRow}
+		]]>
+	</select>
 </mapper>
