@@ -58,11 +58,11 @@ public class VisitorServiceImp implements VisitorService {
 	@Override
 	public void visitorWriteOk(ModelAndView mav) {
 		Map<String, Object> map=mav.getModelMap();
-		HttpServletRequest request=(HttpServletRequest)map.get("request");
+		//HttpServletRequest request=(HttpServletRequest)map.get("request");
 		VisitorDto visitorDto=(VisitorDto)map.get("visitorDto");
-		int mem_no=Integer.parseInt(request.getParameter("mem_no"));
+		//int mem_no=Integer.parseInt(request.getParameter("mem_no"));
 		
-		visitorDto.setMem_no(mem_no);
+		//visitorDto.setMem_no(mem_no);
 		visitorDto.setVisitor_status_code(Constant.SYNB_YN_Y);
 		
 		int check=visitorDao.visitorInsert(visitorDto);
