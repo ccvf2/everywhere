@@ -8,7 +8,7 @@ import java.util.Date;
  * @described 공통코드 Data Transfer Object
  * @reference class
  */
-public class CommonCodeDto {
+public class CommonCodeDto extends CommonCodeDtoExt{
 	/** 공통코드 : 공통코드시퀀스 */
 	private int code_no = 0;
 	/** 공통코드 : 공통코드 */
