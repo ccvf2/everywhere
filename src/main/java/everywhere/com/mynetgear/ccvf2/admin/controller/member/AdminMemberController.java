@@ -13,6 +13,6 @@ import everywhere.com.mynetgear.ccvf2.admin.service.member.AdminMemberService;
  */
 @Controller
 public class AdminMemberController {
-	@Autowired
-	private AdminMemberService adminMemberService;
+/*	@Autowired
+	private AdminMemberService adminMemberService;*/
 }
