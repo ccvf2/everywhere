@@ -1,13 +1,7 @@
 package everywhere.com.mynetgear.ccvf2.user.controller.visitor;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.ModelAndView;
 
 import everywhere.com.mynetgear.ccvf2.user.service.visitor.VisitorService;
 
@@ -21,18 +15,5 @@ import everywhere.com.mynetgear.ccvf2.user.service.visitor.VisitorService;
 public class VisitorController {
 	@Autowired
 	private VisitorService visitorService;
-	
-	/**
-	 * @author 김준호
-	 * @createDate 2015. 12. 10.
-	 * @described 방명록작성
-	 * @param request
-	 * @param response
-	 * @return
-	 */
-	@RequestMapping(value="/user/visitor/visitorWrite.do", method=RequestMethod.GET)
-	public ModelAndView visitorWrite(HttpServletRequest request, HttpServletResponse response) {
-		return new ModelAndView("/user/visitor/visitorWrite");
-	}
 
 }
