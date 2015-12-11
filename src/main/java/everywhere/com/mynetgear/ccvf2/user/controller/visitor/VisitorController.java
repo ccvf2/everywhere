@@ -34,10 +34,7 @@ public class VisitorController {
 	@RequestMapping(value="/user/visitor/visitorWrite.do", method=RequestMethod.GET)
 	public ModelAndView visitorWrite(HttpServletRequest request, HttpServletResponse response) {
 		ModelAndView mav=new ModelAndView();
-		int mem_no=Integer.parseInt(request.getParameter("mem_no"));
-		System.out.println("VisitorController write mem_no:"+mem_no);
 		mav.addObject("request", request);
-		mav.addObject("mem_no", mem_no);
 		visitorService.visitorWrite(mav);
 		
 		return mav;

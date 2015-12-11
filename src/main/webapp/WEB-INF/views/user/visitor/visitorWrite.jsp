@@ -10,9 +10,9 @@
 <body>
 	<div align="center">
 		<c:if test="${count==0||currentPage==1}">
-			<form action="/user/visitor/visitorWrite.do" method="post" onsubmit="">
+			<form action="/user/visitor/visitorWrite.do" method="post" onsubmit="return visitorForm(this)">
 				<div>
-					<a href="#">아이디:${VisitorDto.mem_no}</a>
+					<a href="#">아이디:${visitorDto.mem_no}</a>
 				</div>
 				<div>
 					<textarea rows="5" cols="65" name="visitor_content"></textarea>
