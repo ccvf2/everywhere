@@ -8,12 +8,12 @@ import java.util.List;
  * @described 클래스전체의 하는(큰)일을 적어주세요.
  * @reference class
  */
-public class EverywhereDefaultDto {
-	private int totalCount;
+public class EverywhereDefaultDto extends CommonFileIODto {
+	private int totalCount=0;
 	private int startRow;
 	private int startEnd;
 	
-	private int currentPage;
+	private int currentPage=1;
 	private int pageBlock=10;
 	private int startPage;
 	private int endPage;

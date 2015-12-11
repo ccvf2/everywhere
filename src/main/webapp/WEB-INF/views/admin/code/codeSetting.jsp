@@ -50,7 +50,7 @@
 	<form action="/admin/commoncode/code.do" method="post" id="codeForm">
 	<input type="hidden" name="code_CRUD" id="code_CRUD" value="C">
 	<input type="hidden" name="code_no" id="code_no" value="0">
-		<table>
+		<table border="1">
 			<tr>
 				<th>고유코드</th>
 				<td>
@@ -83,15 +83,16 @@
 	
 	
 	<!-- 코드목록 -->
-	<table>
+	<table border="1">
 		<tr>
-			<th>seq</th>
-			<th>고유코드</th>
-			<th>코드명</th>
-			<th>코드그룹</th>
-			<th>코드그룹명</th>
-			<th>코드밸류</th>
-			<th>코드등록일</th>
+			<th>코드(code_no)</th>
+			<th>고유코드(code)</th>
+			<th>코드명(code_name)</th>
+			<th>코드그룹(code_group)</th>
+			<th>코드그룹명(code_group_name)</th>
+			<th>코드밸류(code_value)</th>
+			<th>코드등록일(code_regdate)</th>
+			<th>코드정렬값(code_sort)</th>
 		</tr>
 		<c:forEach var="list" items="${codeList}">
 		<tr>
@@ -106,6 +107,7 @@
 			<td><c:out value="${list.code_group_name}"/></td>
 			<td><c:out value="${list.code_value}"/></td>
 			<td><c:out value="${list.code_regdate}"/></td>
+			<td><c:out value="${list.code_sort}"/></td>
 		</tr>
 		</c:forEach>
 	</table>
