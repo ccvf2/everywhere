@@ -15,9 +15,10 @@ function readCityList(){
 		success:function(data){
 			var result = data.split("|");
 			var str = "";
+			str+="<option value=''> ---- </option>";		
 			for(i = 0; i < result.length-1; i++){
 				var code = result[i].split(",");
-				str+="<option value='"+code[0]+"'>" + code[1] + "</option>";				
+				str+="<option value='"+code[0]+"'>" + code[1] + "</option>";		
 			}
 			$("#selectCity").empty(); 
 			$("#selectCity").prepend(str);
@@ -29,30 +30,33 @@ function readCityList(){
 	})
 }
 
-function readCountrySpotList(){
-	readCityList();
+function selectSpotList(){	
 	var countrycode = document.getElementById("selectCountry").value;
-	var params = "country_code=" + countrycode;
-	var url = "/user/spot/selectCountrySpot.ajax?" + params;
+	var citycode = document.getElementById("selectCity").value;
+	var typecode = document.getElementById("selectType").value;
+	var params = "country_code=" + countrycode + "&city_code=" + citycode + "&spot_type_code="+typecode;
+	var url = "/user/spot/selectSpotList.ajax?" + params;
 	$.ajax({
 		url:url,
 		type:"get",
 		dataType:"text",
-		success:function(data){
-			var str="";
-			if(data != ""){
-				var obj = JSON.parse(data);
-				for(i = 0; i < obj.spot.length; i++){
-					str+="<li><div><a href='/user/spot/spotReadPage.do?spot_no="+obj.spot[i].spot_no+"'> "+obj.spot[i].spot_name+"</a>"+obj.spot[i].spot_note+"</div></li>";	
-				}
-			}
-			$("#spotList").empty(); 
-			$("#spotList").prepend(str);
-		},
+		success:spotListDisp,
 		error:function(xhr, status, errorMsg){
 			alert(xhr+","+status+","+errorMsg);
 		}
 	})
+}
+
+function spotListDisp(data){
+	var str="";
+	if(data != ""){
+		var obj = JSON.parse(data);
+		for(i = 0; i < obj.spot.length; i++){
+			str+="<li><div><a href='/user/spot/spotReadPage.do?spot_no="+obj.spot[i].spot_no+"'> "+obj.spot[i].spot_name+"</a>"+obj.spot[i].spot_note+"</div></li>";	
+		}
+	}
+	$("#spotList").empty(); 
+	$("#spotList").prepend(str);
 }
 
 //명소 업데이트 자바스크립트

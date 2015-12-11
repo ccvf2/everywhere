@@ -19,6 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 import everywhere.com.mynetgear.ccvf2.comm.dao.commoncode.CommonCodeDao;
 import everywhere.com.mynetgear.ccvf2.comm.dto.common.CommonReplyDto;
 import everywhere.com.mynetgear.ccvf2.comm.dto.commoncode.CommonCodeDto;
+import everywhere.com.mynetgear.ccvf2.comm.service.commoncode.CommonCodeService;
 import everywhere.com.mynetgear.ccvf2.user.dao.spot.SpotDao;
 import everywhere.com.mynetgear.ccvf2.user.dto.spot.SpotDto;
 
@@ -29,17 +30,13 @@ public class SpotServiceImp implements SpotService{
 	private SpotDao spotDao;
 	
 	@Autowired
-	private CommonCodeDao commonCodeDao;
+	private CommonCodeService commonCodeService;	
 
 	@Override
-	public void addSpotPage(ModelAndView mav) {
-		CommonCodeDto codeDto = new CommonCodeDto();
+	public void addSpotPage(ModelAndView mav) {		
+		List<CommonCodeDto> countryList = commonCodeService.getListCodeGroup("B0000");
 		
-		codeDto.setCode_group("B0000");
-		List<CommonCodeDto> countryList = commonCodeDao.getListCommonCodeInfo(codeDto);
-		
-		codeDto.setCode_group("T0001");
-		List<CommonCodeDto> spotTypeList = commonCodeDao.getListCommonCodeInfo(codeDto);
+		List<CommonCodeDto> spotTypeList = commonCodeService.getListCodeGroup("T0001");
 		
 		mav.addObject("countryList", countryList);
 		mav.addObject("spotTypeList", spotTypeList);
@@ -53,9 +50,7 @@ public class SpotServiceImp implements SpotService{
 		HttpServletResponse response = (HttpServletResponse)map.get("response");
 		String country_code = request.getParameter("country_code");
 		
-		CommonCodeDto codeDto = new CommonCodeDto();
-		codeDto.setCode_group(country_code);
-		List<CommonCodeDto> cityList = commonCodeDao.getListCommonCodeInfo(codeDto);
+		List<CommonCodeDto> cityList = commonCodeService.getListCodeGroup(country_code);
 		
 		if(cityList.size() > 0){
 			String result = "";
@@ -75,47 +70,48 @@ public class SpotServiceImp implements SpotService{
 	}
 	
 	@Override
-	public void readCountrySpotList(ModelAndView mav) {
+	public void selectSpotList(ModelAndView mav) {
 		Map<String, Object> map=mav.getModelMap();
 		HttpServletRequest request = (HttpServletRequest)map.get("request");
 		HttpServletResponse response = (HttpServletResponse)map.get("response");
 		String country_code = request.getParameter("country_code");
-		
+		String city_code = request.getParameter("city_code");
+		String spot_type_code = request.getParameter("spot_type_code");
 		SpotDto spotDto = new SpotDto();
 		spotDto.setCountry_code(country_code);
+		spotDto.setCity_code(city_code);
+		spotDto.setSpot_type_code(spot_type_code);
 		List<SpotDto> countrySpotList = spotDao.getSpotList(spotDto);
 		
-		if(countrySpotList.size() > 0){
-			JSONArray jsonArray = new JSONArray();
-			JSONObject rootObj = new JSONObject();
-			for (int i = 0; i < countrySpotList.size(); i++) {
-				SpotDto dto = countrySpotList.get(i);
-				JSONObject obj = new JSONObject();
-				obj.put("spot_no", dto.getSpot_no());
-				obj.put("mem_no", dto.getMem_no());
-				obj.put("country_code", dto.getCountry_code());
-				obj.put("city_code", dto.getCity_code());
-				obj.put("spot_name", dto.getSpot_name());
-				obj.put("spot_type_code", dto.getSpot_type_code());
-				obj.put("mem_level_code", dto.getMem_level_code());
-				obj.put("spot_note", "\"" + dto.getSpot_note() + "\"");
-				obj.put("spot_addr", "\"" + dto.getSpot_addr() + "\"");
-				obj.put("spot_lat", dto.getSpot_lat());
-				obj.put("spot_long", dto.getSpot_long());
-				obj.put("total_star_score", dto.getTotal_star_score());
-				jsonArray.add(obj);
-			}
-			
-			try{
-				rootObj.put("spot", jsonArray);
-				String json = rootObj.toJSONString();
-				System.out.println(json);
-				response.setContentType("application/html;charset=UTF-8");
-				PrintWriter out = response.getWriter();
-				out.print(json);
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
+		JSONArray jsonArray = new JSONArray();
+		JSONObject rootObj = new JSONObject();
+		for (int i = 0; i < countrySpotList.size(); i++) {
+			SpotDto dto = countrySpotList.get(i);
+			JSONObject obj = new JSONObject();
+			obj.put("spot_no", dto.getSpot_no());
+			obj.put("mem_no", dto.getMem_no());
+			obj.put("country_code", dto.getCountry_code());
+			obj.put("city_code", dto.getCity_code());
+			obj.put("spot_name", dto.getSpot_name());
+			obj.put("spot_type_code", dto.getSpot_type_code());
+			obj.put("mem_level_code", dto.getMem_level_code());
+			obj.put("spot_note", "\"" + dto.getSpot_note() + "\"");
+			obj.put("spot_addr", "\"" + dto.getSpot_addr() + "\"");
+			obj.put("spot_lat", dto.getSpot_lat());
+			obj.put("spot_long", dto.getSpot_long());
+			obj.put("total_star_score", dto.getTotal_star_score());
+			jsonArray.add(obj);
+		}
+		
+		try{
+			rootObj.put("spot", jsonArray);
+			String json = rootObj.toJSONString();
+			System.out.println(json);
+			response.setContentType("application/html;charset=UTF-8");
+			PrintWriter out = response.getWriter();
+			out.print(json);
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 	}
 
@@ -134,12 +130,8 @@ public class SpotServiceImp implements SpotService{
 	public void getSpotList(ModelAndView mav) {
 		List<SpotDto> spotList = spotDao.getSpotAllList();
 		
-		CommonCodeDto codeDto = new CommonCodeDto();
-		codeDto.setCode_group("B0000");
-		List<CommonCodeDto> countryList = commonCodeDao.getListCommonCodeInfo(codeDto);
-		
-		codeDto.setCode_group("T0001");
-		List<CommonCodeDto> spotTypeList = commonCodeDao.getListCommonCodeInfo(codeDto);
+		List<CommonCodeDto> countryList = commonCodeService.getListCodeGroup("B0000");		
+		List<CommonCodeDto> spotTypeList = commonCodeService.getListCodeGroup("T0001");
 		
 		mav.addObject("countryList", countryList);
 		mav.addObject("spotTypeList", spotTypeList);
@@ -156,13 +148,13 @@ public class SpotServiceImp implements SpotService{
 		SpotDto spotDto = spotDao.getOneSpot(spot_no);
 		CommonCodeDto codeDto = new CommonCodeDto();
 		
-		codeDto = commonCodeDao.getOneCommonCodeInfo(spotDto.getCountry_code());
+		codeDto = commonCodeService.getOneCodeGroup(spotDto.getCountry_code());
 		String countryName = codeDto.getCode_name();
 		
-		codeDto = commonCodeDao.getOneCommonCodeInfo(spotDto.getCity_code());
+		codeDto = commonCodeService.getOneCodeGroup(spotDto.getCity_code());
 		String cityName = codeDto.getCode_name();
 		
-		codeDto = commonCodeDao.getOneCommonCodeInfo(spotDto.getSpot_type_code());
+		codeDto = commonCodeService.getOneCodeGroup(spotDto.getSpot_type_code());
 		String spot_type = codeDto.getCode_name();
 		
 		mav.addObject("spotDto", spotDto);
@@ -179,13 +171,9 @@ public class SpotServiceImp implements SpotService{
 		int spot_no = Integer.parseInt(request.getParameter("spot_no"));
 		
 		SpotDto spotDto = spotDao.getOneSpot(spot_no);
-		CommonCodeDto codeDto = new CommonCodeDto();
-		codeDto.setCode_group("B0000");
-		List<CommonCodeDto> countryList = commonCodeDao.getListCommonCodeInfo(codeDto);
-		codeDto.setCode_group(spotDto.getCountry_code());
-		List<CommonCodeDto> cityList = commonCodeDao.getListCommonCodeInfo(codeDto);
-		codeDto.setCode_group("T0001");
-		List<CommonCodeDto> spotTypeList = commonCodeDao.getListCommonCodeInfo(codeDto);
+		List<CommonCodeDto> countryList = commonCodeService.getListCodeGroup("B0000");
+		List<CommonCodeDto> cityList = commonCodeService.getListCodeGroup(spotDto.getCountry_code());
+		List<CommonCodeDto> spotTypeList = commonCodeService.getListCodeGroup("T0001");
 		
 		mav.addObject("countryList", countryList);
 		mav.addObject("cityList", cityList);
