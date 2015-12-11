@@ -74,5 +74,24 @@ public class VisitorController {
 		
 		return mav;
 	}
+	
+	/**
+	 * @author 김준호
+	 * @createDate 2015. 12. 11.
+	 * @described 방명록수정
+	 * @param request
+	 * @param response
+	 * @param visitorDto
+	 * @return
+	 */
+	@RequestMapping(value="/user/visitor/visitorUpdate.do", method=RequestMethod.POST)
+	public ModelAndView visitorUpdateOk(HttpServletRequest request, HttpServletResponse response, VisitorDto visitorDto) {
+		ModelAndView mav=new ModelAndView();
+		mav.addObject("request", request);
+		mav.addObject("visitorDto", visitorDto);
+		visitorService.visitorUpdateOk(mav);
+		
+		return mav;
+	}
 
 }

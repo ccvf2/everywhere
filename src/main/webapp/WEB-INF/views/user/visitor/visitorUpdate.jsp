@@ -4,23 +4,23 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>타이틀 입력</title>
+<title>방명록수정</title>
 </head>
 <body>
 	<div align="center">
 		<form action="/user/visitor/visitorUpdate.do" method="post" onsubmit="return visitorForm(this)">
 		<input type="hidden" name="visitor_no" value="${visitorDto.visitor_no}"/>
 		<input type="hidden" name="pageNumber" value="${pageNumber}"/>
-			<div class="title">
+			<div>
 				<label>이름</label> 
 				<input type="text" value="${visitorDto.visitor_no}" disabled="disabled"/> 
 			</div>
 		
-			<div class="content">
-				<textArea rows="5" cols="65" name="visitor_content">${visitorDto.content}</textArea>
+			<div>
+				<textArea rows="5" cols="65" name="visitor_content">${visitorDto.visitor_content}</textArea>
 			</div>
 				
-			<div class="title" style="text-align:right;">
+			<div style="text-align:right;">
 				<input type="submit" value=확인> 
 				<input type="reset" value=취소>
 			</div>

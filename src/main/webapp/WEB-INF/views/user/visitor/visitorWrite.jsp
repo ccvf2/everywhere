@@ -25,7 +25,7 @@
 		</c:if>
 		<c:if test="${count>0}">
 			<c:forEach var="visitor" items="${visitorList}">
-				<div class="" style="border-width:1px; border-bottom:0px;">
+				<div style="border-width:1px; border-bottom:0px;">
 					${visitor.mem_no}
 					<fmt:formatDate value="${visitor.visitor_write_date}" type="both"/>
 					<span style="margin-left: 180px;"> 
@@ -34,7 +34,7 @@
 					</span>
 				</div>
 				
-				<div class="" style="border-width:1px; text-align:left;">
+				<div style="border-width:1px; text-align:left;">
 					${visitor.visitor_content}
 				</div>
 			</c:forEach>

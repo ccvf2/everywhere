@@ -88,4 +88,20 @@ public class VisitorServiceImp implements VisitorService {
 		
 	}
 
+	@Override
+	public void visitorUpdateOk(ModelAndView mav) {
+		Map<String, Object> map=mav.getModelMap();
+		HttpServletRequest request=(HttpServletRequest) map.get("request");
+		VisitorDto visitorDto=(VisitorDto)map.get("visitorDto");
+		
+		int check=visitorDao.visitorUpdate(visitorDto);
+		System.out.println("VisitorService updateOk check:"+check);
+		
+		int pageNumber=Integer.parseInt(request.getParameter("pageNumber"));
+		
+		mav.addObject("check", check);
+		mav.addObject("pageNumber", pageNumber);
+		mav.setViewName("/user/visitor/visitorUpdateOk");
+	}
+
 }
