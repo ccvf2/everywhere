@@ -32,7 +32,29 @@
                         </ol>
                     </div>
                 </div>
-
+                
+                <div class="panel panel-default">
+				  <!-- Default panel contents -->
+				  <div class="panel-heading">Panel heading</div>
+				  <div class="panel-body">
+				    <p>...</p>
+				  </div>
+				
+				  <!-- Table -->
+				  <table class="table">
+				    ...
+				  </table>
+				</div>
+                
+                
+                 <div class="row">
+                   <div class="col-lg-12">
+					<div class="form-group input-group">
+	                   <input type="text" class="form-control">
+	                   <span class="input-group-btn"><button class="btn btn-default" type="button"><i class="fa fa-search"></i></button></span>
+	               </div>
+           	   	</div>
+               </div>
 
                 <div class="row">
                     <div class="col-lg-12">
@@ -45,8 +67,8 @@
                             		<col width="15%"/>
                             		<col width="15%"/>
                             		<col width="8%"/>
-                            		<col width="10%"/>
                             		<col width="8%"/>
+                            		<col width="10%"/>
                             		<col width="14%"/>
                             	</colgroup>
                                 <thead>
@@ -65,7 +87,7 @@
                                 	<c:forEach items="${memberList}" var="member" varStatus="index">
                                     <tr>
                                         <td><c:out value="${member.mem_no}"/></td>
-                                        <td><c:out value="${member.mem_email}"/></td>
+                                        <td><a href=""><c:out value="${member.mem_email}"/></a></td>
                                         <td><c:out value="${member.mem_name}"/></td>
                                         <td><c:out value="${member.mem_phone}"/></td>
                        					<td>
@@ -83,7 +105,7 @@
 											</c:forEach>
 										</td>
 										<td>
-	                       					<c:forEach var="memLevel" items="${phoneStatusList}">
+	                       					<c:forEach var="phoneStatus" items="${phoneStatusList}">
 												<c:if test="${member.mem_p_status_code==phoneStatus.code}">
 										  			${phoneStatus.code_name}
 										  		</c:if>
