@@ -3,6 +3,7 @@ package everywhere.com.mynetgear.ccvf2.comm.dao.commoncode;
 import java.util.List;
 
 import everywhere.com.mynetgear.ccvf2.comm.dto.commoncode.CommonCodeDto;
+import everywhere.com.mynetgear.ccvf2.comm.dto.commoncode.CommonCodeDtoInterface;
 
 /**
  * @author 배성욱
@@ -78,6 +79,14 @@ public interface CommonCodeDao {
 	 * @return CommonCodeDto
 	 */
 	/*public CommonCodeDto getOneCommonCodeInfo(String code_group_name, String code_name);*/
+	/**
+	 * @author 배성욱
+	 * @createDate 2015. 12. 11.
+	 * @described 공통코드 검색에 필요한 목록 
+	 * @param test
+	 * @return
+	 */
+	public List<CommonCodeDto> getListCommonCodeSearchConditionList();
 	
 	/**
 	 * @author 안희진

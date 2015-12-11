@@ -118,6 +118,17 @@
 				</choose>
 		</where>
 	</select>
+	
+	<select id="select_list_code_gropup" resultType="everywhere.com.mynetgear.ccvf2.comm.dto.commoncode.CommonCodeDto">
+		SELECT
+			code_group
+			,code_group_name
+		FROM
+			tbl_common_code
+		GROUP BY
+			code_group
+			,code_group_name
+	</select>
 
 
 	<!-- 삭제 예정 -->

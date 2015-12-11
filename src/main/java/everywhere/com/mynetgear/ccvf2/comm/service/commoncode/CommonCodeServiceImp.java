@@ -13,6 +13,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import everywhere.com.mynetgear.ccvf2.comm.dao.commoncode.CommonCodeDao;
 import everywhere.com.mynetgear.ccvf2.comm.dto.commoncode.CommonCodeDto;
+import everywhere.com.mynetgear.ccvf2.comm.dto.commoncode.CommonCodeDtoExt;
+import everywhere.com.mynetgear.ccvf2.comm.dto.commoncode.CommonCodeDtoInterface;
 import everywhere.com.mynetgear.ccvf2.comm.util.common.Constant;
 
 /**
@@ -35,6 +37,8 @@ public class CommonCodeServiceImp implements CommonCodeService {
 	public void callCodeSettingPage(ModelAndView mav) {
 		CommonCodeDto dto = new CommonCodeDto();
 		List<CommonCodeDto> list=commonCodeDao.getListCommonCodeInfo();
+		List<CommonCodeDto> searchConditionList=commonCodeDao.getListCommonCodeSearchConditionList();
+		mav.addObject("searchConditionList", searchConditionList);
 		mav.addObject("codeList", list);
 		mav.setViewName("/admin/code/codeSetting");
 	}

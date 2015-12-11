@@ -45,7 +45,7 @@
 	</script>
 </c:if>
 
-
+size:${searchConditionList.size()}
 <%-- root:${root} --%>
 	<form action="/admin/commoncode/code.do" method="post" id="codeForm">
 	<input type="hidden" name="code_CRUD" id="code_CRUD" value="C">
@@ -79,7 +79,11 @@
 		<input type="button" value="등록" onclick="insertCcodeFormSubmin()">
 	</form>
 	
-	
+	<select>
+		<c:forEach items="${searchConditionList}" var="codeGroupList">
+			<option value="${codeGroupList.code_group}">${codeGroupList.code_group_name}(${codeGroupList.code_group})</option>
+		</c:forEach>
+	</select>
 	
 	
 	<!-- 코드목록 -->
