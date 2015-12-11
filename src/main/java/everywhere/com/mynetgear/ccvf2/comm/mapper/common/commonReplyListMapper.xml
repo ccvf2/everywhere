@@ -8,24 +8,58 @@
 		<result property="code_name" column="CODE_NAME" />
 		<result property="code_value" column="CODE_VALUE" /> -->
 	</resultMap>
-
+	
+	<!-- 공통댓글 목록 삭제하기 -->
 	<select id="select_Common_list_reply" parameterType="everywhere.com.mynetgear.ccvf2.comm.dto.common.CommonReplyDto" resultType="everywhere.com.mynetgear.ccvf2.comm.dto.common.CommonReplyDto">
-		SELECT REPLY_NO
-			, MEM_NO
-			, TYPE_CODE
-			, ITEM_NO
-			, REPLY_CONTENT
-			, REPLY_WRITER_NAME
-			, REPLY_WRITE_DATE
-			,USE_YN 
+		SELECT reply.REPLY_NO
+			, reply.MEM_NO
+			, reply.TYPE_CODE
+			, reply.ITEM_NO
+			, reply.REPLY_CONTENT
+			, reply.REPLY_WRITER_NAME
+			, reply.REPLY_WRITE_DATE
+			, reply.USE_YN
+			, member.MEM_PROFILE_PHOTO
 		FROM 
+			TBL_COMMON_REPLY reply, TBL_MEMBER member
+		WHERE
+			reply.MEM_NO = member.MEM_NO
+		AND
+			reply.TYPE_CODE = #{type_code}
+		AND
+			reply.ITEM_NO = #{item_no}
+		AND
+			reply.USE_YN = 'Y'
+	</select>
+	
+	<!-- 공통댓글 1건 삭제 하기 -->
+	<delete id="delete_Common_reply" parameterType="everywhere.com.mynetgear.ccvf2.comm.dto.common.CommonReplyDto">
+		DELETE FROM 
 			TBL_COMMON_REPLY
 		WHERE
-			TYPE_CODE = #{type_code}
+			REPLY_NO=#{reply_no}
 		AND
-			ITEM_NO = #{item_no}
+			TYPE_CODE=#{type_code}
 		AND
-			USE_YN = 'Y'
-	</select>
+			ITEM_NO=#{item_no}
+		AND
+			MEM_NO=#{mem_no}
+	</delete>
+	
+	<!-- 공통댓글 수정하기 -->
+	<update id="update_Common_reply" parameterType="everywhere.com.mynetgear.ccvf2.comm.dto.common.CommonReplyDto">
+	UPDATE 
+		TBL_COMMON_REPLY
+	SET
+		REPLY_CONTENT=#{reply_content}
+	WHERE
+		REPLY_NO=#{reply_no}
+	AND
+		TYPE_CODE=#{type_code}
+	AND
+		ITEM_NO=#{item_no}
+	AND
+		MEM_NO=#{mem_no}
+	</update>
 	
 </mapper>

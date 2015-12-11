@@ -24,5 +24,15 @@ public interface CommonReplyService {
 	 * @param item_no
 	 * @return
 	 */
-	public List<CommonReplyDto> getListCommonReplyList(String type_code, int item_no);
+	public List<CommonReplyDto> getListCommonReplyList(CommonReplyDto commonReplyDto);
+	/**
+	 * @author 배성욱
+	 * @createDate 2015. 12. 12.
+	 * @described 공통댓글 삭제하기
+	 * @param type_code
+	 * @param reply_no
+	 * @param mem_no
+	 * @return
+	 */
+	public int deleteCommonReply(CommonReplyDto commonReplyDto);
 }

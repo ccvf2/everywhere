@@ -5,154 +5,157 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<!-- Meta -->
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<!-- Favicon -->
-<link rel="shortcut icon" href="favicon.ico">
-<!-- Web Fonts -->
-<link rel='stylesheet' type='text/css' href='//fonts.googleapis.com/css?family=Open+Sans:400,300,600&amp;subset=cyrillic,latin'>
-<!-- CSS Global Compulsory -->
-<link rel="stylesheet" href="/plugins/bootstrap/css/bootstrap.min.css">
-<link rel="stylesheet" href="/css/user/style.css">
-<!-- CSS Header and Footer -->
-<link rel="stylesheet" href="/css/user/headers/header-default.css">
-<link rel="stylesheet" href="/css/user/footers/footer-v1.css">
-<!-- CSS Implementing Plugins -->
-<link rel="stylesheet" href="/plugins/animate.css">
-<link rel="stylesheet" href="/plugins/line-icons/line-icons.css">
-<link rel="stylesheet" href="/plugins/font-awesome/css/font-awesome.min.css">
-<!-- CSS Customization -->
-<link rel="stylesheet" href="/css/user/custom.css">
-
-
-<script type="text/javascript" src="/script/common/jquery-1.11.3.js"></script>
-<!-- JS Global Compulsory -->
-<!-- <script type="text/javascript" src="assets/plugins/jquery/jquery.min.js"></script> -->
-<script type="text/javascript" src="/plugins/jquery/jquery-migrate.min.js"></script>
-<script type="text/javascript" src="/plugins/bootstrap/js/bootstrap.min.js"></script>
-<!-- JS Implementing Plugins -->
-<script type="text/javascript" src="/plugins/back-to-top.js"></script>
-<script type="text/javascript" src="/plugins/smoothScroll.js"></script>
-<!-- JS Customization -->
-<script type="text/javascript" src="/script/user/js/custom.js"></script>
-<!-- JS Page Level -->
-<script type="text/javascript" src="/script/user/js/app.js"></script>
+<script type="text/javascript" src="/script/common/commonReply.js"></script>
+<script src="/assets/plugins/jquery/jquery.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
-    App.init();
-});
+/* 	commonReplyInit(type_code,mem_no,item_no,defaultPhotoPath); */
+	commonReplyInit('A00001',64,282,"");
+})
+</script>
+<script type="text/javascript">
+/* var delStr=0;
+//사용될 게시판 고유 코드
+var type_code="A00001";
+var mem_no=64;
+var defaultPhoto="/assets/img/testimonials/user.jpg";
 	function clickTo() {
+		//글쓰기 화면 만들기
+		showViewWrite()
 		$(function() {
 			$.ajax({
-						/* url : "/common/code/codelist.ajax?code_group=T0001", */
-						url : "/common/reply/replylist.ajax?type_code=A00001&item_no=282",
-						type : "get",
+						url : "/common/reply/replylist.ajax?=&item_no=282&mem_no=63",
+						type : "POST",
+						data : {"type_code":type_code,"item_no":282,"mem_no":63},
 						dataType : "text",
-						success : replyUpdate,
+						success : replyList,
 						error : function() {
-							alert("hul");
+							alert("목록 가져오기 실패");
 						}
 					})
 		})
 	}
-	function replyUpdate(jsonData, status, xhr) {
-		//alert(jsonData);
-		//var obj = jQuery.parseJSON(jsonData);
-		//var obj = JSON.parse(jsonData);
+	function replyList(jsonData, status, xhr) {
 		var arr = new Array();
 		arr = JSON.parse(jsonData);
-		console.log(arr);
-		//alert(obj.common_code.length);
-		//alert(obj.common_code[0].code_no);
+		var arrSize=arr.length;
+			$("#replyListArea").append("<h3 style='color:#72c02c'>Comments</h3>");
+		for( var i=0 ;i<arrSize;i++ ){
+			var item=arr[i];
+			item.reply_no
+			console.log(item);
+			$("#replyListArea").append("<div class='media' id='"+i+"'></div>");
+			
+			var photoPath="";
+			if(item.mem_profile_photo==""){
+				photoPath=defaultPhoto;
+			}else{
+				photoPath=item.mem_profile_photo
+			}
+			
+			$("#"+i).append("<a class='pull-left' href='#'><img class='media-object rounded-2x' src='"+photoPath+"' alt='' /></a>");
+			$("#"+i).append("<div class='media-body' id='media-body"+i+"'></div>");
+			$("#media-body"+i).append("<h4 class='media-heading' id='media-heading"+i+"'>"+item.reply_writer_name+"&nbsp;</h4>");
+			$("#media-heading"+i).append("<span id='spanId"+i+"'>"+item.reply_write_date+" / </span>")
+			var aTag="<a id='spId' href=\"javascript:replyDelete(\'"+ i +"\',\'"+item.reply_no+"\',\'"+item.item_no+"\',\'"+type_code+"\')\">삭제</a>";
+			$("#spanId"+i).append(aTag);
+			$("#"+i).append("<p id='replyContent'>"+item.reply_content+"</p><hr/>");
+			
+			$("#"+i).css("margin-top", "0px");
+			//이미지싸이즈 조정
+			$(".media-object").css("width", "54px");
+			$(".media-object").css("height", "54px");
+			
+			
+			$("#spanId"+i).css("float", "right");
+			$("#spanId"+i).css("margin-right", "10px");
+			
+		}
 	}
-
-	function replyDelete() {
-		alert("b");
+	
+	
+	//index:화면뷰를 삭제할 ID,
+	//reply_no:댓글고유번호,
+	//type_code:댓글이 있는 게시판고유코드,
+	//item_no:댓글이 있는 게시판 글번호
+	function replyDelete(index, reply_no, item_no, type_code) {
+		delStr=index;
+		$(function() {
+			$.ajax({
+						url : "/common/reply/replydelete.ajax",
+						type : "POST",
+						data : {"reply_no":reply_no,"item_no":item_no,"mem_no":mem_no,"type_code":type_code},
+						dataType : "text",
+						success : viewDelete,
+						error : function() {
+							alert("삭제 실패");
+						}
+					})
+		})
 	}
+	
+	function viewDelete(data) {
+		if(data>0){
+		alert("삭제 되었습니다.");
+		$("#"+delStr).remove();
+		}else{
+			alert("자신의 글만 삭제 가능합니다.");
+			return;
+		}
+	}
+	
+	
+	
+	
+	
+	//글쓰기 화면 구성
+	function showViewWrite(){
+		$("#replyWriteArea").addClass("post-comment");
+		$("#replyWriteArea").append("<h3>Leave a Comment</h3>");
+		$("#replyWriteArea").append("<form id='replyWriteForm' action=''></form>");
+		
+		$("#replyWriteForm").append("<label>Message</label>")
+		$("#replyWriteForm").append("<div class='row margin-bottom-20' id='formWrap'></div>")
+		$("#formWrap").append("<div class='col-md-11 col-md-offset-0' id='formWrapInner'></div>")
+		$("#formWrapInner").append("<textarea class='form-control' rows='8'></textarea>")
+		$("#replyWriteForm").append("<p><button class='btn-u' type='submit'>Send Message</button></p>")
+	} */
 </script>
 </head>
 <body>
-	<div id="replyArea">
-		<div id="replywrap">
-			<div id="replyWriteArea">
-				<input type="text" name="reply_list" maxlength="1000" />
-			</div>
-			<div id="replyListArea">
-				<!-- Recent Comments -->
-				<div class="media">
-					<h3>Comments</h3>
-					<a class="pull-left" href="#"> <img class="media-object"
-						src="assets/img/testimonials/img2.jpg" alt="" />
-					</a>
-					<div class="media-body">
-						<h4 class="media-heading">
-							Media heading <span>5 hours ago / <a href="#">Reply</a></span>
-						</h4>
-						<p>Donec id erum quidem rerumd facilis est et expedita
-							distinctio lorem ipsum dolorlit non mi portas sats eget metus.
-							Fusce dapibus, tellus ac cursus commodo, tortor mauris
-							condimentum nibh, ut fermentum massa justo sit amet risus. Etiam
-							porta sem malesuada magna..</p>
 
-						<hr>
+<form action="">
 
-						<div class="media">
-							<a class="pull-left" href="#"> <img class="media-object"
-								src="assets/img/testimonials/img5.jpg" alt="" />
-							</a>
-							<div class="media-body">
-								<h4 class="media-heading">
-									Media heading <span>17 hours ago / <a href="#">Reply</a></span>
-								</h4>
-								<p>Donec id erum quidem rerumd facilis est et expedita
-									distinctio lorem ipsum dolorlit non mi portas sats eget metus.
-									Fusce dapibus, tellus ac cursus commodo, tortor mauris
-									condimentum nibh, ut fermentum massa justo sit amet risus.
-									Etiam porta sem malesuada magna..</p>
-							</div>
+</form>
+		<div class="wrapper">
+		    <!--=== Header ===-->
+		    <div class="header">
+				<c:import url="/WEB-INF/views/user/common/header.jsp"/>
+		    </div>
+		    
+		    <!--=== End Header ===-->
+	
+		<a href="javascript:clickTo()">눌러봐봐</a>
+		<div id="replyArea" class="container">
+			<div id="replywrap">
+				<div id="replyListArea">
+				
+					<!-- <div class="media">
+						<a class="pull-left" href="#"><img class="media-object" src="/assets/img/testimonials/img4.jpg" alt="" /></a>
+						<div class="media-body">
+							<h4 class="media-heading">
+								게시 <span>July 5,2013 / <a href="#">삭제</a></span>
+							</h4>
+							<p id="replyContent"></p>
 						</div>
-
-						<hr>
-
-						<div class="media">
-							<a class="pull-left" href="#"> <img class="media-object"
-								src="assets/img/testimonials/img1.jpg" alt="" />
-							</a>
-							<div class="media-body">
-								<h4 class="media-heading">
-									Media heading <span>2 days ago / <a href="#">Reply</a></span>
-								</h4>
-								<p>Donec id erum quidem rerumd facilis est et expedita
-									distinctio lorem ipsum dolorlit non mi portas sats eget metus.
-									Fusce dapibus, tellus ac cursus commodo, tortor mauris
-									condimentum nibh, ut fermentum massa justo sit amet risus.
-									Etiam porta sem malesuada magna..</p>
-							</div>
-						</div>
-					</div>
+					</div> -->
+					<!--/media-->
+					<!-- End Recent Comments -->
 				</div>
-				<!--/media-->
-
-				<div class="media">
-					<a class="pull-left" href="#"> <img class="media-object"
-						src="assets/img/testimonials/img4.jpg" alt="" />
-					</a>
-					<div class="media-body">
-						<h4 class="media-heading">
-							Media heading <span>July 5,2013 / <a href="#">Reply</a></span>
-						</h4>
-						<p>Donec id erum quidem rerumd facilis est et expedita
-							distinctio lorem ipsum dolorlit non mi portas sats eget metus.
-							Fusce dapibus, tellus ac cursus commodo, tortor mauris
-							condimentum nibh, ut fermentum massa justo sit amet risus. Etiam
-							porta sem malesuada magna..</p>
-					</div>
+				<div id="replyWriteArea">
 				</div>
-				<!--/media-->
-				<!-- End Recent Comments -->
 			</div>
 		</div>
 	</div>
-	<a href="javascript:clickTo()">눌러봐봐</a>
 </body>
 </html>

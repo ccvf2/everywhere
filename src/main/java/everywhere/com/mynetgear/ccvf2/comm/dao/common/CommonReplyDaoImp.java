@@ -28,5 +28,11 @@ public class CommonReplyDaoImp implements CommonReplyDao {
 	public List<CommonReplyDto> getListCommonReplyList(CommonReplyDto commonReplyDto) {
 		return sqlTemplate.selectList("select_Common_list_reply",commonReplyDto);
 	}
+	
+	/** 공통댓글 삭제하기 */
+	@Override
+	public int deleteCommonReply(CommonReplyDto commonReplyDto) {
+		return sqlTemplate.delete("delete_Common_reply",commonReplyDto);
+	}
 
 }

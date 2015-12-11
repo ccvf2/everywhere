@@ -8,7 +8,7 @@ import java.util.Date;
  * @described 클래스전체의 하는(큰)일을 적어주세요.
  * @reference class
  */
-public class CommonReplyDto {
+public class CommonReplyDto extends EverywhereDefaultDto{
 	/** 공통댓글 : 공통댓글시퀀스 */
 	private int reply_no=0;
 	/** 공통댓글 : 회원번호 */

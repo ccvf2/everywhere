@@ -38,16 +38,15 @@ public class CommonReplyController {
 	 * @author 배성욱
 	 * @param request 
 	 * @param response 
+	 * @param commonReplyDto 
 	 * @return 
 	 * @throws IOException 
 	 * @createDate 2015. 12. 8.
 	 * @described 공통댓글목록
 	 */
 	@RequestMapping(value="/common/reply/replylist.ajax", method=RequestMethod.GET)
-	public void register(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		String type_code=request.getParameter("type_code");
-		int item_no=Integer.parseInt(request.getParameter("item_no"));
-		List<CommonReplyDto> list= commonReplyService.getListCommonReplyList(type_code, item_no);
+	public void register(HttpServletRequest request, HttpServletResponse response,CommonReplyDto commonReplyDto) throws IOException {
+		List<CommonReplyDto> list= commonReplyService.getListCommonReplyList(commonReplyDto);
 		JSONArray jsonArray = new JSONArray();
 		for (int i = 0; i < list.size(); i++) {
 			CommonReplyDto dto = list.get(i);
@@ -55,7 +54,6 @@ public class CommonReplyController {
 			//DTO의 Date객체를 문자화
 			SimpleDateFormat transFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 			String dateStr = transFormat.format(dto.getReply_write_date());
-			
 			
 			obj.put("reply_no", dto.getReply_no());
 			obj.put("mem_no", dto.getMem_no());
@@ -65,6 +63,7 @@ public class CommonReplyController {
 			obj.put("reply_writer_name", StringUtils.clean(dto.getReply_writer_name()));
 			obj.put("reply_write_date", StringUtils.clean(dateStr));
 			obj.put("use_yn", StringUtils.clean(dto.getUse_yn()));
+			obj.put("mem_profile_photo", StringUtils.clean(dto.getMem_profile_photo()));
 			jsonArray.add(obj);
 		}
 
@@ -72,5 +71,23 @@ public class CommonReplyController {
 		response.setContentType("application/html;charset=UTF-8");
 		PrintWriter out = response.getWriter();
 		out.print(test);
+	}
+	/**
+	 * @author 배성욱
+	 * @param request 
+	 * @param response 
+	 * @return 
+	 * @throws IOException 
+	 * @createDate 2015. 12. 11.
+	 * @described 공통댓글삭제
+	 */
+	@RequestMapping(value="/common/reply/replydelete.ajax", method=RequestMethod.POST)
+	public void replyDelete(HttpServletRequest request, HttpServletResponse response,CommonReplyDto commonReplyDto) throws IOException {
+		
+		int result=commonReplyService.deleteCommonReply(commonReplyDto);
+		
+		response.setContentType("application/html;charset=UTF-8");
+		PrintWriter out = response.getWriter();
+		out.print(result);
 	}
 }

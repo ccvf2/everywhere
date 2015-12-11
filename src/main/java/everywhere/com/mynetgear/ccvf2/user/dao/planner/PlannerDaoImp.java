@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.PlatformTransactionManager;
 
+import everywhere.com.mynetgear.ccvf2.comm.dto.commoncode.CommonCodeDto;
 import everywhere.com.mynetgear.ccvf2.user.dto.planner.PlannerDto;
 
 @Component
@@ -40,7 +41,5 @@ public class PlannerDaoImp implements PlannerDao {
 	public int updatePlanner(PlannerDto planner) {
 		return sqlTemplate.update("planner_update", planner);
 	}
-
-	
 
 }

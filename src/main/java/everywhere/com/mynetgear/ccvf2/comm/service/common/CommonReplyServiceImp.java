@@ -24,20 +24,16 @@ public class CommonReplyServiceImp implements CommonReplyService {
 	 * 공통댓글 목록 불러오기
 	 */
 	@Override
-	public List<CommonReplyDto> getListCommonReplyList(String type_code, int item_no) {
+	public List<CommonReplyDto> getListCommonReplyList(CommonReplyDto commonReplyDto) {
 		List<CommonReplyDto> replyList = null;
 		String errorMsg =Constant.SYNB_NULL;
 		try {
-			if(StringUtils.equals(Constant.SYNB_NULL, type_code)){
+			if(StringUtils.equals(Constant.SYNB_NULL, commonReplyDto.getType_code())){
 				errorMsg+="타입코드가 입력안되었습니다./";
-			}else if(item_no==0){
+			}else if(commonReplyDto.getItem_no()==0){
 				errorMsg+="글번호가 입력안되었습니다./";
 			}else{
-				//실제구현부
-				CommonReplyDto commonReplyDto = new CommonReplyDto();
-				commonReplyDto.setType_code(type_code);
-				commonReplyDto.setItem_no(item_no);
-				
+				//공통댓글 목록 불러오기
 				replyList = commonReplyDao.getListCommonReplyList(commonReplyDto);
 			}
 		}catch(Exception e){
@@ -47,6 +43,15 @@ public class CommonReplyServiceImp implements CommonReplyService {
 			System.out.println(errorMsg);
 		}
 		return replyList;
+	}
+	/* 
+	 * 공통댓글 삭제하기
+	 */
+	@Override
+	public int deleteCommonReply(CommonReplyDto commonReplyDto) {
+		int result=0;
+		result=commonReplyDao.deleteCommonReply(commonReplyDto);
+		return result;
 	}
 
 }
