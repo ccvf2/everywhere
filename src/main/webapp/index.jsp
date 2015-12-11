@@ -25,5 +25,9 @@
  <a href="/admin/mailtemplat/mailTemplatList.do">메일목록</a>
  <a href="/admin/member/adminMemberList.do">관리자 -회원관리</a>
  
+ <hr/>
+ <a href="/user/main/main.do">유저 메인 페이지</a>
+ 
+ 
 </body>
 </html>
