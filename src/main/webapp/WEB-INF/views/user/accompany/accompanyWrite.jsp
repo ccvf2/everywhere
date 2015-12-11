@@ -46,6 +46,12 @@
 		<input type="hidden" name="mem_no" value="" />
 		
 		<label>종류</label>
+		<!-- 동행구함 여부 -->
+		<select name="accompany_status_code">
+			<c:forEach var="postType" items="${postTypeList}">
+				<option value="${postType.code}">${postType.code_name}</option>
+			</c:forEach>
+		</select>
 		
 		<br/>
 		<label>제목</label>

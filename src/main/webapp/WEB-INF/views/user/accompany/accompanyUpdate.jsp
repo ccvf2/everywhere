@@ -57,10 +57,16 @@
 		</script>
 		<br/><br />
 		
+
 		<!-- 동행구함 여부 -->
 		<select name="accompany_status_code">
 			<c:forEach var="postType" items="${postTypeList}">
-				<option value="${postType.code}">${postType.code_name}</option>
+				<c:if test="${postType.code==accompanyDto.accompany_status_code}">
+					<option value="${postType.code}" selected="selected">${postType.code_name}</option>
+				</c:if>
+				<c:if test="${postType.code!=accompanyDto.accompany_status_code}">
+					<option value="${postType.code}">${postType.code_name}</option>
+				</c:if>
 			</c:forEach>
 		</select>
 		<br/><br/>
