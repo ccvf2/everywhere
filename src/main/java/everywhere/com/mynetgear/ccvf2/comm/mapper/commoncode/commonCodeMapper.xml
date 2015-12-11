@@ -62,7 +62,7 @@
 
 
 	<!-- 코드목록 불러오기 -->
-	<select id="selectList_code_info" resultMap="codeMap" parameterType="everywhere.com.mynetgear.ccvf2.comm.dto.commoncode.CommonCodeDto">
+	<select id="selectList_code_info" resultMap="codeMap" parameterType="everywhere.com.mynetgear.ccvf2.comm.dto.commoncode.CommonCodeDtoExt">
 		SELECT
 			code_no
 			,code
@@ -76,11 +76,11 @@
 			tbl_common_code
 		<where>
 				<choose>
-					<when test="code_group != ''">
-					AND code_group=#{code_group}
+					<when test="search_code_group != ''">
+					AND code_group=#{search_code_group}
 					</when>
-					<when test="code_group_name != ''">
-					AND code_group_name=#{code_group_name}
+					<when test="search_code_group_name != ''">
+					AND code_group_name=#{search_code_group}
 					</when>
 					<otherwise>
 					</otherwise>
@@ -117,6 +117,17 @@
 					</otherwise>
 				</choose>
 		</where>
+	</select>
+	
+	<select id="select_list_code_gropup" resultType="everywhere.com.mynetgear.ccvf2.comm.dto.commoncode.CommonCodeDto">
+		SELECT
+			code_group
+			,code_group_name
+		FROM
+			tbl_common_code
+		GROUP BY
+			code_group
+			,code_group_name
 	</select>
 
 

@@ -1,6 +1,5 @@
 package everywhere.com.mynetgear.ccvf2.comm.dao.commoncode;
 
-import java.util.HashMap;
 import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
@@ -10,6 +9,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.PlatformTransactionManager;
 
 import everywhere.com.mynetgear.ccvf2.comm.dto.commoncode.CommonCodeDto;
+import everywhere.com.mynetgear.ccvf2.comm.dto.commoncode.CommonCodeDtoExt;
 
 /**
  * @author 배성욱
@@ -51,8 +51,8 @@ public class CommonCodeDaoImp implements CommonCodeDao {
 	}
 	/** 코드 목록가져오기 */
 	@Override
-	public List<CommonCodeDto> getListCommonCodeInfo(CommonCodeDto CommonCodeDto) {
-		return sqlTemplate.selectList("selectList_code_info",CommonCodeDto);
+	public List<CommonCodeDto> getListCommonCodeInfo(CommonCodeDtoExt dtoImp) {
+		return sqlTemplate.selectList("selectList_code_info",dtoImp);
 	}
 	
 
@@ -72,13 +72,18 @@ public class CommonCodeDaoImp implements CommonCodeDao {
 		dto.setCode(code);
 		return sqlTemplate.selectOne("selectOne_code_info", dto);
 	}
+	/** 코드목록 검색시 필요한 코드그룹 목록*/
+	@Override
+	public List<CommonCodeDto> getListCommonCodeSearchConditionList() {
+		return sqlTemplate.selectList("select_list_code_gropup");
+	}
 /*	@Override
 	public CommonCodeDto getOneCommonCodeInfo(String code_group_name, String code_name) {
 		HashMap<String, String> map =new HashMap<String, String>();
 		map.put("code_group_name", code_group_name);
 		map.put("code_name", code_name);
 		return sqlTemplate.selectOne("select_code_info_groupname", map);
-	}*/
+	}
 	
 /*	@Override
 	public List<CommonCodeDto> getListByGroupCode(String code_group) {
