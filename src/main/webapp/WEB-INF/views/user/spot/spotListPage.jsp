@@ -12,17 +12,19 @@
 	<div>
 		<input type="hidden" name="mem_no" value="1">			
 			<input type="hidden" name="mem_level_code" value="M0002">
-			<select name="country_code" id="selectCountry" onchange="readCountrySpotList()">
+			<select name="country_code" id="selectCountry" onchange="selectSpotList()">
 				<option value=""> ---- </option>
 				<c:forEach var="country" items="${countryList}" >
 					  <option value="${country.code}">${country.code_name}</option>
 				</c:forEach>                                                                     
 			</select>
 				
-			<select name="city_code" id="selectCity">
-				<option> ---- </option>
+			<select name="city_code" id="selectCity" onchange="selectSpotList()">
+				<option value=""> ---- </option>
 			</select>
-			<select name="spot_type_code">
+			
+			<select name="spot_type_code" id="selectType" onchange="selectSpotList()">
+				<option value=""> ---- </option>
 				<c:forEach var="spotType" items="${spotTypeList}" >
 					  <option value="${spotType.code}">${spotType.code_name}</option>
 				</c:forEach>         
