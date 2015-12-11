@@ -13,6 +13,6 @@ import everywhere.com.mynetgear.ccvf2.admin.dao.member.AdminMemberDao;
  */
 @Component
 public class AdminMemberServiceImp {
-	@Autowired
-	private AdminMemberDao adminMemberDao;
+	/*@Autowired
+	private AdminMemberDao adminMemberDao;*/
 }
