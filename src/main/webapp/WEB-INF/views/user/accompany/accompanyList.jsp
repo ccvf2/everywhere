@@ -30,8 +30,9 @@
 	<c:if test="${count > 0 }">
 		<table class="table">
 			<tr>
-				<td width="70">번호</td>
-				<td width="200">제목</td>
+				<td width="50">번호</td>
+				<td width="80">종류</td>
+				<td width="300">제목</td>
 				<td width="120">글쓴이</td>
 				<td width="100">날짜</td>
 				<td width="60">조회</td>			
@@ -39,6 +40,14 @@
 			<c:forEach var="accompanyDto" items="${accompanyList}">
 				<tr>
 					<td>${accompanyDto.accompany_no}</td>
+					<!-- 게시글 종류  -->
+					<td>
+						<c:forEach var="postType" items="${postTypeList}">
+							<c:if test="${accompanyDto.accompany_status_code==postType.code}">
+								<a href="#">${postType.code_name}</a>
+							</c:if>
+						</c:forEach>
+					</td>
 					<td><a href ="/user/accompany/accompanyRead.do?accompany_no=${accompanyDto.accompany_no}&currentPage=${currentPage}">${accompanyDto.title}</a></td>
 					<td>${accompanyDto.mem_name}</td>
 					<td><fmt:formatDate pattern="MM-dd" value="${accompanyDto.write_date}"/></td>

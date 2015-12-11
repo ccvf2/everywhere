@@ -9,6 +9,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
@@ -52,9 +53,9 @@ public class AccompanyServiceImp implements AccompanyService {
 		
 		// 성별 코드 가져옴
 		List<CommonCodeDto> genderList = commonCodeService.getListCodeGroup("G0001");
-		// 게시글 종류 코드 가져옴
+		//게시글 종류 코드 가져옴
 		List<CommonCodeDto> postTypeList = commonCodeService.getListCodeGroup("H0001");
-				
+		
 		mav.addObject("postTypeList", postTypeList);
 		mav.addObject("genderList", genderList);
 		mav.setViewName("user/accompany/accompanyWrite");
@@ -89,16 +90,21 @@ public class AccompanyServiceImp implements AccompanyService {
 				// 실제 구현부
 				
 				accompanyDto.setMem_no(Integer.parseInt(mem_no));
+
 				/*제목 및 HTML제거*/
 				accompanyDto.setTitle(CommonUtils.deleteHTML(title));
+				
 				/*내용 및 HTML 제거*/
 				accompanyDto.setContent(CommonUtils.deleteHTML(content));
-				
+				System.out.println(accompanyDto.getContent());
+
+				/*enter값 처리*/
+				accompanyDto.setContent(accompanyDto.getContent().replace("\r\n", "<br/>"));
 				/*성별 코드: 1. 남자, 2. 여자, 3. 둘다*/
 				accompanyDto.setGender_code(gender_code);
 				
 				/*기본값으로 동행은 구해지지 않았다*/
-				accompanyDto.setAccompany_status_code(Constant.ACCOMPANY_TYPE_OBTAINING);
+				accompanyDto.setAccompany_status_code(request.getParameter("accompany_status_code"));
 				
 				/*여행 시작일 - 여행 종료일 Date 형식으로 변경*/
 				try {
@@ -115,7 +121,6 @@ public class AccompanyServiceImp implements AccompanyService {
 				/*	CommonFileIOServiceImp nd=new CommonFileIOServiceImp();
 					CommonFileIODto filedto= nd.requestWriteFileAndDTO(request, "file", savePath);*/
 					
-				accompanyDto.printAll();
 				check = accompanyDao.insertAccompany(accompanyDto);
 				EverywhereAspect.logger.info(EverywhereAspect.logMsg + check);
 			}
@@ -138,9 +143,12 @@ public class AccompanyServiceImp implements AccompanyService {
 		//요청한 페이지
 		String pageNumber = request.getParameter("pageNumber");
 		
-		if(pageNumber == null) {
-			pageNumber = "1"; 	
+		if(pageNumber==null){
+			pageNumber = "1"; 
 		}
+		/*if(StringUtils.equals(pageNumber, Constant.SYNB_NULL)) {
+			pageNumber = "1"; 	
+		}*/
 		
 		int currentPage = Integer.parseInt(pageNumber);
 		int startRow = (currentPage - 1) * boardSize + 1;
@@ -163,7 +171,7 @@ public class AccompanyServiceImp implements AccompanyService {
 		
 		//게시글 종류 코드 가져옴
 		List<CommonCodeDto> postTypeList = commonCodeService.getListCodeGroup("H0001");
-				
+		
 		mav.addObject("count", count);
 		mav.addObject("postTypeList", postTypeList);
 		mav.addObject("boardSize", boardSize);
@@ -185,7 +193,6 @@ public class AccompanyServiceImp implements AccompanyService {
 		
 		AccompanyDto accompanyDto = accompanyDao.readAccompany(accompany_no);
 		// accompanyDto.printAll();
-		
 		// 세션에서 회원no 가져옴 (수정 및 삭제 버튼을 보여줄지 여부를 선택하기 위함)
 		//int mem_no = (Integer) session.getAttribute("mem_no");
 		int mem_no=64;//임시
@@ -241,10 +248,13 @@ public class AccompanyServiceImp implements AccompanyService {
 		
 		EverywhereAspect.logger.info(EverywhereAspect.logMsg + accompany_no + "\t" + currentPage);
 		
+		//성별 코드 가져옴
 		List<CommonCodeDto> genderList = commonCodeService.getListCodeGroup("G0001");
+		//게시글 종류 코드 가져옴
+		List<CommonCodeDto> postTypeList = commonCodeService.getListCodeGroup("H0001");
 		
 		AccompanyDto accompanyDto = accompanyDao.readAccompany(accompany_no);
-		// accompanyDto.printAll();
+		 accompanyDto.printAll();
 		
 		// 세션에서 회원no 가져옴
 		//int mem_no = (Integer) session.getAttribute("mem_no");
@@ -254,6 +264,7 @@ public class AccompanyServiceImp implements AccompanyService {
 		
 		mav.addObject("currentPage", currentPage);
 		mav.addObject("genderList", genderList);
+		mav.addObject("postTypeList", postTypeList);
 		mav.addObject("ownerCheck", ownerCheck);
 		mav.addObject("accompanyDto", accompanyDto);
 		mav.setViewName("user/accompany/accompanyUpdate");
@@ -263,11 +274,12 @@ public class AccompanyServiceImp implements AccompanyService {
 	public void updateOkAccompany(ModelAndView mav) {
 		Map<String, Object> map = mav.getModelMap();
 		MultipartHttpServletRequest request = (MultipartHttpServletRequest) map.get("request");
+		int currentPage = Integer.parseInt(request.getParameter("currentPage"));
+		
 		int check = 0;
 		AccompanyDto accompanyDto = new AccompanyDto();
-		accompanyDto.setAccompany_no(Integer.parseInt(request.getParameter("accompany_no")));
-		accompanyDto.setMem_no(Integer.parseInt(request.getParameter("mem_no")));
 		
+		String accompany_no = request.getParameter("accompany_no");
 		/*글쓴이: 임시라 변경 필요*/
 //		int mem_no = request.getParameter("mem_no");
 		String mem_no = "64";
@@ -278,7 +290,9 @@ public class AccompanyServiceImp implements AccompanyService {
 		String content = request.getParameter("content");
 
 		try {
-			if(mem_no.equals(Constant.SYNB_NULL)) {
+			if(accompany_no.equals(Constant.SYNB_NULL)) {
+				EverywhereAspect.logger.info(EverywhereAspect.logMsg + "게시글 번호가 없습니다.");
+			} else if(mem_no.equals(Constant.SYNB_NULL)) {
 				EverywhereAspect.logger.info(EverywhereAspect.logMsg + "회원 정보가 없음");
 			} else if (!(gender_code.equals(Constant.ACCOMPANY_GENDER_BOTH) || gender_code.equals(Constant.ACCOMPANY_GENDER_MALE) || gender_code.equals(Constant.ACCOMPANY_GENDER_FEMALE))){
 				EverywhereAspect.logger.info(EverywhereAspect.logMsg + "gender_code Error");
@@ -288,13 +302,14 @@ public class AccompanyServiceImp implements AccompanyService {
 				EverywhereAspect.logger.info(EverywhereAspect.logMsg + "내용이 입력되지 않았습니다.");
 			} else {
 				// 실제 구현부
-				
+				accompanyDto.setAccompany_no(Integer.parseInt(accompany_no));
 				accompanyDto.setMem_no(Integer.parseInt(mem_no));
 				/*제목 및 HTML제거*/
 				accompanyDto.setTitle(CommonUtils.deleteHTML(title));
 				/*내용 및 HTML 제거*/
 				accompanyDto.setContent(CommonUtils.deleteHTML(content));
-				
+				/*enter값 처리*/
+				accompanyDto.setContent(accompanyDto.getContent().replace("\r\n", "<br/>"));;
 				/*성별 코드: 1. 남자, 2. 여자, 3. 둘다*/
 				accompanyDto.setGender_code(gender_code);
 				
@@ -319,7 +334,6 @@ public class AccompanyServiceImp implements AccompanyService {
 				/*	CommonFileIOServiceImp nd=new CommonFileIOServiceImp();
 					CommonFileIODto filedto= nd.requestWriteFileAndDTO(request, "file", savePath);*/
 					
-				accompanyDto.printAll();
 				check = accompanyDao.updateAccompany(accompanyDto);
 				EverywhereAspect.logger.info(EverywhereAspect.logMsg + check);
 			}
@@ -327,6 +341,8 @@ public class AccompanyServiceImp implements AccompanyService {
 			e.printStackTrace();
 		} finally {
 			mav.addObject("check", check);
+			mav.addObject("accompanyDto", accompanyDto);
+			mav.addObject("currentPage", currentPage);
 			mav.setViewName("user/accompany/accompanyUpdateOk");
 		}
 		

@@ -38,6 +38,14 @@
   	<fmt:formatDate pattern="MM-dd" value="${accompanyDto.end_date}"/>까지
   	<br/>
   	
+  	<label>종류</label>
+	<c:forEach var="postType" items="${postTypeList}">
+		<c:if test="${accompanyDto.accompany_status_code==postType.code}">
+			${postType.code_name}
+		</c:if>
+	</c:forEach>
+	<br/>
+  		
   	<label>구하는 성별</label>
   	<c:forEach var="gender_code" items="${genderList}">
 		<c:if test="${accompanyDto.gender_code==gender_code.code}">

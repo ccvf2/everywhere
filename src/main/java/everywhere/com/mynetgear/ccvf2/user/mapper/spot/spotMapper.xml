@@ -18,16 +18,14 @@
 				<when test="country_code != ''">
 				AND country_code=#{country_code}
 				</when>
-			</choose>
-			<choose>
 				<when test="city_code != ''">
 				AND city_code=#{city_code}
 				</when>
-			</choose>
-			<choose>
 				<when test="spot_type_code != ''">
 				AND spot_type_code=#{spot_type_code}
 				</when>
+				<otherwise>
+				</otherwise>
 			</choose>
 		</where>
 	</select>
