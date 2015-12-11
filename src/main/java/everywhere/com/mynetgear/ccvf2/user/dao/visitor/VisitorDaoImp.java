@@ -31,7 +31,12 @@ public class VisitorDaoImp implements VisitorDao {
 		hMap.put("startRow", startRow);
 		hMap.put("endRow", endRow);
 		
-		return sqlTemplate.selectOne("everywhere.com.mynetgear.ccvf2.user.mapper.visitor.visitorList", hMap);
+		return sqlTemplate.selectList("everywhere.com.mynetgear.ccvf2.user.mapper.visitor.visitorList", hMap);
+	}
+
+	@Override
+	public int visitorInsert(VisitorDto visitorDto) {
+		return sqlTemplate.insert("everywhere.com.mynetgear.ccvf2.user.mapper.visitor.visitorInsert", visitorDto);
 	}
 
 }

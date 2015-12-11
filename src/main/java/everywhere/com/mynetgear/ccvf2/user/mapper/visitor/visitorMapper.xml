@@ -17,9 +17,8 @@
 	
 	<select id="visitorList" parameterType="java.util.HashMap" resultMap="visitorDto">
 		<![CDATA[
-			select * from(
-				select rownum rnum, a.* from
-				(select * from tbl_visitor order by visitor_no desc) a)
+			select * from (select rownum rnum, a.* from
+						  (select * from tbl_visitor order by visitor_no desc) a)
 			where rnum >= #{startRow} and rnum <= #{endRow}
 		]]>
 	</select>

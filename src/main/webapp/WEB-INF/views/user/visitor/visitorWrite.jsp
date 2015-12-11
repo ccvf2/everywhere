@@ -27,7 +27,7 @@
 			<c:forEach var="visitor" items="${visitorList}">
 				<div class="" style="border-width:1px; border-bottom:0px;">
 					${visitor.mem_no}
-					<fmt:formatDate value="${visitor.visotor_write_date}" type="both"/>
+					<fmt:formatDate value="${visitor.visitor_write_date}" type="both"/>
 					<span style="margin-left: 180px;"> 
 						<a href="/user/visitor/visitorUpdate.do?num=${visitor.visitor_no}&pageNumber=${currentPage}">수정</a> 
 						<a href="javascript:deleteCheck('${visitor.visitor_no}','${currentPage}')">삭제</a>

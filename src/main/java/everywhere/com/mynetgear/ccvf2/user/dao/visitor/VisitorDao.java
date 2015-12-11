@@ -27,5 +27,13 @@ public interface VisitorDao {
 	 * @return
 	 */
 	public List<VisitorDto> getVisitorList(int startRow, int endRow);
+	/**
+	 * @author 김준호
+	 * @createDate 2015. 12. 11.
+	 * @described 방명록작성
+	 * @param visitorDto
+	 * @return
+	 */
+	public int visitorInsert(VisitorDto visitorDto);
 
 }

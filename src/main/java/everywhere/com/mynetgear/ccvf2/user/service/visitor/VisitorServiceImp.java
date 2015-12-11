@@ -27,7 +27,6 @@ public class VisitorServiceImp implements VisitorService {
 	public void visitorWrite(ModelAndView mav) {
 		Map<String, Object> map=mav.getModelMap();
 		HttpServletRequest request=(HttpServletRequest)map.get("request");
-		int mem_no=Integer.parseInt(request.getParameter("mem_no"));
 		
 		String pageNumber=request.getParameter("pageNumber");
 		if(pageNumber==null) pageNumber="1";
@@ -43,8 +42,6 @@ public class VisitorServiceImp implements VisitorService {
 		System.out.println("VisitorService write count:"+count);
 		
 		List<VisitorDto> visitorList=null;
-		VisitorDto visitorDto=(VisitorDto)map.get("visitorDto");
-		visitorDto.setMem_no(mem_no);
 		if(count>0) {
 			visitorList=visitorDao.getVisitorList(startRow, endRow);
 		}
@@ -55,6 +52,16 @@ public class VisitorServiceImp implements VisitorService {
 		mav.addObject("boardSize", boardSize);
 		mav.addObject("currentPage", currentPage);
 		mav.setViewName("/user/visitor/visitorWrite");
+	}
+
+	@Override
+	public void visitorWriteOk(ModelAndView mav) {
+		Map<String, Object> map=mav.getModelMap();
+		VisitorDto visitorDto=(VisitorDto)map.get("visitorDto");
+		
+		int check=visitorDao.visitorInsert(visitorDto);
+		System.out.println("VisitorService writeOk check:"+check);
+		
 	}
 
 }

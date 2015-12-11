@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import everywhere.com.mynetgear.ccvf2.user.dto.visitor.VisitorDto;
 import everywhere.com.mynetgear.ccvf2.user.service.visitor.VisitorService;
 
 /**
@@ -38,6 +39,23 @@ public class VisitorController {
 		mav.addObject("request", request);
 		mav.addObject("mem_no", mem_no);
 		visitorService.visitorWrite(mav);
+		
+		return mav;
+	}
+	
+	/**
+	 * @author 김준호
+	 * @createDate 2015. 12. 11.
+	 * @described 매소드의 용도를 적어주세요
+	 * @param request
+	 * @param response
+	 * @return
+	 */
+	@RequestMapping(value="/user/visitor/visitorWrite.do", method=RequestMethod.POST)
+	public ModelAndView visitorWriteOk(HttpServletRequest request, HttpServletResponse response, VisitorDto visitorDto) {
+		ModelAndView mav=new ModelAndView();
+		mav.addObject("visitorDto", visitorDto);
+		visitorService.visitorWriteOk(mav);
 		
 		return mav;
 	}
