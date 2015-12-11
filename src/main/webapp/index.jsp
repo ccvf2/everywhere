@@ -24,5 +24,9 @@
  <a href="/admin/commoncode/code.do">관리자-공통코드(거의완료)</a>
  <a href="/admin/mailtemplat/mailTemplatList.do">메일목록</a>
  
+ <hr/>
+ <a href="/user/main/main.do">유저 메인 페이지</a>
+ 
+ 
 </body>
 </html>
