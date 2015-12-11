@@ -14,13 +14,14 @@
 <link href="/css/admin/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
     <!-- jQuery -->
-<script type="text/javascript" src="/script/admin/jquery.js"></script>
+<!-- <script type="text/javascript" src="/script/admin/jquery.js"></script> -->
+<script type="text/javascript" src="/script/common/jquery-1.11.3.js"></script>
     <!-- Bootstrap Core JavaScript -->
 <script src="/script/admin/bootstrap.min.js"></script>
     <!-- Morris Charts JavaScript -->
 <script src="/script/admin//plugins/morris/raphael.min.js"></script>
-<script src="/script/admin//plugins/morris/morris.min.js"></script>
-<script src="/script/admin//plugins/morris/morris-data.js"></script>
+<!-- <script src="/script/admin//plugins/morris/morris.min.js"></script>
+<script src="/script/admin//plugins/morris/morris-data.js"></script> -->
 </head>
 <body>
 <div class="navbar-header">
