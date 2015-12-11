@@ -68,9 +68,9 @@ public class Constant {
 	public static final String SYNB_NUM_0 = "0";
 
 	/** 회원등급:관리자 */
-	public static final String MEMBER_LEVEL_ADMIN = "ADMIN";
+	public static final String MEMBER_LEVEL_ADMIN = "M0001";
 	/** 회원등급:일반사용자 */
-	public static final String MEMBER_LEVEL_USER = "USER";
+	public static final String MEMBER_LEVEL_USER = "M0002";
 	
 	/**메일 컨덴츠 타입: text*/
 	public static final String MAIL_CONTENT_TYPE_TEXT = "text";
