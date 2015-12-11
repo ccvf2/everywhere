@@ -51,6 +51,7 @@ public class PlannerServiceImp implements PlannerService {
 		
 		plannerDto.setPlanner_ba_code(planner_ba_code);
 		plannerDto.setUse_yn(Constant.SYNB_YN_N);
+		System.out.println(plannerDto);
 		
 		int check = plannerDao.insertPlanner(plannerDto);
 		EverywhereAspect.logger.info(EverywhereAspect.logMsg + check);
@@ -88,10 +89,45 @@ public class PlannerServiceImp implements PlannerService {
 	public void updatePlanner(ModelAndView mav) {
 		Map<String, Object> map=mav.getModelMap();
 		HttpServletRequest request = (HttpServletRequest)map.get("request");
-		PlannerDto plannerDto = (PlannerDto)map.get("plannerDto");
+		int planner_no = Integer.parseInt(request.getParameter("planner_no"));
 		
-		int result = plannerDao.updatePlanner(plannerDto);
-		mav.addObject("result", result);
-		mav.setViewName("user/planner/plannerRead");
+		PlannerDto plannerDto = plannerDao.getOnePlanner(planner_no);
+		
+		mav.addObject("plannerDto", plannerDto);
+		mav.setViewName("user/planner/plannerWrite");
+	}
+
+	@Override
+	public void updatePlannerOk(ModelAndView mav) {
+		Map<String, Object> map=mav.getModelMap();
+		HttpServletRequest request = (HttpServletRequest)map.get("request");		
+		
+		PlannerDto plannerDto = new PlannerDto();
+		plannerDto.setPlanner_no(Integer.parseInt(request.getParameter("planner_no")));
+		plannerDto.setTitle(request.getParameter("title"));
+		plannerDto.setMemo(request.getParameter("memo"));
+		
+		String start_date = request.getParameter("start_date");
+		String end_date = request.getParameter("end_date");
+				
+		try {
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+			plannerDto.setStart_date(sdf.parse(start_date));
+			if(!end_date.equals("")) plannerDto.setEnd_date(sdf.parse(end_date));
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		
+		String use_yn = request.getParameter("use_yn");
+		System.out.println(use_yn);
+		plannerDto.setUse_yn(use_yn.equals(Constant.SYNB_YN_Y) ? Constant.SYNB_YN_Y :Constant.SYNB_YN_N);
+		
+		System.out.println(plannerDto);
+		int check = plannerDao.updatePlanner(plannerDto);
+		EverywhereAspect.logger.info(EverywhereAspect.logMsg + check);
+		
+		mav.addObject("planner_no", plannerDto.getPlanner_no());
+		mav.addObject("check", check);
+		mav.setViewName("user/planner/plannerWriteOk");
 	}
 }

@@ -21,6 +21,7 @@ public class PlannerController {
 	public ModelAndView insertPlanner(HttpServletRequest request, HttpServletResponse response) {
 		return new ModelAndView("/user/planner/NewFile");	
 	}
+	
 	@RequestMapping(value="/user/planner/plannerCreate.do", method=RequestMethod.POST)
 	public ModelAndView insertPlannerOK(HttpServletRequest request, HttpServletResponse response) {
 		ModelAndView mav = new ModelAndView();
@@ -28,6 +29,7 @@ public class PlannerController {
 		plannerService.insertPlanner(mav);
 		return mav;
 	}
+	
 	@RequestMapping(value="/user/planner/plannerList.do", method=RequestMethod.GET)
 	public ModelAndView getPlannerList(HttpServletRequest request, HttpServletResponse response) {
 		ModelAndView mav = new ModelAndView();
@@ -35,6 +37,7 @@ public class PlannerController {
 		plannerService.getPlannerList(mav);
 		return mav;
 	}
+	
 	@RequestMapping(value="/user/planner/readPlanner.do", method=RequestMethod.GET)
 	public ModelAndView getOnePlanner(HttpServletRequest request, HttpServletResponse response) {
 		ModelAndView mav = new ModelAndView();
@@ -43,12 +46,19 @@ public class PlannerController {
 		return mav;
 	}
 	
-	@RequestMapping(value="/user/planner/updatePlannerOk.do", method=RequestMethod.POST)
-	public ModelAndView updatePlanner(HttpServletRequest request, HttpServletResponse response, PlannerDto plannerDto) {
+	@RequestMapping(value="/user/planner/writePlanner.do", method=RequestMethod.GET)
+	public ModelAndView updatePlanner(HttpServletRequest request, HttpServletResponse response) {
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("request", request);
-		mav.addObject("plannerDto", plannerDto);
 		plannerService.updatePlanner(mav);
+		return mav;
+	}
+	
+	@RequestMapping(value="/user/planner/updatePlanner.do", method=RequestMethod.POST)
+	public ModelAndView updatePlannerOK(HttpServletRequest request, HttpServletResponse response) {
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("request", request);
+		plannerService.updatePlannerOk(mav);
 		return mav;
 	}
 }

@@ -13,6 +13,6 @@
 여행 끝 날짜 : ${planner.end_date } <br/>
 
 여행 간단 설명 : ${planner.memo} <br/>
-<input type="button" value="modify">
+<input type="button" value="modify" onclick="location.href='/user/planner/writePlanner.do?planner_no=${planner.planner_no}'">
 </body>
 </html>

@@ -12,4 +12,6 @@ public interface PlannerService {
 
 	public void updatePlanner(ModelAndView mav);
 
+	public void updatePlannerOk(ModelAndView mav);
+
 }

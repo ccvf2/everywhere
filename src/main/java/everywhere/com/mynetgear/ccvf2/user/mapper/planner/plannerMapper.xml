@@ -37,6 +37,12 @@
 	</select> 
 	
 	<update id="planner_update" parameterType="everywhere.com.mynetgear.ccvf2.user.dto.planner.PlannerDto">
-		update tbl_planner set title=#{title}, memo=#{memo}, start_date=#{start_date}, end_date=#{end_date} where planner_no=#{planner_no}
+		update tbl_planner set 
+			title=#{title}, 
+			memo=#{memo}, 
+			start_date=#{start_date}, 
+			end_date=#{end_date}, 
+			use_yn=#{use_yn}
+		where planner_no=#{planner_no}
 	</update>
 </mapper>
