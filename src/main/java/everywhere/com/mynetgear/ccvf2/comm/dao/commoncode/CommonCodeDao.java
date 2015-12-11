@@ -3,7 +3,7 @@ package everywhere.com.mynetgear.ccvf2.comm.dao.commoncode;
 import java.util.List;
 
 import everywhere.com.mynetgear.ccvf2.comm.dto.commoncode.CommonCodeDto;
-import everywhere.com.mynetgear.ccvf2.comm.dto.commoncode.CommonCodeDtoInterface;
+import everywhere.com.mynetgear.ccvf2.comm.dto.commoncode.CommonCodeDtoExt;
 
 /**
  * @author 배성욱
@@ -50,7 +50,7 @@ public interface CommonCodeDao {
 	 * @described 코드목록가져오기(매개변수가 있는 타입)
 	 * @return
 	 */
-	public List<CommonCodeDto> getListCommonCodeInfo(CommonCodeDto dto);
+	public List<CommonCodeDto> getListCommonCodeInfo(CommonCodeDtoExt dtoImp);
 	
 	
 	

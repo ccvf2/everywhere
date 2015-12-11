@@ -35,6 +35,13 @@
 		$("#code_CRUD").val("d"); 
 		$("#codeForm").submit(); 
 	}
+	
+	
+	
+	//코드셀렉터
+	function selectCode(searchConditionList){
+		
+	}
 </script>
 </head>
 <body>
@@ -79,9 +86,10 @@ size:${searchConditionList.size()}
 		<input type="button" value="등록" onclick="insertCcodeFormSubmin()">
 	</form>
 	
+	<!-- 코드 셀렉터 -->
 	<select>
 		<c:forEach items="${searchConditionList}" var="codeGroupList">
-			<option value="${codeGroupList.code_group}">${codeGroupList.code_group_name}(${codeGroupList.code_group})</option>
+			<option value="${codeGroupList.code_group}" onchange="selectCode('${codeGroupList.code_group}')">${codeGroupList.code_group_name}(${codeGroupList.code_group})</option>
 		</c:forEach>
 	</select>
 	

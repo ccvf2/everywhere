@@ -1,6 +1,5 @@
 package everywhere.com.mynetgear.ccvf2.comm.dao.commoncode;
 
-import java.util.HashMap;
 import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
@@ -10,7 +9,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.PlatformTransactionManager;
 
 import everywhere.com.mynetgear.ccvf2.comm.dto.commoncode.CommonCodeDto;
-import everywhere.com.mynetgear.ccvf2.comm.dto.commoncode.CommonCodeDtoInterface;
+import everywhere.com.mynetgear.ccvf2.comm.dto.commoncode.CommonCodeDtoExt;
 
 /**
  * @author 배성욱
@@ -52,8 +51,8 @@ public class CommonCodeDaoImp implements CommonCodeDao {
 	}
 	/** 코드 목록가져오기 */
 	@Override
-	public List<CommonCodeDto> getListCommonCodeInfo(CommonCodeDto CommonCodeDto) {
-		return sqlTemplate.selectList("selectList_code_info",CommonCodeDto);
+	public List<CommonCodeDto> getListCommonCodeInfo(CommonCodeDtoExt dtoImp) {
+		return sqlTemplate.selectList("selectList_code_info",dtoImp);
 	}
 	
 

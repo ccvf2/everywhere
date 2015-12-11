@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +13,6 @@ import org.springframework.web.servlet.ModelAndView;
 import everywhere.com.mynetgear.ccvf2.comm.dao.commoncode.CommonCodeDao;
 import everywhere.com.mynetgear.ccvf2.comm.dto.commoncode.CommonCodeDto;
 import everywhere.com.mynetgear.ccvf2.comm.dto.commoncode.CommonCodeDtoExt;
-import everywhere.com.mynetgear.ccvf2.comm.dto.commoncode.CommonCodeDtoInterface;
 import everywhere.com.mynetgear.ccvf2.comm.util.common.Constant;
 
 /**
@@ -35,8 +33,9 @@ public class CommonCodeServiceImp implements CommonCodeService {
 	 */
 	@Override
 	public void callCodeSettingPage(ModelAndView mav) {
-		CommonCodeDto dto = new CommonCodeDto();
-		List<CommonCodeDto> list=commonCodeDao.getListCommonCodeInfo();
+		//CommonCodeDto dto = new CommonCodeDto();
+		CommonCodeDtoExt dtoImp= new CommonCodeDtoExt();
+		List<CommonCodeDto> list=commonCodeDao.getListCommonCodeInfo(dtoImp);
 		List<CommonCodeDto> searchConditionList=commonCodeDao.getListCommonCodeSearchConditionList();
 		mav.addObject("searchConditionList", searchConditionList);
 		mav.addObject("codeList", list);
@@ -84,9 +83,9 @@ public class CommonCodeServiceImp implements CommonCodeService {
 	 * @described 공통코드목록을 불러 옵니다.인자 값으로 "코드그룹(String code_group)"을 보내야 합니다.
 	 */
 	public List<CommonCodeDto> getListCodeGroup(String code_group) {
-		CommonCodeDto dto= new CommonCodeDto();
+		CommonCodeDtoExt dto= new CommonCodeDtoExt();
 		code_group=StringUtils.deleteWhitespace(code_group);
-		dto.setCode_group(code_group);
+		dto.setSearch_code_group(code_group);
 		List<CommonCodeDto> list=commonCodeDao.getListCommonCodeInfo(dto);
 		return list;
 	}
@@ -96,9 +95,9 @@ public class CommonCodeServiceImp implements CommonCodeService {
 	 * @described 공통코드목록을 불러 옵니다.인자 값으로 "코드그룹이름(String code_group_name)"을 보내야 합니다.
 	 */
 	public List<CommonCodeDto> getListCodeGroupName(String code_group_name) {
-		CommonCodeDto dto= new CommonCodeDto();
+		CommonCodeDtoExt dto= new CommonCodeDtoExt();
 		code_group_name=StringUtils.deleteWhitespace(code_group_name);
-		dto.setCode_group_name(code_group_name);
+		dto.setSearch_code_group_name(code_group_name);
 		List<CommonCodeDto> list=commonCodeDao.getListCommonCodeInfo(dto);
 		return list;
 	}
