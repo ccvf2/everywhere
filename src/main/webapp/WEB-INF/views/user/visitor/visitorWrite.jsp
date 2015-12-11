@@ -10,9 +10,9 @@
 <body>
 	<div align="center">
 		<c:if test="${count==0||currentPage==1}">
-			<form action="/user/visitor/visitorWrite.do" method="post" onsubmit="">
+			<form action="/user/visitor/visitorWrite.do" method="post" onsubmit="return visitorForm(this)">
 				<div>
-					<a href="#">아이디:${VisitorDto.mem_no}</a>
+					<a href="#">아이디:${visitorDto.mem_no}</a>
 				</div>
 				<div>
 					<textarea rows="5" cols="65" name="visitor_content"></textarea>
@@ -25,16 +25,16 @@
 		</c:if>
 		<c:if test="${count>0}">
 			<c:forEach var="visitor" items="${visitorList}">
-				<div class="" style="border-width:1px; border-bottom:0px;">
+				<div style="border-width:1px; border-bottom:0px;">
 					${visitor.mem_no}
 					<fmt:formatDate value="${visitor.visitor_write_date}" type="both"/>
 					<span style="margin-left: 180px;"> 
-						<a href="/user/visitor/visitorUpdate.do?num=${visitor.visitor_no}&pageNumber=${currentPage}">수정</a> 
-						<a href="javascript:deleteCheck('${visitor.visitor_no}','${currentPage}')">삭제</a>
+						<a href="/user/visitor/visitorUpdate.do?visitor_no=${visitor.visitor_no}&pageNumber=${currentPage}">수정</a> 
+						<a href="/user/visitor/visitorDelete.do?visitor_no=${visitor.visitor_no}&pageNumber=${currentPage}">삭제</a>
 					</span>
 				</div>
 				
-				<div class="" style="border-width:1px; text-align:left;">
+				<div style="border-width:1px; text-align:left;">
 					${visitor.visitor_content}
 				</div>
 			</c:forEach>

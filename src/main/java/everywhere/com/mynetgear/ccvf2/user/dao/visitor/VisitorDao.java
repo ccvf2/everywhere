@@ -35,5 +35,21 @@ public interface VisitorDao {
 	 * @return
 	 */
 	public int visitorInsert(VisitorDto visitorDto);
+	/**
+	 * @author 김준호
+	 * @createDate 2015. 12. 11.
+	 * @described 방명록수정
+	 * @param visitor_no
+	 * @return
+	 */
+	public VisitorDto visitorSelect(int visitor_no);
+	/**
+	 * @author 김준호
+	 * @createDate 2015. 12. 11.
+	 * @described 매소드의 용도를 적어주세요
+	 * @param visitorDto
+	 * @return
+	 */
+	public int visitorUpdate(VisitorDto visitorDto);
 
 }

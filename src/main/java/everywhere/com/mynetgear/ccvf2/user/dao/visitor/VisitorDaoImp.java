@@ -39,4 +39,14 @@ public class VisitorDaoImp implements VisitorDao {
 		return sqlTemplate.insert("everywhere.com.mynetgear.ccvf2.user.mapper.visitor.visitorInsert", visitorDto);
 	}
 
+	@Override
+	public VisitorDto visitorSelect(int visitor_no) {
+		return sqlTemplate.selectOne("everywhere.com.mynetgear.ccvf2.user.mapper.visitor.visitorSelect", visitor_no);
+	}
+
+	@Override
+	public int visitorUpdate(VisitorDto visitorDto) {
+		return sqlTemplate.update("everywhere.com.mynetgear.ccvf2.user.mapper.visitor.visitorUpdate", visitorDto);
+	}
+
 }
