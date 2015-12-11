@@ -3,5 +3,7 @@
 
 <!-- 관리자 회원관리의 mapper -->
 <mapper namespace="everywhere.com.mynetgear.ccvf2.admin.mapper.member">
-
+	<select id="getMemberList" resultType="everywhere.com.mynetgear.ccvf2.user.dto.member.MemberDto">
+		select * from tbl_member
+	</select>
 </mapper>

@@ -36,7 +36,6 @@ import oracle.jdbc.Const;
 public class AccompanyServiceImp implements AccompanyService {
 	@Autowired
 	private AccompanyDao accompanyDao;
-
 	
 	@Autowired
 	private CommonCodeService commonCodeService;
