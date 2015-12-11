@@ -43,7 +43,7 @@ public class VisitorController {
 	/**
 	 * @author 김준호
 	 * @createDate 2015. 12. 11.
-	 * @described 매소드의 용도를 적어주세요
+	 * @described 방명록작성
 	 * @param request
 	 * @param response
 	 * @param visitorDto 
@@ -54,6 +54,23 @@ public class VisitorController {
 		ModelAndView mav=new ModelAndView();
 		mav.addObject("visitorDto", visitorDto);
 		visitorService.visitorWriteOk(mav);
+		
+		return mav;
+	}
+	
+	/**
+	 * @author 김준호
+	 * @createDate 2015. 12. 11.
+	 * @described 방명록수정
+	 * @param request
+	 * @param response
+	 * @return
+	 */
+	@RequestMapping(value="/user/visitor/visitorUpdate.do", method=RequestMethod.GET)
+	public ModelAndView visitorUpdate(HttpServletRequest request, HttpServletResponse response) {
+		ModelAndView mav=new ModelAndView();
+		mav.addObject("request", request);
+		visitorService.visitorUpdate(mav);
 		
 		return mav;
 	}

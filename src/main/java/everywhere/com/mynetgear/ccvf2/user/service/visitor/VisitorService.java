@@ -23,5 +23,12 @@ public interface VisitorService {
 	 * @param mav
 	 */
 	public void visitorWriteOk(ModelAndView mav);
+	/**
+	 * @author 김준호
+	 * @createDate 2015. 12. 11.
+	 * @described 방명록수정
+	 * @param mav
+	 */
+	public void visitorUpdate(ModelAndView mav);
 
 }

@@ -26,4 +26,8 @@
 	<insert id="visitorInsert" parameterType="everywhere.com.mynetgear.ccvf2.user.dto.visitor.VisitorDto">
 		insert into tbl_visitor values(tbl_visitor_visitor_no_seq.nextval, #{mem_no}, #{visitor_content}, sysdate, #{visitor_status_code})
 	</insert>
+	
+	<select id="visitorSelect" parameterType="int" resultMap="visitorDto">
+		select * from tbl_visitor where visitor_no=#{visitor_no}
+	</select>
 </mapper>
