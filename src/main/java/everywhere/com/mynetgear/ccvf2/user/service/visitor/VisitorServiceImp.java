@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.ModelAndView;
 
+import everywhere.com.mynetgear.ccvf2.comm.util.common.Constant;
 import everywhere.com.mynetgear.ccvf2.user.dao.visitor.VisitorDao;
 import everywhere.com.mynetgear.ccvf2.user.dto.visitor.VisitorDto;
 
@@ -57,7 +58,12 @@ public class VisitorServiceImp implements VisitorService {
 	@Override
 	public void visitorWriteOk(ModelAndView mav) {
 		Map<String, Object> map=mav.getModelMap();
+		HttpServletRequest request=(HttpServletRequest)map.get("request");
 		VisitorDto visitorDto=(VisitorDto)map.get("visitorDto");
+		int mem_no=Integer.parseInt(request.getParameter("mem_no"));
+		
+		visitorDto.setMem_no(mem_no);
+		visitorDto.setVisitor_status_code(Constant.SYNB_YN_Y);
 		
 		int check=visitorDao.visitorInsert(visitorDto);
 		System.out.println("VisitorService writeOk check:"+check);
