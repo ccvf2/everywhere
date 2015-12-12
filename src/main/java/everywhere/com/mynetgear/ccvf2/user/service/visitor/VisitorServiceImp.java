@@ -73,13 +73,14 @@ public class VisitorServiceImp implements VisitorService {
 	@Override
 	public void visitorUpdate(ModelAndView mav) {
 		Map<String, Object> map=mav.getModelMap();
-		HttpServletRequest request=(HttpServletRequest) map.get("request");
+		HttpServletRequest request=(HttpServletRequest)map.get("request");
+		VisitorDto visitorDto=(VisitorDto)map.get("visitorDto");
 		
 		int visitor_no=Integer.parseInt(request.getParameter("visitor_no"));
 		int pageNumber=Integer.parseInt(request.getParameter("pageNumber"));
-		System.out.println("VisitorController update visitor_no:"+visitor_no+" & pageNumber:"+pageNumber);
+		System.out.println("VisitorController update visitor_no:"+visitor_no+"&pageNumber:"+pageNumber);
 		
-		VisitorDto visitorDto=visitorDao.visitorSelect(visitor_no);
+		visitorDto=visitorDao.visitorSelect(visitor_no);
 		System.out.println("VisitorController update visitorDto:"+visitorDto);
 		
 		mav.addObject("visitorDto", visitorDto);
@@ -91,7 +92,7 @@ public class VisitorServiceImp implements VisitorService {
 	@Override
 	public void visitorUpdateOk(ModelAndView mav) {
 		Map<String, Object> map=mav.getModelMap();
-		HttpServletRequest request=(HttpServletRequest) map.get("request");
+		HttpServletRequest request=(HttpServletRequest)map.get("request");
 		VisitorDto visitorDto=(VisitorDto)map.get("visitorDto");
 		
 		int check=visitorDao.visitorUpdate(visitorDto);
@@ -102,6 +103,28 @@ public class VisitorServiceImp implements VisitorService {
 		mav.addObject("check", check);
 		mav.addObject("pageNumber", pageNumber);
 		mav.setViewName("/user/visitor/visitorUpdateOk");
+	}
+
+	@Override
+	public void visitorDelete(ModelAndView mav) {
+		Map<String, Object> map=mav.getModelMap();
+		HttpServletRequest request=(HttpServletRequest)map.get("request");
+		VisitorDto visitorDto=(VisitorDto)map.get("visitorDto");
+		
+		int visitor_no=Integer.parseInt(request.getParameter("visitor_no"));
+		int pageNumber=Integer.parseInt(request.getParameter("pageNumber"));
+		System.out.println("VisitorController delete visitor_no:"+visitor_no+"&pageNumber:"+pageNumber);
+		
+		visitorDto=visitorDao.visitorSelect(visitor_no);
+		System.out.println("VisitorController delete visitorDto:"+visitorDto);
+		
+		visitorDto.setVisitor_status_code(Constant.SYNB_YN_N);
+		
+		int check=visitorDao.visitorDelete(visitorDto);
+		System.out.println("VisitorService delete check:"+check);
+		
+		mav.addObject("check", check);
+		mav.setViewName("/user/visitor/visitorDelete");
 	}
 
 }

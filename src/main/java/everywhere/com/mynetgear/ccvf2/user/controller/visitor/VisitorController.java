@@ -93,5 +93,24 @@ public class VisitorController {
 		
 		return mav;
 	}
+	
+	/**
+	 * @author 김준호
+	 * @createDate 2015. 12. 11.
+	 * @described 방명록삭제
+	 * @param request
+	 * @param response
+	 * @param visitorDto 
+	 * @return
+	 */
+	@RequestMapping(value="/user/visitor/visitorDelete.do", method=RequestMethod.GET)
+	public ModelAndView visitorDelete(HttpServletRequest request, HttpServletResponse response, VisitorDto visitorDto) {
+		ModelAndView mav=new ModelAndView();
+		mav.addObject("request", request);
+		mav.addObject("visitorDto", visitorDto);
+		visitorService.visitorDelete(mav);
+		
+		return mav;
+	}
 
 }
