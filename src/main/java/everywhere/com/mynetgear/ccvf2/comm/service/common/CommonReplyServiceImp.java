@@ -44,13 +44,20 @@ public class CommonReplyServiceImp implements CommonReplyService {
 		}
 		return replyList;
 	}
-	/* 
-	 * 공통댓글 삭제하기
-	 */
+	/** 공통댓글 삭제하기*/
 	@Override
 	public int deleteCommonReply(CommonReplyDto commonReplyDto) {
 		int result=0;
 		result=commonReplyDao.deleteCommonReply(commonReplyDto);
+		return result;
+	}
+	
+	
+	/** 공통댓글 등록하기.*/
+	@Override
+	public int inserCommonReply(CommonReplyDto commonReplyDto) {
+		int result=0;
+		result=commonReplyDao.insertCommonReply(commonReplyDto);
 		return result;
 	}
 

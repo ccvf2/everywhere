@@ -27,4 +27,12 @@ public interface CommonReplyDao {
 	 * @return
 	 */
 	public int deleteCommonReply(CommonReplyDto commonReplyDto);		
+	/**
+	 * @author 배성욱
+	 * @createDate 2015. 12. 12.
+	 * @described 댓글 등록
+	 * @param commonReplyDto
+	 * @return
+	 */
+	public int insertCommonReply(CommonReplyDto commonReplyDto);		
 }

@@ -21,6 +21,7 @@ import everywhere.com.mynetgear.ccvf2.comm.dao.common.CommonReplyDao;
 import everywhere.com.mynetgear.ccvf2.comm.dto.common.CommonReplyDto;
 import everywhere.com.mynetgear.ccvf2.comm.service.common.CommonReplyService;
 import everywhere.com.mynetgear.ccvf2.comm.service.common.CommonReplyServiceImp;
+import everywhere.com.mynetgear.ccvf2.comm.util.common.Constant;
 import everywhere.com.mynetgear.ccvf2.user.service.member.MemberService;
 
 /**
@@ -90,10 +91,11 @@ public class CommonReplyController {
 	@RequestMapping(value="/common/reply/replyWrite.ajax", method=RequestMethod.POST)
 	public void register(HttpServletRequest request, HttpServletResponse response,CommonReplyDto commonReplyDto) throws IOException {
 		//List<CommonReplyDto> list= commonReplyService.getListCommonReplyList(commonReplyDto);
-
+		int result = commonReplyService.inserCommonReply(commonReplyDto);
+		System.out.println(Constant.LOG_ID1+"ajax호출");
 		response.setContentType("application/html;charset=UTF-8");
 		PrintWriter out = response.getWriter();
-		out.print("<script>replyWriteComplate()</script>");
+		out.print(result);
 	}
 	
 	

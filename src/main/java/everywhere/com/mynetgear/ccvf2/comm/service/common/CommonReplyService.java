@@ -35,4 +35,12 @@ public interface CommonReplyService {
 	 * @return
 	 */
 	public int deleteCommonReply(CommonReplyDto commonReplyDto);
+	/**
+	 * @author 배성욱
+	 * @createDate 2015. 12. 12.
+	 * @described 공통댓글작성하기
+	 * @param commonReplyDto
+	 * @return
+	 */
+	public int inserCommonReply(CommonReplyDto commonReplyDto);
 }

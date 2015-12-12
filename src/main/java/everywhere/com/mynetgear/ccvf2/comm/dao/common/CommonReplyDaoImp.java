@@ -35,4 +35,10 @@ public class CommonReplyDaoImp implements CommonReplyDao {
 		return sqlTemplate.delete("delete_Common_reply",commonReplyDto);
 	}
 
+	/** 공통댓글 삭제하기 */
+	@Override
+	public int insertCommonReply(CommonReplyDto commonReplyDto) {
+		return sqlTemplate.insert("insert_Common_reply",commonReplyDto);
+	}
+
 }

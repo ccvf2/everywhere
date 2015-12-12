@@ -1,18 +1,25 @@
-/**
- * 
- */
+//viewIndex:화면뷰를 삭제할 ID,
 var viewIndex;
-//사용될 게시판 고유 코드
+
+//type_code:댓글이 있는 게시판고유코드,
 var type_code;
+
+//mem_no:회원고유번호,
 var mem_no;
+
+//defaultPhoto:화면에 뿌릴 기본 이미지 선택,
 var defaultPhoto;
+
+//item_no:댓글이 있는 게시판 글번호
 var item_no;
 
+
+// 댓글부분 초기화 매소드
 function commonReplyInit(type_code,mem_no,item_no,defaultPhotoPath){
 	this.type_code=type_code;
 	this.mem_no=mem_no;
 	this.item_no=item_no;
-	defaultPhotoPath=defaultPhotoPath.trim();
+	defaultPhotoPath=defaultPhotoPath;
 	this.defaultPhoto=defaultPhotoPath;
 	if(this.defaultPhoto=="" || this.defaultPhoto==null || this.defaultPhoto==undefined){
 		this.defaultPhoto="/assets/img/testimonials/user.jpg";
@@ -27,7 +34,7 @@ function commonReplyInit(type_code,mem_no,item_no,defaultPhotoPath){
 }
 
 
-//목록 불러오기 요청
+//목록 불러오기 AJAX요청
 function requestList() {
 	var requestURL="/common/reply/replylist.ajax?type_code="+this.type_code+"&item_no="+this.item_no+"&mem_no="+this.mem_no;
 	$(function() {
@@ -86,7 +93,7 @@ function getListSuccess(jsonData, status, xhr) {
 
 
 
-
+/*댓글삭제 AJAX요청 */
 //index:화면뷰를 삭제할 ID,
 //reply_no:댓글고유번호,
 //type_code:댓글이 있는 게시판고유코드,
@@ -125,7 +132,7 @@ function viewDelete(data) {
 function showViewWrite(){
 	$("#replyWriteArea").addClass("post-comment");
 	$("#replyWriteArea").append("<h3>Leave a Comment</h3>");
-	$("#replyWriteArea").append("<form id='replyWriteForm'  method='post' name='replyWrite'></form>");
+	$("#replyWriteArea").append("<form id='replyWriteForm'  method='post' name='replyWrite' onsubmit=\"return doReplyWrite(replyWrite)\"></form>");
 	$("#replyWriteForm").append("<input type='hidden' name='mem_no' value='"+this.mem_no+"'/>");
 	$("#replyWriteForm").append("<input type='hidden' name='type_code' value='"+this.type_code+"'/>");
 	$("#replyWriteForm").append("<input type='hidden' name='item_no' value='"+this.item_no+"'/>");
@@ -134,46 +141,43 @@ function showViewWrite(){
 	$("#replyWriteForm").append("<div class='row margin-bottom-20' id='formWrap'></div>");
 	$("#formWrap").append("<div class='col-md-11 col-md-offset-0' id='formWrapInner'></div>");
 	$("#formWrapInner").append("<textarea class='form-control' rows='8' name='reply_content'></textarea>");
-	$("#replyWriteForm").append("<p><button class='btn-u' onclick=\"doReplyWrite(replyWrite)\">Send Message</button></p>");
+	$("#replyWriteForm").append("<p><button class='btn-u'>Send Message</button></p>");
 }
 
 
 
+
+
+
 function doReplyWrite(form){
-	//alert(form);
-	var mem_no=form.mem_no.value;
+	$(".btn-u").css("display", "none");
+	alert(form);
 	var type_code=form.type_code.value;
 	var mem_no=form.mem_no.value;
 	var item_no=form.item_no.value;
 	var use_yn="Y";
 	var reply_content=form.reply_content.value;
-	alert(reply_content);
-	return false
-/*	$(function() {
-		$.ajax({
-					url : "/common/reply/replyWrite.ajax",
-					type : "POST",
-					data : {"reply_no":reply_no,"item_no":item_no,"mem_no":mem_no,"type_code":type_code},
-					dataType : "text",
-					success : viewDelete,
-					error : function() {
-						alert("삭제 실패");
-					}
-				})
-	})*/
+	this.type_code=type_code;
+	this.mem_no=mem_no;
+	this.item_no=item_no;
+	alert("typeCOde:"+type_code+"mem_no:"+mem_no+"user_yn:"+use_yn+"reply_content:"+reply_content);
+		$(function() {
+			$.ajax({
+						url : "/common/reply/replyWrite.ajax",
+						type : "POST",
+						data : {"item_no":item_no, "mem_no":mem_no, "type_code":type_code, "reply_content":reply_content},
+						dataType : "text",
+						success : function(){
+							$("#replyListArea").remove();
+							$("#replyWriteArea").remove();
+							$("#replywrap").append("<div id='replyListArea'></div>");
+							$("#replywrap").append("<div id='replyWriteArea'></div>");
+							commonReplyInit(type_code,mem_no,item_no,"");
+						},
+						error : function() {
+							alert("등록 실패");
+						}
+					})
+		})
+	return false;
 }
-
-
-
-
-
-
-//$("#replyListArea").remove();
-
-//글작성
-function replyWriteComplate(){
-}
-
-
-
-
