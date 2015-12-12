@@ -82,9 +82,9 @@ function getListSuccess(jsonData, status, xhr) {
 		$(".media-object").css("width", "54px");
 		$(".media-object").css("height", "54px");
 		
-		
+		/*
 		$("#spanId"+i).css("float", "right");
-		$("#spanId"+i).css("margin-right", "10px");
+		$("#spanId"+i).css("margin-right", "10px");*/
 		
 	}
 }
@@ -141,7 +141,7 @@ function showViewWrite(){
 	$("#replyWriteForm").append("<label>Message</label>");
 	$("#replyWriteForm").append("<div class='row margin-bottom-20' id='formWrap'></div>");
 	$("#formWrap").append("<div class='col-md-11 col-md-offset-0' id='formWrapInner'></div>");
-	$("#formWrapInner").append("<textarea class='form-control' rows='8' name='reply_content'></textarea>");
+	$("#formWrapInner").append("<textarea class='form-control' rows='8' name='reply_content' style='margin:0 auto'></textarea>");
 	$("#replyWriteForm").append("<p><button class='btn-u'>Send Message</button></p>");
 }
 

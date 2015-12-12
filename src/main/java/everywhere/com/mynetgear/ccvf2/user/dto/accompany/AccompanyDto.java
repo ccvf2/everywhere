@@ -9,7 +9,7 @@ import java.util.List;
  * @described 동행구하기 게시판 DTO
  * @reference class
  */
-public class AccompanyDto {
+public class AccompanyDto extends AccompanyDtoExt {
 	private int accompany_no;
 	private int mem_no;
 	private String mem_name;
@@ -19,7 +19,6 @@ public class AccompanyDto {
 	private String title;
 	private String content;
 	private String accompany_status_code;
-	private List<Object> reply;
 	private String use_yn;
 	private String gender_code;
 	private int hits;
@@ -70,14 +69,6 @@ public class AccompanyDto {
 
 	public void setContent(String content) {
 		this.content = content;
-	}
-
-	public List<Object> getReply() {
-		return reply;
-	}
-
-	public void setReply(List<Object> reply) {
-		this.reply = reply;
 	}
 
 	public String getAccompany_status_code() {
