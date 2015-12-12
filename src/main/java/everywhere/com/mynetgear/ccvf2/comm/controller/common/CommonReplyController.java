@@ -29,6 +29,12 @@ import everywhere.com.mynetgear.ccvf2.user.service.member.MemberService;
  * @described 클래스전체의 하는(큰)일을 적어주세요.
  * @reference class
  */
+/**
+ * @author 배성욱
+ * @createDate 2015. 12. 12.
+ * @described 클래스전체의 하는(큰)일을 적어주세요.
+ * @reference class
+ */
 @Controller
 public class CommonReplyController {
 	@Autowired
@@ -45,7 +51,7 @@ public class CommonReplyController {
 	 * @described 공통댓글목록
 	 */
 	@RequestMapping(value="/common/reply/replylist.ajax", method=RequestMethod.GET)
-	public void register(HttpServletRequest request, HttpServletResponse response,CommonReplyDto commonReplyDto) throws IOException {
+	public void replylist(HttpServletRequest request, HttpServletResponse response,CommonReplyDto commonReplyDto) throws IOException {
 		List<CommonReplyDto> list= commonReplyService.getListCommonReplyList(commonReplyDto);
 		JSONArray jsonArray = new JSONArray();
 		for (int i = 0; i < list.size(); i++) {
@@ -72,6 +78,29 @@ public class CommonReplyController {
 		PrintWriter out = response.getWriter();
 		out.print(test);
 	}
+	/**
+	 * @author 배성욱
+	 * @createDate 2015. 12. 12.
+	 * @described 공통댓글작성
+	 * @param request
+	 * @param response
+	 * @param commonReplyDto
+	 * @throws IOException
+	 */
+	@RequestMapping(value="/common/reply/replyWrite.ajax", method=RequestMethod.POST)
+	public void register(HttpServletRequest request, HttpServletResponse response,CommonReplyDto commonReplyDto) throws IOException {
+		//List<CommonReplyDto> list= commonReplyService.getListCommonReplyList(commonReplyDto);
+
+		response.setContentType("application/html;charset=UTF-8");
+		PrintWriter out = response.getWriter();
+		out.print("<script>replyWriteComplate()</script>");
+	}
+	
+	
+	
+	
+	
+	
 	/**
 	 * @author 배성욱
 	 * @param request 

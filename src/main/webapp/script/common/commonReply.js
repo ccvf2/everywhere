@@ -30,7 +30,6 @@ function commonReplyInit(type_code,mem_no,item_no,defaultPhotoPath){
 //목록 불러오기 요청
 function requestList() {
 	var requestURL="/common/reply/replylist.ajax?type_code="+this.type_code+"&item_no="+this.item_no+"&mem_no="+this.mem_no;
-	alert(requestURL);
 	$(function() {
 		$.ajax({
 					url : requestURL,
@@ -119,22 +118,61 @@ function viewDelete(data) {
 }
 
 
+	
+
+
 //글쓰기 화면 구성
 function showViewWrite(){
 	$("#replyWriteArea").addClass("post-comment");
 	$("#replyWriteArea").append("<h3>Leave a Comment</h3>");
-	$("#replyWriteArea").append("<form id='replyWriteForm' action=''></form>");
+	$("#replyWriteArea").append("<form id='replyWriteForm'  method='post' name='replyWrite'></form>");
+	$("#replyWriteForm").append("<input type='hidden' name='mem_no' value='"+this.mem_no+"'/>");
+	$("#replyWriteForm").append("<input type='hidden' name='type_code' value='"+this.type_code+"'/>");
+	$("#replyWriteForm").append("<input type='hidden' name='item_no' value='"+this.item_no+"'/>");
+	$("#replyWriteForm").append("<input type='hidden' name='use_yn' value='Y'/>");
 	$("#replyWriteForm").append("<label>Message</label>");
 	$("#replyWriteForm").append("<div class='row margin-bottom-20' id='formWrap'></div>");
 	$("#formWrap").append("<div class='col-md-11 col-md-offset-0' id='formWrapInner'></div>");
-	$("#formWrapInner").append("<textarea class='form-control' rows='8'></textarea>");
-	$("#replyWriteForm").append("<p><button class='btn-u' type='submit'>Send Message</button></p>");
+	$("#formWrapInner").append("<textarea class='form-control' rows='8' name='reply_content'></textarea>");
+	$("#replyWriteForm").append("<p><button class='btn-u' onclick=\"doReplyWrite(replyWrite)\">Send Message</button></p>");
+}
+
+
+
+function doReplyWrite(form){
+	//alert(form);
+	var mem_no=form.mem_no.value;
+	var type_code=form.type_code.value;
+	var mem_no=form.mem_no.value;
+	var item_no=form.item_no.value;
+	var use_yn="Y";
+	var reply_content=form.reply_content.value;
+	alert(reply_content);
+	return false
+/*	$(function() {
+		$.ajax({
+					url : "/common/reply/replyWrite.ajax",
+					type : "POST",
+					data : {"reply_no":reply_no,"item_no":item_no,"mem_no":mem_no,"type_code":type_code},
+					dataType : "text",
+					success : viewDelete,
+					error : function() {
+						alert("삭제 실패");
+					}
+				})
+	})*/
 }
 
 
 
 
 
+
+//$("#replyListArea").remove();
+
+//글작성
+function replyWriteComplate(){
+}
 
 
 
