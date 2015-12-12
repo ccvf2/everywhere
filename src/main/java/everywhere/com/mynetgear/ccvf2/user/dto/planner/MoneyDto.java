@@ -1,20 +1,21 @@
 package everywhere.com.mynetgear.ccvf2.user.dto.planner;
 
 public class MoneyDto {
-	private int moeny_no;
+	private int money_no;
 	private int planner_no;
 	private int item_no;
 	private int mem_no;
 	private int spot_no;
 	private String money_type_code;
 	private String money_currency_code;
-	private Double amount;
+	private String money_title;
+	private Double price;
 	
-	public int getMoeny_no() {
-		return moeny_no;
+	public int getMoney_no() {
+		return money_no;
 	}
-	public void setMoeny_no(int moeny_no) {
-		this.moeny_no = moeny_no;
+	public void setMoney_no(int money_no) {
+		this.money_no = money_no;
 	}
 	
 	public int getPlanner_no() {
@@ -59,19 +60,25 @@ public class MoneyDto {
 		this.money_currency_code = money_currency_code;
 	}
 	
-	public Double getAmount() {
-		return amount;
+	public String getMoney_title() {
+		return money_title;
 	}
-	public void setAmount(Double amount) {
-		this.amount = amount;
+	public void setMoney_title(String money_title) {
+		this.money_title = money_title;
+	}
+	
+	public Double getPrice() {
+		return price;
+	}
+	public void setPrice(Double price) {
+		this.price = price;
 	}
 	
 	@Override
 	public String toString() {
-		return "MoneyDto [moeny_no=" + moeny_no + ", planner_no=" + planner_no + ", item_no=" + item_no + ", mem_no="
+		return "MoneyDto [money_no=" + money_no + ", planner_no=" + planner_no + ", item_no=" + item_no + ", mem_no="
 				+ mem_no + ", spot_no=" + spot_no + ", money_type_code=" + money_type_code + ", money_currency_code="
-				+ money_currency_code + ", amount=" + amount + "]";
+				+ money_currency_code + ", money_title=" + money_title + ", price=" + price + "]";
 	}
-	
 	
 }
