@@ -7,5 +7,5 @@ package everywhere.com.mynetgear.ccvf2.admin.dto.member;
  * @reference class
  */
 public class AdminMemberDto {
-
+	
 }

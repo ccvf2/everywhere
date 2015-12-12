@@ -22,7 +22,6 @@ function readCityList(){
 			}
 			$("#selectCity").empty(); 
 			$("#selectCity").prepend(str);
-			
 		},
 		error:function(xhr, status, errorMsg){
 			alert(xhr+","+status+","+errorMsg);
@@ -30,10 +29,14 @@ function readCityList(){
 	})
 }
 
-function selectSpotList(){	
-	var countrycode = document.getElementById("selectCountry").value;
+function selectSpotList(city){
+	var countrycode = document.getElementById("selectCountry").value;	
 	var citycode = document.getElementById("selectCity").value;
 	var typecode = document.getElementById("selectType").value;
+	
+	if(city==true) {
+		readCityList();
+	}
 	var params = "country_code=" + countrycode + "&city_code=" + citycode + "&spot_type_code="+typecode;
 	var url = "/user/spot/selectSpotList.ajax?" + params;
 	$.ajax({
@@ -52,7 +55,7 @@ function spotListDisp(data){
 	if(data != ""){
 		var obj = JSON.parse(data);
 		for(i = 0; i < obj.spot.length; i++){
-			str+="<li><div><a href='/user/spot/spotReadPage.do?spot_no="+obj.spot[i].spot_no+"'> "+obj.spot[i].spot_name+"</a>"+obj.spot[i].spot_note+"</div></li>";	
+			str+="<li><div id="+ obj.spot[i].spot_no+"item draggable='true' ondragstart='drag(event)'><a href='/user/spot/spotReadPage.do?spot_no="+obj.spot[i].spot_no+"'> "+obj.spot[i].spot_name+"</a>"+obj.spot[i].spot_note+"</div></li>";	
 		}
 	}
 	$("#spotList").empty(); 

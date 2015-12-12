@@ -7,6 +7,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import everywhere.com.mynetgear.ccvf2.comm.util.common.Constant;
 import everywhere.com.mynetgear.ccvf2.user.dto.visitor.VisitorDto;
 
 /**
@@ -27,9 +28,10 @@ public class VisitorDaoImp implements VisitorDao {
 
 	@Override
 	public List<VisitorDto> getVisitorList(int startRow, int endRow) {
-		HashMap<String, Integer> hMap=new HashMap<String, Integer>();
+		HashMap<String, Object> hMap=new HashMap<String, Object>();
 		hMap.put("startRow", startRow);
 		hMap.put("endRow", endRow);
+		hMap.put("visitor_status_code", Constant.SYNB_YN_Y);
 		
 		return sqlTemplate.selectList("everywhere.com.mynetgear.ccvf2.user.mapper.visitor.visitorList", hMap);
 	}
@@ -37,6 +39,21 @@ public class VisitorDaoImp implements VisitorDao {
 	@Override
 	public int visitorInsert(VisitorDto visitorDto) {
 		return sqlTemplate.insert("everywhere.com.mynetgear.ccvf2.user.mapper.visitor.visitorInsert", visitorDto);
+	}
+
+	@Override
+	public VisitorDto visitorSelect(int visitor_no) {
+		return sqlTemplate.selectOne("everywhere.com.mynetgear.ccvf2.user.mapper.visitor.visitorSelect", visitor_no);
+	}
+
+	@Override
+	public int visitorUpdate(VisitorDto visitorDto) {
+		return sqlTemplate.update("everywhere.com.mynetgear.ccvf2.user.mapper.visitor.visitorUpdate", visitorDto);
+	}
+
+	@Override
+	public int visitorDelete(VisitorDto visitorDto) {
+		return sqlTemplate.update("everywhere.com.mynetgear.ccvf2.user.mapper.visitor.visitorDelete", visitorDto);
 	}
 
 }
