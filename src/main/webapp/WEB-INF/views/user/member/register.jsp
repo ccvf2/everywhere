@@ -58,6 +58,7 @@
 		form.mem_interest.value = str;
 	}
 </script>
+<c:import url="/WEB-INF/views/user/common/utilImport.jsp"/>
 </head>
 <body>
 	<button class="btn-u" data-toggle="modal" data-target="#responsive">회원가입</button>
@@ -70,8 +71,8 @@
 				</div>
 				<div class="modal-body">
 					<div class="row">
-						<div class="col-md-6">
-							<div align="center" style="width: 420px;">
+						<div class="col-md-12">
+						
 								<form name="memberForm" action="/user/member/register.do" method="post" onsubmit="return registerForm(this)">
 									<div align="left">
 										<label style="float: left; margin-right: 38px;">이메일</label> 
@@ -81,14 +82,14 @@
 										<div id="emailCheck"></div>
 									</div>
 
-									<div align="center" style="margin-right: 80px;">
+									<div align="left" style="margin-right: 80px;">
 										<h6>*로그인은 E-mail 주소로 합니다.</h6>
 									</div>
 
 									<div align="left">
 										<label style="margin-right: 16px;">비밀번호</label> 
 										<span>
-											<input type="password" name="mem_pwd" size="20" />
+											<input type="password" class="form-control" name="mem_pwd" size="20" />
 										</span>
 									</div>
 
@@ -103,28 +104,28 @@
 										<label>핸드폰번호</label> 
 										<span> 
 											<input type="text" name="mem_phone" class="form-control" size="20" /> 
-											<input type="button" value="번호인증" onclick="">
+											<input type="button" value="번호인증" class="btn-u btn-u-primary" onclick="">
 										</span>
 									</div>
 
 									<div align="left">
-										<label style="float: left; margin-right: 18px;">관심분야</label> 
+										<label>관심분야</label><br/>
 										<span>
-											<input type="checkbox" name="interestValue" value="혼자여행" /><font size="1">혼자여행 &nbsp;</font> 
-											<input type="checkbox" name="interestValue" value="단체여행" /><font size="1">단체여행&nbsp;</font> 
-											<input type="checkbox" name="interestValue" value="국내여행" /><font size="1">국내여행 &nbsp;</font> 
-											<input type="checkbox" name="interestValue" value="해외여행" /><font size="1">해외여행 &nbsp;</font> 
+											<label><input type="checkbox" name="interestValue" value="혼자여행" />혼자여행</label>
+											<label><input type="checkbox" name="interestValue" value="단체여행" />단체여행 </label>
+											<label><input type="checkbox" name="interestValue" value="국내여행" />국내여행</label>
+											<label><input type="checkbox" name="interestValue" value="해외여행" />해외여행 </label>
 											<input type="hidden" name="mem_interest" />
 										</span>
 									</div>
 									<hr />
 
 									<div align="left">
-										<input type="checkbox" name="" value="" />everywhere 이용 약관 동의(필수)<a href="" style="margin-left: 74px;">전문보기</a><br/> 
-										<input type="checkbox" name="" value="" />개인 정보 수집 및 이용 동의(필수)<a href="" style="margin-left: 65px;">전문보기</a>
+										<label><input type="checkbox" name="" value="이용약관" />everywhere 이용 약관 동의(필수)</label><a href="" style="margin-left: 74px;">전문보기</a><br/> 
+										<label><input type="checkbox" name="" value="개인정보" />개인 정보 수집 및 이용 동의(필수)</label><a href="" style="margin-left: 70px;">전문보기</a>
 									</div>
 								</form>
-							</div>
+							
 						</div>
 					</div>
 				</div>
@@ -135,7 +136,7 @@
 					
 					<div align="left">
 						<a href="">로그인</a> 
-						<input type="submit" value="회원가입" style="margin: 0px 0px 0px 210px; height: 30px; width: 70px;" class="btn-u btn-u-primary" />
+						<input type="submit" value="회원가입" style="margin: 0px 0px 0px 480px;" class="btn-u btn-u-primary" />
 					</div>
 				</div>
 			</div>
