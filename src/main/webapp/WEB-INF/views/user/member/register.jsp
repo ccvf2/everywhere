@@ -61,45 +61,45 @@
 </head>
 <body>
 	<div align="center">
-		<font size="2"><b>회원가입</b></font>
+		<font size="2"><b>이메일 주소로 회원가입</b></font>
 	</div>
 
 	<div align="center">
-		<form class="form_style" name="memberForm" action="/user/member/register.do" 
-			method="post" onsubmit="return registerForm(this)">
-			<div class="line">
-				<label class="title">이메일</label>
-				<span class="content">
+		<form name="memberForm" action="/user/member/register.do" method="post" onsubmit="return registerForm(this)">
+			<div>
+				<label>이메일</label>
+				<div>
 					<input type="text" name="mem_email" id="email"/>
-				</span>
-				<div id="emailCheck"></div>
+					<div id="emailCheck"></div>
+					<h4>*로그인은 E-mail 주소로 합니다.</h4>
+				</div>
 			</div>
 			
-			<div class="line">
-				<label  class="title">비밀번호</label>
-				<span class="content">
+			<div>
+				<label>비밀번호</label>
+				<span>
 					<input type="password" name="mem_pwd" />
 				</span>
 			</div>
 	
-			<div class="line">
-				<label class="title">이름</label>
-				<span class="content">
+			<div>
+				<label>이름</label>
+				<span>
 					<input type="text" name="mem_name"/>
 				</span>
 			</div>
 		
-			<div class="line">
-				<label class="title">핸드폰번호</label>
-				<span class="content">
+			<div>
+				<label>핸드폰번호</label>
+				<span>
 					<input type="text" name="mem_phone" size="11" />
 					<input type="button" value="번호인증하기" onclick="">
 				</span>
 			</div>
 	
-			<div class="line">
-				<label class="title">관심분야</label>
-				<span class="content">
+			<div>
+				<label>관심분야</label>
+				<span>
 					<input type="checkbox" name="interestValue" value="혼자여행"/> 혼자여행 &nbsp;
 					<input type="checkbox" name="interestValue" value="단체여행"/> 단체여행 &nbsp;
 					<input type="checkbox" name="interestValue" value="국내여행"/> 국내여행 &nbsp;
@@ -108,9 +108,8 @@
 				</span>
 			</div>
 			
-			<div class="line" style="width:498px; border-width:2px; text-align:center;">
+			<div style="width:498px; border-width:2px; text-align:center;">
 				<input type="submit" value="가입" />
-				<input type="reset" value="취소" />
 			</div>
 		</form>
 	</div>
