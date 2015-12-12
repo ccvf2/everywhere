@@ -33,28 +33,42 @@
                     </div>
                 </div>
                 
-                <div class="panel panel-default">
-				  <!-- Default panel contents -->
-				  <div class="panel-heading">Panel heading</div>
-				  <div class="panel-body">
-				    <p>...</p>
-				  </div>
-				
-				  <!-- Table -->
-				  <table class="table">
-				    ...
-				  </table>
+             
+                <div class="row">
+                	<div class="col-xs-6 col-md-4">
+						<div class="form-group">
+                          <label>계정 상태</label>
+                          <select class="form-control">
+                              <option>1</option>
+                              <option>2</option>
+                              <option>3</option>
+                              <option>4</option>
+                              <option>5</option>
+                          </select>
+                        </div>
+                        
+                        <div class="form-group">
+                          <label>계정 상태</label>
+                          <select class="form-control">
+                              <option>1</option>
+                              <option>2</option>
+                              <option>3</option>
+                              <option>4</option>
+                              <option>5</option>
+                          </select>
+                        </div>
+					</div>
+					<div class="col-xs-12 col-md-7">
+						<input type="text" class="form-control">
+	                    
+					</div>
+					<div class="col-xs-12 col-md-1">
+					<span class="input-group-btn"><button class="btn btn-default" type="button"><i class="fa fa-search"></i></button></span>
+	                    
+					</div>
+					
 				</div>
                 
-                
-                 <div class="row">
-                   <div class="col-lg-12">
-					<div class="form-group input-group">
-	                   <input type="text" class="form-control">
-	                   <span class="input-group-btn"><button class="btn btn-default" type="button"><i class="fa fa-search"></i></button></span>
-	               </div>
-           	   	</div>
-               </div>
 
                 <div class="row">
                     <div class="col-lg-12">
