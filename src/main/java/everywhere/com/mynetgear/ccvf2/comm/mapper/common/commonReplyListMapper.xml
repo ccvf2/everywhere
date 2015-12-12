@@ -8,8 +8,29 @@
 		<result property="code_name" column="CODE_NAME" />
 		<result property="code_value" column="CODE_VALUE" /> -->
 	</resultMap>
+	<!-- 공통댓글 작성하기 -->
+	<insert id="insert_Common_reply" parameterType="everywhere.com.mynetgear.ccvf2.comm.dto.commoncode.CommonCodeDto">
+		INSERT INTO TBL_COMMON_REPLY (
+			REPLY_NO
+			,MEM_NO
+			,TYPE_CODE
+			,ITEM_NO
+			,REPLY_CONTENT
+			,REPLY_WRITER_NAME
+			,REPLY_WRITE_DATE
+		)VALUES(
+			TBL_COMMON_REPLY_REPLY_NO_SEQ.nextval
+			,#{mem_no}
+			,#{type_code}
+			,#{item_no}
+			,#{reply_content}
+			,(SELECT MEM_NAME FROM TBL_MEMBER WHERE MEM_NO=#{mem_no})
+			,SYSDATE
+		)
+
+	</insert>
 	
-	<!-- 공통댓글 목록 삭제하기 -->
+	<!-- 공통댓글 목록 가져오기 -->
 	<select id="select_Common_list_reply" parameterType="everywhere.com.mynetgear.ccvf2.comm.dto.common.CommonReplyDto" resultType="everywhere.com.mynetgear.ccvf2.comm.dto.common.CommonReplyDto">
 		SELECT reply.REPLY_NO
 			, reply.MEM_NO
@@ -30,6 +51,9 @@
 			reply.ITEM_NO = #{item_no}
 		AND
 			reply.USE_YN = 'Y'
+		ORDER BY
+			REPLY_WRITE_DATE
+		ASC
 	</select>
 	
 	<!-- 공통댓글 1건 삭제 하기 -->

@@ -1,7 +1,7 @@
 /**
  * 
  */
-$(function() {
+$(function datepickerInit() {
 		$("#start_date").datepicker({
 			dateFormat : "yy-mm-dd",
 			defaultDate : "+1w",
