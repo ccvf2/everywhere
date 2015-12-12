@@ -100,29 +100,30 @@ function getListSuccess(jsonData, status, xhr) {
 //item_no:댓글이 있는 게시판 글번호
 function replyDelete(index, reply_no, item_no, type_code) {
 	this.viewIndex=index;
-	$(function() {
-		$.ajax({
-					url : "/common/reply/replydelete.ajax",
-					type : "POST",
-					data : {"reply_no":reply_no,"item_no":item_no,"mem_no":mem_no,"type_code":type_code},
-					dataType : "text",
-					success : viewDelete,
-					error : function() {
-						alert("삭제 실패");
+	if(confirm("정말로 삭제 하시겠습니까?")){
+		$(function() {
+			$.ajax({
+				url : "/common/reply/replydelete.ajax",
+				type : "POST",
+				data : {"reply_no":reply_no,"item_no":item_no,"mem_no":mem_no,"type_code":type_code},
+				dataType : "text",
+				success : function(data){
+					if(data>0){
+						alert("삭제 되었습니다.");
+						$("#"+index).remove();
+					}else{
+						alert("자신의 글만 삭제 가능합니다.");
+						return;
 					}
-				})
-	})
-}
-
-function viewDelete(data) {
-	if(data>0){
-	alert("삭제 되었습니다.");
-	$("#"+this.viewIndex).remove();
-	}else{
-		alert("자신의 글만 삭제 가능합니다.");
-		return;
+				},
+				error : function() {
+					alert("삭제 실패");
+				}
+			})
+		})
 	}
 }
+
 
 
 	
@@ -151,7 +152,6 @@ function showViewWrite(){
 
 function doReplyWrite(form){
 	$(".btn-u").css("display", "none");
-	alert(form);
 	var type_code=form.type_code.value;
 	var mem_no=form.mem_no.value;
 	var item_no=form.item_no.value;
@@ -160,7 +160,7 @@ function doReplyWrite(form){
 	this.type_code=type_code;
 	this.mem_no=mem_no;
 	this.item_no=item_no;
-	alert("typeCOde:"+type_code+"mem_no:"+mem_no+"user_yn:"+use_yn+"reply_content:"+reply_content);
+	/*alert("typeCOde:"+type_code+"mem_no:"+mem_no+"user_yn:"+use_yn+"reply_content:"+reply_content);*/
 		$(function() {
 			$.ajax({
 						url : "/common/reply/replyWrite.ajax",

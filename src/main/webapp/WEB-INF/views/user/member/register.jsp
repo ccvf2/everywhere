@@ -1,31 +1,31 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="UTF-8">
 <title>회원가입</title>
 <link rel="stylesheet" type="text/css" href="">
 <script type="text/javascript" src="/script/common/jquery-1.11.3.js"></script>
 <script type="text/javascript">
-	$(function() {	
-		$("#email").keyup(function(){
-			var email=$("#email").val();
-			if(email.length>=13) {
+	$(function() {
+		$("#email").keyup(function() {
+			var email = $("#email").val();
+			if (email.length >= 13) {
 				$.ajax({
-					url:"emailCheck.ajax?email="+email,
-					type:"get",
-					dataType:"text",
-					success:function(data){
+					url : "emailCheck.ajax?email=" + email,
+					type : "get",
+					dataType : "text",
+					success : function(data) {
 						//alert(data);
-						if(data==0) {
+						if (data == 0) {
 							$("#emailCheck").text("사용가능한 이메일입니다.");
 						} else {
 							$("#emailCheck").text("이미 사용중인 이메일입니다.");
 						}
 					},
-					error:function(xhr, status, errorMsg){
-						alert(xhr+","+status+","+errorMsg);
+					error : function(xhr, status, errorMsg) {
+						alert(xhr + "," + status + "," + errorMsg);
 					}
 				});
 			}
@@ -33,85 +33,113 @@
 	});
 </script>
 <script type="text/javascript">
-	var checked=false;
+	var checked = false;
 	function registerForm(form) {
-		
-		 //alert("ok1");
-		
-		var check=false;
-		var str="";
-		for(var i=0; i<form.interestValue.length;i++) {
-			if(form.interestValue[i].checked==true) {
+
+		//alert("ok1");
+
+		var check = false;
+		var str = "";
+		for (var i = 0; i < form.interestValue.length; i++) {
+			if (form.interestValue[i].checked == true) {
 				str += form.interestValue[i].value + ",";
-				check=true;
+				check = true;
 			}
-			
+
 		}
-		
-		 //alert(str);
-		if(check==false) {
+
+		//alert(str);
+		if (check == false) {
 			alert("하나라도 체크하세요");
 			form.interestValue[0].focus();
 			return false;
 		}
-		
-		form.mem_interest.value=str;
+
+		form.mem_interest.value = str;
 	}
 </script>
 </head>
 <body>
-	<div align="center">
-		<font size="2"><b>이메일 주소로 회원가입</b></font>
-	</div>
+	<button class="btn-u" data-toggle="modal" data-target="#responsive">회원가입</button>
+	<div class="modal fade" id="responsive" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h3 class="modal-title" id="myModalLabel4">이메일 주소로 회원가입</h3>
+				</div>
+				<div class="modal-body">
+					<div class="row">
+						<div class="col-md-6">
+							<div align="center" style="width: 420px;">
+								<form name="memberForm" action="/user/member/register.do" method="post" onsubmit="return registerForm(this)">
+									<div align="left">
+										<label style="float: left; margin-right: 38px;">이메일</label> 
+										<span>
+											<input type="text" class="form-control" name="mem_email" id="email" size="20" />
+										</span>
+										<div id="emailCheck"></div>
+									</div>
 
-	<div align="center">
-		<form name="memberForm" action="/user/member/register.do" method="post" onsubmit="return registerForm(this)">
-			<div>
-				<label>이메일</label>
-				<div>
-					<input type="text" name="mem_email" id="email"/>
-					<div id="emailCheck"></div>
-					<h4>*로그인은 E-mail 주소로 합니다.</h4>
+									<div align="center" style="margin-right: 80px;">
+										<h6>*로그인은 E-mail 주소로 합니다.</h6>
+									</div>
+
+									<div align="left">
+										<label style="margin-right: 16px;">비밀번호</label> 
+										<span>
+											<input type="password" name="mem_pwd" size="20" />
+										</span>
+									</div>
+
+									<div align="left">
+										<label style="margin-right: 48px;">이름</label> 
+										<span> 
+											<input type="text" class="form-control" name="mem_name" size="20" />
+										</span>
+									</div>
+
+									<div align="left">
+										<label>핸드폰번호</label> 
+										<span> 
+											<input type="text" name="mem_phone" class="form-control" size="20" /> 
+											<input type="button" value="번호인증하기" onclick="">
+										</span>
+									</div>
+
+									<div align="left">
+										<label style="float: left; margin-right: 18px;">관심분야</label> 
+										<span>
+											<input type="checkbox" name="interestValue" value="혼자여행" /><font size="1">혼자여행 &nbsp;</font> 
+											<input type="checkbox" name="interestValue" value="단체여행" /><font size="1">단체여행&nbsp;</font> 
+											<input type="checkbox" name="interestValue" value="국내여행" /><font size="1">국내여행 &nbsp;</font> 
+											<input type="checkbox" name="interestValue" value="해외여행" /><font size="1">해외여행 &nbsp;</font> 
+											<input type="hidden" name="mem_interest" />
+										</span>
+									</div>
+									<hr />
+
+									<div align="left">
+										<input type="checkbox" name="" value="" />everywhere 이용 약관 동의(필수)<a href="" style="margin-left: 74px;">전문보기</a><br/> 
+										<input type="checkbox" name="" value="" />개인 정보 수집 및 이용 동의(필수)<a href="" style="margin-left: 65px;">전문보기</a>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<div align="left">
+						<h3>이미 아이디가 있습니까?</h3>
+					</div>
+					
+					<div align="left">
+						<a href="">로그인</a> 
+						<input type="submit" value="회원가입" style="margin: 0px 0px 0px 210px; height: 30px; width: 70px;" class="btn-u btn-u-primary" />
+					</div>
 				</div>
 			</div>
-			
-			<div>
-				<label>비밀번호</label>
-				<span>
-					<input type="password" name="mem_pwd" />
-				</span>
-			</div>
-	
-			<div>
-				<label>이름</label>
-				<span>
-					<input type="text" name="mem_name"/>
-				</span>
-			</div>
-		
-			<div>
-				<label>핸드폰번호</label>
-				<span>
-					<input type="text" name="mem_phone" size="11" />
-					<input type="button" value="번호인증하기" onclick="">
-				</span>
-			</div>
-	
-			<div>
-				<label>관심분야</label>
-				<span>
-					<input type="checkbox" name="interestValue" value="혼자여행"/> 혼자여행 &nbsp;
-					<input type="checkbox" name="interestValue" value="단체여행"/> 단체여행 &nbsp;
-					<input type="checkbox" name="interestValue" value="국내여행"/> 국내여행 &nbsp;
-					<input type="checkbox" name="interestValue" value="해외여행"/> 해외여행 &nbsp;
-					<input type="hidden" name="mem_interest"/>
-				</span>
-			</div>
-			
-			<div style="width:498px; border-width:2px; text-align:center;">
-				<input type="submit" value="가입" />
-			</div>
-		</form>
+		</div>
 	</div>
 </body>
 </html>
