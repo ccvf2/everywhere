@@ -19,7 +19,23 @@
 		<![CDATA[
 			select * from (select rownum rnum, a.* from
 						  (select * from tbl_visitor order by visitor_no desc) a)
-			where rnum >= #{startRow} and rnum <= #{endRow}
+			where rnum >= #{startRow} and rnum <= #{endRow} and visitor_status_code=#{visitor_status_code}
 		]]>
 	</select>
+	
+	<insert id="visitorInsert" parameterType="everywhere.com.mynetgear.ccvf2.user.dto.visitor.VisitorDto">
+		insert into tbl_visitor values(tbl_visitor_visitor_no_seq.nextval, #{mem_no}, #{visitor_content}, sysdate, #{visitor_status_code})
+	</insert>
+	
+	<select id="visitorSelect" parameterType="int" resultMap="visitorDto">
+		select * from tbl_visitor where visitor_no=#{visitor_no}
+	</select>
+	
+	<update id="visitorUpdate" parameterType="everywhere.com.mynetgear.ccvf2.user.dto.visitor.VisitorDto">
+		update tbl_visitor set visitor_content=#{visitor_content} where visitor_no=#{visitor_no} 
+	</update>
+	
+	<update id="visitorDelete" parameterType="everywhere.com.mynetgear.ccvf2.user.dto.visitor.VisitorDto">
+		update tbl_visitor set visitor_status_code=#{visitor_status_code} where visitor_no=#{visitor_no}
+	</update>
 </mapper>

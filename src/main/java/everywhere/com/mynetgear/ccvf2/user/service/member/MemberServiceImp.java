@@ -63,7 +63,7 @@ public class MemberServiceImp implements MemberService {
 		
 		memberDto.setMem_level_code(Constant.MEMBER_LEVEL_USER);
 		memberDto.setMem_p_status_code(Constant.MEMBER_P_STATUS_ACTIVE);
-		memberDto.setMem_profile_photo("null");
+		memberDto.setMem_profile_photo(Constant.SYNB_NULL);
 		memberDto.setMem_status_code(Constant.MEMBER_STATUS_LOCK);
 		System.out.println("memberService registerOk memberDto:"+memberDto.toString());
 		

@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.ModelAndView;
 
+import everywhere.com.mynetgear.ccvf2.comm.util.common.Constant;
 import everywhere.com.mynetgear.ccvf2.user.dao.visitor.VisitorDao;
 import everywhere.com.mynetgear.ccvf2.user.dto.visitor.VisitorDto;
 
@@ -58,10 +59,72 @@ public class VisitorServiceImp implements VisitorService {
 	public void visitorWriteOk(ModelAndView mav) {
 		Map<String, Object> map=mav.getModelMap();
 		VisitorDto visitorDto=(VisitorDto)map.get("visitorDto");
+		String mem_no="64";
+		visitorDto.setMem_no(Integer.parseInt(mem_no));
+		visitorDto.setVisitor_status_code(Constant.SYNB_YN_Y);
 		
 		int check=visitorDao.visitorInsert(visitorDto);
 		System.out.println("VisitorService writeOk check:"+check);
 		
+		mav.addObject("check", check);
+		mav.setViewName("/user/visitor/visitorWriteOk");
+	}
+
+	@Override
+	public void visitorUpdate(ModelAndView mav) {
+		Map<String, Object> map=mav.getModelMap();
+		HttpServletRequest request=(HttpServletRequest)map.get("request");
+		VisitorDto visitorDto=(VisitorDto)map.get("visitorDto");
+		
+		int visitor_no=Integer.parseInt(request.getParameter("visitor_no"));
+		int pageNumber=Integer.parseInt(request.getParameter("pageNumber"));
+		System.out.println("VisitorController update visitor_no:"+visitor_no+"&pageNumber:"+pageNumber);
+		
+		visitorDto=visitorDao.visitorSelect(visitor_no);
+		System.out.println("VisitorController update visitorDto:"+visitorDto);
+		
+		mav.addObject("visitorDto", visitorDto);
+		mav.addObject("pageNumber", pageNumber);
+		mav.setViewName("/user/visitor/visitorUpdate");
+		
+	}
+
+	@Override
+	public void visitorUpdateOk(ModelAndView mav) {
+		Map<String, Object> map=mav.getModelMap();
+		HttpServletRequest request=(HttpServletRequest)map.get("request");
+		VisitorDto visitorDto=(VisitorDto)map.get("visitorDto");
+		
+		int check=visitorDao.visitorUpdate(visitorDto);
+		System.out.println("VisitorService updateOk check:"+check);
+		
+		int pageNumber=Integer.parseInt(request.getParameter("pageNumber"));
+		
+		mav.addObject("check", check);
+		mav.addObject("pageNumber", pageNumber);
+		mav.setViewName("/user/visitor/visitorUpdateOk");
+	}
+
+	@Override
+	public void visitorDelete(ModelAndView mav) {
+		Map<String, Object> map=mav.getModelMap();
+		HttpServletRequest request=(HttpServletRequest)map.get("request");
+		VisitorDto visitorDto=(VisitorDto)map.get("visitorDto");
+		
+		int visitor_no=Integer.parseInt(request.getParameter("visitor_no"));
+		int pageNumber=Integer.parseInt(request.getParameter("pageNumber"));
+		System.out.println("VisitorController delete visitor_no:"+visitor_no+"&pageNumber:"+pageNumber);
+		
+		visitorDto=visitorDao.visitorSelect(visitor_no);
+		System.out.println("VisitorController delete visitorDto:"+visitorDto);
+		
+		visitorDto.setVisitor_status_code(Constant.SYNB_YN_N);
+		
+		int check=visitorDao.visitorDelete(visitorDto);
+		System.out.println("VisitorService delete check:"+check);
+		
+		mav.addObject("check", check);
+		mav.setViewName("/user/visitor/visitorDelete");
 	}
 
 }
