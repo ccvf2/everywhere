@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
+<meta charset="utf-8">
 <title>회원가입</title>
 <link rel="stylesheet" type="text/css" href="">
 <script type="text/javascript" src="/script/common/jquery-1.11.3.js"></script>
@@ -103,7 +103,7 @@
 										<label>핸드폰번호</label> 
 										<span> 
 											<input type="text" name="mem_phone" class="form-control" size="20" /> 
-											<input type="button" value="번호인증하기" onclick="">
+											<input type="button" value="번호인증" onclick="">
 										</span>
 									</div>
 
