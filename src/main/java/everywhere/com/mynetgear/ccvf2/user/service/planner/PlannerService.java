@@ -14,4 +14,6 @@ public interface PlannerService {
 
 	public void updatePlannerOk(ModelAndView mav);
 
+	public void deletePlanner(ModelAndView mav);
+
 }
