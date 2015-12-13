@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -89,7 +90,10 @@ jQuery(document).ready(function() {
 	            <div class="container">
 	                <ul class="nav navbar-nav">
 	                    <!-- Home -->
-	                    <li class="dropdown active">
+	                    <c:set var="path" value="<%= request.getRequestURI().replaceAll(\"/WEB-INF/view\", \"\") %>" />
+	                  	<c:set var="active" value=" active" />
+	                  	
+	                    <li class="dropdown <c:if test="${ fn:startsWith(path, '/user/member')}">${ on }</c:if>">
 	                        <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">
 	                            Home
 	                        </a>
@@ -447,7 +451,7 @@ jQuery(document).ready(function() {
 	                    <!-- End Pages -->
 	
 	                    <!-- Blog -->
-	                    <li class="dropdown">
+	                    <li class="dropdown<c:if test="${ fn:startsWith(path, '/user/member')}">${ on }</c:if>">
 	                        <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">
 	                            Blog
 	                        </a>
@@ -575,7 +579,7 @@ jQuery(document).ready(function() {
 	                    <!-- End Portfolio -->
 	
 	                    <!-- Features -->
-	                    <li class="dropdown">
+	                    <li class="dropdown<c:if test="${ fn:startsWith(path, '/user/member')}">${ on }</c:if>">
 	                        <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">
 	                            Features
 	                        </a>
@@ -637,7 +641,7 @@ jQuery(document).ready(function() {
 	                    <!-- End Features -->
 	
 	                    <!-- Shortcodes -->
-	                    <li class="dropdown mega-menu-fullwidth">
+	                    <li class="dropdown mega-menu-fullwidth<c:if test="${ fn:startsWith(path, '/user/member')}">${ on }</c:if>">
 	                        <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">
 	                            Shortcodes
 	                        </a>
@@ -734,7 +738,7 @@ jQuery(document).ready(function() {
 	                    <!-- End Shortcodes -->
 	
 	                    <!-- Misc Pages -->
-	                    <li class="dropdown">
+	                    <li class="dropdown<c:if test="${ fn:startsWith(path, '/user/member')}">${ on }</c:if>">
 	                        <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">
 	                            Misc
 	                        </a>
