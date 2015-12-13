@@ -29,6 +29,7 @@
 				<value>classpath:/everywhere/com/mynetgear/ccvf2/comm/mapper/common/commonReplyListMapper.xml</value>
 				<value>classpath:/everywhere/com/mynetgear/ccvf2/user/mapper/planner/plannerMapper.xml</value>
 				<value>classpath:/everywhere/com/mynetgear/ccvf2/admin/mapper/member/adminMemberMapper.xml</value>
+				<value>classpath:/everywhere/com/mynetgear/ccvf2/user/mapper/message/messageMapper.xml</value>
 			</list>
 		</property>
 	</bean>
