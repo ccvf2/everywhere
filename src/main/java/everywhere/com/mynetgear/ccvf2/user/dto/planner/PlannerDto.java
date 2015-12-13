@@ -7,7 +7,7 @@ public class PlannerDto {
 	private int mem_no;
 	private String planner_ba_code;
 	private String title;
-	private String attach_fiel;
+	private String attach_file;
 	private String memo;
 	private Date start_date;
 	private Date end_date;
@@ -37,11 +37,11 @@ public class PlannerDto {
 	public void setTitle(String title) {
 		this.title = title;
 	}
-	public String getAttach_fiel() {
-		return attach_fiel;
+	public String getAttach_file() {
+		return attach_file;
 	}
-	public void setAttach_fiel(String attach_fiel) {
-		this.attach_fiel = attach_fiel;
+	public void setAttach_file(String attach_file) {
+		this.attach_file = attach_file;
 	}
 	public String getMemo() {
 		return memo;
@@ -77,7 +77,7 @@ public class PlannerDto {
 	@Override
 	public String toString() {
 		return "PlannerDto [planner_no=" + planner_no + ", mem_no=" + mem_no + ", planner_ba_code=" + planner_ba_code
-				+ ", title=" + title + ", attach_fiel=" + attach_fiel + ", memo=" + memo + ", start_date=" + start_date
+				+ ", title=" + title + ", attach_file=" + attach_file + ", memo=" + memo + ", start_date=" + start_date
 				+ ", end_date=" + end_date + ", reg_date=" + reg_date + ", use_yn=" + use_yn + "]";
 	}
 }
