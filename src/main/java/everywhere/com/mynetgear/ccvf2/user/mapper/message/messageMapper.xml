@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="everywhere.com.mynetgear.ccvf2.user.mapper.message.messageMapper">
+	
+	<!-- 1:1 대화내용 -->
+	<select id="select_list_parson_Talk" parameterType="int" resultType="everywhere.com.mynetgear.ccvf2.user.dto.message.MessageDto">
+		SELECT * FROM TBL_MESSAGE where MSG_GROUP_NO=#{value} ORDER BY SEND_TIME ASC
+	</select>
+	
+	<!-- 대화함 목록 -->
+	<select id="select_list_messageBox" parameterType="int" resultType="everywhere.com.mynetgear.ccvf2.user.dto.message.MessageDto">
+		SELECT
+			uu.*
+			,(SELECT mem_name FROM tbl_member WHERE mem_no=uu.send_mem_no) AS send_mem_name
+			,(SELECT mem_name FROM tbl_member WHERE mem_no=uu.recv_mem_no) AS recv_mem_name
+			,(SELECT COUNT(*) FROM TBL_MESSAGE WHERE RECV_MEM_NO=#{value} AND RECV_TIME IS NULL) AS unreadCount
+		FROM 
+			tbl_message uu
+			, (SELECT
+					A.msg_group_no
+					, MAX(A.send_time)send_time
+				FROM
+					(SELECT * FROM tbl_message WHERE send_mem_no=#{value} OR recv_mem_no=#{value} ) A
+		  		GROUP BY
+		  			A.msg_group_no
+		  	)zz
+		WHERE
+			zz.msg_group_no=uu.msg_group_no
+		AND
+			zz.send_time=uu.send_time
+		AND
+			uu.recv_remove_time IS NULL
+		ORDER BY
+			uu.send_time
+		DESC
+			, uu.recv_time
+		DESC
+	</select>
+	
+	<!-- 메세지 보내기 -->
+	<insert id="insert_message_send" parameterType="everywhere.com.mynetgear.ccvf2.user.dto.message.MessageDto">
+		INSERT INTO
+			TBL_MESSAGE(
+				  MSG_NO
+				, SEND_MEM_NO
+				, MSG_GROUP_NO
+				, RECV_MEM_NO
+				, MESSAGE
+				, SEND_TIME
+		) VALUES(
+			TBL_MESSAGE_MSG_NO_SEQ.nextval
+			,#{send_mem_no}
+			,#{msg_group_no}
+			,#{recv_mem_no}
+			,#{message}
+			,SYSDATE
+		)
+	</insert>
+	
+	<!-- 대화함 그룹번호 생성 시 -->
+	<select id="get_message_group_number" resultType="int">
+		SELECT TBL_MESSAGE_MSG_GROUP_NO_SEQ.NEXTVAL FROM DUAL
+	</select>
+	
+	
+	<!-- 읽음으로 표시 -->
+	<update id="update_parson_Talk" parameterType="everywhere.com.mynetgear.ccvf2.user.dto.message.MessageDto">
+		UPDATE
+			tbl_message
+		SET
+			recv_time=SYSDATE
+		WHERE
+			msg_group_no=#{msg_group_no}
+		AND
+			recv_mem_no=#{recv_mem_no}
+		AND
+			recv_time IS NULL
+	</update>
+	
+	
+</mapper>

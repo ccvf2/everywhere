@@ -39,6 +39,9 @@
 
  <hr/>
  <a href="/user/main/main.do">유저 메인 페이지</a>
+<hr/>
+ <a href="/user/message/messageTalkList.do?recv_mem_no=74&msg_group_no=99999">1:1대화함</a>
+ <a href="/user/message/messageBox.do?mem_no=74">메세지 박스</a>
 
 </body>
 </html>
