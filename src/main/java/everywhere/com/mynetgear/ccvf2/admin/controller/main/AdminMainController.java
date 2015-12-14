@@ -53,11 +53,6 @@ public class AdminMainController {
 		return mav;
 	}
 
-	
-	
-	
-	
-
 	@RequestMapping(value="/admin/commoncode/code.do", method=RequestMethod.GET)
 	public ModelAndView showCode() {
 		ModelAndView mav= new ModelAndView();
@@ -73,9 +68,6 @@ public class AdminMainController {
 		commonCodeService.callCodeSetting(mav);
 		return mav;
 	}
-	
-	
-	
 	
 	/** 파일 테스트 
 	 * @throws Exception */
@@ -107,7 +99,6 @@ public class AdminMainController {
 		String fileName = request.getParameter("fileName");
 		CommonFileIOService dsdr= new CommonFileIOServiceImp();
 		if(StringUtils.equals(param, Constant.SYNB_CRUD_C)){
-			
 			CommonFileIODto commonFileIODto= dsdr.requestWriteFileAndDTO(request, "file", tempPath);
 			//CommonFileIODto가 null 이면 파일이 작성되지 않은것이다.
 			if(commonFileIODto!=null){
@@ -115,13 +106,10 @@ public class AdminMainController {
 				commonFileIODto.setWrite_no(1);
 				commonFileIOService.insertFileInfo(commonFileIODto);
 			}
-			
 		}else{
 			boolean dtoa= dsdr.requestDeleteFile(savePath, fileName);
 			System.out.println(dtoa);
 		}
-		
-		
 		return null;
 	}
 	

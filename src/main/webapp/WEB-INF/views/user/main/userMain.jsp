@@ -22,8 +22,8 @@
 	
 	    <!--=== Slider ===-->
 	    <div class="slider-inner">
-	        <div id="da-slider" class="da-slider">
-<!-- 	            <div class="da-slide">
+	        <div id="da-slider" class="da-slider" >
+ 	            <div class="da-slide">
 	                <h2><i>CLEAN &amp; FRESH</i> <br /> <i>FULLY RESPONSIVE</i> <br /> <i>DESIGN</i></h2>
 	                <p><i>Lorem ipsum dolor amet</i> <br /> <i>tempor incididunt ut</i> <br /> <i>veniam omnis </i></p>
 	                <div class="da-img"><img class="img-responsive" src="/assets/plugins/parallax-slider/img/1.png" alt=""></div>
@@ -38,20 +38,19 @@
 	            <div class="da-slide">
 	                <h2><i>USING BEST WEB</i> <br /> <i>SOLUTIONS WITH</i> <br /> <i>HTML5/CSS3</i></h2>
 	                <p><i>Lorem ipsum dolor amet</i> <br /> <i>tempor incididunt ut</i> <br /> <i>veniam omnis </i></p>
-	                <div class="da-img"><img src="assets/plugins/parallax-slider/img/html5andcss3.png" alt="image01" /></div>
+	                <div class="da-img"><img src="/assets/plugins/parallax-slider/img/html5andcss3.png" alt="image01" /></div>
 	            </div>
 	            <div class="da-arrows">
 	                <span class="da-arrows-prev"></span>
 	                <span class="da-arrows-next"></span>
-	            </div> -->
+	            </div>
 	        </div>
 	    </div>
 	    <!--/slider-->
-	    
 	    <!--=== End Slider ===-->
 	
 	    <!--=== Purchase Block ===-->
-<!-- 	    <div class="purchase">
+<!--  	    <div class="purchase">
 	        <div class="container">
 	            <div class="row">
 	                <div class="col-md-9 animated fadeInLeft">
@@ -63,7 +62,7 @@
 	                </div>
 	            </div>
 	        </div>
-	    </div>/row -->
+	    </div> -->
 	    <!-- End Purchase Block -->
 	
 	    <!--=== Content Part ===-->
@@ -73,55 +72,47 @@
 	            <p>Creative freedom matters user experience, we minimize the gap between technology and its audience.</p>
 	        </div> -->
 	
-	        <div class="margin-bottom-40"></div>
+	   <div class="margin-bottom-40">
+			영역0
+	   </div>
 	
 	        <!-- Info Blocks -->
 	        <div class="row">
-	            <div class="col-sm-4 info-blocks">
-	                <i class="icon-info-blocks fa fa-bell-o"></i>
-	                <div class="info-blocks-in">
-	                    <h3>FREE Updates</h3>
-	                    <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum animi..</p>
-	                </div>
-	            </div>
-	            <div class="col-sm-4 info-blocks">
-	                <i class="icon-info-blocks fa fa-hdd-o"></i>
-	                <div class="info-blocks-in">
-	                    <h3>1000+ Icons</h3>
-	                    <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum animi..</p>
-	                </div>
-	            </div>
-	            <div class="col-sm-4 info-blocks">
-	                <i class="icon-info-blocks fa fa-lightbulb-o"></i>
-	                <div class="info-blocks-in">
-	                    <h3>Creative Ideas</h3>
-	                    <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum animi..</p>
-	                </div>
-	            </div>
+			영역1
+			<br/>
+			<br/>
+			<br/>
+			<br/>
+			<br/>
+			<br/>
+			<br/>
+			<br/>
+			<br/>
+			<br/>
+			<br/>
+			<br/>
+			<br/>
+			<br/>
+			<br/>
+			<br/>
+			<br/>
+			<br/>
+			<br/>
+			<br/>
+			<br/>
+			<br/>
+			<br/>
+			<br/>
+			<br/>
+			<br/>
+			<br/>
+			<br/>
+			<br/>
+			<br/>
 	        </div>
 	
 	        <div class="row margin-bottom-60">
-	            <div class="col-sm-4 info-blocks">
-	                <i class="icon-info-blocks fa fa-code"></i>
-	                <div class="info-blocks-in">
-	                    <h3>SEO Ready</h3>
-	                    <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum animi..</p>
-	                </div>
-	            </div>
-	            <div class="col-sm-4 info-blocks">
-	                <i class="icon-info-blocks fa fa-compress"></i>
-	                <div class="info-blocks-in">
-	                    <h3>Fully Responsive</h3>
-	                    <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum animi..</p>
-	                </div>
-	            </div>
-	            <div class="col-sm-4 info-blocks">
-	                <i class="icon-info-blocks fa fa-html5"></i>
-	                <div class="info-blocks-in">
-	                    <h3>CSS3 + HTML5</h3>
-	                    <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum animi..</p>
-	                </div>
-	            </div>
+				영역2
 	        </div>
 	        <!-- End Info Blocks -->
 	
@@ -131,7 +122,6 @@
 	
 	    <!--=== Footer Version 1 ===-->
 	    <div class="footer-v1">
-			발바닥
 			<c:import url="/WEB-INF/views/user/common/footer.jsp"/>
 	    </div>
 	    <!--=== End Footer Version 1 ===-->
