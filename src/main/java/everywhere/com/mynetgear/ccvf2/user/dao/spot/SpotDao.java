@@ -13,6 +13,7 @@ public interface SpotDao {
 	 * @described 국가코드 목록 가져오기
 	 * @return
 	 */
+	public int getSpotNextSeq();
 	public int insertSpot(SpotDto spotDto);
 	public List<SpotDto> getSpotAllList();
 	public List<SpotDto> getSpotList(SpotDto spotDto);
