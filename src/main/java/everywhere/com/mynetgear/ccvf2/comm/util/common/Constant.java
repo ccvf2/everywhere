@@ -104,5 +104,6 @@ public class Constant {
 	public static final String ACCOMPANY_TYPE_COMPLETED = "H0002";
 	/**여행동행구하기 게시글 종류: 공지*/
 	public static final String ACCOMPANY_TYPE_NOTICE = "H0003";
-	
+
+	public static final String FILE_TYPE_SPOT = "F0001";
 }

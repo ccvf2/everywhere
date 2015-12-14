@@ -28,7 +28,9 @@
 		<c:set var="day" value="${item.item_order / 10100}" />
 		<fmt:formatNumber value="${day}" type="number" maxFractionDigits="0"/> /		
 		<c:set var="order" value="${item.item_order%100}"/> ${order} <br/>
-		${item.note} <br/>
+		명소 이름 : ${item.spot.spot_name} <br/>
+		명소 설명 : ${item.spot.spot_note } <br/>
+		내 메모 : ${item.note} <br/>
 		내별점 : ${item.item_star_score} <br/>
 		<c:if test="${!empty item.start_time}">
 			시작시간 : ${item.start_time} <br/>
@@ -42,7 +44,7 @@
 		</c:forEach>
 		<br/>
 	</c:forEach>
-	`<br/><br/>
+	<br/><br/>
 <input type="button" value="modify" onclick="location.href='/user/planner/writePlanner.do?planner_no=${plannerDto.planner_no}'">
 <input type="button" value="delete" onclick="location.href='/user/planner/deletePlanner.do?planner_no=${plannerDto.planner_no}'">
 </body>

@@ -2,6 +2,7 @@ package everywhere.com.mynetgear.ccvf2.user.service.spot;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -11,15 +12,16 @@ import javax.servlet.http.HttpServletResponse;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpRequest;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
-import everywhere.com.mynetgear.ccvf2.comm.dao.commoncode.CommonCodeDao;
-import everywhere.com.mynetgear.ccvf2.comm.dto.common.CommonReplyDto;
+import everywhere.com.mynetgear.ccvf2.comm.dao.common.CommonFileIODao;
+import everywhere.com.mynetgear.ccvf2.comm.dto.common.CommonFileIODto;
 import everywhere.com.mynetgear.ccvf2.comm.dto.commoncode.CommonCodeDto;
+import everywhere.com.mynetgear.ccvf2.comm.service.common.CommonFileIOService;
 import everywhere.com.mynetgear.ccvf2.comm.service.commoncode.CommonCodeService;
+import everywhere.com.mynetgear.ccvf2.comm.util.common.Constant;
 import everywhere.com.mynetgear.ccvf2.user.dao.spot.SpotDao;
 import everywhere.com.mynetgear.ccvf2.user.dto.spot.SpotDto;
 
@@ -30,17 +32,25 @@ public class SpotServiceImp implements SpotService{
 	private SpotDao spotDao;
 	
 	@Autowired
-	private CommonCodeService commonCodeService;	
-
+	private CommonCodeService commonCodeService;
+	
+	@Autowired
+	private CommonFileIOService commonFileIOService;
+	@Autowired
+	private CommonFileIODao commonFileIoDao;
+	
+	@Value("${attach.spot.path}")
+	private String spotPath;
+	
 	@Override
 	public void addSpotPage(ModelAndView mav) {		
 		List<CommonCodeDto> countryList = commonCodeService.getListCodeGroup("B0000");
 		
 		List<CommonCodeDto> spotTypeList = commonCodeService.getListCodeGroup("T0001");
-		
+		System.out.println(spotPath);
 		mav.addObject("countryList", countryList);
 		mav.addObject("spotTypeList", spotTypeList);
-		mav.setViewName("/user/spot/addSpotPage2");
+		mav.setViewName("/user/spot/addSpotPage");
 	}
 
 	@Override
@@ -118,8 +128,21 @@ public class SpotServiceImp implements SpotService{
 	@Override
 	public void insertSpot(ModelAndView mav) {
 		Map<String, Object> map=mav.getModelMap();
-		
+		HttpServletRequest request = (HttpServletRequest)map.get("request");		
 		SpotDto spotDto = (SpotDto)map.get("spotDto");		
+		
+		spotDto.setSpot_no(spotDao.getSpotNextSeq());
+		
+		CommonFileIODto commonFileIODto = commonFileIOService.requestWriteFileAndDTO(request, "spot_image", spotPath);
+		if(commonFileIODto != null){
+			commonFileIODto.setType_code(Constant.FILE_TYPE_SPOT);
+			commonFileIODto.setWrite_no(spotDto.getSpot_no());
+			String spot_photo_num = commonFileIOService.insertFileInfo(commonFileIODto) + ",";
+			System.out.println("spot_photo_num : " + spot_photo_num);
+			spotDto.setAttach_file(spot_photo_num);
+		}
+		
+		System.out.println(spotDto);
 		int result = spotDao.insertSpot(spotDto);
 		System.out.println("result : " + result);
 		
@@ -146,6 +169,18 @@ public class SpotServiceImp implements SpotService{
 		int spot_no = Integer.parseInt(request.getParameter("spot_no"));
 		
 		SpotDto spotDto = spotDao.getOneSpot(spot_no);
+		if(spotDto.getAttach_file() != null){
+			String[] attach_no = spotDto.getAttach_file().split(",");
+			List<CommonFileIODto> fileList = new ArrayList<CommonFileIODto>();
+			for(int i = 0; i < attach_no.length; i++){
+				int file_no = Integer.parseInt(attach_no[i]);
+				System.out.println("file_no : " + file_no);
+				CommonFileIODto fileIODto =  commonFileIoDao.getOneFileDto(file_no);
+				System.out.println(fileIODto);
+				fileList.add(fileIODto);				
+			}
+			spotDto.setSpot_photoes(fileList);
+		}
 		CommonCodeDto codeDto = new CommonCodeDto();
 		
 		codeDto = commonCodeService.getOneCodeGroup(spotDto.getCountry_code());
