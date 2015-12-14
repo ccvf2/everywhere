@@ -163,21 +163,21 @@ function doReplyWrite(form){
 	/*alert("typeCOde:"+type_code+"mem_no:"+mem_no+"user_yn:"+use_yn+"reply_content:"+reply_content);*/
 		$(function() {
 			$.ajax({
-						url : "/common/reply/replyWrite.ajax",
-						type : "POST",
-						data : {"item_no":item_no, "mem_no":mem_no, "type_code":type_code, "reply_content":reply_content},
-						dataType : "text",
-						success : function(){
-							$("#replyListArea").remove();
-							$("#replyWriteArea").remove();
-							$("#replywrap").append("<div id='replyListArea'></div>");
-							$("#replywrap").append("<div id='replyWriteArea'></div>");
-							commonReplyInit(type_code,mem_no,item_no,"");
-						},
-						error : function() {
-							alert("등록 실패");
-						}
-					})
+					url : "/common/reply/replyWrite.ajax",
+					type : "POST",
+					data : {"item_no":item_no, "mem_no":mem_no, "type_code":type_code, "reply_content":reply_content},
+					dataType : "text",
+					success : function(){
+						$("#replyListArea").remove();
+						$("#replyWriteArea").remove();
+						$("#replywrap").append("<div id='replyListArea'></div>");
+						$("#replywrap").append("<div id='replyWriteArea'></div>");
+						commonReplyInit(type_code,mem_no,item_no,"");
+					},
+					error : function() {
+						alert("등록 실패");
+					}
+				})
 		})
 	return false;
 }

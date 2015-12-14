@@ -61,4 +61,12 @@ public class PlannerController {
 		plannerService.updatePlannerOk(mav);
 		return mav;
 	}
+	
+	@RequestMapping(value="/user/planner/deletePlanner.do", method=RequestMethod.GET)
+	public ModelAndView deletePlanner(HttpServletRequest request, HttpServletResponse response) {
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("request", request);
+		plannerService.deletePlanner(mav);
+		return mav;
+	}
 }
