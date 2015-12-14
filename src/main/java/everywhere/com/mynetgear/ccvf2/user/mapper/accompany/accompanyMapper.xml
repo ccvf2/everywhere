@@ -56,6 +56,12 @@
 		select count(*) from tbl_accompany
 	</select>
 	
+	<!-- 검색한 개시물 개수 가져오기 -->
+	<select id="searchAccompanyCount" resultType="int" parameterType="String">
+		select count(*) from tbl_accompany where title like '%#{searchValue}%' or content like '%#{searchValue}%'
+	</select>
+
+	
 	<!-- 한 페이지에 표시할 게시글 리스트 -->
 	<select id="getAccompanyList" parameterType="java.util.Map" resultMap="accompanyMap">
 		<![CDATA[
@@ -84,6 +90,46 @@
 								SELECT * 
 								FROM tbl_accompany 
 								where use_yn=#{use_yn}
+								ORDER BY accompany_no desc
+							)b
+						)
+				where rnum >= #{startRow}
+				and rnum <= #{endRow}
+				) accompany, 
+				  tbl_member member
+			where accompany.mem_no = member.mem_no
+		]]>
+	</select>
+	
+	<!-- 한 페이지에 표시할 게시글 리스트 -->
+	<select id="getSearchAccompanyList" parameterType="java.util.Map" resultMap="accompanyMap">
+		<![CDATA[
+			select accompany.rnum,
+			  accompany.accompany_no,
+			  accompany.mem_no, 
+			  accompany.write_date, 
+			  accompany.start_date, 
+			  accompany.end_date, 
+			  accompany.title, 
+			  accompany.content,
+			  accompany.attach_file, 
+			  accompany.accompany_status_code, 
+			  accompany.gender_code, 
+			  accompany.use_yn, 
+			  accompany.hits,
+			  member.mem_name,
+			  (
+			  	select count(*) 
+				  from tbl_common_reply 
+				  where item_no=accompany.accompany_no and type_code='S0010') as reply_count
+			from (select * 
+						from (
+							SELECT ROWNUM rnum, b.* 
+							FROM (
+								SELECT * 
+								FROM tbl_accompany 
+								WHERE use_yn=#{use_yn}
+								AND (title like '%#{searchValue}%' or content like '%#{searchValue}%')
 								ORDER BY accompany_no desc
 							)b
 						)
