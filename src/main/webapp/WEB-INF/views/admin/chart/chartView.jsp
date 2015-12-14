@@ -102,7 +102,6 @@
 						
 						var reUrl="/admin/chart/chartList.do";
 						var sendData="?date1="+date1+"&date2="+date2+"&selectOption="+selectOption;
-						alert("sendData : " +sendData);
 						
 						$.ajax({
 							url: reUrl+sendData,
@@ -151,7 +150,7 @@
 								
 							},
 							error:function(xhr, status, errorMsg){
-								alert(xhr+","+status+","+errorMsg);
+								//alert(xhr+","+status+","+errorMsg);
 							}
 						});
 					});
