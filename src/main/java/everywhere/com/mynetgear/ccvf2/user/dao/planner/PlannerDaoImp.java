@@ -13,6 +13,7 @@ import org.springframework.transaction.support.DefaultTransactionDefinition;
 import everywhere.com.mynetgear.ccvf2.user.dto.planner.ItemDto;
 import everywhere.com.mynetgear.ccvf2.user.dto.planner.MoneyDto;
 import everywhere.com.mynetgear.ccvf2.user.dto.planner.PlannerDto;
+import everywhere.com.mynetgear.ccvf2.user.dto.spot.SpotDto;
 
 @Component
 public class PlannerDaoImp implements PlannerDao {
@@ -70,6 +71,9 @@ public class PlannerDaoImp implements PlannerDao {
 	public List<ItemDto> getItemList(int planner_no) {	
 		List<ItemDto> itemList = sqlTemplate.selectList("get_item_list", planner_no);
 		for(int i = 0; i < itemList.size(); i++){
+			SpotDto spot = sqlTemplate.selectOne("select_one_spot", itemList.get(i).getSpot_no());
+			itemList.get(i).setSpot(spot);
+			
 			List<MoneyDto> moneyList = getMoneyList(itemList.get(i).getItem_no());
 			itemList.get(i).setMoneyList(moneyList);
 		}

@@ -99,6 +99,7 @@ public class Constant {
 	public static final String MEMBER_P_STATUS_LOCK = "M2002";
 	
 	/**여행동행구하기 게시글 종류: 공지*/
+
 	public static final String ACCOMPANY_TYPE_NOTICE = "H0001";
 	/**여행동행구하기 게시글 종류: 한국 출발*/
 	public static final String ACCOMPANY_TYPE_FROMKOREA = "H0002";
@@ -106,5 +107,8 @@ public class Constant {
 	public static final String ACCOMPANY_TYPE_ONTRIP = "H0003";
 	/**여행동행구하기 게시글 종류: 완료*/
 	public static final String ACCOMPANY_TYPE_COMPLETED = "H0004";
-	
+
+	/** 분류명 : 내용기술 */
+	public static final String FILE_TYPE_SPOT = "F0001";
+
 }

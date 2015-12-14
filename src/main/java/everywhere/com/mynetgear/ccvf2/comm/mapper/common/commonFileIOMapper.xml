@@ -31,9 +31,13 @@
 			, #{extension}
 			, #{file_size}
 			)
-	<selectKey keyProperty="FILE_NO" resultType="Integer" order="AFTER">
+	<selectKey keyProperty="file_no" resultType="Integer" order="AFTER">
 		SELECT TBL_COMMON_FILE_FILE_NO_SEQ.currval FROM dual
 	</selectKey>
 	</insert>
+	
+	<select id="get_one_file_info" resultType="everywhere.com.mynetgear.ccvf2.comm.dto.common.CommonFileIODto" parameterType="integer">
+		SELECT * from TBL_COMMON_FILE where file_no=#{file_no}
+	</select>
 	
 </mapper>

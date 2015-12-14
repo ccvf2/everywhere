@@ -177,7 +177,7 @@ public class PlannerServiceImp implements PlannerService {
 				itemDto.setSpot_no(spot_no);
 				String itemOrder = i + "010" + j;
 				itemDto.setItem_order(Integer.parseInt(itemOrder));
-				itemDto.setNote(request.getParameter(itemString+"_note"));				
+				itemDto.setNote(request.getParameter(itemString+"_note").replace("\r\n", "<br/>"));				
 				try {
 					SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm");
 					String start_time = request.getParameter(itemString+"_start_time");

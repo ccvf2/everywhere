@@ -53,5 +53,10 @@ public class SpotDaoImp implements SpotDao {
 	public int deleteSpot(int spot_no) {
 		return sqlTemplate.delete("delete_spot", spot_no);
 	}
+
+	@Override
+	public int getSpotNextSeq() {
+		return sqlTemplate.selectOne("get_spot_seq_no");
+	}
 	
 }
