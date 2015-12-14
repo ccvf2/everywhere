@@ -57,7 +57,7 @@ public class MessageServiceImp implements MessageService {
 		int mem_no =(Integer)map.get("mem_no"); 
 		List<MessageDto> list = messageDao.getListMessageBox(mem_no);
 		mav.addObject("messageBoxList",list);
-		mav.setViewName("/user/message/messageBox");
+		mav.setViewName("/user/message/messageBox2");
 	}
 
 	/** 메세지 보내기 */ 

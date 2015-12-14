@@ -3,6 +3,8 @@ package everywhere.com.mynetgear.ccvf2.user.dto.spot;
 import java.io.File;
 import java.util.List;
 
+import everywhere.com.mynetgear.ccvf2.comm.dto.common.CommonFileIODto;
+
 public class SpotDto {
 	private int spot_no;
 	private int mem_no;
@@ -12,13 +14,14 @@ public class SpotDto {
 	private String spot_type_code;
 	private String mem_level_code;
 	private String spot_note;
+	private String attach_file;
 	private String spot_addr;
 	private double spot_lat;
 	private double spot_long;
 	private double total_star_score;
 	private int count_star_score;
 	
-	private List<File> spot_photoes;
+	private List<CommonFileIODto> spot_photoes;
 
 	public int getSpot_no() {
 		return spot_no;
@@ -82,6 +85,14 @@ public class SpotDto {
 
 	public void setSpot_note(String spot_note) {
 		this.spot_note = spot_note;
+	}	
+
+	public String getAttach_file() {
+		return attach_file;
+	}
+
+	public void setAttach_file(String attach_file) {
+		this.attach_file = attach_file;
 	}
 
 	public String getSpot_addr() {
@@ -124,11 +135,11 @@ public class SpotDto {
 		this.count_star_score = count_star_score;
 	}
 
-	public List<File> getSpot_photoes() {
+	public List<CommonFileIODto> getSpot_photoes() {
 		return spot_photoes;
 	}
 
-	public void setSpot_photoes(List<File> spot_photoes) {
+	public void setSpot_photoes(List<CommonFileIODto> spot_photoes) {
 		this.spot_photoes = spot_photoes;
 	}
 
@@ -138,6 +149,6 @@ public class SpotDto {
 				+ city_code + ", spot_name=" + spot_name + ", spot_type_code=" + spot_type_code + ", mem_level_code="
 				+ mem_level_code + ", spot_note=" + spot_note + ", spot_addr=" + spot_addr + ", spot_lat=" + spot_lat
 				+ ", spot_long=" + spot_long + ", total_star_score=" + total_star_score + ", count_star_score="
-				+ count_star_score + ", spot_photoes=" + spot_photoes + "]";
+				+ count_star_score + ", attach_file=" + attach_file + "]";
 	}
 }

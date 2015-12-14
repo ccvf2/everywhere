@@ -25,7 +25,11 @@
 		${countryName } ${cityName } ${spot_type } <br/>
 		명소명 : ${spotDto.spot_name } <br/>
 		한줄설명 : ${spotDto.spot_note } <br/>
-		Image : <input type="file"> <br/>
+		<c:if test="${spotDto.spot_photoes != null}">		
+			<c:forEach var="photo" items="${spotDto.spot_photoes}">
+				<img alt="" src="/attatchFile/spot/${photo.save_name}.${photo.extension}">
+			</c:forEach>
+		</c:if>
 		주소 : ${spotDto.spot_addr } <br/>
 		위도 : ${spotDto.spot_lat } <br/>
 		경도 : ${spotDto.spot_long } <br/> 
