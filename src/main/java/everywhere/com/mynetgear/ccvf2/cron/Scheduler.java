@@ -22,7 +22,7 @@ public class Scheduler {
 	/**
 	 * 1. 7초마다 호출이 되는 스케쥴러 
 	 */
-	@Scheduled(cron = "0/7 * * * * ?")
+	//@Scheduled(cron = "0/7 * * * * ?")
 	public void cronTest1(){
 		if(checkTodayCount==0){
 			 checkTodayCount=sqlSessionTemplate.selectOne("dao.chartMapper.selectTodayCount");
@@ -50,7 +50,7 @@ public class Scheduler {
 	 * 2. 매일 정시(00:00) 마다 Today total, login user count=0 set
 	 */
 	
-	@Scheduled(cron = "0 0 0 * * ?")
+	//@Scheduled(cron = "0 0 0 * * ?")
 	public void cronTest2(){
 		int todayCnt=sqlSessionTemplate.selectOne("dao.chartMapper.todaySelectCnt");
 		if(todayCnt==0){
