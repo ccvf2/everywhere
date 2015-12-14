@@ -6,7 +6,7 @@
 <mapper namespace="dao.chartMapper">
 	<insert id="totalSetCount">
 		<![CDATA[
-			insert into stats values(stats_num_seq.nextval, 
+			insert into tbl_stats values(tbl_stats_stats_num_seq.nextval, 
 			  to_char(sysdate, 'yyyy'), 
 			  to_char(sysdate, 'mm'), 
 			  to_char(sysdate, 'dd'), 
@@ -26,7 +26,7 @@
 	
 	<insert id="loginUSetCount">
 		<![CDATA[
-			insert into stats values(stats_num_seq.nextval, 
+			insert into tbl_stats values(tbl_stats_stats_num_seq.nextval, 
 			  to_char(sysdate, 'yyyy'), 
 			  to_char(sysdate, 'mm'), 
 			  to_char(sysdate, 'dd'), 
@@ -46,7 +46,7 @@
 	
 	<update id="todayCountUpdate" parameterType="int">
 		<![CDATA[
-		  update stats set stats_count=#{cnt}
+		  update tbl_stats set stats_count=#{cnt}
 		  where stats_status='T' 
 		  and stats_year=(select to_char(sysdate, 'yyyy') from dual)
 		  and stats_mon=(select to_char(sysdate, 'mm') from dual)
@@ -56,7 +56,7 @@
 	
 	<select id="selectTodayCount" resultType="int">
 		<![CDATA[
-			select nvl(max(stats_count), 0) from stats 
+			select nvl(max(stats_count), 0) from tbl_stats 
 		  	where stats_status='T'
 		  	and stats_year=(select to_char(sysdate, 'yyyy') from dual)
 		  	and stats_mon=(select to_char(sysdate, 'mm') from dual)
@@ -67,7 +67,7 @@
 	<select id="getChartMonthList" parameterType="java.util.HashMap" resultType="int">
 		<![CDATA[
 			select sum(STATS_COUNT)
-			from stats
+			from tbl_stats
 			where STATS_YEAR=#{year}
 			and stats_status='T'
       		and stats_mon>=to_number(#{start})
@@ -79,7 +79,7 @@
 	
 	<select id="todaySelectCnt" resultType="int">
 		<![CDATA[
-			select count(*) from stats 
+			select count(*) from tbl_stats 
 		  	where stats_status='T'
 		  	and stats_year=(select to_char(sysdate, 'yyyy') from dual)
 		  	and stats_mon=(select to_char(sysdate, 'mm') from dual)
@@ -89,7 +89,7 @@
 	
 	<select id="getCharYearOne" resultType="int" parameterType="String">
 		select sum(stats_count) 
-		from stats 
+		from tbl_stats 
 		where stats_status='T' 
 		and STATS_YEAR=#{year}
 	</select>
@@ -97,7 +97,7 @@
 	<select id="getCharYearList" resultType="int" parameterType="java.util.HashMap">
 		<![CDATA[
 			select sum(STATS_COUNT)
-			from stats
+			from tbl_stats
 			where stats_status='T'
 			and stats_year>=#{yearS}
 			and stats_year<=#{yearE}
@@ -109,7 +109,7 @@
 	<select id="getChartDayList" parameterType="java.util.HashMap" resultType="int">
 		<![CDATA[
 			select stats_count
-			from stats
+			from tbl_stats
 			where STATS_YEAR=#{year}
 			and stats_day>=to_number(#{dayS})
 			and stats_day<=to_number(#{dayE})
