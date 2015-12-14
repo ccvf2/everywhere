@@ -18,6 +18,8 @@
  <a href="/admin/mailtemplat/mailTemplatList.do">메일목록</a>
  <a href="/admin/member/adminMemberList.do">관리자 -회원관리</a>
  <hr/>
+ <a href="/admin/chart/chartView.do">관리자 - 통계보기</a>
+ <hr/>
 
  <h1>사용자</h1>
  <a href="/user/member/register.do">회원가입</a>
