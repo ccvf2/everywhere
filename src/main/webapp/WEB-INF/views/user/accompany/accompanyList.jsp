@@ -32,7 +32,7 @@
 			
 			location.href="/user/accompany/accompanyList.do?search="+search;
 		}
-	</script>    
+	</script>
   </head>
   <body>
 	<div class="wrapper">
@@ -48,7 +48,7 @@
 	   <div class="breadcrumbs-v1">
         <div class="container">
             <span>사람들과 함께 더 재미있는 여행을 즐기세요</span>
-            <h1>동행구하기 게시판</h1>
+            <h1><a href="/user/accompany/accompanyList.do" style="color:inherit; text-decoration: none;">동행구하기 게시판</a></h1>
 	        </div>
 	    </div>
 	   <div class="bg-color-light">
@@ -71,6 +71,21 @@
                     </div>
                     <!-- End Blog Newsletter -->
                     
+                    <div class="headline-v2"><h2>최근 글</h2></div>
+                    <!-- Latest Links -->
+                    <ul class="list-unstyled blog-latest-posts margin-bottom-50">
+                    	<c:forEach var="recentAccompanyDto" items="${recentAccompanyList}">
+                    		<li>
+                    			<h3>${recentAccompanyDto.title}</h3>
+                    			<small><fmt:formatDate pattern="MM-dd" value="${recentAccompanyDto.write_date}"/> / <a href="#">${recentAccompanyDto.mem_name}</a></small>
+                    			<p>${fn:substring(recentAccompanyDto.content, 0, 70)}
+						        <c:if test="${fn:length(albumDto.content) >70}">
+						        	…
+						        </c:if></p>
+                    		</li>
+                    	</c:forEach>
+                    </ul>
+                    <!-- End Latest Links -->
                  
                 </div>
                 <!-- End Blog Sidebar -->
@@ -80,7 +95,11 @@
                 	<div class="news-v3 bg-color-white margin-bottom-30">
                         <div class="news-v3-in">
 		                	<!-- 게시판 리스트 시작 -->
-		                	<%-- <span class="results-number">About ${fn:length(accompanyList)} results</span><br/><br/> --%>
+		                	<c:if test="${searchValue != '' || searchValue ne null}">
+		                		<span class="results-number">${seachValue} Total: ${count} results</span><br/><br/>
+		                	</c:if>
+		                	
+		                	
 		                	<!-- 게시글이 없을 경우 -->
 							<c:if test="${count == 0}">
 								<h2>게시판에 저장된 글이 없습니다.</h2>
@@ -185,10 +204,6 @@
 		    </div>
 		    <!--=== End Footer Version 1 ===-->
 	    </div>
-			    
     </div>
-	<script type="text/javascript" src="/script/common/jquery-1.11.3.js"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="/script/common/bootstrap/js/bootstrap.min.js"></script>
   </body>
 </html>

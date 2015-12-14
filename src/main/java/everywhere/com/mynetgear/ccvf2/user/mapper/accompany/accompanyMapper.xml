@@ -57,14 +57,17 @@
 	</select>
 	
 	<!-- 검색한 개시물 개수 가져오기 -->
-	<select id="searchAccompanyCount" resultType="int" parameterType="String">
-		select count(*) from tbl_accompany where title like '%#{searchValue}%' or content like '%#{searchValue}%'
+	<select id="searchAccompanyCount" parameterType="String" resultType="int">
+		select count(*)
+		from tbl_accompany
+		where title like '%'||#{searchValue, jdbcType=VARCHAR}||'%' 
+		or content like '%'||#{searchValue, jdbcType=VARCHAR}||'%' 
 	</select>
 
 	
 	<!-- 한 페이지에 표시할 게시글 리스트 -->
 	<select id="getAccompanyList" parameterType="java.util.Map" resultMap="accompanyMap">
-		<![CDATA[
+	<![CDATA[
 			select accompany.rnum,
 			  accompany.accompany_no,
 			  accompany.mem_no, 
@@ -90,6 +93,9 @@
 								SELECT * 
 								FROM tbl_accompany 
 								where use_yn=#{use_yn}
+								<if test="accompany_status_code!=''">
+									and accompany_status_code=#{accompany_status_code}
+								</if>
 								ORDER BY accompany_no desc
 							)b
 						)
@@ -101,7 +107,7 @@
 		]]>
 	</select>
 	
-	<!-- 한 페이지에 표시할 게시글 리스트 -->
+	<!-- 한 페이지에 표시할 검색된 게시글 리스트 -->
 	<select id="getSearchAccompanyList" parameterType="java.util.Map" resultMap="accompanyMap">
 		<![CDATA[
 			select accompany.rnum,
@@ -129,7 +135,8 @@
 								SELECT * 
 								FROM tbl_accompany 
 								WHERE use_yn=#{use_yn}
-								AND (title like '%#{searchValue}%' or content like '%#{searchValue}%')
+								and (title like '%'||#{searchValue, jdbcType=VARCHAR}||'%' 
+								or content like '%'||#{searchValue, jdbcType=VARCHAR}||'%') 
 								ORDER BY accompany_no desc
 							)b
 						)
@@ -200,6 +207,7 @@
 		and mem_no=#{mem_no}
 	</update>
 	
+	<!-- 게시물 수정 -->
 	<update id="updateAccompany" parameterType="everywhere.com.mynetgear.ccvf2.user.dto.accompany.AccompanyDto">
 		UPDATE tbl_accompany
 		SET start_date=#{start_date},
@@ -210,4 +218,41 @@
 		    gender_code=#{gender_code}
 		WHERE accompany_no=#{accompany_no}
 	</update>
+	
+	<!-- 최근 5개 게시물 (삭제 제외, 공지 제외) -->
+	<select id="getRecentAccompanyList" parameterType="java.util.Map" resultMap="accompanyMap">
+		<![CDATA[
+		select accompany.rnum,
+			  accompany.accompany_no,
+			  accompany.mem_no, 
+			  accompany.write_date, 
+			  accompany.start_date, 
+			  accompany.end_date, 
+			  accompany.title, 
+			  accompany.content,
+			  accompany.attach_file, 
+			  accompany.accompany_status_code, 
+			  accompany.gender_code, 
+			  accompany.use_yn, 
+			  accompany.hits,
+			  member.mem_name
+			from (select * 
+						from (
+							SELECT ROWNUM rnum, b.* 
+							FROM (
+								SELECT * 
+								FROM tbl_accompany 
+								where use_yn=#{use_yn}
+              					  AND tbl_accompany.ACCOMPANY_STATUS_CODE not like #{accompany_status_code}
+								ORDER BY accompany_no desc
+							)b
+						)
+				where rnum >= 1
+				and rnum <= 5
+				) accompany, 
+				  tbl_member member
+			where accompany.mem_no = member.mem_no
+			]]>
+	</select>
+	
 </mapper>

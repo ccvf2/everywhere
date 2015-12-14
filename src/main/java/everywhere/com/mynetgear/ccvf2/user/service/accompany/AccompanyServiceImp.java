@@ -65,6 +65,11 @@ public class AccompanyServiceImp implements AccompanyService {
 		//게시글 종류 코드 가져옴
 		List<CommonCodeDto> postTypeList = commonCodeService.getListCodeGroup("H0001");
 		
+		//최근 글 용 리스트 5개 가져옴
+		List<AccompanyDto> recentAccompanyList = null;
+		recentAccompanyList = accompanyDao.getRecentAccompanyList();
+		
+		mav.addObject("recentAccompanyList", recentAccompanyList);
 		mav.addObject("postTypeList", postTypeList);
 		mav.addObject("genderList", genderList);
 		mav.setViewName("user/accompany/accompanyWrite");
@@ -133,6 +138,7 @@ public class AccompanyServiceImp implements AccompanyService {
 				if(request.getParameter("file")!=null) {
 					CommonFileIODto commonFileIODto = commonFileIOService.requestWriteFileAndDTO(request, "file", accompanyPath);
 					commonFileIOService.insertFileInfo(commonFileIODto);
+					
 				}
 				
 				check = accompanyDao.insertAccompany(accompanyDto);
@@ -152,7 +158,6 @@ public class AccompanyServiceImp implements AccompanyService {
 		HttpServletRequest request = (HttpServletRequest) map.get("request");
 		// 검색 파라메터
 		String searchValue = request.getParameter("search");
-		
 		
 		//한 페이지에 보여줄 게시물 수 (추후 변경 필요)
 		int boardSize = 15;
@@ -189,6 +194,7 @@ public class AccompanyServiceImp implements AccompanyService {
 			if(count > 0) {
 				accompanyList = accompanyDao.getSearchAccompanyList(startRow, endRow, searchValue);
 			}
+			mav.addObject("searchValue", searchValue);
 		}
 		
 		EverywhereAspect.logger.info(EverywhereAspect.logMsg + accompanyList.size());
@@ -200,6 +206,13 @@ public class AccompanyServiceImp implements AccompanyService {
 		
 		//게시글 종류 코드 가져옴
 		List<CommonCodeDto> postTypeList = commonCodeService.getListCodeGroup("H0001");
+		
+		
+		//최근 글 용 리스트 5개 가져옴
+		List<AccompanyDto> recentAccompanyList = null;
+		recentAccompanyList = accompanyDao.getRecentAccompanyList();
+		
+		mav.addObject("recentAccompanyList", recentAccompanyList);
 		
 		mav.addObject("count", count);
 		mav.addObject("postTypeList", postTypeList);
@@ -233,6 +246,12 @@ public class AccompanyServiceImp implements AccompanyService {
 		//게시글 종류 코드 가져옴
 		List<CommonCodeDto> postTypeList = commonCodeService.getListCodeGroup("H0001");
 		
+		
+		//최근 글 용 리스트 5개 가져옴
+		List<AccompanyDto> recentAccompanyList = null;
+		recentAccompanyList = accompanyDao.getRecentAccompanyList();
+		
+		mav.addObject("recentAccompanyList", recentAccompanyList);
 		mav.addObject("postTypeList", postTypeList);
 		mav.addObject("genderList", genderList);
 		mav.addObject("ownerCheck", ownerCheck);
@@ -291,6 +310,12 @@ public class AccompanyServiceImp implements AccompanyService {
 		int mem_no=64;
 		int ownerCheck = accompanyDao.checkUserAccompany(accompany_no, mem_no);
 		
+		
+		//최근 글 용 리스트 5개 가져옴
+		List<AccompanyDto> recentAccompanyList = null;
+		recentAccompanyList = accompanyDao.getRecentAccompanyList();
+		
+		mav.addObject("recentAccompanyList", recentAccompanyList);
 		mav.addObject("currentPage", currentPage);
 		mav.addObject("genderList", genderList);
 		mav.addObject("postTypeList", postTypeList);

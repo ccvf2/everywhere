@@ -98,4 +98,13 @@ public interface AccompanyDao {
 	 */
 	List<AccompanyDto> getSearchAccompanyList(int startRow, int endRow, String searchValue);
 
+	/**
+	 * @author 곽성국	
+	 * @createDate 2015. 12. 14.
+	 * @described 동행구하기 게시판의 최근 5개 글을 가져온다. (공지 제외)
+	 * @return
+	 */
+	List<AccompanyDto> getRecentAccompanyList();
+
+
 }

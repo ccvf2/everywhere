@@ -100,6 +100,7 @@ public class AccompanyDaoImp implements AccompanyDao {
 
 	@Override
 	public int searchAccompanyCount(String searchValue) {
+		System.out.println(searchValue);
 		return sqlTemplate.selectOne("everywhere.com.mynetgear.ccvf2.user.mapper.accompany.searchAccompanyCount", searchValue);
 	}
 
@@ -110,9 +111,16 @@ public class AccompanyDaoImp implements AccompanyDao {
 		hMap.put("endRow", endRow);
 		hMap.put("searchValue", searchValue);
 		hMap.put("use_yn", Constant.SYNB_YN_Y);
+		System.out.println(hMap.get("searchValue"));
 		return sqlTemplate.selectList("everywhere.com.mynetgear.ccvf2.user.mapper.accompany.getSearchAccompanyList", hMap);
 	}
-	
-	
-	
+
+	@Override
+	public List<AccompanyDto> getRecentAccompanyList() {
+		Map<String, Object> hMap = new HashMap<String, Object>();
+		hMap.put("use_yn", Constant.SYNB_YN_Y);
+		hMap.put("accompany_status_code", Constant.ACCOMPANY_TYPE_NOTICE);
+		
+		return sqlTemplate.selectList("everywhere.com.mynetgear.ccvf2.user.mapper.accompany.getRecentAccompanyList", hMap);
+	}
 }
