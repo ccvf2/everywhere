@@ -10,7 +10,7 @@
 <title>admin-top_menu</title>
 <link href="/css/admin/bootstrap.min.css" rel="stylesheet">
 <link href="/css/admin/sb-admin.css" rel="stylesheet">
-<link href="/css/admin/plugins/morris.css" rel="stylesheet">
+<!-- <link href="/css/admin/plugins/morris.css" rel="stylesheet"> -->
 <link href="/css/admin/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
     <!-- jQuery -->
@@ -22,6 +22,16 @@
 <script src="/script/admin//plugins/morris/raphael.min.js"></script>
 <!-- <script src="/script/admin//plugins/morris/morris.min.js"></script>
 <script src="/script/admin//plugins/morris/morris-data.js"></script> -->
+
+
+
+<!-- <script type="text/javascript" src="/script/chart/jquery-1.11.3.min.js"></script> -->
+<script type="text/javascript" src="/script/chart/jquery-ui.js"></script>
+<link rel="stylesheet" type="text/css" href="/script/chart/jquery-ui.css"/>
+<script type="text/javascript" src="/script/chart/chart.js"></script>
+<script type="text/javascript" src="/script/chart/jquery.canvasjs.min.js"></script>
+
+
 </head>
 <body>
 <div class="navbar-header">

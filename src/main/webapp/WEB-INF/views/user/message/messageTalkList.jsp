@@ -7,7 +7,6 @@
 <title>타이틀 입력</title>
 <script src="/assets/plugins/jquery/jquery.min.js"></script>
 <script type="text/javascript">
-
 	 function formSubmit(form) {
 		 console.log(form);
 		var send_mem_no=form.send_mem_no.value;

@@ -42,7 +42,7 @@ public class MessageController {
 		messageService.getListParsonTalk(mav);
 		return mav;	
 	}
-	
+
 	/**
 	 * @author 배성욱
 	 * @createDate 2015. 12. 13.
