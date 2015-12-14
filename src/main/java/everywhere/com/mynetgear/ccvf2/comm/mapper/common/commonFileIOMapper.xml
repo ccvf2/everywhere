@@ -9,7 +9,10 @@
 		<result property="code_value" column="CODE_VALUE" /> -->
 	</resultMap>
 	<!-- 저장파일내용 데이터베이스에 insert -->
-	<insert id="insert_file_info" parameterType="everywhere.com.mynetgear.ccvf2.comm.dto.common.CommonFileIODto">
+	<insert id="insert_file_info" parameterType="everywhere.com.mynetgear.ccvf2.comm.dto.common.CommonFileIODto" useGeneratedKeys="true" keyProperty="file_no">
+		<selectKey keyProperty="file_no" keyColumn="file_no" resultType="int" order="BEFORE" statementType="PREPARED">
+			SELECT TBL_COMMON_FILE_FILE_NO_SEQ.nextval FROM dual
+		</selectKey>
 		INSERT INTO
 			TBL_COMMON_FILE(
 			 FILE_NO
@@ -22,7 +25,7 @@
 			, FILE_SIZE
 			)
 		VALUES(
-			TBL_COMMON_FILE_FILE_NO_SEQ.NEXTVAL
+			#{file_no}
 			, #{type_code}
 			, #{write_no}
 			, #{real_name}
@@ -31,9 +34,6 @@
 			, #{extension}
 			, #{file_size}
 			)
-	<selectKey keyProperty="FILE_NO" resultType="Integer" order="AFTER">
-		SELECT TBL_COMMON_FILE_FILE_NO_SEQ.currval FROM dual
-	</selectKey>
 	</insert>
 	
 </mapper>

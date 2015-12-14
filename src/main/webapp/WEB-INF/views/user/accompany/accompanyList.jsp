@@ -180,7 +180,6 @@
                  
 		    <!--=== Footer Version 1 ===-->
 		    <div class="footer-v1">
-				발바닥
 				<c:import url="/WEB-INF/views/user/common/footer.jsp"/>
 		    </div>
 		    <!--=== End Footer Version 1 ===-->
