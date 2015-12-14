@@ -105,4 +105,11 @@ public class Constant {
 	/**여행동행구하기 게시글 종류: 공지*/
 	public static final String ACCOMPANY_TYPE_NOTICE = "H0003";
 	
+	
+	/**관심분야 그룹 코드: 관심분야*/
+	public static final String INTEREST_GROUP_CODE = "I0001";
+	
+	
+	
+	
 }
