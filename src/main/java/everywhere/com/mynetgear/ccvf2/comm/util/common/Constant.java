@@ -95,7 +95,7 @@ public class Constant {
 	public static final String ACCOMPANY_GENDER_MALE = "G0001";
 	/**여행동행구하기 성별: 여*/
 	public static final String ACCOMPANY_GENDER_FEMALE = "G0002";
-
+	/** 여행동행구하기 성별: 불문*/
 	public static final String ACCOMPANY_GENDER_BOTH = "G0003";
 	
 	/** 회원 계정 상태: 비활성 */
@@ -113,7 +113,6 @@ public class Constant {
 	public static final String MEMBER_P_STATUS_LOCK = "M2002";
 	
 	/**여행동행구하기 게시글 종류: 공지*/
-
 	public static final String ACCOMPANY_TYPE_NOTICE = "H0001";
 	/**여행동행구하기 게시글 종류: 한국 출발*/
 	public static final String ACCOMPANY_TYPE_FROMKOREA = "H0002";
@@ -125,4 +124,6 @@ public class Constant {
 	/** 분류명 : 내용기술 */
 	public static final String FILE_TYPE_SPOT = "F0001";
 
+	/**관심분야 그룹 코드: 관심분야*/
+	public static final String INTEREST_GROUP_CODE = "I0001";
 }

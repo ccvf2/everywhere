@@ -2,6 +2,7 @@ package everywhere.com.mynetgear.ccvf2.user.service.member;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -11,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.ModelAndView;
 
+import everywhere.com.mynetgear.ccvf2.comm.dto.commoncode.CommonCodeDto;
+import everywhere.com.mynetgear.ccvf2.comm.service.commoncode.CommonCodeService;
 import everywhere.com.mynetgear.ccvf2.comm.util.common.Constant;
 import everywhere.com.mynetgear.ccvf2.user.dao.member.MemberDao;
 import everywhere.com.mynetgear.ccvf2.user.dto.member.MemberDto;
@@ -25,6 +28,8 @@ import everywhere.com.mynetgear.ccvf2.user.dto.member.MemberDto;
 public class MemberServiceImp implements MemberService {
 	@Autowired
 	private MemberDao memberDao;
+	@Autowired
+	private CommonCodeService commonCodeService;
 
 	@Override
 	public void emailCheck(ModelAndView mav) {
@@ -85,7 +90,9 @@ public class MemberServiceImp implements MemberService {
 		MemberDto memberDto=memberDao.memberRead(mem_no);
 		System.out.println("memberService read memberDto:"+memberDto.toString());
 		memberDto=memberDao.memberRead(mem_no);
+		List<CommonCodeDto> list=commonCodeService.getListCodeGroup("I0001");
 		
+		mav.addObject("interestList", list);
 		mav.addObject("memberDto", memberDto);
 		mav.setViewName("/user/member/memberRead");
 	}
@@ -102,7 +109,9 @@ public class MemberServiceImp implements MemberService {
 		
 		memberDto=memberDao.memberRead(mem_no);
 		System.out.println("memberService update memberDto:"+memberDto.toString());
+		List<CommonCodeDto> list=commonCodeService.getListCodeGroup("I0001");
 		
+		mav.addObject("interestList", list);
 		mav.addObject("memberDto", memberDto);
 		mav.setViewName("user/member/memberUpdate");
 	}
