@@ -48,7 +48,7 @@
 							</c:if>
 						</c:forEach>
 					</td>
-					<td><a href ="/user/accompany/accompanyRead.do?accompany_no=${accompanyDto.accompany_no}&currentPage=${currentPage}">${accompanyDto.title}</a></td>
+					<td><a href ="/user/accompany/accompanyRead.do?accompany_no=${accompanyDto.accompany_no}&currentPage=${currentPage}">${accompanyDto.title} ${accompanyDto.reply_count}</a></td>
 					<td>${accompanyDto.mem_name}</td>
 					<td><fmt:formatDate pattern="MM-dd" value="${accompanyDto.write_date}"/></td>
 					<td>${accompanyDto.hits}</td>

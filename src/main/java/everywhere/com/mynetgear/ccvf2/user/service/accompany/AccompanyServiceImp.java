@@ -11,13 +11,16 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import everywhere.com.mynetgear.ccvf2.comm.aop.EverywhereAspect;
 import everywhere.com.mynetgear.ccvf2.comm.dao.commoncode.CommonCodeDao;
+import everywhere.com.mynetgear.ccvf2.comm.dto.common.CommonFileIODto;
 import everywhere.com.mynetgear.ccvf2.comm.dto.commoncode.CommonCodeDto;
+import everywhere.com.mynetgear.ccvf2.comm.service.common.CommonFileIOService;
 import everywhere.com.mynetgear.ccvf2.comm.service.commoncode.CommonCodeService;
 import everywhere.com.mynetgear.ccvf2.comm.util.common.CommonUtils;
 import everywhere.com.mynetgear.ccvf2.comm.util.common.Constant;
@@ -39,6 +42,13 @@ public class AccompanyServiceImp implements AccompanyService {
 	
 	@Autowired
 	private CommonCodeService commonCodeService;
+	
+	@Autowired
+	private CommonFileIOService commonFileIOService;
+
+	@Value("${attach.accompany.path}")
+	private String accompanyPath;
+	
 	
 	@Override
 	public void mainAccompany(ModelAndView mav) {
@@ -67,6 +77,7 @@ public class AccompanyServiceImp implements AccompanyService {
 		AccompanyDto accompanyDto = new AccompanyDto();
 		int check = 0;
 		
+		
 		/*글쓴이: 임시라 변경 필요*/
 //		int mem_no = request.getParameter("mem_no");
 		String mem_no = "64";
@@ -75,6 +86,8 @@ public class AccompanyServiceImp implements AccompanyService {
 		String gender_code = request.getParameter("gender_code");
 		String title = request.getParameter("title");
 		String content = request.getParameter("content");
+		
+		
 		
 		try {
 			if(mem_no.equals(Constant.SYNB_NULL)) {
@@ -105,6 +118,7 @@ public class AccompanyServiceImp implements AccompanyService {
 				/*기본값으로 동행은 구해지지 않았다*/
 				accompanyDto.setAccompany_status_code(request.getParameter("accompany_status_code"));
 				
+				
 				/*여행 시작일 - 여행 종료일 Date 형식으로 변경*/
 				try {
 					SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -116,10 +130,11 @@ public class AccompanyServiceImp implements AccompanyService {
 				
 				accompanyDto.setUse_yn(Constant.SYNB_YN_Y);
 				
-//				파일 추가 필요
-				/*	CommonFileIOServiceImp nd=new CommonFileIOServiceImp();
-					CommonFileIODto filedto= nd.requestWriteFileAndDTO(request, "file", savePath);*/
-					
+				if(request.getParameter("file")!=null) {
+					CommonFileIODto commonFileIODto = commonFileIOService.requestWriteFileAndDTO(request, "file", accompanyPath);
+					commonFileIOService.insertFileInfo(commonFileIODto);
+				}
+				
 				check = accompanyDao.insertAccompany(accompanyDto);
 				EverywhereAspect.logger.info(EverywhereAspect.logMsg + check);
 			}

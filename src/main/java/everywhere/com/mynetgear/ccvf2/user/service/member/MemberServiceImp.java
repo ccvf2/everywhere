@@ -84,6 +84,7 @@ public class MemberServiceImp implements MemberService {
 		
 		MemberDto memberDto=memberDao.memberRead(mem_no);
 		System.out.println("memberService read memberDto:"+memberDto.toString());
+		memberDto=memberDao.memberRead(mem_no);
 		
 		mav.addObject("memberDto", memberDto);
 		mav.setViewName("/user/member/memberRead");
