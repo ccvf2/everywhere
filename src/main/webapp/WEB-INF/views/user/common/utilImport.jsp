@@ -20,8 +20,10 @@
 <link rel="stylesheet" href="/assets/plugins/animate.css">
 <link rel="stylesheet" href="/assets/plugins/line-icons/line-icons.css">
 <link rel="stylesheet" href="/assets/plugins/font-awesome/css/font-awesome.css">
+<link rel="stylesheet" href="/assets/plugins/parallax-slider/css/parallax-slider.css">
+<link rel="stylesheet" href="/assets/plugins/owl-carousel/owl-carousel/owl.carousel.css">
 <!-- CSS Theme -->
-<link rel="stylesheet" href="/assets/css/theme-colors/default.css">
+<!-- <link rel="stylesheet" href="/assets/css/theme-colors/default.css"> -->
 <!-- CSS Customization -->
 <link rel="stylesheet" href="/assets/css/custom.css">
 <!-- --------------------------------css End------------------------------------- -->
@@ -33,12 +35,17 @@
 <!-- JS Implementing Plugins -->
 <script src="/assets/plugins/back-to-top.js"></script>
 <script src="/assets/plugins/smoothScroll.js"></script>
+<script type="text/javascript" src="/assets/plugins/parallax-slider/js/modernizr.js"></script>
+<script type="text/javascript" src="/assets/plugins/parallax-slider/js/jquery.cslider.js"></script>
+<script type="text/javascript" src="/assets/plugins/owl-carousel/owl-carousel/owl.carousel.js"></script>
 
 <!-- JS Customization -->
 <script type="text/javascript" src="/assets/js/custom.js"></script>
 
 <!-- JS Page Level -->
 <script src="/assets/js/app.js"></script>
+<script type="text/javascript" src="/assets/js/plugins/owl-carousel.js"></script>
+<script type="text/javascript" src="/assets/js/plugins/parallax-slider.js"></script>
 </head>
 <body>
 </body>
