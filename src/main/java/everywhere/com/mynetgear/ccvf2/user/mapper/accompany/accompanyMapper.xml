@@ -15,7 +15,9 @@
 		<result property="accompany_status_code" column="ACCOMPANY_STATUS_CODE"/>
 		<result property="use_yn" column="USE_YN"/>
 		<result property="gender_code" column="GENDER_CODE"/>
-		<result property="mem_name" column="MEM_NAME"/>		
+		<result property="mem_name" column="MEM_NAME"/>	
+		<result property="reply_count" column="reply_count"/>
+		
 	</resultMap> 
 	
 	<!-- 동행구하기 게시판 쓰기 -->
@@ -70,7 +72,11 @@
 			  accompany.gender_code, 
 			  accompany.use_yn, 
 			  accompany.hits,
-			  member.mem_name
+			  member.mem_name,
+			  (
+			  	select count(*) 
+				  from tbl_common_reply 
+				  where item_no=accompany.accompany_no and type_code='S0010') as reply_count
 			from (select * 
 						from (
 							SELECT ROWNUM rnum, b.* 
@@ -80,7 +86,7 @@
 								where use_yn=#{use_yn}
 								ORDER BY accompany_no desc
 							)b
-							)
+						)
 				where rnum >= #{startRow}
 				and rnum <= #{endRow}
 				) accompany, 
@@ -91,10 +97,18 @@
 	
 	<!-- 게시글 읽기 -->
 	<select id="readAccompany" parameterType="java.util.Map" resultMap="accompanyMap">
-		select *
-		from tbl_accompany
-		where accompany_no=#{accompany_no}
-		and use_yn=#{use_yn}
+		SELECT b.*,
+      	(
+	        SELECT count(*) 
+	        FROM tbl_common_reply 
+	        WHERE item_no=accompany_no AND type_code='S0010'
+		) AS reply_count
+	    FROM
+	      (
+	        SELECT *		  	
+	        FROM tbl_accompany
+	        WHERE accompany_no=${accompany_no}
+	        AND use_yn=${use_yn}) b;
 	</select>
 	
 	<!-- 게시글 조회수 증가 -->

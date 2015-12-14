@@ -12,8 +12,8 @@
 	</div>
 
 	<div align="center">
-		<form class="form_style" name="memberForm" action="/user/member/update.do" 
-			method="post" onsubmit="return registerForm(this)">
+		<form class="form_style" name="memberForm" action="/user/member/memberUpdate.do?mem_no=${mem_no}" method="post" onsubmit="return registerForm(this)">
+		
 			<div class="line">
 				<label class="title">이메일</label>
 				<span class="content">
@@ -64,7 +64,7 @@
 			</div>
 			
 			<div class="line" style="width:498px; border-width:2px; text-align:center;">
-				<input type="submit" value="정보수정" />
+				<input type="submit" value="수정" />
 			</div>
 		</form>
 	</div>

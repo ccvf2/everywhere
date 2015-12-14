@@ -31,6 +31,9 @@
 			, #{extension}
 			, #{file_size}
 			)
+	<selectKey keyProperty="FILE_NO" resultType="Integer" order="AFTER">
+		SELECT TBL_COMMON_FILE_FILE_NO_SEQ.currval FROM dual
+	</selectKey>
 	</insert>
 	
 </mapper>

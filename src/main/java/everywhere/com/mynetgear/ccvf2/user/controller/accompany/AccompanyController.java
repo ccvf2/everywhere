@@ -4,11 +4,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import everywhere.com.mynetgear.ccvf2.comm.service.common.CommonFileIOService;
 import everywhere.com.mynetgear.ccvf2.comm.service.commoncode.CommonCodeService;
 import everywhere.com.mynetgear.ccvf2.user.dto.accompany.AccompanyDto;
 import everywhere.com.mynetgear.ccvf2.user.service.accompany.AccompanyService;
@@ -25,6 +27,7 @@ public class AccompanyController {
 	@Autowired
 	private AccompanyService accompanyService;
 
+	
 	/**
 	 * @author 곽성국	
 	 * @createDate 2015. 12. 8.
