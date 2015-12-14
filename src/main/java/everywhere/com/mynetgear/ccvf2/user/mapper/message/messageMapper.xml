@@ -6,7 +6,15 @@
 	
 	<!-- 1:1 대화내용 -->
 	<select id="select_list_parson_Talk" parameterType="int" resultType="everywhere.com.mynetgear.ccvf2.user.dto.message.MessageDto">
-		SELECT * FROM TBL_MESSAGE where MSG_GROUP_NO=#{value} ORDER BY SEND_TIME ASC
+		SELECT
+			*
+		FROM
+			TBL_MESSAGE
+		WHERE
+			MSG_GROUP_NO=#{value}
+		ORDER BY
+			SEND_TIME
+		ASC
 	</select>
 	
 	<!-- 대화함 목록 -->
