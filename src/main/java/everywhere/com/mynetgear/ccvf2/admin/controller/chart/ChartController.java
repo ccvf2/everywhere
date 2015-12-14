@@ -80,7 +80,7 @@ public class ChartController {
 		
 	
 		String jsonData = jarray.toJSONString();
-		System.out.println(jsonData);
+		//System.out.println(jsonData);
 		response.setContentType("application/json;charset=UTF-8");
 		PrintWriter out = response.getWriter();
 		out.print(jsonData);
