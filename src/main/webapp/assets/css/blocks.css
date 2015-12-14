@@ -112,9 +112,10 @@
 /*Breadcrumbs v1
 ------------------------------------*/ 
 .breadcrumbs-v1 {
-  padding: 25px 0;
+  padding: 60px 0;
   position: relative;
-  background: url(../img/breadcrumbs/handshake.jpg) center no-repeat;
+  
+  background: url(../img/breadcrumbs/michelangelo_1_creation_of_adam.jpg) center no-repeat;
   background-size: cover; /*Scales the background image to be as large as possible*/
 }
 
