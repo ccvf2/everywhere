@@ -47,4 +47,14 @@ public interface MessageDao {
 	 * @return
 	 */
 	public int getOneNewMessageGroupNumber();
+	
+	
+	/**
+	 * @author 배성욱
+	 * @createDate 2015. 12. 14.
+	 * @described 메세지함 삭제 시
+	 * @param dto
+	 * @return
+	 */
+	public int deleteMessageBox(MessageDto dto);
 }

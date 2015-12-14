@@ -35,4 +35,11 @@ public interface MessageService {
 	 */
 	public int insertMessageSender(MessageDto dto);
 		
+	/**
+	 * @author 배성욱
+	 * @createDate 2015. 12. 14.
+	 * @described 매소드의 용도를 적어주세요
+	 * @param mav
+	 */
+	public void deleteMessageBox(ModelAndView mav);
 }

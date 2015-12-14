@@ -73,5 +73,14 @@ public class MessageServiceImp implements MessageService {
 		return result;
 	}
 
+	
+	/**메세지함 삭제 시 */
+	@Override
+	public void deleteMessageBox(ModelAndView mav) {
+		Map<String, Object> map = mav.getModelMap();
+		MessageDto dto = (MessageDto)map.get("messageDto");
+		int result = messageDao.deleteMessageBox(dto);
+	}
+
 
 }

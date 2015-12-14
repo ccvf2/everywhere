@@ -12,6 +12,7 @@ public class MessageDtoExt {
 	private String recv_mem_name;
 	private String recv_mem_email;
 	private int unreadCount;
+	private int remove_men_no;
 	public String getSend_mem_name() {
 		return send_mem_name;
 	}
@@ -42,7 +43,13 @@ public class MessageDtoExt {
 	public void setUnreadCount(int unreadCount) {
 		this.unreadCount = unreadCount;
 	}
-	
+	public int getRemove_men_no() {
+		return remove_men_no;
+	}
+	public void setRemove_men_no(int remove_men_no) {
+		this.remove_men_no = remove_men_no;
+	}
+
 	
 	
 }
