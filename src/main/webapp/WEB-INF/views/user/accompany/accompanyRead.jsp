@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -40,6 +41,7 @@
 			commonReplyInit('S0010',64,accompany_no,"");
 		});
 	</script>
+	
   </head>
   <body>
 	  <div class="wrapper">
@@ -55,7 +57,7 @@
 	   <div class="breadcrumbs-v1">
         <div class="container">
             <span>사람들과 함께 더 재미있는 여행을 즐기세요</span>
-            <h1>동행구하기 게시판</h1>
+            <h1><a href="/user/accompany/accompanyList.do" style="color:inherit; text-decoration: none;">동행구하기 게시판</a></h1>
 	        </div>
 	    </div>
 	   <div class="bg-color-light">
@@ -65,15 +67,15 @@
                 <div class="col-md-3">
                 
                	   <div class="headline-v2"><h2>검색</h2></div>
-                    <!-- Blog Newsletter -->
+                   <!-- Blog Newsletter -->
                     <div class="blog-newsletter">
                         <p>원하는 동행을 검색을 통해 찾아보세요.</p>
-                        <div class="input-group">
-                            <input type="text" class="form-control" placeholder="Email">
+                       	<div class="input-group">
+                            <input type="text" class="form-control" id="search" placeholder="Search">
                             <span class="input-group-btn">
-                                <button class="btn-u" type="button">검색</button>
+                                <button class="btn-u" type="button" onclick="searchFun()">검색</button>
                             </span>
-                        </div>
+                    	 	</div>
                         <br/><br/>
                     </div>
                     <!-- End Blog Newsletter -->
@@ -82,26 +84,16 @@
                     <div class="headline-v2"><h2>최근 글</h2></div>
                     <!-- Latest Links -->
                     <ul class="list-unstyled blog-latest-posts margin-bottom-50">
-                        <li>
-                            <h3><a href="#">Wireframe for the news view...</a></h3>
-                            <small>5 Jan, 2015 / <a href="#">Web,</a> <a href="#">Webdesign</a></small>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam odio leo.</p>
-                        </li>
-                        <li>
-                            <h3><a href="#">It is a long established fact that a reader</a></h3>
-                            <small>17 Jan, 2015 / <a href="#">Artificial Intelligence</a></small>                            
-                            <p>Pellentesque efficitur blandit dui, porta cursus velit imperdiet sit amet.</p>
-                        </li>
-                        <li>
-                            <h3><a href="#">The point of using Lorem Ipsum</a></h3>
-                            <small>19 Jan, 2015 / <a href="#">Hi-Tech,</a> <a href="#">Technology</a></small>                            
-                            <p>Phasellus ullamcorper pellentesque ex. Cras venenatis elit orci, vitae dictum elit egestas a. Nunc nec auctor mauris, semper scelerisque nibh.</p>
-                        </li>
-                        <li>
-                            <h3><a href="#">Many desktop publishing packages...</a></h3>
-                            <small>23 Jan, 2015 / <a href="#">Art,</a> <a href="#">Lifestyles</a></small>                            
-                            <p>Integer vehicula sed justo ac dapibus. In sodales nunc non varius accumsan.</p>
-                        </li>
+                    	<c:forEach var="recentAccompanyDto" items="${recentAccompanyList}">
+                    		<li>
+                    			<h3>${recentAccompanyDto.title}</h3>
+                    			<small><fmt:formatDate pattern="MM-dd" value="${recentAccompanyDto.write_date}"/> / <a href="#">${recentAccompanyDto.mem_name}</a></small>
+                    			<p>${fn:substring(recentAccompanyDto.content, 0, 70)}
+						        <c:if test="${fn:length(albumDto.content) >70}">
+						        	…
+						        </c:if></p>
+                    		</li>
+                    	</c:forEach>
                     </ul>
                     <!-- End Latest Links -->
                 </div>
@@ -183,37 +175,6 @@
 						</div>
 					</div>
 					<!-- 댓글을 뿌릴 영역 END-->
-					<hr/>
-					<!-- News v2 -->
-                    <div class="row news-v2 margin-bottom-50">
-                        <div class="col-sm-6 sm-margin-bottom-30">
-                            <div class="news-v2-badge">
-                                <p>
-                                    <span>23</span>
-                                    <small>Jan</small>
-                                </p>
-                            </div>
-                            <div class="news-v2-desc">
-                                <h3><a href="#">Reading Some Books</a></h3>
-                                <small>By Admin | California, US | In <a href="#">Art</a></small>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae, gravida pellentesque urna varius vitae.</p>
-                            </div>
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="news-v2-badge">
-                                <p>
-                                    <span>22</span>
-                                    <small>Jan</small>
-                                </p>
-                            </div>
-                            <div class="news-v2-desc">
-                                <h3><a href="#">Interior Design</a></h3>
-                                <small>By Admin | California, US | In <a href="#">Art</a></small>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae, gravida pellentesque urna varius vitae.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- End News v2 -->
 					
 	                </div>
 	                <!-- End Blog All Posts -->
@@ -229,7 +190,6 @@
 			    </div>
 			    <!--=== End Footer Version 1 ===-->
 		    </div>
-				    
     </div>
   </body>
 </html>

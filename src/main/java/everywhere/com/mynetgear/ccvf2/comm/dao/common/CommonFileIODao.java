@@ -18,4 +18,12 @@ public interface CommonFileIODao {
 	 */
 	
 	public int insertFileInfo(CommonFileIODto commonFileIODto);
+
+	/**
+	 * @author 안희진
+	 * @createDate 2015. 12. 14.
+	 * @described 공통파일의 데이터를 한개씩 가져오는 함수
+	 * @return
+	 */
+	public CommonFileIODto getOneFileDto(int file_no);
 }

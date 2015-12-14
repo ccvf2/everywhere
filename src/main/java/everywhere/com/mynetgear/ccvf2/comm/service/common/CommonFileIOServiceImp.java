@@ -37,16 +37,16 @@ private CommonFileIODao commonFileIODao;
 		CommonFileIODto returnDto = null;
 		String errorMsg = Constant.SYNB_NULL;
 		try {
-			returnDto = new CommonFileIODto();
-
 			MultipartHttpServletRequest mulltRequest = (MultipartHttpServletRequest) request;
+			
 			// 지정한 필드네임으로 파일을 선택
 			MultipartFile upFile = mulltRequest.getFile(fieldName);
 			if (upFile.isEmpty() == false) {
 				String realFileName = StringUtils.substringBeforeLast(upFile.getOriginalFilename(), Constant.SYNB_DOT);
 				String extension = StringUtils.substringAfterLast(upFile.getOriginalFilename(), Constant.SYNB_DOT);
-
+				
 				// DTO에 삽입
+				returnDto = new CommonFileIODto();
 				returnDto.setReal_name(realFileName);
 				returnDto.setExtension(StringUtils.upperCase(extension));
 				returnDto.setSave_name("_" + System.currentTimeMillis());
@@ -113,7 +113,9 @@ private CommonFileIODao commonFileIODao;
 	@Override
 	public int insertFileInfo(CommonFileIODto commonFileIODto) {
 		int result=0;
-		result=commonFileIODao.insertFileInfo(commonFileIODto);
+		commonFileIODao.insertFileInfo(commonFileIODto);
+		result=commonFileIODto.getFile_no();
+		
 		//파일 업로드 실패 시 삭제처리
 		if(result==0){
 			String fullpath=commonFileIODto.getSave_path()+

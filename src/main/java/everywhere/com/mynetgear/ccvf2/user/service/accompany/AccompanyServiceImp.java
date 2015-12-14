@@ -65,6 +65,11 @@ public class AccompanyServiceImp implements AccompanyService {
 		//게시글 종류 코드 가져옴
 		List<CommonCodeDto> postTypeList = commonCodeService.getListCodeGroup("H0001");
 		
+		//최근 글 용 리스트 5개 가져옴
+		List<AccompanyDto> recentAccompanyList = null;
+		recentAccompanyList = accompanyDao.getRecentAccompanyList();
+		
+		mav.addObject("recentAccompanyList", recentAccompanyList);
 		mav.addObject("postTypeList", postTypeList);
 		mav.addObject("genderList", genderList);
 		mav.setViewName("user/accompany/accompanyWrite");
@@ -133,6 +138,7 @@ public class AccompanyServiceImp implements AccompanyService {
 				if(request.getParameter("file")!=null) {
 					CommonFileIODto commonFileIODto = commonFileIOService.requestWriteFileAndDTO(request, "file", accompanyPath);
 					commonFileIOService.insertFileInfo(commonFileIODto);
+					
 				}
 				
 				check = accompanyDao.insertAccompany(accompanyDto);
@@ -150,9 +156,11 @@ public class AccompanyServiceImp implements AccompanyService {
 	public void getAccompanyList(ModelAndView mav) {
 		Map<String, Object> map = mav.getModelMap();
 		HttpServletRequest request = (HttpServletRequest) map.get("request");
+		// 검색 파라메터
+		String searchValue = request.getParameter("search");
 		
 		//한 페이지에 보여줄 게시물 수 (추후 변경 필요)
-		int boardSize = 9;
+		int boardSize = 15;
 		
 		//요청한 페이지
 		String pageNumber = request.getParameter("pageNumber");
@@ -168,14 +176,27 @@ public class AccompanyServiceImp implements AccompanyService {
 		int startRow = (currentPage - 1) * boardSize + 1;
 		int endRow = currentPage * boardSize;
 		
-		// 게시글 수 가져옴
-		int count = accompanyDao.getAccompanyCount();
-		EverywhereAspect.logger.info(EverywhereAspect.logMsg + count);
-		
 		List<AccompanyDto> accompanyList = null;
-		if(count > 0) {
-			accompanyList = accompanyDao.getAccompanyList(startRow, endRow);
+		
+		// 게시글 수 가져옴
+		int count = 0;
+		if(searchValue==null) {
+			count = accompanyDao.getAccompanyCount();
+			EverywhereAspect.logger.info(EverywhereAspect.logMsg + count);
+			// 게시물 리스트 가져옴
+			if(count > 0) {
+				accompanyList = accompanyDao.getAccompanyList(startRow, endRow);
+			}
+		} else {
+			count = accompanyDao.searchAccompanyCount(searchValue);
+			EverywhereAspect.logger.info(EverywhereAspect.logMsg + count);
+			// 게시물 검색 리스트 가져옴
+			if(count > 0) {
+				accompanyList = accompanyDao.getSearchAccompanyList(startRow, endRow, searchValue);
+			}
+			mav.addObject("searchValue", searchValue);
 		}
+		
 		EverywhereAspect.logger.info(EverywhereAspect.logMsg + accompanyList.size());
 		
 //		mem_name테스터
@@ -185,6 +206,13 @@ public class AccompanyServiceImp implements AccompanyService {
 		
 		//게시글 종류 코드 가져옴
 		List<CommonCodeDto> postTypeList = commonCodeService.getListCodeGroup("H0001");
+		
+		
+		//최근 글 용 리스트 5개 가져옴
+		List<AccompanyDto> recentAccompanyList = null;
+		recentAccompanyList = accompanyDao.getRecentAccompanyList();
+		
+		mav.addObject("recentAccompanyList", recentAccompanyList);
 		
 		mav.addObject("count", count);
 		mav.addObject("postTypeList", postTypeList);
@@ -218,6 +246,12 @@ public class AccompanyServiceImp implements AccompanyService {
 		//게시글 종류 코드 가져옴
 		List<CommonCodeDto> postTypeList = commonCodeService.getListCodeGroup("H0001");
 		
+		
+		//최근 글 용 리스트 5개 가져옴
+		List<AccompanyDto> recentAccompanyList = null;
+		recentAccompanyList = accompanyDao.getRecentAccompanyList();
+		
+		mav.addObject("recentAccompanyList", recentAccompanyList);
 		mav.addObject("postTypeList", postTypeList);
 		mav.addObject("genderList", genderList);
 		mav.addObject("ownerCheck", ownerCheck);
@@ -276,6 +310,12 @@ public class AccompanyServiceImp implements AccompanyService {
 		int mem_no=64;
 		int ownerCheck = accompanyDao.checkUserAccompany(accompany_no, mem_no);
 		
+		
+		//최근 글 용 리스트 5개 가져옴
+		List<AccompanyDto> recentAccompanyList = null;
+		recentAccompanyList = accompanyDao.getRecentAccompanyList();
+		
+		mav.addObject("recentAccompanyList", recentAccompanyList);
 		mav.addObject("currentPage", currentPage);
 		mav.addObject("genderList", genderList);
 		mav.addObject("postTypeList", postTypeList);

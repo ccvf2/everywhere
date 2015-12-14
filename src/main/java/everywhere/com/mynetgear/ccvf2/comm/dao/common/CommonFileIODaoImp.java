@@ -31,5 +31,16 @@ public class CommonFileIODaoImp implements CommonFileIODao {
 	public int insertFileInfo(CommonFileIODto commonFileIODto) {
 		return sqlTemplate.insert("insert_file_info", commonFileIODto);
 	}
+	
+	/**
+	 * @author 안희진
+	 * @createDate 2015. 12. 14.
+	 * @described 공통파일의 데이터를 한개씩 가져오는 함수
+	 * @return
+	 */
+	@Override
+	public CommonFileIODto getOneFileDto(int file_no) {
+		return sqlTemplate.selectOne("get_one_file_info", file_no);
+	}
 
 }

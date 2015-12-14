@@ -23,6 +23,7 @@ public interface AccompanyDao {
 
 	/**
 	 * @author 곽성국	
+	 * @param searchValue 
 	 * @createDate 2015. 12. 8.
 	 * @described 동행구하기 게시판 게시글 수 가져오기
 	 * @return
@@ -76,5 +77,34 @@ public interface AccompanyDao {
 	 * @return
 	 */
 	int updateAccompany(AccompanyDto accompanyDto);
+
+	/**
+	 * @author 곽성국	
+	 * @createDate 2015. 12. 14.
+	 * @described 동행구하기 게시판 검색결과의 개수
+	 * @param searchValue
+	 * @return
+	 */
+	int searchAccompanyCount(String searchValue);
+
+	/**
+	 * @author 곽성국	
+	 * @createDate 2015. 12. 14.
+	 * @described 동행구하기 게시판 검색리스트 가져오기
+	 * @param startRow
+	 * @param endRow
+	 * @param searchValue
+	 * @return
+	 */
+	List<AccompanyDto> getSearchAccompanyList(int startRow, int endRow, String searchValue);
+
+	/**
+	 * @author 곽성국	
+	 * @createDate 2015. 12. 14.
+	 * @described 동행구하기 게시판의 최근 5개 글을 가져온다. (공지 제외)
+	 * @return
+	 */
+	List<AccompanyDto> getRecentAccompanyList();
+
 
 }

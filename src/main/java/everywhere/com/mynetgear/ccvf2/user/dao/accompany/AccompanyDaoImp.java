@@ -95,10 +95,32 @@ public class AccompanyDaoImp implements AccompanyDao {
 
 	@Override
 	public int updateAccompany(AccompanyDto accompanyDto) {
-		
 		return sqlTemplate.update("everywhere.com.mynetgear.ccvf2.user.mapper.accompany.updateAccompany", accompanyDto);
 	}
-	
-	
-	
+
+	@Override
+	public int searchAccompanyCount(String searchValue) {
+		System.out.println(searchValue);
+		return sqlTemplate.selectOne("everywhere.com.mynetgear.ccvf2.user.mapper.accompany.searchAccompanyCount", searchValue);
+	}
+
+	@Override
+	public List<AccompanyDto> getSearchAccompanyList(int startRow, int endRow, String searchValue) {
+		Map<String, Object> hMap = new HashMap<String, Object>();
+		hMap.put("startRow", startRow);
+		hMap.put("endRow", endRow);
+		hMap.put("searchValue", searchValue);
+		hMap.put("use_yn", Constant.SYNB_YN_Y);
+		System.out.println(hMap.get("searchValue"));
+		return sqlTemplate.selectList("everywhere.com.mynetgear.ccvf2.user.mapper.accompany.getSearchAccompanyList", hMap);
+	}
+
+	@Override
+	public List<AccompanyDto> getRecentAccompanyList() {
+		Map<String, Object> hMap = new HashMap<String, Object>();
+		hMap.put("use_yn", Constant.SYNB_YN_Y);
+		hMap.put("accompany_status_code", Constant.ACCOMPANY_TYPE_NOTICE);
+		
+		return sqlTemplate.selectList("everywhere.com.mynetgear.ccvf2.user.mapper.accompany.getRecentAccompanyList", hMap);
+	}
 }
