@@ -152,7 +152,7 @@
 											<i class="icon-append fa fa-phone"></i> 
 											<input type="text" name="mem_phone" placeholder="Phonenumber"> 
 											<b class="tooltip tooltip-top-right">회원님의 전화번호를 입력해주세요.</b>
-											<button type="button" class="btn btn-default btn-sm">번호인증</button>
+											<button type="button" class="btn-u">번호인증</button>
 										</label>
 									</section>
 
@@ -173,7 +173,7 @@
 											<div class="panel panel-default">
 												<div class="panel-heading">
 													<h6 class="panel-title">
-														<label><input type="checkbox" name="description" value="이용약관" /><font size="2">everywhere 이용 약관에 대한 동의 (필수)</font></label>
+														<label><input type="checkbox" name="description" value="이용약관" />everywhere 이용 약관에 대한 동의 (필수)</label>
 														<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion-1" href="#collapse-One" >
 															<font size="2">전문보기</font>
 														</a>
@@ -344,7 +344,7 @@
 											<div class="panel panel-default">
 												<div class="panel-heading">
 													<h6 class="panel-title">
-														<label><input type="checkbox" name="terms" value="개인정보" /><font size="2">개인 정보 수집 및 이용 동의 (필수)</font></label><br/>
+														<label><input type="checkbox" name="terms" value="개인정보" />개인 정보 수집 및 이용 동의 (필수)</label><br/>
 														<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion-1" href="#collapse-Two">
 															<font size="2">전문보기</font>
 														</a>
