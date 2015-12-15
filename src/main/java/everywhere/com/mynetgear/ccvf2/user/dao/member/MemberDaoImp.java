@@ -43,5 +43,8 @@ public class MemberDaoImp implements MemberDao {
 	public int memberDelete(MemberDto memberDto) {
 		return sqlTemplate.update("everywhere.com.mynetgear.ccvf2.user.mapper.member.memberDelete", memberDto);
 	}
+	
+	
+	
 
 }
