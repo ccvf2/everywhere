@@ -12,6 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
 import everywhere.com.mynetgear.ccvf2.comm.util.common.Constant;
+import everywhere.com.mynetgear.ccvf2.comm.util.common.SecurityUtil;
 import everywhere.com.mynetgear.ccvf2.comm.util.common.StringUtil;
 import everywhere.com.mynetgear.ccvf2.user.dao.member.MemberDao;
 import everywhere.com.mynetgear.ccvf2.user.dto.member.MemberDto;
@@ -42,24 +43,20 @@ public class LoginServiceImp implements LoginService {
 		String mem_pwd = dto.getMem_pwd();
 		mem_pwd = StringUtils.trim(mem_pwd);
 		mem_pwd = StringUtil.removeXSS(mem_pwd, false);
-		dto.setMem_pwd(mem_pwd);
 
+		//비밀번호 암호화
+		String pw=SecurityUtil.Sha256Encrypt(mem_email, mem_pwd);
+		dto.setMem_pwd(pw);
+		
 		// 아이디 존재 여부 확인
 		int exisiID=memberDao.tryLoginInfo(dto);
 		if (exisiID==1) {
 			try {
-				// 암호화 알고리즘을 통한 암호 복원
-				//String password256 = SecurityUtil.Sha256Encrypt(vo.getAdminId(), vo.getAdminPassword());
 				MemberDto member = memberDao.getOneMemberInfo(dto);
 
 					// 세션처리
 					HttpSession session = request.getSession();
 					session.setAttribute(Constant.SYNN_LOGIN_OBJECT, member);
-					/*session.setAttribute("mem_no", member.getMem_no());
-					session.setAttribute("mem_email", member.getMem_email());
-					session.setAttribute("mem_name", member.getMem_name());
-					session.setAttribute("mem_status", member.getMem_status_code());
-					session.setAttribute("mem_level", member.getMem_level_code());*/
 
 					// 불필요한 파라미터 제거
 					/*String url = "/user/main/main.do";
