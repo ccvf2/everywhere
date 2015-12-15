@@ -22,9 +22,11 @@
 <link rel="stylesheet" href="/assets/plugins/font-awesome/css/font-awesome.css">
 <link rel="stylesheet" href="/assets/plugins/parallax-slider/css/parallax-slider.css">
 <link rel="stylesheet" href="/assets/plugins/owl-carousel/owl-carousel/owl.carousel.css">
-<link rel="stylesheet" href="assets/plugins/font-awesome/css/font-awesome.min.css">
-<link rel="stylesheet" href="assets/plugins/sky-forms-pro/skyforms/css/sky-forms.css">
-<link rel="stylesheet" href="assets/plugins/sky-forms-pro/skyforms/custom/custom-sky-forms.css">
+<link rel="stylesheet" href="/assets/plugins/font-awesome/css/font-awesome.min.css">
+<link rel="stylesheet" href="/assets/plugins/sky-forms-pro/skyforms/css/sky-forms.css">
+<link rel="stylesheet" href="/assets/plugins/sky-forms-pro/skyforms/custom/custom-sky-forms.css">
+<link rel="stylesheet" href="/assets/plugins/animate.css">
+<link rel="stylesheet" href="/assets/plugins/line-icons/line-icons.css">
 <!-- CSS Theme -->
 <!-- <link rel="stylesheet" href="/assets/css/theme-colors/default.css"> -->
 <!-- CSS Customization -->
@@ -41,22 +43,23 @@
 <script type="text/javascript" src="/assets/plugins/parallax-slider/js/modernizr.js"></script>
 <script type="text/javascript" src="/assets/plugins/parallax-slider/js/jquery.cslider.js"></script>
 <script type="text/javascript" src="/assets/plugins/owl-carousel/owl-carousel/owl.carousel.js"></script>
-<script src="assets/plugins/sky-forms-pro/skyforms/js/jquery.validate.min.js"></script>
-<script src="assets/plugins/sky-forms-pro/skyforms/js/jquery.maskedinput.min.js"></script>
-<script src="assets/plugins/sky-forms-pro/skyforms/js/jquery-ui.min.js"></script>
-<script src="assets/plugins/sky-forms-pro/skyforms/js/jquery.form.min.js"></script>
+<script src="/assets/plugins/sky-forms-pro/skyforms/js/jquery.validate.min.js"></script>
+<script src="/assets/plugins/sky-forms-pro/skyforms/js/jquery.maskedinput.min.js"></script>
+<script src="/assets/plugins/sky-forms-pro/skyforms/js/jquery-ui.min.js"></script>
+<script src="/assets/plugins/sky-forms-pro/skyforms/js/jquery.form.min.js"></script>
 
 <!-- JS Customization -->
 <script type="text/javascript" src="/assets/js/custom.js"></script>
 
 <!-- JS Page Level -->
 <script src="/assets/js/app.js"></script>
-<script type="text/javascript" src="assets/js/forms/reg.js"></script>
-<script type="text/javascript" src="assets/js/forms/login.js"></script>
-<script type="text/javascript" src="assets/js/forms/contact.js"></script>
-<script type="text/javascript" src="assets/js/forms/comment.js"></script>
+<script type="text/javascript" src="/assets/js/forms/reg.js"></script>
+<script type="text/javascript" src="/assets/js/forms/login.js"></script>
+<script type="text/javascript" src="/assets/js/forms/contact.js"></script>
+<script type="text/javascript" src="/assets/js/forms/comment.js"></script>
 <script type="text/javascript" src="/assets/js/plugins/owl-carousel.js"></script>
 <script type="text/javascript" src="/assets/js/plugins/parallax-slider.js"></script>
+<script type="text/javascript" src="/assets/js/app.js"></script>
 <script type="text/javascript">
     jQuery(document).ready(function() {
         App.init();
@@ -70,11 +73,6 @@
         ContactForm.initContactForm();
         CommentForm.initCommentForm();
         });
-</script>
-<script type="text/javascript"> 
-	$(document).ready(function(){
-		$(".tooltip tooltip-bottom-right").popover({trigger: 'hover click','placement': 'top'});
-		});
 </script>
 </head>
 <body>
