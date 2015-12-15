@@ -32,6 +32,11 @@
 			
 			location.href="/user/accompany/accompanyList.do?search="+search;
 		}
+		
+		function statusFunc() {
+			var status = document.getElementById("accompany_status_code").value;
+			location.href="/user/accompany/accompanyList.do?accompany_status_code="+status;
+		}
 	</script>
   </head>
   <body>
@@ -95,6 +100,13 @@
                 	<div class="news-v3 bg-color-white margin-bottom-30">
                         <div class="news-v3-in">
 		                	<!-- 게시판 리스트 시작 -->
+		                	<select id="accompany_status_code" onchange="statusFunc()">
+		                		<option value="H0000">모두</option>
+								<c:forEach var="postType" items="${postTypeList}">
+									<option value="${postType.code}">${postType.code_name}</option>
+								</c:forEach>
+							</select>
+		
 		                	<c:if test="${searchValue != '' || searchValue ne null}">
 		                		<span class="results-number">${seachValue} Total: ${count} results</span><br/><br/>
 		                	</c:if>
