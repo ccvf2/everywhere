@@ -117,14 +117,6 @@
 			                    
 			                </div>
                         
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
 		                	<!-- 게시판 리스트 시작 -->
 		                	<select id="accompany_status_code" onchange="statusFunc()">
 		                		<option value=""  disabled selected style="display:none;">모두</option>

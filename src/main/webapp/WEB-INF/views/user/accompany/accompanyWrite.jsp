@@ -8,11 +8,6 @@
 <head>
 <meta charset="UTF-8">
 <title>글쓰기</title>
-<script type="text/javascript" src="/script/common/jquery-1.11.3.js"></script>
-<script type="text/javascript" src="/script/common/jquery-ui/jquery-ui.js"></script>
-<link rel="stylesheet" type="text/css" href="/script/common/jquery-ui/jquery-ui.css" />
-<script type="text/javascript" src="/assets/js/forms/order.js"></script>
-
 
 <!-- CSS Implementing Plugins -->
 <link rel="stylesheet" href="/assets/plugins/animate.css">
@@ -53,7 +48,11 @@
 	        document.forms["accompanyForm"]["title"].focus();
 	        return false;
 	    }
-		
+	}
+	
+	function searchFun() {
+		var search=document.getElementById("search").value;
+		location.href="/user/accompany/accompanyList.do?search="+search;
 	}
 </script>
 </head>
@@ -149,19 +148,19 @@
 		                        </section>
 		                        <!-- 제목 종료 -->     
 			                    <!-- DatePicker 시작 -->
-			                    <div class="row">
-		                            <section class="col col-6">
-		                                <label class="input">
-		                                    <i class="icon-append fa fa-calendar"></i>
-		                                    <input type="text" name="start_date" id="start_date" placeholder="시작일" class="hasDatepicker">
-		                                </label>
-		                            </section>
-		                            <section class="col col-6">
-		                                <label class="input">
-		                                    <i class="icon-append fa fa-calendar"></i>
-		                                    <input type="text" name="end-date" id="end-date" placeholder="종료일" class="hasDatepicker">
-		                                </label>
-		                            </section>
+                                <div class="row">
+                                    <section class="col col-6">
+                                        <label class="input">
+                                            <i class="icon-append fa fa-calendar"></i>
+                                            <input type="text" name="start_date" id="start" placeholder="시작일">
+                                        </label>
+                                    </section>
+                                    <section class="col col-6">
+                                        <label class="input">
+                                            <i class="icon-append fa fa-calendar"></i>
+                                            <input type="text" name="start_date" id="finish" placeholder="종료일">
+                                        </label>
+                                    </section>
 		                        </div>
 		                        <!-- DatePicker 끝 -->
 		                        <!-- 글 내용 시작 -->
@@ -207,13 +206,11 @@
 		    <!--=== End Footer Version 1 ===-->
 	    </div>
 	</div>
-	<!-- Masking Form -->
-	<script src="/assets/plugins/sky-forms/version-2.0.1/js/jquery.maskedinput.min.js"></script>
-	<!-- Datepicker Form -->
-	<script src="assets/plugins/sky-forms/version-2.0.1/js/jquery-ui.min.js"></script>
-	<!-- Validation Form -->
-	<script src="/assets/plugins/sky-forms/version-2.0.1/js/jquery.validate.min.js"></script>
-	<!-- JS Page Level -->           
+	<!-- JS Implementing Plugins -->
+	<script src="/assets/plugins/sky-forms-pro/skyforms/js/jquery.maskedinput.min.js"></script>
+	<script src="/assets/plugins/sky-forms-pro/skyforms/js/jquery-ui.min.js"></script>
+	<script src="/assets/plugins/sky-forms-pro/skyforms/js/jquery.validate.min.js"></script>
+	<!-- JS Page Level -->
 	<script type="text/javascript" src="/assets/js/app.js"></script>
 	<script type="text/javascript" src="/assets/js/plugins/masking.js"></script>
 	<script type="text/javascript" src="/assets/js/plugins/datepicker.js"></script>
