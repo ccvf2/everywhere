@@ -38,6 +38,30 @@
 	function registerForm(form) {
 
 		//alert("ok1");
+		
+		if (memberForm.mem_email.value == "") {
+			alert("이메일을 입력해주세요.");
+			memberForm.mem_email.focus();
+			return false;
+		}
+		
+		if (memberForm.mem_pwd.value == "") {
+			alert("패스워드를 입력해주세요.");
+			memberForm.mem_pwd.focus();
+			return false;
+		}
+		
+		if (memberForm.mem_name.value == "") {
+			alert("이름을 입력해주세요.");
+			memberForm.mem_name.focus();
+			return false;
+		}
+		
+		if (memberForm.mem_phone.value == "") {
+			alert("전화번호를 입력해주세요.");
+			memberForm.mem_phone.focus();
+			return false;
+		}
 
 		var check = false;
 		var str = "";
@@ -51,12 +75,30 @@
 
 		//alert(str);
 		if (check == false) {
-			alert("하나라도 체크하세요");
+			alert("관심분야를 하나 이상 체크해주세요.");
 			form.interestValue[0].focus();
 			return false;
 		}
 
 		form.mem_interest.value = str;
+		
+		var description = false;
+		if (form.description.checked == true) {
+			description = true;
+		} else if (form.description.checked == false) {
+			alert("이용약관에 동의해주세요.");
+			form.description.focus();
+			return false;
+		}
+		
+		var terms = false;
+		if (form.terms.checked == true) {
+			terms = true;
+		} else if (form.terms.checked == false) {
+			alert("개인정보활용에 동의해주세요.");
+			form.terms.focus();
+			return false;
+		}
 	}
 </script>
 <c:import url="/WEB-INF/views/user/common/utilImport.jsp" />
@@ -81,7 +123,7 @@
 										<label class="input"> 
 											<i class="icon-append fa fa-envelope"></i> 
 											<input type="email" name="mem_email" id="email" placeholder="Email address">
-											<b class="tooltip tooltip-bottom-right">사용하실 이메일(계정)을 입력해주세요.</b>
+											<b class="tooltip tooltip-bottom-right" data-toggle="tooltip" data-placement="bottom-right">사용하실 이메일(계정)을 입력해주세요.</b>
 										</label>
 										<div id="emailCheck"></div>
 									</section>
@@ -132,17 +174,17 @@
 											<div class="panel panel-default">
 												<div class="panel-heading">
 													<h6 class="panel-title">
-														<label><input type="checkbox" name="subsciption" value="이용약관" /><font size="2">everywhere 이용 약관에 대한 동의 (필수)</font></label>
+														<label><input type="checkbox" name="description" value="이용약관" /><font size="2">everywhere 이용 약관에 대한 동의 (필수)</font></label>
 														<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion-1" href="#collapse-One" >
 															<font size="2">전문보기</font>
 														</a>
 													</h6>
 												</div>
-												<div id="collapse-One" class="panel-collapse collapse in">
+												<div id="collapse-One" class="panel-collapse collapse">
 													<div class="panel-body">
 														<div class="row">
 															<div class="col-md-12" style="font:8px;">
-																<textarea rows="8" cols="30" disabled="disabled" style="resize:none;">
+																<textarea class="form-control" rows="8" cols="30" disabled="disabled" style="resize:none;">
 																	제 1 조(목적) 이 약관은 (주) 3성(이하 “회사”라 합니다)가 제공하는 여행정보 공유서비스 ‘에브리웨얼'(‘Everywhere’) 웹 서비스, 모바일 어플리케이션 등 관련 제반 서비스(이하 “서비스”라 합니다)의 이용과 관련하여 회사와 
 																	회원과의 권리, 의무 및 책임사항, 기타 필요한 사항을 규정함을 목적으로 합니다.
 																	제 2 조(정의) 이 약관에서 사용하는 용어의 정의는 다음과 같습니다.
@@ -313,7 +355,7 @@
 													<div class="panel-body">
 														<div class="row">
 															<div class="col-md-12" style="font:8px;">
-																<textarea rows="8" cols="30" disabled="disabled" style="resize:none;">
+																<textarea class="form-control" rows="8" cols="30" disabled="disabled" style="resize:none;">
 																	정보통신망법 규정에 따라, 위시빈에 회원가입 신청하시는 이용자들께, 수집하는 개인정보의 항목, 개인정보의 수집 및 이용목적, 개인정보의 보유 및 이용기간에 대하여 안내 드리오니, 자세히 읽은 후 동의하여 주시기 바랍니다.
 																	1. 수집하는 필수 개인정보의 항목
 																	회사는 회원가입, 고객 상담 및 각종 서비스의 제공을 위하여 아래와 같이 개인정보를 수집하고 있습니다.

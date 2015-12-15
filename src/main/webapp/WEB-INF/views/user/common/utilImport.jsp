@@ -71,6 +71,11 @@
         CommentForm.initCommentForm();
         });
 </script>
+<script type="text/javascript"> 
+	$(document).ready(function(){
+		$(".tooltip tooltip-bottom-right").popover({trigger: 'hover click','placement': 'top'});
+		});
+</script>
 </head>
 <body>
 </body>
