@@ -80,13 +80,12 @@
                     </div>
                     <!-- End Blog Newsletter -->
                     
-                  
-                    <div class="headline-v2"><h2>최근 글</h2></div>
+                   <div class="headline-v2"><h2>최근 글</h2></div>
                     <!-- Latest Links -->
                     <ul class="list-unstyled blog-latest-posts margin-bottom-50">
                     	<c:forEach var="recentAccompanyDto" items="${recentAccompanyList}">
                     		<li>
-                    			<h3>${recentAccompanyDto.title}</h3>
+                    			<h3><a href="/user/accompany/accompanyRead.do?accompany_no=${recentAccompanyDto.accompany_no}&currentPage=${currentPage}">${recentAccompanyDto.title}</a></h3>
                     			<small><fmt:formatDate pattern="MM-dd" value="${recentAccompanyDto.write_date}"/> / <a href="#">${recentAccompanyDto.mem_name}</a></small>
                     			<p>${fn:substring(recentAccompanyDto.content, 0, 70)}
 						        <c:if test="${fn:length(albumDto.content) >70}">
