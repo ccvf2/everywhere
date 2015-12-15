@@ -158,7 +158,8 @@ public class AccompanyServiceImp implements AccompanyService {
 		HttpServletRequest request = (HttpServletRequest) map.get("request");
 		// 검색 파라메터
 		String searchValue = request.getParameter("search");
-		
+		// 카테고리 파라메터
+		String accompany_status_code = request.getParameter("accompany_status_code");
 		//한 페이지에 보여줄 게시물 수 (추후 변경 필요)
 		int boardSize = 15;
 		
@@ -176,25 +177,16 @@ public class AccompanyServiceImp implements AccompanyService {
 		int startRow = (currentPage - 1) * boardSize + 1;
 		int endRow = currentPage * boardSize;
 		
-		List<AccompanyDto> accompanyList = null;
-		
 		// 게시글 수 가져옴
 		int count = 0;
-		if(searchValue==null) {
-			count = accompanyDao.getAccompanyCount();
-			EverywhereAspect.logger.info(EverywhereAspect.logMsg + count);
-			// 게시물 리스트 가져옴
-			if(count > 0) {
-				accompanyList = accompanyDao.getAccompanyList(startRow, endRow);
-			}
-		} else {
-			count = accompanyDao.searchAccompanyCount(searchValue);
-			EverywhereAspect.logger.info(EverywhereAspect.logMsg + count);
-			// 게시물 검색 리스트 가져옴
-			if(count > 0) {
-				accompanyList = accompanyDao.getSearchAccompanyList(startRow, endRow, searchValue);
-			}
-			mav.addObject("searchValue", searchValue);
+		
+		count = accompanyDao.getAccompanyCount(searchValue, accompany_status_code);
+		EverywhereAspect.logger.info(EverywhereAspect.logMsg + count);
+		
+		// 게시물 리스트 가져옴
+		List<AccompanyDto> accompanyList = null;
+		if(count > 0) {
+			accompanyList = accompanyDao.getAccompanyList(startRow, endRow, searchValue, accompany_status_code);
 		}
 		
 		EverywhereAspect.logger.info(EverywhereAspect.logMsg + accompanyList.size());
@@ -207,13 +199,12 @@ public class AccompanyServiceImp implements AccompanyService {
 		//게시글 종류 코드 가져옴
 		List<CommonCodeDto> postTypeList = commonCodeService.getListCodeGroup("H0001");
 		
-		
 		//최근 글 용 리스트 5개 가져옴
 		List<AccompanyDto> recentAccompanyList = null;
 		recentAccompanyList = accompanyDao.getRecentAccompanyList();
 		
+		mav.addObject("searchValue", searchValue);
 		mav.addObject("recentAccompanyList", recentAccompanyList);
-		
 		mav.addObject("count", count);
 		mav.addObject("postTypeList", postTypeList);
 		mav.addObject("boardSize", boardSize);
