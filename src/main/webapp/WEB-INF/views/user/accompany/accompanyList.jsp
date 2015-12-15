@@ -29,14 +29,21 @@
 	<script type="text/javascript">
 		function searchFun() {
 			var search=document.getElementById("search").value;
-			
-			location.href="/user/accompany/accompanyList.do?search="+search;
+			var status=document.getElementById("accompany_status_code").value;
+			location.href="/user/accompany/accompanyList.do?search="+search+"&accompany_status_code="+status;
 		}
 		
 		function statusFunc() {
 			var status = document.getElementById("accompany_status_code").value;
 			location.href="/user/accompany/accompanyList.do?accompany_status_code="+status;
 		}
+		
+		$(document).ready(function(){
+		    $(".nav-tabs a").click(function(){
+		        $(this).tab('show');
+		        alert();
+		    });
+		});
 	</script>
   </head>
   <body>
@@ -81,7 +88,7 @@
                     <ul class="list-unstyled blog-latest-posts margin-bottom-50">
                     	<c:forEach var="recentAccompanyDto" items="${recentAccompanyList}">
                     		<li>
-                    			<h3>${recentAccompanyDto.title}</h3>
+                    			<h3><a href="/user/accompany/accompanyRead.do?accompany_no=${recentAccompanyDto.accompany_no}&currentPage=${currentPage}">${recentAccompanyDto.title}</a></h3>
                     			<small><fmt:formatDate pattern="MM-dd" value="${recentAccompanyDto.write_date}"/> / <a href="#">${recentAccompanyDto.mem_name}</a></small>
                     			<p>${fn:substring(recentAccompanyDto.content, 0, 70)}
 						        <c:if test="${fn:length(albumDto.content) >70}">
@@ -95,13 +102,32 @@
                 </div>
                 <!-- End Blog Sidebar -->
 
-                <!-- Blog All Posts -->
+                <!-- 게시글 시작 -->
                 <div class="col-md-9">
                 	<div class="news-v3 bg-color-white margin-bottom-30">
                         <div class="news-v3-in">
+                        
+                        	<div class="tab-v2">
+			                    <ul class="nav nav-tabs">
+			                    	<li class="active"><a href="#" data-toggle="tab">전체</a></li>
+			                    	<c:forEach var="postType" items="${postTypeList}">
+			                    		 <li class=""><a href="#" data-toggle="tab">${postType.code_name}</a></li>
+			                    	</c:forEach>
+			                    </ul>                
+			                    
+			                </div>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
 		                	<!-- 게시판 리스트 시작 -->
 		                	<select id="accompany_status_code" onchange="statusFunc()">
-		                		<option value="H0000">모두</option>
+		                		<option value=""  disabled selected style="display:none;">모두</option>
 								<c:forEach var="postType" items="${postTypeList}">
 									<option value="${postType.code}">${postType.code_name}</option>
 								</c:forEach>
@@ -203,7 +229,7 @@
 		                </div>
 	                </div>
 	                </div>
-	                <!-- End Blog All Posts -->
+	                <!-- 게시판 종료 -->
 	            </div>
 	        </div><!--/end container-->
 	        <!-- End Content Part -->
