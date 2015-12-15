@@ -50,6 +50,12 @@
 			return false;
 		}
 		
+		if (memberForm.passwordConfirm.value == "") {
+			alert("확인 패스워드를 입력해주세요.");
+			memberForm.passwordConfirm.focus();
+			return false;
+		}
+		
 		if (memberForm.mem_name.value == "") {
 			alert("이름을 입력해주세요.");
 			memberForm.mem_name.focus();
@@ -98,6 +104,13 @@
 			form.terms.focus();
 			return false;
 		}
+		
+		if(form.mem_pwd.value != form.passwordConfirm.value) {
+			alert("비밀번호가 일치하지 않습니다. 다시 확인해주세요.");
+			form.mem_pwd.focus();
+			return false;
+		}
+		
 	}
 </script>
 <c:import url="/WEB-INF/views/user/common/utilImport.jsp" />
@@ -138,6 +151,14 @@
 											<b class="tooltip tooltip-top-right">사용하실 비밀번호를 입력해주세요.</b>
 										</label>
 									</section>
+									
+									<section>
+	                                    <label class="input">
+	                                        <i class="icon-append fa fa-lock"></i>
+	                                        <input type="password" name="passwordConfirm" placeholder="Confirm password">
+	                                        <b class="tooltip tooltip-top-right">사용하실 비밀번호를 한번 더 입력해주세요.</b>
+	                                    </label>
+	                                </section>
 
 									<section>
 										<label class="input"> 
@@ -157,12 +178,12 @@
 									</section>
 
 									<section>
-										<label>관심분야</label><br /> 
-										<span> 
-											<label style="float: left"><input type="checkbox" name="interestValue" value="I0001" />혼자여행</label> 
-											<label style="float: left"><input type="checkbox" name="interestValue" value="I0002" />단체여행 </label> 
-											<label style="float: left"><input type="checkbox" name="interestValue" value="I0003" />국내여행</label> 
-											<label><input type="checkbox" name="interestValue" value="I0004" />해외여행 </label>
+										<label><font size="5">관심분야</font></label><br />
+										<span>
+											<label style="margin-right:30px;"><input type="checkbox" name="interestValue" value="I0001" /><font size="3">혼자여행</font></label>
+											<label style="margin-right:30px;"><input type="checkbox" name="interestValue" value="I0002" /><font size="3">단체여행 </font></label>
+											<label style="margin-right:30px;"><input type="checkbox" name="interestValue" value="I0003" /><font size="3">국내여행</font></label>
+											<label style="margin-right:30px;"><input type="checkbox" name="interestValue" value="I0004" /><font size="3">해외여행 </font></label>
 											<input type="hidden" name="mem_interest" />
 										</span>
 									</section>
@@ -398,7 +419,7 @@
 						</div>
 
 						<div align="right">
-							<a href="">로그인</a>
+							<a class="btn-u btn-u-default" href="">로그인</a>
 							<button type="submit" class="btn-u">회원가입</button>
 						</div>
 					</div>
