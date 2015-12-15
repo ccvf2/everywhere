@@ -18,7 +18,6 @@ import everywhere.com.mynetgear.ccvf2.comm.util.common.Constant;
 import everywhere.com.mynetgear.ccvf2.comm.util.common.SecurityUtil;
 import everywhere.com.mynetgear.ccvf2.user.dao.member.MemberDao;
 import everywhere.com.mynetgear.ccvf2.user.dto.member.MemberDto;
-import everywhere.com.mynetgear.ccvf2.comm.aop.EverywhereAspect;
 
 /**
  * @author 김준호
@@ -74,10 +73,10 @@ public class MemberServiceImp implements MemberService {
 		memberDto.setMem_p_status_code(Constant.MEMBER_P_STATUS_ACTIVE);
 		memberDto.setMem_profile_photo(Constant.SYNB_NULL);
 		memberDto.setMem_status_code(Constant.MEMBER_STATUS_LOCK);
-		//System.out.println("memberService registerOk memberDto:"+memberDto.toString());
+		System.out.println("memberService registerOk memberDto:"+memberDto.toString());
 		
 		int check=memberDao.registerOk(memberDto);
-		//System.out.println("memberService registerOk check:"+check);
+		System.out.println("memberService registerOk check:"+check);
 		
 		mav.addObject("check", check);
 		mav.setViewName("/user/member/registerOk");	
@@ -130,10 +129,10 @@ public class MemberServiceImp implements MemberService {
 		String pw =SecurityUtil.Sha256Encrypt(memberDto.getMem_email(), memberDto.getMem_pwd());
 		memberDto.setMem_pwd(pw);
 		
-		//System.out.println("memberService updateOk memberDto:"+memberDto.toString());
+		System.out.println("memberService updateOk memberDto:"+memberDto.toString());
 		
 		int check=memberDao.memberUpdate(memberDto);
-		//System.out.println("memberService updateOk check:"+check);
+		System.out.println("memberService updateOk check:"+check);
 		
 		int mem_no=Integer.parseInt(request.getParameter("mem_no"));
 		memberDto=memberDao.memberRead(mem_no);
@@ -150,7 +149,7 @@ public class MemberServiceImp implements MemberService {
 		MemberDto memberDto=(MemberDto)map.get("memberDto");
 		
 		int mem_no=Integer.parseInt(request.getParameter("mem_no"));
-		//System.out.println("memberService delete mem_no:"+mem_no);
+		System.out.println("memberService delete mem_no:"+mem_no);
 		memberDto.setMem_no(mem_no);
 		
 		memberDto=memberDao.memberRead(mem_no);
