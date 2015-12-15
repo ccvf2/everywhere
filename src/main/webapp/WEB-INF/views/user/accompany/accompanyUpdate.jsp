@@ -34,7 +34,42 @@
 		  box-shadow: none;
 		  border: 0px solid #eee;
 		}
+		
 	</style>
+	<script type="text/javascript">
+		//유효성 검사 함수
+		function writeCheck() {
+			//성별 체크 확인
+			if ($("input[name='gender_code']:checked").length > 0){
+				  // one ore more checkboxes are checked
+			}
+			else{
+				// no checkboxes are checked
+				alert("구할 동행의 성별을 체크해주세요");
+				return false;
+			}
+			
+			var title = document.forms["accompanyForm"]["title"].value;
+		    if (title == null || x == "") {
+		        alert("제목을 입력하세요");
+		        document.forms["accompanyForm"]["title"].focus();
+		        return false;
+		    }
+		    
+		    var content = document.forms["accompanyForm"]["content"].value;
+		    if (content == null || x == "") {
+		        alert("제목을 입력하세요");
+		        document.forms["accompanyForm"]["title"].focus();
+		        return false;
+		    }
+		}
+		
+		// 검색하는 함수
+		function searchFun() {
+			var search=document.getElementById("search").value;
+			location.href="/user/accompany/accompanyList.do?search="+search;
+		}
+	</script>
 </head>
 <body>
 	<div class="wrapper">
@@ -146,20 +181,19 @@
 			                    <!-- DatePicker 시작 -->
 			                    <fmt:formatDate var="start_date" pattern="yyyy-MM-dd" value="${accompanyDto.start_date}"/>
   								<fmt:formatDate var="end_date" pattern="yyyy-MM-dd" value="${accompanyDto.end_date}"/>
-  		
-			                    <div class="row">
-		                            <section class="col col-6">
-		                                <label class="input">
-		                                    <i class="icon-append fa fa-calendar"></i>
-		                                    <input type="text" name="start_date" id="start_date" placeholder="시작일" class="hasDatepicker" value="${start_date}">
-		                                </label>
-		                            </section>
-		                            <section class="col col-6">
-		                                <label class="input">
-		                                    <i class="icon-append fa fa-calendar"></i>
-		                                    <input type="text" name="end-date" id="end-date" placeholder="종료일" class="hasDatepicker" value="${end_date}">
-		                                </label>
-		                            </section>
+                                <div class="row">
+                                    <section class="col col-6">
+                                        <label class="input">
+                                            <i class="icon-append fa fa-calendar"></i>
+                                            <input type="text" name="start_date" id="start" placeholder="시작일">
+                                        </label>
+                                    </section>
+                                    <section class="col col-6">
+                                        <label class="input">
+                                            <i class="icon-append fa fa-calendar"></i>
+                                            <input type="text" name="start_date" id="finish" placeholder="종료일">
+                                        </label>
+                                    </section>
 		                        </div>
 		                        <!-- DatePicker 끝 -->
 		                        <!-- 글 내용 시작 -->
@@ -205,5 +239,22 @@
 		    <!--=== End Footer Version 1 ===-->
 	    </div>
 	</div>
+	<!-- JS Implementing Plugins -->
+	<script src="/assets/plugins/sky-forms-pro/skyforms/js/jquery.maskedinput.min.js"></script>
+	<script src="/assets/plugins/sky-forms-pro/skyforms/js/jquery-ui.min.js"></script>
+	<script src="/assets/plugins/sky-forms-pro/skyforms/js/jquery.validate.min.js"></script>
+	<!-- JS Page Level -->
+	<script type="text/javascript" src="/assets/js/app.js"></script>
+	<script type="text/javascript" src="/assets/js/plugins/masking.js"></script>
+	<script type="text/javascript" src="/assets/js/plugins/datepicker.js"></script>
+	<script type="text/javascript" src="/assets/js/plugins/validation.js"></script>
+	<script type="text/javascript">
+	    jQuery(document).ready(function() {
+	        App.init();
+	        Masking.initMasking();
+	        Datepicker.initDatepicker();
+	        Validation.initValidation();
+	    });
+	</script>
   </body>
 </html>

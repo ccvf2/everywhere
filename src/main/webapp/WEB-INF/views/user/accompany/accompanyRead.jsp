@@ -29,6 +29,12 @@
 				location.href="/user/accompany/accompanyDelete.do?accompany_no="+accompany_no;
 			}
 		}
+		
+		function searchFun() {
+			var search=document.getElementById("search").value;
+			location.href="/user/accompany/accompanyList.do?search="+search;
+		}
+		
 		$(document).ready(function() {
 			
 		//type_code:댓글이 있는 게시판고유코드,
