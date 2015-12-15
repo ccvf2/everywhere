@@ -8,8 +8,8 @@
 </head>
 <body>
 <form action="/user/login/login.do" name="memberLogin" method="post">
-<label>아이디<input type="text" name="mem_email" value="admin@everywhere.com"></label>
-<label>비밀번호<input type="text" name="mem_pwd" value="1234"></label>
+<label>아이디<input type="text" name="mem_email" value="ccvf2@naver.com"></label>
+<label>비밀번호<input type="text" name="mem_pwd" value="66107e7"></label>
 <input type="submit" value="로그인">
 </form>
 </body>
