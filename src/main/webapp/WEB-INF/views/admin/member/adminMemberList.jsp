@@ -45,6 +45,18 @@
 			}
 		});
 	});
+	
+	function searchFun() {
+		var memLevel=document.getElementById("memLevel").value;
+		var memStatus=document.getElementById("memStatus").value;
+		var phoneStatus=document.getElementById("phoneStatus").value;
+		var start_date=document.getElementById("start_date");
+		var end_date=document.getElementById("end_date").value;
+		
+		alert("memLevel:" + memLevel + "memStatus:" + memStatus + "phoneStatus:" + phoneStatus + "start_date:" + start_date + "end_date:" + end_date);
+		
+		//location.href="/user/accompany/accompanyList.do?search="+search;
+	}
 </script>
 </head>
 <body>
@@ -72,13 +84,14 @@
                         </ol>
                     </div>
                 </div>
-                <form>
+                <form 
+                >
 	                <!-- 필터들 -->
 	                <div class="row">
 	                	<div class="col-xs-6 col-sm-2">
 							<div class="form-group">
 	                          <label>사용자 종류</label>
-	                           	<select name="memLevel" class="form-control">
+	                           	<select name="memLevel" id="memLevel" class="form-control">
 									<c:forEach var="memLevel" items="${memLevelList}">
 										<option value="${memLevel.code}">${memLevel.code_name}</option>
 									</c:forEach>
@@ -89,7 +102,7 @@
 	                  	<div class="col-xs-6 col-sm-2">    
 	                        <div class="form-group">
 	                          <label>계정 상태</label>
-	                          <select name="memStatus" class="form-control">
+	                          <select name="memStatus" id="memStatus" class="form-control">
 									<c:forEach var="memStatus" items="${memStatusList}">
 										<option value="${memStatus.code}">${memStatus.code_name}</option>
 									</c:forEach>
@@ -100,7 +113,7 @@
 	                  	<div class="col-xs-6 col-sm-2">        
 	                        <div class="form-group">
 	                          <label>핸드폰 인증 상태</label>
-	                           <select name="phoneStatus" class="form-control">
+	                           <select name="phoneStatus" id="phoneStatus" class="form-control">
 									<c:forEach var="phoneStatus" items="${phoneStatusList}">
 										<option value="${phoneStatus.code}">${phoneStatus.code_name}</option>
 									</c:forEach>
@@ -109,30 +122,31 @@
 	                        </div>
 						</div>
 						<div class="col-xs-6 col-sm-3">
-							<label>시작일</label>
-							<input type="text" name="start_date" id="start_date" />
-							
+							<div class="form-group">
+								<label>시작일</label>
+								<input type="text" name="start_date" id="start_date" class="form-control"/>
+							</div>
 							
 						</div>
 						<div class="col-xs-6 col-sm-3">
 							<label>종료일</label>
-							<input type="text" name="end_date" id="end_date" /><br/>
+							<input type="text" name="end_date" id="end_date" class="form-control"/><br/>
 						</div>
 					</div>
 					
 					<!-- 검색칸 -->
 	                <div class="row">
-	                	<div class="col-xs-4 col-md-7">
+	                	<div class="col-xs-4">
 	                		<select name="phoneStatus" class="form-control">
 								<option value="email">이메일</option>
 								<option value="name">이름</option>
 								<option value="emailname">이메일+이름</option>
 						   </select>
 						</div>
-	                	<div class="col-xs-8 col-md-7">
+	                	<div class="col-xs-8">
 							<input type="text" class="form-control">
 		                    <span class="input-group-btn">
-		                    	<button class="btn btn-default" type="button">
+		                    	<button class="btn btn-default" type="button" onclick="searchFun()">
 		                    		<i class="fa fa-search"></i>
 		                    	</button>
 		                    </span>
