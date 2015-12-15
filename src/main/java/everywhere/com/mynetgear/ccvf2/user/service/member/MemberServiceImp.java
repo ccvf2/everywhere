@@ -17,6 +17,7 @@ import everywhere.com.mynetgear.ccvf2.comm.service.commoncode.CommonCodeService;
 import everywhere.com.mynetgear.ccvf2.comm.util.common.Constant;
 import everywhere.com.mynetgear.ccvf2.user.dao.member.MemberDao;
 import everywhere.com.mynetgear.ccvf2.user.dto.member.MemberDto;
+import everywhere.com.mynetgear.ccvf2.comm.aop.EverywhereAspect;
 
 /**
  * @author 김준호
@@ -38,11 +39,9 @@ public class MemberServiceImp implements MemberService {
 		HttpServletResponse response=(HttpServletResponse)map.get("response");
 		
 		String email=request.getParameter("email");
-		// EverywhereAspect.logger.info(EverywhereAspect.logger+","+email);
 		
 		String mem_email=memberDao.emailCheck(email);
 		System.out.println("memberService emailCheck mem_email:"+mem_email);
-		// EverywhereAspect.logger.info(EverywhereAspect.logger+","+mem_email);
 		
 		int check=0;
 		if(mem_email.equals(email)&& mem_email!=null) {
