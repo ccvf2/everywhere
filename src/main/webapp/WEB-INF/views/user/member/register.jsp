@@ -50,6 +50,12 @@
 			return false;
 		}
 		
+		if (memberForm.passwordConfirm.value == "") {
+			alert("확인 패스워드를 입력해주세요.");
+			memberForm.passwordConfirm.focus();
+			return false;
+		}
+		
 		if (memberForm.mem_name.value == "") {
 			alert("이름을 입력해주세요.");
 			memberForm.mem_name.focus();
@@ -98,6 +104,13 @@
 			form.terms.focus();
 			return false;
 		}
+		
+		if(form.mem_pwd.value != form.passwordConfirm.value) {
+			alert("비밀번호가 일치하지 않습니다. 다시 확인해주세요.");
+			form.mem_pwd.focus();
+			return false;
+		}
+		
 	}
 </script>
 <c:import url="/WEB-INF/views/user/common/utilImport.jsp" />
@@ -138,6 +151,14 @@
 											<b class="tooltip tooltip-top-right">사용하실 비밀번호를 입력해주세요.</b>
 										</label>
 									</section>
+									
+									<section>
+	                                    <label class="input">
+	                                        <i class="icon-append fa fa-lock"></i>
+	                                        <input type="password" name="passwordConfirm" placeholder="Confirm password">
+	                                        <b class="tooltip tooltip-top-right">사용하실 비밀번호를 한번 더 입력해주세요.</b>
+	                                    </label>
+	                                </section>
 
 									<section>
 										<label class="input"> 
@@ -152,17 +173,17 @@
 											<i class="icon-append fa fa-phone"></i> 
 											<input type="text" name="mem_phone" placeholder="Phonenumber"> 
 											<b class="tooltip tooltip-top-right">회원님의 전화번호를 입력해주세요.</b>
-											<button type="button" class="btn btn-default btn-sm">번호인증</button>
+											<button type="button" class="btn-u">번호인증</button>
 										</label>
 									</section>
 
 									<section>
-										<label>관심분야</label><br /> 
-										<span> 
-											<label style="float: left"><input type="checkbox" name="interestValue" value="I0001" />혼자여행</label> 
-											<label style="float: left"><input type="checkbox" name="interestValue" value="I0002" />단체여행 </label> 
-											<label style="float: left"><input type="checkbox" name="interestValue" value="I0003" />국내여행</label> 
-											<label><input type="checkbox" name="interestValue" value="I0004" />해외여행 </label>
+										<label><font size="5">관심분야</font></label><br />
+										<span>
+											<label style="margin-right:30px;"><input type="checkbox" name="interestValue" value="I0001" /><font size="3">혼자여행</font></label>
+											<label style="margin-right:30px;"><input type="checkbox" name="interestValue" value="I0002" /><font size="3">단체여행 </font></label>
+											<label style="margin-right:30px;"><input type="checkbox" name="interestValue" value="I0003" /><font size="3">국내여행</font></label>
+											<label style="margin-right:30px;"><input type="checkbox" name="interestValue" value="I0004" /><font size="3">해외여행 </font></label>
 											<input type="hidden" name="mem_interest" />
 										</span>
 									</section>
@@ -173,7 +194,7 @@
 											<div class="panel panel-default">
 												<div class="panel-heading">
 													<h6 class="panel-title">
-														<label><input type="checkbox" name="description" value="이용약관" /><font size="2">everywhere 이용 약관에 대한 동의 (필수)</font></label>
+														<label><input type="checkbox" name="description" value="이용약관" />everywhere 이용 약관에 대한 동의 (필수)</label>
 														<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion-1" href="#collapse-One" >
 															<font size="2">전문보기</font>
 														</a>
@@ -344,7 +365,7 @@
 											<div class="panel panel-default">
 												<div class="panel-heading">
 													<h6 class="panel-title">
-														<label><input type="checkbox" name="terms" value="개인정보" /><font size="2">개인 정보 수집 및 이용 동의 (필수)</font></label><br/>
+														<label><input type="checkbox" name="terms" value="개인정보" />개인 정보 수집 및 이용 동의 (필수)</label><br/>
 														<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion-1" href="#collapse-Two">
 															<font size="2">전문보기</font>
 														</a>
@@ -398,7 +419,7 @@
 						</div>
 
 						<div align="right">
-							<a href="">로그인</a>
+							<a class="btn-u btn-u-default" href="">로그인</a>
 							<button type="submit" class="btn-u">회원가입</button>
 						</div>
 					</div>
