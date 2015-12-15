@@ -33,35 +33,16 @@
 	<!--=== Header ===-->	
     <div class="header">
 		<c:import url="/WEB-INF/views/user/common/header.jsp"/>
-    </div>
-    <script type="text/javascript">
-    $(function() {
-		$(".cbp_tmlabel equal-height-column").css("margin" , "0 0 20 25%");
-	})
-    
-    </script>
+    </div>    
 	<!--=== End Header ===-->	
 	 
-    <!--=== Breadcrumbs ===-->
-    <div class="breadcrumbs">
-        <div class="container">
-            <h1 class="pull-left">Timeline</h1>
-            <ul class="pull-right breadcrumb">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="">Features</a></li>
-                <li class="active">Timeline</li>
-            </ul>
-        </div>
-    </div>
-    <!--=== Breadcrumbs v1 ===-->
+    <!--=== Breadcrumbs ===-->    
     <div class="breadcrumbs-v1">
         <div class="container" style="height: 50px;">
             <span>Blog Item Page</span>
             <h1>Basic Item Page</h1>
         </div>
     </div>
-    <!--=== End Breadcrumbs v1 ===-->    
-    <!--/breadcrumbs-->
     <!--=== End Breadcrumbs ===-->
 
     <!--=== Content Part ===-->

@@ -15,7 +15,7 @@ function readCityList(){
 		success:function(data){
 			var result = data.split("|");
 			var str = "";
-			str+="<option value=''> ---- </option>";		
+			str+="<option value='0' selected disabled>City</option>";		
 			for(i = 0; i < result.length-1; i++){
 				var code = result[i].split(",");
 				str+="<option value='"+code[0]+"'>" + code[1] + "</option>";		

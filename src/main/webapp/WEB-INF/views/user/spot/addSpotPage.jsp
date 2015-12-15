@@ -1,76 +1,37 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>타이틀 입력</title>
-<script type="text/javascript" src="/script/common/jquery-1.11.3.js"></script>
-<script type="text/javascript" src="/script/user/spot/selectedCountry.js"></script>
-<script type="text/javascript" src="/script/user/spot/xhr.js"></script>
-<script type="text/javascript" src="/script/user/spot/googleMap.js"></script>
-<script async defer src="https://maps.googleapis.com/maps/api/js?sensor=true"></script>
-<style type="text/css">
-#map {
-   height: 350px;
-   width: 350px;
-}
-</style>
-<script type="text/javascript">
-function readURL(input) {
-    if (input.files && input.files[0]) {
-        var reader = new FileReader();
-        
-        reader.onload = function (e) {
-            $('#preview').attr('src', e.target.result);
-        }
-        
-        reader.readAsDataURL(input.files[0]);
-    }
-}
-
-$(document).ready(function(){
-	$("#spot_image").change(function(){
-	    readURL(this);
-	});
-});
-</script>
-</head>
-<!-- <body leftmargin="0" marginwidth="0" topmargin="0" marginheight="0" onload="initialize();"> -->
-<body leftmargin="20" topmargin="20" onload="initialize();">
-<form class="addSpotStyle" action="/user/spot/addSpotWrite.do" method="post" onsubmit="return guestForm(this)" enctype="multipart/form-data">
-	<input type="text" id="address"  name="spot_addr" placeholder="주소를 입력해주세요" size="38"/> 
-	<input type="button" value="클릭" onclick="toServer()" />
-	<div id="map"></div>
-	<div>	
-		<input type="hidden" name="mem_no" value="1">			
-		<input type="hidden" name="mem_level_code" value="M0002">
-		<select name="country_code" id="selectCountry" onchange="readCityList()">
-			<c:forEach var="country" items="${countryList}" >
-				  <option value="${country.code}">${country.code_name}</option>
-			</c:forEach>                                                                     
-		</select>
-			
-		<select name="city_code" id="selectCity">
-			<option> select </option>
-		</select>
-		<select name="spot_type_code">
-			 <c:forEach var="spotType" items="${spotTypeList}" >
-				  <option value="${spotType.code}">${spotType.code_name}</option>
-			</c:forEach>         
-		</select> <br/>
-		명소명 : <input type="text" name="spot_name"/> <br/>
-		한줄설명 : <input type="text" name="spot_note"/> <br/>
-		<div>
-			<img id="preview"/>
-		</div>
-		Image : <input type="file" id="spot_image" name="spot_image">
-		<br/>
-		// 테스트용 위도경도; 수정금지. 나중에 hidden 으로 바꾸자
-		<input type="text" id="lat" name="spot_lat"/>
-		<input type="text" id="lng" name="spot_long"/> <br/>
-		<input type="submit" value="추가"/>
-	</div>		
-</form>
-</body>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>명소 추가</title>    
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    
+	
+  </head>
+  <body>
+  <div class="header">
+		<c:import url="/WEB-INF/views/user/common/utilImport.jsp"/>
+	    </div>   
+       <button class="btn-u" data-toggle="modal" data-target=".bs-example-modal-lg">Large Modal</button>
+       
+       <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+           <div class="modal-dialog modal-lg">
+               <div class="modal-content">                                    
+                   <div class="modal-body">
+                       <c:import url="/WEB-INF/views/user/spot/addSpotModal.jsp"></c:import>
+                   </div>
+               </div>
+           </div>
+       </div>
+  </body>
 </html>
