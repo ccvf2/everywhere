@@ -6,7 +6,6 @@
 <head>
 <meta charset="utf-8">
 <title>회원가입</title>
-<link rel="stylesheet" type="text/css" href="">
 <script type="text/javascript" src="/script/common/jquery-1.11.3.js"></script>
 <script type="text/javascript">
 	$(function() {
@@ -106,13 +105,13 @@
 <body>
 	<button class="btn-u" data-toggle="modal" data-target="#myModal">회원가입</button>
 
-	<div class="modal fade bs-example-modal-sm" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-		<div class="modal-dialog modal-sm">
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
 			<div class="modal-content">
 				<form name="memberForm" id="sky-form4" class="sky-form" action="/user/member/register.do" method="post" onsubmit="return registerForm(this)">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-						<h3 class="modal-title" id="myModalLabel4">이메일 주소로 회원가입</h3>
+						<h3 class="modal-title" id="myModalLabel4">회원가입</h3>
 					</div>
 
 					<div class="modal-body">
@@ -123,7 +122,7 @@
 										<label class="input"> 
 											<i class="icon-append fa fa-envelope"></i> 
 											<input type="email" name="mem_email" id="email" placeholder="Email address">
-											<b class="tooltip tooltip-bottom-right" data-toggle="tooltip" data-placement="bottom-right">사용하실 이메일(계정)을 입력해주세요.</b>
+											<b class="tooltip tooltip-top-right" data-toggle="tooltip" data-placement="bottom-right">사용하실 이메일(계정)을 입력해주세요.</b>
 										</label>
 										<div id="emailCheck"></div>
 									</section>
@@ -133,27 +132,27 @@
 									</div>
 
 									<section>
-										<label class="input" style="margin-left: 5px;"> 
+										<label class="input"> 
 											<i class="icon-append fa fa-lock"></i> 
 											<input type="password" name="mem_pwd" placeholder="Password"> 
-											<b class="tooltip tooltip-bottom-right">사용하실 비밀번호를 입력해주세요.</b>
+											<b class="tooltip tooltip-top-right">사용하실 비밀번호를 입력해주세요.</b>
 										</label>
 									</section>
 
 									<section>
-										<label class="input" style="margin-left: 3px; margin-top: 2px;"> 
+										<label class="input"> 
 											<i class="icon-append fa fa-user"></i> 
 											<input type="text" name="mem_name" placeholder="Username"> 
-											<b class="tooltip tooltip-bottom-right">회원님의 이름을 입력해주세요.</b>
+											<b class="tooltip tooltip-top-right">회원님의 이름을 입력해주세요.</b>
 										</label>
 									</section>
 
 									<section>
-										<label class="input" style="margin-left: 3px;"> 
+										<label class="input"> 
 											<i class="icon-append fa fa-phone"></i> 
 											<input type="text" name="mem_phone" placeholder="Phonenumber"> 
-											<b class="tooltip tooltip-bottom-right">회원님의 전화번호를 입력해주세요.</b>
-											<button type="button" class="btn btn-default btn-sm">번호인증</button>
+											<b class="tooltip tooltip-top-right">회원님의 전화번호를 입력해주세요.</b>
+											<button type="button" class="btn-u">번호인증</button>
 										</label>
 									</section>
 
@@ -174,7 +173,7 @@
 											<div class="panel panel-default">
 												<div class="panel-heading">
 													<h6 class="panel-title">
-														<label><input type="checkbox" name="description" value="이용약관" /><font size="2">everywhere 이용 약관에 대한 동의 (필수)</font></label>
+														<label><input type="checkbox" name="description" value="이용약관" />everywhere 이용 약관에 대한 동의 (필수)</label>
 														<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion-1" href="#collapse-One" >
 															<font size="2">전문보기</font>
 														</a>
@@ -183,9 +182,9 @@
 												<div id="collapse-One" class="panel-collapse collapse">
 													<div class="panel-body">
 														<div class="row">
-															<div class="col-md-12" style="font:8px;">
+															<div class="col-md-12">
 																<textarea class="form-control" rows="8" cols="30" disabled="disabled" style="resize:none;">
-																	제 1 조(목적) 이 약관은 (주) 3성(이하 “회사”라 합니다)가 제공하는 여행정보 공유서비스 ‘에브리웨얼'(‘Everywhere’) 웹 서비스, 모바일 어플리케이션 등 관련 제반 서비스(이하 “서비스”라 합니다)의 이용과 관련하여 회사와 
+																	제 1 조(목적) 이 약관은 (주) 3성(이하 “회사”라 합니다)가 제공하는 여행정보 공유서비스 ‘에브리웨얼'(‘everywhere’) 웹 서비스, 모바일 어플리케이션 등 관련 제반 서비스(이하 “서비스”라 합니다)의 이용과 관련하여 회사와 
 																	회원과의 권리, 의무 및 책임사항, 기타 필요한 사항을 규정함을 목적으로 합니다.
 																	제 2 조(정의) 이 약관에서 사용하는 용어의 정의는 다음과 같습니다.
 																	1. "회원"이라 함은 "회사"의 "서비스"에 접속하여 이 약관에 따라 "회사"와 이용계약을 체결하고 "회사"가 제공하는 "서비스"를 이용하는 고객을 말합니다.
@@ -345,7 +344,7 @@
 											<div class="panel panel-default">
 												<div class="panel-heading">
 													<h6 class="panel-title">
-														<label><input type="checkbox" name="terms" value="개인정보" /><font size="2">개인 정보 수집 및 이용 동의 (필수)</font></label><br/>
+														<label><input type="checkbox" name="terms" value="개인정보" />개인 정보 수집 및 이용 동의 (필수)</label><br/>
 														<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion-1" href="#collapse-Two">
 															<font size="2">전문보기</font>
 														</a>
@@ -354,8 +353,8 @@
 												<div id="collapse-Two" class="panel-collapse collapse">
 													<div class="panel-body">
 														<div class="row">
-															<div class="col-md-12" style="font:8px;">
-																<textarea class="form-control" rows="8" cols="30" disabled="disabled" style="resize:none;">
+															<div class="col-md-12">
+																<textarea class="form-control" rows="5" cols="30" disabled="disabled" style="resize:none;">
 																	정보통신망법 규정에 따라, 위시빈에 회원가입 신청하시는 이용자들께, 수집하는 개인정보의 항목, 개인정보의 수집 및 이용목적, 개인정보의 보유 및 이용기간에 대하여 안내 드리오니, 자세히 읽은 후 동의하여 주시기 바랍니다.
 																	1. 수집하는 필수 개인정보의 항목
 																	회사는 회원가입, 고객 상담 및 각종 서비스의 제공을 위하여 아래와 같이 개인정보를 수집하고 있습니다.

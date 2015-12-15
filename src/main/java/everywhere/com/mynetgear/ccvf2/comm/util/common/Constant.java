@@ -73,6 +73,10 @@ public class Constant {
 	public static final String SYNN_LOGIN_EMAIL = "mem_email";
 	/** 세션에 담겨 있는 로그인정보 : NAME */
 	public static final String SYNN_LOGIN_NAME = "mem_name";
+	/** 세션에 담겨 있는 로그인정보 : STATUS */
+	public static final String SYNN_LOGIN_STATUS = "mem_status";
+	/** 세션에 담겨 있는 로그인정보 : LEVEL */
+	public static final String SYNN_LOGIN_LEVEL = "mem_level";
 	/** 세션에 담겨 있는 로그인정보 : OBJECT */
 	public static final String SYNN_LOGIN_OBJECT = "mem_object";
 	
