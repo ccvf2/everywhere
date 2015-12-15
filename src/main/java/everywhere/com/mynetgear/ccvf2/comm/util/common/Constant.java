@@ -66,6 +66,20 @@ public class Constant {
 	public static final String SYNB_NUM_9 = "9";
 	/** String Numbr : 0 */
 	public static final String SYNB_NUM_0 = "0";
+	
+	/** 세션에 담겨 있는 로그인정보 : SEQ */
+	public static final String SYNN_LOGIN_SEQ= "mem_no";
+	/** 세션에 담겨 있는 로그인정보 : ID */
+	public static final String SYNN_LOGIN_EMAIL = "mem_email";
+	/** 세션에 담겨 있는 로그인정보 : NAME */
+	public static final String SYNN_LOGIN_NAME = "mem_name";
+	/** 세션에 담겨 있는 로그인정보 : OBJECT */
+	public static final String SYNN_LOGIN_OBJECT = "mem_object";
+	
+	/** 화면으로 메세지 전송 : alert */
+	public static final String ALERT_MSG = "alert_msg";
+	
+	
 
 	/** 회원등급:관리자 */
 	public static final String MEMBER_LEVEL_ADMIN = "M0001";
