@@ -7,13 +7,11 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
 import everywhere.com.mynetgear.ccvf2.comm.util.common.Constant;
-import everywhere.com.mynetgear.ccvf2.comm.util.common.SecurityUtil;
 import everywhere.com.mynetgear.ccvf2.comm.util.common.StringUtil;
 import everywhere.com.mynetgear.ccvf2.user.dao.member.MemberDao;
 import everywhere.com.mynetgear.ccvf2.user.dto.member.MemberDto;
@@ -30,7 +28,7 @@ public class LoginServiceImp implements LoginService {
 	private MemberDao memberDao;
 
 	@Override
-	public void HandleMemberLogin(ModelAndView mav) {/*
+	public void HandleMemberLogin(ModelAndView mav) {
 		String errMsg = "";
 		Map<String, Object> map = mav.getModelMap();
 		HttpServletRequest request= (HttpServletRequest)map.get("request");
@@ -47,50 +45,38 @@ public class LoginServiceImp implements LoginService {
 		dto.setMem_pwd(mem_pwd);
 
 		// 아이디 존재 여부 확인
-		if (memberDao.getAdminIdcheck(request, dto) > 0) {
+		int exisiID=memberDao.tryLoginInfo(dto);
+		if (exisiID==1) {
 			try {
 				// 암호화 알고리즘을 통한 암호 복원
-				String password256 = SecurityUtil.Sha256Encrypt(vo.getAdminId(), vo.getAdminPassword());
-				vo.setAdminPassword(password256);
-				AdminVO member = adminDao.getLoginInfo(vo);
-				if (null == member || StringUtils.equals(vo.getAdminPassword(), member.getAdminPassword())) {
-					mav = new ModelAndView("/login/login");
-					mav.addObject(Constants.ALERT_MSG, "로그인 정보가 정확하지 않습니다.");
-				} else {
-
-					// 로그인시간처리
-					adminDao.updateLoginConnectDate(member);
+				//String password256 = SecurityUtil.Sha256Encrypt(vo.getAdminId(), vo.getAdminPassword());
+				MemberDto member = memberDao.getOneMemberInfo(dto);
 
 					// 세션처리
 					HttpSession session = request.getSession();
-					session.setAttribute("SESSION_USER", member);
-					session.setAttribute("sid", member.getAdminId());
-					session.setAttribute("sidname", member.getAdminName()); // 이름
-					session.setAttribute("sidseq", member.getAdminSeq()); // adminSeq
-					session.setAttribute("sidemail", member.getAdminEmail()); // 이메일
-					// 로그인 시간 처리
-					session.setAttribute("time", StringUtil.getTodayEx5());
-					// 이전 접속 시간
-					session.setAttribute("conn", member.getAdminConnectDate());
-
+					session.setAttribute(Constant.SYNN_LOGIN_OBJECT, member);
+					/*session.setAttribute("mem_no", member.getMem_no());
+					session.setAttribute("mem_email", member.getMem_email());
+					session.setAttribute("mem_name", member.getMem_name());
+					session.setAttribute("mem_status", member.getMem_status_code());
+					session.setAttribute("mem_level", member.getMem_level_code());*/
 
 					// 불필요한 파라미터 제거
-					String url = "/main/main.do";
+					/*String url = "/user/main/main.do";
 					RedirectView redirectView = new RedirectView(url);
 					redirectView.setExposeModelAttributes(false);
-					mav = new ModelAndView(redirectView);
-
-				}
+					mav = new ModelAndView(redirectView);*/
+					mav.setViewName("/user/main/userMain");
 			} catch (Exception ex) {
 				ex.printStackTrace();
 			}
 		} else {
 			// 아이디 불일치
-			mav = new ModelAndView("/");
+			mav = new ModelAndView("/user/login/login.do");
 			mav.addObject(Constant.ALERT_MSG, "로그인 정보가 정확하지 않습니다.");
 		}
 		
-	*/}
+	}
 	
 	
 	

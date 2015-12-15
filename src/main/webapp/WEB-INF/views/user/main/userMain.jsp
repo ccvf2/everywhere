@@ -19,7 +19,7 @@
 	    </div>
 	    
 	    <!--=== End Header ===-->
-	
+		<a href="/user/login/loginout.do">로그아웃</a>
 	    <!--=== Slider ===-->
 	    <div class="slider-inner">
 	        <div id="da-slider" class="da-slider" >

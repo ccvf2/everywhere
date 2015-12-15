@@ -42,12 +42,22 @@
 	</beans:bean>
 	
 	
-		<beans:bean id="properties" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-        <beans:property name="locations">
-            <beans:list>
-                <beans:value>classpath:everywhere/com/mynetgear/ccvf2/comm/util/common/attachFileAddress.properties</beans:value>
-            </beans:list>
-        </beans:property>
-		</beans:bean>
+	<beans:bean id="properties" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+       <beans:property name="locations">
+           <beans:list>
+               <beans:value>classpath:everywhere/com/mynetgear/ccvf2/comm/util/common/attachFileAddress.properties</beans:value>
+           </beans:list>
+       </beans:property>
+	</beans:bean>
 	
+	
+	<beans:bean id="authorityInterceptor" class="everywhere.com.mynetgear.ccvf2.comm.util.common.AuthorityInterceptor"></beans:bean>
+		<interceptors>
+			<interceptor> 
+				<mapping path="/**"/>
+			<beans:ref  bean="authorityInterceptor"/> 
+			</interceptor>
+		</interceptors>
+		
+
 </beans:beans>
