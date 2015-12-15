@@ -4,7 +4,7 @@
 var values = [];
 
 //명소 쓰기 페이지에서 나라 선택할때 해당 도시 가져오기
-function readCityList(){
+function readCityList(check){
 	var countrycode = document.getElementById("selectCountry").value;
 	var params = "country_code=" + countrycode;
 	var url = "/user/spot/selectCountry.ajax?" + params;
@@ -15,7 +15,11 @@ function readCityList(){
 		success:function(data){
 			var result = data.split("|");
 			var str = "";
-			str+="<option value='0' selected disabled>City</option>";		
+			if(check==true) {
+				str+="<option value='' selected> ---- </option>";
+			}else{
+				str+="<option value='' selected disabled>City</option>";
+			}					
 			for(i = 0; i < result.length-1; i++){
 				var code = result[i].split(",");
 				str+="<option value='"+code[0]+"'>" + code[1] + "</option>";		
@@ -35,7 +39,7 @@ function selectSpotList(city){
 	var typecode = document.getElementById("selectType").value;
 	
 	if(city==true) {
-		readCityList();
+		readCityList(true);
 	}
 	var params = "country_code=" + countrycode + "&city_code=" + citycode + "&spot_type_code="+typecode;
 	var url = "/user/spot/selectSpotList.ajax?" + params;

@@ -39,7 +39,7 @@ function addSpotForm(form){
 		return false;
 	}
 	
-	if(form.city_code.value == null || form.city_code.value=="0"){
+	if(form.city_code.value == null || form.city_code.value=="0" || form.city_code.value==""){
 		alert("도시를 선택해주세요.");
 		form.country_code.focus();
 		return false;
