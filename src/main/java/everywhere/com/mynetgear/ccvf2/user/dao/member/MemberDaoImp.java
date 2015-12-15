@@ -43,6 +43,17 @@ public class MemberDaoImp implements MemberDao {
 	public int memberDelete(MemberDto memberDto) {
 		return sqlTemplate.update("everywhere.com.mynetgear.ccvf2.user.mapper.member.memberDelete", memberDto);
 	}
+
+	/** 아이디 비밀번호 체크 */
+	@Override
+	public int tryLoginInfo(MemberDto memberDto) {
+		return sqlTemplate.selectOne("tryLoginInfo", memberDto);
+	}
+	/** 아이디 비밀번호 체크 후 로그인사용자 정보가져오기 */
+	@Override
+	public MemberDto getOneMemberInfo(MemberDto memberDto) {
+		return sqlTemplate.selectOne("getOneMemberInfo", memberDto);
+	}
 	
 	
 	

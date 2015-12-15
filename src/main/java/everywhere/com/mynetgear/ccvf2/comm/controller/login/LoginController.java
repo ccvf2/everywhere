@@ -47,31 +47,45 @@ public class LoginController {
 	 * @param dto
 	 * @return
 	 */
-	@RequestMapping(value = "user/login/login.do", method = RequestMethod.POST)
+	@RequestMapping(value = "/user/login/login.do", method = RequestMethod.POST)
 	public ModelAndView HandleMemberLogin(HttpServletRequest request, HttpServletResponse response, 
 			@ModelAttribute("memberLogin") MemberDto dto) {
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("request", request);
 		mav.addObject("memberDto", dto);
 		loginService.HandleMemberLogin(mav);
+		System.out.println("로그인성공");
 		return mav;
 	}
 
+	/**
+	 * @author 배성욱
+	 * @createDate 2015. 12. 15.
+	 * @described 로그인페이지로 이동
+	 * @param request
+	 * @param response
+	 * @param dto
+	 * @return
+	 */
+	@RequestMapping(value = "/user/login/login.do", method = RequestMethod.GET)
+	public ModelAndView memberLoginpage(HttpServletRequest request, HttpServletResponse response) {
+		ModelAndView mav = new ModelAndView("/common/login/login");
+		return mav;
+	}
 
 	/* 로그아웃 */
-	@RequestMapping(value = "/login/logout.au", method = RequestMethod.GET)
+	@RequestMapping(value = "/user/login/loginout.do", method = RequestMethod.GET)
 	public ModelAndView requestLogout(HttpServletRequest request) {
+		System.out.println(Constant.LOG_ID1+"로그아웃");
 		// 세션처리
 		HttpSession session = request.getSession();
 		session.invalidate();
 
 		/* 불필요한 파라미터 제거 */
-		String url = "/login/login.au";
-
+/*		String url = "/";
 		RedirectView redirectView = new RedirectView(url);
-		redirectView.setExposeModelAttributes(false);
-
-		ModelAndView mav = new ModelAndView(redirectView);
+		redirectView.setExposeModelAttributes(false);*/
+		ModelAndView mav = new ModelAndView("/user/main/userMain");
 
 		return mav;
 

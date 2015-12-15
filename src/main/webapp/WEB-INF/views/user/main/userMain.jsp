@@ -18,8 +18,8 @@
 			<c:import url="/WEB-INF/views/user/common/header.jsp"/>
 	    </div>
 	    
+		<a href="/user/login/loginout.do">로그아웃</a>
 	    <!--=== End Header ===-->
-	
 	    <!--=== Slider ===-->
 	    <div class="slider-inner">
 	        <div id="da-slider" class="da-slider" >

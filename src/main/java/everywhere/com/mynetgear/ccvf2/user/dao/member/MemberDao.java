@@ -49,5 +49,24 @@ public interface MemberDao {
 	 * @return
 	 */
 	public int memberDelete(MemberDto memberDto);
+	
+	/**
+	 * @author 배성욱
+	 * @createDate 2015. 12. 15.
+	 * @described 로그인시 비밀번호와아이디 체크.
+	 * @param memberDto
+	 * @return
+	 */
+	public int tryLoginInfo(MemberDto memberDto);
+	
+	
+	/**
+	 * @author 배성욱
+	 * @createDate 2015. 12. 15.
+	 * @described 비밀번호 아이디 체크 후 사용자 정보 가져오기
+	 * @param memberDto
+	 * @return
+	 */
+	public MemberDto getOneMemberInfo(MemberDto memberDto); 
 
 }
