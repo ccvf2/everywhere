@@ -20,7 +20,6 @@
     <task:annotation-driven scheduler="jobScheduler" /> -->
     
     
-    <!-- AuthorityInterceptor -->
-	<bean id="authorityInterceptor" class="everywhere.com.mynetgear.ccvf2.comm.util.common.AuthorityInterceptor" />
+    
 
 </beans>
