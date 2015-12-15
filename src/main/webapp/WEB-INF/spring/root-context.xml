@@ -44,14 +44,5 @@
 	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
 		<property name="dataSource" ref="DataSource"/>
 	</bean>
-	<!-- AuthorityInterceptor -->
- 	<!-- <bean id="authorityInterceptor" class="everywhere.com.mynetgear.ccvf2.comm.util.common.AuthorityInterceptor" /> -->
- 	
- 	<!-- HandlerMapping 방식 설정 -->    
-    <!-- <bean id="mapMethod1" class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping" >
-    	<property name="order" value="1" />	
-		<property name="interceptors" ref="authorityInterceptor"/>
-		<property name="alwaysUseFullPath" value="true"/>
-    </bean> -->
 
 </beans>

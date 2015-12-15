@@ -1,4 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -45,5 +47,28 @@
  <a href="/user/message/messageTalkList.do?recv_mem_no=74&msg_group_no=99999">1:1대화함</a>
  <a href="/user/message/messageBox.do?mem_no=74">메세지 박스</a>
 
+<hr/>
+<h2>로그인</h2>
+<c:choose>
+	<c:when test="${mem_object==null}">
+		<form action="/user/login/login.do" name="memberLogin" method="post">
+		<label>아이디<input type="text" name="mem_email" value="admin@everywhere.com"></label>
+		<label>비밀번호<input type="text" name="mem_pwd" value="1234"></label>
+		<input type="submit" value="로그인">
+		</form>
+	</c:when>
+	<c:otherwise>
+		mem_no:${mem_object.mem_no}<br/>
+		mem_email:${mem_object.mem_email}<br/>
+		mem_name:${mem_object.mem_name}<br/>
+		mem_phone:${mem_object.mem_phone}<br/>
+		mem_interest:${mem_object.mem_interest}<br/>
+		mem_status_code:${mem_object.mem_status_code}<br/>
+		mem_level_code:${mem_object.mem_level_code}<br/>
+		mem_profile_photo:${mem_object.mem_profile_photo}<br/>
+		mem_reg_date:${mem_object.mem_reg_date}<br/>
+		<br/><a href="/user/login/loginout.do">로그아웃</a>
+	</c:otherwise>
+</c:choose>
 </body>
 </html>
