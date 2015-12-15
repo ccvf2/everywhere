@@ -22,6 +22,9 @@
  <hr/>
 
  <h1>사용자</h1>
+ 
+ <a href="/user/myPage/myPage.do">마이페이지</a>
+ <hr/>
  <a href="/user/member/register.do">회원가입</a>
  <a href="/user/member/memberRead.do?mem_no=64">회원정보보기</a>
  <a href="/user/member/memberUpdate.do?mem_no=64">회원정보수정</a>
