@@ -147,7 +147,7 @@
 									<section>
 										<label class="input"> 
 											<i class="icon-append fa fa-lock"></i> 
-											<input type="password" name="mem_pwd" placeholder="Password"> 
+											<input type="password" name="mem_pwd" placeholder="Password" id="password"> 
 											<b class="tooltip tooltip-top-right">사용하실 비밀번호를 입력해주세요.</b>
 										</label>
 									</section>
