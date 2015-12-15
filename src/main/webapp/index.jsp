@@ -49,6 +49,7 @@
 
 <hr/>
 <h2>로그인</h2>
+
 <c:choose>
 	<c:when test="${mem_object==null}">
 		<form action="/user/login/login.do" name="memberLogin" method="post">
