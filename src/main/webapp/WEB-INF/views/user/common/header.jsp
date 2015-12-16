@@ -48,6 +48,10 @@
 <script src="/assets/js/app.js"></script>
 <script type="text/javascript" src="/assets/js/plugins/owl-carousel.js"></script>
 <script type="text/javascript" src="/assets/js/plugins/parallax-slider.js"></script>
+
+<!-- CSS Global Compulsory -->
+<link rel="stylesheet" href="/assets/plugins/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="/assets/css/style.css">
 <script>
 jQuery(document).ready(function() {
     App.init();
