@@ -7,12 +7,11 @@
 <meta charset="UTF-8">
 <title>타이틀 입력</title>
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-	<link rel="stylesheet" href="/script/common/jquery-ui/jquery-ui.css">
 	<script src="/script/common/jquery-1.11.3.js"></script>
     <script src="/script/common/jquery-ui/jquery-ui.js"></script>
     <script>
     $(function() {
-        $( "#drop_item li" ).draggable({
+        $( "#spot_item li" ).draggable({
           appendTo: "body",
           helper: "clone"
         });
@@ -43,15 +42,13 @@
     <link rel="stylesheet" href="/assets/plugins/scrollbar/css/jquery.mCustomScrollbar.css">
     <link rel="stylesheet" href="/assets/plugins/sky-forms-pro/skyforms/css/sky-forms.css">
     <link rel="stylesheet" href="/assets/plugins/sky-forms-pro/skyforms/custom/custom-sky-forms.css">
-    
-    
 </head>
 <body>  
 	<div class="wrapper">
 		<!--=== Header ===-->	
 	    <div class="header">
 			<c:import url="/WEB-INF/views/user/common/header.jsp"/>
-	    </div>    
+	    </div>
 		<!--=== End Header ===-->
 	
 		<!--=== Breadcrumbs ===-->    
@@ -69,7 +66,7 @@
         <div class="row">
             <!--Left Sidebar-->
             <div class="col-md-3 md-margin-bottom-40">
-                <img class="img-responsive profile-img margin-bottom-20" src="assets/img/team/img32-md.jpg" alt="">
+                <img class="img-responsive profile-img margin-bottom-20" src="/assets/img/team/img32-md.jpg" alt="">
 
                 <ul class="list-group sidebar-nav-v1 margin-bottom-40" id="sidebar-nav-1">
                     <li class="list-group-item">
@@ -107,6 +104,7 @@
                     <h2 class="heading-xs pull-left"><i class="fa fa-bell-o"></i> Notification</h2>
                     <a href="#"><i class="fa fa-cog pull-right"></i></a>
                 </div>
+                <div id="spot_item">
                 <ul class="list-unstyled mCustomScrollbar margin-bottom-20" data-mcs-theme="minimal-dark">
                     <li class="notification">
                         <i class="icon-custom icon-sm rounded-x icon-bg-red icon-line icon-envelope"></i>
@@ -150,7 +148,8 @@
                             <small>23/12 15:15 pm</small>
                         </div>    
                     </li>
-                </ul>    
+                </ul>
+                </div>
                 <button type="button" class="btn-u btn-u-default btn-u-sm btn-block">Load More</button>
                 <!--End Notification-->
 
@@ -240,14 +239,6 @@
 		</div>
 	</div>
 	
-	<!-- 달력 -->
-	
-	
-	<!-- JS Global Compulsory -->           
-	<script type="text/javascript" src="/assets/plugins/jquery/jquery.min.js"></script>
-	<script type="text/javascript" src="/assets/plugins/jquery/jquery-migrate.min.js"></script>
-	<script type="text/javascript" src="/assets/plugins/bootstrap/js/bootstrap.min.js"></script> 
-	
 	<!-- JS Implementing Plugins -->
 	<script src="/assets/plugins/sky-forms-pro/skyforms/js/jquery.maskedinput.min.js"></script>
 	<script src="/assets/plugins/sky-forms-pro/skyforms/js/jquery-ui.min.js"></script>
@@ -255,11 +246,9 @@
 	<!-- JS Customization -->
 	<script type="text/javascript" src="/assets/js/custom.js"></script>
 	<!-- JS Page Level -->
-	<script type="text/javascript" src="/assets/js/app.js"></script>
-	<script type="text/javascript" src="assets/plugins/smoothScroll.js"></script>
-	<script type="text/javascript" src="assets/plugins/counter/waypoints.min.js"></script>
-	<script type="text/javascript" src="assets/plugins/counter/jquery.counterup.min.js"></script> 
-	<script type="text/javascript" src="assets/plugins/sky-forms-pro/skyforms/js/jquery-ui.min.js"></script>
+	<script type="text/javascript" src="/assets/plugins/sky-forms-pro/skyforms/js/jquery-ui.min.js"></script>
+	
+	<script type="text/javascript" src="/assets/js/plugins/style-switcher.js"></script>
 	<script type="text/javascript" src="/assets/plugins/scrollbar/js/jquery.mCustomScrollbar.concat.min.js"></script>
 	<script type="text/javascript" src="/assets/js/plugins/masking.js"></script>
 	<script type="text/javascript" src="/assets/js/plugins/datepicker.js"></script>	
@@ -268,7 +257,6 @@
 	
 	<script type="text/javascript">
 	    jQuery(document).ready(function() {
-	        App.init();
 	        App.initScrollBar();
 	        Masking.initMasking();
 	        Datepicker.initDatepicker();
