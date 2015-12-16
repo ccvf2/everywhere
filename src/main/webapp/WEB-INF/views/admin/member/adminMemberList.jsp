@@ -47,13 +47,18 @@
 	});
 	
 	function searchFun() {
+		var search=document.getElementById("search").value;
 		var memLevel=document.getElementById("memLevel").value;
 		var memStatus=document.getElementById("memStatus").value;
 		var phoneStatus=document.getElementById("phoneStatus").value;
 		var start_date=document.getElementById("start_date");
 		var end_date=document.getElementById("end_date").value;
 		
-		//alert("memLevel:" + memLevel + "memStatus:" + memStatus + "phoneStatus:" + phoneStatus + "start_date:" + start_date + "end_date:" + end_date);
+		alert("memLevel:" + memLevel);
+		alert("memStatus:" + memStatus);
+		alert("phoneStatus:" + phoneStatus);
+		alert("start_date:" + start_date);
+		alert("end_date:" + end_date);
 		
 		location.href="/admin/member/adminMemberList.do?search="+search+"&memLevel="+memLevel+"&memStatus="+memStatus+"&phoneStatus="+phoneStatus+"&start_date="+start_date+"&end_date="+end_date;
 	}
