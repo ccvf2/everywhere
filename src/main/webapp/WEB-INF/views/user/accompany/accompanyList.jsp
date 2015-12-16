@@ -11,6 +11,11 @@
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <title>동행구하기 게시판</title>
 	<link href="/script/common/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="/assets/plugins/owl-carousel/owl-carousel/owl.carousel.css">
+	<!-- CSS Theme-->
+	<link rel="stylesheet" href="/assets/css/theme-colors/default.css">
+	<!-- JS Page Level -->
+	<script src="/assets/js/app.js"></script>
 
 	<script type="text/javascript" src="/script/common/commonReply.js"></script>
 	<!-- 제이쿼리 라이브러리.(필수) : commonReplyInit() 함수호출 전 선언  -->
@@ -232,6 +237,11 @@
 				<c:import url="/WEB-INF/views/user/common/footer.jsp"/>
 		    </div>
 		    <!--=== End Footer Version 1 ===-->
+		    
+		    <!-- 쪽지함에서 충돌로 인하 주석처리! -->
+			<script type="text/javascript" src="/assets/plugins/owl-carousel/owl-carousel/owl.carousel.js"></script>
+			<!-- 쪽지함에서 충돌로 인하 주석처리! -->
+			<script type="text/javascript" src="/assets/js/plugins/owl-carousel.js"></script>
 	    </div>
     </div>
   </body>
