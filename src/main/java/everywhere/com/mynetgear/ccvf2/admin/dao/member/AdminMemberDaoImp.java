@@ -6,6 +6,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import everywhere.com.mynetgear.ccvf2.admin.dto.member.AdminMemberDto;
 import everywhere.com.mynetgear.ccvf2.user.dto.member.MemberDto;
 
 /**
@@ -19,8 +20,9 @@ public class AdminMemberDaoImp implements AdminMemberDao {
 	@Autowired
 	private SqlSessionTemplate sqlTemplate;
 
+
 	@Override
-	public List<MemberDto> getMemberList() {
-		return sqlTemplate.selectList("everywhere.com.mynetgear.ccvf2.admin.mapper.member.getMemberList");
+	public List<MemberDto> getMemberList(AdminMemberDto adminMemberDto) {
+		return sqlTemplate.selectList("everywhere.com.mynetgear.ccvf2.admin.mapper.member.getMemberList", adminMemberDto);
 	}
 }
