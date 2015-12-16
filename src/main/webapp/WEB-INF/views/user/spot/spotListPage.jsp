@@ -80,6 +80,7 @@ ul li {
 			    <div id="spot-list">
 			    	<ul class="list-unstyled mCustomScrollbar margin-bottom-20" data-mcs-theme="minimal-dark" id="spotList">
 			    
+				    	
 				    	<c:forEach var="spot" items="${spotList}">
 					        <li class="notification">
 					            <i class="icon-custom icon-sm rounded-x icon-bg-red icon-line icon-envelope"></i>
