@@ -10,13 +10,13 @@
 	<c:if test="${check>0}">
 		<script type="text/javascript">
 			alert("방명록이 삭제 되었습니다.");
-			location.href="/user/visitor/visitorWrite.do?mem_no=64";
+			location.href="/user/visitor/visitorWrite.do?mem_no=10";
 		</script>
 	</c:if>
 	<c:if test="${check==0}">
 		<script type="text/javascript">
 			alert("방명록이 삭제되지 않았습니다. 다시 시도해주세요.");
-			location.href="/user/visitor/visitorWrite.do?mem_no=64";
+			location.href="/user/visitor/visitorWrite.do?mem_no=10";
 		</script>
 	</c:if>
 </body>

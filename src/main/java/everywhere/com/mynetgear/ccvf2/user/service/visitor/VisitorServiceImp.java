@@ -52,14 +52,14 @@ public class VisitorServiceImp implements VisitorService {
 		mav.addObject("count", count);
 		mav.addObject("boardSize", boardSize);
 		mav.addObject("currentPage", currentPage);
-		mav.setViewName("/user/visitor/visitorWrite2");
+		mav.setViewName("/user/visitor/visitorWrite");
 	}
 
 	@Override
 	public void visitorWriteOk(ModelAndView mav) {
 		Map<String, Object> map=mav.getModelMap();
 		VisitorDto visitorDto=(VisitorDto)map.get("visitorDto");
-		String mem_no="64";
+		String mem_no="10";
 		visitorDto.setMem_no(Integer.parseInt(mem_no));
 		visitorDto.setVisitor_status_code(Constant.SYNB_YN_Y);
 		

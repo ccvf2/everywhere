@@ -32,7 +32,8 @@
 <!-- --------------------------------css End------------------------------------- -->
 <!-- **********************************  javascript  Start ****************************************** -->
 <!-- JS Global Compulsory -->
-<script src="/assets/plugins/jquery/jquery.min.js"></script>
+<!-- hjahn. 드래그&드롭 관련 충돌로 인해 주석처리  -->
+<!-- <script src="/assets/plugins/jquery/jquery.min.js"></script> -->
 <script src="/assets/plugins/jquery/jquery-migrate.min.js"></script>
 <script src="/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
 <!-- JS Implementing Plugins -->
