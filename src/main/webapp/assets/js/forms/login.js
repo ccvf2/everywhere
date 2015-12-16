@@ -28,7 +28,7 @@ var LoginForm = function () {
 	                email:
 	                {
 	                    required: 'Please enter your email address',
-	                    email: 'Please enter a VALID email address'
+	                    email: '이메일 형식이 올바르지 않습니다.'
 	                },
 	                password:
 	                {
@@ -61,7 +61,7 @@ var LoginForm = function () {
 	                email:
 	                {
 	                    required: 'Please enter your email address',
-	                    email: 'Please enter a VALID email address'
+	                    email: '이메일 형식이 올바르지 않습니다.'
 	                }
 	            },
 	                                

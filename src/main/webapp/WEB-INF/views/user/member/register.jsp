@@ -39,31 +39,31 @@
 		//alert("ok1");
 		
 		if (memberForm.mem_email.value == "") {
-			alert("이메일을 입력해주세요.");
+			everywhereAlert("이메일입력오류","이메일을 입력해주세요.");
 			memberForm.mem_email.focus();
 			return false;
 		}
 		
 		if (memberForm.mem_pwd.value == "") {
-			alert("패스워드를 입력해주세요.");
+			everywhereAlert("비밀번호입력오류","패스워드를 입력해주세요.");
 			memberForm.mem_pwd.focus();
 			return false;
 		}
 		
 		if (memberForm.passwordConfirm.value == "") {
-			alert("확인 패스워드를 입력해주세요.");
+			everywhereAlert("비밀번호확인오류","확인 패스워드를 입력해주세요.");
 			memberForm.passwordConfirm.focus();
 			return false;
 		}
 		
 		if (memberForm.mem_name.value == "") {
-			alert("이름을 입력해주세요.");
+			everywhereAlert("이름입력오류","이름을 입력해주세요.");
 			memberForm.mem_name.focus();
 			return false;
 		}
 		
 		if (memberForm.mem_phone.value == "") {
-			alert("전화번호를 입력해주세요.");
+			everywhereAlert("전화번호입력오류","전화번호를 입력해주세요.");
 			memberForm.mem_phone.focus();
 			return false;
 		}
@@ -80,7 +80,7 @@
 
 		//alert(str);
 		if (check == false) {
-			alert("관심분야를 하나 이상 체크해주세요.");
+			everywhereAlert("관심분야선택오류","관심분야를 하나 이상 체크해주세요.");
 			form.interestValue[0].focus();
 			return false;
 		}
@@ -91,7 +91,7 @@
 		if (form.description.checked == true) {
 			description = true;
 		} else if (form.description.checked == false) {
-			alert("이용약관에 동의해주세요.");
+			everywhereAlert("이용약관미동의","이용약관에 동의해주세요.");
 			form.description.focus();
 			return false;
 		}
@@ -100,13 +100,13 @@
 		if (form.terms.checked == true) {
 			terms = true;
 		} else if (form.terms.checked == false) {
-			alert("개인정보활용에 동의해주세요.");
+			everywhereAlert("개인정보활용미동의","개인정보활용에 동의해주세요.");
 			form.terms.focus();
 			return false;
 		}
 		
 		if(form.mem_pwd.value != form.passwordConfirm.value) {
-			alert("비밀번호가 일치하지 않습니다. 다시 확인해주세요.");
+			everywhereAlert("비밀번호불일치","비밀번호가 일치하지 않습니다. 다시 확인해주세요.");
 			form.mem_pwd.focus();
 			return false;
 		}
@@ -114,6 +114,7 @@
 	}
 </script>
 <c:import url="/WEB-INF/views/user/common/utilImport.jsp" />
+<c:import url="/WEB-INF/views/user/common/footer.jsp" />
 </head>
 <body>
 	<button class="btn-u" data-toggle="modal" data-target="#myModal">회원가입</button>

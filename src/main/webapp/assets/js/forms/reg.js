@@ -58,16 +58,16 @@ var RegForm = function () {
 	                },
 	                email:
 	                {
-	                    required: 'Please enter your email address',
-	                    email: 'Please enter a VALID email address'
+	                    required: '사용하실 이메일(계정)을 입력해주세요.',
+	                    email: '이메일 형식이 올바르지 않습니다.'
 	                },
 	                password:
 	                {
-	                    required: 'Please enter your password'
+	                    required: '사용하실 비밀번호를 입력해주세요.'
 	                },
 	                passwordConfirm:
 	                {
-	                    required: 'Please enter your password one more time',
+	                    required: '사용하실 비밀번호를 한번 더 입력해주세요.',
 	                    equalTo: '비밀번호가 같지 않습니다.'
 	                },
 	                firstname:

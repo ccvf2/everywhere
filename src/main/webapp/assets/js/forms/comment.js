@@ -43,7 +43,7 @@ var CommentForm = function () {
 	                email:
 	                {
 	                    required: 'Enter your email address',
-	                    email: 'Enter a VALID email'
+	                    email: '이메일 형식이 올바르지 않습니다.'
 	                },
 	                url:
 	                {
