@@ -20,7 +20,7 @@
             <a href="#"><i class="fa fa-cubes"></i> 나의 여행</a>
         </li>
         <li class="list-group-item">
-            <a href="/user/visitor/visitorWrite.do?mem_no=10"><i class="fa fa-comments"></i> 방명록</a>
+            <a href="/user/visitor/visitorWrite.do?mem_no=10"><i class="fa fa-pencil-square-o"></i> 방명록</a>
         </li>
         <li class="list-group-item">
             <a href="#"><i class="fa fa-comments"></i> 쪽지함</a>
@@ -29,7 +29,7 @@
             <a href="#"><i class="fa fa-history"></i> 내 활동</a>
         </li>
         <li class="list-group-item">
-            <a href="#"><i class="fa fa-cog"></i> 즐겨찾기</a>
+            <a href="#"><i class="fa fa-star-o"></i> 즐겨찾기</a>
         </li>
         <li class="list-group-item">
             <a href="#"><i class="fa fa-cog"></i> 설정</a>

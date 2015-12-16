@@ -57,7 +57,7 @@
 	<!-- 메세지 작성부분 -->
 	<form name="sendMessage" id="sendMessage">
 	+++++++++++++++++++++++++++++++++++++++<br/>
-		보내는사람:<input type="text" name="send_mem_no" value="${param.recv_mem_no}"><br/>
+		보내는사람:<input type="text" name="send_mem_no" value="${param.rev_mem_no}"><br/>
 		메세지함 그룹:<input type="text" name="msg_group_no" value="${param.msg_group_no}"><br/>
 		받는사람:<input type="text" name="recv_mem_no" value="73"><br/>
 		내용:<input type="text" name="message">

@@ -6,36 +6,31 @@
 <head>
 <meta charset="UTF-8">
 <title>방명록</title>
-<!-- Meta -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
-    <meta name="author" content="">
+<!-- Favicon -->
+<link rel="shortcut icon" href="favicon.ico">
 
-    <!-- Favicon -->
-    <link rel="shortcut icon" href="favicon.ico">
+<!-- Web Fonts -->
+<link rel='stylesheet' type='text/css' href='//fonts.googleapis.com/css?family=Open+Sans:400,300,600&amp;subset=cyrillic,latin'>
 
-    <!-- Web Fonts -->
-    <link rel='stylesheet' type='text/css' href='//fonts.googleapis.com/css?family=Open+Sans:400,300,600&amp;subset=cyrillic,latin'>
+<!-- CSS Global Compulsory -->
+<link rel="stylesheet" href="/assets/plugins/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="/assets/css/style.css">
 
-    <!-- CSS Global Compulsory -->
-    <link rel="stylesheet" href="/assets/plugins/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/assets/css/style.css">
+<!-- CSS Implementing Plugins -->
+<link rel="stylesheet" href="/assets/plugins/animate.css">
+<link rel="stylesheet" href="/assets/plugins/line-icons/line-icons.css">
+<link rel="stylesheet" href="/assets/plugins/font-awesome/css/font-awesome.min.css">
+<link rel="stylesheet" href="/assets/plugins/scrollbar/css/jquery.mCustomScrollbar.css">
+<link rel="stylesheet" href="/assets/plugins/sky-forms-pro/skyforms/css/sky-forms.css">
+<link rel="stylesheet" href="/assets/plugins/sky-forms-pro/skyforms/custom/custom-sky-forms.css">
 
-    <!-- CSS Implementing Plugins -->
-    <link rel="stylesheet" href="/assets/plugins/animate.css">
-    <link rel="stylesheet" href="/assets/plugins/line-icons/line-icons.css">
-    <link rel="stylesheet" href="/assets/plugins/font-awesome/css/font-awesome.min.css">
-    <link rel="stylesheet" href="/assets/plugins/scrollbar/css/jquery.mCustomScrollbar.css">
-    <link rel="stylesheet" href="/assets/plugins/sky-forms-pro/skyforms/css/sky-forms.css">
-    <link rel="stylesheet" href="/assets/plugins/sky-forms-pro/skyforms/custom/custom-sky-forms.css">
+<!-- CSS Page Style -->
+<link rel="stylesheet" href="/assets/css/pages/profile.css">
+<link rel="stylesheet" href="/assets/css/pages/shortcode_timeline1.css">
 
-    <!-- CSS Page Style -->
-    <link rel="stylesheet" href="/assets/css/pages/profile.css">
-    <link rel="stylesheet" href="/assets/css/pages/shortcode_timeline1.css">
+<!-- CSS Customization -->
+<link rel="stylesheet" href="/assets/css/custom.css">
 
-    <!-- CSS Customization -->
-    <link rel="stylesheet" href="/assets/css/custom.css">
 <c:import url="/WEB-INF/views/user/common/utilImport.jsp" />
 </head>
 <body>
@@ -72,8 +67,7 @@
 									<textarea class="form-control" rows="5" cols="65" name="visitor_content" style="resize:none;"></textarea>
 								</div>
 								<div class="form-group" align="right">
-									<input type="submit" class="btn-u btn-u-green" value="확인"/>
-									<input type="reset"  class="btn-u btn-u-green" value="취소"/>
+									<input type="submit" class="btn-u btn-u-green" value="작성"/>
 								</div>
 							</form>
 						</div>
@@ -93,8 +87,7 @@
 									<textarea class="form-control" rows="5" cols="65" name="visitor_content" style="resize:none;"></textarea>
 								</div>
 								<div class="form-group" align="right">
-									<input type="submit" class="btn-u btn-u-green" value="확인"/>
-									<input type="reset"  class="btn-u btn-u-green" value="취소"/>
+									<input type="submit" class="btn-u btn-u-green" value="작성"/>
 								</div>
 							</form>
 						</div>

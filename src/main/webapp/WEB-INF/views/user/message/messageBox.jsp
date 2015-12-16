@@ -7,7 +7,6 @@
 <title>타이틀 입력</title>
 </head>
 <body>
-${param.mem_no}<br>
 메시지박스<br/>
 <table border="1">
 	<tr>
@@ -25,9 +24,17 @@ ${param.mem_no}<br>
 		<th>받은사람 삭제여부</th> -->
 	</tr>
 <c:forEach var="list" items="${messageBoxList}">
+<c:choose>
+	<c:when test="${mem_object.mem_no==list.send_mem_no}">
+			<c:set value="${list.recv_mem_no}" var="recv_no"/>
+	</c:when>
+	<c:otherwise>
+			<c:set value="${list.send_mem_no}" var="recv_no"/>
+	</c:otherwise>
+</c:choose>
 	<tr>
 		<td>
-			<a href="/user/message/messageTalkList.do?recv_mem_no=${param.mem_no}&msg_group_no=${list.msg_group_no}">
+			<a href="/user/message/messageTalkList.do?recv_mem_no=${recv_no}&msg_group_no=${list.msg_group_no}">
 			${list.msg_no}
 			</a>
 		</td>

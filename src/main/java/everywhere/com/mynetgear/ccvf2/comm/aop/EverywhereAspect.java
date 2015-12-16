@@ -36,6 +36,10 @@ public class EverywhereAspect {
 			logger.info(Constant.LOG_ID2+"ASPECT 요청클래스명:---  "+joinPoint.getTarget().getClass().getName());
 			logger.info(Constant.LOG_ID2+"ASPECT 요청함수명:---  "+joinPoint.getSignature().getName());
 			obj=joinPoint.proceed();
+			obj=new Object(); 
+			if(obj!=null){
+				obj=joinPoint.proceed();
+			}
 		} catch (Throwable e) {
 			logger.info(Constant.LOG_ID3+"Advice Throwable Message");
 			e.printStackTrace();

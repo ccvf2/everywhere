@@ -18,7 +18,7 @@
 			, MSG.MESSAGE
 			, MSG.SEND_TIME
 			, MSG.RECV_TIME
-			, MSG.REMOVE_MEN_NO
+			, MSG.REMOVE_MEM_NO
 		FROM
 			TBL_MESSAGE MSG
 		WHERE
@@ -50,7 +50,7 @@
 		AND
 			zz.send_time=uu.send_time
 		AND
-			(uu.REMOVE_MEN_NO IS NULL OR not(uu.REMOVE_MEN_NO=#{value}))
+			(uu.REMOVE_MEM_NO IS NULL OR not(uu.REMOVE_MEM_NO=#{value}))
 		ORDER BY
 			uu.send_time
 		DESC
@@ -93,7 +93,7 @@
 		WHERE
 			msg_group_no=#{msg_group_no}
 		AND
-			recv_mem_no=#{recv_mem_no}
+			recv_mem_no=#{send_mem_no}
 		AND
 			recv_time IS NULL
 	</update>
@@ -127,4 +127,19 @@
 		DELETE FROM TBL_MESSAGE WHERE MSG_NO=#{msg_no} AND REMOVE_MEN_NO is not null
 	</delete>
 	
+	
+	
+	
+	
+	<!--이전에 대화했었던 활성화 되어 있는 방이 있는지... -->
+	<select id="select_check_group_number" parameterType="everywhere.com.mynetgear.ccvf2.user.dto.message.MessageDto" resultType="int">
+		SELECT
+			NVL(MAX(MSG_GROUP_NO),0)
+		FROM
+			tbl_message
+		WHERE
+			(send_mem_no=#{send_mem_no} OR send_mem_no=#{recv_mem_no})
+		AND
+			REMOVE_MEM_NO IS NULL
+	</select>
 </mapper>
