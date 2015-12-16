@@ -58,7 +58,7 @@
 			<!-- 메인------------------------------------------------------------------------------------------------------------------------------ -->
             <!-- Profile Content -->
             <div class="col-md-9">
-            	<c:if test="${count==0}">
+            	<c:if test="${count==0&&currentPage==1}">
 					<div class="panel panel-green margin-bottom-40">
 		            	<div class="panel-heading" style="height:30px;" align="left">
 		                	<h3 class="panel-title">No.${visitorDto.visitor_no}</h3>

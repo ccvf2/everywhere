@@ -24,9 +24,9 @@ public class Constant {
 	public static final String CHARACTER_SET_UTF8 = "UTF-8";
 
 	/** YN : Y */
-	public static final String SYNB_YN_Y = "Y";
+	public static final String SYNB_YN_Y = "Y0001";
 	/** YN : N */
-	public static final String SYNB_YN_N = "N";
+	public static final String SYNB_YN_N = "Y0002";
 
 	/** CRUD : C */
 	public static final String SYNB_CRUD_C = "C";
