@@ -92,4 +92,14 @@ public class MessageDaoImp implements MessageDao {
 		}
 		return 0;
 	}
+
+	/* (non-Javadoc)
+	 * @see everywhere.com.mynetgear.ccvf2.user.dao.message.MessageDao#getOneCheckGroupNumber(everywhere.com.mynetgear.ccvf2.user.dto.message.MessageDto)
+	 */
+	@Override
+	public int getOneCheckGroupNumber(MessageDto dto) {
+		int result =0;
+		result=sqlTemplate.selectOne("select_check_group_number",dto); 
+		return 0;
+	}
 }

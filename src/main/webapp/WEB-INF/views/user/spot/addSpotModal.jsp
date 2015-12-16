@@ -32,10 +32,6 @@
 	</style>	  
   </head>
   <body onload="initialize();">
-  <c:choose>
-	<c:when test="${mem_object==null}">		
-	</c:when>
-  </c:choose>	
 	<div class="wrapper">
 	<!--=== Header ===-->	
 	<div class="header">

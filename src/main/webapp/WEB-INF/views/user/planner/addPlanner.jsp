@@ -11,16 +11,19 @@
     <script src="/script/common/jquery-ui/jquery-ui.js"></script>
     <script>
     $(function() {
-        $( "#spot_item li" ).draggable({
+        $( "#spotLists li > div" ).draggable({
           appendTo: "body",
+          revert: "invalid",
           helper: "clone"
         });
-        $( "#drop_item2 ol" ).droppable({
-            activeClass: "ui-state-default",
-            hoverClass: "ui-state-hover",
+        
+        $( "#droppable" ).droppable({
+        	accept: "#draggable",
+            activeClass: "ui-state-hover",
+            hoverClass: "ui-state-active",
             accept: ":not(.ui-sortable-helper)",
             drop: function( event, ui ) {
-              $( this ).find( ".placeholder" ).remove();
+              $( this ).find( "span" ).remove();
               $( "<li></li>" ).text( ui.draggable.text() ).appendTo( this );
             }
           }).sortable({
@@ -42,6 +45,10 @@
     <link rel="stylesheet" href="/assets/plugins/scrollbar/css/jquery.mCustomScrollbar.css">
     <link rel="stylesheet" href="/assets/plugins/sky-forms-pro/skyforms/css/sky-forms.css">
     <link rel="stylesheet" href="/assets/plugins/sky-forms-pro/skyforms/custom/custom-sky-forms.css">
+    
+    <!-- 도시&국가 셀렉트박스 -->
+    <script type="text/javascript" src="/script/user/spot/selectedCountry.js"></script>
+	
 </head>
 <body>  
 	<div class="wrapper">
@@ -96,62 +103,71 @@
                     <div style="width: 64%" aria-valuemax="100" aria-valuemin="0" aria-valuenow="64" role="progressbar" class="progress-bar progress-bar-dark">
                     </div>
                 </div>
-
-                <hr>
+                
 
                 <!--Notification-->
+                <div class="tag-box tag-box-v4 rounded-2x margin-bottom-20">
                 <div class="panel-heading-v2 overflow-h">
                     <h2 class="heading-xs pull-left"><i class="fa fa-bell-o"></i> Notification</h2>
-                    <a href="#"><i class="fa fa-cog pull-right"></i></a>
                 </div>
-                <div id="spot_item">
-                <ul class="list-unstyled mCustomScrollbar margin-bottom-20" data-mcs-theme="minimal-dark">
-                    <li class="notification">
+                
+                <div class="panel-heading-v2 overflow-h">
+                <form class="sky-form">
+                	 <!-- 나라 -->
+                    <label class="select">
+                        <select name="country_code" id="selectCountry" onchange="selectSpotList('true')">                                    	
+                        	<option value=""> Country </option>
+                        	<c:forEach var="country" items="${countryList}" >
+                            	 <option value="${country.code}">${country.code_name}</option>
+                         	</c:forEach>                                       
+                        </select>
+                        <i></i>
+                    </label>
+                    
+                     <!-- 도시 -->
+                    <label class="select">
+                    	<select name="city_code" id="selectCity" onchange="selectSpotList('false')">
+							<option value="">City</option>
+						</select>
+                        <i></i>
+                    </label>
+                    
+                    <!-- 명소타입 -->
+	               <label class="select">
+	                          <select name="spot_type_code" id="selectType" onchange="selectSpotList(false)">
+	                          <option value=""> SpotType </option>
+	                          <c:forEach var="spotType" items="${spotTypeList}" >
+	                          	  <option value="${spotType.code}">${spotType.code_name}</option>
+	                          </c:forEach>
+	                          </select>
+                            <i></i>
+                        </label>
+                    </form>
+                </div>
+                  
+                      
+                      
+                      
+                <div>
+                <ul class="list-unstyled mCustomScrollbar margin-bottom-20" data-mcs-theme="minimal-dark" id="spotLists">
+                <c:forEach var="spot" items="${spotList}">
+                    <li class="notification" style="border:1px">
+                    	<div id="${spot.spot_no}item" class="rounded">
                         <i class="icon-custom icon-sm rounded-x icon-bg-red icon-line icon-envelope"></i>
                         <div class="overflow-h">
-                            <span><strong>Albert Heller</strong> has sent you email.</span>
-                            <small>Two minutes ago</small>
+                            <span><strong>${spot.spot_name}</strong></span>
+                            <small><c:out value="${spot.spot_note}"/></small>
+                        </div>
                         </div>    
                     </li>
-                    <li class="notification">
-                        <img class="rounded-x" src="assets/img/testimonials/img5.jpg" alt="">
-                        <div class="overflow-h">
-                            <span><strong>Taylor Lee</strong> started following you.</span>
-                            <small>Today 18:25 pm</small>
-                        </div>    
-                    </li>
-                    <li class="notification">
-                        <i class="icon-custom icon-sm rounded-x icon-bg-yellow icon-line fa fa-bolt"></i>
-                        <div class="overflow-h">
-                            <span><strong>Natasha Kolnikova</strong> accepted your invitation.</span>
-                            <small>Yesterday 1:07 pm</small>
-                        </div>    
-                    </li>
-                    <li class="notification">
-                        <img class="rounded-x" src="assets/img/testimonials/img1.jpg" alt="">
-                        <div class="overflow-h">
-                            <span><strong>Mikel Andrews</strong> commented on your Timeline.</span>
-                            <small>23/12 11:01 am</small>
-                        </div>    
-                    </li>
-                    <li class="notification">
-                        <i class="icon-custom icon-sm rounded-x icon-bg-blue icon-line fa fa-comments"></i>
-                        <div class="overflow-h">
-                            <span><strong>Bruno Js.</strong> added you to group chating.</span>
-                            <small>Yesterday 1:07 pm</small>
-                        </div>    
-                    </li>
-                    <li class="notification">
-                        <img class="rounded-x" src="assets/img/testimonials/img6.jpg" alt="">
-                        <div class="overflow-h">
-                            <span><strong>Taylor Lee</strong> changed profile picture.</span>
-                            <small>23/12 15:15 pm</small>
-                        </div>    
-                    </li>
+                </c:forEach>
                 </ul>
                 </div>
                 <button type="button" class="btn-u btn-u-default btn-u-sm btn-block">Load More</button>
                 <!--End Notification-->
+                </div>
+                
+                
 
                 <div class="margin-bottom-50"></div>
 
@@ -168,7 +184,9 @@
             	<div class="profile-body margin-bottom-20">
             	<form action="/user/spot/addSpotWrite.do" id="sky-form" class="sky-form" style="border:none;" onsubmit="return addSpotForm(this)" method="post" enctype="multipart/form-data">
                 <fmt:formatDate var="start_date" pattern="yyyy-MM-dd" value="${plannerDto.start_date}"/>
-				<fmt:formatDate var="end_date" pattern="yyyy-MM-dd" value="${plannerDto.end_date}"/>  		
+				<fmt:formatDate var="end_date" pattern="yyyy-MM-dd" value="${plannerDto.end_date}"/>  
+				<c:set var="day_count" value="${end_date - start_date }"/>		
+				<input type="text" name="day_count" value="${day_count}"/>
 				<input type="hidden" name="planner_no" value="${plannerDto.planner_no}"/>
                 <input type="hidden" name="mem_no" value="${mem_object.mem_no}">
                 <div class="tag-box tag-box-v4 rounded-2x margin-bottom-30">
@@ -196,14 +214,14 @@
                 
                 <input type="hidden" name="day_count" value="3"/>
                 <c:forEach var="i" begin="1" end="3">
-                <div class="tag-box tag-box-v4 rounded-2x margin-bottom-40" id="drop_item2">
-                	<ol>
+                <div class="tag-box tag-box-v4 rounded-2x margin-bottom-40">
+                	<ol class="list-unstyled " >
                 	<li>
                 	<div class="panel-group">
 					    <div class="panel panel-default">
-					      <div class="panel-heading">
+					      <div class="panel-heading" id="droppable">
 					        <h4 class="panel-title">
-					          <a data-toggle="collapse" href="#collapse${i}">Collapsible list group</a>
+					          <a data-toggle="collapse" href="#collapse${i}"><span>Add Spot</span></a>
 					        </h4>
 					      </div>
 					      <div id="collapse${i}" class="panel-collapse collapse">
@@ -251,7 +269,7 @@
 	<script type="text/javascript" src="/assets/js/plugins/style-switcher.js"></script>
 	<script type="text/javascript" src="/assets/plugins/scrollbar/js/jquery.mCustomScrollbar.concat.min.js"></script>
 	<script type="text/javascript" src="/assets/js/plugins/masking.js"></script>
-	<script type="text/javascript" src="/assets/js/plugins/datepicker.js"></script>	
+	<script type="text/javascript" src="/assets/js/plugins/datepicker2.js"></script>	
 	<script type="text/javascript" src="/assets/js/plugins/validation.js"></script>
 	<script type="text/javascript" src="/assets/js/plugins/style-switcher.js"></script>
 	
@@ -262,6 +280,7 @@
 	        Datepicker.initDatepicker();
 	        Validation.initValidation();
 	    });
+	    
 	</script>
 </body>
 </html>

@@ -4,12 +4,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.ModelAndView;
 
 import everywhere.com.mynetgear.ccvf2.comm.util.common.Constant;
 import everywhere.com.mynetgear.ccvf2.user.dao.message.MessageDao;
+import everywhere.com.mynetgear.ccvf2.user.dto.member.MemberDto;
 import everywhere.com.mynetgear.ccvf2.user.dto.message.MessageDto;
 
 /**
@@ -31,20 +34,42 @@ public class MessageServiceImp implements MessageService {
 	public void getListParsonTalk(ModelAndView mav) {
 		Map<String, Object> map = mav.getModelMap();
 		MessageDto dto = (MessageDto)map.get("messageDto");
-		//글을 읽는사람 *하드코딩*
-		//int mem_no=73;
-		//int msg_group_no=99999;
+		HttpServletRequest request=(HttpServletRequest)map.get("request");
+		//보내는 사람정보가 없을경우 세션에서 담아준다.
+		if(dto.getSend_mem_no()==0){
+			MemberDto memberDto = (MemberDto)request.getSession().getAttribute(Constant.SYNN_LOGIN_OBJECT);
+			dto.setSend_mem_no(memberDto.getMem_no());
+		}
 		
-		//HashMap<String, Integer>map = new HashMap<String, Integer>();
-		//MessageDto dto = new MessageDto();
-		//dto.setRecv_mem_no(mem_no);
-		//dto.setMsg_group_no(msg_group_no);
-		//map.put("mem_no", mem_no);
-		//map.put("msg_group_no", msg_group_no);
 		
-		List<MessageDto> list = messageDao.getListParsonTalk(dto);
-		System.out.println(Constant.LOG_ID1+ list.size());
-		mav.addObject("parsonTalkList",list);
+		//방번호가 있는지 없는지 체크한다.
+		if(dto.getMsg_group_no()==0){
+			//보낼사람 정보가 있는지 확인
+			if(dto.getRecv_mem_no()==0){
+				//그사람과 대화한 방이 있는지 확인
+				int checkNumber=messageDao.getOneCheckGroupNumber(dto);
+				if(checkNumber==0){
+					//그 방번호가 없으면 생성
+					int newGroupNumber=messageDao.getOneNewMessageGroupNumber();
+					dto.setMsg_group_no(newGroupNumber);
+				}else{
+					//있으면 그 방번호를 삽입
+					dto.setMsg_group_no(checkNumber);
+				}
+			}else{
+				//방번호 생성(첫대화)
+				int newGroupNumber=messageDao.getOneNewMessageGroupNumber();
+				dto.setMsg_group_no(newGroupNumber);
+			}
+		}else{
+			List<MessageDto> list = messageDao.getListParsonTalk(dto);
+			mav.addObject("parsonTalkList",list);
+			System.out.println(Constant.LOG_ID1+ list.size());
+		}
+		
+		
+		
+		mav.addObject("msg_group_no",dto.getMsg_group_no());
 		mav.setViewName("/user/message/messageTalkList2");
 	}
 	
