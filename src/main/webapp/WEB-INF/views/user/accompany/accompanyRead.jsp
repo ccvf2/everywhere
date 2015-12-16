@@ -142,7 +142,7 @@
                             
                             <ul class="post-shares post-shares-lg">
                                 <!-- 글쓴이만 삭제 및 수정이 보이도록 -->
-							  	<c:if test="${ownerCheck>0}">
+							  	<c:if test="${accompanyDto.mem_no==mem_object.mem_no}">
 							  		<li>
 	                                    <a href="/user/accompany/accompanyUpdate.do?accompany_no=${accompanyDto.accompany_no}&pageNumber=${currentPage}">
 	                                        <i class="rounded-x fa fa-pencil" title="수정"></i>
