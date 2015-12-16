@@ -63,7 +63,7 @@ public class PlannerServiceImp implements PlannerService {
 		
 		mav.addObject("check", check);
 		mav.addObject("plannerDto", plannerDto);
-		mav.setViewName("user/planner/plannerWrite");
+		mav.setViewName("user/planner/addPlanner");
 	}
 
 	@Override
