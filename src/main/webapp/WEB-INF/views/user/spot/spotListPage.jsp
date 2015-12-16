@@ -45,6 +45,25 @@ ul li {
 
 <!-- CSS Page Style -->
 <link rel="stylesheet" href="/assets/css/pages/profile.css">
+<script type="text/javascript">
+var spot_no=0;
+$(function(){
+	
+	var no=0;
+	
+	if(no!=spot_no){
+		alert(spot_no);
+	}
+	
+	/* $("a").click(function(){
+		
+	}); */
+});
+
+function modalOnload(spot_no) {
+	alert("spot_no : " + spot_no);
+}
+</script>
 
   </head>
   <body>
@@ -85,7 +104,9 @@ ul li {
 					            <i class="icon-custom icon-sm rounded-x icon-bg-red icon-line icon-envelope"></i>
 					            <div class="overflow-h">
 					                <div id="${spot.spot_no}item" draggable="true" ondragstart="drag(event)">
-									<a href="/user/spot/spotReadPage.do?spot_no=${spot.spot_no }">${spot.spot_name }</a>
+									<%-- <a href="/user/spot/spotReadPage.do?spot_no=${spot.spot_no }">${spot.spot_name }</a> --%>
+									<a href="javascript:modalOnload('${spot.spot_no}')" data-target="#myModal">${spot.spot_name}</a>
+									<%-- <a href="" data-target="#myModal" data-toggle="modal" onclick="javascript:alert();">${spot.spot_name}</a> --%>
 									<c:out value="${spot.spot_note}"/>
 								</div>
 					            </div>
@@ -97,6 +118,50 @@ ul li {
             <!--End Left Sidebar-->
         </div>
     </div><!--/container-->
+    
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	    <div style="margin-left: 10%">
+			<div class="modal-dialog modal-lg" style="float: left;">
+				<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+							<h3 class="modal-title" id="myModalLabel4">명소!!!!!!!음메</h3>
+						</div>
+	
+						<div class="modal-body">
+							<div class="row">
+								<div class="col-md-12">
+									
+								</div>
+							</div>
+						</div>
+	
+						<div class="modal-footer">
+						</div>
+				</div>
+			</div>
+			
+			<div class="modal-dialog modal-sm" style="float: left;">
+				<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+							<h3 class="modal-title" id="myModalLabel4">명소!!!!!!!음메</h3>
+						</div>
+	
+						<div class="modal-body">
+							<div class="row">
+								<div class="col-md-12">
+									
+								</div>
+							</div>
+						</div>
+	
+						<div class="modal-footer">
+						</div>
+				</div>
+			</div>
+		</div>
+	</div>
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script type="text/javascript" src="/script/common/jquery-1.11.3.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
