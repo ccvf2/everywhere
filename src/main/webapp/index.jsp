@@ -26,13 +26,16 @@
  <h1>사용자</h1>
  <a href="/user/myPage/myPage.do">마이페이지</a>
  <hr/>
+ <h3>타회원(마이페이지) 이동</h3>
+ <a href="/user/myPage/userPage.do?mem_no=73">김성광(test1234@nate.com)</a>
+ <hr/>
  <a href="/user/member/register.do">회원가입</a>
- <a href="/user/member/memberRead.do?mem_no=64">회원정보보기</a>
- <a href="/user/member/memberUpdate.do?mem_no=64">회원정보수정</a>
- <a href="/user/member/memberDelete.do?mem_no=64">회원정보삭제</a>
+ <a href="/user/member/memberRead.do?mem_no=10">회원정보보기</a>
+ <a href="/user/member/memberUpdate.do?mem_no=10">회원정보수정</a>
+ <a href="/user/member/memberDelete.do?mem_no=10">회원정보삭제</a>
  <hr/> 
 
- <a href="/user/visitor/visitorWrite.do?mem_no=64">방명록쓰기</a>
+ <a href="/user/visitor/visitorWrite.do?mem_no=10">방명록쓰기</a>
  <hr/> 
 
  <a href="/user/accompany/accompanyMain.do">회원동행구하기</a>
@@ -48,7 +51,7 @@
 <hr/>
  <a href="/user/message/messageTalkList.do?recv_mem_no=74&msg_group_no=99999">1:1대화함</a>
  <a href="/user/message/messageBox.do?mem_no=74">메세지 박스</a>
-
+ 
 <hr/>
 <h2>로그인</h2>
 
