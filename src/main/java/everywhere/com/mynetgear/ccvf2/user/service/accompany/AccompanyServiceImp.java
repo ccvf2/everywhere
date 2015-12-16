@@ -2,14 +2,12 @@ package everywhere.com.mynetgear.ccvf2.user.service.accompany;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -17,7 +15,6 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import everywhere.com.mynetgear.ccvf2.comm.aop.EverywhereAspect;
-import everywhere.com.mynetgear.ccvf2.comm.dao.commoncode.CommonCodeDao;
 import everywhere.com.mynetgear.ccvf2.comm.dto.common.CommonFileIODto;
 import everywhere.com.mynetgear.ccvf2.comm.dto.commoncode.CommonCodeDto;
 import everywhere.com.mynetgear.ccvf2.comm.service.common.CommonFileIOService;
@@ -26,7 +23,6 @@ import everywhere.com.mynetgear.ccvf2.comm.util.common.CommonUtils;
 import everywhere.com.mynetgear.ccvf2.comm.util.common.Constant;
 import everywhere.com.mynetgear.ccvf2.user.dao.accompany.AccompanyDao;
 import everywhere.com.mynetgear.ccvf2.user.dto.accompany.AccompanyDto;
-import oracle.jdbc.Const;
 
 
 /**

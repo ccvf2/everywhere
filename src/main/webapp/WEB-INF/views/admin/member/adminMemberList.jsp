@@ -53,9 +53,9 @@
 		var start_date=document.getElementById("start_date");
 		var end_date=document.getElementById("end_date").value;
 		
-		alert("memLevel:" + memLevel + "memStatus:" + memStatus + "phoneStatus:" + phoneStatus + "start_date:" + start_date + "end_date:" + end_date);
+		//alert("memLevel:" + memLevel + "memStatus:" + memStatus + "phoneStatus:" + phoneStatus + "start_date:" + start_date + "end_date:" + end_date);
 		
-		//location.href="/user/accompany/accompanyList.do?search="+search;
+		location.href="/admin/member/adminMemberList.do?search="+search+"&memLevel="+memLevel+"&memStatus="+memStatus+"&phoneStatus="+phoneStatus+"&start_date="+start_date+"&end_date="+end_date;
 	}
 </script>
 </head>
@@ -137,6 +137,7 @@
 					<!-- 검색칸 -->
 	                <div class="row">
 	                	<div class="col-xs-4">
+	                		<label>필터</label>
 	                		<select name="phoneStatus" class="form-control">
 								<option value="email">이메일</option>
 								<option value="name">이름</option>
@@ -144,7 +145,8 @@
 						   </select>
 						</div>
 	                	<div class="col-xs-8">
-							<input type="text" class="form-control">
+	                		<label>검색어</label>
+							<input type="text" id="search" class="form-control">
 		                    <span class="input-group-btn">
 		                    	<button class="btn btn-default" type="button" onclick="searchFun()">
 		                    		<i class="fa fa-search"></i>

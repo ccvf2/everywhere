@@ -3,7 +3,26 @@
 
 <!-- 관리자 회원관리의 mapper -->
 <mapper namespace="everywhere.com.mynetgear.ccvf2.admin.mapper.member">
-	<select id="getMemberList" resultType="everywhere.com.mynetgear.ccvf2.user.dto.member.MemberDto">
-		select * from tbl_member
+	<select id="getMemberList" parameterType="everywhere.com.mynetgear.ccvf2.admin.dto.member.AdminMemberDto" resultType="everywhere.com.mynetgear.ccvf2.user.dto.member.MemberDto">
+		select * 
+		from tbl_member
+		where (title like '%'||#{searchValue, jdbcType=VARCHAR}||'%' 
+			or content like '%'||#{searchValue, jdbcType=VARCHAR}||'%')
+		<if test="search != null">
+			
+		</if>
+		<if test="memLevel != null">
+			
+		</if>
+		<if test="memStatus ! = null">
+		
+		</if>
+		<if test="phoneStatus != null">
+		
+		</if>
+		<if test="start_date">
+		
+		</if>
+		<if test="end_date"></if>
 	</select>
 </mapper>
