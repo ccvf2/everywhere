@@ -51,14 +51,14 @@
 	</beans:bean>
 	
 	<!-- 로그인 세션 체크를 위한 인터셉터 설정  -->
- 	<beans:bean id="authorityInterceptor" class="everywhere.com.mynetgear.ccvf2.comm.util.common.AuthorityInterceptor"></beans:bean>
+<!--   	<beans:bean id="authorityInterceptor" class="everywhere.com.mynetgear.ccvf2.comm.util.common.AuthorityInterceptor"></beans:bean>
 		<interceptors>
 			<interceptor> 
 				<mapping path="/**/*.do"/>
 				<mapping path="/**/*.ajax"/>
 			<beans:ref  bean="authorityInterceptor"/> 
 			</interceptor>
-		</interceptors>
+		</interceptors> -->
 		
 
 </beans:beans>

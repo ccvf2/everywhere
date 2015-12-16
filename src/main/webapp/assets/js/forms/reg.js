@@ -68,7 +68,7 @@ var RegForm = function () {
 	                passwordConfirm:
 	                {
 	                    required: 'Please enter your password one more time',
-	                    equalTo: 'Please enter the same password as above'
+	                    equalTo: '비밀번호가 같지 않습니다.'
 	                },
 	                firstname:
 	                {

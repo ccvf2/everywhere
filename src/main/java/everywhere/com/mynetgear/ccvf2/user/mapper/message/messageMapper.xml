@@ -7,13 +7,24 @@
 	<!-- 1:1 대화내용 -->
 	<select id="select_list_parson_Talk" parameterType="int" resultType="everywhere.com.mynetgear.ccvf2.user.dto.message.MessageDto">
 		SELECT
-			*
+			MSG.MSG_NO
+			, MSG.MSG_GROUP_NO
+			, MSG.SEND_MEM_NO
+			, (SELECT MEM_NAME FROM TBL_MEMBER WHERE MEM_NO=MSG.SEND_MEM_NO)send_mem_name
+			, (SELECT MEM_EMAIL FROM TBL_MEMBER WHERE MEM_NO=MSG.SEND_MEM_NO)send_mem_email
+			, MSG.RECV_MEM_NO
+			, (SELECT MEM_NAME FROM TBL_MEMBER WHERE MEM_NO=MSG.RECV_MEM_NO)recv_mem_name
+			, (SELECT MEM_EMAIL FROM TBL_MEMBER WHERE MEM_NO=MSG.RECV_MEM_NO)recv_mem_email
+			, MSG.MESSAGE
+			, MSG.SEND_TIME
+			, MSG.RECV_TIME
+			, MSG.REMOVE_MEN_NO
 		FROM
-			TBL_MESSAGE
+			TBL_MESSAGE MSG
 		WHERE
-			MSG_GROUP_NO=#{value}
+			MSG.MSG_GROUP_NO=#{value}
 		ORDER BY
-			SEND_TIME
+			MSG.SEND_TIME
 		ASC
 	</select>
 	
