@@ -2962,7 +2962,7 @@ blockquote.hero.hero-default small {
 
 .testimonials.testimonials-v2 .item p:after,
 .testimonials.testimonials-v2 .item p:before {
-  left: 8%;
+  right: 8%;
   bottom: 45px;
 }
 

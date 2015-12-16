@@ -33,7 +33,7 @@
 	<c:forEach var="list" items="${parsonTalkList}">
 		<tr>
 			<td><c:out value="${list.msg_no}" /></td>
-			<td><c:out value="${list.send_mem_no }" /></td>
+			<td><c:out value="${list.send_mem_no}" /></td>
 			<td><c:out value="${list.msg_group_no}" /></td>
 			<td><c:out value="${list.recv_mem_no}" /></td>
 			<td><c:out value="${list.message}" /></td>

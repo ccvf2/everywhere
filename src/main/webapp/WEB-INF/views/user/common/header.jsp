@@ -23,7 +23,8 @@
 <link rel="stylesheet" href="/assets/plugins/line-icons/line-icons.css">
 <link rel="stylesheet" href="/assets/plugins/font-awesome/css/font-awesome.css">
 <link rel="stylesheet" href="/assets/plugins/parallax-slider/css/parallax-slider.css">
-<link rel="stylesheet" href="/assets/plugins/owl-carousel/owl-carousel/owl.carousel.css">
+<!-- 쪽지함에서 충돌로 인하 주석처리! -->
+<!-- <link rel="stylesheet" href="/assets/plugins/owl-carousel/owl-carousel/owl.carousel.css"> -->
 <!-- CSS Theme -->
 <!-- <link rel="stylesheet" href="/assets/css/theme-colors/default.css"> -->
 <!-- CSS Customization -->
@@ -39,14 +40,16 @@
 <script src="/assets/plugins/smoothScroll.js"></script>
 <script type="text/javascript" src="/assets/plugins/parallax-slider/js/modernizr.js"></script>
 <script type="text/javascript" src="/assets/plugins/parallax-slider/js/jquery.cslider.js"></script>
-<script type="text/javascript" src="/assets/plugins/owl-carousel/owl-carousel/owl.carousel.js"></script>
+<!-- 쪽지함에서 충돌로 인하 주석처리! -->
+<!-- <script type="text/javascript" src="/assets/plugins/owl-carousel/owl-carousel/owl.carousel.js"></script> -->
 
 <!-- JS Customization -->
 <script type="text/javascript" src="/assets/js/custom.js"></script>
 
 <!-- JS Page Level -->
 <script src="/assets/js/app.js"></script>
-<script type="text/javascript" src="/assets/js/plugins/owl-carousel.js"></script>
+<!-- 쪽지함에서 충돌로 인하 주석처리! -->
+<!-- <script type="text/javascript" src="/assets/js/plugins/owl-carousel.js"></script> -->
 <script type="text/javascript" src="/assets/js/plugins/parallax-slider.js"></script>
 
 <!-- CSS Global Compulsory -->
@@ -55,8 +58,8 @@
 <script>
 jQuery(document).ready(function() {
     App.init();
-    OwlCarousel.initOwlCarousel();
-    ParallaxSlider.initParallaxSlider();
+    //OwlCarousel.initOwlCarousel();
+    //ParallaxSlider.initParallaxSlider();
 });
 </script>
 <meta charset="UTF-8">
