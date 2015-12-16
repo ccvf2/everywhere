@@ -107,7 +107,7 @@
 					
 					<div class="modal-footer">
 						<div align="right">
-							<a href="/user/member/memberDelete.do?mem_no=${mem_no}">회원탈퇴</a> 
+							<a class="btn-u" href="/user/member/memberDelete.do?mem_no=${mem_no}">회원탈퇴</a> 
 							<button type="submit" class="btn-u">수정완료</button>
 						</div>
 					</div>

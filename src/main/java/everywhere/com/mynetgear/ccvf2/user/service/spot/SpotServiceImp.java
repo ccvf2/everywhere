@@ -9,6 +9,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang.StringUtils;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -100,13 +101,13 @@ public class SpotServiceImp implements SpotService{
 			JSONObject obj = new JSONObject();
 			obj.put("spot_no", dto.getSpot_no());
 			obj.put("mem_no", dto.getMem_no());
-			obj.put("country_code", dto.getCountry_code());
-			obj.put("city_code", dto.getCity_code());
-			obj.put("spot_name", dto.getSpot_name());
-			obj.put("spot_type_code", dto.getSpot_type_code());
-			obj.put("mem_level_code", dto.getMem_level_code());
-			obj.put("spot_note", "\"" + dto.getSpot_note() + "\"");
-			obj.put("spot_addr", "\"" + dto.getSpot_addr() + "\"");
+			obj.put("country_code", StringUtils.clean(dto.getCountry_code()));
+			obj.put("city_code", StringUtils.clean(dto.getCity_code()));
+			obj.put("spot_name", StringUtils.clean(dto.getSpot_name()));
+			obj.put("spot_type_code", StringUtils.clean(dto.getSpot_type_code()));
+			obj.put("mem_level_code", StringUtils.clean(dto.getMem_level_code()));
+			obj.put("spot_note", StringUtils.clean(dto.getSpot_note()));
+			obj.put("spot_addr", StringUtils.clean(dto.getSpot_addr()));
 			obj.put("spot_lat", dto.getSpot_lat());
 			obj.put("spot_long", dto.getSpot_long());
 			obj.put("total_star_score", dto.getTotal_star_score());
@@ -159,7 +160,7 @@ public class SpotServiceImp implements SpotService{
 		mav.addObject("countryList", countryList);
 		mav.addObject("spotTypeList", spotTypeList);
 		mav.addObject("spotList", spotList);
-		mav.setViewName("/user/spot/spotListPage");
+		mav.setViewName("/user/planner/addPlanner");
 	}
 
 	@Override

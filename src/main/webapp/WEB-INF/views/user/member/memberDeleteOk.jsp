@@ -16,7 +16,7 @@
 	<c:if test="${check==0}">
 		<script type="text/javascript">
 			alert("회원정보가 삭제되지 않았습니다. 다시 시도해주세요.");
-			location.href="/user/member/memberDelete.do";
+			location.href="/user/member/memberDelete.do?mem_no=10";
 		</script>
 	</c:if>
 </body>

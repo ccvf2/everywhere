@@ -57,4 +57,17 @@ public interface MessageDao {
 	 * @return
 	 */
 	public int deleteMessageBox(MessageDto dto);
+	
+	
+	
+	
+	
+	/**
+	 * @author 배성욱
+	 * @createDate 2015. 12. 16.
+	 * @described 이전에 생성된, 활성화된 방번호가 있는지 확인.
+	 * @param dto
+	 * @return
+	 */
+	public int getOneCheckGroupNumber(MessageDto dto);
 }

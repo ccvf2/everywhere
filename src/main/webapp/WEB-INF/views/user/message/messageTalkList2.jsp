@@ -5,6 +5,32 @@
 <head>
 <meta charset="UTF-8">
 <title>My Page</title>
+
+<script src="/assets/plugins/jquery/jquery.min.js"></script>
+<script type="text/javascript">
+	 function formSubmit(form) {
+		 console.log(form);
+		var send_mem_no=form.send_mem_no.value;
+		var msg_group_no=form.msg_group_no.value;
+		var recv_mem_no=form.recv_mem_no.value;
+		var message=form.message.value;
+			$.ajax({
+				url:"/user/message/messageSend.ajax",
+				type:"POST",
+				data:{"send_mem_no":send_mem_no
+					,"msg_group_no":msg_group_no
+					,"recv_mem_no":recv_mem_no
+					,"message":message
+					},
+				success:function(){alert("성공")},
+				error:function(){alert("요청실패")}
+			})
+			return false;
+	}
+</script>
+
+
+
 <!-- Meta -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -60,7 +86,7 @@
             <div style="overflow:auto; overflow-x:hidden; max-height:700px; border:1px solid #e5e5e5;">
             <c:forEach var="list" items="${parsonTalkList}">
             	<c:choose>
-            		<c:when test="${list.recv_mem_no==mem_object.mem_no}">
+            		<c:when test="${list.recv_mem_no!=mem_object.mem_no}">
             			<!-- 자기글 일때. -->
             			<div class="row">
 	            		<div class="col-md-12">
@@ -72,10 +98,10 @@
 		                                    <p>${list.message}</p>
 			                                <div class="testimonial-info" style="text-align: right;">
 			                                    <span class="testimonial-author">
-			                                        <c:out value="${list.recv_mem_name}" />
+			                                        <c:out value="${list.send_mem_name}" />
 			                                        <em>
 		                                        		<c:out value="${list.recv_time}" />, 
-			                                        	<c:out value="${list.recv_mem_email}" /> 
+			                                        	<c:out value="${list.send_mem_email}" /> 
 			                                        </em>
 			                                    </span>
 			                                </div>
@@ -86,7 +112,8 @@
 	                    </div>
 	                    </div>
             		</c:when>
-            		<c:when test="${list.recv_mem_no!=mem_object.mem_no}">
+            		<c:when test="${list.recv_mem_no==mem_object.mem_no}">
+            		<c:set var="revc" value="${list.recv_mem_no}"/>
             			<!-- 상대방 일때. -->
             			<div class="row">
 			            <div class="col-md-12">
@@ -98,11 +125,11 @@
 				                                <p style="text-align: right;">${list.message}</p>
 				                                <div class="testimonial-info">
 				                                    <span class="testimonial-author">
-				                                        <c:out value="${list.recv_mem_name}" />
+				                                        <c:out value="${list.send_mem_name}" />
 				                                        <em>
-				                                        <c:out value="${list.recv_mem_email}" />,
+				                                        <c:out value="${list.send_mem_email}" />,
 			                                        	<c:choose>
-			                                        		<c:when test="${list.recv_time==''}">읽지않음</c:when>
+			                                        		<c:when test="${list.recv_time=='' ||list.recv_time==null}">읽지않음</c:when>
 			                                        		<c:otherwise><c:out value="${list.recv_time}" /></c:otherwise>
 			                                        	</c:choose>
 				                                        </em>
@@ -128,7 +155,21 @@
 			<hr>
                     <h2 class="margin-bottom-20">Post a Comment</h2>
                     <!-- Form -->
-                    <form action="assets/php/sky-forms-pro/demo-comment-process.php" method="post" id="sky-form3" class="sky-form comment-style">
+                    <form name="sendMessage" id="sky-form3" class="sky-form comment-style">
+						<c:choose>
+							<c:when test="${param.msg_group_no==null|| param.msg_group_no==0}">
+								<c:set value="${msg_group_no}" var="group_no"/>
+							</c:when>
+							<c:otherwise>
+								<c:set value="${param.msg_group_no}" var="group_no"/>
+							</c:otherwise>
+						</c:choose>
+                       group_no:<c:out value="${group_no }" />
+                       <input type="hidden" name="send_mem_no" value="${mem_object.mem_no}">
+                       <input type="hidden" name="recv_mem_no" value="${param.recv_mem_no}"> 
+                       <input type="hidden" name="msg_group_no" value="${group_no}">
+                       
+                        
                         <fieldset>
                             <div class="row sky-space-30">
                                 <div class="col-md-6">
@@ -144,7 +185,7 @@
                                 </div>
                             </div>
 
-                            <p><button type="submit" class="btn-u">Submit</button></p>
+                            <p><button type="submit" class="btn-u" onclick="formSubmit(sendMessage)">Submit</button></p>
                         </fieldset>
 
                         <div class="message">
