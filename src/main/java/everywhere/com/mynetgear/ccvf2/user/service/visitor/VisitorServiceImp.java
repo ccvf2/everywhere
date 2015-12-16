@@ -52,7 +52,7 @@ public class VisitorServiceImp implements VisitorService {
 		mav.addObject("count", count);
 		mav.addObject("boardSize", boardSize);
 		mav.addObject("currentPage", currentPage);
-		mav.setViewName("/user/visitor/visitorWrite");
+		mav.setViewName("/user/visitor/visitorWrite2");
 	}
 
 	@Override
