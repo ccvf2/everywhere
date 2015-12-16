@@ -4,9 +4,14 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>타이틀 입력</title>
-</head>
-<body>
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+  <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+  <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+  <link rel="stylesheet" href="/resources/demos/style.css">
+<script type="text/javascript" src="/script/common/alert.js"></script>
+<script type="text/javascript">
+everywhereAlert("제목","내용푸터에서 실행");
+</script>
 <!--         <div class="footer">
             <div class="container">
                 <div class="row">
@@ -39,5 +44,5 @@
                 </div>
             </div>
         </div><!--/copyright-->
-</body>
+
 </html>

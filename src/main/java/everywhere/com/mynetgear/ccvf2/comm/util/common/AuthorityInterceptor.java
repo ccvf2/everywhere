@@ -38,6 +38,7 @@ public class AuthorityInterceptor extends HandlerInterceptorAdapter {
 		urlList.add("/user/main/main.do");
 		urlList.add("/user/login/login.do");
 		urlList.add("/user/login/loginout.do");
+		urlList.add("/common/code/codelist.ajax");
 
 		for (String urlException : urlList) {
 			if (uri.indexOf(urlException) > -1) {
