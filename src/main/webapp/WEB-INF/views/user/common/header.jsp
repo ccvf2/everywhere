@@ -69,7 +69,7 @@ jQuery(document).ready(function() {
 <body>
 	        <div class="container">
 	            <!-- Logo -->
-	            <a class="logo" href="index.html">
+	            <a class="logo" href="/">
 	                <img src="/assets/img/logo1-default.png" alt="Logo">
 	            </a>
 	            <!-- End Logo -->

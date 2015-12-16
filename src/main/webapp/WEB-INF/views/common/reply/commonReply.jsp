@@ -19,7 +19,7 @@ $(document).ready(function() {
 //item_no:댓글이 있는 게시판 글번호
 //defaultPhotoPath:기본으로 뿌릴 이미지 선택,
 /* 	commonReplyInit(type_code,mem_no,item_no,defaultPhotoPath); */
-	commonReplyInit('A00001',64,282,"");
+	commonReplyInit('A00001',10,1,"");
 })
 </script>
 </head>

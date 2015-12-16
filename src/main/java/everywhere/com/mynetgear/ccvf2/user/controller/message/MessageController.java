@@ -39,6 +39,7 @@ public class MessageController {
 	public ModelAndView getListParsonTalk(HttpServletRequest request, HttpServletResponse response,MessageDto messageDto) {
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("messageDto",messageDto);
+		mav.addObject("request",request);
 		messageService.getListParsonTalk(mav);
 		return mav;	
 	}
