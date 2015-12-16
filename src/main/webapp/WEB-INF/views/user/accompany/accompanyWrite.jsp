@@ -9,6 +9,15 @@
 <meta charset="UTF-8">
 <title>글쓰기</title>
 
+
+<!-- CSS Global Compulsory -->
+<link rel="stylesheet" href="/assets/plugins/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="/assets/css/style.css">
+
+<!-- CSS Header and Footer -->
+<link rel="stylesheet" href="/assets/css/headers/header-default.css">
+<link rel="stylesheet" href="/assets/css/footers/footer-v1.css">
+
 <!-- CSS Implementing Plugins -->
 <link rel="stylesheet" href="/assets/plugins/animate.css">
 <link rel="stylesheet" href="/assets/plugins/line-icons/line-icons.css">
@@ -16,6 +25,9 @@
 <link rel="stylesheet" href="/assets/plugins/sky-forms-pro/skyforms/css/sky-forms.css">
 <link rel="stylesheet" href="/assets/plugins/sky-forms-pro/skyforms/custom/custom-sky-forms.css">
 <!--[if lt IE 9]><link rel="stylesheet" href="assets/plugins/sky-forms-pro/skyforms/css/sky-forms-ie8.css"><![endif]-->
+
+<!-- CSS Customization -->
+<link rel="stylesheet" href="/assets/css/custom.css">
 <style type="text/css">
 	.sky-form {
 	  box-shadow: none;
@@ -114,6 +126,7 @@
                 	<div class="news-v3 bg-color-white margin-bottom-30">
                         <div class="news-v3-in">
                         	<form name="accompanyForm" class="sky-form" action="/user/accompany/accompanyWriteOk.do" method="post" onsubmit="return writeCheck()" enctype="multipart/form-data">
+                        		<input type="hidden" value="${mem_object.mem_no}" name="mem_no"/>
 			                    <header>동행구하기 글쓰기</header>
 			                    <fieldset>
 			                    <!-- 글 종류와 구하는 성별 시작 -->
@@ -158,7 +171,7 @@
                                     <section class="col col-6">
                                         <label class="input">
                                             <i class="icon-append fa fa-calendar"></i>
-                                            <input type="text" name="start_date" id="finish" placeholder="종료일">
+                                            <input type="text" name="end_date" id="finish" placeholder="종료일">
                                         </label>
                                     </section>
 		                        </div>
@@ -206,10 +219,18 @@
 		    <!--=== End Footer Version 1 ===-->
 	    </div>
 	</div>
+	<!-- JS Global Compulsory -->
+	<script type="text/javascript" src="/assets/plugins/jquery/jquery.min.js"></script>
+	<script type="text/javascript" src="/assets/plugins/jquery/jquery-migrate.min.js"></script>
+	<script type="text/javascript" src="/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
 	<!-- JS Implementing Plugins -->
+	<script type="text/javascript" src="/assets/plugins/back-to-top.js"></script>
+	<script type="text/javascript" src="/assets/plugins/smoothScroll.js"></script>
 	<script src="/assets/plugins/sky-forms-pro/skyforms/js/jquery.maskedinput.min.js"></script>
 	<script src="/assets/plugins/sky-forms-pro/skyforms/js/jquery-ui.min.js"></script>
 	<script src="/assets/plugins/sky-forms-pro/skyforms/js/jquery.validate.min.js"></script>
+	<!-- JS Customization -->
+	<script type="text/javascript" src="/assets/js/custom.js"></script>
 	<!-- JS Page Level -->
 	<script type="text/javascript" src="/assets/js/app.js"></script>
 	<script type="text/javascript" src="/assets/js/plugins/masking.js"></script>

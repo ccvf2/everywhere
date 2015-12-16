@@ -7,14 +7,17 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.ModelAndView;
 
 import everywhere.com.mynetgear.ccvf2.admin.dao.member.AdminMemberDao;
 import everywhere.com.mynetgear.ccvf2.admin.dto.member.AdminMemberDto;
+import everywhere.com.mynetgear.ccvf2.comm.aop.EverywhereAspect;
 import everywhere.com.mynetgear.ccvf2.comm.dto.commoncode.CommonCodeDto;
 import everywhere.com.mynetgear.ccvf2.comm.service.commoncode.CommonCodeService;
+import everywhere.com.mynetgear.ccvf2.comm.util.common.Constant;
 import everywhere.com.mynetgear.ccvf2.comm.util.common.StringUtil;
 import everywhere.com.mynetgear.ccvf2.user.dto.member.MemberDto;
 
@@ -38,24 +41,36 @@ public class AdminMemberServiceImp implements AdminMemberService {
 		HttpServletRequest request = (HttpServletRequest) map.get("request");
 		AdminMemberDto adminMemberDto = new AdminMemberDto();
 		
-		adminMemberDto.setSearch(request.getParameter("search"));
-		adminMemberDto.setMemLevel(request.getParameter("memLevel")); 
-		adminMemberDto.setMemStatus(request.getParameter("memStatus"));
-		adminMemberDto.setPhoneStatus(request.getParameter("phoneStatus"));
-		
-		String start_date = request.getParameter("start_date");
-		String end_date = request.getParameter("end_date");
+		/*String search = StringUtils.trimToEmpty(request.getParameter("search"));*/
 		
 		/*여행 시작일 - 여행 종료일 Date 형식으로 변경*/
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		try {
-			if(start_date != null) {
-				adminMemberDto.setStart_date(sdf.parse(start_date));
+			if(request.getParameter("start_date")==null) {
+				EverywhereAspect.logger.info(EverywhereAspect.logMsg + "시작일이 입력안 됨");
+			} else if (request.getParameter("end_date")==null) {
+				EverywhereAspect.logger.info(EverywhereAspect.logMsg + "종료일이 입력안 됨");
+			} else if (request.getParameter("search")==null) {
+				EverywhereAspect.logger.info(EverywhereAspect.logMsg + "search 입력안 됨");
+			} else if (request.getParameter("memLevel")==null) {
+				EverywhereAspect.logger.info(EverywhereAspect.logMsg + "memLevel 입력안 됨");
+			} else if (request.getParameter("memStatus")==null) {
+				EverywhereAspect.logger.info(EverywhereAspect.logMsg + "memStatus 입력안 됨");
+			} else if (request.getParameter("phoneStatus")==null) {
+				EverywhereAspect.logger.info(EverywhereAspect.logMsg + "phoneStatus 입력안 됨");
+			} else {
+				adminMemberDto.setSearch(request.getParameter("search"));
+				adminMemberDto.setMemLevel(request.getParameter("memLevel")); 
+				adminMemberDto.setMemStatus(request.getParameter("memStatus"));
+				adminMemberDto.setPhoneStatus(request.getParameter("phoneStatus"));
+				try {
+					adminMemberDto.setStart_date(sdf.parse(request.getParameter("start_date")));
+					adminMemberDto.setEnd_date(sdf.parse(request.getParameter("end_date")));
+				} catch (ParseException e) {
+					e.printStackTrace();
+				}
 			}
-			if (end_date != null) {
-				adminMemberDto.setEnd_date(sdf.parse(end_date));
-			}
-		} catch (ParseException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		

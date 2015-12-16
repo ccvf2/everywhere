@@ -6,8 +6,8 @@
 	<select id="getMemberList" parameterType="everywhere.com.mynetgear.ccvf2.admin.dto.member.AdminMemberDto" resultType="everywhere.com.mynetgear.ccvf2.user.dto.member.MemberDto">
 		select * 
 		from tbl_member
-		where (title like '%'||#{searchValue, jdbcType=VARCHAR}||'%' 
-			or content like '%'||#{searchValue, jdbcType=VARCHAR}||'%')
+		
+		
 		<if test="search != null">
 			
 		</if>

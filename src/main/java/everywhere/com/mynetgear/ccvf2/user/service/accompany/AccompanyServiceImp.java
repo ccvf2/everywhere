@@ -23,6 +23,7 @@ import everywhere.com.mynetgear.ccvf2.comm.util.common.CommonUtils;
 import everywhere.com.mynetgear.ccvf2.comm.util.common.Constant;
 import everywhere.com.mynetgear.ccvf2.user.dao.accompany.AccompanyDao;
 import everywhere.com.mynetgear.ccvf2.user.dto.accompany.AccompanyDto;
+import everywhere.com.mynetgear.ccvf2.user.dto.member.MemberDto;
 
 
 /**
@@ -81,7 +82,7 @@ public class AccompanyServiceImp implements AccompanyService {
 		
 		/*글쓴이: 임시라 변경 필요*/
 //		int mem_no = request.getParameter("mem_no");
-		String mem_no = "64";
+		String mem_no = request.getParameter("mem_no");
 		String start_date = request.getParameter("start_date");
 		String end_date = request.getParameter("end_date");
 		String gender_code = request.getParameter("gender_code");
@@ -222,10 +223,7 @@ public class AccompanyServiceImp implements AccompanyService {
 		
 		AccompanyDto accompanyDto = accompanyDao.readAccompany(accompany_no);
 		// accompanyDto.printAll();
-		// 세션에서 회원no 가져옴 (수정 및 삭제 버튼을 보여줄지 여부를 선택하기 위함)
 		//int mem_no = (Integer) session.getAttribute("mem_no");
-		int mem_no=64;//임시
-		int ownerCheck = accompanyDao.checkUserAccompany(accompany_no, mem_no);
 		
 		//성별 코드 가져옴
 		List<CommonCodeDto> genderList = commonCodeService.getListCodeGroup("G0001");
@@ -241,7 +239,6 @@ public class AccompanyServiceImp implements AccompanyService {
 		mav.addObject("recentAccompanyList", recentAccompanyList);
 		mav.addObject("postTypeList", postTypeList);
 		mav.addObject("genderList", genderList);
-		mav.addObject("ownerCheck", ownerCheck);
 		mav.addObject("currentPage", currentPage);
 		mav.addObject("accompanyDto", accompanyDto);
 		mav.setViewName("user/accompany/accompanyRead");
@@ -251,22 +248,15 @@ public class AccompanyServiceImp implements AccompanyService {
 	public void deleteAccompany(ModelAndView mav) {
 		Map<String, Object> map = mav.getModelMap();
 		HttpServletRequest request = (HttpServletRequest) map.get("request");
-		HttpSession session = request.getSession();
 		
-		
-		// 세션 회원no 가져옴
-		//String mem_no = (String) session.getAttribute("mem_no");
 		int accompany_no = Integer.parseInt(request.getParameter("accompany_no"));
+		MemberDto memberDto = (MemberDto) request.getSession().getAttribute(Constant.SYNN_LOGIN_OBJECT);
 		
-		// 세션에서 회원no 가져옴
-		//int mem_no = (Integer) session.getAttribute("mem_no");
-		// 세션이 없으므로 임시로 64로 둠
-		int mem_no=64;
 		
 		//게시글 write mem_no와 세션의 mem_no가 일치할때
 	
-		int check =	accompanyDao.deleteAccompany(accompany_no, mem_no);
-		EverywhereAspect.logger.info(EverywhereAspect.logMsg + accompany_no + "\t" + mem_no);
+		int check =	accompanyDao.deleteAccompany(accompany_no, memberDto.getMem_no());
+		EverywhereAspect.logger.info(EverywhereAspect.logMsg + accompany_no + "\t" + memberDto.getMem_no());
 		
 		mav.addObject("check", check);
 		mav.setViewName("user/accompany/accompanyDelete");
@@ -276,7 +266,7 @@ public class AccompanyServiceImp implements AccompanyService {
 	public void updateAccompany(ModelAndView mav) {
 		Map<String, Object> map = mav.getModelMap();
 		HttpServletRequest request = (HttpServletRequest) map.get("request");
-		HttpSession session = request.getSession();
+
 		
 		int accompany_no = Integer.parseInt(request.getParameter("accompany_no"));
 		int currentPage = Integer.parseInt(request.getParameter("pageNumber"));
@@ -292,10 +282,8 @@ public class AccompanyServiceImp implements AccompanyService {
 		 accompanyDto.printAll();
 		
 		// 세션에서 회원no 가져옴
-		//int mem_no = (Integer) session.getAttribute("mem_no");
-		// 세션이 없으므로 임시로 64로 둠
-		int mem_no=64;
-		int ownerCheck = accompanyDao.checkUserAccompany(accompany_no, mem_no);
+		MemberDto memberDto = (MemberDto) request.getSession().getAttribute(Constant.SYNN_LOGIN_OBJECT);
+		int ownerCheck = accompanyDao.checkUserAccompany(accompany_no, memberDto.getMem_no());
 		
 		
 		//최근 글 용 리스트 5개 가져옴
@@ -321,9 +309,9 @@ public class AccompanyServiceImp implements AccompanyService {
 		AccompanyDto accompanyDto = new AccompanyDto();
 		
 		String accompany_no = request.getParameter("accompany_no");
-		/*글쓴이: 임시라 변경 필요*/
-//		int mem_no = request.getParameter("mem_no");
-		String mem_no = "64";
+		/*세션 가져옴*/
+		MemberDto memberDto = (MemberDto) request.getSession().getAttribute(Constant.SYNN_LOGIN_OBJECT);
+	
 		String start_date = request.getParameter("start_date");
 		String end_date = request.getParameter("end_date");
 		String gender_code = request.getParameter("gender_code");
@@ -333,7 +321,7 @@ public class AccompanyServiceImp implements AccompanyService {
 		try {
 			if(accompany_no.equals(Constant.SYNB_NULL)) {
 				EverywhereAspect.logger.info(EverywhereAspect.logMsg + "게시글 번호가 없습니다.");
-			} else if(mem_no.equals(Constant.SYNB_NULL)) {
+			} else if(memberDto==null) {
 				EverywhereAspect.logger.info(EverywhereAspect.logMsg + "회원 정보가 없음");
 			} else if (!(gender_code.equals(Constant.ACCOMPANY_GENDER_BOTH) || gender_code.equals(Constant.ACCOMPANY_GENDER_MALE) || gender_code.equals(Constant.ACCOMPANY_GENDER_FEMALE))){
 				EverywhereAspect.logger.info(EverywhereAspect.logMsg + "gender_code Error");
@@ -344,7 +332,7 @@ public class AccompanyServiceImp implements AccompanyService {
 			} else {
 				// 실제 구현부
 				accompanyDto.setAccompany_no(Integer.parseInt(accompany_no));
-				accompanyDto.setMem_no(Integer.parseInt(mem_no));
+				accompanyDto.setMem_no(memberDto.getMem_no());
 				/*제목 및 HTML제거*/
 				accompanyDto.setTitle(CommonUtils.deleteHTML(title));
 				/*내용 및 HTML 제거*/

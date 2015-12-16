@@ -44,7 +44,8 @@
 		//defaultPhotoPath:기본으로 뿌릴 이미지 선택,
 		/* 	commonReplyInit(type_code,mem_no,item_no,defaultPhotoPath); */
 			var accompany_no=${accompanyDto.accompany_no};
-			commonReplyInit('S0010',64,accompany_no,"");
+			var mem_no=${mem_object.mem_no}
+			commonReplyInit('S0010', mem_no, accompany_no,"");
 		});
 	</script>
 	
@@ -142,7 +143,7 @@
                             
                             <ul class="post-shares post-shares-lg">
                                 <!-- 글쓴이만 삭제 및 수정이 보이도록 -->
-							  	<c:if test="${ownerCheck>0}">
+							  	<c:if test="${accompanyDto.mem_no==mem_object.mem_no}">
 							  		<li>
 	                                    <a href="/user/accompany/accompanyUpdate.do?accompany_no=${accompanyDto.accompany_no}&pageNumber=${currentPage}">
 	                                        <i class="rounded-x fa fa-pencil" title="수정"></i>
