@@ -20,7 +20,7 @@
             <a href="#"><i class="fa fa-cubes"></i> 나의 여행</a>
         </li>
         <li class="list-group-item">
-            <a href="#"><i class="fa fa-comments"></i> 방명록</a>
+                        <a href="/user/visitor/visitorWrite2.do"><i class="fa fa-comments"></i> 방명록</a>
         </li>
         <li class="list-group-item">
             <a href="#"><i class="fa fa-comments"></i> 쪽지함</a>
@@ -36,8 +36,6 @@
         </li>
         <c:if test=""></c:if>
     </ul>
-
-    <hr>
 
     <!--Notification-->
     <div class="panel-heading-v2 overflow-h">

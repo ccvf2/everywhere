@@ -1,10 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>My Page</title>
+<title>방명록</title>
 <!-- Meta -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -35,6 +36,7 @@
 
     <!-- CSS Customization -->
     <link rel="stylesheet" href="/assets/css/custom.css">
+<c:import url="/WEB-INF/views/user/common/utilImport.jsp" />
 </head>
 <body>
 <div class="wrapper">
@@ -56,51 +58,96 @@
 			<!-- 메인------------------------------------------------------------------------------------------------------------------------------ -->
             <!-- Profile Content -->
             <div class="col-md-9">
-                <ul class="timeline-v1">
-                    <li>
-                        <div class="timeline-badge primary"><i class="glyphicon glyphicon-record"></i></div> <!-- 좌측 타임라인 0번째 -->
-                        <div class="timeline-panel">
-                            <div class="timeline-heading">
-                                <img class="img-responsive" src="/assets/img/main/img10.jpg" alt=""/>
-                            </div>
-                            <div class="timeline-body text-justify">
-                                <h2><a href="#">Timeline Heading</a></h2>
-                                <p>Lorem Ipsum is simply dummy text of the printing and type setting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
-                                <a class="btn-u btn-u-sm" href="#">Read More</a>
-                            </div>
-                            <div class="timeline-footer">
-                                <ul class="list-unstyled list-inline blog-info">
-                                    <li><i class="fa fa-clock-o"></i> March 28, 2014</li>
-                                    <li><i class="fa fa-comments-o"></i> <a href="#">7 Comments</a></li>
-                                </ul>
-                                <a class="likes" href="#"><i class="fa fa-heart"></i>239</a>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="timeline-inverted">
-                        <div class="timeline-badge primary"><i class="glyphicon glyphicon-record invert"></i></div> <!-- 우측 타임라인 1번째 -->
-                        <div class="timeline-panel">
-                            <div class="timeline-heading">
-                                <img class="img-responsive" src="/assets/img/main/img12.jpg" alt=""/>
-                            </div>
-                            <div class="timeline-body text-justify">
-                                <h2><a href="#">Timeline Heading</a></h2>
-                                <p>Lorem Ipsum is simply dummy text of the printing and type setting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
-                                <a class="btn-u btn-u-sm" href="#">Read More</a>
-                            </div>
-                            <div class="timeline-footer">
-                                <ul class="list-unstyled list-inline blog-info">
-                                    <li><i class="fa fa-clock-o"></i> March 16, 2014</li>
-                                    <li><i class="fa fa-comments-o"></i> <a href="#">12 Comments</a></li>
-                                </ul>
-                                <a class="likes" href="#"><i class="fa fa-heart"></i>87</a>
-                            </div>
-                        </div>
-                    </li>
-                    
-                    <li class="clearfix" style="float: none;"></li>
-                </ul>
-            </div>
+            	<c:if test="${count==0}">
+					<div class="panel panel-green margin-bottom-40">
+		            	<div class="panel-heading" style="height:30px;" align="left">
+		                	<h3 class="panel-title">No.${visitorDto.visitor_no}</h3>
+		               	</div>
+		                <div class="panel-body">
+		                    <form class="margin-bottom-40" role="form" action="/user/visitor/visitorWrite.do" method="post" onsubmit="return visitorForm(this)">
+								<div class="form-group" align="left">
+									<span>아이디:${mem_no}</span>
+								</div>
+								<div class="form-group">
+									<textarea class="form-control" rows="5" cols="65" name="visitor_content" style="resize:none;"></textarea>
+								</div>
+								<div class="form-group" align="right">
+									<input type="submit" class="btn-u btn-u-green" value="확인"/>
+									<input type="reset"  class="btn-u btn-u-green" value="취소"/>
+								</div>
+							</form>
+						</div>
+		        	</div>
+				</c:if>
+				<c:if test="${count>0}">
+					<div class="panel panel-green margin-bottom-40">
+		            	<div class="panel-heading" style="height:30px;" align="left">
+		                	<h3 class="panel-title">No.${visitorDto.visitor_no}</h3>
+		               	</div>
+		                <div class="panel-body">
+		                    <form class="margin-bottom-40" role="form" action="/user/visitor/visitorWrite.do" method="post" onsubmit="return visitorForm(this)">
+								<div class="form-group" align="left">
+									<span>아이디:${visitorDto.mem_no}</span>
+								</div>
+								<div class="form-group">
+									<textarea class="form-control" rows="5" cols="65" name="visitor_content" style="resize:none;"></textarea>
+								</div>
+								<div class="form-group" align="right">
+									<input type="submit" class="btn-u btn-u-green" value="확인"/>
+									<input type="reset"  class="btn-u btn-u-green" value="취소"/>
+								</div>
+							</form>
+						</div>
+		        	</div>
+					<c:forEach var="visitor" items="${visitorList}">
+						<div class="panel panel-green margin-bottom-40">
+		            		<div class="panel-heading" style="height:30px;" align="left">
+		                		<h3 class="panel-title" style="float:left; margin-right:620px;">No.${visitor.visitor_no}</h3>
+								<fmt:formatDate value="${visitor.visitor_write_date}" type="both"/>
+		                	</div>
+		                	<div class="panel-body">
+		                    	<div class="form-group" align="left">
+									<a href="/user/member/myPage.do?mem_no=${visitorDto.mem_no}">아이디:${visitor.mem_no}</a>
+								</div>
+								<div class="form-group" style="height:110px;">
+									<div align="left">${visitor.visitor_content}</div>
+								</div>
+								<div class="form-group" align="right"> 
+									<a class="btn-u btn-u-green" href="/user/visitor/visitorUpdate.do?visitor_no=${visitor.visitor_no}&pageNumber=${currentPage}">수정</a> 
+									<a class="btn-u btn-u-green" href="/user/visitor/visitorDelete.do?visitor_no=${visitor.visitor_no}&pageNumber=${currentPage}">삭제</a>
+								</div>
+							</div>
+						</div>
+					</c:forEach>
+				</c:if>
+			</div>
+			
+			<div class="col-md-9" align="center">
+				<c:if test="${count>0}">
+					<c:set var="pageBlock" value="${3}"/>
+				</c:if>
+		       	<fmt:parseNumber var="rs" value="${(currentPage-1)/pageBlock}" integerOnly="true"/>
+				<c:set var="startPage" value="${rs*pageBlock+1}"/>
+				<c:set var="endPage" value="${startPage+pageBlock-1}"/>
+				
+				<c:set var="pageCount" value="${count/boardSize+(count%boardSize==0 ? 0:1)}"/>
+				
+				<c:if test="${endPage>pageCount}">
+					<c:set var="endPage" value="${pageCount}"/>
+				</c:if>
+				
+				<c:if test="${startPage>pageBlock}">
+					<a href="/user/visitor/visitorWrite2.do?pageNumber=${startPage-pageBlock}">[이전]</a>
+				</c:if>
+				
+				<c:forEach var="i" begin="${startPage}" end="${endPage}">
+					<a href="/user/visitor/visitorWrite2.do?pageNumber=${i}">[${i}]</a>
+				</c:forEach>
+				
+				<c:if test="${endPage<pageCount}">
+					<a href="/user/visitor/visitorWrite2.do?pageNumber=${startPage+pageBlock}">[다음]</a>
+				</c:if>
+			</div>
             <!-- End Profile Content -->
             <!-- 메인------------------------------------------------------------------------------------------------------------------------------ -->
         </div>
@@ -143,6 +190,5 @@
     <script src="assets/plugins/html5shiv.js"></script>
     <script src="assets/plugins/placeholder-IE-fixes.js"></script>
 <![endif]-->
-
 </body>
 </html>
