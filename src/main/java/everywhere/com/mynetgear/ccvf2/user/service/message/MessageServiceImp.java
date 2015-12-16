@@ -45,7 +45,7 @@ public class MessageServiceImp implements MessageService {
 		List<MessageDto> list = messageDao.getListParsonTalk(dto);
 		System.out.println(Constant.LOG_ID1+ list.size());
 		mav.addObject("parsonTalkList",list);
-		mav.setViewName("/user/message/messageTalkList");
+		mav.setViewName("/user/message/messageTalkList2");
 	}
 	
 	/* (non-Javadoc)
