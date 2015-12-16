@@ -42,6 +42,7 @@
  <hr/> 
  <a href="/user/planner/plannerCreate.do">스케줄</a>
  <a href="/user/planner/plannerList.do?mem_no=64">스케줄 목록</a>
+ <a href="/user/planner/updatePlanner.do?planner_no=10">스케줄 쓰기 테스트</a>
  <hr/>
  <a href="/user/spot/addSpotPage.do">명소추가</a>
  <a href="user/spot/spotListPage.do">스케줄-명소목록()</a>

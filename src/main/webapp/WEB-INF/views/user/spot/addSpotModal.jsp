@@ -24,12 +24,17 @@
 	<script type="text/javascript" src="/script/user/spot/googleMap.js"></script>
     <script async defer src="https://maps.googleapis.com/maps/api/js?sensor=true"></script>
     
-    <style type="text/css">
-	#map {
-	   height: 300px;
-	   width: 300px;
+  <style type="text/css">
+  	html, body, #map  {
+	  margin: 0;
+	  padding: 0;
+	  height: 100%;
 	}
-	</style>	  
+	#map {
+	  width:300px;
+	  height:300px;
+	}
+  </style>
   </head>
   <body onload="initialize();">
 	<div class="wrapper">

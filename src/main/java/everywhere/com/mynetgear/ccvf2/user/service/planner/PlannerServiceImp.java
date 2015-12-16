@@ -103,7 +103,7 @@ public class PlannerServiceImp implements PlannerService {
 		PlannerDto plannerDto = plannerDao.getOnePlanner(planner_no);
 		
 		mav.addObject("plannerDto", plannerDto);
-		mav.setViewName("user/planner/plannerWrite");
+		mav.setViewName("user/planner/addPlanner");
 		//mav.setViewName("user/planner/NewFile2");
 	}
 

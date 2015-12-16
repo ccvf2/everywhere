@@ -103,8 +103,23 @@ function initialize() {
 		map : map
 	});
 	marker.setMap(null);
+};
+
+$('#myMapModal').on('show.bs.modal', function() {
+	   //Must wait until the render of the modal appear, thats why we use the resizeMap and NOT resizingMap!! ;-)
+	   resizeMap();
+})
+function resizeMap() {
+   if(typeof map =="undefined") return;
+   setTimeout( function(){resizingMap();} , 400);
 }
 
+function resizingMap() {
+   if(typeof map =="undefined") return;
+   var center = map.getCenter();
+   google.maps.event.trigger(map, "resize");
+   map.setCenter(center); 
+}
 /* ------------------------------------------------------------------------------------- */
 // spot Read 할때 지도 표시
 function markInitialize(lat, lng, name) {

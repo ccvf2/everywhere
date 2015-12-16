@@ -19,7 +19,7 @@ public class PlannerController {
 	
 	@RequestMapping(value="/user/planner/plannerCreate.do", method=RequestMethod.GET)
 	public ModelAndView insertPlanner(HttpServletRequest request, HttpServletResponse response) {
-		return new ModelAndView("/user/planner/NewFile");	
+		return new ModelAndView("/user/planner/NewFile");
 	}
 	
 	@RequestMapping(value="/user/planner/plannerCreate.do", method=RequestMethod.POST)
@@ -46,7 +46,7 @@ public class PlannerController {
 		return mav;
 	}
 	
-	@RequestMapping(value="/user/planner/writePlanner.do", method=RequestMethod.GET)
+	@RequestMapping(value="/user/planner/updatePlanner.do", method=RequestMethod.GET)
 	public ModelAndView updatePlanner(HttpServletRequest request, HttpServletResponse response) {
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("request", request);
