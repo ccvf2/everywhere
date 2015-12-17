@@ -4,12 +4,11 @@
 <!DOCTYPE html>
 <html>
 <head>
+<c:import url="/WEB-INF/views/common/jquery.jsp" />
 <meta charset="utf-8">
 <title>회원가입</title>
-<script type="text/javascript" src="/script/common/jquery-1.11.3.js"></script>
-<script type="text/javascript" src="/script/common/alert.js"></script>
 <script type="text/javascript">
-	$(function() {
+	/* $(function() {
 		$(".email").keyup(function() {
 			var email = $(".email").val();
 			if (email.length >= 9) {
@@ -31,7 +30,7 @@
 				});
 			}
 		});
-	});
+	}); */
 </script>
 <script type="text/javascript">
 	var checked = false;
