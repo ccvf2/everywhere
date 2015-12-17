@@ -12,7 +12,7 @@
     <script src="/script/common/jquery-ui/jquery-ui.js"></script>
     <script>
     $(function() {
-        $( "#spotLists li > div" ).draggable({
+        $( "#spotLists div" ).draggable({
           appendTo: "body",
           revert: "invalid",
           helper: "clone",
@@ -27,10 +27,14 @@
             hoverClass: "ui-state-active",
             accept: ":not(.ui-sortable-helper)",
             drop: function( event, ui ) {
-            	$(event['target']).droppable('disable');
+              $(event['target']).droppable('disable');
               $( this).addClass( "ui-state-highlight" );
-              $( this ).find( "span" ).remove();
-              $( "<li></li>" ).text( ui.draggable.text() ).appendTo( $( this ).find( "a" ) );
+              $( this ).find( "span" ).remove();              
+              
+              var test = ui.draggable.attr('id').replace("_item","");
+              $( this ).find("input").val(test);
+              
+              $( "<div></div>" ).html( ui.draggable.html() ).appendTo( $( this ).find( "a" ) );
               
             }
           }).sortable({
@@ -69,9 +73,10 @@
 		var money_type = new Array('항공', '숙박', '교통', '쇼핑', '식사', '입장료', '오락', '기타');
 		var money_code = new Array('D0001', 'D0002', 'D0003', 'D0004', 'D0005', 'D0006', 'D0007', 'D0008');
 		var moneySelect = document.createElement("select");
+		moneySelect.name=input_name+"_money"+money_count.value +"_type_code";
 		
 		var label = document.createElement("label");
-		label.className = "select";		
+		label.className = "select";
 		for (i = 0; i < money_type.length; i++) {
             var moneyOption = new Option(money_type[i], money_code[i]);
             moneySelect.options.add(moneyOption);
@@ -81,14 +86,14 @@
 		
 		var noteInput = document.createElement("input");
 		noteInput.type="text";
-		noteInput.name= input_name+"_money"+money_count.value+"_note";
+		noteInput.name= input_name+"_money"+money_count.value+"_title";
 		noteInput.placeholder="예) 기념품";
 		div.appendChild(noteInput);
 		
 		var priceInput = document.createElement("input");
 		priceInput.style.marginLeft="10px";
 		priceInput.type="text";
-		noteInput.name= input_name+"_money"+money_count.value+"_price";
+		priceInput.name= input_name+"_money"+money_count.value+"_price";
 		priceInput.placeholder="3000";
 		div.appendChild(priceInput);
 		
@@ -207,9 +212,9 @@
                       
                       
                 <div>
-                <ul class="list-unstyled mCustomScrollbar margin-bottom-20" data-mcs-theme="minimal-dark" id="spotLists">
+                <ul class="list-unstyled mCustomScrollbar margin-bottom-20" data-mcs-theme="minimal-dark">
                 <c:forEach var="spot" items="${spotList}">
-                    <li class="notification" style="border:1px">
+                    <li class="notification" style="border:1px" id="spotLists">
                     	<div id="${spot.spot_no}_item" class="rounded">
                         <i style="margin:0;"><img alt="" src="/attatchFile/spot/${spot.spot_photoes[0].save_name}.${spot.spot_photoes[0].extension}" style="width:35px;height:35px;margin-right:5px;"></i>
                         <div class="overflow-h">
@@ -272,17 +277,17 @@
                 <input type="hidden" name="day_count" value="${day_count}"/>
                 <c:forEach var="i" begin="1" end="${day_count}">
                 <div class="tag-box tag-box-v4 rounded-2x margin-bottom-30">
-                	<input type="hidden" name="d${i}_item_count" value="1">
+                	<input type="hidden" id="d${i}_item_count" name="d${i}_item_count" value="1">
                 	<h2 class="heading-xs">Day ${i}</h2>
                 	<c:set var="id_value" value="d${i}_item1"/>
                 	<ol class="list-unstyled" >
 	                	<li>
 	                	<div class="panel-group">
-	                		<input type="hidden" name="${id_value}_no"/>
-	                		<input type="hidden" name="${id_value}_spot_no"/>
+	                		<input type="hidden" name="${id_value}_no"/>	                		
 						    <div class="panel panel-default">
-						      <div class="panel-heading ui-widget-header droppable">
+						      <div class="panel-heading ui-widget-header droppable">						      	
 						        <h4 class="panel-title">
+						          <input type="hidden" id="${id_value}_spot_no" name="${id_value}_spot_no"/>
 						          <a data-toggle="collapse" href="#collapse_${id_value}"><span>Add Spot</span></a>
 						        </h4>
 						      </div>
@@ -297,7 +302,7 @@
 						        <div class="project-share">
 	                                <ul class="list-inline comment-list-v2 pull-right">
 	                                    <li><i class="expand-list rounded-x fa  fa-plus-square"></i> <a href="#">25</a></li>
-	                                    <li><i class="fa fa-comments"></i> <a href="#">32</a></li>
+	                                    <li><i class="fa fa-comments" onclick=""></i> <a href="#">32</a></li>
 	                                    <li><i class="fa fa-retweet" onclick="addMoney('${id_value}')"></i> <a href="#">77</a></li>
 	                                </ul>
 	                           	 </div>
@@ -306,7 +311,6 @@
 						    </div>
 	 					 </li>
  					 </ol>
- 					 
  					 
                 </div>
                 </c:forEach>
