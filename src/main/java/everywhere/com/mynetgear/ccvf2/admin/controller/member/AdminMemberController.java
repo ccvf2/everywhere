@@ -46,7 +46,7 @@ public class AdminMemberController {
 	 * @param response
 	 * @return
 	 */
-	@RequestMapping(value="/admin/member/adminMemberUpdate.do", method=RequestMethod.GET)
+	@RequestMapping(value="/admin/member/adminMemberUpdate.ajax", method=RequestMethod.GET)
 	public ModelAndView adminMemberStatusUpdate(HttpServletRequest request, HttpServletResponse response) {
 		ModelAndView mav = new ModelAndView();
 		System.out.println("adminMember 회원 정보 수정");

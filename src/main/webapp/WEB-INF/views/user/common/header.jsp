@@ -85,22 +85,20 @@ jQuery(document).ready(function() {
 	            <!-- Topbar -->
 	            <div class="topbar">
 	                <ul class="loginbar pull-right">
-<!-- 	                    <li class="hoverSelector">
-	                        <i class="fa fa-globe"></i>
-	                        <a>Languages</a>
-	                        <ul class="languages hoverSelectorBlock">
-	                            <li class="active">
-	                                <a href="#">English <i class="fa fa-check"></i></a>
-	                            </li>
-	                            <li><a href="#">Spanish</a></li>
-	                            <li><a href="#">Russian</a></li>
-	                            <li><a href="#">German</a></li>
-	                        </ul>
-	                    </li> -->
-	                   <!--  <li class="topbar-devider"></li> -->
-	                    <li><a href="page_login.html">Login</a></li>
-	                    <li class="topbar-devider"></li>
-	                    <li><a href="page_faq.html">Help</a></li>
+	                	<c:choose>
+	                		<c:when test="${ mem_object.mem_name=='' || mem_object==null }">
+	                    		<li><a href="/user/login/login.do">Login</a></li>
+	                		</c:when>
+	                		<c:otherwise>
+			                	<li>${mem_object.mem_name}님 안녕하세요.</li>
+			                    <li class="topbar-devider"></li>
+			                    <li><a href="/user/login/loginout.do" style="color: #72c02c;">Logout</a></li>
+			                    <li class="topbar-devider"></li>
+			                    <c:if test="${mem_object.mem_level_code=='M0001'}">
+			                    <li><a href="/admin/main/main.do" style="color: #72c02c;">관리자페이지</a></li>
+			                    </c:if>
+	                		</c:otherwise>
+	                	</c:choose>
 	                </ul>
 	            </div>
 	            <!-- End Topbar -->

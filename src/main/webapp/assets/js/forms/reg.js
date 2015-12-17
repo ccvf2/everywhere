@@ -71,11 +71,11 @@ var RegForm = function () {
 	            	},
 	            	mem_name:
 		            {
-	            		required: '고객님의 성함을 입력해주세요.'
+	            		required: '회원님의 성함을 입력해주세요.'
 		            },
 	                login:
 	                {
-	                    required: '고객님의 계정으로 로그인해주세요.'
+	                    required: '회원님의 계정으로 로그인해주세요.'
 	                },
 	                mem_email:
 	                {
