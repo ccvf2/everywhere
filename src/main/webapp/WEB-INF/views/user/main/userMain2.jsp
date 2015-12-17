@@ -36,6 +36,8 @@
 
     <!-- CSS Customization -->
     <link rel="stylesheet" href="/assets/css/custom.css">
+    
+    <link href="/assets/css/pages/blog_masonry_3col.css" rel="stylesheet">
 </head>
 
 <body>
@@ -125,66 +127,35 @@
     	<!-- End Service Blokcs -->
 
     	<!-- Recent Works -->
-        <div class="headline"><h2>Recent Works</h2></div>
         <div class="row margin-bottom-20">
-            <!-- <div class="col-md-3 col-sm-6">
-                <div class="thumbnails thumbnail-style thumbnail-kenburn">
-                	<div class="thumbnail-img">
-                        <div class="overflow-hidden">
-                            <img class="img-responsive" src="/assets/img/main/img1.jpg" alt="">
-                        </div>
-                        <a class="btn-more hover-effect" href="#">read more +</a>
-                    </div>
-                    <div class="caption">
-                        <h3><a class="hover-effect" href="#">Project One</a></h3>
-                        <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, justo sit amet risus etiam porta sem.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3 col-sm-6">
-                <div class="thumbnails thumbnail-style thumbnail-kenburn">
-                    <div class="thumbnail-img">
-                        <div class="overflow-hidden">
-                            <img class="img-responsive" src="/assets/img/main/img12.jpg" alt="">
-                        </div>
-                        <a class="btn-more hover-effect" href="#">read more +</a>
-                    </div>
-                    <div class="caption">
-                        <h3><a class="hover-effect" href="#">Project Two</a></h3>
-                        <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, justo sit amet risus etiam porta sem.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3 col-sm-6">
-                <div class="thumbnails thumbnail-style thumbnail-kenburn">
-                    <div class="thumbnail-img">
-                        <div class="overflow-hidden">
-                            <img class="img-responsive" src="/assets/img/main/img3.jpg" alt="">
-                        </div>
-                        <a class="btn-more hover-effect" href="#">read more +</a>
-                    </div>
-                    <div class="caption">
-                        <h3><a class="hover-effect" href="#">Project Three</a></h3>
-                        <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, justo sit amet risus etiam porta sem.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3 col-sm-6">
-                <div class="thumbnails thumbnail-style thumbnail-kenburn">
-                    <div class="thumbnail-img">
-                        <div class="overflow-hidden">
-                            <img class="img-responsive" src="/assets/img/main/img17.jpg" alt="">
-                        </div>
-                        <a class="btn-more hover-effect" href="#">read more +</a>
-                    </div>
-                    <div class="caption">
-                        <h3><a class="hover-effect" href="#">Project Four</a></h3>
-                        <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, justo sit amet risus etiam porta sem.</p>
-                    </div>
-                </div>
-            </div> -->
+        <div class="headline"><h2>Recent Works</h2></div>
+	        <div class="blog_masonry_3col">
+		        <div class="container content grid-boxes">
+		            <div class="grid-boxes-in" >
+		                <img class="img-responsive" src="assets/img/main/img3.jpg" alt="">
+		                <div class="grid-boxes-caption">
+		                    <h3><a href="#">Unify Clean and Fresh Fully Responsive Template</a></h3>
+		                    <ul class="list-inline grid-boxes-news">
+		                        <li><span>By</span> <a href="#">Kathy Reyes</a></li>
+		                        <li>|</li>
+		                        <li><i class="fa fa-clock-o"></i> July 06, 2014</li>
+		                        <li>|</li>
+		                        <li><a href="#"><i class="fa fa-comments-o"></i> 06</a></li>
+		                    </ul>
+		                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+		                </div>
+		            </div>
+				</div>
+			</div>
+	        
+
+			
+			
+			
+			
+			
         </div>
-    	<!-- End Recent Works -->
+    	<!-- End Row-->
 
     	<!-- Info Blokcs -->
     	<div class="row margin-bottom-30">
