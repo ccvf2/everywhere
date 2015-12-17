@@ -92,7 +92,11 @@
 								SELECT * 
 								FROM tbl_accompany 
 								where use_yn=#{use_yn}
-								
+								<if test="accompany_status_code != null">
+									and accompany_status_code=#{accompany_status_code}
+								</if>
+									and (title like '%'||#{searchValue, jdbcType=VARCHAR}||'%' 
+									or content like '%'||#{searchValue, jdbcType=VARCHAR}||'%')
 								ORDER BY<![CDATA[ accompany_no desc]]>
 							)b
 						)
