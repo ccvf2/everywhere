@@ -17,19 +17,29 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.ModelAndView;
 
 import everywhere.com.mynetgear.ccvf2.comm.aop.EverywhereAspect;
+import everywhere.com.mynetgear.ccvf2.comm.dao.common.CommonFileIODao;
+import everywhere.com.mynetgear.ccvf2.comm.dto.common.CommonFileIODto;
+import everywhere.com.mynetgear.ccvf2.comm.dto.commoncode.CommonCodeDto;
+import everywhere.com.mynetgear.ccvf2.comm.service.commoncode.CommonCodeService;
 import everywhere.com.mynetgear.ccvf2.comm.util.common.Constant;
 import everywhere.com.mynetgear.ccvf2.user.dao.member.MemberDao;
 import everywhere.com.mynetgear.ccvf2.user.dao.planner.PlannerDao;
+import everywhere.com.mynetgear.ccvf2.user.dao.spot.SpotDao;
 import everywhere.com.mynetgear.ccvf2.user.dto.planner.ItemDto;
 import everywhere.com.mynetgear.ccvf2.user.dto.planner.MoneyDto;
 import everywhere.com.mynetgear.ccvf2.user.dto.planner.PlannerDto;
+import everywhere.com.mynetgear.ccvf2.user.dto.spot.SpotDto;
 
 @Component
 public class PlannerServiceImp implements PlannerService {
 	@Autowired
 	private PlannerDao plannerDao;
 	@Autowired
-	private MemberDao memberDao;
+	private SpotDao spotDao;
+	@Autowired
+	private CommonFileIODao commonFileIoDao;
+	@Autowired
+	private CommonCodeService commonCodeService;
 
 	@Override
 	public void insertPlanner(ModelAndView mav) {
@@ -101,8 +111,31 @@ public class PlannerServiceImp implements PlannerService {
 		int planner_no = Integer.parseInt(request.getParameter("planner_no"));
 		
 		PlannerDto plannerDto = plannerDao.getOnePlanner(planner_no);
-		
 		mav.addObject("plannerDto", plannerDto);
+		
+		List<SpotDto> spotList = spotDao.getSpotAllList();
+		for(int i = 0; i < spotList.size(); i++){
+			String[] attach_no = spotList.get(i).getAttach_file().split(",");
+			
+			List<CommonFileIODto> fileList = new ArrayList<CommonFileIODto>();
+			CommonFileIODto fileIODto = commonFileIoDao.getOneFileDto(Integer.parseInt(attach_no[0]));
+			fileList.add(fileIODto);
+			System.out.println(fileIODto);
+			spotList.get(i).setSpot_photoes(fileList);
+		}
+		
+		List<CommonCodeDto> countryList = commonCodeService.getListCodeGroup("B0000");		
+		List<CommonCodeDto> spotTypeList = commonCodeService.getListCodeGroup("T0001");
+		
+		mav.addObject("countryList", countryList);
+		mav.addObject("spotTypeList", spotTypeList);
+		
+		mav.addObject("spotList", spotList);
+		
+		long diff = plannerDto.getEnd_date().getTime() - plannerDto.getStart_date().getTime();
+        long diffDays = diff / (24 * 60 * 60 * 1000);
+        mav.addObject("day_count", diffDays+1);
+        
 		mav.setViewName("user/planner/addPlanner");
 		//mav.setViewName("user/planner/NewFile2");
 	}

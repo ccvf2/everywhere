@@ -160,7 +160,7 @@ public class SpotServiceImp implements SpotService{
 		mav.addObject("countryList", countryList);
 		mav.addObject("spotTypeList", spotTypeList);
 		mav.addObject("spotList", spotList);
-		mav.setViewName("/user/planner/addPlanner");
+		mav.setViewName("/user/spot/spotListPage");
 	}
 
 	@Override

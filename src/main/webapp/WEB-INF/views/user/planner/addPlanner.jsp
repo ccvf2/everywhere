@@ -4,33 +4,37 @@
 <!DOCTYPE html>
 <html>
 <head>
+<c:import url="/WEB-INF/views/common/jquery.jsp"/>
 <meta charset="UTF-8">
 <title>타이틀 입력</title>
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-	<script src="/script/common/jquery-1.11.3.js"></script>
+	<script src="/script/common/jquery-ui/jquery-ui.theme.css"></script>
     <script src="/script/common/jquery-ui/jquery-ui.js"></script>
     <script>
     $(function() {
         $( "#spotLists li > div" ).draggable({
           appendTo: "body",
           revert: "invalid",
-          helper: "clone"
+          helper: "clone",
+          start: function() {
+              $(this).find("img").css({ height: 35, width: 35 });
+          }
         });
         
-        $( "#droppable" ).droppable({
+        $( ".droppable" ).droppable({
         	accept: "#draggable",
-            activeClass: "ui-state-hover",
+        	activeClass: "ui-state-highlight",
             hoverClass: "ui-state-active",
             accept: ":not(.ui-sortable-helper)",
             drop: function( event, ui ) {
+            	$(event['target']).droppable('disable');
+              $( this).addClass( "ui-state-highlight" );
               $( this ).find( "span" ).remove();
               $( "<li></li>" ).text( ui.draggable.text() ).appendTo( $( this ).find( "a" ) );
             }
           }).sortable({
             items: "li:not(.placeholder)",
             sort: function() {
-              // gets added unintentionally by droppable interacting with sortable
-              // using connectWithSortable fixes this, but doesn't allow you to customize active/hoverClass options
               $( this ).removeClass( "ui-state-default" );
             }
           });
@@ -61,8 +65,8 @@
 		<!--=== Breadcrumbs ===-->    
 	    <div class="breadcrumbs-v1">
 	        <div class="container" style="height: 50px;">
-	            <span>${plannerDto.title}</span>
-	            <h1>Basic Item Page</h1>
+	            <span></span>
+	            <h1>${plannerDto.title}</h1>
 	        </div>
 	    </div>
     <!--=== End Breadcrumbs ===-->
@@ -153,9 +157,9 @@
                 <c:forEach var="spot" items="${spotList}">
                     <li class="notification" style="border:1px">
                     	<div id="${spot.spot_no}item" class="rounded">
-                        <i><img alt="" src="/attatchFile/spot/${spot.spot_photoes[1].save_name}.${spot.spot_photoes[1].extension}"></i>
+                        <i style="margin:0;"><img alt="" src="/attatchFile/spot/${spot.spot_photoes[0].save_name}.${spot.spot_photoes[0].extension}" style="width:35px;height:35px;margin-right:5px;"></i>
                         <div class="overflow-h">
-                            <span><strong>${spot.spot_name}</strong></span>
+                            <span><strong><a href="#">${spot.spot_name}</a></strong></span>
                             <small><c:out value="${spot.spot_note}"/></small>
                         </div>
                         </div>    
@@ -185,9 +189,9 @@
             	<form action="/user/spot/addSpotWrite.do" id="sky-form" class="sky-form" style="border:none;" onsubmit="return addSpotForm(this)" method="post" enctype="multipart/form-data">
                 <fmt:formatDate var="start_date" pattern="yyyy-MM-dd" value="${plannerDto.start_date}"/>
 				<fmt:formatDate var="end_date" pattern="yyyy-MM-dd" value="${plannerDto.end_date}"/>
-				<input type="text" name="day_count" value="${day_count}"/>
 				<input type="hidden" name="planner_no" value="${plannerDto.planner_no}"/>
                 <input type="hidden" name="mem_no" value="${mem_object.mem_no}">
+                <input type="hidden" name="planner_title" value="${plannerDto.title}">
                 <div class="tag-box tag-box-v4 rounded-2x margin-bottom-30">
 	               <label class="textarea">
                        <i class="icon-append fa fa-question-circle"></i>
@@ -204,28 +208,50 @@
                       <div class="col col-6">
                           <label class="input">
                               <i class="icon-append fa fa-calendar"></i>
-                              <input type="text" name="finish" id="finish" placeholder="Expected finish date" value="${plannerDto.end_date}">
+                              <input type="text" name="finish" id="finish" placeholder="Expected finish date" value="${end_date}">
                           </label>
                       </div>
                   </div> 
                 </div>
-                
-                
-                <input type="hidden" name="day_count" value="3"/>
-                <c:forEach var="i" begin="1" end="3">
-                <div class="tag-box tag-box-v4 rounded-2x margin-bottom-40">
+
+				<!-- Day Schedule -->
+                <input type="hidden" name="day_count" value="${day_count}"/>
+                <c:forEach var="i" begin="1" end="${day_count}">
+                <div class="tag-box tag-box-v4 rounded-2x margin-bottom-30">
+                	<input type="hidden" name="d${i}_item_count" value="0">
+                	<h2 class="heading-xs">Day ${i}</h2>
                 	<ol class="list-unstyled " >
 	                	<li>
 	                	<div class="panel-group">
 						    <div class="panel panel-default">
-						      <div class="panel-heading" id="droppable">
+						      <div class="panel-heading ui-widget-header droppable">
 						        <h4 class="panel-title">
 						          <a data-toggle="collapse" href="#collapse${i}"><span>Add Spot</span></a>
 						        </h4>
 						      </div>
 						      <div id="collapse${i}" class="panel-collapse collapse">
 						        <div class="panel-body">Panel Body</div>
-						        <div class="panel-body">Panel Body</div>
+						        <div class="panel-body" style="padding:0px">
+		                            <label class="textarea" style="margin:0">
+		                                <textarea style="border:0px" rows="3" name="info" placeholder="Write some notes.."></textarea>
+		                            </label>        
+						        </div>
+						        <div class="panel-body">
+						         <ul class="list-inline blog-info-v2">
+                                    <li>
+                                        <strong>12%</strong>
+                                        <span>Funded</span>
+                                    </li>
+                                    <li>
+                                        <strong>17%</strong>
+                                        <span>Pludged</span>
+                                    </li>
+                                    <li>
+                                        <strong>25</strong>
+                                        <span>days to go</span>
+                                    </li>
+                                </ul>
+						        </div>
 						      </div>
 						    </div>
 						    </div>
