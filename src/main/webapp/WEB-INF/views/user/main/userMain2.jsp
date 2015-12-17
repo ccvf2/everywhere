@@ -76,63 +76,21 @@
     </div><!--/slider-->
     <!--=== End Slider ===-->
 
-    <!--=== Purchase Block ===-->
-    <div class="purchase">
-<!--         <div class="container">
-            <div class="row">
-                <div class="col-md-9 animated fadeInLeft">
-                    <span>Unify is a clean and fully responsive incredible Template.</span>
-                    <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi  vehicula sem ut volutpat. Ut non libero magna fusce condimentum eleifend enim a feugiat corrupti quos.</p>
-                </div>
-                <div class="col-md-3 btn-buy animated fadeInRight">
-                    <a href="#" class="btn-u btn-u-lg"><i class="fa fa-cloud-download"></i> Download Now</a>
-                </div>
-            </div>
-        </div> -->
-    </div><!--/row-->
-    <!-- End Purchase Block -->
 
     <!--=== Content Part ===-->
     <div class="container content-sm">
-    	<!-- Service Blocks -->
-    	<div class="row margin-bottom-30">
-        	<!-- <div class="col-md-4">
-        		<div class="service">
-                    <i class="fa fa-compress service-icon"></i>
-        			<div class="desc">
-        				<h4>Fully Responsive</h4>
-                        <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus etiam sem...</p>
-        			</div>
-        		</div>
-        	</div>
-        	<div class="col-md-4">
-        		<div class="service">
-                    <i class="fa fa-cogs service-icon"></i>
-        			<div class="desc">
-        				<h4>HTML5 + CSS3</h4>
-                        <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus etiam sem...</p>
-        			</div>
-        		</div>
-        	</div>
-        	<div class="col-md-4">
-        		<div class="service">
-                    <i class="fa fa-rocket service-icon"></i>
-        			<div class="desc">
-        				<h4>Launch Ready</h4>
-                        <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus etiam sem...</p>
-        			</div>
-        		</div>
-        	</div> -->
-    	</div>
-    	<!-- End Service Blokcs -->
+
 
     	<!-- Recent Works -->
         <div class="row margin-bottom-20">
         <div class="headline"><h2>Recent Works</h2></div>
 	        <div class="blog_masonry_3col">
-		        <div class="container content grid-boxes">
-		            <div class="grid-boxes-in" >
-		                <img class="img-responsive" src="assets/img/main/img3.jpg" alt="">
+		        <div class="container content grid-boxes" >
+		        
+		        
+		            <div class="col-md-4">
+		            <div class="grid-boxes-in">
+		                <img class="img-responsive" src="/assets/img/main/img3.jpg" alt="" style="width: 360px; height: 227px;">
 		                <div class="grid-boxes-caption">
 		                    <h3><a href="#">Unify Clean and Fresh Fully Responsive Template</a></h3>
 		                    <ul class="list-inline grid-boxes-news">
@@ -145,6 +103,102 @@
 		                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
 		                </div>
 		            </div>
+		            </div>
+		            
+		            
+		            
+		            <div class="col-md-4">
+		            <div class="grid-boxes-in">
+		                <img class="img-responsive" src="/assets/img/main/img3.jpg" alt="" style="width: 360px; height: 227px;">
+		                <div class="grid-boxes-caption">
+		                    <h3><a href="#">Unify Clean and Fresh Fully Responsive Template</a></h3>
+		                    <ul class="list-inline grid-boxes-news">
+		                        <li><span>By</span> <a href="#">Kathy Reyes</a></li>
+		                        <li>|</li>
+		                        <li><i class="fa fa-clock-o"></i> July 06, 2014</li>
+		                        <li>|</li>
+		                        <li><a href="#"><i class="fa fa-comments-o"></i> 06</a></li>
+		                    </ul>
+		                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+		                </div>
+		            </div>
+		            </div>
+		            
+		            
+		            <div class="col-md-4">
+		            <div class="grid-boxes-in">
+		                <img class="img-responsive" src="/assets/img/main/img3.jpg" alt="" style="width: 360px; height: 227px;">
+		                <div class="grid-boxes-caption">
+		                    <h3><a href="#">Unify Clean and Fresh Fully Responsive Template</a></h3>
+		                    <ul class="list-inline grid-boxes-news">
+		                        <li><span>By</span> <a href="#">Kathy Reyes</a></li>
+		                        <li>|</li>
+		                        <li><i class="fa fa-clock-o"></i> July 06, 2014</li>
+		                        <li>|</li>
+		                        <li><a href="#"><i class="fa fa-comments-o"></i> 06</a></li>
+		                    </ul>
+		                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+		                </div>
+		            </div>
+		            </div>
+		            
+		            
+		            
+		            
+		            <div class="col-md-4">
+		            <div class="grid-boxes-in">
+		                <img class="img-responsive" src="/assets/img/main/img3.jpg" alt="" style="width: 360px; height: 227px;">
+		                <div class="grid-boxes-caption">
+		                    <h3><a href="#">Unify Clean and Fresh Fully Responsive Template</a></h3>
+		                    <ul class="list-inline grid-boxes-news">
+		                        <li><span>By</span> <a href="#">Kathy Reyes</a></li>
+		                        <li>|</li>
+		                        <li><i class="fa fa-clock-o"></i> July 06, 2014</li>
+		                        <li>|</li>
+		                        <li><a href="#"><i class="fa fa-comments-o"></i> 06</a></li>
+		                    </ul>
+		                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+		                </div>
+		            </div>
+		            </div>
+		            
+		            
+		            <div class="col-md-4">
+		            <div class="grid-boxes-in">
+		                <img class="img-responsive" src="/assets/img/main/img3.jpg" alt="" style="width: 360px; height: 227px;">
+		                <div class="grid-boxes-caption">
+		                    <h3><a href="#">Unify Clean and Fresh Fully Responsive Template</a></h3>
+		                    <ul class="list-inline grid-boxes-news">
+		                        <li><span>By</span> <a href="#">Kathy Reyes</a></li>
+		                        <li>|</li>
+		                        <li><i class="fa fa-clock-o"></i> July 06, 2014</li>
+		                        <li>|</li>
+		                        <li><a href="#"><i class="fa fa-comments-o"></i> 06</a></li>
+		                    </ul>
+		                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+		                </div>
+		            </div>
+		            </div>
+		            
+		            
+		            <div class="col-md-4">
+		            <div class="grid-boxes-in">
+		                <img class="img-responsive" src="/assets/img/main/img3.jpg" alt="" style="width: 360px; height: 227px;">
+		                <div class="grid-boxes-caption">
+		                    <h3><a href="#">Unify Clean and Fresh Fully Responsive Template</a></h3>
+		                    <ul class="list-inline grid-boxes-news">
+		                        <li><span>By</span> <a href="#">Kathy Reyes</a></li>
+		                        <li>|</li>
+		                        <li><i class="fa fa-clock-o"></i> July 06, 2014</li>
+		                        <li>|</li>
+		                        <li><a href="#"><i class="fa fa-comments-o"></i> 06</a></li>
+		                    </ul>
+		                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+		                </div>
+		            </div>
+		            </div>
+		            
+		            
 				</div>
 			</div>
 	        
@@ -254,6 +308,13 @@
             </div> -->
         </div>
         <!-- End Owl Clients v1 -->
+        
+        
+        
+        
+        
+        
+        
     </div><!--/container-->
     <!-- End Content Part -->
 
