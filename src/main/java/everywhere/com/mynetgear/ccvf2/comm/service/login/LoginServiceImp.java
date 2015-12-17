@@ -58,12 +58,8 @@ public class LoginServiceImp implements LoginService {
 					HttpSession session = request.getSession();
 					session.setAttribute(Constant.SYNN_LOGIN_OBJECT, member);
 
-					// 불필요한 파라미터 제거
-					/*String url = "/user/main/main.do";
-					RedirectView redirectView = new RedirectView(url);
-					redirectView.setExposeModelAttributes(false);
-					mav = new ModelAndView(redirectView);*/
-					mav.setViewName("/user/main/userMain");
+
+					//mav.setViewName("/user/main/userMain");
 			} catch (Exception ex) {
 				ex.printStackTrace();
 			}

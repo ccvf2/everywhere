@@ -9,9 +9,13 @@
 <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 <link rel="stylesheet" href="/resources/demos/style.css">
 <script type="text/javascript" src="/script/common/alert.js"></script>
+
+
 <script type="text/javascript">
 //everywhereAlert("제목","내용푸터에서 실행");
 </script>
+
+
 <!--         <div class="footer">
             <div class="container">
                 <div class="row">

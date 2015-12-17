@@ -18,7 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 public class UserMainController {
 	@RequestMapping(value="/user/main/main.do", method=RequestMethod.GET)
 	public ModelAndView userMainPage(HttpServletRequest request, HttpServletResponse response) {
-		ModelAndView mav = new ModelAndView("/user/main/userMain");
+		ModelAndView mav = new ModelAndView("/user/main/userMain2");
 		return mav;	
 	}
 	
