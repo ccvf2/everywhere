@@ -51,16 +51,52 @@
 		var memLevel=document.getElementById("memLevel").value;
 		var memStatus=document.getElementById("memStatus").value;
 		var phoneStatus=document.getElementById("phoneStatus").value;
-		var start_date=document.getElementById("start_date");
+		var start_date=document.getElementById("start_date").value;
 		var end_date=document.getElementById("end_date").value;
 		
+		var searchOption=document.getElementById("searchOption");
+	    var selectedOption = searchOption.options[searchOption.selectedIndex].value
+	    /* 
 		alert("memLevel:" + memLevel);
 		alert("memStatus:" + memStatus);
 		alert("phoneStatus:" + phoneStatus);
 		alert("start_date:" + start_date);
 		alert("end_date:" + end_date);
+		alert("selectedOption: " + selectedOption); */
+		var url = "/admin/member/adminMemberList.do?";
 		
-		location.href="/admin/member/adminMemberList.do?search="+search+"&memLevel="+memLevel+"&memStatus="+memStatus+"&phoneStatus="+phoneStatus+"&start_date="+start_date+"&end_date="+end_date;
+		if(searchOption!="") {
+			if(selectedOption=="name") {
+				url+="name="+search;
+			} else if(selectedOption=="email") {
+				url+="email="+search;
+			} else if(selectedOption=="emailname"){
+				url+="name="+search+"&email="+search;
+			}
+		}
+		
+		
+		if(memLevel!="") {
+			url+="&memLevel="+memLevel;
+		}
+		
+		if(memStatus!=""){
+			url+="&memStatus="+memStatus;
+		}
+		
+		if(phoneStatus!=""){
+			url+="&phoneStatus="+phoneStatus;
+		}
+		
+		if(start_date!=""){
+			url+="&start_date="+start_date;
+		}
+		
+		if(end_date!=""){
+			url+="&end_date="+end_date;
+		}
+				
+		location.href=url;
 	}
 </script>
 </head>
@@ -143,10 +179,10 @@
 	                <div class="row">
 	                	<div class="col-xs-4">
 	                		<label>필터</label>
-	                		<select name="phoneStatus" class="form-control">
+	                		<select name="searchOption" id="searchOption" class="form-control">
+	                			<option value="emailname">이메일+이름</option>
 								<option value="email">이메일</option>
 								<option value="name">이름</option>
-								<option value="emailname">이메일+이름</option>
 						   </select>
 						</div>
 	                	<div class="col-xs-8">

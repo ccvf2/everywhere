@@ -32,7 +32,8 @@ public class AdminMemberController {
 	public ModelAndView mailTemplatList(HttpServletRequest request, HttpServletResponse response) {
 		ModelAndView mav= new ModelAndView();
 		System.out.println("adminMember 컨트롤러");
-		mav.addObject("request");
+
+		mav.addObject("request", request);
 		adminMemberService.adminMemberList(mav);
 		return mav;
 	}
