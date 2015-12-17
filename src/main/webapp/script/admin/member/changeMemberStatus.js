@@ -6,7 +6,7 @@ function changeStatus(mem_no) {
 	var selected_status=$("#memStatus"+mem_no+" option:selected").val();
 	/* alert(selected); */
 	$.ajax({
-		url: "/admin/member/adminMemberUpdate.do?mem_no="+mem_no+"&mem_status_code="+selected_status,
+		url: "/admin/member/adminMemberUpdate.ajax?mem_no="+mem_no+"&mem_status_code="+selected_status,
 		type:"get",
 		dataType:"text",
 		success: changeStatusSuccess,
