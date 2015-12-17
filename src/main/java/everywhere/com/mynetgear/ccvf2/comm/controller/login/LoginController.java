@@ -55,7 +55,13 @@ public class LoginController {
 		mav.addObject("memberDto", dto);
 		loginService.HandleMemberLogin(mav);
 		System.out.println("로그인성공");
-		return mav;
+		
+		// 불필요한 파라미터 제거
+		String url = "/user/main/main.do";
+		RedirectView redirectView = new RedirectView(url);
+		redirectView.setExposeModelAttributes(false);
+		
+		return new ModelAndView(redirectView);
 	}
 
 	/**
@@ -81,13 +87,12 @@ public class LoginController {
 		HttpSession session = request.getSession();
 		session.invalidate();
 
-		/* 불필요한 파라미터 제거 */
-/*		String url = "/";
+		// 불필요한 파라미터 제거
+		String url = "/user/main/main.do";
 		RedirectView redirectView = new RedirectView(url);
-		redirectView.setExposeModelAttributes(false);*/
-		ModelAndView mav = new ModelAndView("/user/main/userMain");
-
-		return mav;
+		redirectView.setExposeModelAttributes(false);
+		
+		return new ModelAndView(redirectView);
 
 	}
 

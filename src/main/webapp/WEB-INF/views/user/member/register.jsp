@@ -8,9 +8,9 @@
 <meta charset="utf-8">
 <title>회원가입</title>
 <script type="text/javascript">
-	/* $(function() {
-		$(".email").keyup(function() {
-			var email = $(".email").val();
+	 $(function() {
+		$("#email").keyup(function() {
+			var email = $("#email").val();
 			if (email.length >= 9) {
 				$.ajax({
 					url : "emailCheck.ajax?email=" + email,
@@ -30,47 +30,13 @@
 				});
 			}
 		});
-	}); */
+	});
 </script>
 <script type="text/javascript">
-	function registerFormtest() {
-		everywhereAlert("aa","cc");
-	}
-	
 
 	var checked = false;
 	function registerForm(form) {
 		//alert("ok1");
-		
-		if (memberForm.mem_email.value == "") {
-			everywhereAlert("이메일입력오류","이메일을 입력해주세요.");
-			memberForm.mem_email.focus();
-			return false;
-		}
-		
-		if (memberForm.mem_pwd.value == "") {
-			everywhereAlert("비밀번호입력오류","패스워드를 입력해주세요.");
-			memberForm.mem_pwd.focus();
-			return false;
-		}
-		
-		if (memberForm.passwordConfirm.value == "") {
-			everywhereAlert("비밀번호확인오류","확인 패스워드를 입력해주세요.");
-			memberForm.passwordConfirm.focus();
-			return false;
-		}
-		
-		if (memberForm.mem_name.value == "") {
-			everywhereAlert("이름입력오류","이름을 입력해주세요.");
-			memberForm.mem_name.focus();
-			return false;
-		}
-		
-		if (memberForm.mem_phone.value == "") {
-			everywhereAlert("전화번호입력오류","전화번호를 입력해주세요.");
-			memberForm.mem_phone.focus();
-			return false;
-		}
 
 		var check = false;
 		var str = "";
@@ -90,42 +56,17 @@
 		}
 
 		form.mem_interest.value = str;
-		
-		var description = false;
-		if (form.description.checked == true) {
-			description = true;
-		} else if (form.description.checked == false) {
-			everywhereAlert("이용약관미동의","이용약관에 동의해주세요.");
-			form.description.focus();
-			return false;
-		}
-		
-		var terms = false;
-		if (form.terms.checked == true) {
-			terms = true;
-		} else if (form.terms.checked == false) {
-			everywhereAlert("개인정보활용미동의","개인정보활용에 동의해주세요.");
-			form.terms.focus();
-			return false;
-		}
-		
-		if(form.mem_pwd.value != form.passwordConfirm.value) {
-			everywhereAlert("비밀번호불일치","비밀번호가 일치하지 않습니다. 다시 확인해주세요.");
-			form.mem_pwd.focus();
-			return false;
-		}
-		
 	}
 </script>
 <c:import url="/WEB-INF/views/user/common/utilImport.jsp" />
 </head>
 <body>
 	<button class="btn-u" data-toggle="modal" data-target="#myModal">회원가입</button>
-	<a href="javascript:registerFormtest()">test</a>
+	
 	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
 			<div class="modal-content">
-				<form name="memberForm" id="sky-form4" class="sky-form" action="/user/member/register.do" method="post" onsubmit="return registerForm(this)">
+				<form name="regForm" id="sky-form4" class="sky-form" action="/user/member/register.do" method="post" onsubmit="return registerForm(this)">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 						<h3 class="modal-title" id="myModalLabel4">회원가입</h3>
@@ -138,7 +79,7 @@
 									<section>
 										<label class="input"> 
 											<i class="icon-append fa fa-envelope"></i> 
-											<input type="email" name="mem_email" id="email" placeholder="Email address" class="email">
+											<input type="email" name="mem_email" placeholder="Email address" id="email">
 											<b class="tooltip tooltip-top-right">사용하실 이메일(계정)을 입력해주세요.</b>
 										</label>
 										<div id="emailCheck"></div>
@@ -177,17 +118,17 @@
 											<i class="icon-append fa fa-phone"></i> 
 											<input type="text" name="mem_phone" placeholder="Phonenumber" id="phone"> 
 											<b class="tooltip tooltip-top-right">회원님의 전화번호를 입력해주세요.</b>
-											<button type="button" class="btn-u">번호인증</button>
+											<button type="button" class="btn-u" onclick="">번호인증</button>
 										</label>
 									</section>
 
 									<section>
 										<label><font size="5">관심분야</font></label><br />
 										<span>
-											<label style="margin-right:30px;"><input type="checkbox" name="interestValue" value="I0001" /><font size="3">혼자여행</font></label>
-											<label style="margin-right:30px;"><input type="checkbox" name="interestValue" value="I0002" /><font size="3">단체여행 </font></label>
-											<label style="margin-right:30px;"><input type="checkbox" name="interestValue" value="I0003" /><font size="3">국내여행</font></label>
-											<label style="margin-right:30px;"><input type="checkbox" name="interestValue" value="I0004" /><font size="3">해외여행 </font></label>
+											<label style="margin-right:30px;"><input type="checkbox" name="interestValue" value="I0001" /><font size="3">&nbsp;혼자여행</font></label>
+											<label style="margin-right:30px;"><input type="checkbox" name="interestValue" value="I0002" /><font size="3">&nbsp;단체여행 </font></label>
+											<label style="margin-right:30px;"><input type="checkbox" name="interestValue" value="I0003" /><font size="3">&nbsp;국내여행</font></label>
+											<label style="margin-right:30px;"><input type="checkbox" name="interestValue" value="I0004" /><font size="3">&nbsp;해외여행 </font></label>
 											<input type="hidden" name="mem_interest" />
 										</span>
 									</section>
@@ -198,7 +139,7 @@
 											<div class="panel panel-default">
 												<div class="panel-heading">
 													<h6 class="panel-title">
-														<label><input type="checkbox" name="description" value="이용약관" />everywhere 이용 약관에 대한 동의 (필수)</label>
+														<label><input type="checkbox" name="description" value="이용약관" />&nbsp;everywhere 이용 약관에 대한 동의 (필수)</label>
 														<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion-1" href="#collapse-One" >
 															<font size="2">전문보기</font>
 														</a>
@@ -369,7 +310,7 @@
 											<div class="panel panel-default">
 												<div class="panel-heading">
 													<h6 class="panel-title">
-														<label><input type="checkbox" name="terms" value="개인정보" />개인 정보 수집 및 이용 동의 (필수)</label><br/>
+														<label><input type="checkbox" name="terms" value="개인정보" />&nbsp;개인 정보 수집 및 이용 동의 (필수)</label><br/>
 														<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion-1" href="#collapse-Two">
 															<font size="2">전문보기</font>
 														</a>
@@ -423,7 +364,7 @@
 						</div>
 
 						<div align="right">
-							<a class="btn-u btn-u-default" href="">로그인</a>
+							<a class="btn-u btn-u-default" href="/user/login/login.do">로그인</a>
 							<button type="submit" class="btn-u">회원가입</button>
 						</div>
 					</div>

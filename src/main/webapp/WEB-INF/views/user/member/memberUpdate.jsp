@@ -6,8 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>회원정보수정</title>
-<link rel="stylesheet" type="text/css" href="">
-<script type="text/javascript" src="/script/common/jquery-1.11.3.js"></script>
+<c:import url="/WEB-INF/views/common/jquery.jsp" />
 <script type="text/javascript">
 	var checked = false;
 	function registerForm(form) {
@@ -39,10 +38,10 @@
 <body>
 	<button class="btn-u" data-toggle="modal" data-target="#myModal">회원정보수정</button>
 	
-	<div class="modal fade bs-example-modal-sm" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-		<div class="modal-dialog modal-sm">
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
 			<div class="modal-content">
-				<form name="memberForm" action="/user/member/memberUpdate.do" method="post" onsubmit="return registerForm(this)">
+				<form name="regForm" id="sky-form4" class="sky-form" action="/user/member/memberUpdate.do" method="post" onsubmit="return registerForm(this)">
 					<input type="hidden" name="mem_no" value="${memberDto.mem_no}" />
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -56,44 +55,48 @@
 									<section>
 										<label class="input">
 		                                	<i class="icon-append fa fa-envelope"></i>
-		                                	<input type="email" name="mem_email" id="email" placeholder="Email address" value="${memberDto.mem_email}" disabled="disabled">
+		                                	<input type="email" name="mem_email" id="email" value="${memberDto.mem_email}" disabled="disabled">
+		                                	<b class="tooltip tooltip-top-right"></b>
 		                            	</label>
 	                                </section>
 	                                
 	                                <section>
-		                            	<label class="input" style="margin-left:5px;">
+		                            	<label class="input">
 		                                	<i class="icon-append fa fa-lock"></i>
 		                                   	<input type="password" name="mem_pwd" placeholder="Password" value="${memberDto.mem_pwd}">
+		                                   	<b class="tooltip tooltip-top-right">사용하실 비밀번호를 입력해주세요.</b>
 		                                </label>
 		                            </section>
 		                            
 		                            <section>
-		                            	<label class="input" style="margin-left:3px; margin-top:2px;">
+		                            	<label class="input">
 		                                	<i class="icon-append fa fa-user"></i>
-		                                    <input type="text" name="mem_name" placeholder="Username" value="${memberDto.mem_name}" disabled="disabled">
+		                                    <input type="text" name="mem_name" value="${memberDto.mem_name}" disabled="disabled">
+		                                    <b class="tooltip tooltip-top-right"></b>
 		                                </label>
 		                            </section>
 		                            
 		                            <section>
-		                            	<label class="input" style="margin-left:3px;">
+		                            	<label class="input">
 		                                	<i class="icon-append fa fa-phone"></i>
 		                                    <input type="text" name="mem_phone" placeholder="Phonenumber" value="${memberDto.mem_phone}">
-		                                    <button type="button" class="btn btn-default btn-sm">번호인증</button>
+		                                    <b class="tooltip tooltip-top-right">회원님의 전화번호를 입력해주세요.</b>
+		                                    <button type="button" class="btn-u">번호인증</button>
 		                                </label>
 		                            </section>
 		
 									<section>
-										<label>관심분야</label><br/>
+										<label><font size="5">관심분야</font></label><br/>
 										<span>
 											<c:forEach var="codelist" items="${interestList}">
-												<label style="float:left"><input type="checkbox" name="interestValue" value="${codelist.code}">${codelist.code_name}</label>
+												<label style="float:left; margin-right:30px;"><input type="checkbox" name="interestValue" value="${codelist.code}"><font size="3">&nbsp;${codelist.code_name}</font></label>
 											</c:forEach>
 											<input type="hidden" name="mem_interest" value="${memberDto.mem_interest}"/>
 											<c:forTokens var="mem_interest" items="${memberDto.mem_interest}" delims=",">
 												<script type="text/javascript">
-													for(var i=0;i<memberForm.interestValue.length;i++) {
-														if(memberForm.interestValue[i].value=="${mem_interest}") {
-															memberForm.interestValue[i].checked=true;
+													for(var i=0;i<regForm.interestValue.length;i++) {
+														if(regForm.interestValue[i].value=="${mem_interest}") {
+															regForm.interestValue[i].checked=true;
 														}
 													}
 												</script>

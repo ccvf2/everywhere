@@ -6,6 +6,12 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<script type="text/javascript">
+	function test() {
+		window.showModalDialog("/test/reply.do","","");
+	}
+</script>
+
 </head>
 
 <body>
@@ -54,8 +60,10 @@
  <a href="/user/message/messageBox.do?mem_no=${mem_object.mem_no}">메세지 박스</a>
  
 <hr/>
+<a href="javascript:test()">test</a>
+<hr/>
 <h2>로그인</h2>
-
+ <a href="/user/login/login.do">로그인 페이지</a>
 <c:choose>
 	<c:when test="${mem_object==null}">
 		<form action="/user/login/login.do" name="memberLogin" method="post">

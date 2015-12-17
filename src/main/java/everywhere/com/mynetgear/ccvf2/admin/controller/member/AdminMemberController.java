@@ -29,11 +29,32 @@ public class AdminMemberController {
 	 * @return
 	 */
 	@RequestMapping(value="/admin/member/adminMemberList.do", method=RequestMethod.GET)
-	public ModelAndView mailTemplatList(HttpServletRequest request, HttpServletResponse response) {
+	public ModelAndView adminMemberList(HttpServletRequest request, HttpServletResponse response) {
 		ModelAndView mav= new ModelAndView();
 		System.out.println("adminMember 컨트롤러");
-		mav.addObject("request");
+
+		mav.addObject("request", request);
 		adminMemberService.adminMemberList(mav);
 		return mav;
+	}
+	
+	/**
+	 * @author 곽성국	
+	 * @createDate 2015. 12. 17.
+	 * @described 관리자 회원관리에서 회원상태를 바꿈
+	 * @param request
+	 * @param response
+	 * @return
+	 */
+	@RequestMapping(value="/admin/member/adminMemberUpdate.ajax", method=RequestMethod.GET)
+	public ModelAndView adminMemberStatusUpdate(HttpServletRequest request, HttpServletResponse response) {
+		ModelAndView mav = new ModelAndView();
+		System.out.println("adminMember 회원 정보 수정");
+		
+		mav.addObject("request", request);
+		mav.addObject("response", response);
+		adminMemberService.adminMemberStatusUpdate(mav);
+		return null;
+		
 	}
 }
