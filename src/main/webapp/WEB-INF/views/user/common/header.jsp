@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
+    <c:import url="/WEB-INF/views/common/jquery.jsp"/>
     <c:import url="/WEB-INF/views/user/common/utilImport.jsp"/>
 <!-- --------------------------------css Start------------------------------------- -->
 <!-- Favicon -->

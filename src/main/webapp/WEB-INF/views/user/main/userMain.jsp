@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-<c:import url="/WEB-INF/views/common/jquery.jsp"/>
+
 <title>everywhere Main</title>
 <!-- Meta -->
 <meta charset="UTF-8">
