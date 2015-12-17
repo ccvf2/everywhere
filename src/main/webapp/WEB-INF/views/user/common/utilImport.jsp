@@ -41,7 +41,7 @@
 
 <!-- **********************************  javascript  Start ****************************************** -->
 <!-- JS Global Compulsory -->
-<script src="/assets/plugins/jquery/jquery.min.js"></script>
+<!-- <script src="/assets/plugins/jquery/jquery.min.js"></script> -->
 <script src="/assets/plugins/jquery/jquery-migrate.min.js"></script>
 <script src="/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
 
@@ -53,7 +53,7 @@
 <script type="text/javascript" src="/assets/plugins/owl-carousel/owl-carousel/owl.carousel.js"></script>
 <script src="/assets/plugins/sky-forms-pro/skyforms/js/jquery.validate.min.js"></script>
 <script src="/assets/plugins/sky-forms-pro/skyforms/js/jquery.maskedinput.min.js"></script>
-<script src="/assets/plugins/sky-forms-pro/skyforms/js/jquery-ui.min.js"></script>
+<!-- <script src="/assets/plugins/sky-forms-pro/skyforms/js/jquery-ui.min.js"></script> -->
 <script src="/assets/plugins/sky-forms-pro/skyforms/js/jquery.form.min.js"></script>
 
 <!-- JS Customization -->
