@@ -9,28 +9,28 @@ var LoginForm = function () {
 	            // Rules for form validation
 	            rules:
 	            {
-	                email:
+	                mem_email:
 	                {
 	                    required: true,
 	                    email: true
 	                },
-	                password:
+	                mem_pwd:
 	                {
 	                    required: true,
-	                    minlength: 3,
-	                    maxlength: 20
+	                    minlength: 8,
+	                    maxlength: 15
 	                }
 	            },
 	                                
 	            // Messages for form validation
 	            messages:
 	            {
-	                email:
+	                mem_email:
 	                {
 	                    required: '이메일 주소를 입력해주세요.',
 	                    email: '이메일 형식이 올바르지 않습니다.'
 	                },
-	                password:
+	                mem_pwd:
 	                {
 	                    required: '비밀번호를 입력해주세요.'
 	                }
@@ -48,7 +48,7 @@ var LoginForm = function () {
 	            // Rules for form validation
 	            rules:
 	            {
-	                email:
+	                mem_email:
 	                {
 	                    required: true,
 	                    email: true
@@ -58,9 +58,9 @@ var LoginForm = function () {
 	            // Messages for form validation
 	            messages:
 	            {
-	                email:
+	                mem_email:
 	                {
-	                    required: 'Please enter your email address',
+	                    required: '이메일 주소를 입력해주세요.',
 	                    email: '이메일 형식이 올바르지 않습니다.'
 	                }
 	            },

@@ -7,7 +7,7 @@
 <title>타이틀 입력</title>
 </head>
 <body>
-<c:if test="${check>0}">
+<c:if test="${check==1}">
 	<script type="text/javascript">
 		alert("게시글이 작성되었습니다.");
 		location.href="/user/accompany/accompanyList.do";

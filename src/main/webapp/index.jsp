@@ -55,7 +55,7 @@
  
 <hr/>
 <h2>로그인</h2>
-
+ <a href="/user/login/login.do">로그인 페이지</a>
 <c:choose>
 	<c:when test="${mem_object==null}">
 		<form action="/user/login/login.do" name="memberLogin" method="post">
