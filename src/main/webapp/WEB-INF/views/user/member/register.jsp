@@ -8,9 +8,9 @@
 <meta charset="utf-8">
 <title>회원가입</title>
 <script type="text/javascript">
-	/* $(function() {
-		$(".email").keyup(function() {
-			var email = $(".email").val();
+	 $(function() {
+		$("#email").keyup(function() {
+			var email = $("#email").val();
 			if (email.length >= 9) {
 				$.ajax({
 					url : "emailCheck.ajax?email=" + email,
@@ -30,13 +30,9 @@
 				});
 			}
 		});
-	}); */
+	});
 </script>
 <script type="text/javascript">
-	function registerFormtest() {
-		everywhereAlert("aa","cc");
-	}
-	
 
 	var checked = false;
 	function registerForm(form) {
@@ -121,7 +117,7 @@
 </head>
 <body>
 	<button class="btn-u" data-toggle="modal" data-target="#myModal">회원가입</button>
-	<a href="javascript:registerFormtest()">test</a>
+	
 	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
 			<div class="modal-content">
@@ -138,7 +134,7 @@
 									<section>
 										<label class="input"> 
 											<i class="icon-append fa fa-envelope"></i> 
-											<input type="email" name="mem_email" id="email" placeholder="Email address" class="email">
+											<input type="email" name="mem_email" placeholder="Email address" id="email">
 											<b class="tooltip tooltip-top-right">사용하실 이메일(계정)을 입력해주세요.</b>
 										</label>
 										<div id="emailCheck"></div>

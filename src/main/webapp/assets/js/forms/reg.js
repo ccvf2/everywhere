@@ -9,18 +9,18 @@ var RegForm = function () {
 	            // Rules for form validation
 	            rules:
 	            {
-	                username:
+	                mem_name:
 	                {
 	                    required: true,
 	                    maxlength: 4
 	                    
 	                },
-	                email:
+	                mem_email:
 	                {
 	                    required: true,
 	                    email: true
 	                },
-	                password:
+	                mem_pwd:
 	                {
 	                    required: true,
 	                    minlength: 8,
@@ -58,12 +58,12 @@ var RegForm = function () {
 	                {
 	                    required: '고객님의 계정으로 로그인해주세요.'
 	                },
-	                email:
+	                mem_email:
 	                {
 	                    required: '사용하실 이메일(계정)을 입력해주세요.',
 	                    email: '이메일 형식이 올바르지 않습니다.'
 	                },
-	                password:
+	                mem_pwd:
 	                {
 	                    required: '사용하실 비밀번호를 입력해주세요.'
 	                },
