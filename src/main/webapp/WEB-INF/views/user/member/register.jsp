@@ -32,6 +32,32 @@
 		});
 	});
 </script>
+<script type="text/javascript">
+
+	var checked = false;
+	function registerForm(form) {
+		//alert("ok1");
+
+		var check = false;
+		var str = "";
+		for (var i = 0; i < form.interestValue.length; i++) {
+			if (form.interestValue[i].checked == true) {
+				str += form.interestValue[i].value + ",";
+				check = true;
+			}
+
+		}
+
+		//alert(str);
+		if (check == false) {
+			everywhereAlert("관심분야선택오류","관심분야를 하나 이상 체크해주세요.");
+			form.interestValue[0].focus();
+			return false;
+		}
+
+		form.mem_interest.value = str;
+	}
+</script>
 <c:import url="/WEB-INF/views/user/common/utilImport.jsp" />
 </head>
 <body>
@@ -338,7 +364,7 @@
 						</div>
 
 						<div align="right">
-							<a class="btn-u btn-u-default" href="">로그인</a>
+							<a class="btn-u btn-u-default" href="/common/login/login.do">로그인</a>
 							<button type="submit" class="btn-u">회원가입</button>
 						</div>
 					</div>
