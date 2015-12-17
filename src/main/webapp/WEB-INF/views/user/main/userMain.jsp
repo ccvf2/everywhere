@@ -1,19 +1,22 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
-<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
-<!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
-<!--[if !IE]><!--> <html lang="ko"> <!--<![endif]-->
+<html lang="ko">
 <head>
+<c:import url="/WEB-INF/views/common/jquery.jsp"/>
 <title>everywhere Main</title>
 <!-- Meta -->
 <meta charset="UTF-8">
 <meta content="width=device-width, initial-scale=1.0" name="viewport">
+<link rel="stylesheet" href="/assets/plugins/owl-carousel/owl-carousel/owl.carousel.css">
+<link rel="stylesheet" href="/assets/css/theme-colors/default.css">
+	<!-- **********************************  javascript  start ****************************************** -->
+
 <!-- **********************************  javascript  End ****************************************** -->
 </head>
 <body>
 	<div class="wrapper">
-	    <!--=== Header ===-->
+	    <!--=== Header:import ===-->
 	    <div class="header">
 			<c:import url="/WEB-INF/views/user/common/header.jsp"/>
 	    </div>
@@ -119,6 +122,11 @@
 
 	    </div><!--/container-->
 	    <!-- End Content Part -->
+	
+	
+
+	
+	
 	
 	    <!--=== Footer Version 1 ===-->
 	    <div class="footer-v1">
