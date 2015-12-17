@@ -57,20 +57,20 @@ var OrderForm = function () {
 	            {
 	                name:
 	                {
-	                    required: 'Please enter your name'
+	                    required: '이름을 입력해주세요.'
 	                },
 	                email:
 	                {
-	                    required: 'Please enter your email address',
+	                    required: '이메일 주소를 입력해주세요.',
 	                    email: '이메일 형식이 올바르지 않습니다.'
 	                },
 	                phone:
 	                {
-	                    required: 'Please enter your phone number'
+	                    required: '전화번호를 입력해주세요.'
 	                },
 	                interested:
 	                {
-	                    required: 'Please select interested service'
+	                    required: '관심분야를 선택해주세요.'
 	                },
 	                budget:
 	                {

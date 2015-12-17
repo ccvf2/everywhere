@@ -54,7 +54,7 @@ var RegForm = function () {
 	            {
 	                login:
 	                {
-	                    required: 'Please enter your login'
+	                    required: '고객님의 계정으로 로그인해주세요.'
 	                },
 	                email:
 	                {

@@ -27,12 +27,12 @@ var LoginForm = function () {
 	            {
 	                email:
 	                {
-	                    required: 'Please enter your email address',
+	                    required: '이메일 주소를 입력해주세요.',
 	                    email: '이메일 형식이 올바르지 않습니다.'
 	                },
 	                password:
 	                {
-	                    required: 'Please enter your password'
+	                    required: '비밀번호를 입력해주세요.'
 	                }
 	            },                  
 	            
