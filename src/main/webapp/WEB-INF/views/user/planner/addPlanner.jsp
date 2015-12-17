@@ -31,6 +31,7 @@
               $( this).addClass( "ui-state-highlight" );
               $( this ).find( "span" ).remove();
               $( "<li></li>" ).text( ui.draggable.text() ).appendTo( $( this ).find( "a" ) );
+              
             }
           }).sortable({
             items: "li:not(.placeholder)",
@@ -41,6 +42,59 @@
         
       });
     </script>
+    
+    <script type="text/javascript">
+	function addMoney(input_name){
+		//input_name : d1_item1
+		
+		//가계부 Div가 있는지 먼저 확인 후에 없으면 만들어준다.
+		var moneyDiv = document.getElementById("money"+input_name);		
+		if(moneyDiv == null){
+			moneyDiv = document.createElement("div");
+			moneyDiv.id = "money"+input_name;
+			moneyDiv.className  = "panel-body";
+			$("#"+input_name+"_note").after(moneyDiv);
+		}
+		
+		var div = document.createElement("div");
+		var money_count = document.getElementById(input_name+"_money_count");
+		money_count.value=Number(money_count.value)+1;
+		div.style.marginTop="3px";		
+		
+		var hiddenInput = document.createElement("input");
+		hiddenInput.setAttribute("type", "hidden");
+		hiddenInput.name= input_name+"_money"+money_count.value+"_no";
+		div.appendChild(hiddenInput);
+		
+		var money_type = new Array('항공', '숙박', '교통', '쇼핑', '식사', '입장료', '오락', '기타');
+		var money_code = new Array('D0001', 'D0002', 'D0003', 'D0004', 'D0005', 'D0006', 'D0007', 'D0008');
+		var moneySelect = document.createElement("select");
+		
+		var label = document.createElement("label");
+		label.className = "select";		
+		for (i = 0; i < money_type.length; i++) {
+            var moneyOption = new Option(money_type[i], money_code[i]);
+            moneySelect.options.add(moneyOption);
+        }
+		label.appendChild(moneySelect)
+		div.appendChild(label);
+		
+		var noteInput = document.createElement("input");
+		noteInput.type="text";
+		noteInput.name= input_name+"_money"+money_count.value+"_note";
+		noteInput.placeholder="예) 기념품";
+		div.appendChild(noteInput);
+		
+		var priceInput = document.createElement("input");
+		priceInput.style.marginLeft="10px";
+		priceInput.type="text";
+		noteInput.name= input_name+"_money"+money_count.value+"_price";
+		priceInput.placeholder="3000";
+		div.appendChild(priceInput);
+		
+		moneyDiv.appendChild(div);
+	}
+</script>
     
     <!-- CSS Page Style -->
     <link rel="stylesheet" href="/assets/css/pages/profile.css">
@@ -156,7 +210,7 @@
                 <ul class="list-unstyled mCustomScrollbar margin-bottom-20" data-mcs-theme="minimal-dark" id="spotLists">
                 <c:forEach var="spot" items="${spotList}">
                     <li class="notification" style="border:1px">
-                    	<div id="${spot.spot_no}item" class="rounded">
+                    	<div id="${spot.spot_no}_item" class="rounded">
                         <i style="margin:0;"><img alt="" src="/attatchFile/spot/${spot.spot_photoes[0].save_name}.${spot.spot_photoes[0].extension}" style="width:35px;height:35px;margin-right:5px;"></i>
                         <div class="overflow-h">
                             <span><strong><a href="#">${spot.spot_name}</a></strong></span>
@@ -218,40 +272,35 @@
                 <input type="hidden" name="day_count" value="${day_count}"/>
                 <c:forEach var="i" begin="1" end="${day_count}">
                 <div class="tag-box tag-box-v4 rounded-2x margin-bottom-30">
-                	<input type="hidden" name="d${i}_item_count" value="0">
+                	<input type="hidden" name="d${i}_item_count" value="1">
                 	<h2 class="heading-xs">Day ${i}</h2>
-                	<ol class="list-unstyled " >
+                	<c:set var="id_value" value="d${i}_item1"/>
+                	<ol class="list-unstyled" >
 	                	<li>
 	                	<div class="panel-group">
+	                		<input type="hidden" name="${id_value}_no"/>
+	                		<input type="hidden" name="${id_value}_spot_no"/>
 						    <div class="panel panel-default">
 						      <div class="panel-heading ui-widget-header droppable">
 						        <h4 class="panel-title">
-						          <a data-toggle="collapse" href="#collapse${i}"><span>Add Spot</span></a>
+						          <a data-toggle="collapse" href="#collapse_${id_value}"><span>Add Spot</span></a>
 						        </h4>
 						      </div>
-						      <div id="collapse${i}" class="panel-collapse collapse">
+						      <div id="collapse_${id_value}" class="panel-collapse collapse">
 						        <div class="panel-body">Panel Body</div>
-						        <div class="panel-body" style="padding:0px">
+						        <div id="${id_value}_note"class="panel-body" style="padding:0px">
 		                            <label class="textarea" style="margin:0">
-		                                <textarea style="border:0px" rows="3" name="info" placeholder="Write some notes.."></textarea>
+		                                <textarea style="border:0px" rows="3" name="${id_value}_note" placeholder="Write some notes.."></textarea>
 		                            </label>        
 						        </div>
-						        <div class="panel-body">
-						         <ul class="list-inline blog-info-v2">
-                                    <li>
-                                        <strong>12%</strong>
-                                        <span>Funded</span>
-                                    </li>
-                                    <li>
-                                        <strong>17%</strong>
-                                        <span>Pludged</span>
-                                    </li>
-                                    <li>
-                                        <strong>25</strong>
-                                        <span>days to go</span>
-                                    </li>
-                                </ul>
-						        </div>
+						        <input type="hidden" id="${id_value}_money_count" name="${id_value}_money_count" value="0"/>
+						        <div class="project-share">
+	                                <ul class="list-inline comment-list-v2 pull-right">
+	                                    <li><i class="expand-list rounded-x fa  fa-plus-square"></i> <a href="#">25</a></li>
+	                                    <li><i class="fa fa-comments"></i> <a href="#">32</a></li>
+	                                    <li><i class="fa fa-retweet" onclick="addMoney('${id_value}')"></i> <a href="#">77</a></li>
+	                                </ul>
+	                           	 </div>
 						      </div>
 						    </div>
 						    </div>
