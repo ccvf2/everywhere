@@ -38,15 +38,15 @@ var RegForm = function () {
 	                },
 	                firstname:
 	                {
-	                    required: true
+	                    required: false
 	                },
 	                lastname:
 	                {
-	                    required: true
+	                    required: false
 	                },
 	                gender:
 	                {
-	                    required: true
+	                    required: false
 	                },
 	                terms:
 	                {
@@ -58,7 +58,7 @@ var RegForm = function () {
 	                },
 	                interestValue:
 	                {
-	                	required: true
+	                	required: false
 	                }
 	            },
 	            
@@ -114,8 +114,7 @@ var RegForm = function () {
 	                interestValue:
 	                {
 	                	required: '관심분야를 1개 이상 선택해주세요.'
-	                }
-	                
+	                }  
 	            },                  
 	            
 	            // Do not change code below
