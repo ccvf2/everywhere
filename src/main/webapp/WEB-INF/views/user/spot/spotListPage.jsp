@@ -53,23 +53,18 @@ ul li {
 <script async defer src="https://maps.googleapis.com/maps/api/js"></script>
 
 <script type="text/javascript">
-/* $(function(){
+$(function(){
 	$("a").click(function(){
-		//alert($(this).attr('id'));
 		var id=$(this).attr('id');
 		
-		var url="/user/spot/spotReadPage.do?spot_no="+id;
+		$(id).on('show.bs.modal', function() {
+			   //Must wait until the render of the modal appear, thats why we use the resizeMap and NOT resizingMap!! ;-)
+			   resizeMap();
+		})
 		
-		//$("#myModal").modal('show'); 
-		 $('#myModal').modal({
-		     remote: url
-		  });
-		 
-		 $('#myModal').modal({
-			remote: url
-		}); 
+		
 	});
-}); */
+});
 </script>
 
   </head>
@@ -113,7 +108,7 @@ ul li {
 							            <div class="overflow-h">
 							                <div id="${spot.spot_no}item" draggable="true" ondragstart="drag(event)">
 												<%-- <a href="/user/spot/spotReadPage.do?spot_no=${spot.spot_no }">${spot.spot_name }</a> --%>
-													<a id="${spot.spot_no}" data-target="#myModal${spot.spot_no}" data-toggle="modal">${spot.spot_name}</a>
+													<a id="#myModal${spot.spot_no}" data-target="#myModal${spot.spot_no}" data-toggle="modal">${spot.spot_name}</a>
 												<div class="modal fade" id="myModal${spot.spot_no}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 													<c:import url="/user/spot/spotReadPage.do?spot_no=${spot.spot_no }"/>
 												</div>
