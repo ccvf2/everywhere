@@ -10,9 +10,9 @@ public interface PlannerService {
 
 	public void getOnePlanner(ModelAndView mav);
 
-	public void updatePlanner(ModelAndView mav);
+	public void writePlanner(ModelAndView mav);
 
-	public void updatePlannerOk(ModelAndView mav);
+	public void writePlannerOk(ModelAndView mav);
 
 	public void deletePlanner(ModelAndView mav);
 

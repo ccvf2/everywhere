@@ -4,6 +4,7 @@ import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Enumeration;
 import java.util.List;
@@ -105,7 +106,7 @@ public class PlannerServiceImp implements PlannerService {
 	}
 
 	@Override
-	public void updatePlanner(ModelAndView mav) {
+	public void writePlanner(ModelAndView mav) {
 		Map<String, Object> map=mav.getModelMap();
 		HttpServletRequest request = (HttpServletRequest)map.get("request");
 		int planner_no = Integer.parseInt(request.getParameter("planner_no"));
@@ -137,11 +138,10 @@ public class PlannerServiceImp implements PlannerService {
         mav.addObject("day_count", diffDays+1);
         
 		mav.setViewName("user/planner/addPlanner");
-		//mav.setViewName("user/planner/NewFile2");
 	}
 
 	@Override
-	public void updatePlannerOk(ModelAndView mav) {
+	public void writePlannerOk(ModelAndView mav) {
 		Map<String, Object> map=mav.getModelMap();
 		HttpServletRequest request = (HttpServletRequest)map.get("request");		
 		
@@ -162,15 +162,20 @@ public class PlannerServiceImp implements PlannerService {
 		plannerDto.setTitle(request.getParameter("planner_title"));
 		plannerDto.setMemo(request.getParameter("planner_memo"));
 		String start_date = request.getParameter("start_date");
+		String day_count = request.getParameter("day_count");
 		String end_date = request.getParameter("end_date");
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");		
 		
 		try {
 			plannerDto.setStart_date(dateFormat.parse(start_date));
-			plannerDto.setEnd_date(dateFormat.parse(end_date));
+			
+			Calendar cal = Calendar.getInstance();
+			cal.setTime(plannerDto.getStart_date());
+			cal.add(Calendar.DATE, Integer.parseInt(day_count));
+			plannerDto.setEnd_date(cal.getTime());
 		} catch (ParseException e) {
 			e.printStackTrace();
-		}	
+		}
 		
 		plannerDto.setUse_yn(request.getParameter("planner_use_yn"));
 		
@@ -210,22 +215,26 @@ public class PlannerServiceImp implements PlannerService {
 				itemDto.setSpot_no(spot_no);
 				String itemOrder = i + "010" + j;
 				itemDto.setItem_order(Integer.parseInt(itemOrder));
-				itemDto.setNote(request.getParameter(itemString+"_note").replace("\r\n", "<br/>"));				
+				itemDto.setNote(request.getParameter(itemString+"_note").replace("\r\n", "<br/>"));
+				
+				/* String 형식으로 바꿀 예정
 				try {
 					SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm");
-					String start_time = request.getParameter(itemString+"_start_time");
-					if(!start_time.equals("")){
+					String start_time = request.getParameter(itemString+"_start_time"); 
+					String end_time = request.getParameter(itemString+"_end_time");
+					System.out.println("error : " + start_time + "," + end_time);
+					if(!start_time.equals("") || start_time != null){
 						Date date = timeFormat.parse(start_time);
 						itemDto.setStart_time(new Timestamp(date.getTime()));
 					}
-					String end_time = request.getParameter(itemString+"_end_time");
-					if(!end_time.equals("")){
+					if(!end_time.equals("") || end_time != null){
 						Date date = timeFormat.parse(end_time);
 						itemDto.setEnd_time(new Timestamp(date.getTime()));
 					}
 				} catch (ParseException e) {
 					e.printStackTrace();
 				}
+				*/
 				
 				itemList.add(itemDto);
 				
