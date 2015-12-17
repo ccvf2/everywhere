@@ -6,8 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>회원정보수정</title>
-<link rel="stylesheet" type="text/css" href="">
-<script type="text/javascript" src="/script/common/jquery-1.11.3.js"></script>
+<c:import url="/WEB-INF/views/common/jquery.jsp" />
 <script type="text/javascript">
 	var checked = false;
 	function registerForm(form) {

@@ -30,6 +30,7 @@
 <!-- CSS Customization -->
 <link rel="stylesheet" href="/assets/css/custom.css">
 
+<c:import url="/WEB-INF/views/common/jquery.jsp" />
 <c:import url="/WEB-INF/views/user/common/utilImport.jsp" />
 </head>
 <body>
@@ -52,7 +53,7 @@
 				<!-- 메인------------------------------------------------------------------------------------------------------------------------------ -->
 		        <!-- Profile Content -->
 				<div class="col-md-9">
-					<div class="panel panel-green margin-bottom-40">
+					<div class="panel panel-u margin-bottom-40">
 				    	<div class="panel-heading" style="height:30px;" align="left">
 				    		<h3 class="panel-title">No.${visitorDto.visitor_no}</h3>
 				    	</div>
@@ -67,7 +68,7 @@
 									<textarea class="form-control" rows="5" cols="65" name="visitor_content" style="resize:none;">${visitorDto.visitor_content}</textarea>
 								</div>
 								<div class="form-group" align="right">
-									<input type="submit" class="btn-u btn-u-green" value="수정완료"/>
+									<input type="submit" class="btn-u" value="수정완료"/>
 								</div>
 							</form>
 						</div>
