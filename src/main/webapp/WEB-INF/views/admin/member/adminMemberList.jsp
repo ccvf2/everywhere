@@ -187,12 +187,14 @@
 						</div>
 	                	<div class="col-xs-8">
 	                		<label>검색어</label>
-							<input type="text" id="search" class="form-control">
+	                		<div class="input-group">
+                                <input type="text" id="search" class="form-control">
 		                    <span class="input-group-btn">
 		                    	<button class="btn btn-default" type="button" onclick="searchFun()">
 		                    		<i class="fa fa-search"></i>
 		                    	</button>
 		                    </span>
+                            </div>
 						</div>
 	                </div>
 				</form>
