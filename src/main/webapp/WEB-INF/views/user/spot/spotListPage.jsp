@@ -32,7 +32,7 @@ ul li {
 }
 </style>    
     
-<script type="text/javascript" src="/script/user/spot/selectedCountry.js"></script>
+<!-- <script type="text/javascript" src="/script/user/spot/selectedCountry.js"></script> -->
 <script type="text/javascript" src="/script/user/spot/dragAndDrop.js"></script>
 
 
@@ -47,24 +47,29 @@ ul li {
 
 <!-- CSS Page Style -->
 <link rel="stylesheet" href="/assets/css/pages/profile.css">
+
+
+<script type="text/javascript" src="/script/user/spot/googleMap.js"></script>
+<script async defer src="https://maps.googleapis.com/maps/api/js"></script>
+
 <script type="text/javascript">
-$(function(){
-	//$("a").click(function(){
+/* $(function(){
+	$("a").click(function(){
 		//alert($(this).attr('id'));
-		/* var id=$(this).attr('id');
+		var id=$(this).attr('id');
 		
 		var url="/user/spot/spotReadPage.do?spot_no="+id;
 		
-		$("#myModal").modal('show'); */
-		/* $('#myModal').modal({
+		//$("#myModal").modal('show'); 
+		 $('#myModal').modal({
 		     remote: url
 		  });
-		 */
-		/* $('#myModal').modal({
+		 
+		 $('#myModal').modal({
 			remote: url
-		}); */
-	//});
-});
+		}); 
+	});
+}); */
 </script>
 
   </head>
@@ -100,69 +105,36 @@ $(function(){
 			    </div>
 			    <div id="spot-list">
 			    	<ul class="list-unstyled mCustomScrollbar margin-bottom-20" data-mcs-theme="minimal-dark" id="spotList">
-				    	<c:forEach var="spot" items="${spotList}">
-					        <li class="notification">
-					            <i class="icon-custom icon-sm rounded-x icon-bg-red icon-line icon-envelope"></i>
-					            <div class="overflow-h">
-					                <div id="${spot.spot_no}item" draggable="true" ondragstart="drag(event)">
-									<%-- <a href="/user/spot/spotReadPage.do?spot_no=${spot.spot_no }">${spot.spot_name }</a> --%>
-									<a href="/user/spot/spotReadPage.do?spot_no=${spot.spot_no }" id="${spot.spot_no}" data-target="#myModal" data-toggle="modal">${spot.spot_name}</a>
-									<%-- <a href="" data-target="#myModal" data-toggle="modal" onclick="javascript:alert();">${spot.spot_name}</a> --%>
-									<c:out value="${spot.spot_note}"/>
-								</div>
-					            </div>
-					        </li>
-					   </c:forEach>
+			    		
+	    					
+						    	<c:forEach var="spot" items="${spotList}">
+							        <li class="notification">
+							            <i class="icon-custom icon-sm rounded-x icon-bg-red icon-line icon-envelope"></i>
+							            <div class="overflow-h">
+							                <div id="${spot.spot_no}item" draggable="true" ondragstart="drag(event)">
+												<%-- <a href="/user/spot/spotReadPage.do?spot_no=${spot.spot_no }">${spot.spot_name }</a> --%>
+													<a id="${spot.spot_no}" data-target="#myModal${spot.spot_no}" data-toggle="modal">${spot.spot_name}</a>
+												<div class="modal fade" id="myModal${spot.spot_no}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+													<c:import url="/user/spot/spotReadPage.do?spot_no=${spot.spot_no }"/>
+												</div>
+												<%-- <a href="" data-target="#myModal" data-toggle="modal" onclick="javascript:alert();">${spot.spot_name}</a> --%>
+												<c:out value="${spot.spot_note}"/>
+											</div>
+							            </div>
+							        </li>
+												    <%--  --%>
+							   </c:forEach>
+							
+							
 				    </ul>
 				</div>
             </div>
             <!--End Left Sidebar-->
         </div>
     </div><!--/container-->
-    <c:import url="/WEB-INF/views/user/spot/spotReadPage.jsp"/>
-    <!-- <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-	    <div style="margin-left: 10%">
-			<div class="modal-dialog modal-lg" style="float: left;">
-				<div class="modal-content">
-						<div class="modal-header">
-							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-							<h3 class="modal-title" id="myModalLabel4">명소!!!!!!!음메</h3>
-						</div>
-	
-						<div class="modal-body">
-							<div class="row">
-								<div class="col-md-12">
-									
-								</div>
-							</div>
-						</div>
-	
-						<div class="modal-footer">
-						</div>
-				</div>
-			</div>
+    
 			
-			<div class="modal-dialog modal-sm" style="float: left;">
-				<div class="modal-content">
-						<div class="modal-header">
-							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-							<h3 class="modal-title" id="myModalLabel4">명소2222222222</h3>
-						</div>
-	
-						<div class="modal-body">
-							<div class="row">
-								<div class="col-md-12">
-									
-								</div>
-							</div>
-						</div>
-	
-						<div class="modal-footer">
-						</div>
-				</div>
-			</div>
-		</div>
-	</div> -->
+		
     
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="/script/common/bootstrap/js/bootstrap.min.js"></script>

@@ -5,105 +5,78 @@
 <head>
 <meta charset="UTF-8">
 <title>타이틀 입력</title>
-<script type="text/javascript" src="/script/user/spot/selectedCountry.js"></script>
+<!-- <script type="text/javascript" src="/script/user/spot/selectedCountry.js"></script> -->
 <script type="text/javascript" src="/script/user/spot/googleMap.js"></script>
-<script async defer src="https://maps.googleapis.com/maps/api/js?sensor=true"></script>
+<script async defer src="https://maps.googleapis.com/maps/api/js"></script> -->
 <style type="text/css">
 #map {
-   height: 300px;
-   width: 300px;
+   height: 500px;
+   width: 100%;
 }
 </style>
 </head>
 <body  leftmargin="0" marginwidth="0" topmargin="0" marginheight="0"
    onload="markInitialize('${spotDto.spot_lat}','${spotDto.spot_long }', '${spotDto.spot_name }');">
-	<%-- <div id="map"></div>
-	<div>
-		<c:set var="mem_no" value="1"/>
-		<input type="hidden" name="mem_no" value="1">
-		<input type="hidden" name="mem_level_code" value="M0002">
-		${countryName } ${cityName } ${spot_type } <br/>
-		명소명 : ${spotDto.spot_name } <br/>
-		한줄설명 : ${spotDto.spot_note } <br/>
-		<c:if test="${spotDto.spot_photoes != null}">		
-			<c:forEach var="photo" items="${spotDto.spot_photoes}">
-				<img alt="" src="/attatchFile/spot/${photo.save_name}.${photo.extension}">
-			</c:forEach>
-		</c:if>
-		주소 : ${spotDto.spot_addr } <br/>
-		위도 : ${spotDto.spot_lat } <br/>
-		경도 : ${spotDto.spot_long } <br/> 
-		<c:if test="${spotDto.mem_no == mem_no }">
-			<input type="button" value="수정" onclick="updateSpot('${spotDto.spot_no}')">
-		</c:if>
-		<c:if test="${spotDto.mem_level_code == 'M0002' }">
-			<input type="button" value="삭제" onclick="deleteSpot('${spotDto.spot_no}')">
-		</c:if>
-		
-	</div>
-	 --%>
-	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-	    <div style="margin-left: 10%">
-			<div class="modal-dialog modal-lg" style="float: left;">
-				<div class="modal-content">
-						<div class="modal-header">
-							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-							<h3 class="modal-title" id="myModalLabel4">명소!!!!!!!음메</h3>
-						</div>
 	
-						<div class="modal-body">
-							<div class="row">
-								<div class="col-md-12">
-									<div id="map"></div>
-								</div>
-							</div>
+	<div style="width: 1300px; margin-left: 10%;">
+		<div class="modal-dialog modal-lg" style="float: left;">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h3 class="modal-title" id="myModalLabel4">명소!!!!!!!음메</h3>
+				</div>
+
+				<div class="modal-body">
+					<div class="row">
+						<div class="col-md-12">
+							<div id="map"></div>
 						</div>
-	
-						<div class="modal-footer">
-						</div>
+					</div>
+				</div>
+
+				<div class="modal-footer">
 				</div>
 			</div>
-			
-			<div class="modal-dialog modal-sm" style="float: left;">
-				<div class="modal-content">
-						<div class="modal-header">
-							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-							<h3 class="modal-title" id="myModalLabel4">명소2222222222</h3>
-						</div>
-	
-						<div class="modal-body">
-							<div class="row">
-								<div class="col-md-12">
-									<div>
-										<c:set var="mem_no" value="1"/>
-										<input type="hidden" name="mem_no" value="1">
-										<input type="hidden" name="mem_level_code" value="M0002">
-										${countryName } ${cityName } ${spot_type } <br/>
-										명소명 : ${spotDto.spot_name } <br/>
-										한줄설명 : ${spotDto.spot_note } <br/>
-										<c:if test="${spotDto.spot_photoes != null}">		
-											<c:forEach var="photo" items="${spotDto.spot_photoes}">
-												<img alt="" src="/attatchFile/spot/${photo.save_name}.${photo.extension}">
-											</c:forEach>
-										</c:if>
-										주소 : ${spotDto.spot_addr } <br/>
-										위도 : ${spotDto.spot_lat } <br/>
-										경도 : ${spotDto.spot_long } <br/> 
-										<c:if test="${spotDto.mem_no == mem_no }">
-											<input type="button" value="수정" onclick="updateSpot('${spotDto.spot_no}')">
-										</c:if>
-										<c:if test="${spotDto.mem_level_code == 'M0002' }">
-											<input type="button" value="삭제" onclick="deleteSpot('${spotDto.spot_no}')">
-										</c:if>
-										
-									</div>
+		</div>
+		
+		<div class="modal-dialog modal-sm" style="float: left;">
+			<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						<h3 class="modal-title" id="myModalLabel4">명소2222222222</h3>
+					</div>
+
+					<div class="modal-body">
+						<div class="row">
+							<div class="col-md-12">
+								<div>
+									<c:set var="mem_no" value="1"/>
+									<input type="hidden" name="mem_no" value="1">
+									<input type="hidden" name="mem_level_code" value="M0002">
+									${countryName } ${cityName } ${spot_type } <br/>
+									명소명 : ${spotDto.spot_name } <br/>
+									한줄설명 : ${spotDto.spot_note } <br/>
+									<c:if test="${spotDto.spot_photoes != null}">		
+										<c:forEach var="photo" items="${spotDto.spot_photoes}">
+											<img alt="" src="/attatchFile/spot/${photo.save_name}.${photo.extension}">
+										</c:forEach>
+									</c:if>
+									주소 : ${spotDto.spot_addr } <br/>
+									위도 : ${spotDto.spot_lat } <br/>
+									경도 : ${spotDto.spot_long } <br/> 
+									<c:if test="${spotDto.mem_no == mem_no }">
+										<input type="button" value="수정" onclick="updateSpot('${spotDto.spot_no}')">
+									</c:if>
+									<c:if test="${spotDto.mem_level_code == 'M0002' }">
+										<input type="button" value="삭제" onclick="deleteSpot('${spotDto.spot_no}')">
+									</c:if>
 								</div>
 							</div>
 						</div>
-	
-						<div class="modal-footer">
-						</div>
-				</div>
+					</div>
+
+					<div class="modal-footer">
+					</div>
 			</div>
 		</div>
 	</div>
