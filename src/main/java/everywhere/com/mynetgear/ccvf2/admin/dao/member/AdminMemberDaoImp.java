@@ -25,4 +25,10 @@ public class AdminMemberDaoImp implements AdminMemberDao {
 	public List<MemberDto> getMemberList(AdminMemberDto adminMemberDto) {
 		return sqlTemplate.selectList("everywhere.com.mynetgear.ccvf2.admin.mapper.member.getMemberList", adminMemberDto);
 	}
+
+
+	@Override
+	public int updateMemberStatus(MemberDto memberDto) {
+		return sqlTemplate.update("everywhere.com.mynetgear.ccvf2.admin.mapper.member.updateMemberStatus", memberDto);
+	}
 }

@@ -22,4 +22,13 @@ public interface AdminMemberDao {
 	 */
 	List<MemberDto> getMemberList(AdminMemberDto adminMemberDto);
 
+	/**
+	 * @author 곽성국	
+	 * @createDate 2015. 12. 17.
+	 * @described 사용자 상태 변경
+	 * @param memberDto
+	 * @return
+	 */
+	int updateMemberStatus(MemberDto memberDto);
+
 }
