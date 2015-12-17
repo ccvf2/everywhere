@@ -7,10 +7,11 @@
 <meta charset="utf-8">
 <title>회원가입</title>
 <script type="text/javascript" src="/script/common/jquery-1.11.3.js"></script>
+<script type="text/javascript" src="/script/common/alert.js"></script>
 <script type="text/javascript">
 	$(function() {
-		$("#email").keyup(function() {
-			var email = $("#email").val();
+		$(".email").keyup(function() {
+			var email = $(".email").val();
 			if (email.length >= 9) {
 				$.ajax({
 					url : "emailCheck.ajax?email=" + email,
@@ -114,7 +115,6 @@
 	}
 </script>
 <c:import url="/WEB-INF/views/user/common/utilImport.jsp" />
-<c:import url="/WEB-INF/views/user/common/footer.jsp" />
 </head>
 <body>
 	<button class="btn-u" data-toggle="modal" data-target="#myModal">회원가입</button>
@@ -135,8 +135,8 @@
 									<section>
 										<label class="input"> 
 											<i class="icon-append fa fa-envelope"></i> 
-											<input type="email" name="mem_email" id="email" placeholder="Email address">
-											<b class="tooltip tooltip-top-right" data-toggle="tooltip" data-placement="bottom-right">사용하실 이메일(계정)을 입력해주세요.</b>
+											<input type="email" name="mem_email" id="email" placeholder="Email address" class="email">
+											<b class="tooltip tooltip-top-right">사용하실 이메일(계정)을 입력해주세요.</b>
 										</label>
 										<div id="emailCheck"></div>
 									</section>
@@ -172,7 +172,7 @@
 									<section>
 										<label class="input"> 
 											<i class="icon-append fa fa-phone"></i> 
-											<input type="text" name="mem_phone" placeholder="Phonenumber"> 
+											<input type="text" name="mem_phone" placeholder="Phonenumber" id="phone"> 
 											<b class="tooltip tooltip-top-right">회원님의 전화번호를 입력해주세요.</b>
 											<button type="button" class="btn-u">번호인증</button>
 										</label>
