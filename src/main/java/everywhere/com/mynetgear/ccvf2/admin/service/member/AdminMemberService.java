@@ -18,4 +18,12 @@ public interface AdminMemberService {
 	 */
 	void adminMemberList(ModelAndView mav);
 
+	/**
+	 * @author 곽성국	
+	 * @createDate 2015. 12. 17.
+	 * @described 관리자 회원관리 회원상태 변경 ajax 처리
+	 * @param mav
+	 */
+	void adminMemberStatusUpdate(ModelAndView mav);
+
 }

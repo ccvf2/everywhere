@@ -3,6 +3,7 @@
 
 <!-- 관리자 회원관리의 mapper -->
 <mapper namespace="everywhere.com.mynetgear.ccvf2.admin.mapper.member">
+	<!-- 회원정보 리스트 및 검색  -->
 	<select id="getMemberList" parameterType="everywhere.com.mynetgear.ccvf2.admin.dto.member.AdminMemberDto" resultType="everywhere.com.mynetgear.ccvf2.user.dto.member.MemberDto">
 		select *
 		from tbl_member
@@ -20,7 +21,7 @@
 				and mem_reg_date <![CDATA[>=]]>#{start_date}
 			</if>
 			<if test="end_date!=null">
-				and mem_reg_date <![CDATA[<=]]> #{end_date}
+				and mem_reg_date <![CDATA[<]]> #{end_date}+1
 			</if>
 			<choose>
 				<when test="mem_email != null">
@@ -48,4 +49,11 @@
 			</choose>
 		</where>
 	</select>
+	
+	<!-- 회원 상태 업데이트 -->
+	<update id="updateMemberStatus" parameterType="everywhere.com.mynetgear.ccvf2.user.dto.member.MemberDto">
+		update tbl_member
+		set mem_status_code=#{mem_status_code}
+		where mem_no=#{mem_no}
+	</update>
 </mapper>
