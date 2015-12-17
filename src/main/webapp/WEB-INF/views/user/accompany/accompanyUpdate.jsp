@@ -22,6 +22,15 @@
 	  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 	<![endif]-->
 	   
+	
+	<!-- CSS Global Compulsory -->
+	<link rel="stylesheet" href="/assets/plugins/bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" href="/assets/css/style.css">
+	
+	<!-- CSS Header and Footer -->
+	<link rel="stylesheet" href="/assets/css/headers/header-default.css">
+	<link rel="stylesheet" href="/assets/css/footers/footer-v1.css">
+	
 	<!-- CSS Implementing Plugins -->
 	<link rel="stylesheet" href="/assets/plugins/animate.css">
 	<link rel="stylesheet" href="/assets/plugins/line-icons/line-icons.css">
@@ -29,6 +38,10 @@
 	<link rel="stylesheet" href="/assets/plugins/sky-forms-pro/skyforms/css/sky-forms.css">
 	<link rel="stylesheet" href="/assets/plugins/sky-forms-pro/skyforms/custom/custom-sky-forms.css">
 	<!--[if lt IE 9]><link rel="stylesheet" href="assets/plugins/sky-forms-pro/skyforms/css/sky-forms-ie8.css"><![endif]-->
+	
+	<!-- CSS Customization -->
+	<link rel="stylesheet" href="/assets/css/custom.css">   
+	   
 	<style type="text/css">
 		.sky-form {
 		  box-shadow: none;
@@ -239,10 +252,19 @@
 		    <!--=== End Footer Version 1 ===-->
 	    </div>
 	</div>
+	
+	<!-- JS Global Compulsory -->
+	<script type="text/javascript" src="/assets/plugins/jquery/jquery.min.js"></script>
+	<script type="text/javascript" src="/assets/plugins/jquery/jquery-migrate.min.js"></script>
+	<script type="text/javascript" src="/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
 	<!-- JS Implementing Plugins -->
+	<script type="text/javascript" src="/assets/plugins/back-to-top.js"></script>
+	<script type="text/javascript" src="/assets/plugins/smoothScroll.js"></script>
 	<script src="/assets/plugins/sky-forms-pro/skyforms/js/jquery.maskedinput.min.js"></script>
 	<script src="/assets/plugins/sky-forms-pro/skyforms/js/jquery-ui.min.js"></script>
 	<script src="/assets/plugins/sky-forms-pro/skyforms/js/jquery.validate.min.js"></script>
+	<!-- JS Customization -->
+	<script type="text/javascript" src="/assets/js/custom.js"></script>
 	<!-- JS Page Level -->
 	<script type="text/javascript" src="/assets/js/app.js"></script>
 	<script type="text/javascript" src="/assets/js/plugins/masking.js"></script>

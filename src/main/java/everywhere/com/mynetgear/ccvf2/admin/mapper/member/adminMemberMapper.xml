@@ -4,25 +4,48 @@
 <!-- 관리자 회원관리의 mapper -->
 <mapper namespace="everywhere.com.mynetgear.ccvf2.admin.mapper.member">
 	<select id="getMemberList" parameterType="everywhere.com.mynetgear.ccvf2.admin.dto.member.AdminMemberDto" resultType="everywhere.com.mynetgear.ccvf2.user.dto.member.MemberDto">
-		select * 
+		select *
 		from tbl_member
-		
-		
-		<if test="search != null">
-			
-		</if>
-		<if test="memLevel != null">
-			
-		</if>
-		<if test="memStatus ! = null">
-		
-		</if>
-		<if test="phoneStatus != null">
-		
-		</if>
-		<if test="start_date">
-		
-		</if>
-		<if test="end_date"></if>
+		<where>
+			<if test="mem_level_code != null">
+				mem_level_code like #{mem_level_code}
+			</if>
+			<if test="mem_status_code != null">
+				and mem_status_code like #{mem_status_code}
+			</if>
+			<if test="mem_p_status_code != null">
+				and mem_p_status_code like #{mem_p_status_code}
+			</if>
+			<if test="start_date!=null">
+				and mem_reg_date <![CDATA[>=]]>#{start_date}
+			</if>
+			<if test="end_date!=null">
+				and mem_reg_date <![CDATA[<=]]> #{end_date}
+			</if>
+			<choose>
+				<when test="mem_email != null">
+					<choose>
+						<when test="mem_name != null">
+							and (mem_name like '%'||#{mem_name, jdbcType=VARCHAR}||'%' 
+							or mem_email like '%'||#{mem_email, jdbcType=VARCHAR}||'%')
+						</when>
+						<otherwise>
+							and mem_email like '%'||#{mem_email, jdbcType=VARCHAR}||'%'				
+						</otherwise>
+					</choose>
+				</when>
+				<when test="mem_name != null">
+					<choose>
+						<when test="mem_email != null">
+							and (mem_name like '%'||#{mem_name, jdbcType=VARCHAR}||'%' 
+							or mem_email like '%'||#{mem_email, jdbcType=VARCHAR}||'%')
+						</when>
+						<otherwise>
+							and mem_name like '%'||#{mem_name, jdbcType=VARCHAR}
+						</otherwise>	
+					</choose>
+				</when>
+			</choose>
+		</where>
 	</select>
 </mapper>
