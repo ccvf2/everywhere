@@ -33,9 +33,13 @@
 	}); */
 </script>
 <script type="text/javascript">
+	function registerFormtest() {
+		everywhereAlert("aa","cc");
+	}
+	
+
 	var checked = false;
 	function registerForm(form) {
-
 		//alert("ok1");
 		
 		if (memberForm.mem_email.value == "") {
@@ -117,7 +121,7 @@
 </head>
 <body>
 	<button class="btn-u" data-toggle="modal" data-target="#myModal">회원가입</button>
-
+	<a href="javascript:registerFormtest()">test</a>
 	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
 			<div class="modal-content">
