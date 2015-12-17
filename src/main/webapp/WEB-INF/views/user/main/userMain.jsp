@@ -8,11 +8,6 @@
 <!-- Meta -->
 <meta charset="UTF-8">
 <meta content="width=device-width, initial-scale=1.0" name="viewport">
-<link rel="stylesheet" href="/assets/plugins/owl-carousel/owl-carousel/owl.carousel.css">
-<link rel="stylesheet" href="/assets/css/theme-colors/default.css">
-	<!-- **********************************  javascript  start ****************************************** -->
-
-<!-- **********************************  javascript  End ****************************************** -->
 </head>
 <body>
 	<div class="wrapper">
@@ -123,7 +118,12 @@
 	    </div><!--/container-->
 	    <!-- End Content Part -->
 	
-	
+	<script>
+	jQuery(document).ready(function() {
+	    OwlCarousel.initOwlCarousel();
+	    ParallaxSlider.initParallaxSlider();
+	});
+</script>
 
 	
 	

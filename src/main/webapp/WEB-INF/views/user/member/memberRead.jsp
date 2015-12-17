@@ -5,7 +5,11 @@
 <head>
 <meta charset="UTF-8">
 <title>회원정보보기</title>
+<<<<<<< HEAD
+<c:import url="/WEB-INF/views/common/jquery.jsp"/>
+=======
 <c:import url="/WEB-INF/views/common/jquery.jsp" />
+>>>>>>> 9e18fc162cc075c0acfb27d693c8e8a6692af0e9
 <c:import url="/WEB-INF/views/user/common/utilImport.jsp"/>
 </head>
 <body>
