@@ -41,7 +41,7 @@
 	<div class="modal fade bs-example-modal-sm" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="modal-dialog modal-sm">
 			<div class="modal-content">
-				<form name="memberForm" action="/user/member/memberUpdate.do" method="post" onsubmit="return registerForm(this)">
+				<form name="regForm" action="/user/member/memberUpdate.do" method="post" onsubmit="return registerForm(this)">
 					<input type="hidden" name="mem_no" value="${memberDto.mem_no}" />
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>

@@ -14,7 +14,7 @@
 	<div class="modal fade bs-example-modal-sm" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="modal-dialog modal-sm">
 			<div class="modal-content">
-				<form action="/user/member/memberDelete.do" method="post">
+				<form name="regForm" action="/user/member/memberDelete.do" method="post" onsubmit="return registerForm(this)">
 					<input type="hidden" name="mem_no" value="${memberDto.mem_no}"/>
 					<input type="hidden" name="mem_email" value="${memberDto.mem_email}"/>
 					<div class="modal-header">

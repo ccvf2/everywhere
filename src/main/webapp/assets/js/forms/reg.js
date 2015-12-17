@@ -9,11 +9,14 @@ var RegForm = function () {
 	            // Rules for form validation
 	            rules:
 	            {
+	            	mem_phone:
+	            	{
+	            		required: true
+	            	},
 	                mem_name:
 	                {
 	                    required: true,
-	                    maxlength: 4
-	                    
+	                    maxlength: 4  
 	                },
 	                mem_email:
 	                {
@@ -48,12 +51,28 @@ var RegForm = function () {
 	                terms:
 	                {
 	                    required: true
+	                },
+	                description:
+	                {
+	                	required: true
+	                },
+	                interestValue:
+	                {
+	                	required: true
 	                }
 	            },
 	            
 	            // Messages for form validation
 	            messages:
 	            {
+	            	mem_phone:
+	            	{
+	            		required: '전화번호를 입력해주세요.'
+	            	},
+	            	mem_name:
+		            {
+	            		required: '고객님의 성함을 입력해주세요.'
+		            },
 	                login:
 	                {
 	                    required: '고객님의 계정으로 로그인해주세요.'
@@ -86,8 +105,17 @@ var RegForm = function () {
 	                },
 	                terms:
 	                {
-	                    required: '이용약관 및 개인정보 활용에 동의해주세요.'
+	                    required: '개인정보 활용에 동의해주세요.'
+	                },
+	                description:
+	                {
+	                	required: '이용약관에 동의해주세요.'
+	                },
+	                interestValue:
+	                {
+	                	required: '관심분야를 1개 이상 선택해주세요.'
 	                }
+	                
 	            },                  
 	            
 	            // Do not change code below
@@ -97,6 +125,5 @@ var RegForm = function () {
 	            }
 	        });
         }
-
     };
 }();
