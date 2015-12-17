@@ -11,7 +11,9 @@ var RegForm = function () {
 	            {
 	                username:
 	                {
-	                    required: true
+	                    required: true,
+	                    maxlength: 15
+	                    
 	                },
 	                email:
 	                {
@@ -22,13 +24,13 @@ var RegForm = function () {
 	                {
 	                    required: true,
 	                    minlength: 3,
-	                    maxlength: 20
+	                    maxlength: 15
 	                },
 	                passwordConfirm:
 	                {
 	                    required: true,
 	                    minlength: 3,
-	                    maxlength: 20,
+	                    maxlength: 15,
 	                    equalTo: '#password'
 	                },
 	                firstname:
@@ -54,7 +56,7 @@ var RegForm = function () {
 	            {
 	                login:
 	                {
-	                    required: 'Please enter your login'
+	                    required: '고객님의 계정으로 로그인해주세요.'
 	                },
 	                email:
 	                {
@@ -84,7 +86,7 @@ var RegForm = function () {
 	                },
 	                terms:
 	                {
-	                    required: 'You must agree with Terms and Conditions'
+	                    required: '이용약관 및 개인정보 활용에 동의해주세요.'
 	                }
 	            },                  
 	            

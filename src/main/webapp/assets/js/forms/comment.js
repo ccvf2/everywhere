@@ -38,11 +38,11 @@ var CommentForm = function () {
 	            {
 	                name:
 	                {
-	                    required: 'Enter your name',
+	                    required: '이름을 입력해주세요.',
 	                },
 	                email:
 	                {
-	                    required: 'Enter your email address',
+	                    required: '이메일 주소를 입력해주세요.',
 	                    email: '이메일 형식이 올바르지 않습니다.'
 	                },
 	                url:
