@@ -24,7 +24,7 @@
             accept: ":not(.ui-sortable-helper)",
             drop: function( event, ui ) {
               $( this ).find( "span" ).remove();
-              $( "<li></li>" ).text( ui.draggable.text() ).appendTo( this );
+              $( "<li></li>" ).text( ui.draggable.text() ).appendTo( $( this ).find( "a" ) );
             }
           }).sortable({
             items: "li:not(.placeholder)",
@@ -153,7 +153,7 @@
                 <c:forEach var="spot" items="${spotList}">
                     <li class="notification" style="border:1px">
                     	<div id="${spot.spot_no}item" class="rounded">
-                        <i class="icon-custom icon-sm rounded-x icon-bg-red icon-line icon-envelope"></i>
+                        <i><img alt="" src="/attatchFile/spot/${spot.spot_photoes[1].save_name}.${spot.spot_photoes[1].extension}"></i>
                         <div class="overflow-h">
                             <span><strong>${spot.spot_name}</strong></span>
                             <small><c:out value="${spot.spot_note}"/></small>
@@ -184,8 +184,7 @@
             	<div class="profile-body margin-bottom-20">
             	<form action="/user/spot/addSpotWrite.do" id="sky-form" class="sky-form" style="border:none;" onsubmit="return addSpotForm(this)" method="post" enctype="multipart/form-data">
                 <fmt:formatDate var="start_date" pattern="yyyy-MM-dd" value="${plannerDto.start_date}"/>
-				<fmt:formatDate var="end_date" pattern="yyyy-MM-dd" value="${plannerDto.end_date}"/>  
-				<c:set var="day_count" value="${end_date - start_date }"/>		
+				<fmt:formatDate var="end_date" pattern="yyyy-MM-dd" value="${plannerDto.end_date}"/>
 				<input type="text" name="day_count" value="${day_count}"/>
 				<input type="hidden" name="planner_no" value="${plannerDto.planner_no}"/>
                 <input type="hidden" name="mem_no" value="${mem_object.mem_no}">
@@ -199,13 +198,13 @@
                       <div class="col col-6">
                           <label class="input">
                               <i class="icon-append fa fa-calendar"></i>
-                              <input type="text" name="start_date" id="start" placeholder="Start date">
+                              <input type="text" name="start_date" id="start" placeholder="Start date" value="${start_date}">
                           </label>
                       </div>
                       <div class="col col-6">
                           <label class="input">
                               <i class="icon-append fa fa-calendar"></i>
-                              <input type="text" name="finish" id="finish" placeholder="Expected finish date">
+                              <input type="text" name="finish" id="finish" placeholder="Expected finish date" value="${plannerDto.end_date}">
                           </label>
                       </div>
                   </div> 
@@ -216,38 +215,24 @@
                 <c:forEach var="i" begin="1" end="3">
                 <div class="tag-box tag-box-v4 rounded-2x margin-bottom-40">
                 	<ol class="list-unstyled " >
-                	<li>
-                	<div class="panel-group">
-					    <div class="panel panel-default">
-					      <div class="panel-heading" id="droppable">
-					        <h4 class="panel-title">
-					          <a data-toggle="collapse" href="#collapse${i}"><span>Add Spot</span></a>
-					        </h4>
-					      </div>
-					      <div id="collapse${i}" class="panel-collapse collapse">
-					        <div class="panel-body">Panel Body</div>
-					        <div class="panel-body">Panel Body</div>
-					      </div>
-					    </div>
-					    </div>
- 					 </li>
+	                	<li>
+	                	<div class="panel-group">
+						    <div class="panel panel-default">
+						      <div class="panel-heading" id="droppable">
+						        <h4 class="panel-title">
+						          <a data-toggle="collapse" href="#collapse${i}"><span>Add Spot</span></a>
+						        </h4>
+						      </div>
+						      <div id="collapse${i}" class="panel-collapse collapse">
+						        <div class="panel-body">Panel Body</div>
+						        <div class="panel-body">Panel Body</div>
+						      </div>
+						    </div>
+						    </div>
+	 					 </li>
  					 </ol>
  					 
- 					 <div class="panel-group">
- 					 	<div class="drag_able">
-					    <div class="panel panel-default">
-					      <div class="panel-heading">
-					        <h4 class="panel-title">
-					          <a data-toggle="collapse" href="#collapse${i}${i+1}">Collapsible list group</a>
-					        </h4>
-					      </div>
-					      <div id="collapse${i}${i+1}" class="panel-collapse collapse">
-					        <div class="panel-body">Panel Body</div>
-					        <div class="panel-body">Panel Body</div>
-					      </div>
-					      </div>
-					    </div>
- 					 </div>
+ 					 
                 </div>
                 </c:forEach>
                 </form>
