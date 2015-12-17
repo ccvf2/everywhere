@@ -12,7 +12,7 @@ var RegForm = function () {
 	                username:
 	                {
 	                    required: true,
-	                    maxlength: 15
+	                    maxlength: 4
 	                    
 	                },
 	                email:
@@ -23,13 +23,13 @@ var RegForm = function () {
 	                password:
 	                {
 	                    required: true,
-	                    minlength: 3,
+	                    minlength: 8,
 	                    maxlength: 15
 	                },
 	                passwordConfirm:
 	                {
 	                    required: true,
-	                    minlength: 3,
+	                    minlength: 8,
 	                    maxlength: 15,
 	                    equalTo: '#password'
 	                },
