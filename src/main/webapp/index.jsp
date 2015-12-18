@@ -18,6 +18,7 @@
  <h3>공통사용(모듈)</h3>
  <a href="/test/test2.do">파일테스트</a>
  <a href="/test/reply.do">공통댓글</a>
+ <a href="/common/email/sendEmail.do">메일 보내기</a>
  <hr/>
 
  <h1>관리자</h1>

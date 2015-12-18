@@ -165,13 +165,13 @@
                                     <section class="col col-6">
                                         <label class="input">
                                             <i class="icon-append fa fa-calendar"></i>
-                                            <input type="text" name="start_date" id="start" placeholder="시작일">
+                                            <input type="text" name="start_date" id="start_date" placeholder="시작일">
                                         </label>
                                     </section>
                                     <section class="col col-6">
                                         <label class="input">
                                             <i class="icon-append fa fa-calendar"></i>
-                                            <input type="text" name="end_date" id="finish" placeholder="종료일">
+                                            <input type="text" name="end_date" id="end_date" placeholder="종료일">
                                         </label>
                                     </section>
 		                        </div>
@@ -198,7 +198,6 @@
 			                    </footer>  
 			                    <div class="message">
 		                        <i class="rounded-x fa fa-check"></i>
-		                        <p>Thanks for your order!<br>We'll contact you very soon.</p>
 		                    </div>
 		                    </fieldset>
 		                    </form>
@@ -219,6 +218,8 @@
 		    <!--=== End Footer Version 1 ===-->
 	    </div>
 	</div>
+	
+	<script type="text/javascript" src="/script/common/datepicker.js"></script>
 	<!-- JS Global Compulsory -->
 	<script type="text/javascript" src="/assets/plugins/jquery/jquery.min.js"></script>
 	<script type="text/javascript" src="/assets/plugins/jquery/jquery-migrate.min.js"></script>
@@ -234,13 +235,11 @@
 	<!-- JS Page Level -->
 	<script type="text/javascript" src="/assets/js/app.js"></script>
 	<script type="text/javascript" src="/assets/js/plugins/masking.js"></script>
-	<script type="text/javascript" src="/assets/js/plugins/datepicker.js"></script>
 	<script type="text/javascript" src="/assets/js/plugins/validation.js"></script>
 	<script type="text/javascript">
 	    jQuery(document).ready(function() {
 	        App.init();
 	        Masking.initMasking();
-	        Datepicker.initDatepicker();
 	        Validation.initValidation();
 	    });
 	</script>

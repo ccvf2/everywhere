@@ -89,5 +89,13 @@ public interface AccompanyDao {
 	 */
 	List<AccompanyDto> getRecentAccompanyList();
 
+	/**
+	 * @author 곽성국	
+	 * @createDate 2015. 12. 18.
+	 * @described 다음 시퀀스 가져옴
+	 * @return
+	 */
+	int getAccompanyNextSeq();
+
 
 }
