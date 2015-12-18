@@ -34,16 +34,64 @@ $(function() {
 	});
 });
 
+function addDay(day_count){
+	var before_day_count = $("#before_day_count").val();
+
+	if(before_day_count < day_count.value){
+		var select = confirm("일정 추가 하시겠습니까?");
+		if(select == true){
+			//Item 용 레퍼런스 복사 후 name값 변경
+			var html = $('#dayDiv').html();
+			var copy = "d"+day_count.value+"_item";
+			var newHtml = html.replace(/d0_item/g, copy);
+
+			$("#submit_btn").before(newHtml);
+			$("#d"+day_count.value+"_items_date").text("Day " + day_count.value)
+
+			$( ".droppable .dropItem" ).droppable({
+				accept: "#draggable",
+				activeClass: "ui-state-highlight",
+				hoverClass: "ui-state-active",
+				accept: ":not(.ui-sortable-helper)",
+				drop: function( event, ui ) {
+					$(event['target']).droppable('disable');
+					$( this).addClass( "ui-state-highlight" );
+					$( this ).find( "span" ).remove();
+
+					var test = ui.draggable.attr('id').replace("_item","");
+					$( this ).find("input").val(test);
+
+					$( "<div></div>" ).html( ui.draggable.html() ).appendTo( $( this ).find( "a" ) );
+				}
+			});
+			
+			$("#before_day_count").val(day_count.value);
+		}else{
+			day_count.value = before_day_count;
+			return;
+		}
+	}else{
+		var select = confirm("마지막 일정을 삭제 하시겠습니까?");
+		if(select == true){
+			$("#d"+before_day_count+"_items_div").remove();
+			$("#before_day_count").val(day_count.value);
+		}else{
+			day_count.value = before_day_count;
+			return;
+		}
+	}
+}
+
 function addItem(input_name){
 	//input_name = d1_item
 	var day_item_count = document.getElementById(input_name+"_count");
-
-	var before = input_name+day_item_count.value;
 	day_item_count.value = Number(day_item_count.value)+1;
-	var after = input_name+day_item_count.value;
-	alert(before +  "," + after);
-	var html = "<li id='"+before+"_li'>" + $('#'+before+'_li').html() + "</li>";
-	var newHtml = html.replace(new RegExp(before,'g'), after);
+	
+	var copy = input_name+day_item_count.value;
+
+	//Item 용 레퍼런스 복사 후 name값 변경
+	var html = $('#d0_item_ol').html();
+	var newHtml = html.replace(/d0_item1/g, copy);
 
 	$("#"+input_name+"_ol").append(newHtml);
 

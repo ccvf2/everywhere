@@ -16,7 +16,7 @@
 	<link rel="stylesheet" href="/assets/plugins/sky-forms-pro/skyforms/custom/custom-sky-forms.css">
 
 	<!-- 도시&국가 셀렉트박스 -->
-	<script type="text/javascript" src="/script/user/spot/selectedCountry.js"></script>	
+	<script type="text/javascript" src="/script/user/planner/selectedCountry.js"></script>	
 	<script type="text/javascript" src="/script/user/planner/addPlannerPage.js"></script>	
 </head>
 <body>
@@ -75,16 +75,16 @@ ${mem_object.mem_no }
 				</div>
 
 				<!--Notification-->
-				<div class="tag-box tag-box-v4 rounded-2x margin-bottom-20">
+				<div class="tag-box tag-box-v4 rounded-2x margin-bottom-20" style="padding : 7px;">
 					<div class="panel-heading-v2 overflow-h">
-						<h2 class="heading-xs pull-left"><i class="fa fa-bell-o"></i> Notification</h2>
+						<h2 class="heading-xs pull-left"><i class="fa fa-map-marker"></i> Spot</h2>
 					</div>
 
 					<div class="panel-heading-v2 overflow-h">
 						<form class="sky-form">
 							<!-- 나라 -->
 							<label class="select">
-								<select name="country_code" id="selectCountry" onchange="selectSpotList('true')">                                    	
+								<select name="country_code" id="selectCountry" onchange="selectSpotList(true)">
 									<option value=""> Country </option>
 									<c:forEach var="country" items="${countryList}" >
 										<option value="${country.code}">${country.code_name}</option>
@@ -95,8 +95,8 @@ ${mem_object.mem_no }
 
 							<!-- 도시 -->
 							<label class="select">
-								<select name="city_code" id="selectCity" onchange="selectSpotList('false')">
-									<option value="">City</option>
+								<select name="city_code" id="selectCity" onchange="selectSpotList(false)">
+									<option value=""> City </option>
 								</select>
 								<i></i>
 							</label>
@@ -113,15 +113,16 @@ ${mem_object.mem_no }
 							</label>
 						</form>
 					</div>
+					<hr style="margin : 0px 0px 5px 0px;"/>
 
 					<div>
-						<ul class="list-unstyled mCustomScrollbar margin-bottom-20" data-mcs-theme="minimal-dark">
+						<ul class="list-unstyled mCustomScrollbar margin-bottom-20" data-mcs-theme="minimal-dark"  id="spotLists">
 							<c:forEach var="spot" items="${spotList}">
-								<li class="notification" style="border:1px" id="spotLists">
+								<li class="notification" style="margin:0px;border:1px solid #eee;padding:5px 5px;height: 48px;">
 									<div id="${spot.spot_no}_item" class="rounded">
 										<i style="margin:0;"><img alt="" src="/attatchFile/spot/${spot.spot_photoes[0].save_name}.${spot.spot_photoes[0].extension}" style="width:35px;height:35px;margin-right:5px;"></i>
 										<div class="overflow-h">
-											<span><strong><a href="#">${spot.spot_name}</a></strong></span>
+											<span><strong><a href="/user/spot/spotReadPage.do?spot_no=${spot.spot_no}">${spot.spot_name}</a></strong></span>
 											<small><c:out value="${spot.spot_note}"/></small>
 										</div>
 									</div>
@@ -147,7 +148,6 @@ ${mem_object.mem_no }
 			<div class="profile-body margin-bottom-20">
 				<form action="/user/planner/writePlanner.do" id="sky-form" class="sky-form" style="border:none;" onsubmit="" method="post" enctype="multipart/form-data">
 					<fmt:formatDate var="start_date" pattern="yyyy-MM-dd" value="${plannerDto.start_date}"/>
-					<fmt:formatDate var="end_date" pattern="yyyy-MM-dd" value="${plannerDto.end_date}"/>
 					<input type="hidden" name="planner_no" value="${plannerDto.planner_no}"/>
 					<input type="hidden" name="mem_no" value="${mem_object.mem_no}">
 					<input type="hidden" name="planner_title" value="${plannerDto.title}">
@@ -166,7 +166,8 @@ ${mem_object.mem_no }
 									</div>
 									<div class="col col-2" style="padding-left: 0px;">
 										<label class="input">
-										<input type="number" min="1" value="${day_count}" name="day_count" id="day_count" style="padding:5px;width:55px;">
+										<input type="number" min="1" value="${day_count}" name="day_count" id="day_count" onchange="addDay(this)" style="padding:5px;width:55px;">
+										<input type="hidden" value="${day_count}" id="before_day_count">
 									</label>
 								</div>
 							</div> 
@@ -174,12 +175,12 @@ ${mem_object.mem_no }
 
 						<!-- Day Schedule -->
 						<c:forEach var="i" begin="1" end="${day_count}">
-							<div class="tag-box tag-box-v4 rounded-2x margin-bottom-30">
+							<div class="tag-box tag-box-v4 rounded-2x margin-bottom-30" id="d${i}_items_div">
 								<input type="hidden" id="d${i}_item_count" name="d${i}_item_count" value="1">
-								<h2 class="heading-xs">Day ${i}</h2>
+								<h2 class="heading-xs" id="d${i}_items_date">Day ${i}</h2>
 								<c:set var="id_value" value="d${i}_item1"/>
 									<ol class="list-unstyled" id="d${i}_item_ol">
-										<li id="d${i}_item1_li">
+										<li>
 										<div class="panel-group droppable">
 											<input type="hidden" name="${id_value}_no"/>
 											<div class="panel panel-default">
@@ -215,7 +216,7 @@ ${mem_object.mem_no }
 								</ul>
 							</div>
 						</c:forEach>
-						<button type="submit" class="btn-u">Submit</button>
+						<button type="submit" class="btn-u" id="submit_btn">Submit</button>
 					</form>
 				</div>
 			</div>
@@ -223,14 +224,14 @@ ${mem_object.mem_no }
 		</div>
 	</div>
 
-	<!-- 동적 입력창을 위한 HTML 값  -->
-	<div style="display:none">
-		<div class="tag-box tag-box-v4 rounded-2x margin-bottom-30">
+	<!-- 동적 입력창을 위한 HTML 레퍼런스값  -->
+	<div style="display:none" id="dayDiv">
+		<div class="tag-box tag-box-v4 rounded-2x margin-bottom-30" id="d0_items_div">
 			<input type="hidden" id="d0_item_count" name="d0_item_count" value="1">
-			<h2 class="heading-xs">Day 0</h2>
+			<h2 class="heading-xs" id="d0_items_date">Day 0</h2>
 			<c:set var="id_value" value="d0_item1"/>
 			<ol class="list-unstyled" id="d0_item_ol">
-				<li id="d0_item1_li">
+				<li>
 					<div class="panel-group droppable">
 						<input type="hidden" name="d0_item1_no"/>
 						<div class="panel panel-default">
@@ -262,7 +263,7 @@ ${mem_object.mem_no }
 				</li>
 			</ol>
 			<ul class="bs-glyphicons">	 
-				<li style="width:50%; height:100%; padding:0px; border: 0px; text-align: right"><span class="glyphicon glyphicon-plus-sign" onclick="addItem('d${i}_item')"></span></li>
+				<li style="width:50%; height:100%; padding:0px; border: 0px; text-align: right"><span class="glyphicon glyphicon-plus-sign" onclick="addItem('d0_item')"></span></li>
 			</ul>
 		</div>
 	</div>
