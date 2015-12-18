@@ -5,15 +5,15 @@
 <head>
 <meta charset="UTF-8">
 <title>마이페이지 Left</title>
+<script type="text/javascript" src="/assets/plugins/line-icons/icons-lte-ie7.js"></script>
 </head>
 <body>
 	<img class="img-responsive profile-img margin-bottom-20" src="/assets/img/team/img32-md.jpg" alt="">
 	<%-- <c:out value="${session.mem_name}"/><c:out value="(${session.mem_email})"/> --%>
-	<c:set var="loginMember" value="${mem_object}" scope="session"/>
-	<c:if test="${loginMember!=null}">
-		<c:out value="${loginMember.mem_name}"/><c:out value="(${loginMember.mem_email})"/>
-	</c:if>
-	
+	<%-- <c:set var="loginMember" value="${mem_object}" scope="session"/> --%>
+	<c:set var="memberDto" value="${memberDto}"/>
+	<c:out value="${memberDto.mem_name}"/><c:out value="(${memberDto.mem_email})"/>
+	    
     <ul class="list-group sidebar-nav-v1 margin-bottom-40" id="sidebar-nav-1">
         <li class="list-group-item">
         </li>

@@ -54,5 +54,11 @@ public class MemberDaoImp implements MemberDao {
 	public MemberDto getOneMemberInfo(MemberDto memberDto) {
 		return sqlTemplate.selectOne("getOneMemberInfo", memberDto);
 	}
+	
+	/** email로 회원 정보(Dto) 가져오기*/
+	@Override
+	public MemberDto getOneMemberInfoAsEmail(String mem_email) {
+		return sqlTemplate.selectOne("getOneMemberInfoAsEmail", mem_email);
+	}
 
 }
