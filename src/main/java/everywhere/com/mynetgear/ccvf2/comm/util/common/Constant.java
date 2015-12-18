@@ -125,9 +125,15 @@ public class Constant {
 	/**여행동행구하기 게시글 종류: 완료*/
 	public static final String ACCOMPANY_TYPE_COMPLETED = "H0004";
 
-	/** 분류명 : 내용기술 */
+	/** 파일 사용처 코드 : 명소 */
 	public static final String FILE_TYPE_SPOT = "F0001";
+	/** 파일 사용처 코드 : 항목 */
 	public static final String FILE_TYPE_ITEM = "F0002";
+	/** 파일 사용처 코드 : 공통 이메일 쓰기 */
+	public static final String FILE_TYPE_EMAIL = "F0004";
+	/** 파일 사용처 코드 : 동행구하기 게시판 */
+	public static final String FILE_TYPE_ACCOMPANY = "F0003";
+	
 
 	/**관심분야 그룹 코드: 관심분야*/
 	public static final String INTEREST_GROUP_CODE = "I0001";
