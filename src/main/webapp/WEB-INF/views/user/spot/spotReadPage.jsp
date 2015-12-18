@@ -16,13 +16,12 @@
 </style>
 </head>
 <body  leftmargin="0" marginwidth="0" topmargin="0" marginheight="0"
-   onload="markInitialize('${spotDto.spot_lat}','${spotDto.spot_long }', '${spotDto.spot_name }');">
+   onload="markInitialize('${spotDto.spot_lat}','${spotDto.spot_long }', '${spotDto.spot_name }', '${spotDto.spot_no}')">
 	
 	<div style="width: 1300px; margin-left: 10%;">
 		<div class="modal-dialog modal-lg" style="float: left;">
 			<div class="modal-content">
 				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 					<h1 class="modal-title" id="myModalLabel1"><c:out value="${spotDto.spot_name }"/></h1>
 				</div>
 
@@ -31,15 +30,15 @@
 						<div class="col-md-12">
 							<!-- Tab panes -->
 							<div class="tab-content">
-							  <div role="tabpanel" class="tab-pane active" id="spot_pic">
+							  <div role="tabpanel" class="tab-pane active" id="spot_pic${spotDto.spot_no}">
 							  	<c:if test="${spotDto.spot_photoes != null}">		
 									<c:forEach var="photo" items="${spotDto.spot_photoes}">
-										<img alt="" src="/attatchFile/spot/${photo.save_name}.${photo.extension}" style="width: 100%; height: 500px;">
+										<img alt="" src="/attatchFile/spot/${photo.save_name}.${photo.extension}" style="width: 100%; height: 70%;">
 									</c:forEach>
 								</c:if>
 							  </div>
-							  <div role="tabpanel" class="tab-pane" id="spot_maps">
-							  	<div id="map"></div>
+							  <div role="tabpanel" class="tab-pane" id="spot_maps${spotDto.spot_no}">
+							  	<div id="map${spotDto.spot_no}"></div>
 							  </div>
 							</div>
 						</div>
@@ -47,8 +46,8 @@
 					
 					<div class="row">
 						<ul class="nav nav-tabs" role="tablist">
-						    <li role="presentation" class="active"><a href="#spot_pic" aria-controls="spot_pic" role="tab" data-toggle="tab">사진</a></li>
-						    <li role="presentation"><a href="#spot_maps" aria-controls="spot_maps" role="tab" data-toggle="tab">위치</a></li>
+						    <li role="presentation" class="active"><a href="#spot_pic${spotDto.spot_no}" aria-controls="spot_pic${spotDto.spot_no}" role="tab" data-toggle="tab">사진</a></li>
+						    <li role="presentation"><a href="#spot_maps${spotDto.spot_no}" aria-controls="spot_maps${spotDto.spot_no}" role="tab" data-toggle="tab">위치</a></li>
 					    </ul>
 					</div>
 					
