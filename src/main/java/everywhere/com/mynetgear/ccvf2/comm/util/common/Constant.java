@@ -138,4 +138,13 @@ public class Constant {
 
 	/**관심분야 그룹 코드: 관심분야*/
 	public static final String INTEREST_GROUP_CODE = "I0001";
+
+	
+	/**서비스페이지메인셋팅위치코드: 슬라이드이미지 뒷배경*/
+	public static final String SERVICE_SETTING_BACKGROUNDIMG = "M9990";
+	/**서비스페이지메인셋팅위치코드: 슬라이드이미지 앞이미지*/
+	public static final String SERVICE_SETTING_FRONTIMG = "M9991";
+	
+	
+	
 }

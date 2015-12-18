@@ -32,7 +32,7 @@
 
     <!--=== Slider ===-->
     <div class="slider-inner">
-        <div id="da-slider" class="da-slider">
+        <div id="da-slider" class="da-slider" style="background: transparent url(${backgroungImg}) repeat 0% 0%;">
             <div class="da-slide">
                 <h2><i>CLEAN &amp; FRESH</i> <br /> <i>FULLY RESPONSIVE</i> <br /> <i>DESIGN</i></h2>
                 <p><i>Lorem ipsum dolor amet</i> <br /> <i>tempor incididunt ut</i> <br /> <i>veniam omnis </i></p>
