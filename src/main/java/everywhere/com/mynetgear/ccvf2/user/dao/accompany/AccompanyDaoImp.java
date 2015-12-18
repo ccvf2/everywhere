@@ -114,5 +114,8 @@ public class AccompanyDaoImp implements AccompanyDao {
 		return sqlTemplate.selectList("everywhere.com.mynetgear.ccvf2.user.mapper.accompany.getRecentAccompanyList", hMap);
 	}
 
-	
+	@Override
+	public int getAccompanyNextSeq() {
+		return sqlTemplate.selectOne("everywhere.com.mynetgear.ccvf2.user.mapper.accompany.getAccompanyNextSeq");
+	}
 }

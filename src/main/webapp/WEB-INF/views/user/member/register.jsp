@@ -4,12 +4,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-<%-- <c:import url="/WEB-INF/views/common/jquery.jsp" /> --%>
+<c:import url="/WEB-INF/views/common/jquery.jsp" />
 <meta charset="utf-8">
 <title>회원가입</title>
 <script type="text/javascript">
 	 $(function() {
-		$("#email").keyup(function() {
+		$("#email").focusout(function() {
 			var email = $("#email").val();
 			if (email.length >= 9) {
 				$.ajax({
@@ -69,10 +69,10 @@
 		}
 	}
 </script>
-<%-- <c:import url="/WEB-INF/views/user/common/utilImport.jsp" /> --%>
+<c:import url="/WEB-INF/views/user/common/utilImport.jsp" />
 </head>
-
-	<!-- <button class="btn-u" data-toggle="modal" data-target="#joinModal">회원가입</button> -->
+<body>
+	<button class="btn-u" data-toggle="modal" data-target="#joinModal">회원가입</button>
 
 	<div class="modal fade" id="joinModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
@@ -383,5 +383,5 @@
 			</div>
 		</div>
 	</div>
-
+</body>
 </html>

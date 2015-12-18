@@ -102,7 +102,6 @@ public class AccompanyServiceImp implements AccompanyService {
 				EverywhereAspect.logger.info(EverywhereAspect.logMsg + "내용이 입력되지 않았습니다.");
 			} else {
 				// 실제 구현부
-				
 				accompanyDto.setMem_no(Integer.parseInt(mem_no));
 
 				/*제목 및 HTML제거*/
@@ -132,14 +131,30 @@ public class AccompanyServiceImp implements AccompanyService {
 				
 				accompanyDto.setUse_yn(Constant.SYNB_YN_Y);
 				
-				if(request.getParameter("file")!=null) {
-					CommonFileIODto commonFileIODto = commonFileIOService.requestWriteFileAndDTO(request, "file", accompanyPath);
-					commonFileIOService.insertFileInfo(commonFileIODto);
-					
-				}
 				
+				
+				/*CommonFileIODto commonFileIODto = commonFileIOService.requestWriteFileAndDTO(request, "spot_image", spotPath);
+				if(commonFileIODto != null){
+					commonFileIODto.setType_code(Constant.FILE_TYPE_SPOT);
+					commonFileIODto.setWrite_no(spotDto.getSpot_no());
+					String spot_photo_num = commonFileIOService.insertFileInfo(commonFileIODto) + ",";
+					System.out.println("spot_photo_num : " + spot_photo_num);
+					spotDto.setAttach_file(spot_photo_num);
+				}
+				*/
+				// 파일 쓰기를 위해 시퀀스를 가져온다.
+				int accompany_no_nextSeq = accompanyDao.getAccompanyNextSeq();
+				accompanyDto.setAccompany_no(accompany_no_nextSeq);
 				check = accompanyDao.insertAccompany(accompanyDto);
 				EverywhereAspect.logger.info(EverywhereAspect.logMsg + check);
+				
+				CommonFileIODto commonFileIODto = commonFileIOService.requestWriteFileAndDTO(request, "file", accompanyPath);
+				if(commonFileIODto != null) {
+					commonFileIODto.setType_code(Constant.FILE_TYPE_ACCOMPANY);
+					commonFileIODto.setWrite_no(accompanyDto.getAccompany_no());
+					int accompany_file_no = commonFileIOService.insertFileInfo(commonFileIODto);
+					System.out.println("Accompany_file_no : " + accompany_file_no);					
+				}
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

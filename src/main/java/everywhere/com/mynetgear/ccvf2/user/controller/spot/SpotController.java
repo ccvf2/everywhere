@@ -103,4 +103,16 @@ public class SpotController {
 		spotService.deleteSpot(mav);
 		return mav;
 	}
+	
+	
+	@RequestMapping(value="/user/empty/empty.do", method=RequestMethod.GET)
+	public ModelAndView emptyModel(HttpServletRequest request, HttpServletResponse response){
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("request", request);
+		String spot_no=request.getParameter("spot_no");
+		mav.addObject("spot_no", spot_no);
+		//spotService.deleteSpot(mav);
+		mav.setViewName("/user/spot/empty");
+		return mav;
+	}
 }

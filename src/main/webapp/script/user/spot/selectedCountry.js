@@ -59,10 +59,12 @@ function spotListDisp(data){
 	if(data != ""){
 		var obj = JSON.parse(data);
 		for(i = 0; i < obj.spot.length; i++){
-			str+="<li class='notification' style='border:1px'><div id=" + obj.spot[i].spot_no + " class='rounded'>"+
-            "<i class='icon-custom icon-sm rounded-x icon-bg-red icon-line icon-envelope'></i>" +
-            "<div class='overflow-h' id="+ obj.spot[i].spot_no +"><span><strong>" + obj.spot[i].spot_name + "</strong></span><small>" + obj.spot[i].spot_note + "</small>"+
-            "</div></div></li>";			
+			str+="<li class='notification'>"+
+	             "<i class='icon-custom icon-sm rounded-x icon-bg-red icon-line icon-envelope'></i>" +
+	             "<div class='overflow-h'>" +
+	             "<div id='"+obj.spot[i].spot_no+"item' draggable='true' ondragstart='drag(event)'>"+
+	             "<a href='/user/spot/spotReadPage.do?spot_no='"+obj.spot[i].spot_no+"'>"+obj.spot[i].spot_name+"</a>"+
+	             "</div></div></li>";			
 		}
 	}
 	$("#spotLists").empty(); 
