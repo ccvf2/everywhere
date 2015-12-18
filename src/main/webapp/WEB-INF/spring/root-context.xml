@@ -32,6 +32,7 @@
 				<value>classpath:/everywhere/com/mynetgear/ccvf2/user/mapper/message/messageMapper.xml</value>
 				<value>classpath:/everywhere/com/mynetgear/ccvf2/admin/mapper/chart/chartDaoMapper.xml</value>
 				<value>classpath:/everywhere/com/mynetgear/ccvf2/admin/mapper/settingmain/settingMainMapper.xml</value>
+				<value>classpath:/everywhere/com/mynetgear/ccvf2/user/mapper/main/userMainMapper.xml</value>
 			</list>
 		</property>
 	</bean>

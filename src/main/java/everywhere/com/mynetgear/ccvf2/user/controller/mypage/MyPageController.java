@@ -18,29 +18,32 @@ import everywhere.com.mynetgear.ccvf2.user.service.mypage.MyPageService;
 public class MyPageController {
 	@Autowired
 	private MyPageService myPageService;
-	
-	@RequestMapping(value="/user/myPage/myPage.do", method=RequestMethod.GET)
-	public ModelAndView myPage(HttpServletRequest request, HttpServletResponse response){
+
+	@RequestMapping(value = "/user/myPage/myPage.do", method = RequestMethod.GET)
+	public ModelAndView myPage(HttpServletRequest request, HttpServletResponse response) {
+		ModelAndView mav=new ModelAndView();
+		mav.addObject("request", request);
+		mav.addObject("response", response);
 		
-//		request.getAttribute(name)
 		
-		return new ModelAndView("/user/myPage/myPage");
+		int uandMe=Integer.parseInt(request.getParameter("uandMe"));
+		if(uandMe==1){
+			System.out.println("마이페이지로 이동");
+			mav=myPageService.myPage(mav);
+		}else{
+			System.out.println("친구페이지로 이동");
+			mav=myPageService.moveUserPage(mav);
+		}
+		
+		return mav;
 	}
-	
-	@RequestMapping(value="/user/myPage/userPage.do", method=RequestMethod.GET)
-	public ModelAndView userPage(HttpServletRequest request, HttpServletResponse response){
+
+	/*@RequestMapping(value = "/user/myPage/userPage.do", method = RequestMethod.GET)
+	public ModelAndView userPage(HttpServletRequest request, HttpServletResponse response) {
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("request", request);
-		mav=myPageService.moveUserPage(mav);
-		
+		mav = myPageService.moveUserPage(mav);
+
 		return mav;// new ModelAndView("/user/myPage/myPage");
-	}
-	
-//	MemberDto member = memberDao.getOneMemberInfo(dto);
-//
-//	// 세션처리
-//	HttpSession session = request.getSession();
-//	session.setAttribute(Constant.SYNN_LOGIN_OBJECT, member);
-	
-//	/user/myPage/userPage.do?mem_no=73
+	}*/
 }

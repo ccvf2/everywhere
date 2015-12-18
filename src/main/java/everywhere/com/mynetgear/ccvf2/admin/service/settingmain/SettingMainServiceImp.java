@@ -53,7 +53,7 @@ public class SettingMainServiceImp implements SettingMainService {
 		settingDto.setUse_yn(Constant.SYNB_YN_Y);
 		//세팅URl : 이미지 위치.
 		String path = commonFileIODto.getSave_name()+Constant.SYNB_DOT+commonFileIODto.getExtension();
-		settingDto.setSetting_spot_code(path);
+		settingDto.setSetting_url(path);
 		settingMainDao.insertBackgroundImgChange(settingDto);
 		mav.setViewName("/admin/settingMain/settingMain");
 	}

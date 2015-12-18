@@ -28,11 +28,11 @@ public class UserMainDaoImp implements UserMainDao {
 		SettingMainDto dto = new SettingMainDto();
 		dto.setUse_yn(Constant.SYNB_YN_Y);
 		dto.setSetting_type_code(Constant.SERVICE_SETTING_BACKGROUNDIMG);
-		String result=sqlTemplate.selectOne("select_service_main_background_img", dto);
-		System.out.println(result);
+		SettingMainDto result=sqlTemplate.selectOne("select_service_main_background_img", dto);
+		//System.out.println(result);
 		//List<Object> list=sqlTemplate.selectOne("select_service_main_background_img", dto);
-		//return  result;
-		return null;
+		return  result;
+		//return null;
 	}
 
 }

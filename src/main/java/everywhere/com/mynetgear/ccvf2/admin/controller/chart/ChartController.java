@@ -2,7 +2,6 @@ package everywhere.com.mynetgear.ccvf2.admin.controller.chart;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.List;
 
@@ -10,7 +9,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,11 +30,27 @@ public class ChartController {
 	@Autowired
 	private ChartService service;
 	
+	/**
+	 * @author 김성광
+	 * @createDate 2015. 12. 19.
+	 * @described chart 페이지 이동
+	 * @param request
+	 * @param response
+	 * @return
+	 */
 	@RequestMapping(value="/admin/chart/chartView.do", method=RequestMethod.GET)
 	public ModelAndView chartView(HttpServletRequest request, HttpServletResponse response){
 		return new ModelAndView("/admin/chart/chartView");
 	}
 	
+	/**
+	 * @author 김성광
+	 * @createDate 2015. 12. 19.
+	 * @described 통계 데이터 Ajax 요청
+	 * @param request
+	 * @param response
+	 * @throws IOException
+	 */
 	@RequestMapping(value="/admin/chart/chartList.do", method=RequestMethod.GET)
 	public void chartList(HttpServletRequest request, HttpServletResponse response) throws IOException{
 		String start=request.getParameter("date1");

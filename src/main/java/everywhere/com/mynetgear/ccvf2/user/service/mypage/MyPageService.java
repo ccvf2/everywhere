@@ -6,4 +6,6 @@ public interface MyPageService {
 
 	public ModelAndView moveUserPage(ModelAndView mav);
 
+	public ModelAndView myPage(ModelAndView mav);
+
 }
