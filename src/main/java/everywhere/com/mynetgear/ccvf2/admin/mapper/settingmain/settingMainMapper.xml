@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 관리자 회원관리의 mapper -->
+<mapper namespace="everywhere.com.mynetgear.ccvf2.admin.mapper.settingmain.settingMainMapper">
+	<!-- 메인페이지 셋팅 등록 -->
+	<insert id="insert_Background_Img_Change" parameterType="everywhere.com.mynetgear.ccvf2.admin.dto.settingmain.SettingMainDto">
+		INSERT INTO
+		TBL_ADMIN_MAIN_SETTING
+		(
+			SETTING_NO
+			, SETTING_SPOT_CODE
+			, SETTING_TYPE_CODE
+			, SETTING_URL
+			, PLANNER_NO
+			, USE_YN
+		)
+		VALUES(
+			TBL_ADMIN_MAIN_SETTING_NO_SEQ.NEXTVAL
+			, #{setting_spot_code}
+			, #{setting_type_code}
+			, #{setting_url}
+			, #{planner_no}
+			, #{use_yn}
+		)
+	</insert>
+</mapper>
