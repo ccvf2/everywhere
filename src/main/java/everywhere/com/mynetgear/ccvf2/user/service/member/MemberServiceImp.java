@@ -8,6 +8,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.ModelAndView;
@@ -38,13 +39,13 @@ public class MemberServiceImp implements MemberService {
 		HttpServletRequest request=(HttpServletRequest)map.get("request");
 		HttpServletResponse response=(HttpServletResponse)map.get("response");
 		
-		String email=request.getParameter("email");
+		String email=StringUtils.trimToEmpty(request.getParameter("email"));
 		
-		String mem_email=memberDao.emailCheck(email);
+		String mem_email=StringUtils.trimToEmpty(memberDao.emailCheck(email));
 		System.out.println("memberService emailCheck mem_email:"+mem_email);
 		
 		int check=0;
-		if(mem_email.equals(email)&& mem_email!=null) {
+		if( StringUtils.equals(email, mem_email) ) {
 			check=1;
 		}else{
 			check=0;

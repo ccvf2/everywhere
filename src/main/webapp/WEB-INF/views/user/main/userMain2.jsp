@@ -5,38 +5,20 @@
 <!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
 <!--[if !IE]><!--> <html lang="en"> <!--<![endif]-->
 <head>
+<c:import url="/WEB-INF/views/common/jquery.jsp" />
+<c:import url="/WEB-INF/views/user/common/utilImport.jsp" />
     <title>Unify - Responsive Website Template</title>
-
     <!-- Meta -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <!-- Favicon -->
-    <link rel="shortcut icon" href="favicon.ico">
-
-    <!-- Web Fonts -->
-    <link rel='stylesheet' type='text/css' href='//fonts.googleapis.com/css?family=Open+Sans:400,300,600&amp;subset=cyrillic,latin'>
-
-    <!-- CSS Global Compulsory -->
-    <link rel="stylesheet" href="/assets/plugins/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/assets/css/style.css">
-
-    <!-- CSS Header and Footer -->
-    <link rel="stylesheet" href="/assets/css/headers/header-default.css">
-    <link rel="stylesheet" href="/assets/css/footers/footer-v1.css">
-
     <!-- CSS Implementing Plugins -->
-    <link rel="stylesheet" href="/assets/plugins/animate.css">
-    <link rel="stylesheet" href="/assets/plugins/line-icons/line-icons.css">
-    <link rel="stylesheet" href="/assets/plugins/font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet" href="/assets/plugins/parallax-slider/css/parallax-slider.css">
     <link rel="stylesheet" href="/assets/plugins/owl-carousel/owl-carousel/owl.carousel.css">
 
     <!-- CSS Customization -->
-    <link rel="stylesheet" href="/assets/css/custom.css">
-    
     <link href="/assets/css/pages/blog_masonry_3col.css" rel="stylesheet">
 </head>
 
@@ -326,9 +308,7 @@
 </div><!--/wrapper-->
 
 <!-- JS Global Compulsory -->
-<script type="text/javascript" src="/assets/plugins/jquery/jquery.min.js"></script>
-<script type="text/javascript" src="/assets/plugins/jquery/jquery-migrate.min.js"></script>
-<script type="text/javascript" src="/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+<!-- <script type="text/javascript" src="/assets/plugins/jquery/jquery.min.js"></script> -->
 <!-- JS Implementing Plugins -->
 <script type="text/javascript" src="/assets/plugins/back-to-top.js"></script>
 <script type="text/javascript" src="/assets/plugins/smoothScroll.js"></script>
@@ -338,12 +318,10 @@
 <!-- JS Customization -->
 <script type="text/javascript" src="/assets/js/custom.js"></script>
 <!-- JS Page Level -->
-<script type="text/javascript" src="/assets/js/app.js"></script>
 <script type="text/javascript" src="/assets/js/plugins/owl-carousel.js"></script>
-<script type="text/javascript" src="/assets/js/plugins/parallax-slider.js"></script>
 <script type="text/javascript">
     jQuery(document).ready(function() {
-      	App.init();
+      	//App.init();
         OwlCarousel.initOwlCarousel();
         ParallaxSlider.initParallaxSlider();
     });

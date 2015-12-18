@@ -74,7 +74,7 @@ jQuery(document).ready(function() {
 <meta charset="UTF-8">
 <title>타이틀 입력</title>
 </head>
-<body>
+
 	        <div class="container">
 	            <!-- Logo -->
 	            <a class="logo" href="/">
@@ -88,8 +88,13 @@ jQuery(document).ready(function() {
 	                	<c:choose>
 	                		<c:when test="${ mem_object.mem_name=='' || mem_object==null }">
 	                    		<li><a href="/user/login/login.do">Login</a></li>
+								<li class="topbar-devider"></li>
+	                    		<li>
+	                    			<a href="#" data-toggle="modal" data-target="#joinModal">회원가입</a>
+	                    		</li>
 	                		</c:when>
 	                		<c:otherwise>
+	                    			<a href="#" data-toggle="modal" data-target="#joinModal">회원가입</a>
 			                	<li>${mem_object.mem_name}님 안녕하세요.</li>
 			                    <li class="topbar-devider"></li>
 			                    <li><a href="/user/login/loginout.do" style="color: #72c02c;">Logout</a></li>
@@ -218,5 +223,8 @@ jQuery(document).ready(function() {
 	                </ul>
 	            </div><!--/end container-->
 		</div><!--/navbar-collapse-->
-</body>
+
+
+
+
 </html>
