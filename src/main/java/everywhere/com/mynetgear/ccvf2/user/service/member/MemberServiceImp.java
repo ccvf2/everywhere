@@ -69,8 +69,12 @@ public class MemberServiceImp implements MemberService {
 		String pw=SecurityUtil.Sha256Encrypt(memberDto.getMem_email(), memberDto.getMem_pwd());
 		memberDto.setMem_pwd(pw);
 		
+		String mem_p_status_code="";
+		if(mem_p_status_code=="") {
+			memberDto.setMem_p_status_code(Constant.MEMBER_P_STATUS_LOCK);
+		}
+		
 		memberDto.setMem_level_code(Constant.MEMBER_LEVEL_USER);
-		memberDto.setMem_p_status_code(Constant.MEMBER_P_STATUS_ACTIVE);
 		memberDto.setMem_profile_photo(Constant.SYNB_NULL);
 		memberDto.setMem_status_code(Constant.MEMBER_STATUS_LOCK);
 		System.out.println("memberService registerOk memberDto:"+memberDto.toString());

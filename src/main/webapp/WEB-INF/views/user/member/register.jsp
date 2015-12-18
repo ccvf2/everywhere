@@ -33,7 +33,6 @@
 	});
 </script>
 <script type="text/javascript">
-
 	var checked = false;
 	function registerForm(form) {
 		//alert("ok1");
@@ -56,6 +55,14 @@
 		}
 
 		form.mem_interest.value = str;
+	}
+</script>
+<script type="text/javascript">
+	function pStatusChange() {
+		var mem_p_status_code="";
+		MemberDto memberDto=new MemberDto();
+		memberDto.setMem_p_status_code(Constant.MEMBER_P_STATUS_ACTIVE);
+		everywhereAlert("전화번호인증", "회원님의 번호가 인증되었습니다.");
 	}
 </script>
 <c:import url="/WEB-INF/views/user/common/utilImport.jsp" />
@@ -118,7 +125,7 @@
 											<i class="icon-append fa fa-phone"></i> 
 											<input type="text" name="mem_phone" placeholder="Phonenumber" id="phone"> 
 											<b class="tooltip tooltip-top-right">회원님의 전화번호를 입력해주세요.</b>
-											<button type="button" class="btn-u" onclick="">번호인증</button>
+											<a class="btn-u" href="javascript:pStatusChange()">번호인증</a>
 										</label>
 									</section>
 
