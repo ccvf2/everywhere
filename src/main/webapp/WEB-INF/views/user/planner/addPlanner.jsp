@@ -121,7 +121,7 @@
 			var photoDiv = document.getElementById("photo"+input_name);
 			if(photoDiv == null){
 				photoDiv = document.createElement("div");
-				photoDiv.id = "photo"+input_name;
+				photoDiv.id = input_name + "_photo";
 				photoDiv.className  = "panel-body";
 				$("#"+input_name+"_note").before(photoDiv);
 				
@@ -349,7 +349,7 @@ ${mem_object.mem_no }
                 <div class="tag-box tag-box-v4 rounded-2x margin-bottom-30">
 	               <label class="textarea">
                        <i class="icon-append fa fa-question-circle"></i>
-                       <textarea rows="5" placeholder="부산으로 떠나는 즐거운 여행"></textarea>
+                       <textarea name="planner_memo" rows="5" placeholder="부산으로 떠나는 즐거운 여행"></textarea>
                        <b class="tooltip tooltip-top-right">여행에 대한 짧은 메모를 입력해주세요</b>
                    </label>
                    <div class="row" style="margin-bottom:5px;">   
