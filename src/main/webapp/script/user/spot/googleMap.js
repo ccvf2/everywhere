@@ -108,7 +108,7 @@ function initialize() {
 $('#myMapModal').on('show.bs.modal', function() {
 	   //Must wait until the render of the modal appear, thats why we use the resizeMap and NOT resizingMap!! ;-)
 	   resizeMap();
-})
+});
 function resizeMap() {
    if(typeof map =="undefined") return;
    setTimeout( function(){resizingMap();} , 400);
@@ -136,7 +136,7 @@ function markInitialize(lat, lng, name) {
 	});
 	map = new google.maps.Map(document.getElementById("map"), myOptions);
 	marker.setMap(map);
-
+	
 	// 인포윈도우의 생성
 	var infowindow = new google.maps.InfoWindow({
 		content : name
@@ -146,3 +146,4 @@ function markInitialize(lat, lng, name) {
 		infowindow.open(map, marker);
 	});
 }
+
