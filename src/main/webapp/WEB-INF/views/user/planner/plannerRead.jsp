@@ -40,7 +40,7 @@
     <div class="breadcrumbs-v1">
         <div class="container" style="height: 50px;">
             <span>Blog Item Page</span>
-            <h1>Basic Item Page</h1>
+            <h1>${plannerDto.title}</h1>
         </div>
     </div>
     <!--=== End Breadcrumbs ===-->
@@ -93,55 +93,6 @@
                     </li>
                     <!-- End Buttons UI -->
 
-                    <!-- Icons -->
-                    <li class="list-group-item list-toggle">                   
-                        <a data-toggle="collapse" data-parent="#sidebar-nav" href="#collapse-icons">Icons</a>
-                        <ul id="collapse-icons" class="collapse">
-                            <li>
-                                <span class="badge badge-u">New</span>                            
-                                <a href="shortcode_icon_general.html"><i class="fa fa-chevron-circle-right"></i> General Icons</a>
-                            </li>
-                            <li><a href="shortcode_icon_fa.html"><i class="fa fa-chevron-circle-right"></i> Font Awesome Icons</a></li>
-                            <li>
-                                <span class="badge badge-u">New</span>                            
-                                <a href="shortcode_icon_line.html"><i class="fa fa-chevron-circle-right"></i> Line Icons</a>
-                            </li>
-                            <li><a href="shortcode_icon_glyph.html"><i class="fa fa-chevron-circle-right"></i> Glyphicons (Bootstrap)</a></li>
-                        </ul>
-                    </li>
-                    <!-- End Icons -->
-
-                    <!-- Thumbails -->
-                    <li class="list-group-item"><a href="shortcode_thumbnails.html">Thumbnails</a></li>
-                    <!-- End Thumbails -->
-
-                    <!-- Components -->
-                    <li class="list-group-item list-toggle">
-                        <a class="accordion-toggle" href="#collapse-components" data-toggle="collapse">Components</a>
-                        <ul id="collapse-components" class="collapse">
-                            <li><a href="shortcode_compo_messages.html"><i class="fa fa-comment"></i> Alerts &amp; Messages</a></li>
-                            <li>
-                                <span class="badge badge-u">New</span>                            
-                                <a href="shortcode_compo_labels.html"><i class="fa fa-tags"></i> Labels &amp; Badges</a>
-                            </li>
-                            <li>
-                                <span class="badge badge-u">New</span>                            
-                                <a href="shortcode_compo_progress_bars.html"><i class="fa fa-align-left"></i> Progress Bars</a>
-                            </li>
-                            <li>
-                                <span class="badge badge-u">New</span>
-                                <a href="shortcode_compo_media.html"><i class="fa fa-volume-down"></i> Audio/Videos &amp; Images</a>
-                            </li>
-                            <li><a href="shortcode_compo_panels.html"><i class="fa fa-columns"></i> Panels</a></li>
-                            <li><a href="shortcode_compo_pagination.html"><i class="fa fa-arrows-h"></i> Pagination</a></li>
-                        </ul>
-                    </li>
-                    <!-- End Components -->
-
-                    <!-- Accordion and Tabs -->
-                    <li class="list-group-item"><a href="shortcode_accordion_and_tabs.html">Accordion and Tabs</a></li>
-                    <!-- End Accordion and Tabs -->
-
                     <!-- Timeline -->                    
                     <li class="list-group-item list-toggle active">
                         <a class="accordion-toggle" href="#collapse-timeline" data-toggle="collapse">Timeline</a>
@@ -156,78 +107,7 @@
                             </li>
                         </ul>
                     </li>
-                    <!-- End Timeline -->                    
-
-                    <!-- Carousel Examples -->                    
-                    <li class="list-group-item">
-                        <span class="badge badge-u">New</span>                    
-                        <a href="shortcode_carousels.html">Carousel Examples</a>
-                    </li>
-                    <!-- End Carousel Examples -->                    
-
-                    <!-- Forms -->
-                    <li class="list-group-item list-toggle">
-                        <a class="accordion-toggle" href="#collapse-forms" data-toggle="collapse">Forms</a>
-                        <ul id="collapse-forms" class="collapse">
-                            <li><a href="shortcode_form_general.html"><i class="fa fa-bars"></i> Common Bootstrap Forms</a></li>
-                            <li>
-                                <span class="badge badge-u">New</span>                            
-                                <a href="shortcode_form_general1.html"><i class="fa fa-bars"></i> General Unify Forms</a>
-                            </li>
-                            <li>
-                                <span class="badge badge-u">New</span>                            
-                                <a href="shortcode_form_advanced.html"><i class="fa fa-bars"></i> Advanced Forms</a>
-                            </li>
-                            <li>
-                                <span class="badge badge-u">New</span>                            
-                                <a href="shortcode_form_layouts.html"><i class="fa fa-bars"></i> Form Layouts</a>
-                            </li>                            
-                            <li>
-                                <span class="badge badge-u">New</span>                            
-                                <a href="shortcode_form_layouts_advanced.html"><i class="fa fa-bars"></i> Advanced Form Layouts</a>
-                            </li>
-                            <li>
-                                <span class="badge badge-u">New</span>                            
-                                <a href="shortcode_form_states.html"><i class="fa fa-bars"></i> Form States</a>
-                            </li>
-                            <li>
-                                <span class="badge badge-u">New</span>                            
-                                <a href="shortcode_form_sliders.html"><i class="fa fa-bars"></i> Form Sliders</a>
-                            </li>
-                            <li>
-                                <span class="badge badge-u">New</span>                            
-                                <a href="shortcode_form_modals.html"><i class="fa fa-bars"></i> Modals</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <!-- End Forms -->
-
-                    <!-- Tables -->
-                    <li class="list-group-item"><a href="shortcode_table_general.html">Tables</a></li>
-                    <!-- End Tables -->
-
-                    <!-- Maps -->                    
-                    <li class="list-group-item list-toggle">                   
-                        <a class="accordion-toggle" href="#collapse-maps" data-toggle="collapse">Maps</a>
-                        <ul id="collapse-maps" class="collapse">
-                            <li>
-                                <span class="badge badge-u">New</span>
-                                <a href="shortcode_maps_google.html"><i class="fa fa-map-marker"></i> Google Maps</a>
-                            </li>
-                            <li>
-                                <span class="badge badge-u">New</span>                            
-                                <a href="shortcode_maps_vector.html"><i class="fa fa-align-center"></i> Vector Maps</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <!-- End Maps -->                    
-
-                    <!-- Charts -->
-                    <li class="list-group-item">
-                        <span class="badge badge-u">New</span>                    
-                        <a href="shortcode_compo_charts.html">Charts &amp; Countdowns</a>
-                    </li>
-                    <!-- End Charts -->
+                    <!-- End Timeline -->
                 </ul>
             </div>
             <!-- End Sidebar Menu -->
@@ -257,7 +137,7 @@
                             <h2>${item.spot.spot_name}</h2>
                             <div class="row">
                                 <div class="col-md-4">
-                                    <img class="img-responsive" src="assets/img/main/img1.jpg" alt=""> 
+                                    <img class="img-responsive" src="/attatchFile/spot/${item.spot.spot_photoes[0].save_name}.${item.spot.spot_photoes[0].extension}" alt=""> 
                                     <div class="md-margin-bottom-20"></div>
                                 </div>
                                 <div class="col-md-8">    
@@ -272,7 +152,7 @@
 		                        <div class="panel-body">
 	                                <div class="row">
 	                                    <div class="col-md-4">
-	                                        <img class="img-responsive" src="assets/img/main/img12.jpg" alt="">
+	                                        <img class="img-responsive" src="/attatchFile/item/${item.item_photoes[0].save_name}.${item.item_photoes[0].extension}" alt="">
 	                                    </div>
 	                                    <div class="col-md-8">
 	                                        ${item.note}

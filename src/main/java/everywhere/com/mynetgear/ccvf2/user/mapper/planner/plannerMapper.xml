@@ -37,8 +37,7 @@
 			title=#{title}, 
 			memo=#{memo, jdbcType=VARCHAR},
 			start_date=#{start_date}, 
-			end_date=#{end_date}, 
-			use_yn=#{use_yn}
+			end_date=#{end_date}
 		where planner_no=#{planner_no}
 	</update>
 	

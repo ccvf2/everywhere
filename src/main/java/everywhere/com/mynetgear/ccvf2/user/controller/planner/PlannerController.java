@@ -46,19 +46,19 @@ public class PlannerController {
 		return mav;
 	}
 	
-	@RequestMapping(value="/user/planner/updatePlanner.do", method=RequestMethod.GET)
-	public ModelAndView updatePlanner(HttpServletRequest request, HttpServletResponse response) {
+	@RequestMapping(value="/user/planner/writePlanner.do", method=RequestMethod.GET)
+	public ModelAndView writePlanner(HttpServletRequest request, HttpServletResponse response) {
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("request", request);
-		plannerService.updatePlanner(mav);
+		plannerService.writePlanner(mav);
 		return mav;
 	}
 	
-	@RequestMapping(value="/user/planner/updatePlanner.do", method=RequestMethod.POST)
-	public ModelAndView updatePlannerOK(HttpServletRequest request, HttpServletResponse response) {
+	@RequestMapping(value="/user/planner/writePlanner.do", method=RequestMethod.POST)
+	public ModelAndView writePlannerOK(HttpServletRequest request, HttpServletResponse response) {
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("request", request);
-		plannerService.updatePlannerOk(mav);
+		plannerService.writePlannerOk(mav);
 		return mav;
 	}
 	

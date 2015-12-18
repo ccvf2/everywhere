@@ -12,7 +12,7 @@
     <script src="/script/common/jquery-ui/jquery-ui.js"></script>
     <script>
     $(function() {
-        $( "#spotLists li > div" ).draggable({
+        $( "#spotLists div" ).draggable({
           appendTo: "body",
           revert: "invalid",
           helper: "clone",
@@ -27,10 +27,15 @@
             hoverClass: "ui-state-active",
             accept: ":not(.ui-sortable-helper)",
             drop: function( event, ui ) {
-            	$(event['target']).droppable('disable');
+              $(event['target']).droppable('disable');
               $( this).addClass( "ui-state-highlight" );
-              $( this ).find( "span" ).remove();
-              $( "<li></li>" ).text( ui.draggable.text() ).appendTo( $( this ).find( "a" ) );
+              $( this ).find( "span" ).remove();              
+              
+              var test = ui.draggable.attr('id').replace("_item","");
+              $( this ).find("input").val(test);
+              
+              $( "<div></div>" ).html( ui.draggable.html() ).appendTo( $( this ).find( "a" ) );
+              
             }
           }).sortable({
             items: "li:not(.placeholder)",
@@ -41,6 +46,154 @@
         
       });
     </script>
+    
+    <script type="text/javascript">
+    	function addItem(){
+    		alert('hi');
+    	}
+    </script>
+    
+    <script type="text/javascript">
+	function addMoney(input_name){
+		//input_name : d1_item1
+		
+		//가계부 Div가 있는지 먼저 확인 후에 없으면 만들어준다.
+		var moneyDiv = document.getElementById("money"+input_name);		
+		if(moneyDiv == null){
+			moneyDiv = document.createElement("div");
+			moneyDiv.id = "money"+input_name;
+			moneyDiv.className  = "panel-body";
+			$("#"+input_name+"_note").after(moneyDiv);
+		}
+		
+		var div = document.createElement("div");
+		var money_count = document.getElementById(input_name+"_money_count");
+		money_count.value=Number(money_count.value)+1;
+		div.style.marginTop="3px";		
+		
+		var hiddenInput = document.createElement("input");
+		hiddenInput.setAttribute("type", "hidden");
+		hiddenInput.name= input_name+"_money"+money_count.value+"_no";
+		div.appendChild(hiddenInput);
+		
+		var hiddenInputType = document.createElement("input");
+		hiddenInputType.setAttribute("type", "hidden");
+		hiddenInputType.name= input_name+"_money"+money_count.value+"_currency_code";
+		hiddenInputType.value= "P0001";
+		div.appendChild(hiddenInputType);
+		
+		var money_type = new Array('항공', '숙박', '교통', '쇼핑', '식사', '입장료', '오락', '기타');
+		var money_code = new Array('D0001', 'D0002', 'D0003', 'D0004', 'D0005', 'D0006', 'D0007', 'D0008');
+		var moneySelect = document.createElement("select");
+		moneySelect.name=input_name+"_money"+money_count.value +"_type_code";
+		
+		var label = document.createElement("label");
+		label.className = "select";
+		for (i = 0; i < money_type.length; i++) {
+            var moneyOption = new Option(money_type[i], money_code[i]);
+            moneySelect.options.add(moneyOption);
+        }
+		label.appendChild(moneySelect)
+		div.appendChild(label);
+		
+		var noteInput = document.createElement("input");
+		noteInput.type="text";
+		noteInput.name= input_name+"_money"+money_count.value+"_title";
+		noteInput.placeholder="예) 기념품";
+		div.appendChild(noteInput);
+		
+		var priceInput = document.createElement("input");
+		priceInput.style.marginLeft="10px";
+		priceInput.type="text";
+		priceInput.name= input_name+"_money"+money_count.value+"_price";
+		priceInput.placeholder="3000";
+		div.appendChild(priceInput);
+		
+		moneyDiv.appendChild(div);
+	}
+</script>
+	
+	<script type="text/javascript">
+	function addPhoto(input, input_name){
+		//input_name : d1_item1
+		
+		if (input.files && input.files[0]) {
+			var photoDiv = document.getElementById("photo"+input_name);
+			if(photoDiv == null){
+				photoDiv = document.createElement("div");
+				photoDiv.id = input_name + "_photo";
+				photoDiv.className  = "panel-body";
+				$("#"+input_name+"_note").before(photoDiv);
+				
+				var preview = document.createElement("img");
+				preview.id = "preview";
+				
+				photoDiv.appendChild(preview);
+			}
+			
+	        var reader = new FileReader();
+	        
+	        reader.onload = function (e) {
+	            $('#preview').attr('src', e.target.result);
+	            $('#preview').attr('width', 400);
+	            $('#preview').attr('height', 300);
+	            input.parentNode.nextSibling.value = input.value;
+	        }
+        
+        reader.readAsDataURL(input.files[0]);
+    }
+	
+	return;
+		
+		//가계부 Div가 있는지 먼저 확인 후에 없으면 만들어준다.
+		var photoDiv = document.getElementById("money"+input_name);		
+		if(moneyDiv == null){
+			moneyDiv = document.createElement("div");
+			moneyDiv.id = "money"+input_name;
+			moneyDiv.className  = "panel-body";
+			$("#"+input_name+"_note").after(moneyDiv);
+		}
+		
+		var div = document.createElement("div");
+		var money_count = document.getElementById(input_name+"_money_count");
+		money_count.value=Number(money_count.value)+1;
+		div.style.marginTop="3px";		
+		
+		var hiddenInput = document.createElement("input");
+		hiddenInput.setAttribute("type", "hidden");
+		hiddenInput.name= input_name+"_money"+money_count.value+"_no";
+		div.appendChild(hiddenInput);
+		
+		var money_type = new Array('항공', '숙박', '교통', '쇼핑', '식사', '입장료', '오락', '기타');
+		var money_code = new Array('D0001', 'D0002', 'D0003', 'D0004', 'D0005', 'D0006', 'D0007', 'D0008');
+		var moneySelect = document.createElement("select");
+		moneySelect.name=input_name+"_money"+money_count.value +"_type_code";
+		
+		var label = document.createElement("label");
+		label.className = "select";
+		for (i = 0; i < money_type.length; i++) {
+            var moneyOption = new Option(money_type[i], money_code[i]);
+            moneySelect.options.add(moneyOption);
+        }
+		label.appendChild(moneySelect)
+		div.appendChild(label);
+		
+		var noteInput = document.createElement("input");
+		noteInput.type="text";
+		noteInput.name= input_name+"_money"+money_count.value+"_title";
+		noteInput.placeholder="예) 기념품";
+		div.appendChild(noteInput);
+		
+		var priceInput = document.createElement("input");
+		priceInput.style.marginLeft="10px";
+		priceInput.type="text";
+		priceInput.name= input_name+"_money"+money_count.value+"_price";
+		priceInput.placeholder="3000";
+		div.appendChild(priceInput);
+		
+		moneyDiv.appendChild(div);
+	}
+	</script>
     
     <!-- CSS Page Style -->
     <link rel="stylesheet" href="/assets/css/pages/profile.css">
@@ -55,6 +208,7 @@
 	
 </head>
 <body>  
+${mem_object.mem_no }
 	<div class="wrapper">
 		<!--=== Header ===-->	
 	    <div class="header">
@@ -153,10 +307,10 @@
                       
                       
                 <div>
-                <ul class="list-unstyled mCustomScrollbar margin-bottom-20" data-mcs-theme="minimal-dark" id="spotLists">
+                <ul class="list-unstyled mCustomScrollbar margin-bottom-20" data-mcs-theme="minimal-dark">
                 <c:forEach var="spot" items="${spotList}">
-                    <li class="notification" style="border:1px">
-                    	<div id="${spot.spot_no}item" class="rounded">
+                    <li class="notification" style="border:1px" id="spotLists">
+                    	<div id="${spot.spot_no}_item" class="rounded">
                         <i style="margin:0;"><img alt="" src="/attatchFile/spot/${spot.spot_photoes[0].save_name}.${spot.spot_photoes[0].extension}" style="width:35px;height:35px;margin-right:5px;"></i>
                         <div class="overflow-h">
                             <span><strong><a href="#">${spot.spot_name}</a></strong></span>
@@ -186,7 +340,7 @@
             <!--Tag Box v4-->
             <div class="col-md-9">
             	<div class="profile-body margin-bottom-20">
-            	<form action="/user/spot/addSpotWrite.do" id="sky-form" class="sky-form" style="border:none;" onsubmit="return addSpotForm(this)" method="post" enctype="multipart/form-data">
+            	<form action="/user/planner/writePlanner.do" id="sky-form" class="sky-form" style="border:none;" onsubmit="" method="post" enctype="multipart/form-data">
                 <fmt:formatDate var="start_date" pattern="yyyy-MM-dd" value="${plannerDto.start_date}"/>
 				<fmt:formatDate var="end_date" pattern="yyyy-MM-dd" value="${plannerDto.end_date}"/>
 				<input type="hidden" name="planner_no" value="${plannerDto.planner_no}"/>
@@ -195,72 +349,71 @@
                 <div class="tag-box tag-box-v4 rounded-2x margin-bottom-30">
 	               <label class="textarea">
                        <i class="icon-append fa fa-question-circle"></i>
-                       <textarea rows="5" placeholder="부산으로 떠나는 즐거운 여행"></textarea>
+                       <textarea name="planner_memo" rows="5" placeholder="부산으로 떠나는 즐거운 여행"></textarea>
                        <b class="tooltip tooltip-top-right">여행에 대한 짧은 메모를 입력해주세요</b>
                    </label>
                    <div class="row" style="margin-bottom:5px;">   
-                      <div class="col col-6">
+                      <div class="col col-4">
                           <label class="input">
                               <i class="icon-append fa fa-calendar"></i>
                               <input type="text" name="start_date" id="start" placeholder="Start date" value="${start_date}">
                           </label>
                       </div>
-                      <div class="col col-6">
+                      <div class="col col-2" style="padding-left: 0px;">
                           <label class="input">
-                              <i class="icon-append fa fa-calendar"></i>
-                              <input type="text" name="finish" id="finish" placeholder="Expected finish date" value="${end_date}">
+                              <input type="number" min="1" value="${day_count}" name="day_count" id="day_count" style="padding:5px;width:55px;">
                           </label>
                       </div>
                   </div> 
                 </div>
 
 				<!-- Day Schedule -->
-                <input type="hidden" name="day_count" value="${day_count}"/>
                 <c:forEach var="i" begin="1" end="${day_count}">
                 <div class="tag-box tag-box-v4 rounded-2x margin-bottom-30">
-                	<input type="hidden" name="d${i}_item_count" value="0">
+                	<input type="hidden" id="d${i}_item_count" name="d${i}_item_count" value="1">
                 	<h2 class="heading-xs">Day ${i}</h2>
-                	<ol class="list-unstyled " >
+                	<c:set var="id_value" value="d${i}_item1"/>
+                	<ol class="list-unstyled" >
 	                	<li>
 	                	<div class="panel-group">
+	                		<input type="hidden" name="${id_value}_no"/>	                		
 						    <div class="panel panel-default">
-						      <div class="panel-heading ui-widget-header droppable">
+						      <div class="panel-heading ui-widget-header droppable">						      	
 						        <h4 class="panel-title">
-						          <a data-toggle="collapse" href="#collapse${i}"><span>Add Spot</span></a>
+						          <input type="hidden" id="${id_value}_spot_no" name="${id_value}_spot_no"/>
+						          <a data-toggle="collapse" href="#collapse_${id_value}"><span>Add Spot</span></a>
 						        </h4>
 						      </div>
-						      <div id="collapse${i}" class="panel-collapse collapse">
-						        <div class="panel-body">Panel Body</div>
-						        <div class="panel-body" style="padding:0px">
+						      <div id="collapse_${id_value}" class="panel-collapse collapse">						        
+						        <div id="${id_value}_note"class="panel-body" style="padding:0px">
 		                            <label class="textarea" style="margin:0">
-		                                <textarea style="border:0px" rows="3" name="info" placeholder="Write some notes.."></textarea>
+		                                <textarea style="border:0px" rows="3" name="${id_value}_note" placeholder="Write some notes.."></textarea>
 		                            </label>        
 						        </div>
-						        <div class="panel-body">
-						         <ul class="list-inline blog-info-v2">
-                                    <li>
-                                        <strong>12%</strong>
-                                        <span>Funded</span>
-                                    </li>
-                                    <li>
-                                        <strong>17%</strong>
-                                        <span>Pludged</span>
-                                    </li>
-                                    <li>
-                                        <strong>25</strong>
-                                        <span>days to go</span>
-                                    </li>
-                                </ul>
-						        </div>
+						        <input type="hidden" id="${id_value}_money_count" name="${id_value}_money_count" value="0"/>
+						        <div class="project-share">
+	                                <ul class="list-inline comment-list-v2 pull-right">
+	                                	<li><i class="icon-hourglass" style="font-size:23px" onclick="addTime('${id_value}')"></i></li>
+	                                    <li><i class="icon-picture input input-file" style="font-size:23px" onclick="addPhoto('${id_value}')">
+	                                    	<div class="button" style="background-color:rgba(255, 255, 255, 0);"><input type="file" name="${id_value}_attach_photoes" onchange="addPhoto(this,'${id_value}')" accept="image/*"/></div>
+	                                    </i></li>
+	                                    <li><i class="icon-credit-card" style="font-size:23px" onclick="addMoney('${id_value}')"></i></li>
+	                                </ul>
+	                           	 </div>
 						      </div>
 						    </div>
-						    </div>
+						 </div> 
 	 					 </li>
  					 </ol>
- 					 
- 					 
+ 					 <ul class="bs-glyphicons">	 
+ 					 <li style="width:50%; height:100%; padding:0px; border: 0px; text-align: right"><span class="glyphicon glyphicon-plus-sign" onclick="addItem()"></span></li> 					 
+ 					 </ul>
+	 				
                 </div>
                 </c:forEach>
+                
+                <button type="submit" class="btn-u">Submit</button>
+                
                 </form>
                 </div>
             </div>

@@ -69,15 +69,7 @@ public class PlannerDaoImp implements PlannerDao {
 	
 	@Override
 	public List<ItemDto> getItemList(int planner_no) {	
-		List<ItemDto> itemList = sqlTemplate.selectList("get_item_list", planner_no);
-		for(int i = 0; i < itemList.size(); i++){
-			SpotDto spot = sqlTemplate.selectOne("select_one_spot", itemList.get(i).getSpot_no());
-			itemList.get(i).setSpot(spot);
-			
-			List<MoneyDto> moneyList = getMoneyList(itemList.get(i).getItem_no());
-			itemList.get(i).setMoneyList(moneyList);
-		}
-		return itemList;
+		return sqlTemplate.selectList("get_item_list", planner_no);
 	}
 
 	@Override

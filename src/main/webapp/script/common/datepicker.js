@@ -1,12 +1,11 @@
 /**
  * 
  */
-$(function datepickerInit() {
+$(function (){
 		$("#start_date").datepicker({
 			dateFormat : "yy-mm-dd",
 			defaultDate : "+1w",
 			changeMonth : true,
-			numberOfMonths : 3,
 			prevText: '이전 달',
 		    nextText: '다음 달',
 		    monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
@@ -22,7 +21,6 @@ $(function datepickerInit() {
 			dateFormat : "yy-mm-dd",
 			defaultDate : "+1w",
 			changeMonth : true,
-			numberOfMonths : 3,
 			prevText: '이전 달',
 		    nextText: '다음 달',
 		    monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
