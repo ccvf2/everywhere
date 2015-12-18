@@ -21,7 +21,7 @@
           }
         });
         
-        $( ".droppable" ).droppable({
+        $( ".droppable .dropItem" ).droppable({
         	accept: "#draggable",
         	activeClass: "ui-state-highlight",
             hoverClass: "ui-state-active",
@@ -60,6 +60,24 @@
     		var newHtml = html.replace(new RegExp(before,'g'), after);
     		
     		$("#"+input_name+"_ol").append(newHtml);
+    		
+    		$( ".droppable .dropItem" ).droppable({
+    	        	accept: "#draggable",
+    	        	activeClass: "ui-state-highlight",
+    	            hoverClass: "ui-state-active",
+    	            accept: ":not(.ui-sortable-helper)",
+    	            drop: function( event, ui ) {
+    	              $(event['target']).droppable('disable');
+    	              $( this).addClass( "ui-state-highlight" );
+    	              $( this ).find( "span" ).remove();              
+    	              
+    	              var test = ui.draggable.attr('id').replace("_item","");
+    	              $( this ).find("input").val(test);
+    	              
+    	              $( "<div></div>" ).html( ui.draggable.html() ).appendTo( $( this ).find( "a" ) );
+    	              
+    	            }
+    	          });
     	}
     </script>
     
@@ -334,10 +352,10 @@ ${mem_object.mem_no }
                 	<c:set var="id_value" value="d${i}_item1"/>
                 	<ol class="list-unstyled" id="d${i}_item_ol">
 	                	<li id="d${i}_item1_li">
-	                	<div class="panel-group">
+	                	<div class="panel-group droppable">
 	                		<input type="hidden" name="${id_value}_no"/>	                		
 						    <div class="panel panel-default">
-						      <div class="panel-heading ui-widget-header droppable">						      	
+						      <div class="panel-heading ui-widget-header dropItem">						      	
 						        <h4 class="panel-title">
 						          <input type="hidden" id="${id_value}_spot_no" name="${id_value}_spot_no"/>
 						          <a data-toggle="collapse" href="#collapse_${id_value}"><span>Add Spot</span></a>
