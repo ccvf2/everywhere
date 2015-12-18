@@ -1,11 +1,9 @@
 package everywhere.com.mynetgear.ccvf2.user.service.planner;
 
-import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.Enumeration;
 import java.util.List;
 import java.util.Map;
@@ -14,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -21,9 +20,9 @@ import everywhere.com.mynetgear.ccvf2.comm.aop.EverywhereAspect;
 import everywhere.com.mynetgear.ccvf2.comm.dao.common.CommonFileIODao;
 import everywhere.com.mynetgear.ccvf2.comm.dto.common.CommonFileIODto;
 import everywhere.com.mynetgear.ccvf2.comm.dto.commoncode.CommonCodeDto;
+import everywhere.com.mynetgear.ccvf2.comm.service.common.CommonFileIOService;
 import everywhere.com.mynetgear.ccvf2.comm.service.commoncode.CommonCodeService;
 import everywhere.com.mynetgear.ccvf2.comm.util.common.Constant;
-import everywhere.com.mynetgear.ccvf2.user.dao.member.MemberDao;
 import everywhere.com.mynetgear.ccvf2.user.dao.planner.PlannerDao;
 import everywhere.com.mynetgear.ccvf2.user.dao.spot.SpotDao;
 import everywhere.com.mynetgear.ccvf2.user.dto.planner.ItemDto;
@@ -40,7 +39,12 @@ public class PlannerServiceImp implements PlannerService {
 	@Autowired
 	private CommonFileIODao commonFileIoDao;
 	@Autowired
+	private CommonFileIOService commonFileIOService;
+	@Autowired
 	private CommonCodeService commonCodeService;
+	
+	@Value("${attach.item.path}")
+	private String itemPath;
 
 	@Override
 	public void insertPlanner(ModelAndView mav) {
@@ -97,6 +101,45 @@ public class PlannerServiceImp implements PlannerService {
 		
 		PlannerDto plannerDto = plannerDao.getOnePlanner(planner_no);
 		List<ItemDto> itemList = plannerDao.getItemList(planner_no);
+		
+		for(int i = 0; i < itemList.size(); i++){
+			//아이템 별 명소 정보 가져오기
+			SpotDto spot = spotDao.getOneSpot(itemList.get(i).getSpot_no());			
+			if(spot != null){
+				if(spot.getAttach_file() != null){
+					String[] attach_no = spot.getAttach_file().split(",");
+					// 명소 이미지 추가
+					List<CommonFileIODto> fileList = new ArrayList<CommonFileIODto>();
+					for(int j = 0; j < attach_no.length; j++){
+						int file_no = Integer.parseInt(attach_no[j]);
+						System.out.println("file_no : " + file_no);
+						CommonFileIODto fileIODto =  commonFileIoDao.getOneFileDto(file_no);
+						System.out.println(fileIODto);
+						fileList.add(fileIODto);				
+					}
+					spot.setSpot_photoes(fileList);
+				}
+				itemList.get(i).setSpot(spot);
+			}			
+			
+			// 아이템 별 사진 가져오기
+			if(itemList.get(i).getAttach_photoes()!=null){
+				System.out.println("*********************************************");
+				String[] attach_no = itemList.get(i).getAttach_photoes().split(",");
+				List<CommonFileIODto> fileList = new ArrayList<CommonFileIODto>();
+				for(int j = 0; j < attach_no.length; j++){
+					int file_no = Integer.parseInt(attach_no[j]);
+					System.out.println("file_no : " + file_no);
+					CommonFileIODto fileIODto =  commonFileIoDao.getOneFileDto(file_no);
+					System.out.println(fileIODto);
+					fileList.add(fileIODto);				
+				}
+				itemList.get(i).setItem_photoes(fileList);
+			}
+			
+			List<MoneyDto> moneyList = plannerDao.getMoneyList(itemList.get(i).getItem_no());
+			itemList.get(i).setMoneyList(moneyList);
+		}
 		
 		EverywhereAspect.logger.info(EverywhereAspect.logMsg + itemList.size());
 		
@@ -216,6 +259,15 @@ public class PlannerServiceImp implements PlannerService {
 				String itemOrder = i + "010" + j;
 				itemDto.setItem_order(Integer.parseInt(itemOrder));
 				itemDto.setNote(request.getParameter(itemString+"_note").replace("\r\n", "<br/>"));
+				
+				CommonFileIODto commonFileIODto = commonFileIOService.requestWriteFileAndDTO(request, itemString + "_attach_photoes", itemPath);
+				if(commonFileIODto != null){
+					commonFileIODto.setType_code(Constant.FILE_TYPE_ITEM);
+					commonFileIODto.setWrite_no(planner_no);
+					String item_photo_num = commonFileIOService.insertFileInfo(commonFileIODto) + ",";
+					System.out.println("item_photo_num : " + item_photo_num);
+					itemDto.setAttach_photoes(item_photo_num);
+				}
 				
 				/* String 형식으로 바꿀 예정
 				try {

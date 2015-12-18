@@ -127,6 +127,7 @@ public class Constant {
 
 	/** 분류명 : 내용기술 */
 	public static final String FILE_TYPE_SPOT = "F0001";
+	public static final String FILE_TYPE_ITEM = "F0002";
 
 	/**관심분야 그룹 코드: 관심분야*/
 	public static final String INTEREST_GROUP_CODE = "I0001";
