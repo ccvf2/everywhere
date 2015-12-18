@@ -108,7 +108,7 @@ function initialize() {
 $('#myMapModal').on('show.bs.modal', function() {
 	   //Must wait until the render of the modal appear, thats why we use the resizeMap and NOT resizingMap!! ;-)
 	   resizeMap();
-})
+});
 function resizeMap() {
    if(typeof map =="undefined") return;
    setTimeout( function(){resizingMap();} , 400);

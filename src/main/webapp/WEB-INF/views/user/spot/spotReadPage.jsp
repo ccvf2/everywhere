@@ -18,16 +18,12 @@
    width: 100%;
 }
 </style>
-
-<script type="text/javascript">
-$(function() { 
-    $('#myModal').modal('show'); 
-}); 
-</script> 
 </head>
 <body  leftmargin="0" marginwidth="0" topmargin="0" marginheight="0"
    onload="markInitialize('${spotDto.spot_lat}','${spotDto.spot_long }', '${spotDto.spot_name }')">
-	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+   
+   
+	<div class="modal fade" id="myMapModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 		<div style="width: 1300px; margin-left: 10%;">
 			<div class="modal-dialog modal-lg" style="float: left;">
 				<div class="modal-content">
@@ -108,5 +104,18 @@ $(function() {
 			</div>
 		</div>
 	</div>
+	<script src="/script/admin/bootstrap.min.js"></script>
+	<script type="text/javascript">
+		$(function() { 
+		   	$('#myMapModal').modal('show');
+		   
+		  	$('#myMapModal').on('hide.bs.modal', function() {
+			   //Must wait until the render of the modal appear, thats why we use the resizeMap and NOT resizingMap!! ;-)
+			   history.back(-1); ;
+			});
+		
+		   
+		});
+</script> 
 </body>
 </html>
