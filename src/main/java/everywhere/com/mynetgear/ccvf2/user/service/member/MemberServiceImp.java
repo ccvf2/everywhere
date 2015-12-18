@@ -72,6 +72,8 @@ public class MemberServiceImp implements MemberService {
 		String mem_p_status_code="";
 		if(mem_p_status_code=="") {
 			memberDto.setMem_p_status_code(Constant.MEMBER_P_STATUS_LOCK);
+		} else {
+			memberDto.setMem_p_status_code(Constant.MEMBER_P_STATUS_ACTIVE);
 		}
 		
 		memberDto.setMem_level_code(Constant.MEMBER_LEVEL_USER);
@@ -183,6 +185,22 @@ public class MemberServiceImp implements MemberService {
 		mav.addObject("check", check);
 		mav.addObject("memberDto", memberDto);
 		mav.setViewName("user/member/memberDeleteOk");
+	}
+
+	@Override
+	public void pStatusChange(ModelAndView mav) {
+		Map<String,Object> map=mav.getModelMap();
+		MemberDto memberDto=(MemberDto)map.get("memberDto");
+		
+		memberDto.setMem_p_status_code(Constant.MEMBER_P_STATUS_ACTIVE);
+		System.out.println("memberService pStatusChange memberDto:"+memberDto.toString());
+		
+		int check=memberDao.pStatusChange(memberDto);
+		System.out.println("memberService pStatusChange check:"+check);
+		
+		mav.addObject("check", check);
+		mav.addObject("memberDto", memberDto);
+		mav.setViewName("user/member/pStatusChange");
 	}
 
 }

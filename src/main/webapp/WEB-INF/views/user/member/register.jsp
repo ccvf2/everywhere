@@ -59,10 +59,14 @@
 </script>
 <script type="text/javascript">
 	function pStatusChange() {
-		var mem_p_status_code="";
-		MemberDto memberDto=new MemberDto();
-		memberDto.setMem_p_status_code(Constant.MEMBER_P_STATUS_ACTIVE);
-		everywhereAlert("전화번호인증", "회원님의 번호가 인증되었습니다.");
+		var urlName="/user/member/pStatusChange.do";
+		// alert(urlName);
+		var value=confirm("인증하시겠습니까?");
+		if(value==true) {
+			location.href=urlName;
+		} else {
+			alert("인증 되지 않았습니다.");
+		}
 	}
 </script>
 <c:import url="/WEB-INF/views/user/common/utilImport.jsp" />

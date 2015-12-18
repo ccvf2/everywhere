@@ -184,5 +184,24 @@ public class MemberController {
 		
 		return mav;
 	}
+	
+	/**
+	 * @author 김준호
+	 * @createDate 2015. 12. 18.
+	 * @described 전화번호 인증
+	 * @param request
+	 * @param response
+	 * @param memberDto
+	 * @return
+	 */
+	@RequestMapping(value="/user/member/pStatusChange.do", method=RequestMethod.GET)
+	public ModelAndView pStatusChange(HttpServletRequest request, HttpServletResponse response, MemberDto memberDto) {
+		ModelAndView mav=new ModelAndView();
+		
+		mav.addObject("memberDto", memberDto);
+		memberService.pStatusChange(mav);
+		
+		return mav;
+	}
 
 }

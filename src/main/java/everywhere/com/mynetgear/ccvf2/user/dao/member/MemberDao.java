@@ -67,6 +67,14 @@ public interface MemberDao {
 	 * @param memberDto
 	 * @return
 	 */
-	public MemberDto getOneMemberInfo(MemberDto memberDto); 
+	public MemberDto getOneMemberInfo(MemberDto memberDto);
+	/**
+	 * @author 김준호
+	 * @createDate 2015. 12. 18.
+	 * @described 전화번호인증
+	 * @param memberDto
+	 * @return
+	 */
+	public int pStatusChange(MemberDto memberDto);
 
 }
