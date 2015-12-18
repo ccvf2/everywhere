@@ -56,12 +56,10 @@
     		day_item_count.value = Number(day_item_count.value)+1;
     		var after = input_name+day_item_count.value;
     		alert(before +  "," + after);
-    		alert(input_name+'_ol');
-    		var html = $('#'+input_name+'_ol').html();
-    		alert(newHtml);
-    		var newHtml = html.replace(before, after);
+    		var html = "<li id='"+before+"_li'>" + $('#'+before+'_li').html() + "</li>";
+    		var newHtml = html.replace(new RegExp(before,'g'), after);
     		
-    		$('#'+input_name+"_ol").appendTo(newHtml);
+    		$("#"+input_name+"_ol").append(newHtml);
     	}
     </script>
     
@@ -335,7 +333,7 @@ ${mem_object.mem_no }
                 	<h2 class="heading-xs">Day ${i}</h2>
                 	<c:set var="id_value" value="d${i}_item1"/>
                 	<ol class="list-unstyled" id="d${i}_item_ol">
-	                	<li>
+	                	<li id="d${i}_item1_li">
 	                	<div class="panel-group">
 	                		<input type="hidden" name="${id_value}_no"/>	                		
 						    <div class="panel panel-default">
