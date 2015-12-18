@@ -1,7 +1,5 @@
 package everywhere.com.mynetgear.ccvf2.user.controller.member;
 
-import java.io.PrintWriter;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -183,25 +181,6 @@ public class MemberController {
 		mav.addObject("memberDto", memberDto);
 		System.out.println("memberController deleteOk memberDto:"+memberDto.toString());
 		memberService.memberDeleteOk(mav);
-		
-		return mav;
-	}
-	
-	/**
-	 * @author 김준호
-	 * @createDate 2015. 12. 18.
-	 * @described 전화번호 인증
-	 * @param request
-	 * @param response
-	 * @param memberDto
-	 * @return
-	 */
-	@RequestMapping(value="/user/member/pStatusChange.do", method=RequestMethod.GET)
-	public ModelAndView pStatusChange(HttpServletRequest request, HttpServletResponse response, MemberDto memberDto) {
-		ModelAndView mav=new ModelAndView();
-		
-		mav.addObject("memberDto", memberDto);
-		memberService.pStatusChange(mav);
 		
 		return mav;
 	}

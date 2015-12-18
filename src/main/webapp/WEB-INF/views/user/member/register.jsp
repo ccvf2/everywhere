@@ -58,12 +58,12 @@
 	}
 </script>
 <script type="text/javascript">
+	var mem_p_status_code="";
 	function pStatusChange() {
-		var urlName="/user/member/pStatusChange.do";
-		// alert(urlName);
 		var value=confirm("인증하시겠습니까?");
 		if(value==true) {
-			location.href=urlName;
+			mem_p_status_code="M2001";
+			alert("인증되었습니다.");
 		} else {
 			alert("인증 되지 않았습니다.");
 		}

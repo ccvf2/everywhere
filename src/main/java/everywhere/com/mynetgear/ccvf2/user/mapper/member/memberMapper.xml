@@ -49,8 +49,5 @@
 	and
 		MEM_PWD=#{mem_pwd}
 	</select>
-	
-	<insert id="pStatusChange" parameterType="everywhere.com.mynetgear.ccvf2.user.dto.member.MemberDto">
-		insert into tbl_member(mem_p_status_code) values(#{mem_p_status_code})
-	</insert>
+
 </mapper>

@@ -55,12 +55,4 @@ public class MemberDaoImp implements MemberDao {
 		return sqlTemplate.selectOne("getOneMemberInfo", memberDto);
 	}
 
-	@Override
-	public int pStatusChange(MemberDto memberDto) {
-		return sqlTemplate.insert("everywhere.com.mynetgear.ccvf2.user.mapper.member.pStatusChange", memberDto);
-	}
-	
-	
-	
-
 }
