@@ -108,7 +108,7 @@ function initialize() {
 $('#myMapModal').on('show.bs.modal', function() {
 	   //Must wait until the render of the modal appear, thats why we use the resizeMap and NOT resizingMap!! ;-)
 	   resizeMap();
-});
+})
 function resizeMap() {
    if(typeof map =="undefined") return;
    setTimeout( function(){resizingMap();} , 400);
@@ -127,6 +127,7 @@ function markInitialize(lat, lng, name) {
 	var myOptions = {
 		zoom : 15,
 		center : myLatlng,
+		
 		mapTypeId : google.maps.MapTypeId.ROADMAP
 	}
 	// 마커 생성
@@ -137,13 +138,7 @@ function markInitialize(lat, lng, name) {
 	map = new google.maps.Map(document.getElementById("map"), myOptions);
 	marker.setMap(map);
 	
-	// 인포윈도우의 생성
-	var infowindow = new google.maps.InfoWindow({
-		content : name
-	});
-	infowindow.open(map, marker);
-	google.maps.event.addListener(marker, 'click', function() {
-		infowindow.open(map, marker);
+	google.maps.event.addListener(map, 'click', function(event) {
+		map.setCenter(myLatlng);   // 클릭후에 다시 원래 좌표로 이동
 	});
 }
-

@@ -33,11 +33,9 @@
 	});
 </script>
 <script type="text/javascript">
-
 	var checked = false;
 	function registerForm(form) {
-		//alert("ok1");
-
+// 		alert("ok1");
 		var check = false;
 		var str = "";
 		for (var i = 0; i < form.interestValue.length; i++) {
@@ -50,12 +48,24 @@
 
 		//alert(str);
 		if (check == false) {
-			everywhereAlert("관심분야선택오류","관심분야를 하나 이상 체크해주세요.");
+			alert("관심분야를 하나 이상 체크해주세요.");
 			form.interestValue[0].focus();
 			return false;
 		}
 
 		form.mem_interest.value = str;
+	}
+</script>
+<script type="text/javascript">
+	var mem_p_status_code="";
+	function pStatusChange() {
+		var value=confirm("인증하시겠습니까?");
+		if(value==true) {
+			document.getElementById("sky-form4").mem_p_status_code.value="M2001";
+			alert("인증되었습니다.");
+		} else {
+			alert("인증 되지 않았습니다.");
+		}
 	}
 </script>
 <c:import url="/WEB-INF/views/user/common/utilImport.jsp" />
@@ -72,7 +82,9 @@
 
 </head>
 
+
 <!-- <button class="btn-u" data-toggle="modal" data-target="#joinModal">회원가입</button> -->
+
 
 	<div class="modal fade" id="joinModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
@@ -129,7 +141,8 @@
 											<i class="icon-append fa fa-phone"></i> 
 											<input type="text" name="mem_phone" placeholder="Phonenumber" id="phone"> 
 											<b class="tooltip tooltip-top-right">회원님의 전화번호를 입력해주세요.</b>
-											<button type="button" class="btn-u" onclick="">번호인증</button>
+											<a class="btn-u" href="javascript:pStatusChange()">번호인증</a>
+											<input type="hidden" name="mem_p_status_code" value="${mem_p_status_code}">
 										</label>
 									</section>
 
@@ -383,5 +396,5 @@
 			</div>
 		</div>
 	</div>
-
+</body>
 </html>

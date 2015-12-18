@@ -9,6 +9,7 @@ import everywhere.com.mynetgear.ccvf2.user.dto.member.MemberDto;
  * @reference class
  */
 public interface MemberDao {
+	
 	/**
 	 * @author 김준호
 	 * @createDate 2015. 12. 8.
@@ -17,6 +18,7 @@ public interface MemberDao {
 	 * @return
 	 */
 	public String emailCheck(String email);
+	
 	/**
 	 * @author 김준호
 	 * @createDate 2015. 12. 8.
@@ -25,6 +27,7 @@ public interface MemberDao {
 	 * @return
 	 */
 	public int registerOk(MemberDto memberDto);
+	
 	/**
 	 * @author 김준호
 	 * @createDate 2015. 12. 9.
@@ -33,6 +36,7 @@ public interface MemberDao {
 	 * @return
 	 */
 	public MemberDto memberRead(int mem_no);
+	
 	/**
 	 * @author 김준호
 	 * @createDate 2015. 12. 9.
@@ -41,6 +45,7 @@ public interface MemberDao {
 	 * @return
 	 */
 	public int memberUpdate(MemberDto memberDto);
+	
 	/**
 	 * @author 김준호
 	 * @createDate 2015. 12. 10.
@@ -59,7 +64,6 @@ public interface MemberDao {
 	 */
 	public int tryLoginInfo(MemberDto memberDto);
 	
-	
 	/**
 	 * @author 배성욱
 	 * @createDate 2015. 12. 15.
@@ -67,6 +71,6 @@ public interface MemberDao {
 	 * @param memberDto
 	 * @return
 	 */
-	public MemberDto getOneMemberInfo(MemberDto memberDto); 
+	public MemberDto getOneMemberInfo(MemberDto memberDto);
 
 }

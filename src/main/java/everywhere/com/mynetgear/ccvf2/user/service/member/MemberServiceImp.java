@@ -64,14 +64,19 @@ public class MemberServiceImp implements MemberService {
 	@Override
 	public void registerOk(ModelAndView mav) {
 		Map<String, Object> map=mav.getModelMap();
+		HttpServletRequest request=(HttpServletRequest)map.get("request");
 		MemberDto memberDto=(MemberDto)map.get("memberDto");
 		
 		//비밀번호 암호화
 		String pw=SecurityUtil.Sha256Encrypt(memberDto.getMem_email(), memberDto.getMem_pwd());
 		memberDto.setMem_pwd(pw);
 		
+		System.out.println("memberDto getMem_p_status_code2 :"+memberDto.getMem_p_status_code());
+		if(!memberDto.getMem_p_status_code().equals("M2001")) {
+			memberDto.setMem_p_status_code(Constant.MEMBER_P_STATUS_LOCK);
+		}
+		
 		memberDto.setMem_level_code(Constant.MEMBER_LEVEL_USER);
-		memberDto.setMem_p_status_code(Constant.MEMBER_P_STATUS_ACTIVE);
 		memberDto.setMem_profile_photo(Constant.SYNB_NULL);
 		memberDto.setMem_status_code(Constant.MEMBER_STATUS_LOCK);
 		System.out.println("memberService registerOk memberDto:"+memberDto.toString());
@@ -117,7 +122,7 @@ public class MemberServiceImp implements MemberService {
 		
 		mav.addObject("interestList", list);
 		mav.addObject("memberDto", memberDto);
-		mav.setViewName("user/member/memberUpdate");
+		mav.setViewName("/user/member/memberUpdate");
 	}
 
 	@Override
@@ -140,7 +145,7 @@ public class MemberServiceImp implements MemberService {
 		
 		mav.addObject("check", check);
 		mav.addObject("memberDto", memberDto);
-		mav.setViewName("user/member/memberUpdateOk");
+		mav.setViewName("/user/member/memberUpdateOk");
 	}
 
 	@Override
@@ -157,7 +162,7 @@ public class MemberServiceImp implements MemberService {
 		System.out.println("memberServiceImp delete memberDto:"+memberDto.toString());
 		
 		mav.addObject("memberDto", memberDto);
-		mav.setViewName("user/member/memberDelete");
+		mav.setViewName("/user/member/memberDelete");
 	}
 
 	@Override
@@ -179,7 +184,7 @@ public class MemberServiceImp implements MemberService {
 		
 		mav.addObject("check", check);
 		mav.addObject("memberDto", memberDto);
-		mav.setViewName("user/member/memberDeleteOk");
+		mav.setViewName("/user/member/memberDeleteOk");
 	}
 
 }

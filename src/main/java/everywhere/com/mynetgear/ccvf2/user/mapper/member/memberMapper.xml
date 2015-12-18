@@ -49,5 +49,5 @@
 	and
 		MEM_PWD=#{mem_pwd}
 	</select>
-	
+
 </mapper>

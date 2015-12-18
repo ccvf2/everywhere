@@ -78,13 +78,13 @@
 						</div>
 						<div class="col-xs-6 col-sm-3">
 							<div class="form-group">
-								<label>시작일</label>
+								<label>회원가입 기간 ~부터</label>
 								<input type="text" name="start_date" id="start_date" class="form-control"/>
 							</div>
 							
 						</div>
 						<div class="col-xs-6 col-sm-3">
-							<label>종료일</label>
+							<label>~까지</label>
 							<input type="text" name="end_date" id="end_date" class="form-control"/><br/>
 						</div>
 					</div>
@@ -129,14 +129,14 @@
                             	</colgroup>
                                 <thead>
                                     <tr>
-                                        <th>번호</th>
-                                        <th>이메일</th>
-                                        <th>이름</th>
-                                        <th>전화번호</th>
-                                        <th>사용자 종류</th>
-                                        <th>계정 상태</th>
-                                        <th>핸드폰인증상태</th>
-                                        <th>가입일</th>
+                                        <th>번호<br/>(mem_no)</th>
+                                        <th>이메일<br/>(mem_email)</th>
+                                        <th>이름<br/>(mem_name)</th>
+                                        <th>전화번호<br/>(mem_phone)</th>
+                                        <th>사용자 종류<br/>(mem_level_code)</th>
+                                        <th>계정 상태<br/>(mem_status_code)</th>
+                                        <th>핸드폰인증상태<br/>(mem_p_status_code)</th>
+                                        <th>가입일<br/>(mem_reg_date)</th>
                                     </tr>
                                 </thead>
                                 <tbody>

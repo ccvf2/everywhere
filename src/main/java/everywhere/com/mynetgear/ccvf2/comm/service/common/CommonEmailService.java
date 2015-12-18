@@ -15,5 +15,5 @@ public interface CommonEmailService {
 	 * @described 이메일 보내는 메소드
 	 * @param mav
 	 */
-	void sendEmail(ModelAndView mav);
+	void sendEmailOk(ModelAndView mav);
 }

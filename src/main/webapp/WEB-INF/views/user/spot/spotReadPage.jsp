@@ -107,23 +107,14 @@
 	<script src="/script/admin/bootstrap.min.js"></script>
 	<script type="text/javascript">
 		$(function() { 
-		   	$('#myMapModal').modal('show');
+		   	$('#myMapModal').modal('show'); // 현재 페이지로 오면, modal 호출
 		   
-		  	$('#myMapModal').on('hide.bs.modal', function() {
+		  	$('#myMapModal').on('hide.bs.modal', function() {	// modal close 되면 -> back
 			   history.back(-1); ;
 			});
 		  	
 		  	$("#spot_maps1").click(function(){
-		  	    var center = map.getCenter();
-		  		//alert("위치 클릭 : " + center);
-		  	    google.maps.event.trigger(map, "resize");
-		  	    map.setCenter(center);
-		  	    
-		  	    var height=$(window).height()-1;
-		  	    var width=$(window).width()-1;
-		  	    
-		  	    alert("width : " + width + ", height : " +height);
-		  	  	/* window.resizeTo(, ); */
+		  	  	resizeMap();
 		  	});
 		});
 </script> 
