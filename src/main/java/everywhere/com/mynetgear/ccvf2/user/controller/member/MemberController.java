@@ -1,5 +1,7 @@
 package everywhere.com.mynetgear.ccvf2.user.controller.member;
 
+import java.io.PrintWriter;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -45,14 +47,14 @@ public class MemberController {
 	 * @return
 	 */
 	@RequestMapping(value="/user/member/emailCheck.ajax",  method=RequestMethod.GET)
-	public ModelAndView emailCheck(HttpServletRequest request, HttpServletResponse response) {
+	public void emailCheck(HttpServletRequest request, HttpServletResponse response) {
 		ModelAndView mav=new ModelAndView();
 		
 		mav.addObject("request", request);
 		mav.addObject("response", response);
 		memberService.emailCheck(mav);
 		
-		return null;
+		//return ;
 	}
 	
 	/**

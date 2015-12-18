@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<c:import url="/WEB-INF/views/common/jquery.jsp" />
+<%-- <c:import url="/WEB-INF/views/common/jquery.jsp" /> --%>
 <meta charset="utf-8">
 <title>회원가입</title>
 <script type="text/javascript">
@@ -13,7 +13,7 @@
 			var email = $("#email").val();
 			if (email.length >= 9) {
 				$.ajax({
-					url : "emailCheck.ajax?email=" + email,
+					url : "/user/member/emailCheck.ajax?email=" + email,
 					type : "get",
 					dataType : "text",
 					success : function(data) {
@@ -58,12 +58,12 @@
 		form.mem_interest.value = str;
 	}
 </script>
-<c:import url="/WEB-INF/views/user/common/utilImport.jsp" />
+<%-- <c:import url="/WEB-INF/views/user/common/utilImport.jsp" /> --%>
 </head>
-<body>
-	<button class="btn-u" data-toggle="modal" data-target="#myModal">회원가입</button>
-	
-	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+
+	<!-- <button class="btn-u" data-toggle="modal" data-target="#joinModal">회원가입</button> -->
+
+	<div class="modal fade" id="joinModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<form name="regForm" id="sky-form4" class="sky-form" action="/user/member/register.do" method="post" onsubmit="return registerForm(this)">
@@ -372,5 +372,5 @@
 			</div>
 		</div>
 	</div>
-</body>
+
 </html>

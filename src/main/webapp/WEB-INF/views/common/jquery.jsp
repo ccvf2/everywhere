@@ -12,6 +12,5 @@
 <script src="/script/common/jquery-ui/jquery-ui.js"></script>
 <script type="text/javascript" src="/script/common/alert.js"></script>
 </head>
-<body>
-</body>
+
 </html>
