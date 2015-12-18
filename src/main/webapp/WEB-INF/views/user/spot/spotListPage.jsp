@@ -12,13 +12,6 @@
     <!-- Bootstrap -->
     <link href="/script/common/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script type="text/javascript" src="/script/common/jquery-1.11.3.js"></script>
 <style type="text/css">
 #spot-list {
@@ -32,10 +25,7 @@ ul li {
 }
 </style>    
     
-<!-- <script type="text/javascript" src="/script/user/spot/selectedCountry.js"></script> -->
 <script type="text/javascript" src="/script/user/spot/dragAndDrop.js"></script>
-
-
 
 <!-- CSS Global Compulsory -->
 <link rel="stylesheet" href="/assets/css/style.css">
@@ -48,25 +38,7 @@ ul li {
 <!-- CSS Page Style -->
 <link rel="stylesheet" href="/assets/css/pages/profile.css">
 
-
 <script type="text/javascript" src="/script/user/spot/googleMap.js"></script>
-<script async defer src="https://maps.googleapis.com/maps/api/js"></script>
-
-<!-- <script type="text/javascript">
-$(function(){
-	$("a").click(function(){
-		var id=$(this).attr('id');
-		alert("id : " + id)
-		 $(id).on('show.bs.modal', function() {
-			   //Must wait until the render of the modal appear, thats why we use the resizeMap and NOT resizingMap!! ;-)
-			   resizeMap();
-		})
-		
-		
-	});
-});
-</script>  -->
-
   </head>
   <body>
 	<div class="container content profile">
@@ -75,24 +47,24 @@ $(function(){
             <div class="col-md-3 md-margin-bottom-40">
             	<div>
 					<input type="hidden" name="mem_no" value="1">			
-						<input type="hidden" name="mem_level_code" value="M0002">
-						<select name="country_code" id="selectCountry" onchange="selectSpotList(true)">
-							<option value=""> ---- </option>
-							<c:forEach var="country" items="${countryList}" >
-								  <option value="${country.code}">${country.code_name}</option>
-							</c:forEach>                                                                     
-						</select>
-							
-						<select name="city_code" id="selectCity" onchange="selectSpotList(false)">
-							<option value=""> ---- </option>
-						</select>
+					<input type="hidden" name="mem_level_code" value="M0002">
+					<select name="country_code" id="selectCountry" onchange="selectSpotList(true)">
+						<option value=""> ---- </option>
+						<c:forEach var="country" items="${countryList}" >
+							  <option value="${country.code}">${country.code_name}</option>
+						</c:forEach>                                                                     
+					</select>
 						
-						<select name="spot_type_code" id="selectType" onchange="selectSpotList(false)">
-							<option value=""> ---- </option>
-							<c:forEach var="spotType" items="${spotTypeList}" >
-								  <option value="${spotType.code}">${spotType.code_name}</option>
-							</c:forEach>
-						</select>
+					<select name="city_code" id="selectCity" onchange="selectSpotList(false)">
+						<option value=""> ---- </option>
+					</select>
+					
+					<select name="spot_type_code" id="selectType" onchange="selectSpotList(false)">
+						<option value=""> ---- </option>
+						<c:forEach var="spotType" items="${spotTypeList}" >
+							  <option value="${spotType.code}">${spotType.code_name}</option>
+						</c:forEach>
+					</select>
 				</div>
             
                <div class="panel-heading-v2 overflow-h">
@@ -100,19 +72,17 @@ $(function(){
 			    </div>
 			    <div id="spot-list">
 			    	<ul class="list-unstyled mCustomScrollbar margin-bottom-20" data-mcs-theme="minimal-dark" id="spotList">
-			    		
-	    					
-						    	<c:forEach var="spot" items="${spotList}">
-							        <li class="notification">
-							            <i class="icon-custom icon-sm rounded-x icon-bg-red icon-line icon-envelope"></i>
-							            <div class="overflow-h">
-							                <div id="${spot.spot_no}item" draggable="true" ondragstart="drag(event)">
-												<a href="/user/spot/spotReadPage.do?spot_no=${spot.spot_no }">${spot.spot_name }</a>
-												<c:out value="${spot.spot_note}"/>
-											</div>
-							            </div>
-							        </li>
-							   </c:forEach>
+				    	<c:forEach var="spot" items="${spotList}">
+					        <li class="notification">
+					            <i class="icon-custom icon-sm rounded-x icon-bg-red icon-line icon-envelope"></i>
+					            <div class="overflow-h">
+					                <div id="${spot.spot_no}item" draggable="true" ondragstart="drag(event)">
+										<a href="/user/spot/spotReadPage.do?spot_no=${spot.spot_no }">${spot.spot_name }</a>
+										<c:out value="${spot.spot_note}"/>
+									</div>
+					            </div>
+					        </li>
+					   </c:forEach>
 				    </ul>
 				</div>
             </div>
