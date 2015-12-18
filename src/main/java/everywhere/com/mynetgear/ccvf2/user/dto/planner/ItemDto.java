@@ -3,6 +3,7 @@ package everywhere.com.mynetgear.ccvf2.user.dto.planner;
 import java.sql.Timestamp;
 import java.util.List;
 
+import everywhere.com.mynetgear.ccvf2.comm.dto.common.CommonFileIODto;
 import everywhere.com.mynetgear.ccvf2.user.dto.spot.SpotDto;
 
 public class ItemDto {
@@ -18,6 +19,7 @@ public class ItemDto {
 	private Timestamp end_time;
 	
 	private SpotDto spot;
+	private List<CommonFileIODto> item_photoes;
 	private List<MoneyDto> moneyList;
 	
 	public int getItem_no() {
@@ -88,6 +90,13 @@ public class ItemDto {
 	}
 	public void setEnd_time(Timestamp end_time) {
 		this.end_time = end_time;
+	}	
+	
+	public List<CommonFileIODto> getItem_photoes() {
+		return item_photoes;
+	}
+	public void setItem_photoes(List<CommonFileIODto> item_photoes) {
+		this.item_photoes = item_photoes;
 	}
 	
 	public List<MoneyDto> getMoneyList() {
