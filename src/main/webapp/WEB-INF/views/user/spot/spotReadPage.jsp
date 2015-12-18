@@ -124,6 +124,7 @@
 		  	    
 		  	    alert("width : " + width + ", height : " +height);
 		  	  	/* window.resizeTo(, ); */
+		  	  	resizeTo(width-10, height);
 		  	});
 		});
 </script> 
