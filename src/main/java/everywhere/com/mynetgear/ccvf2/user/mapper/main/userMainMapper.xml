@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="everywhere.com.mynetgear.ccvf2.user.mapper.main.userMainMapper">
+	
+	<!-- 슬라이드 이미지의 백그라운드 이미지 셋팅값 -->
+	<select id="select_service_main_background_img" 
+	resultType="String" 
+	parameterType="everywhere.com.mynetgear.ccvf2.admin.dto.settingmain.SettingMainDto">
+		SELECT
+			SETTING_SPOT_CODE
+		FROM
+			TBL_ADMIN_MAIN_SETTING
+		WHERE
+			SETTING_NO=(
+						SELECT
+							MAX(SETTING_NO)
+						FROM
+							TBL_ADMIN_MAIN_SETTING
+						WHERE
+							USE_YN=#{use_yn}
+						AND
+							SETTING_TYPE_CODE=#{setting_type_code}
+						)
+	</select>
+	
+</mapper>

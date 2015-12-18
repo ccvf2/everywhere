@@ -90,11 +90,10 @@ jQuery(document).ready(function() {
 	                    		<li><a href="/user/login/login.do">Login</a></li>
 								<li class="topbar-devider"></li>
 	                    		<li>
-	                    			<a href="#" data-toggle="modal" data-target="#joinModal">회원가입</a>
+	                    			<a href="/user/member/register.do">회원가입</a>
 	                    		</li>
 	                		</c:when>
 	                		<c:otherwise>
-	                    			<a href="#" data-toggle="modal" data-target="#joinModal">회원가입</a>
 			                	<li>${mem_object.mem_name}님 안녕하세요.</li>
 			                    <li class="topbar-devider"></li>
 			                    <li><a href="/user/login/loginout.do" style="color: #72c02c;">Logout</a></li>

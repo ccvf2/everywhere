@@ -42,7 +42,7 @@
                         <a href="http://localhost:8888/admin/commoncode/code.do"><i class="fa fa-fw fa-file"></i> 공통코드목록</a>
                     </li>
                     <li>
-                        <a href="index-rtl.html"><i class="fa fa-fw fa-dashboard"></i> RTL Dashboard</a>
+                        <a href="/admin/settingMain/settingMain.do"><i class="fa fa-fw fa-dashboard"></i> 메인화면 수정하기</a>
                     </li>
                 </ul>
             </div>

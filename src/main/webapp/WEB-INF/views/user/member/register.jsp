@@ -59,9 +59,20 @@
 	}
 </script>
 <c:import url="/WEB-INF/views/user/common/utilImport.jsp" />
+
+	<script type="text/javascript">
+		$(function() { 
+		   	$('#joinModal').modal('show');
+		   
+		  	$('#joinModal').on('hide.bs.modal', function() {
+			   history.back(-1); ;
+			})
+		});
+</script> 
+
 </head>
 
-<button class="btn-u" data-toggle="modal" data-target="#joinModal">회원가입</button>
+<!-- <button class="btn-u" data-toggle="modal" data-target="#joinModal">회원가입</button> -->
 
 	<div class="modal fade" id="joinModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
