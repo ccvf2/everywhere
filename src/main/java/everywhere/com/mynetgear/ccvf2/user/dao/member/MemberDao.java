@@ -73,4 +73,13 @@ public interface MemberDao {
 	 */
 	public MemberDto getOneMemberInfo(MemberDto memberDto);
 
+	/**
+	 * @author 김성광
+	 * @createDate 2015. 12. 19.
+	 * @described email로 상대의 페이지로 이동
+	 * @param mem_email
+	 * @return
+	 */
+	public MemberDto getOneMemberInfoAsEmail(String mem_email);
+
 }
