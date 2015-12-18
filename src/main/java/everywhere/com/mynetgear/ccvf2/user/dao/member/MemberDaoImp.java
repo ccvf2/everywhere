@@ -54,8 +54,5 @@ public class MemberDaoImp implements MemberDao {
 	public MemberDto getOneMemberInfo(MemberDto memberDto) {
 		return sqlTemplate.selectOne("getOneMemberInfo", memberDto);
 	}
-	
-	
-	
 
 }
