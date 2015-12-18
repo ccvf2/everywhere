@@ -126,10 +126,6 @@ $(function(){
         </div>
     </div><!--/container-->
     
-			<input type="text">
-			<br/>
-			<c:out value="${spot}"/>
-		
     
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="/script/common/bootstrap/js/bootstrap.min.js"></script>

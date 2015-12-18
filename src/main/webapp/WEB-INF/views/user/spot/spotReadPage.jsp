@@ -36,7 +36,7 @@
 							<div class="col-md-12">
 								<!-- Tab panes -->
 								<div class="tab-content">
-								  <div role="tabpanel" class="tab-pane active" id="spot_pic}">
+								  <div role="tabpanel" class="tab-pane active" id="spot_pic">
 								  	<c:if test="${spotDto.spot_photoes != null}">		
 										<c:forEach var="photo" items="${spotDto.spot_photoes}">
 											<img alt="" src="/attatchFile/spot/${photo.save_name}.${photo.extension}" style="width: 100%; height: 70%;">
@@ -52,8 +52,8 @@
 						
 						<div class="row">
 							<ul class="nav nav-tabs" role="tablist">
-							    <li role="presentation" class="active"><a href="#spot_pic" aria-controls="spot_pic${spotDto.spot_no}" role="tab" data-toggle="tab">사진</a></li>
-							    <li role="presentation"><a href="#spot_maps" aria-controls="spot_maps${spotDto.spot_no}" role="tab" data-toggle="tab">위치</a></li>
+							    <li role="presentation" class="active"><a href="#spot_pic" aria-controls="spot_pic" role="tab" data-toggle="tab">사진</a></li>
+							    <li role="presentation"><a href="#spot_maps" aria-controls="spot_maps" role="tab" data-toggle="tab" id="spot_maps1">위치</a></li>
 						    </ul>
 						</div>
 						
@@ -110,11 +110,21 @@
 		   	$('#myMapModal').modal('show');
 		   
 		  	$('#myMapModal').on('hide.bs.modal', function() {
-			   //Must wait until the render of the modal appear, thats why we use the resizeMap and NOT resizingMap!! ;-)
 			   history.back(-1); ;
 			});
-		
-		   
+		  	
+		  	$("#spot_maps1").click(function(){
+		  	    var center = map.getCenter();
+		  		//alert("위치 클릭 : " + center);
+		  	    google.maps.event.trigger(map, "resize");
+		  	    map.setCenter(center);
+		  	    
+		  	    var height=$(window).height()-1;
+		  	    var width=$(window).width()-1;
+		  	    
+		  	    alert("width : " + width + ", height : " +height);
+		  	  	/* window.resizeTo(, ); */
+		  	});
 		});
 </script> 
 </body>
