@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>타이틀 입력</title>
-<script src="/script/common/jquery-1.11.3.js"></script>
+<!-- <script src="/script/common/jquery-1.11.3.js"></script> -->
 
 <!-- --------------------------------css Start------------------------------------- -->
 <!-- Favicon -->
@@ -90,11 +90,5 @@
         CommentForm.initCommentForm();
         });
 </script>
-<!-- ***********회원가입 모달페이지*********** -->
-<c:if test="${mem_object==null}">
-	<c:import url="/user/member/register.do"/>
-</c:if>
-
-
 </head>
 </html>
