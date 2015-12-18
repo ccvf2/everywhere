@@ -11,16 +11,16 @@
 			  to_char(sysdate, 'mm'), 
 			  to_char(sysdate, 'dd'), 
 			 	(select case to_char(sysdate,'d')
-				      		when '1' then '일' 
-				       		when '2' then '월'
-						    when '3' then '화'
-							when '4' then '수'
-						    when '5' then '목'
-						    when '6' then '금'
-						    when '7' then '토'
+				      		when '1' then 'U0101' 
+				       		when '2' then 'U0102'
+						    when '3' then 'U0103'
+							when '4' then 'U0104'
+						    when '5' then 'U0105'
+						    when '6' then 'U0106'
+						    when '7' then 'U0107'
 			      		end "week"
 			  	 from dual),
-			  0, 'T')
+			  0, 'C1201')
 		  ]]>
 	</insert>
 	
@@ -31,23 +31,23 @@
 			  to_char(sysdate, 'mm'), 
 			  to_char(sysdate, 'dd'), 
 			 	(select case to_char(sysdate,'d')
-				      		when '1' then '일' 
-				       		when '2' then '월'
-						    when '3' then '화'
-							when '4' then '수'
-						    when '5' then '목'
-						    when '6' then '금'
-						    when '7' then '토'
+				      		when '1' then 'U0101' 
+				       		when '2' then 'U0102'
+						    when '3' then 'U0103'
+							when '4' then 'U0104'
+						    when '5' then 'U0105'
+						    when '6' then 'U0106'
+						    when '7' then 'U0107'
 			      		end "week"
 			  	 from dual),
-			  0, 'L')
+			  0, 'C1202')
 		]]>
 	</insert>
 	
 	<update id="todayCountUpdate" parameterType="int">
 		<![CDATA[
 		  update tbl_stats set stats_count=#{cnt}
-		  where stats_status='T' 
+		  where stats_status='C1201' 
 		  and stats_year=(select to_char(sysdate, 'yyyy') from dual)
 		  and stats_mon=(select to_char(sysdate, 'mm') from dual)
 		  and stats_day=(select to_char(sysdate, 'dd') from dual)
@@ -57,7 +57,7 @@
 	<select id="selectTodayCount" resultType="int">
 		<![CDATA[
 			select nvl(max(stats_count), 0) from tbl_stats 
-		  	where stats_status='T'
+		  	where stats_status='C1201'
 		  	and stats_year=(select to_char(sysdate, 'yyyy') from dual)
 		  	and stats_mon=(select to_char(sysdate, 'mm') from dual)
 		  	and stats_day=(select to_char(sysdate, 'dd') from dual)
@@ -69,7 +69,7 @@
 			select sum(STATS_COUNT)
 			from tbl_stats
 			where STATS_YEAR=#{year}
-			and stats_status='T'
+			and stats_status='C1201'
       		and stats_mon>=to_number(#{start})
       		and stats_mon<=to_number(#{end})
 			group by stats_mon
@@ -80,7 +80,7 @@
 	<select id="todaySelectCnt" resultType="int">
 		<![CDATA[
 			select count(*) from tbl_stats 
-		  	where stats_status='T'
+		  	where stats_status='C1201'
 		  	and stats_year=(select to_char(sysdate, 'yyyy') from dual)
 		  	and stats_mon=(select to_char(sysdate, 'mm') from dual)
 		  	and stats_day=(select to_char(sysdate, 'dd') from dual)
@@ -90,7 +90,7 @@
 	<select id="getCharYearOne" resultType="int" parameterType="String">
 		select sum(stats_count) 
 		from tbl_stats 
-		where stats_status='T' 
+		where stats_status='C1201' 
 		and STATS_YEAR=#{year}
 	</select>
 	
@@ -98,7 +98,7 @@
 		<![CDATA[
 			select sum(STATS_COUNT)
 			from tbl_stats
-			where stats_status='T'
+			where stats_status='C1201'
 			and stats_year>=#{yearS}
 			and stats_year<=#{yearE}
 			group by stats_year
@@ -114,7 +114,7 @@
 			and stats_day>=to_number(#{dayS})
 			and stats_day<=to_number(#{dayE})
 			and stats_mon=#{month}
-			and stats_status='T'
+			and stats_status='C1201'
 			ORDER BY to_number(stats_day)
 		]]>
 	</select>

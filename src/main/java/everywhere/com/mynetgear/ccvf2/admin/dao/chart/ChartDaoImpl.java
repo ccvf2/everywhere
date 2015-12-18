@@ -61,8 +61,4 @@ public class ChartDaoImpl implements ChartDao {
 		return sessionTemplate.selectList("dao.chartMapper.getCharYearList", map);
 	}
 
-	/*@Override
-	public List<Integer> getChartLis(String start, String end, String selectOption) {
-		return sessionTemplate.selectList("dao.chartMapper.getChartLis", map);
-	}*/
 }
