@@ -29,6 +29,7 @@ public class UserMainController {
 		SettingMainDto settingMainDto=userMainService.getOneBackGroundImg();
 		//메인페이지 띄우기
 		String path="/attatchFile/admin/mainBackground/" + settingMainDto.getSetting_spot_code();
+		mav.addObject("backgroungImg",path);
 		return mav;
 	}
 	

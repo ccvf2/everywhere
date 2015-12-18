@@ -4,7 +4,7 @@
 	
 	<!-- 슬라이드 이미지의 백그라운드 이미지 셋팅값 -->
 	<select id="select_service_main_background_img" 
-	resultType="String" 
+	resultType="everywhere.com.mynetgear.ccvf2.admin.dto.settingmain.SettingMainDto" 
 	parameterType="everywhere.com.mynetgear.ccvf2.admin.dto.settingmain.SettingMainDto">
 		SELECT
 			SETTING_SPOT_CODE
