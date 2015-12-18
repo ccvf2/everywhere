@@ -12,32 +12,30 @@
 	</select>
 	
 	<insert id="insert_planner" parameterType="everywhere.com.mynetgear.ccvf2.user.dto.planner.PlannerDto">
-		insert into tbl_planner(
-			planner_no, 
-			mem_no, 
-			planner_ba_code, 
-			title, 
-			start_date, 
-			end_date, 
-			reg_date, 
-			use_yn)
-		 values(
-		 	#{planner_no}, 
-		 	#{mem_no}, 
-		 	#{planner_ba_code}, 
-		 	#{title},
-		 	#{start_date}, 
-		 	#{end_date}, 
-		 	sysdate, 
-		 	#{use_yn})	
+		insert into tbl_planner(planner_no,
+								mem_no,
+								planner_ba_code,
+								title,
+								start_date,
+								end_date,
+								reg_date,
+								use_yn)
+		 			values(
+		 				 	#{planner_no},
+		 				 	#{mem_no},
+		 				 	#{planner_ba_code},
+		 				 	#{title},
+		 				 	#{start_date},
+		 				 	#{end_date},
+		 				 	sysdate,
+		 				 	#{use_yn})	
 	</insert>
 	
 	<update id="update_planner" parameterType="everywhere.com.mynetgear.ccvf2.user.dto.planner.PlannerDto">
-		update tbl_planner set 
-			title=#{title}, 
-			memo=#{memo, jdbcType=VARCHAR},
-			start_date=#{start_date}, 
-			end_date=#{end_date}
+		update tbl_planner set title=#{title},
+								memo=#{memo, jdbcType=VARCHAR},
+				 				start_date=#{start_date},
+				 				end_date=#{end_date}				 				
 		where planner_no=#{planner_no}
 	</update>
 	
@@ -50,8 +48,7 @@
 									#{note, jdbcType=VARCHAR},
 									#{attach_photoes, jdbcType=VARCHAR},
 									#{item_star_score},
-									#{start_time, jdbcType=TIMESTAMP},
-									#{end_time, jdbcType=TIMESTAMP}
+									#{item_time, jdbcType=VARCHAR}
 									)
 	</insert>
 	

@@ -76,8 +76,12 @@ public class PlannerServiceImp implements PlannerService {
 		int check = plannerDao.insertPlanner(plannerDto);
 		EverywhereAspect.logger.info(EverywhereAspect.logMsg + check);
 		
-		mav.addObject("check", check);
+		long diff = plannerDto.getEnd_date().getTime() - plannerDto.getStart_date().getTime();
+        long diffDays = diff / (24 * 60 * 60 * 1000);
+		
 		mav.addObject("plannerDto", plannerDto);
+		mav.addObject("check", check);
+		mav.addObject("day_count", diffDays+1);
 		mav.setViewName("user/planner/addPlanner");
 	}
 
@@ -206,7 +210,6 @@ public class PlannerServiceImp implements PlannerService {
 		plannerDto.setMemo(request.getParameter("planner_memo"));
 		String start_date = request.getParameter("start_date");
 		String day_count = request.getParameter("day_count");
-		String end_date = request.getParameter("end_date");
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");		
 		
 		try {
@@ -219,8 +222,6 @@ public class PlannerServiceImp implements PlannerService {
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
-		
-		plannerDto.setUse_yn(request.getParameter("planner_use_yn"));
 		
 		//아이템 추가
 		List<ItemDto> itemList = new ArrayList<ItemDto>();
@@ -247,7 +248,7 @@ public class PlannerServiceImp implements PlannerService {
 			int item_count = Integer.parseInt(request.getParameter("d"+i+"_item_count"));
 			for(int j = 1; j <= item_count; j++){
 				String itemString = "d"+i+"_item"+j;
-				System.out.println("itemString : " + itemString + "\t" + day_count);
+				
 				// 가계부에 item_no를 넣어주기 위해 미리 가져온다.
 				int item_no = plannerDao.getItemNextSeq();
 				ItemDto itemDto = new ItemDto();
@@ -269,24 +270,8 @@ public class PlannerServiceImp implements PlannerService {
 					itemDto.setAttach_photoes(item_photo_num);
 				}
 				
-				/* String 형식으로 바꿀 예정
-				try {
-					SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm");
-					String start_time = request.getParameter(itemString+"_start_time"); 
-					String end_time = request.getParameter(itemString+"_end_time");
-					System.out.println("error : " + start_time + "," + end_time);
-					if(!start_time.equals("") || start_time != null){
-						Date date = timeFormat.parse(start_time);
-						itemDto.setStart_time(new Timestamp(date.getTime()));
-					}
-					if(!end_time.equals("") || end_time != null){
-						Date date = timeFormat.parse(end_time);
-						itemDto.setEnd_time(new Timestamp(date.getTime()));
-					}
-				} catch (ParseException e) {
-					e.printStackTrace();
-				}
-				*/
+				String item_time = request.getParameter(itemString+"_time");
+				itemDto.setItem_time(item_time);
 				
 				itemList.add(itemDto);
 				
