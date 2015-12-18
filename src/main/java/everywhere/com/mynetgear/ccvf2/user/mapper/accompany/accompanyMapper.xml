@@ -38,7 +38,7 @@
 		)
 		values
 		(
-			TBL_ACCOMPANY_ACCOMPANY_NO_SEQ.nextval,
+			#{accompany_no},
 			#{mem_no},
 			sysdate,
 			#{start_date},
@@ -214,4 +214,8 @@
 			]]>
 	</select>
 	
+	<!-- 다음글 글번호를 가져옴 -->
+	<select id="getAccompanyNextSeq" resultType="int">
+		select TBL_ACCOMPANY_ACCOMPANY_NO_SEQ.nextval from dual
+	</select>
 </mapper>
