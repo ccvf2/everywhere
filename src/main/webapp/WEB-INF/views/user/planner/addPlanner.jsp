@@ -48,8 +48,20 @@
     </script>
     
     <script type="text/javascript">
-    	function addItem(){
-    		alert('hi');
+    	function addItem(input_name){
+    		//input_name = d1_item
+    		var day_item_count = document.getElementById(input_name+"_count");
+    		
+    		var before = input_name+day_item_count.value;
+    		day_item_count.value = Number(day_item_count.value)+1;
+    		var after = input_name+day_item_count.value;
+    		alert(before +  "," + after);
+    		alert(input_name+'_ol');
+    		var html = $('#'+input_name+'_ol').html();
+    		alert(newHtml);
+    		var newHtml = html.replace(before, after);
+    		
+    		$('#'+input_name+"_ol").appendTo(newHtml);
     	}
     </script>
     
@@ -141,57 +153,6 @@
 	        }
         
         reader.readAsDataURL(input.files[0]);
-    }
-	
-	return;
-		
-		//가계부 Div가 있는지 먼저 확인 후에 없으면 만들어준다.
-		var photoDiv = document.getElementById("money"+input_name);		
-		if(moneyDiv == null){
-			moneyDiv = document.createElement("div");
-			moneyDiv.id = "money"+input_name;
-			moneyDiv.className  = "panel-body";
-			$("#"+input_name+"_note").after(moneyDiv);
-		}
-		
-		var div = document.createElement("div");
-		var money_count = document.getElementById(input_name+"_money_count");
-		money_count.value=Number(money_count.value)+1;
-		div.style.marginTop="3px";		
-		
-		var hiddenInput = document.createElement("input");
-		hiddenInput.setAttribute("type", "hidden");
-		hiddenInput.name= input_name+"_money"+money_count.value+"_no";
-		div.appendChild(hiddenInput);
-		
-		var money_type = new Array('항공', '숙박', '교통', '쇼핑', '식사', '입장료', '오락', '기타');
-		var money_code = new Array('D0001', 'D0002', 'D0003', 'D0004', 'D0005', 'D0006', 'D0007', 'D0008');
-		var moneySelect = document.createElement("select");
-		moneySelect.name=input_name+"_money"+money_count.value +"_type_code";
-		
-		var label = document.createElement("label");
-		label.className = "select";
-		for (i = 0; i < money_type.length; i++) {
-            var moneyOption = new Option(money_type[i], money_code[i]);
-            moneySelect.options.add(moneyOption);
-        }
-		label.appendChild(moneySelect)
-		div.appendChild(label);
-		
-		var noteInput = document.createElement("input");
-		noteInput.type="text";
-		noteInput.name= input_name+"_money"+money_count.value+"_title";
-		noteInput.placeholder="예) 기념품";
-		div.appendChild(noteInput);
-		
-		var priceInput = document.createElement("input");
-		priceInput.style.marginLeft="10px";
-		priceInput.type="text";
-		priceInput.name= input_name+"_money"+money_count.value+"_price";
-		priceInput.placeholder="3000";
-		div.appendChild(priceInput);
-		
-		moneyDiv.appendChild(div);
 	}
 	</script>
     
@@ -373,7 +334,7 @@ ${mem_object.mem_no }
                 	<input type="hidden" id="d${i}_item_count" name="d${i}_item_count" value="1">
                 	<h2 class="heading-xs">Day ${i}</h2>
                 	<c:set var="id_value" value="d${i}_item1"/>
-                	<ol class="list-unstyled" >
+                	<ol class="list-unstyled" id="d${i}_item_ol">
 	                	<li>
 	                	<div class="panel-group">
 	                		<input type="hidden" name="${id_value}_no"/>	                		
@@ -406,7 +367,7 @@ ${mem_object.mem_no }
 	 					 </li>
  					 </ol>
  					 <ul class="bs-glyphicons">	 
- 					 <li style="width:50%; height:100%; padding:0px; border: 0px; text-align: right"><span class="glyphicon glyphicon-plus-sign" onclick="addItem()"></span></li> 					 
+ 					 <li style="width:50%; height:100%; padding:0px; border: 0px; text-align: right"><span class="glyphicon glyphicon-plus-sign" onclick="addItem('d${i}_item')"></span></li> 					 
  					 </ul>
 	 				
                 </div>
