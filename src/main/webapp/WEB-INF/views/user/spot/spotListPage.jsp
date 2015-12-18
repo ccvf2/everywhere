@@ -108,16 +108,10 @@ $(function(){
 							            <div class="overflow-h">
 							                <div id="${spot.spot_no}item" draggable="true" ondragstart="drag(event)">
 												<a href="/user/spot/spotReadPage.do?spot_no=${spot.spot_no }">${spot.spot_name }</a>
-												<%-- <a id="#myModal${spot.spot_no}" data-target="#myModal${spot.spot_no}" data-toggle="modal">${spot.spot_name}</a> --%>
-												<%-- <div class="modal fade" id="myModal${spot.spot_no}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-													<c:import url="/user/spot/spotReadPage.do?spot_no=${spot.spot_no }"/>
-												</div> --%>
-												<%-- <a href="" data-target="#myModal" data-toggle="modal" onclick="javascript:alert();">${spot.spot_name}</a> --%>
 												<c:out value="${spot.spot_note}"/>
 											</div>
 							            </div>
 							        </li>
-												    <%--  --%>
 							   </c:forEach>
 				    </ul>
 				</div>
