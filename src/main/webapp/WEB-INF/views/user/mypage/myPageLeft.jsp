@@ -8,7 +8,11 @@
 </head>
 <body>
 	<img class="img-responsive profile-img margin-bottom-20" src="/assets/img/team/img32-md.jpg" alt="">
-	<c:out value="${dto.mem_name}"/>(<c:out value="${dto.mem_email}"/>)
+	<%-- <c:out value="${session.mem_name}"/><c:out value="(${session.mem_email})"/> --%>
+	<c:set var="loginMember" value="${mem_object}" scope="session"/>
+	<c:if test="${loginMember!=null}">
+		<c:out value="${loginMember.mem_name}"/><c:out value="(${loginMember.mem_email})"/>
+	</c:if>
 	
     <ul class="list-group sidebar-nav-v1 margin-bottom-40" id="sidebar-nav-1">
         <li class="list-group-item">
