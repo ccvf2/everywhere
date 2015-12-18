@@ -52,12 +52,12 @@ ul li {
 <script type="text/javascript" src="/script/user/spot/googleMap.js"></script>
 <script async defer src="https://maps.googleapis.com/maps/api/js"></script>
 
-<script type="text/javascript">
+<!-- <script type="text/javascript">
 $(function(){
 	$("a").click(function(){
 		var id=$(this).attr('id');
-		
-		$(id).on('show.bs.modal', function() {
+		alert("id : " + id)
+		 $(id).on('show.bs.modal', function() {
 			   //Must wait until the render of the modal appear, thats why we use the resizeMap and NOT resizingMap!! ;-)
 			   resizeMap();
 		})
@@ -65,7 +65,7 @@ $(function(){
 		
 	});
 });
-</script>
+</script>  -->
 
   </head>
   <body>
@@ -107,11 +107,11 @@ $(function(){
 							            <i class="icon-custom icon-sm rounded-x icon-bg-red icon-line icon-envelope"></i>
 							            <div class="overflow-h">
 							                <div id="${spot.spot_no}item" draggable="true" ondragstart="drag(event)">
-												<%-- <a href="/user/spot/spotReadPage.do?spot_no=${spot.spot_no }">${spot.spot_name }</a> --%>
-													<a id="#myModal${spot.spot_no}" data-target="#myModal${spot.spot_no}" data-toggle="modal">${spot.spot_name}</a>
-												<div class="modal fade" id="myModal${spot.spot_no}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+												<a href="/user/spot/spotReadPage.do?spot_no=${spot.spot_no }">${spot.spot_name }</a>
+												<%-- <a id="#myModal${spot.spot_no}" data-target="#myModal${spot.spot_no}" data-toggle="modal">${spot.spot_name}</a> --%>
+												<%-- <div class="modal fade" id="myModal${spot.spot_no}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 													<c:import url="/user/spot/spotReadPage.do?spot_no=${spot.spot_no }"/>
-												</div>
+												</div> --%>
 												<%-- <a href="" data-target="#myModal" data-toggle="modal" onclick="javascript:alert();">${spot.spot_name}</a> --%>
 												<c:out value="${spot.spot_note}"/>
 											</div>
@@ -119,8 +119,6 @@ $(function(){
 							        </li>
 												    <%--  --%>
 							   </c:forEach>
-							
-							
 				    </ul>
 				</div>
             </div>
@@ -128,8 +126,6 @@ $(function(){
         </div>
     </div><!--/container-->
     
-			
-		
     
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="/script/common/bootstrap/js/bootstrap.min.js"></script>

@@ -8,8 +8,8 @@
 <meta charset="UTF-8">
 <title>타이틀 입력</title>
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-	<script src="/script/common/jquery-ui/jquery-ui.theme.css"></script>
-    <script src="/script/common/jquery-ui/jquery-ui.js"></script>
+	<!-- <script src="/script/common/jquery-ui/jquery-ui.theme.css"></script> -->
+    <!-- <script src="/script/common/jquery-ui/jquery-ui.js"></script> -->
     <script>
     $(function() {
         $( "#spotLists div" ).draggable({

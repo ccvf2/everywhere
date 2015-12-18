@@ -59,10 +59,14 @@ function spotListDisp(data){
 	if(data != ""){
 		var obj = JSON.parse(data);
 		for(i = 0; i < obj.spot.length; i++){
-			str+="<li class='notification' style='border:1px'><div id=" + obj.spot[i].spot_no + " class='rounded'>"+
-            "<i class='icon-custom icon-sm rounded-x icon-bg-red icon-line icon-envelope'></i>" +
-            "<div class='overflow-h' id="+ obj.spot[i].spot_no +"><span><strong>" + obj.spot[i].spot_name + "</strong></span><small>" + obj.spot[i].spot_note + "</small>"+
-            "</div></div></li>";			
+			str+="<li class='notification'>"+
+	             "<i class='icon-custom icon-sm rounded-x icon-bg-red icon-line icon-envelope'></i>" +
+	             "<div class='overflow-h'>" +
+	             "<a id='#myModal'"+obj.spot[i].spot_no+" data-target='#myModal"+obj.spot[i].spot_no+" data-toggle='modal'>"+obj.spot[i].spot_name+"</a>" +
+	             "<div class='modal fade' id='#myModal"+obj.spot[i].spot_no+" tabindex='-1' role='dialog' aria-labelledby='myModalLabel'"+" aria-hidden='true'>" +
+	             "<c:import url='/user/spot/spotReadPage.do?spot_no='"+obj.spot[i].spot_no+"'/></div>"+
+	             "<c:out value='"+obj.spot[i].spot_note+"'/>"+
+	             "</div></div></li>";			
 		}
 	}
 	$("#spotLists").empty(); 
