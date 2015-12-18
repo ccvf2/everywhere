@@ -67,7 +67,7 @@ public class MemberController {
 	@RequestMapping(value="/user/member/register.do", method=RequestMethod.POST)
 	public ModelAndView registerOk(HttpServletRequest request, HttpServletResponse response, MemberDto memberDto) {
 		ModelAndView mav=new ModelAndView();
-		
+
 		mav.addObject("request", request);
 		mav.addObject("memberDto", memberDto);
 		memberService.registerOk(mav);
