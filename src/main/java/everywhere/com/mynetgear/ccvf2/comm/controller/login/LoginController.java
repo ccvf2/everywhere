@@ -1,29 +1,19 @@
 package everywhere.com.mynetgear.ccvf2.comm.controller.login;
 
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.HashMap;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
 import everywhere.com.mynetgear.ccvf2.comm.service.login.LoginService;
 import everywhere.com.mynetgear.ccvf2.comm.util.common.Constant;
-import everywhere.com.mynetgear.ccvf2.comm.util.common.SecurityUtil;
-import everywhere.com.mynetgear.ccvf2.comm.util.common.StringUtil;
-import everywhere.com.mynetgear.ccvf2.user.dao.member.MemberDao;
-import everywhere.com.mynetgear.ccvf2.user.dao.message.MessageDao;
 import everywhere.com.mynetgear.ccvf2.user.dto.member.MemberDto;
 
 
@@ -78,8 +68,29 @@ public class LoginController {
 		ModelAndView mav = new ModelAndView("/common/login/login");
 		return mav;
 	}
+	/**
+	 * @author 배성욱
+	 * @createDate 2015. 12. 19.
+	 * @described 로그인페이지로 이동(모달)
+	 * @param request
+	 * @param response
+	 * @param dto
+	 * @return
+	 */
+	@RequestMapping(value = "/user/login/loginModal.do", method = RequestMethod.GET)
+	public ModelAndView memberLoginModal(HttpServletRequest request, HttpServletResponse response) {
+		ModelAndView mav = new ModelAndView("/common/login/loginModal");
+		return mav;
+	}
 
 	/* 로그아웃 */
+	/**
+	 * @author 배성욱
+	 * @createDate 2015. 12. 15.
+	 * @described 로그아웃 기능 구현
+	 * @param request
+	 * @return
+	 */
 	@RequestMapping(value = "/user/login/loginout.do", method = RequestMethod.GET)
 	public ModelAndView requestLogout(HttpServletRequest request) {
 		System.out.println(Constant.LOG_ID1+"로그아웃");

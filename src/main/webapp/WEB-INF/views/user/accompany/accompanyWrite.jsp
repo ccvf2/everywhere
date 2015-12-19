@@ -67,6 +67,8 @@
 		location.href="/user/accompany/accompanyList.do?search="+search;
 	}
 </script>
+	<c:import url="/WEB-INF/views/common/jquery.jsp"/>
+	<c:import url="/WEB-INF/views/user/common/utilImport.jsp"/>
 </head>
 <body>
 	<div class="wrapper">

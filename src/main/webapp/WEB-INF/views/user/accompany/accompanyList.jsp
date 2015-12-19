@@ -50,15 +50,21 @@
 		    });
 		});
 	</script>
+  	<c:import url="/WEB-INF/views/common/jquery.jsp"/>
+	<c:import url="/WEB-INF/views/user/common/utilImport.jsp"/>
   </head>
   <body>
+  	<!-- 글 작성일 계산을 위한 현제 날짜 -->
+  	<jsp:useBean id="now" class="java.util.Date"/>
+  	<fmt:formatDate var="nowDate" value="${now}" pattern="yy-MM-dd"/>
+  	
+  	
 	<div class="wrapper">
 	    <!--=== Header ===-->
 	    <!-- Header가 꼭 imprt 되어 있어야 한다.(안그러면화면이깨짐) -->
 	    <div class="header">
 			<c:import url="/WEB-INF/views/user/common/header.jsp"/>
 	    </div>
-	    
 	    <!--=== End Header ===-->
 	   
 	   
@@ -93,8 +99,18 @@
                     <ul class="list-unstyled blog-latest-posts margin-bottom-50">
                     	<c:forEach var="recentAccompanyDto" items="${recentAccompanyList}">
                     		<li>
-                    			<h3><a href="/user/accompany/accompanyRead.do?accompany_no=${recentAccompanyDto.accompany_no}&currentPage=${currentPage}">${recentAccompanyDto.title}</a></h3>
-                    			<small><fmt:formatDate pattern="MM-dd" value="${recentAccompanyDto.write_date}"/> / <a href="#">${recentAccompanyDto.mem_name}</a></small>
+                    			<h3><a href="/user/accompany/accompanyRead.do?accompany_no=${recentAccompanyDto.accompany_no}&currentPage=${currentPage}" title="${recentAccompanyDto.title}">${recentAccompanyDto.title}</a></h3>
+                    			<small>
+                    				
+									<fmt:formatDate var="resentWriteDate" value="${recentAccompanyDto.write_date}" pattern="yy-MM-dd"/>
+												
+                    				<c:if test="${resentWriteDate eq nowDate}"><!-- 현재 -->
+										<fmt:formatDate pattern="HH:mm" value="${recentAccompanyDto.write_date}"/>
+									</c:if>
+									<c:if test="${resentWriteDate lt nowDate}"><!-- 과거 -->
+										<fmt:formatDate pattern="MM-dd" value="${recentAccompanyDto.write_date}"/>
+									</c:if> / <a href="#">${recentAccompanyDto.mem_name}</a>
+								</small>
                     			<p>${fn:substring(recentAccompanyDto.content, 0, 70)}
 						        <c:if test="${fn:length(albumDto.content) >70}">
 						        	…
@@ -119,7 +135,6 @@
 			                    		 <li class=""><a href="#" data-toggle="tab">${postType.code_name}</a></li>
 			                    	</c:forEach>
 			                    </ul>                
-			                    
 			                </div>
                         
 		                	<!-- 게시판 리스트 시작 -->
@@ -161,9 +176,17 @@
 													</c:if>
 												</c:forEach>
 											</td>
-											<td><a href ="/user/accompany/accompanyRead.do?accompany_no=${accompanyDto.accompany_no}&currentPage=${currentPage}" style="color:inherit;">${accompanyDto.title}</a>&nbsp;<span class="badge badge-u">${accompanyDto.reply_count}</span></td>
+											<td><a href ="/user/accompany/accompanyRead.do?accompany_no=${accompanyDto.accompany_no}&currentPage=${currentPage}" style="color:inherit;" title="${accompanyDto.title}">${accompanyDto.title}</a>&nbsp;[${accompanyDto.reply_count}]</td>
 											<td>${accompanyDto.mem_name}</td>
-											<td><fmt:formatDate pattern="MM-dd" value="${accompanyDto.write_date}"/></td>
+											<td>
+												<fmt:formatDate var="writeDate" value="${accompanyDto.write_date}" pattern="yy-MM-dd"/>
+												<c:if test="${writeDate eq nowDate}"><!-- 현재 -->
+													<fmt:formatDate pattern="HH:mm" value="${accompanyDto.write_date}"/>
+												</c:if>
+												<c:if test="${writeDate lt nowDate}"><!-- 과거 -->
+													<fmt:formatDate pattern="yyyy-MM-dd" value="${accompanyDto.write_date}"/>
+												</c:if>
+											</td>
 											<td>${accompanyDto.hits}</td>
 										</tr>
 								   </c:forEach>
@@ -230,19 +253,18 @@
 	            </div>
 	        </div><!--/end container-->
 	        <!-- End Content Part -->
-				
-                 
-		    <!--=== Footer Version 1 ===-->
-		    <div class="footer-v1">
-				<c:import url="/WEB-INF/views/user/common/footer.jsp"/>
-		    </div>
-		    <!--=== End Footer Version 1 ===-->
-		    
-		    <!-- 쪽지함에서 충돌로 인하 주석처리! -->
-			<script type="text/javascript" src="/assets/plugins/owl-carousel/owl-carousel/owl.carousel.js"></script>
-			<!-- 쪽지함에서 충돌로 인하 주석처리! -->
-			<script type="text/javascript" src="/assets/js/plugins/owl-carousel.js"></script>
 	    </div>
+        <!--=== Footer Version 1 ===-->
+	    <div class="footer-v1">
+			<c:import url="/WEB-INF/views/user/common/footer.jsp"/>
+	    </div>
+	    <!--=== End Footer Version 1 ===-->
     </div>
+    
+     
+    <!-- 쪽지함에서 충돌로 인하 주석처리! -->
+	<script type="text/javascript" src="/assets/plugins/owl-carousel/owl-carousel/owl.carousel.js"></script>
+	<!-- 쪽지함에서 충돌로 인하 주석처리! -->
+	<script type="text/javascript" src="/assets/js/plugins/owl-carousel.js"></script>
   </body>
 </html>

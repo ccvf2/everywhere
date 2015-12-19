@@ -3,19 +3,24 @@
 <!DOCTYPE html>
 <html>
 <head>
-<c:import url="/WEB-INF/views/common/jquery.jsp"/>
-<c:import url="/WEB-INF/views/user/common/utilImport.jsp"/>
+<c:import url="/WEB-INF/views/common/jquery.jsp" />
+<c:import url="/WEB-INF/views/user/common/utilImport.jsp" />
 <meta charset="UTF-8">
-<title>타이틀 입력</title>
-<!-- <script type="text/javascript" src="/script/common/jquery-1.11.3.js"></script> -->
+<title>여행스케줄쓰기</title>
+<script type="text/javascript">
+		$(function() { 
+			$('#plannerCreate').modal('show');
+			$('#plannerCreate').on('hide.bs.modal', function() {
+				$("#plannerCreate").remove;
+			})
+		});
+</script>
+
 </head>
 <body>
-<div class="header">
-<c:import url="/WEB-INF/views/user/common/header.jsp"/>
-</div>
-<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button>
-
-<div class="modal fade" id="myModal" role="dialog">
+<!-- 여행스케줄쓰기 -->
+<!-- <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button> -->
+<div class="modal fade" id="plannerCreate" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	<div class="modal-dialog">
 		<div class="modal-content">
 		<form action="/user/planner/plannerCreate.do" method="post" onsubmit="return plannerForm(this)" >
@@ -61,7 +66,5 @@
 	
 </div>
 <!-- /.modal -->
-	
-	
 </body>
 </html>
