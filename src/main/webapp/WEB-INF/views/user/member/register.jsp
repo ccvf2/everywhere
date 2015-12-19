@@ -23,6 +23,7 @@
 							$("#emailCheck").text("사용가능한 이메일입니다.");
 						} else {
 							$("#emailCheck").text("이미 사용중인 이메일입니다.");
+							$("#email").css("background-color", "red");
 						}
 					},
 					error : function(xhr, status, errorMsg) {
@@ -70,12 +71,12 @@
 	}
 </script>
 
-	<script type="text/javascript">
-		$(function() { 
-		   	$('#joinModal').modal('show');
+<script type="text/javascript">
+	$(function() { 
+		$('#joinModal').modal('show');
 		   
-		  	$('#joinModal').on('hide.bs.modal', function() {
-		  		$('#joinModal').remove();
+		$('#joinModal').on('hide.bs.modal', function() {
+			$('#joinModal').remove();
 			})
 		});
 </script> 
