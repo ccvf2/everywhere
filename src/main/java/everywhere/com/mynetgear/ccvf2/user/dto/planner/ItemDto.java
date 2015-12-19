@@ -1,6 +1,5 @@
 package everywhere.com.mynetgear.ccvf2.user.dto.planner;
 
-import java.sql.Timestamp;
 import java.util.List;
 
 import everywhere.com.mynetgear.ccvf2.comm.dto.common.CommonFileIODto;
@@ -15,8 +14,7 @@ public class ItemDto {
 	private String note;
 	private String attach_photoes;
 	private double item_star_score;
-	private Timestamp start_time;
-	private Timestamp end_time;
+	private String item_time;
 	
 	private SpotDto spot;
 	private List<CommonFileIODto> item_photoes;
@@ -78,19 +76,12 @@ public class ItemDto {
 		this.item_star_score = item_star_score;
 	}
 	
-	public Timestamp getStart_time() {
-		return start_time;
+	public String getItem_time() {
+		return item_time;
 	}
-	public void setStart_time(Timestamp start_time) {
-		this.start_time = start_time;
+	public void setItem_time(String item_time) {
+		this.item_time = item_time;
 	}
-	
-	public Timestamp getEnd_time() {
-		return end_time;
-	}
-	public void setEnd_time(Timestamp end_time) {
-		this.end_time = end_time;
-	}	
 	
 	public List<CommonFileIODto> getItem_photoes() {
 		return item_photoes;
@@ -117,8 +108,6 @@ public class ItemDto {
 	public String toString() {
 		return "ItemDto [item_no=" + item_no + ", planner_no=" + planner_no + ", mem_no=" + mem_no + ", spot_no="
 				+ spot_no + ", item_order=" + item_order + ", note=" + note + ", attach_photoes=" + attach_photoes
-				+ ", item_star_score=" + item_star_score + ", start_time=" + start_time + ", end_time=" + end_time
-				+ ", moneyList=" + moneyList + "]";
+				+ ", item_star_score=" + item_star_score + ", item_time=" + item_time +", moneyList=" + moneyList + "]";
 	}
-	
 }
