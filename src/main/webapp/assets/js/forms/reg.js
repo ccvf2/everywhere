@@ -15,8 +15,7 @@ var RegForm = function () {
 	            	},
 	                mem_name:
 	                {
-	                    required: true,
-	                    maxlength: 4  
+	                    required: true
 	                },
 	                mem_email:
 	                {
