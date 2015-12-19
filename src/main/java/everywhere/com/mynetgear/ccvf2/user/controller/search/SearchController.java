@@ -37,4 +37,36 @@ public class SearchController {
 		searchService.searchSpot(mav);
 		return mav;
 	}
+	
+	/**
+	 * @author 곽성국	
+	 * @createDate 2015. 12. 19.
+	 * @described 스케줄을 검색한다.
+	 * @param request
+	 * @param response
+	 * @return
+	 */
+	@RequestMapping(value="/user/search/searchPlanner.do", method=RequestMethod.GET)
+	public ModelAndView searchPlanner(HttpServletRequest request, HttpServletResponse response) { 
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("request", request);
+		searchService.searchPlanner(mav);
+		return mav;
+	}
+	
+	/**
+	 * @author 곽성국	
+	 * @createDate 2015. 12. 19.
+	 * @described 명소 및 스케줄을 검색한다.
+	 * @param request
+	 * @param response
+	 * @return
+	 */
+	@RequestMapping(value="/user/search/searchTotal.do", method=RequestMethod.GET)
+	public ModelAndView searchTotal(HttpServletRequest request, HttpServletResponse response) { 
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("request", request);
+		searchService.searchTotal(mav);
+		return mav;
+	}
 }

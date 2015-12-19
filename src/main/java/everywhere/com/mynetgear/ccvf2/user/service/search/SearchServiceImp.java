@@ -24,4 +24,16 @@ public class SearchServiceImp implements SearchService {
 		Map<String, Object> map = mav.getModelMap();
 		HttpServletRequest request = (HttpServletRequest) map.get("request");
 	}
+
+	@Override
+	public void searchPlanner(ModelAndView mav) {
+		Map<String, Object> map = mav.getModelMap();
+		HttpServletRequest request = (HttpServletRequest) map.get("request");
+	}
+
+	@Override
+	public void searchTotal(ModelAndView mav) {
+		Map<String, Object> map = mav.getModelMap();
+		HttpServletRequest request = (HttpServletRequest) map.get("request");
+	}
 }

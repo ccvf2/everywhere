@@ -18,4 +18,20 @@ public interface SearchService {
 	 */
 	void searchSpot(ModelAndView mav);
 
+	/**
+	 * @author 곽성국	
+	 * @createDate 2015. 12. 19.
+	 * @described 스케줄을 검색한다.
+	 * @param mav
+	 */
+	void searchPlanner(ModelAndView mav);
+
+	/**
+	 * @author 곽성국	
+	 * @createDate 2015. 12. 19.
+	 * @described 명소 및 스케줄을 검색한다.
+	 * @param mav
+	 */
+	void searchTotal(ModelAndView mav);
+
 }
