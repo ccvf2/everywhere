@@ -8,4 +8,10 @@ public interface MyPageService {
 
 	public ModelAndView myPage(ModelAndView mav);
 
+	public ModelAndView mateInsert(ModelAndView mav);
+
+	public ModelAndView mateDelete(ModelAndView mav);
+
+	public ModelAndView getListFriends(ModelAndView mav);
+
 }
