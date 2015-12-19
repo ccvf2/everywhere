@@ -19,14 +19,23 @@ public class MyPageController {
 	@Autowired
 	private MyPageService myPageService;
 
+	/**
+	 * @author 김성광
+	 * @createDate 2015. 12. 19.
+	 * @described 마이페이지로 이동
+	 * @param request
+	 * @param response
+	 * @return
+	 */
 	@RequestMapping(value = "/user/myPage/myPage.do", method = RequestMethod.GET)
 	public ModelAndView myPage(HttpServletRequest request, HttpServletResponse response) {
 		ModelAndView mav=new ModelAndView();
 		mav.addObject("request", request);
 		mav.addObject("response", response);
 		
-		
+		// 코드값에 따라 자신의 페이지 이동 & 타회원 페이지 이동
 		int uandMe=Integer.parseInt(request.getParameter("uandMe"));
+		
 		if(uandMe==1){
 			System.out.println("마이페이지로 이동");
 			mav=myPageService.myPage(mav);

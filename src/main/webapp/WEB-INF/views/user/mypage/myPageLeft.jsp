@@ -14,10 +14,10 @@
 	<c:set var="memberDto" value="${memberDto}"/>
 	<c:out value="${memberDto.mem_name}"/><c:out value="(${memberDto.mem_email})"/>
 	<c:if test="${mateCheck==0}">
-		<a href="/user/myPage/mateInsert.do?mate_no=${memberDto.mem_no}">친구추가</a>
+		<a href="/user/myPage/mateInsert.do?mem_no=${memberDto.mem_no}">친구추가</a>
 	</c:if>
 	<c:if test="${mateCheck==1}">
-		<a href="/user/myPage/mateDelete.do?mate_no=${memberDto.mem_no}">친구삭제</a>
+		<a href="/user/myPage/mateDelete.do?mem_no=${memberDto.mem_no}">친구삭제</a>
 	</c:if>
 	
     <ul class="list-group sidebar-nav-v1 margin-bottom-40" id="sidebar-nav-1">

@@ -32,14 +32,14 @@ public class MyPageServiceImpl implements MyPageService {
 	public ModelAndView moveUserPage(ModelAndView mav) {
 		Map<String, Object> map = mav.getModelMap();
 		HttpServletRequest request= (HttpServletRequest)map.get("request");
-		String mem_email=request.getParameter("mem_email");
-		MemberDto memberDto = memberDao.getOneMemberInfoAsEmail(mem_email);
+		int mate_no=Integer.parseInt(request.getParameter("mem_no"));
+		
+		MemberDto memberDto = memberDao.memberRead(mate_no);
 		
 		HttpSession session = request.getSession();
 		MemberDto myDto=(MemberDto) session.getAttribute(Constant.SYNN_LOGIN_OBJECT);
 		
 		int mem_no=myDto.getMem_no();
-		int mate_no=memberDto.getMem_no();
 		
 		HashMap<String, Integer> mateMap=new HashMap<String, Integer>();
 		
@@ -76,17 +76,19 @@ public class MyPageServiceImpl implements MyPageService {
 		HttpServletRequest request= (HttpServletRequest)map.get("request");
 		
 		HttpSession session = request.getSession();
-		MemberDto memberDto=(MemberDto) session.getAttribute(Constant.SYNN_LOGIN_OBJECT);
+		MemberDto myDto=(MemberDto) session.getAttribute(Constant.SYNN_LOGIN_OBJECT);
 		
-		int mem_no=memberDto.getMem_no();
-		int mate_no=Integer.parseInt(request.getParameter("mate_no"));
+		int mate_no=Integer.parseInt(request.getParameter("mem_no"));
+		MemberDto memberDto = memberDao.memberRead(mate_no);
 		
 		HashMap<String, Integer> mateMap=new HashMap<String, Integer>();
 		
-		mateMap.put("mem_no", mem_no);
+		mateMap.put("mem_no", myDto.getMem_no());
 		mateMap.put("mate_no", mate_no);
 		
 		int mateCheck=memberDao.mateInsert(mateMap);
+		
+		System.out.println("친구 추가 완료 :(mateCheck) : " + mateCheck);
 		
 		mav.addObject("mateCheck", mateCheck);
 		mav.addObject("memberDto", memberDto);
@@ -100,19 +102,21 @@ public class MyPageServiceImpl implements MyPageService {
 		HttpServletRequest request= (HttpServletRequest)map.get("request");
 		
 		HttpSession session = request.getSession();
-		MemberDto memberDto=(MemberDto) session.getAttribute(Constant.SYNN_LOGIN_OBJECT);
+		MemberDto myDto=(MemberDto) session.getAttribute(Constant.SYNN_LOGIN_OBJECT);
 		
-		int mem_no=memberDto.getMem_no();
-		int mate_no=Integer.parseInt(request.getParameter("mate_no"));
+		int mate_no=Integer.parseInt(request.getParameter("mem_no"));
+		MemberDto memberDto = memberDao.memberRead(mate_no);
 		
 		HashMap<String, Integer> mateMap=new HashMap<String, Integer>();
 		
-		mateMap.put("mem_no", mem_no);
+		mateMap.put("mem_no", myDto.getMem_no());
 		mateMap.put("mate_no", mate_no);
 		
-		memberDao.mateDelete(mateMap);
+		int mateCheck=memberDao.mateDelete(mateMap);
+
+		if(mateCheck==1) mateCheck=0;
 		
-		mav.addObject("mateCheck", 0);
+		mav.addObject("mateCheck", mateCheck);
 		mav.addObject("memberDto", memberDto);
 		mav.setViewName("/user/myPage/myPage");
 		return mav;
@@ -123,9 +127,13 @@ public class MyPageServiceImpl implements MyPageService {
 		Map<String, Object> map = mav.getModelMap();
 		HttpServletRequest request= (HttpServletRequest)map.get("request");
 		
+		//int uandMe=Integer.parseInt(request.getParameter("uandMe"));
 		int mem_no=Integer.parseInt(request.getParameter("mem_no"));
 		
 		List<MemberDto> friends=memberDao.getListFriends(mem_no);
+		
+		System.out.println("친구 몇명? :" +friends.size());
+		
 		return null;
 	}
 }
