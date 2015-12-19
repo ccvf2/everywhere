@@ -1,9 +1,12 @@
 package everywhere.com.mynetgear.ccvf2.user.service.main;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import everywhere.com.mynetgear.ccvf2.admin.dto.settingmain.SettingMainDto;
+import everywhere.com.mynetgear.ccvf2.comm.util.common.Constant;
+import everywhere.com.mynetgear.ccvf2.comm.util.common.StringUtil;
 import everywhere.com.mynetgear.ccvf2.user.dao.main.UserMainDao;
 
 /**
@@ -23,6 +26,20 @@ public class UserMainServiceImp implements UserMainService {
 	@Override
 	public SettingMainDto getOneBackGroundImg() {
 		SettingMainDto dto = userMainDao.getOneBackGroundImg();
+		
+		if(dto==null){
+			dto= new SettingMainDto();
+			//만약 저장된 이미지가 없으면 기본이미지를 출력한다.
+			dto.setSetting_url("/assets/plugins/parallax-slider/img/bg.jpg");
+		}else{
+			if(StringUtils.equals(dto.getSetting_url(), Constant.SYNB_NULL)){
+				dto.setSetting_url("/assets/plugins/parallax-slider/img/bg.jpg");
+			}else{
+				String path="/attatchFile/admin/mainBackground/"+dto.getSetting_url();
+				dto.setSetting_url(path);
+			}
+		}
+		
 		return dto;
 	}
 	

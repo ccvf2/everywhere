@@ -8,7 +8,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>admin-top_menu</title>
-<link href="/css/admin/bootstrap.min.css" rel="stylesheet">
+<link href="/css/admin/bootstrap.css" rel="stylesheet">
 <link href="/css/admin/sb-admin.css" rel="stylesheet">
 <!-- <link href="/css/admin/plugins/morris.css" rel="stylesheet"> -->
 <link href="/css/admin/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
@@ -41,7 +41,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
     </button>
-    <a class="navbar-brand" href="index.html">EVERYWHERE Admin</a>
+    <a class="navbar-brand" href="/admin/main/main.do">EVERYWHERE Admin</a>
 </div>
 <!-- Top Menu Items -->
             <ul class="nav navbar-right top-nav">

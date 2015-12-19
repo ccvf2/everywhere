@@ -28,8 +28,7 @@ public class UserMainController {
 		ModelAndView mav = new ModelAndView("/user/main/userMain2");
 		SettingMainDto settingMainDto=userMainService.getOneBackGroundImg();
 		//메인페이지 띄우기
-		String path="/attatchFile/admin/mainBackground/" + settingMainDto.getSetting_spot_code();
-		mav.addObject("backgroungImg",path);
+		mav.addObject("backgroungImg",settingMainDto.getSetting_url());
 		return mav;
 	}
 	

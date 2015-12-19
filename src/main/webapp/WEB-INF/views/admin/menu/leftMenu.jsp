@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,7 +14,7 @@
                         <a href="index.html"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
                     </li>
                     <li>
-                        <a href="charts.html"><i class="fa fa-fw fa-bar-chart-o"></i> Charts</a>
+                        <a href="/admin/chart/chartView.do"><i class="fa fa-fw fa-bar-chart-o"></i> 통계보기</a>
                     </li>
                     <li>
                         <a href="/admin/member/adminMemberList.do"><i class="fa fa-fw fa-table"></i>회원관리</a>

@@ -7,8 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
-    <c:import url="/WEB-INF/views/common/jquery.jsp"/>
-    <c:import url="/WEB-INF/views/user/common/utilImport.jsp"/>
+<%--     <c:import url="/WEB-INF/views/common/jquery.jsp"/>
+    <c:import url="/WEB-INF/views/user/common/utilImport.jsp"/> --%>
 <!-- --------------------------------css Start------------------------------------- -->
 <!-- Favicon -->
 <!-- <link rel="shortcut icon" href="/assets/favicon.ico"> -->
@@ -75,6 +75,14 @@ jQuery(document).ready(function() {
 <title>타이틀 입력</title>
 </head>
 
+
+
+
+
+
+
+
+
 	        <div class="container">
 	            <!-- Logo -->
 	            <a class="logo" href="/">
@@ -87,11 +95,47 @@ jQuery(document).ready(function() {
 	                <ul class="loginbar pull-right">
 	                	<c:choose>
 	                		<c:when test="${ mem_object.mem_name=='' || mem_object==null }">
-	                    		<li><a href="/user/login/login.do">Login</a></li>
+	                    		<li><a data-toggle="modal" data-target="#loginModal">login</a></li>
 								<li class="topbar-devider"></li>
 	                    		<li>
 	                    			<a href="/user/member/register.do">회원가입</a>
 	                    		</li>
+									<!-- 로그인 페이지 모달 -->
+									<div class="modal fade" id="loginModal" role="dialog">
+										<div class="modal-dialog">
+											<div class="modal-content">
+												<form class="reg-page" action="/user/login/login.do" name="memberLogin" method="post">
+									                   <div class="reg-header">
+									                       <h2>Login to your account</h2>
+									                   </div>
+									                   
+									                   <div class="input-group margin-bottom-20">
+									                       <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
+									                       <input type="text" name="mem_email" placeholder="Email address" class="form-control" value="admin@everwhere.com">
+									                   </div>
+									                   
+									                   <div class="input-group margin-bottom-20">
+									                       <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+									                       <input type="password" name="mem_pwd" placeholder="Password" class="form-control" value="1234567890">
+									                   </div>
+									                   
+									                   <div class="row">
+									                       <div class="col-md-6 checkbox">
+									                           <label><input type="checkbox">로그인 상태 유지</label>
+									                       </div>
+									                       <div class="col-md-6">
+									                           <button class="btn-u pull-right" type="submit">로그인</button>
+									                       </div>
+									                   </div>
+										
+													<hr>
+									
+									                   <h4>비밀번호를 잊어버리셨나요?</h4>
+									                   <p>걱정하지 마세요, <a class="color-green" href="#">여기를 누르시면</a> 비밀번호를 변경할 수 있습니다.</p>
+												</form>
+											</div>
+										</div>
+									</div>
 	                		</c:when>
 	                		<c:otherwise>
 			                	<li>${mem_object.mem_name}님 안녕하세요.</li>
