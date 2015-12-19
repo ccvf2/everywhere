@@ -7,7 +7,6 @@
 <title>타이틀 입력</title>
 <script src="/script/common/jquery-1.11.3.js"></script>
 <link href="/script/common/bootstrap/css/bootstrap.min.css" rel="stylesheet">
- 
 <script type="text/javascript" src="/script/user/spot/selectedCountry.js"></script>
 <script type="text/javascript" src="/script/user/spot/googleMap.js"></script>
 <script async defer src="https://maps.googleapis.com/maps/api/js"></script>
@@ -19,16 +18,13 @@
 }
 </style>
 </head>
-<body  leftmargin="0" marginwidth="0" topmargin="0" marginheight="0"
-   onload="markInitialize('${spotDto.spot_lat}','${spotDto.spot_long }', '${spotDto.spot_name }')">
-   
-   
-	<div class="modal fade" id="myMapModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<body  leftmargin="0" marginwidth="0" topmargin="0" marginheight="0">
+	<div class="modal fade" id="spotModalPage" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 		<div style="width: 1300px; margin-left: 10%;">
 			<div class="modal-dialog modal-lg" style="float: left;">
 				<div class="modal-content">
 					<div class="modal-header">
-						<h1 class="modal-title" id="myModalLabel1"><c:out value="${spotDto.spot_name }"/></h1>
+						<h1 class="modal-title" id="myModalLabel1"><c:out value="${spotDto.spot_name}"/></h1>
 					</div>
 	
 					<div class="modal-body">
@@ -105,17 +101,22 @@
 		</div>
 	</div>
 	<script src="/script/admin/bootstrap.min.js"></script>
+	
 	<script type="text/javascript">
+	var spot_no=${spotDto.spot_no};
+	var spot_lat = ${spotDto.spot_lat};
+	var spot_long = ${spotDto.spot_long };
 		$(function() { 
-		   	$('#myMapModal').modal('show'); // 현재 페이지로 오면, modal 호출
-		   
-		  	$('#myMapModal').on('hide.bs.modal', function() {	// modal close 되면 -> back
-			   history.back(-1); ;
+			$('#spotModalPage').modal('show'); // 현재 페이지로 오면, modal 호출
+
+			$('#spotModalPage').on('hide.bs.modal', function() {	// modal close 되면 -> back
+				$("#showModal"+spot_no).remove();
 			});
-		  	
-		  	$("#spot_maps1").click(function(){
-		  	  	resizeMap();
-		  	});
+
+			$("#spot_maps1").click(function(){
+				markInitialize(spot_lat, spot_long, spot_long);
+				resizeMap();
+			});
 		});
 </script> 
 </body>
