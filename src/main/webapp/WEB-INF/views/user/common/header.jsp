@@ -65,14 +65,48 @@
 <!-- <link rel="stylesheet" href="/assets/plugins/bootstrap/css/bootstrap.min.css">
 <link rel="stylesheet" href="/assets/css/style.css"> -->
 <script>
-jQuery(document).ready(function() {
-   	//App.init();
-    //OwlCarousel.initOwlCarousel();
-    //ParallaxSlider.initParallaxSlider();
-});
+//회원가입 폼 모달
+function joinFormReqiest() {
+	var makeDiv ="<div id='joinForm'></div>";
+	var requestURL="/user/member/register.do";
+		$.ajax({
+					url : requestURL,
+					type : "GET",
+					dataType : "html",
+					success : function(data) {
+						$("body").append(makeDiv);
+						$("#joinForm").append(data)
+					},
+					error : function() {
+						alert("목록 가져오기 실패");
+					}
+				})
+}
+
+//여행스케줄 작성 모달
+
+function plannerCreateReqiest() {
+	//alert("Qyd")
+	var makeDiv ="<div id='plannerCreate'></div>";
+	var requestURL="user/planner/plannerCreate.do";
+		$.ajax({
+					url : requestURL,
+					type : "GET",
+					dataType : "html",
+					success : function(data) {
+						$("body").append(makeDiv);
+						$("#plannerCreate").append(data)
+					},
+					error : function() {
+						alert("목록 가져오기 실패"); 
+					}
+				})
+}
+
 </script>
 <meta charset="UTF-8">
 <title>타이틀 입력</title>
+
 </head>
 
 
@@ -98,7 +132,8 @@ jQuery(document).ready(function() {
 	                    		<li><a data-toggle="modal" data-target="#loginModal">login</a></li>
 								<li class="topbar-devider"></li>
 	                    		<li>
-	                    			<a href="/user/member/register.do">회원가입</a>
+	                    			<!-- <a href="/user/member/register.do">회원가입</a> -->
+	                    			<a href="javascript:joinFormReqiest()">회원가입</a>
 	                    		</li>
 									<!-- 로그인 페이지 모달 -->
 									<div class="modal fade" id="loginModal" role="dialog">
@@ -205,7 +240,7 @@ jQuery(document).ready(function() {
 	
 	                    <!-- Pages -->
 	                    <li class="dropdown">
-	                        <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">
+	                        <a href="javascript:plannerCreateReqiest()" class="dropdown-toggle">
 	                            여행 스케줄 작성
 	                        </a>
 	                    </li>
@@ -213,7 +248,7 @@ jQuery(document).ready(function() {
 	
 	                    <!-- Blog -->
 	                    <li class="dropdown<c:if test="${ fn:startsWith(path, '/user/member')}">${ on }</c:if>">
-	                        <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">
+	                        <a href="/user/accompany/accompanyList.do" class="dropdown-toggle">
 	                            여행동행구하기
 	                        </a>
 	                     </li>   	                    

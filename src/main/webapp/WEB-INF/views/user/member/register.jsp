@@ -75,7 +75,7 @@
 		   	$('#joinModal').modal('show');
 		   
 		  	$('#joinModal').on('hide.bs.modal', function() {
-			   history.back(-1); ;
+			//   history.back(-1); ;
 			})
 		});
 </script> 
