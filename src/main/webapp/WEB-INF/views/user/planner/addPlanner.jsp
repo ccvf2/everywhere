@@ -5,6 +5,7 @@
 <html>
 <head>
 <c:import url="/WEB-INF/views/common/jquery.jsp"/>
+<c:import url="/WEB-INF/views/user/common/utilImport.jsp"/>
 <meta charset="UTF-8">
 <title>타이틀 입력</title>
 	<!-- CSS Page Style -->
