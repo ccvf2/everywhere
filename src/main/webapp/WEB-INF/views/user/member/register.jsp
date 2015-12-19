@@ -23,7 +23,7 @@
 							$("#emailCheck").text("사용가능한 이메일입니다.");
 						} else {
 							$("#emailCheck").text("이미 사용중인 이메일입니다.");
-							$("#email").css("background-color", "red");
+							$("#email").css("background-color", "#FFF0F0");
 						}
 					},
 					error : function(xhr, status, errorMsg) {
