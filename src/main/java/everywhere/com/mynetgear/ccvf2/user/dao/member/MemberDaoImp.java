@@ -1,5 +1,8 @@
 package everywhere.com.mynetgear.ccvf2.user.dao.member;
 
+import java.util.HashMap;
+import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -59,6 +62,30 @@ public class MemberDaoImp implements MemberDao {
 	@Override
 	public MemberDto getOneMemberInfoAsEmail(String mem_email) {
 		return sqlTemplate.selectOne("getOneMemberInfoAsEmail", mem_email);
+	}
+	
+	/** 친구 유무 확인*/
+	@Override
+	public int getMateCheck(HashMap<String, Integer> mateMap) {
+		return sqlTemplate.selectOne("getMateCheck", mateMap);
+	}
+
+	/** 친구 추가*/
+	@Override
+	public int mateInsert(HashMap<String, Integer> mateMap) {
+		return sqlTemplate.insert("mateInsert", mateMap);
+	}
+
+	/** 친구 삭제*/
+	@Override
+	public int mateDelete(HashMap<String, Integer> mateMap) {
+		return sqlTemplate.delete("mateDelete", mateMap);
+	}
+
+	/** 친구 목록*/
+	@Override
+	public List<MemberDto> getListFriends(int mem_no) {
+		return sqlTemplate.selectList("getListFriends", mem_no);
 	}
 
 }
