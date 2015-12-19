@@ -10,6 +10,8 @@
 <script type="text/javascript" src="/script/chart/jquery-ui.js"></script>
 <link rel="stylesheet" type="text/css" href="/script/chart/jquery-ui.css"/>
 <script type="text/javascript" src="/script/chart/jquery.canvasjs.min.js"></script> -->
+
+
 </head>
 <body>
 	<div id="wrapper">
@@ -22,6 +24,20 @@
 	        </nav>
 			<script type="text/javascript">
 				 $(function(){
+			 		var option = {
+				      title: {
+				         text: "검색 결과 없음(검색해주세요)"
+				      },
+				                animationEnabled: true,
+				      data: [
+				      {
+				         type: "column", //column, line, area, bar, pie, etc
+				         dataPoints: []
+				      }]
+				   	};
+				   	$("#chartContainer").CanvasJSChart(option);
+					 
+					 
 					$("#date1,#date2").datepicker({
 			          dateFormat:"yy-mm-dd",
 			          monthNames: [ "1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월" ],
@@ -159,23 +175,49 @@
 	        <div id="page-wrapper" style="height: 700px;">
 
             <div class="container-fluid">
-				<h3>통계보기</h3>
-				
+				<!-- Page Heading -->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1 class="page-header">
+                            EVERYWHERE <small>관리자 모드</small>
+                        </h1>
+                        <ol class="breadcrumb">
+                            <li class="active">
+                                <i class="fa fa-dashboard"></i> 통계
+                            </li>
+                        </ol>
+                        
+                        <div class="alert alert-info alert-dismissable">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                            <i class="fa fa-info-circle"></i>  <strong>서비스</strong>&nbsp;&nbsp;&nbsp;검색할 년,월,일별통계를 먼저 선택후, 날짜를 검색해주세요.
+                        </div>
+                    </div>
+                </div>
+
+				<hr/>
 				
 				<div>
-					<input type="text" size="10" id="date1"/>
-					<input type="text" size="10" id="date2"/> 
+				
+				<select id="selectOption">
+					<option value="Year">년별 통계</option>
+					<option value="Month">월별 통계</option>
+					<option value="day">일별 통계</option>
+				</select>
+
+                 <label class="input">
+                     <i class="icon-append fa fa-calendar"></i>
+                     <input type="text" name="start" id="date1" placeholder="Start date">
+                 </label>
+                 <label class="input">
+                     <i class="icon-append fa fa-calendar"></i>
+                     <input type="text" name="finish" id="date2" placeholder="Expected finish date">
+                 </label>
 					
-					<select id="selectOption">
-						<option value="Year">년별 통계</option>
-						<option value="Month">월별 통계</option>
-						<option value="day">일별 통계</option>
-					</select>
 					
-					<input type="button" id="btn" value="조회"/>
+					<input type="button" id="btn" value="조회" class="btn btn-default" style="height: 30px; line-height: -50px; width: 100px; margin-bottom: 10px; margin-left: 30px;"/>
 				</div>
 				<br/><br/>
-				 <div id="chartContainer" style="width: 1000px; height: 300px;"></div>
+				 <div id="chartContainer" style="width: 900px; height: 300px;"></div>
 			</div>
 		</div>
 	</div>

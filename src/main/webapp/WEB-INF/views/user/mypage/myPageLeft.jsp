@@ -5,11 +5,15 @@
 <head>
 <meta charset="UTF-8">
 <title>마이페이지 Left</title>
+<script type="text/javascript" src="/assets/plugins/line-icons/icons-lte-ie7.js"></script>
 </head>
 <body>
 	<img class="img-responsive profile-img margin-bottom-20" src="/assets/img/team/img32-md.jpg" alt="">
-	<c:out value="${dto.mem_name}"/>(<c:out value="${dto.mem_email}"/>)
-	
+	<%-- <c:out value="${session.mem_name}"/><c:out value="(${session.mem_email})"/> --%>
+	<%-- <c:set var="loginMember" value="${mem_object}" scope="session"/> --%>
+	<c:set var="memberDto" value="${memberDto}"/>
+	<c:out value="${memberDto.mem_name}"/><c:out value="(${memberDto.mem_email})"/>
+	    
     <ul class="list-group sidebar-nav-v1 margin-bottom-40" id="sidebar-nav-1">
         <li class="list-group-item">
         </li>
@@ -34,7 +38,6 @@
         <li class="list-group-item">
             <a href="#"><i class="fa fa-cog"></i> 설정</a>
         </li>
-        <c:if test=""></c:if>
     </ul>
 
     <!--Notification-->
@@ -51,7 +54,7 @@
             </div>
         </li>
         <li class="notification">
-            <img class="rounded-x" src="assets/img/testimonials/img6.jpg" alt="">
+            <img class="rounded-x" src="/assets/img/testimonials/img6.jpg" alt="">
             <div class="overflow-h">
                 <span><strong>Taylor Lee</strong> started following you.</span>
                 <small>Today 18:25 pm</small>
@@ -65,7 +68,7 @@
             </div>
         </li>
         <li class="notification">
-            <img class="rounded-x" src="assets/img/testimonials/img1.jpg" alt="">
+            <img class="rounded-x" src="/assets/img/testimonials/img1.jpg" alt="">
             <div class="overflow-h">
                 <span><strong>Mikel Andrews</strong> commented on your Timeline.</span>
                 <small>23/12 11:01 am</small>
@@ -79,7 +82,7 @@
             </div>
         </li>
         <li class="notification">
-            <img class="rounded-x" src="assets/img/testimonials/img6.jpg" alt="">
+            <img class="rounded-x" src="/assets/img/testimonials/img6.jpg" alt="">
             <div class="overflow-h">
                 <span><strong>Taylor Lee</strong> changed profile picture.</span>
                 <small>23/12 15:15 pm</small>

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,7 +14,7 @@
                         <a href="index.html"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
                     </li>
                     <li>
-                        <a href="charts.html"><i class="fa fa-fw fa-bar-chart-o"></i> Charts</a>
+                        <a href="/admin/chart/chartView.do"><i class="fa fa-fw fa-bar-chart-o"></i> 통계보기</a>
                     </li>
                     <li>
                         <a href="/admin/member/adminMemberList.do"><i class="fa fa-fw fa-table"></i>회원관리</a>
@@ -42,7 +43,7 @@
                         <a href="http://localhost:8888/admin/commoncode/code.do"><i class="fa fa-fw fa-file"></i> 공통코드목록</a>
                     </li>
                     <li>
-                        <a href="index-rtl.html"><i class="fa fa-fw fa-dashboard"></i> RTL Dashboard</a>
+                        <a href="/admin/settingMain/settingMain.do"><i class="fa fa-fw fa-dashboard"></i> 메인화면 수정하기</a>
                     </li>
                 </ul>
             </div>

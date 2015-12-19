@@ -8,7 +8,7 @@
 
 body {
     margin-top: 100px;
-    background-color: #222;
+    background-color: #FFFFFF;
 }
 
 @media(min-width:768px) {
@@ -122,10 +122,13 @@ ul.alert-dropdown {
         border: none;
         border-radius: 0;
         overflow-y: auto;
-        background-color: #222;
+        /* 사이드 메뉴 배경색 */
+        background-color: #FFFFFF;
         bottom: 0;
         overflow-x: hidden;
         padding-bottom: 40px;
+        /* 선색깔 */
+        border:solid 1px #eee;
     }
 
     .side-nav>li>a {
