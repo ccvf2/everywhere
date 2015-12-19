@@ -5,7 +5,9 @@
 <head>
 <meta charset="UTF-8">
 <title>타이틀 입력</title>
-<script src="/assets/plugins/jquery/jquery.min.js"></script>
+<c:import url="/WEB-INF/views/common/jquery.jsp"/>
+<c:import url="/WEB-INF/views/user/common/utilImport.jsp"/>
+<!-- <script src="/assets/plugins/jquery/jquery.min.js"></script> -->
 <script type="text/javascript">
 	 function formSubmit(form) {
 		 console.log(form);
@@ -29,6 +31,9 @@
 </script>
 </head>
 <body>
+	    <div class="header">
+			<c:import url="/WEB-INF/views/user/common/header.jsp"/>
+	    </div>
 	<table border="1">
 	<c:forEach var="list" items="${parsonTalkList}">
 		<tr>

@@ -72,7 +72,7 @@ function plannerCreateReqiest() {
 </head>
 	        <div class="container">
 	            <!-- Logo -->
-	            <a class="logo" href="/">
+	            <a class="logo" href="/user/main/main.do">
 	                <img src="/assets/img/logo1-default.png" alt="Logo">
 	            </a>
 	            <!-- End Logo -->
@@ -97,6 +97,8 @@ function plannerCreateReqiest() {
 			                    <c:if test="${mem_object.mem_level_code=='M0001'}">
 			                    <li><a href="/admin/main/main.do" style="color: #72c02c;">관리자페이지</a></li>
 			                    </c:if>
+			                    <li class="topbar-devider"></li>
+			                    <li><a href="/user/message/messageBox.do?mem_no=10">쪽지함</a></li>
 	                		</c:otherwise>
 	                	</c:choose>
 	                </ul>
@@ -126,22 +128,22 @@ function plannerCreateReqiest() {
 	                            <div class="input-group animatedfadeInDown ">
 	                                <input type="text" class="form-control" placeholder="Search">
 	                                <span class="input-group-btn">
-	                                    <button class="btn-u" type="button">Go</button>
+	                                    <a class="btn-u" type="button" href="/user/search/searchTotal.do">Go</a>
 	                                </span>
 	                            </div>
 	                        </div>
 	                    </li>
 	                    <!-- End Search Block -->
 	                    <li class="dropdown <c:if test="${ fn:startsWith(path, '/user/member')}">${ on }</c:if>">
-	                        <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">
+	                        <a href="/user/planner/plannerList.do?mem_no=64" class="dropdown-toggle" >
 	                           리뷰
 	                        </a>
-	                        <ul class="dropdown-menu">
+<!-- 	                        <ul class="dropdown-menu">
 	                            <li><a href="index.html">Option 1: Default Page</a></li>
 	                            <li><a href="page_home8.html">Option 5: Home Discover</a></li>
 	                            <li><a href="page_home4.html">Option 17: Home Basic v4</a></li>
 	                            <li class="active"><a href="page_home7.html">Option 18: Home Basic v5</a></li>
-	                        </ul>
+	                        </ul> -->
 	                    </li>
 	                    <!-- End Home -->
 	
@@ -163,12 +165,9 @@ function plannerCreateReqiest() {
 	
 	                    <!-- Portfolio -->
 	                    <li class="dropdown">
-	                        <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">
+	                        <a href="/user/myPage/myPage.do?uandMe=1" class="dropdown-toggle">
 	                            마이페이지
 	                        </a>
-	                        <ul class="dropdown-menu">
-	                            <li><a href="portfolio_hover_colors.html">Portfolio Hover Colors</a></li>
-	                        </ul>
 	                    </li>
 	                    <!-- End Portfolio -->
 	

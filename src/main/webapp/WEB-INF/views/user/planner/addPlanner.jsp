@@ -21,7 +21,7 @@
 	<script type="text/javascript" src="/script/user/planner/addPlannerPage.js"></script>	
 </head>
 <script type="text/javascript">
-function test(no) {
+function spotReadPage(no) {
 	//alert(no);
 	var makeDiv ="<div id='showModal"+no+"'></div>";
 	var requestURL="/user/spot/spotReadPage.do?spot_no="+no;
@@ -145,7 +145,7 @@ function test(no) {
 										<div class="overflow-h">
 											<span><strong>
 											<%-- <a href="/user/spot/spotReadPage.do?spot_no=${spot.spot_no}">${spot.spot_name}</a> --%>
-											<a href="javascript:test('${spot.spot_no}')">${spot.spot_name}</a>
+											<a href="javascript:spotReadPage('${spot.spot_no}')">${spot.spot_name}</a>
 											</strong></span>
 											<small><c:out value="${spot.spot_note}"/></small>
 										</div>

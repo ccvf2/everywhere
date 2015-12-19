@@ -5,8 +5,9 @@
 <head>
 <meta charset="UTF-8">
 <title>My Page</title>
-
-<script src="/assets/plugins/jquery/jquery.min.js"></script>
+<c:import url="/WEB-INF/views/common/jquery.jsp"/>
+<c:import url="/WEB-INF/views/user/common/utilImport.jsp"/>
+<!-- <script src="/assets/plugins/jquery/jquery.min.js"></script> -->
 <script type="text/javascript">
 	 function formSubmit(form) {
 		 console.log(form);
@@ -38,16 +39,16 @@
     <meta name="author" content="">
 
     <!-- Favicon -->
-    <link rel="shortcut icon" href="favicon.ico">
+<!--     <link rel="shortcut icon" href="favicon.ico">
 
-    <!-- Web Fonts -->
+    Web Fonts
     <link rel='stylesheet' type='text/css' href='//fonts.googleapis.com/css?family=Open+Sans:400,300,600&amp;subset=cyrillic,latin'>
 
-    <!-- CSS Global Compulsory -->
+    CSS Global Compulsory
     <link rel="stylesheet" href="/assets/plugins/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="/assets/css/style.css">
 
-    <!-- CSS Implementing Plugins -->
+    CSS Implementing Plugins
     <link rel="stylesheet" href="/assets/plugins/animate.css">
     <link rel="stylesheet" href="/assets/plugins/line-icons/line-icons.css">
     <link rel="stylesheet" href="/assets/plugins/font-awesome/css/font-awesome.min.css">
@@ -55,12 +56,12 @@
     <link rel="stylesheet" href="/assets/plugins/sky-forms-pro/skyforms/css/sky-forms.css">
     <link rel="stylesheet" href="/assets/plugins/sky-forms-pro/skyforms/custom/custom-sky-forms.css">
 
-    <!-- CSS Page Style -->
+    CSS Page Style
     <link rel="stylesheet" href="/assets/css/pages/profile.css">
     <link rel="stylesheet" href="/assets/css/pages/shortcode_timeline1.css">
 
-    <!-- CSS Customization -->
-    <link rel="stylesheet" href="/assets/css/custom.css">
+    CSS Customization
+    <link rel="stylesheet" href="/assets/css/custom.css"> -->
 </head>
 <body>
 <div class="wrapper">
