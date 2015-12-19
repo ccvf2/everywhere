@@ -92,12 +92,21 @@ public class SpotServiceImp implements SpotService{
 		spotDto.setCountry_code(country_code);
 		spotDto.setCity_code(city_code);
 		spotDto.setSpot_type_code(spot_type_code);
-		List<SpotDto> countrySpotList = spotDao.getSpotList(spotDto);
-		
+		List<SpotDto> selectSpotList = spotDao.getSpotList(spotDto);
+		for(int i = 0; i < selectSpotList.size(); i++){
+			String[] attach_no = selectSpotList.get(i).getAttach_file().split(",");
+			
+			List<CommonFileIODto> fileList = new ArrayList<CommonFileIODto>();
+			CommonFileIODto fileIODto = commonFileIoDao.getOneFileDto(Integer.parseInt(attach_no[0]));
+			fileList.add(fileIODto);
+			System.out.println(fileIODto);
+			selectSpotList.get(i).setSpot_photoes(fileList);
+		}
+
 		JSONArray jsonArray = new JSONArray();
 		JSONObject rootObj = new JSONObject();
-		for (int i = 0; i < countrySpotList.size(); i++) {
-			SpotDto dto = countrySpotList.get(i);
+		for (int i = 0; i < selectSpotList.size(); i++) {
+			SpotDto dto = selectSpotList.get(i);
 			JSONObject obj = new JSONObject();
 			obj.put("spot_no", dto.getSpot_no());
 			obj.put("mem_no", dto.getMem_no());
@@ -111,6 +120,8 @@ public class SpotServiceImp implements SpotService{
 			obj.put("spot_lat", dto.getSpot_lat());
 			obj.put("spot_long", dto.getSpot_long());
 			obj.put("total_star_score", dto.getTotal_star_score());
+			obj.put("spot_photo_save_name", StringUtils.clean(dto.getSpot_photoes().get(0).getSave_name()));
+			obj.put("spot_photo_extension", StringUtils.clean(dto.getSpot_photoes().get(0).getExtension()));
 			jsonArray.add(obj);
 		}
 		
