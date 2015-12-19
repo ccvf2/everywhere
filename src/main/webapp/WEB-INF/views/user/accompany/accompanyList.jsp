@@ -50,6 +50,8 @@
 		    });
 		});
 	</script>
+  	<c:import url="/WEB-INF/views/common/jquery.jsp"/>
+	<c:import url="/WEB-INF/views/user/common/utilImport.jsp"/>
   </head>
   <body>
 	<div class="wrapper">
@@ -58,7 +60,6 @@
 	    <div class="header">
 			<c:import url="/WEB-INF/views/user/common/header.jsp"/>
 	    </div>
-	    
 	    <!--=== End Header ===-->
 	   
 	   
@@ -230,19 +231,18 @@
 	            </div>
 	        </div><!--/end container-->
 	        <!-- End Content Part -->
-				
-                 
-		    <!--=== Footer Version 1 ===-->
-		    <div class="footer-v1">
-				<c:import url="/WEB-INF/views/user/common/footer.jsp"/>
-		    </div>
-		    <!--=== End Footer Version 1 ===-->
-		    
-		    <!-- 쪽지함에서 충돌로 인하 주석처리! -->
-			<script type="text/javascript" src="/assets/plugins/owl-carousel/owl-carousel/owl.carousel.js"></script>
-			<!-- 쪽지함에서 충돌로 인하 주석처리! -->
-			<script type="text/javascript" src="/assets/js/plugins/owl-carousel.js"></script>
 	    </div>
+        <!--=== Footer Version 1 ===-->
+	    <div class="footer-v1">
+			<c:import url="/WEB-INF/views/user/common/footer.jsp"/>
+	    </div>
+	    <!--=== End Footer Version 1 ===-->
     </div>
+    
+     
+    <!-- 쪽지함에서 충돌로 인하 주석처리! -->
+	<script type="text/javascript" src="/assets/plugins/owl-carousel/owl-carousel/owl.carousel.js"></script>
+	<!-- 쪽지함에서 충돌로 인하 주석처리! -->
+	<script type="text/javascript" src="/assets/js/plugins/owl-carousel.js"></script>
   </body>
 </html>
