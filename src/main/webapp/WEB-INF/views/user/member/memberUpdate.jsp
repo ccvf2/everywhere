@@ -92,10 +92,8 @@
 		                                	<i class="icon-append fa fa-phone"></i>
 		                                    <input type="text" name="mem_phone" placeholder="Phonenumber" value="${memberDto.mem_phone}">
 		                                    <b class="tooltip tooltip-top-right">회원님의 전화번호를 입력해주세요.</b>
-		                                    <c:if test="${form.mem_phone.value()!=memberDto.mem_p_status_code}">
-			                                    <a class="btn-u" href="javascript:pStatusChange()">번호인증</a>
-											</c:if>
-												<input type="hidden" name="mem_p_status_code" value="${mem_p_status_code}">
+			                                <a class="btn-u" href="javascript:pStatusChange()">번호인증</a>
+											<input type="hidden" name="mem_p_status_code" value="${mem_p_status_code}">
 		                                </label>
 		                            </section>
 		
