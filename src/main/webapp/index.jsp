@@ -61,8 +61,8 @@
  <a href="/user/message/messageBox.do?mem_no=${mem_object.mem_no}">메세지 박스</a>
 <hr/>
 	<a href="/user/search/searchTotal.do">통합검색</a>
-	<a href="/user/search/searchSpot.do">통합검색</a>
-	<a href="/user/search/searchPlanner.do">통합검색</a>
+	<a href="/user/search/searchSpot.do">명소검색</a>
+	<a href="/user/search/searchPlanner.do">스캐줄 검색</a>
 <hr/>
 <a href="javascript:test()">test</a>
 <hr/>
