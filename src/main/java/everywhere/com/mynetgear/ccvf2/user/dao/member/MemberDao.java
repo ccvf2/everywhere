@@ -1,5 +1,8 @@
 package everywhere.com.mynetgear.ccvf2.user.dao.member;
 
+import java.util.HashMap;
+import java.util.List;
+
 import everywhere.com.mynetgear.ccvf2.user.dto.member.MemberDto;
 
 /**
@@ -81,5 +84,41 @@ public interface MemberDao {
 	 * @return
 	 */
 	public MemberDto getOneMemberInfoAsEmail(String mem_email);
+
+	/**
+	 * @author 김성광
+	 * @createDate 2015. 12. 19.
+	 * @described 친구 유무 체크
+	 * @param mateMap
+	 * @return
+	 */
+	public int getMateCheck(HashMap<String, Integer> mateMap);
+
+	/**
+	 * @author 김성광
+	 * @createDate 2015. 12. 19.
+	 * @described 친구추가
+	 * @param mateMap
+	 * @return
+	 */
+	public int mateInsert(HashMap<String, Integer> mateMap);
+
+	/**
+	 * @author 김성광
+	 * @createDate 2015. 12. 19.
+	 * @described 친구삭제
+	 * @param mateMap
+	 * @return
+	 */
+	public int mateDelete(HashMap<String, Integer> mateMap);
+
+	/**
+	 * @author 김성광
+	 * @createDate 2015. 12. 19.
+	 * @described 친구 목록
+	 * @param mem_no
+	 * @return
+	 */
+	public List<MemberDto> getListFriends(int mem_no);
 
 }

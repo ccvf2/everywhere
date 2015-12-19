@@ -34,7 +34,9 @@
  <a href="/user/myPage/myPage.do?uandMe=1">마이페이지</a>
  <hr/>
  <h3>타회원(마이페이지) 이동</h3>
- <a href="/user/myPage/myPage.do?uandMe=2&mem_email=tjdrhkd2@naver.com">김성광(tjdrhkd2@naver.com)</a>
+ <a href="/user/myPage/myPage.do?uandMe=2&mem_no=44">봉채윤(tjdrhkd@naver.com)</a><br/>
+ <a href="/user/myPage/myPage.do?uandMe=2&mem_no=43">김성광(tjdrhkd2@naver.com)</a><br/>
+ <a href="/user/myPage/myPage.do?uandMe=2&mem_no=70">전현준(guswns@naver.com)</a><br/>
  <hr/>
  <a href="/user/member/register.do">회원가입</a>
  <a href="/user/member/memberRead.do?mem_no=10">회원정보보기</a>

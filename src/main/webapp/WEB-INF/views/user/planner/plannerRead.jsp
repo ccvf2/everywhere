@@ -3,40 +3,28 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <title>여행 계획</title>
+<head>
+	<c:import url="/WEB-INF/views/common/jquery.jsp"/>
+	<c:import url="/WEB-INF/views/user/common/utilImport.jsp"/>
+	<meta charset="utf-8">
+	<title>여행 계획</title>
 
-    <!-- Bootstrap -->
-    <link href="/script/common/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+	<!-- CSS Page Style -->
+	<link rel="stylesheet" href="/assets/css/pages/shortcode_timeline2.css">
+	</head>
+	<body>
+	<fmt:formatDate var="start_date" pattern="yyyy-MM-dd" value="${plannerDto.start_date}"/>
+	<fmt:formatDate var="end_date" pattern="yyyy-MM-dd" value="${plannerDto.end_date}"/>
+	<input type="hidden" name="planner_no" value="${plannerDto.planner_no}"/>
+	<input type="hidden" name="mem_no" value="64" />
+	<div class="wrapper">
+		<!--=== Header ===-->
+		<div class="header">
+			<c:import url="/WEB-INF/views/user/common/header.jsp"/>
+		</div>
+	<!--=== End Header ===-->
 
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
-    
-    <!-- CSS Page Style -->    
-    <link rel="stylesheet" href="/assets/css/pages/shortcode_timeline2.css">
-  </head>
-  <body>
-  <fmt:formatDate var="start_date" pattern="yyyy-MM-dd" value="${plannerDto.start_date}"/>
-  <fmt:formatDate var="end_date" pattern="yyyy-MM-dd" value="${plannerDto.end_date}"/>  		
-  <input type="hidden" name="planner_no" value="${plannerDto.planner_no}"/>
-  <input type="hidden" name="mem_no" value="64" />
-  	
-<div class="wrapper">
-	<!--=== Header ===-->	
-    <div class="header">
-		<c:import url="/WEB-INF/views/user/common/header.jsp"/>
-    </div>    
-	<!--=== End Header ===-->	
-	 
-    <!--=== Breadcrumbs ===-->    
+    <!--=== Breadcrumbs ===-->
     <div class="breadcrumbs-v1">
         <div class="container" style="height: 50px;">
             <span>Blog Item Page</span>
@@ -51,8 +39,8 @@
             <!-- Begin Sidebar Menu -->
             <div class="col-md-3">
                 <ul class="list-group sidebar-nav-v1" id="sidebar-nav">
-                    <!-- Typography -->                    
-                    <li class="list-group-item list-toggle">                   
+                    <!-- Typography -->
+                    <li class="list-group-item list-toggle">
                         <a data-toggle="collapse" data-parent="#sidebar-nav" href="#collapse-typography">Typography</a>
                         <ul id="collapse-typography" class="collapse">
                             <li><a href="shortcode_typo_general.html"><i class="fa fa-sort-alpha-asc"></i> General Typography</a></li>
@@ -86,14 +74,14 @@
                                 <a href="shortcode_btn_brands.html"><i class="fa fa-html5"></i> Brand &amp; Social Buttons</a>
                             </li>
                             <li>
-                                <span class="badge badge-u">New</span>                            
+                                <span class="badge badge-u">New</span>
                                 <a href="shortcode_btn_effects.html"><i class="fa fa-bolt"></i> Loading &amp; Hover Effects</a>
                             </li>
                         </ul>
                     </li>
                     <!-- End Buttons UI -->
 
-                    <!-- Timeline -->                    
+                    <!-- Timeline -->
                     <li class="list-group-item list-toggle active">
                         <a class="accordion-toggle" href="#collapse-timeline" data-toggle="collapse">Timeline</a>
                         <ul id="collapse-timeline" class="collapse in">
@@ -114,7 +102,7 @@
             
             <!--Tag Box v4-->
             <div class="col-md-9">
-                <div class="tag-box tag-box-v4 rounded margin-bottom-40" style="float: left;">                                    
+                <div class="tag-box tag-box-v4 rounded margin-bottom-40">
                     <h2>Consectetur adipiscing elit harum quidem rerum magnaed et quam lacus</h2>
                     <p>${plannerDto.memo }</p>
                 </div>
@@ -151,26 +139,36 @@
 		                    <div class="panel panel-default rounded-2x">
 		                        <div class="panel-body">
 	                                <div class="row">
+	                                	<c:if test="${item.item_photoes[0].save_name != null}">
 	                                    <div class="col-md-4">
 	                                        <img class="img-responsive" src="/attatchFile/item/${item.item_photoes[0].save_name}.${item.item_photoes[0].extension}" alt="">
 	                                    </div>
+	                                    </c:if>
 	                                    <div class="col-md-8">
 	                                        ${item.note}
 	                                    </div>
+	                                    
+	                                    <c:if test="${item.moneyList != null }">
+	                                    <hr/>
+	                                    <div class="col-md-8">
+	                                    	<c:forEach var="money" items="${item.moneyList}">
+	                                    	${money.money_title } ${money.price }
+	                                    	</c:forEach>
+	                                    </div>
+	                                    </c:if>
 	                                </div>
 	                            </div>
 		                    </div>
 	                    </div>
                         <!-- 글상자 end -->
-                        
-                        
+
                     </li>
                     </c:forEach>
-                </ul>                
+                </ul>
             </div>
             </div>
             <!-- End Content -->
-        </div>          
+        </div>
     </div><!--/container-->     
     <!--=== End Content Part ===-->
 

@@ -19,25 +19,87 @@ public class MyPageController {
 	@Autowired
 	private MyPageService myPageService;
 
+	/**
+	 * @author 김성광
+	 * @createDate 2015. 12. 19.
+	 * @described 마이페이지로 이동
+	 * @param request
+	 * @param response
+	 * @return
+	 */
 	@RequestMapping(value = "/user/myPage/myPage.do", method = RequestMethod.GET)
 	public ModelAndView myPage(HttpServletRequest request, HttpServletResponse response) {
 		ModelAndView mav=new ModelAndView();
 		mav.addObject("request", request);
 		mav.addObject("response", response);
 		
-		
+		// 코드값에 따라 자신의 페이지 이동 & 타회원 페이지 이동
 		int uandMe=Integer.parseInt(request.getParameter("uandMe"));
+		
 		if(uandMe==1){
 			System.out.println("마이페이지로 이동");
 			mav=myPageService.myPage(mav);
 		}else{
-			System.out.println("친구페이지로 이동");
+			System.out.println("타회원 페이지로 이동");
 			mav=myPageService.moveUserPage(mav);
 		}
 		
 		return mav;
 	}
-
+	
+	/**
+	 * @author 김성광
+	 * @createDate 2015. 12. 19.
+	 * @described 친구추가
+	 * @param request
+	 * @param response
+	 * @return
+	 */
+	@RequestMapping(value = "/user/myPage/mateInsert.do", method = RequestMethod.GET)
+	public ModelAndView mateInsert(HttpServletRequest request, HttpServletResponse response) {
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("request", request);
+		mav = myPageService.mateInsert(mav);
+	
+		return mav;// new ModelAndView("/user/myPage/myPage");
+	}
+	
+	/**
+	 * @author 김성광
+	 * @createDate 2015. 12. 19.
+	 * @described 친구 삭제
+	 * @param request
+	 * @param response
+	 * @return
+	 */
+	@RequestMapping(value = "/user/myPage/mateDelete.do", method = RequestMethod.GET)
+	public ModelAndView mateDelete(HttpServletRequest request, HttpServletResponse response) {
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("request", request);
+		mav = myPageService.mateDelete(mav);
+	
+		return mav;// new ModelAndView("/user/myPage/myPage");
+	}
+	
+	
+	
+		
+	/**
+	 * @author 김성광
+	 * @createDate 2015. 12. 19.
+	 * @described 친구 목록
+	 * @param request
+	 * @param response
+	 * @return
+	 */
+	@RequestMapping(value = "/user/myPage/friends.do", method = RequestMethod.GET)
+	public ModelAndView getListFriends(HttpServletRequest request, HttpServletResponse response) {
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("request", request);
+		mav = myPageService.getListFriends(mav);
+	
+		return mav;// new ModelAndView("/user/myPage/myPage");
+	}
 	/*@RequestMapping(value = "/user/myPage/userPage.do", method = RequestMethod.GET)
 	public ModelAndView userPage(HttpServletRequest request, HttpServletResponse response) {
 		ModelAndView mav = new ModelAndView();

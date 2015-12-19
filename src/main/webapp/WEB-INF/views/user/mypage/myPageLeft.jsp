@@ -13,12 +13,18 @@
 	<%-- <c:set var="loginMember" value="${mem_object}" scope="session"/> --%>
 	<c:set var="memberDto" value="${memberDto}"/>
 	<c:out value="${memberDto.mem_name}"/><c:out value="(${memberDto.mem_email})"/>
-	    
+	<c:if test="${mateCheck==0}">
+		<a href="/user/myPage/mateInsert.do?mem_no=${memberDto.mem_no}">친구추가</a>
+	</c:if>
+	<c:if test="${mateCheck==1}">
+		<a href="/user/myPage/mateDelete.do?mem_no=${memberDto.mem_no}">친구삭제</a>
+	</c:if>
+	
     <ul class="list-group sidebar-nav-v1 margin-bottom-40" id="sidebar-nav-1">
         <li class="list-group-item">
         </li>
         <li class="list-group-item">
-            <a href="#"><i class="fa fa-group"></i> 친구</a>
+            <a href="/user/myPage/friends.do?mem_no=${memberDto.mem_no}"><i class="fa fa-group"></i> 친구</a>
         </li>
         <li class="list-group-item">
             <a href="#"><i class="fa fa-cubes"></i> 나의 여행</a>
