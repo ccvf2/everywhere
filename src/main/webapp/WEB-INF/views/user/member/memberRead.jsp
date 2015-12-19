@@ -5,11 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>회원정보보기</title>
-<<<<<<< HEAD
 <c:import url="/WEB-INF/views/common/jquery.jsp"/>
-=======
-<c:import url="/WEB-INF/views/common/jquery.jsp" />
->>>>>>> 9e18fc162cc075c0acfb27d693c8e8a6692af0e9
 <c:import url="/WEB-INF/views/user/common/utilImport.jsp"/>
 </head>
 <body>
@@ -66,9 +62,9 @@
 											<input type="hidden" name="mem_interest" value="${memberDto.mem_interest}"/>
 											<c:forTokens var="mem_interest" items="${memberDto.mem_interest}" delims=",">
 												<script type="text/javascript">
-													for(var i=0;i<memberForm.interestValue.length;i++) {
-														if(memberForm.interestValue[i].value=="${mem_interest}") {
-															memberForm.interestValue[i].checked=true;
+													for(var i=0;i<regForm.interestValue.length;i++) {
+														if(regForm.interestValue[i].value=="${mem_interest}") {
+															regForm.interestValue[i].checked=true;
 														}
 													}
 												</script>

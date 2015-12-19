@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
@@ -31,6 +30,18 @@
 		}
 
 		form.mem_interest.value = str;
+	}
+</script>
+<script type="text/javascript">
+	var mem_p_status_code="";
+	function pStatusChange() {
+		var value=confirm("인증하시겠습니까?");
+		if(value==true) {
+			document.getElementById("sky-form4").mem_p_status_code.value="M2001";
+			alert("인증되었습니다.");
+		} else {
+			alert("인증 되지 않았습니다.");
+		}
 	}
 </script>
 <c:import url="/WEB-INF/views/user/common/utilImport.jsp"/>
@@ -81,7 +92,10 @@
 		                                	<i class="icon-append fa fa-phone"></i>
 		                                    <input type="text" name="mem_phone" placeholder="Phonenumber" value="${memberDto.mem_phone}">
 		                                    <b class="tooltip tooltip-top-right">회원님의 전화번호를 입력해주세요.</b>
-		                                    <button type="button" class="btn-u">번호인증</button>
+		                                    <c:if test="${form.mem_phone.value()!=memberDto.mem_p_status_code}">
+			                                    <a class="btn-u" href="javascript:pStatusChange()">번호인증</a>
+											</c:if>
+												<input type="hidden" name="mem_p_status_code" value="${mem_p_status_code}">
 		                                </label>
 		                            </section>
 		
