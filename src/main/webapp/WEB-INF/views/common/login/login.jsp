@@ -14,7 +14,7 @@
 		<c:import url="/WEB-INF/views/user/common/header.jsp" />
 	</div>
 		
-	<div class="container content" style="height:507px;">
+	<div class="container content" >
     	<div class="row">
             <div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3">
 				<form class="reg-page" action="/user/login/login.do" name="memberLogin" method="post">

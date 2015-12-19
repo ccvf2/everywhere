@@ -37,7 +37,7 @@
 <!-- <link rel="stylesheet" href="/assets/css/theme-colors/default.css"> -->
 
 <!-- CSS Page Style -->
-<link rel="stylesheet" href="assets/css/pages/page_log_reg_v1.css">
+<link rel="stylesheet" href="/assets/css/pages/page_log_reg_v1.css">
 
 <!-- CSS Customization -->
 <link rel="stylesheet" href="/assets/css/custom.css">
