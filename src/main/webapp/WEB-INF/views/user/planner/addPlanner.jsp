@@ -20,7 +20,6 @@
 	<script type="text/javascript" src="/script/user/planner/addPlannerPage.js"></script>	
 </head>
 <body>
-${mem_object.mem_no }
 	<div class="wrapper">
 		<!--=== Header ===-->	
 		<div class="header">
@@ -134,14 +133,19 @@ ${mem_object.mem_no }
 					<!--End Notification-->
 				</div>
 
-				<div class="margin-bottom-50"></div>
-					<!--Datepicker-->
-					<form action="#" id="sky-form2" class="sky-form">
-						<div id="inline-start"></div>
-					</form> 
-					<!--End Datepicker-->
+				<div class="tag-box tag-box-v4 rounded-2x margin-bottom-20" style="padding : 7px;">
+				<form action="#" id="sky-form" class="sky-form">
+				<!--Datepicker-->
+					<div class="row">
+						<section class="col col-3">
+							<div id="inline-start"></div>
+						</section>
+					</div>
+				</form>
+				<!--End Datepicker-->
 				</div>
-				<!--End Left Sidebar-->
+			</div>
+			<!--End Left Sidebar-->
 
 		<!--Tag Box v4-->
 		<div class="col-md-9">
@@ -186,7 +190,7 @@ ${mem_object.mem_no }
 											<div class="panel panel-default">
 												<div class="panel-heading ui-widget-header dropItem">
 													<h4 class="panel-title">
-														<input type="hidden" id="${id_value}_spot_no" name="${id_value}_spot_no"/>
+														<input type="hidden" id="${id_value}_spot_no" name="${id_value}_spot_no" value="0"/>
 														<a data-toggle="collapse" href="#collapse_${id_value}"><span>Add Spot</span></a>
 													</h4>
 												</div>
@@ -237,7 +241,7 @@ ${mem_object.mem_no }
 						<div class="panel panel-default">
 							<div class="panel-heading ui-widget-header dropItem">
 								<h4 class="panel-title">
-								<input type="hidden" id="d0_item1_spot_no" name="d0_item1_spot_no"/>
+								<input type="hidden" id="d0_item1_spot_no" name="d0_item1_spot_no" value="0"/>
 								<a data-toggle="collapse" href="#d0_item1_collapse"><span>Add Spot</span></a>
 								</h4>
 							</div>
