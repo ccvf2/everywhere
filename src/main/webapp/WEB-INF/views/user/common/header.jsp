@@ -7,64 +7,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
-<%--     <c:import url="/WEB-INF/views/common/jquery.jsp"/>
-    <c:import url="/WEB-INF/views/user/common/utilImport.jsp"/> --%>
-<!-- --------------------------------css Start------------------------------------- -->
-<!-- Favicon -->
-<!-- <link rel="shortcut icon" href="/assets/favicon.ico"> -->
-
-<!-- Web Fonts -->
-<!-- <link rel="shortcut" type="text/css" href="//fonts.googleapis.com/css?family=Open+Sans:400,300,600&subset=cyrillic,latin"> -->
-
-<!-- CSS Global Compulsory -->
-<!-- <link rel="stylesheet" href="/assets/plugins/bootstrap/css/bootstrap.min.css">
-<link rel="stylesheet" href="/assets/css/style.css"> -->
-
-<!-- CSS Header and Footer -->
-<!-- <link rel="stylesheet" href="/assets/css/headers/header-default.css">
-<link rel="stylesheet" href="/assets/css/footers/footer-v1.css">
- -->
-<!-- CSS Implementing Plugins -->
-<!-- <link rel="stylesheet" href="/assets/plugins/animate.css">
-<link rel="stylesheet" href="/assets/plugins/line-icons/line-icons.css">
-<link rel="stylesheet" href="/assets/plugins/font-awesome/css/font-awesome.css">
-<link rel="stylesheet" href="/assets/plugins/parallax-slider/css/parallax-slider.css">
- -->
- <!-- 쪽지함에서 충돌로 인하 주석처리! -->
-<!-- <link rel="stylesheet" href="/assets/plugins/owl-carousel/owl-carousel/owl.carousel.css"> -->
-<!-- CSS Theme -->
-<!-- <link rel="stylesheet" href="/assets/css/theme-colors/default.css"> -->
-<!-- CSS Customization -->
-<!-- <link rel="stylesheet" href="/assets/css/custom.css"> -->
-<!-- --------------------------------css End------------------------------------- -->
-<!-- **********************************  javascript  Start ****************************************** -->
-<!-- JS Global Compulsory -->
-<!-- hjahn. 드래그&드롭 관련 충돌로 인해 주석처리  -->
-<!-- <script src="/assets/plugins/jquery/jquery.min.js"></script> -->
-<!-- <script src="/assets/plugins/jquery/jquery-migrate.min.js"></script>
-<script src="/assets/plugins/bootstrap/js/bootstrap.min.js"></script> -->
-
-<!-- JS Implementing Plugins -->
-<!-- <script src="/assets/plugins/back-to-top.js"></script>
-<script src="/assets/plugins/smoothScroll.js"></script>
-<script type="text/javascript" src="/assets/plugins/parallax-slider/js/modernizr.js"></script>
-<script type="text/javascript" src="/assets/plugins/parallax-slider/js/jquery.cslider.js"></script> -->
-<!-- 쪽지함에서 충돌로 인하 주석처리! -->
-<!-- <script type="text/javascript" src="/assets/plugins/owl-carousel/owl-carousel/owl.carousel.js"></script> -->
-
-<!-- JS Customization -->
-<!-- <script type="text/javascript" src="/assets/js/custom.js"></script> -->
-
-<!-- JS Page Level -->
-<!-- <script src="/assets/js/app.js"></script> -->
-<!-- 쪽지함에서 충돌로 인하 주석처리! -->
-<!-- <script type="text/javascript" src="/assets/js/plugins/owl-carousel.js"></script> -->
-<!-- <script type="text/javascript" src="/assets/js/plugins/parallax-slider.js"></script> -->
-
-<!-- CSS Global Compulsory -->
-<!-- <link rel="stylesheet" href="/assets/plugins/bootstrap/css/bootstrap.min.css">
-<link rel="stylesheet" href="/assets/css/style.css"> -->
 <script>
+//로그인 폼 모달
+function loginFormReqiest() {
+	var makeDiv ="<div id='loginForm'></div>";
+	var requestURL="/user/login/loginModal.do";
+		$.ajax({
+					url : requestURL,
+					type : "GET",
+					dataType : "html",
+					success : function(data) {
+						$("body").append(makeDiv);
+						$("#loginForm").append(data)
+					},
+					error : function() {
+						alert("목록 가져오기 실패");
+					}
+				})
+}
+
+
 //회원가입 폼 모달
 function joinFormReqiest() {
 	var makeDiv ="<div id='joinForm'></div>";
@@ -84,23 +46,23 @@ function joinFormReqiest() {
 }
 
 //여행스케줄 작성 모달
-
 function plannerCreateReqiest() {
 	//alert("Qyd")
-	var makeDiv ="<div id='plannerCreate'></div>";
-	var requestURL="user/planner/plannerCreate.do";
-		$.ajax({
+	var makeDiv2 ="<div id='plannerCreateForm'></div>";
+	var requestURL="/user/planner/plannerCreate.do";
+ 		$.ajax({
 					url : requestURL,
 					type : "GET",
 					dataType : "html",
 					success : function(data) {
-						$("body").append(makeDiv);
-						$("#plannerCreate").append(data)
+						//alert(data);
+						$("body").append(makeDiv2);
+						$("#plannerCreateForm").append(data);
 					},
 					error : function() {
 						alert("목록 가져오기 실패"); 
 					}
-				})
+				});
 }
 
 </script>
@@ -108,15 +70,6 @@ function plannerCreateReqiest() {
 <title>타이틀 입력</title>
 
 </head>
-
-
-
-
-
-
-
-
-
 	        <div class="container">
 	            <!-- Logo -->
 	            <a class="logo" href="/">
@@ -129,48 +82,12 @@ function plannerCreateReqiest() {
 	                <ul class="loginbar pull-right">
 	                	<c:choose>
 	                		<c:when test="${ mem_object.mem_name=='' || mem_object==null }">
-	                    		<li><a data-toggle="modal" data-target="#loginModal">login</a></li>
+	                    		<li><a href="javascript:loginFormReqiest()">login</a></li>
 								<li class="topbar-devider"></li>
 	                    		<li>
 	                    			<!-- <a href="/user/member/register.do">회원가입</a> -->
 	                    			<a href="javascript:joinFormReqiest()">회원가입</a>
 	                    		</li>
-									<!-- 로그인 페이지 모달 -->
-									<div class="modal fade" id="loginModal" role="dialog">
-										<div class="modal-dialog">
-											<div class="modal-content">
-												<form class="reg-page" action="/user/login/login.do" name="memberLogin" method="post">
-									                   <div class="reg-header">
-									                       <h2>Login to your account</h2>
-									                   </div>
-									                   
-									                   <div class="input-group margin-bottom-20">
-									                       <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
-									                       <input type="text" name="mem_email" placeholder="Email address" class="form-control" value="admin@everwhere.com">
-									                   </div>
-									                   
-									                   <div class="input-group margin-bottom-20">
-									                       <span class="input-group-addon"><i class="fa fa-lock"></i></span>
-									                       <input type="password" name="mem_pwd" placeholder="Password" class="form-control" value="1234567890">
-									                   </div>
-									                   
-									                   <div class="row">
-									                       <div class="col-md-6 checkbox">
-									                           <label><input type="checkbox">로그인 상태 유지</label>
-									                       </div>
-									                       <div class="col-md-6">
-									                           <button class="btn-u pull-right" type="submit">로그인</button>
-									                       </div>
-									                   </div>
-										
-													<hr>
-									
-									                   <h4>비밀번호를 잊어버리셨나요?</h4>
-									                   <p>걱정하지 마세요, <a class="color-green" href="#">여기를 누르시면</a> 비밀번호를 변경할 수 있습니다.</p>
-												</form>
-											</div>
-										</div>
-									</div>
 	                		</c:when>
 	                		<c:otherwise>
 			                	<li>${mem_object.mem_name}님 안녕하세요.</li>
@@ -222,16 +139,6 @@ function plannerCreateReqiest() {
 	                        <ul class="dropdown-menu">
 	                            <li><a href="index.html">Option 1: Default Page</a></li>
 	                            <li><a href="page_home8.html">Option 5: Home Discover</a></li>
-	                            <li><a href="page_home14.html">Option 6: Home Incredible</a></li>
-	                            <li><a href="page_home9.html">Option 7: Home Creative</a></li>
-	                            <li><a href="page_home10.html">Option 8: Home Inspire</a></li>
-	                            <li><a href="page_home11.html">Option 9: Home Desire</a></li>
-	                            <li><a href="page_jobs.html">Option 10: Home Jobs</a></li>
-	                            <li><a href="page_home3.html">Option 11: Amazing Content</a></li>
-	                            <li><a href="page_home6.html">Option 12: Home Magazine</a></li>
-	                            <li><a href="page_home1.html">Option 14: Home Basic v1</a></li>
-	                            <li><a href="page_home2.html">Option 15: Home Basic v2</a></li>
-	                            <li><a href="page_home5.html">Option 16: Home Basic v3</a></li>
 	                            <li><a href="page_home4.html">Option 17: Home Basic v4</a></li>
 	                            <li class="active"><a href="page_home7.html">Option 18: Home Basic v5</a></li>
 	                        </ul>
@@ -301,8 +208,4 @@ function plannerCreateReqiest() {
 	                </ul>
 	            </div><!--/end container-->
 		</div><!--/navbar-collapse-->
-
-
-
-
 </html>

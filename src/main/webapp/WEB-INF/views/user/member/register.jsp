@@ -5,6 +5,7 @@
 <html>
 <head>
 <c:import url="/WEB-INF/views/common/jquery.jsp" />
+<c:import url="/WEB-INF/views/user/common/utilImport.jsp" />
 <meta charset="utf-8">
 <title>회원가입</title>
 <script type="text/javascript">
@@ -68,14 +69,13 @@
 		}
 	}
 </script>
-<c:import url="/WEB-INF/views/user/common/utilImport.jsp" />
 
 	<script type="text/javascript">
 		$(function() { 
 		   	$('#joinModal').modal('show');
 		   
 		  	$('#joinModal').on('hide.bs.modal', function() {
-			//   history.back(-1); ;
+		  		$('#joinModal').remove();
 			})
 		});
 </script> 
@@ -94,7 +94,6 @@
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 						<h3 class="modal-title" id="myModalLabel4">회원가입</h3>
 					</div>
-
 					<div class="modal-body">
 						<div class="row">
 							<div class="col-md-12">
