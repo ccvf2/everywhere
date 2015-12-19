@@ -20,6 +20,27 @@
 	<script type="text/javascript" src="/script/user/planner/selectedCountry.js"></script>	
 	<script type="text/javascript" src="/script/user/planner/addPlannerPage.js"></script>	
 </head>
+<script type="text/javascript">
+function test(no) {
+	//alert(no);
+	var makeDiv ="<div id='showModal"+no+"'></div>";
+	var requestURL="/user/spot/spotReadPage.do?spot_no="+no;
+		$.ajax({
+					url : requestURL,
+					type : "GET",
+					dataType : "html",
+					success : function(data) {
+						$("body").append(makeDiv);
+						$("#showModal"+no).append(data)
+					},
+					error : function() {
+						alert("목록 가져오기 실패");
+					}
+				})
+}
+
+
+</script>
 <body>
 	<div class="wrapper">
 		<!--=== Header ===-->	
@@ -122,7 +143,10 @@
 									<div id="${spot.spot_no}_item" class="rounded">
 										<i style="margin:0;"><img alt="" src="/attatchFile/spot/${spot.spot_photoes[0].save_name}.${spot.spot_photoes[0].extension}" style="width:35px;height:35px;margin-right:5px;"></i>
 										<div class="overflow-h">
-											<span><strong><a href="/user/spot/spotReadPage.do?spot_no=${spot.spot_no}">${spot.spot_name}</a></strong></span>
+											<span><strong>
+											<%-- <a href="/user/spot/spotReadPage.do?spot_no=${spot.spot_no}">${spot.spot_name}</a> --%>
+											<a href="javascript:test('${spot.spot_no}')">${spot.spot_name}</a>
+											</strong></span>
 											<small><c:out value="${spot.spot_note}"/></small>
 										</div>
 									</div>
