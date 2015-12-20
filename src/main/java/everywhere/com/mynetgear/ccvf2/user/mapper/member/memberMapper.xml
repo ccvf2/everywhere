@@ -100,4 +100,16 @@
 		from tbl_member
 		where mem_no IN (select mate_no from tbl_mate where mem_no=#{mem_no})
 	</select>
+	
+	
+	<!-- 맴버전체가져오기 -->
+	<select id="passwordChnge" resultType="everywhere.com.mynetgear.ccvf2.user.dto.member.MemberDto">
+		SELECT * FROM TBL_MEMBER
+	</select>
+	
+	<!-- 맴버내용 바꾸기 -->
+	<update id="chngePasswordMemberInfo">
+		update tbl_member set mem_pwd=#{mem_pwd} where mem_no=#{mem_no}
+		<!-- update tbl_member set mem_pwd=#{mem_pwd} where mem_no=10 -->
+	</update>
 </mapper>

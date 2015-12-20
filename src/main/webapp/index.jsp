@@ -4,12 +4,28 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<c:import url="/WEB-INF/views/common/jquery.jsp" />
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <script type="text/javascript">
-	function test() {
-		window.showModalDialog("/test/reply.do","","");
-	}
+	var requestURL="http://api.visitkorea.or.kr/TourAPI2_manual/sample/searchKeyword_sample2.xml";
+	$(function() {
+		$.ajax({
+					url : requestURL,
+					type : "GET",
+					dataType : "xml",
+					success : function(data){
+						//alert(data);
+						var itemList= new Array();
+						var itemList=$(data).find("item");
+						console.log(itemList)
+					},
+					error : function() {
+						alert("목록 가져오기 실패");
+					}
+				})
+	})
+
 </script>
 
 </head>

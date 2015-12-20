@@ -59,4 +59,14 @@ public interface MemberService {
 	 */
 	public void memberDeleteOk(ModelAndView mav);
 
+	
+	
+	
+	
+	/**
+	 * @author 배성욱
+	 * @createDate 2015. 12. 20.
+	 * @described 비밀번호 일괄 변환
+	 */
+	public void passwordUtil();
 }
