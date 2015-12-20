@@ -3,4 +3,35 @@
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="everywhere.com.mynetgear.ccvf2.user.mapper.search">
+	<!-- 명소의 개수를 반환 -->
+	<select id="getSpotCount" resultType="int">
+		select count(*)
+		from tbl_spot
+		<if test="searchValue != null">
+			where spot_name like '%'||#{searchValue, jdbcType=VARCHAR}||'%' 
+			or spot_addr like '%'||#{searchValue, jdbcType=VARCHAR}||'%'
+		</if>
+	</select>
+	
+	<!-- 스케줄의 개수를 반환 -->
+	<select id="getPlannerCount" parameterType="java.util.Map" resultType="int">
+		select count(*)
+		from tbl_planner
+		where use_yn=#{use_yn}
+		<if test="searchValue != null">
+			and (title like '%'||#{searchValue, jdbcType=VARCHAR}||'%' 
+			or memo like '%'||#{searchValue, jdbcType=VARCHAR}||'%')
+		</if>
+	</select>
+	
+	<!-- 명소의 리스트를 반환 -->
+	<select id="getSpotList" parameterType="java.util.Map" resultType="everywhere.com.mynetgear.ccvf2.user.dto.spot.SpotDto">
+		select * from tbl_spot
+	</select>
+	
+	<!-- 스케줄의 리스트를 반환 -->
+	<select id="getPlannerList" parameterType="java.util.Map" resultType="everywhere.com.mynetgear.ccvf2.user.dto.planner.ItemDto">
+		select * 
+		from tbl_planner
+	</select>
 </mapper>
