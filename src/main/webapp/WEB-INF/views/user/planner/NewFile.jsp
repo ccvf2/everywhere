@@ -17,7 +17,7 @@
 </script>
 
 </head>
-<body>
+
 <!-- 여행스케줄쓰기 -->
 <!-- <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button> -->
 <div class="modal fade" id="plannerCreate" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -66,5 +66,5 @@
 	
 </div>
 <!-- /.modal -->
-</body>
+
 </html>
