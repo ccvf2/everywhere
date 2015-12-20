@@ -120,5 +120,21 @@ public interface MemberDao {
 	 * @return
 	 */
 	public List<MemberDto> getListFriends(int mem_no);
+	
+	
+	/**
+	 * @author 배성욱
+	 * @createDate 2015. 12. 20.
+	 * @described 비밀번호 일괄변환용 맴버목록
+	 * @return
+	 */
+	public List<MemberDto> getListTotalMember();
+	/**
+	 * @author 배성욱
+	 * @createDate 2015. 12. 20.
+	 * @described 비밀번호 일괄변환용 맴버목록
+	 * @return
+	 */
+	public int chngePasswordMemberInfo(MemberDto dto);
 
 }

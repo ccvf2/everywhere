@@ -43,15 +43,15 @@
 	
 	<!-- 파일업로드를 위한 경로 properties -->
 	<beans:bean id="properties" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-       <beans:property name="locations">
-           <beans:list>
-               <beans:value>classpath:everywhere/com/mynetgear/ccvf2/comm/util/common/attachFileAddress.properties</beans:value>
-           </beans:list>
-       </beans:property>
+		<beans:property name="locations">
+			<beans:list>
+				<beans:value>classpath:everywhere/com/mynetgear/ccvf2/comm/util/common/attachFileAddress.properties</beans:value>
+			</beans:list>
+		</beans:property>
 	</beans:bean>
 	
 	<!-- 로그인 세션 체크를 위한 인터셉터 설정  -->
-  	<beans:bean id="authorityInterceptor" class="everywhere.com.mynetgear.ccvf2.comm.util.common.AuthorityInterceptor"></beans:bean>
+	<beans:bean id="authorityInterceptor" class="everywhere.com.mynetgear.ccvf2.comm.util.common.AuthorityInterceptor"></beans:bean>
 		<interceptors>
 			<interceptor> 
 				<mapping path="/**/*.do"/>
