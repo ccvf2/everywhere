@@ -63,13 +63,13 @@ function spotListDisp(data){
 					"<div id='"+obj.spot[i].spot_no+"_item' class='rounded'>"+
 					"<i style='margin:0;'><img alt='' src='/attatchFile/spot/"+obj.spot[i].spot_photo_save_name+"."+obj.spot[i].spot_photo_extension+"' style='width:35px;height:35px;margin-right:5px;'></i>"+
 					"<div class='overflow-h'>"+
-					"<span><strong><a href=javascript:spotReadPage('"+obj.spot[i].spot_no+"')'>"+obj.spot[i].spot_name+"</a></strong></span>"+
+					"<span><strong><a href='javascript:spotReadPage("+obj.spot[i].spot_no+")'>"+obj.spot[i].spot_name+"</a></strong></span>"+
 					"<small>"+obj.spot[i].spot_note+"</small>"+
-					"</div></div></li>";			
+					"</div></div></li>";
 		}
 	}
-	$("#spotLists").empty(); 
-	$("#spotLists").prepend(str);
+	$("#mCSB_1_container").empty(); 
+	$("#mCSB_1_container").prepend(str);
 }
 
 //명소 업데이트 자바스크립트

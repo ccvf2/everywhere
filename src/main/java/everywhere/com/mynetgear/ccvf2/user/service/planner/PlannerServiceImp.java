@@ -173,7 +173,7 @@ public class PlannerServiceImp implements PlannerService {
 
 	@Override
 	public void getSpotList(ModelAndView mav) {
-		List<SpotDto> spotList = spotDao.getSpotAllList();
+		List<SpotDto> spotList = spotDao.getSpotAllListForPlanner();
 		for(int i = 0; i < spotList.size(); i++){
 			String[] attach_no = spotList.get(i).getAttach_file().split(",");
 

@@ -1,6 +1,8 @@
 package everywhere.com.mynetgear.ccvf2.user.dao.spot;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,12 +33,25 @@ public class SpotDaoImp implements SpotDao {
 
 	@Override
 	public List<SpotDto> getSpotList(SpotDto spotDto) {
+		return sqlTemplate.selectList("select_spot_list_for_planner", spotDto);
+	}
+
+	@Override
+	public List<SpotDto> getSpotListForPlanner(SpotDto spotDto, int currNum) {
+		// 이거
+		Map <String, String> hmap = new HashMap<String, String>();
 		return sqlTemplate.selectList("select_spot_list", spotDto);
 	}
 	
 	@Override
 	public List<SpotDto> getSpotAllList() {
 		return sqlTemplate.selectList("select_spot_all_list");
+	}
+
+	@Override
+	public List<SpotDto> getSpotAllListForPlanner() {
+		// 이거
+		return sqlTemplate.selectList("select_spot_all_list_for_planner");
 	}
 
 	@Override
