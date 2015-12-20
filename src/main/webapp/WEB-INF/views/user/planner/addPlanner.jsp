@@ -74,26 +74,6 @@ function spotReadPage(no) {
 						<a href="page_profile_me.html"><i class="fa fa-user"></i> Profile</a>
 					</li>
 				</ul>
-	
-				<div class="panel-heading-v2 overflow-h">
-					<h2 class="heading-xs pull-left"><i class="fa fa-bar-chart-o"></i> Task Progress</h2>
-					<a href="#"><i class="fa fa-cog pull-right"></i></a>
-				</div>
-				<h3 class="heading-xs">Web Design <span class="pull-right">92%</span></h3>
-				<div class="progress progress-u progress-xxs">
-					<div style="width: 92%" aria-valuemax="100" aria-valuemin="0" aria-valuenow="92" role="progressbar" class="progress-bar progress-bar-u">
-					</div>
-				</div>
-				<h3 class="heading-xs">Unify Project <span class="pull-right">85%</span></h3>
-				<div class="progress progress-u progress-xxs">
-					<div style="width: 85%" aria-valuemax="100" aria-valuemin="0" aria-valuenow="85" role="progressbar" class="progress-bar progress-bar-blue">
-					</div>
-				</div>
-				<h3 class="heading-xs">Sony Corporation <span class="pull-right">64%</span></h3>
-				<div class="progress progress-u progress-xxs margin-bottom-40">
-					<div style="width: 64%" aria-valuemax="100" aria-valuemin="0" aria-valuenow="64" role="progressbar" class="progress-bar progress-bar-dark">
-					</div>
-				</div>
 
 				<!--Notification-->
 				<div class="tag-box tag-box-v4 rounded-2x margin-bottom-20" style="padding : 7px;">
@@ -137,16 +117,15 @@ function spotReadPage(no) {
 					<hr style="margin : 0px 0px 5px 0px;"/>
 
 					<div>
-						<ul class="list-unstyled mCustomScrollbar margin-bottom-20" data-mcs-theme="minimal-dark"  id="spotLists">
+						<ul class="list-unstyled mCustomScrollbar margin-bottom-20" data-mcs-theme="minimal-dark" id="spotLists">
 							<c:forEach var="spot" items="${spotList}">
-								<li class="notification" style="margin:0px;border:1px solid #eee;padding:5px 5px;height: 48px;">
-									<div id="${spot.spot_no}_item" class="rounded">
+								<li class="notification" style="margin:0px;border:1px solid #eee;padding:5px 5px;height: 48px;" id="spotItem">
+									<div id="${spot.spot_no}_item" class="ui-widget-content" style="border:0px;">
 										<i style="margin:0;"><img alt="" src="/attatchFile/spot/${spot.spot_photoes[0].save_name}.${spot.spot_photoes[0].extension}" style="width:35px;height:35px;margin-right:5px;"></i>
 										<div class="overflow-h">
-											<span><strong>
-											<%-- <a href="/user/spot/spotReadPage.do?spot_no=${spot.spot_no}">${spot.spot_name}</a> --%>
-											<a href="javascript:spotReadPage('${spot.spot_no}')">${spot.spot_name}</a>
-											</strong></span>
+											<span>
+												<strong><a href="javascript:spotReadPage('${spot.spot_no}')">${spot.spot_name}</a></strong>
+											</span>
 											<small><c:out value="${spot.spot_note}"/></small>
 										</div>
 									</div>
@@ -210,14 +189,17 @@ function spotReadPage(no) {
 								<c:set var="id_value" value="d${i}_item1"/>
 									<ol class="list-unstyled" id="d${i}_item_ol">
 										<li>
-										<div class="panel-group droppable">
+										<div class="panel-group">
 											<input type="hidden" name="${id_value}_no"/>
 											<div class="panel panel-default">
 												<div class="panel-heading ui-widget-header dropItem">
+												<a data-toggle="collapse" href="#collapse_${id_value}">
+													<i class="icon-note pull-right"></i>
+												</a>
 													<h4 class="panel-title">
-														<input type="hidden" id="${id_value}_spot_no" name="${id_value}_spot_no" value="0"/>
-														<a data-toggle="collapse" href="#collapse_${id_value}"><span>Add Spot</span></a>
+														<span>Add Spot</span>
 													</h4>
+													<input type="hidden" id="${id_value}_spot_no" name="${id_value}_spot_no" value="0"/>
 												</div>
 												<div id="collapse_${id_value}" class="panel-collapse collapse">
 													<div id="${id_value}_note"class="panel-body" style="padding:0px">
@@ -261,16 +243,19 @@ function spotReadPage(no) {
 			<c:set var="id_value" value="d0_item1"/>
 			<ol class="list-unstyled" id="d0_item_ol">
 				<li>
-					<div class="panel-group droppable">
+					<div class="panel-group ">
 						<input type="hidden" name="d0_item1_no"/>
 						<div class="panel panel-default">
 							<div class="panel-heading ui-widget-header dropItem">
+								<a data-toggle="collapse" href="#collapse_d0_item1">
+									<i class="icon-note pull-right"></i>
+								</a>
 								<h4 class="panel-title">
-								<input type="hidden" id="d0_item1_spot_no" name="d0_item1_spot_no" value="0"/>
-								<a data-toggle="collapse" href="#d0_item1_collapse"><span>Add Spot</span></a>
+									<span>Add Spot</span>
 								</h4>
+								<input type="hidden" id="d0_item1_spot_no" name="d0_item1_spot_no" value="0"/>
 							</div>
-							<div id="d0_item1_collapse" class="panel-collapse collapse">
+							<div id="collapse_d0_item1" class="panel-collapse collapse">
 								<div id="d0_item1_note"class="panel-body" style="padding:0px">
 									<label class="textarea" style="margin:0">
 										<textarea style="border:0px" rows="3" name="d0_item1_note" placeholder="Write some notes.."></textarea>
