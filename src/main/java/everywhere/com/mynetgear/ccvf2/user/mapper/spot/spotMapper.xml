@@ -12,11 +12,11 @@
 
 	<select id="select_spot_all_list_for_planner" resultType="everywhere.com.mynetgear.ccvf2.user.dto.spot.SpotDto">
 		<![CDATA[
-	 		select * from (
-	 			select rownum rnum, a.* from
-	 				(select * from tbl_spot order by spot_name asc) a)
-	 		where rnum >= 1 and rnum <= 10
-	 	]]>
+			select * from (
+				select rownum rnum, a.* from
+					(select * from tbl_spot order by spot_name asc) a)
+			where rnum >= 1 and rnum <= 10
+		]]>
 	</select>
 
 	<select id="select_one_spot" resultType="everywhere.com.mynetgear.ccvf2.user.dto.spot.SpotDto" parameterType="int">
@@ -44,7 +44,7 @@
 		</where>
 	</select>
 	
-	<select id="select_spot_list_for_planner" resultType="everywhere.com.mynetgear.ccvf2.user.dto.spot.SpotDto" parameterType="everywhere.com.mynetgear.ccvf2.user.dto.spot.SpotDto">
+	<select id="select_spot_list_for_planner" resultType="everywhere.com.mynetgear.ccvf2.user.dto.spot.SpotDto" parameterType="java.util.Map">
 		select * from (
 		select rownum rnum, a.* from
 		(select * from tbl_spot 
@@ -66,8 +66,8 @@
 				</choose>
 			</where>
 		)a)b
- 		<!-- where rnum<![CDATA[>=]]>#{startNum} and rnum<![CDATA[<=]]>#{endNum} -->
- 		where rnum<![CDATA[>=]]>1 and rnum<![CDATA[<=]]>10
+		where rnum<![CDATA[>=]]>#{startNum} and rnum<![CDATA[<=]]>#{endNum}
+
 	</select>
 
 	<insert id="insert_spot" parameterType="everywhere.com.mynetgear.ccvf2.user.dto.spot.SpotDto">

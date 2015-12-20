@@ -37,7 +37,7 @@ function addDay(day_count){
 			$("#d"+day_count.value+"_items_date").text("Day " + day_count.value)
 
 			$( ".dropItem" ).droppable({
-				accept: "#spotLists > div",
+				accept: "#spotItem > div",
 				activeClass: "ui-state-hover",
 				hoverClass: "ui-state-active",
 				drop: function( event, ui ) {
@@ -79,7 +79,7 @@ function addItem(input_name){
 	$("#"+input_name+"_ol").append(newHtml);
 
 	$( ".dropItem" ).droppable({
-		accept: "#spotLists > div",
+		accept: "#spotItem > div",
 		activeClass: "ui-state-hover",
 		hoverClass: "ui-state-active",
 		drop: function( event, ui ) {

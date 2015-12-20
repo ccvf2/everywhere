@@ -13,6 +13,7 @@ public interface SpotService {
 	public void addSpotPage(ModelAndView mav);
 	public void readCityList(ModelAndView mav);
 	public void selectSpotList(ModelAndView mav);
+	public void selectSpotListForPlanner(ModelAndView mav);
 	public void insertSpot(ModelAndView mav);
 	public void getSpotList(ModelAndView mav);
 	public void getOneSpot(ModelAndView mav);

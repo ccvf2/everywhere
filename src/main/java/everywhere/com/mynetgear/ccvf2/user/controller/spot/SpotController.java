@@ -55,6 +55,15 @@ public class SpotController {
 		return null;
 	}
 	
+	@RequestMapping(value="/user/spot/selectSpotListForPlanner.ajax", method=RequestMethod.GET)
+	public ModelAndView selectSpotListForPlanner(HttpServletRequest request, HttpServletResponse response){
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("request", request);
+		mav.addObject("response", response);
+		spotService.selectSpotListForPlanner(mav);
+		return null;
+	}
+	
 	@RequestMapping(value="/user/spot/addSpotWrite.do", method=RequestMethod.POST)
 	public ModelAndView insertSpot(HttpServletRequest request, HttpServletResponse response, SpotDto spotDto){
 		ModelAndView mav = new ModelAndView();
