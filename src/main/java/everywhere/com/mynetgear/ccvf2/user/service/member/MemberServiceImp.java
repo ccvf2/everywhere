@@ -2,6 +2,7 @@ package everywhere.com.mynetgear.ccvf2.user.service.member;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -188,6 +189,37 @@ public class MemberServiceImp implements MemberService {
 		mav.addObject("check", check);
 		mav.addObject("memberDto", memberDto);
 		mav.setViewName("/user/member/memberDeleteOk");
+	}
+
+	/* (non-Javadoc)
+	 * @see everywhere.com.mynetgear.ccvf2.user.service.member.MemberService#passwordUtil()
+	 */
+	@Override
+	public void passwordUtil() {
+		// TODO Auto-generated method stub
+		List<MemberDto> list=memberDao.getListTotalMember();
+		
+		int listSize=list.size();
+		for (int i = 0; i < listSize; i++) {
+			MemberDto dto = list.get(i);
+			//dto.setMem_email(StringUtils.deleteWhitespace(dto.getMem_email()));
+			String pw=SecurityUtil.Sha256Encrypt(dto.getMem_email(), dto.getMem_pwd());
+			
+			if(dto.getMem_pwd().length()<=15){
+				dto.setMem_pwd(pw);
+				int result=memberDao.chngePasswordMemberInfo(dto);
+				
+				if(result>0){
+					System.out.println("이름:"+dto.getMem_name()+"이메일:"+dto.getMem_email()+"여부: 성공!");
+				}else{
+					System.out.println(Constant.LOG_ID3+"실패!!!!   이름:"+dto.getMem_name()+"이메일:"+dto.getMem_email());
+				}
+			}else{
+				System.out.println(Constant.LOG_ID2+"이름:"+dto.getMem_name()+"이메일:"+dto.getMem_email()+"여부: 이미암호화된코드");
+			}
+		}
+		System.out.println(Constant.LOG_ID1+"----------------------------------------------------END-------------------------");
+		
 	}
 
 }

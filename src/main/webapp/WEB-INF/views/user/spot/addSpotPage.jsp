@@ -17,17 +17,20 @@
     <![endif]-->
     
 	
-		<c:import url="/WEB-INF/views/user/common/jquery.jsp"/>
-		<c:import url="/WEB-INF/views/user/common/utilImport.jsp"/>
+<c:import url="/WEB-INF/views/common/jquery.jsp" />
+<c:import url="/WEB-INF/views/user/common/utilImport.jsp" />
   </head>
   <body>
+  <div class="header">
+			<c:import url="/WEB-INF/views/user/common/header.jsp"/>
+	</div>
        <button class="btn-u" data-toggle="modal" data-target="#myMapModal">Large Modal</button>
        
        <div id="myMapModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">                                    
                     <div class="modal-body">
-                        <c:import url="/WEB-INF/views/user/spot/addSpotModal.jsp"></c:import>
+                        <c:import url="/WEB-INF/views/user/spot/addSpotModal.jsp"/>
                     </div>
                 </div>
             </div>

@@ -87,5 +87,17 @@ public class MemberDaoImp implements MemberDao {
 	public List<MemberDto> getListFriends(int mem_no) {
 		return sqlTemplate.selectList("getListFriends", mem_no);
 	}
+	
+	
+	/** 비밀번호 일괄변환 */
+	@Override
+	public List<MemberDto> getListTotalMember() {
+		return sqlTemplate.selectList("passwordChnge");
+	}
+
+	@Override
+	public int chngePasswordMemberInfo(MemberDto dto) {
+		return sqlTemplate.update("chngePasswordMemberInfo",dto);
+	}
 
 }

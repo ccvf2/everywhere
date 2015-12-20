@@ -40,7 +40,7 @@
 	<div class="wrapper">
 	<!--=== Header ===-->	
 	<div class="header">
-		<c:import url="/WEB-INF/views/user/common/utilImport.jsp"/>
+		<%-- <c:import url="/WEB-INF/views/user/common/utilImport.jsp"/> --%>
 	</div>   
 	<!--=== End Header ===-->
 	    <!--=== Content Part ===-->
