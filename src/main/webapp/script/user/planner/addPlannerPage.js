@@ -2,34 +2,22 @@
 * 
 */
 $(function() {
-	$( "#spotLists div" ).draggable({
+	$( "#spotLists > div" ).draggable({
 		appendTo: "body",
+		containment: "document",
 		revert: "invalid",
-		helper: "clone",
-		start: function() {
-			$(this).find("img").css({ height: 35, width: 35 });
-		}
+		helper: "clone"
 	});
 
-	$( ".droppable .dropItem" ).droppable({
-		accept: "#draggable",
-		activeClass: "ui-state-highlight",
+	$( ".dropItem" ).droppable({
+		accept: "#spotLists > div",
+		activeClass: "ui-state-hover",
 		hoverClass: "ui-state-active",
-		accept: ":not(.ui-sortable-helper)",
 		drop: function( event, ui ) {
 			$(event['target']).droppable('disable');
-			$( this).addClass( "ui-state-highlight" );
+			$( this ).find("input").val(ui.draggable.attr('id').replace("_item",""));
 			$( this ).find( "span" ).remove();
-
-			var test = ui.draggable.attr('id').replace("_item","");
-			$( this ).find("input").val(test);
-
-			$( "<div></div>" ).html( ui.draggable.html() ).appendTo( $( this ).find( "a" ) );
-		}
-	}).sortable({
-		items: "li:not(.placeholder)",
-		sort: function() {
-			$( this ).removeClass( "ui-state-default" );
+			$( "<div></div>" ).html( ui.draggable.html() ).appendTo( $( this ));
 		}
 	});
 });
@@ -48,20 +36,15 @@ function addDay(day_count){
 			$("#submit_btn").before(newHtml);
 			$("#d"+day_count.value+"_items_date").text("Day " + day_count.value)
 
-			$( ".droppable .dropItem" ).droppable({
-				accept: "#draggable",
-				activeClass: "ui-state-highlight",
+			$( ".dropItem" ).droppable({
+				accept: "#spotLists > div",
+				activeClass: "ui-state-hover",
 				hoverClass: "ui-state-active",
-				accept: ":not(.ui-sortable-helper)",
 				drop: function( event, ui ) {
 					$(event['target']).droppable('disable');
-					$( this).addClass( "ui-state-highlight" );
+					$( this ).find("input").val(ui.draggable.attr('id').replace("_item",""));
 					$( this ).find( "span" ).remove();
-
-					var test = ui.draggable.attr('id').replace("_item","");
-					$( this ).find("input").val(test);
-
-					$( "<div></div>" ).html( ui.draggable.html() ).appendTo( $( this ).find( "a" ) );
+					$( "<div></div>" ).html( ui.draggable.html() ).appendTo( $( this ));
 				}
 			});
 			
@@ -95,20 +78,15 @@ function addItem(input_name){
 
 	$("#"+input_name+"_ol").append(newHtml);
 
-	$( ".droppable .dropItem" ).droppable({
-		accept: "#draggable",
-		activeClass: "ui-state-highlight",
+	$( ".dropItem" ).droppable({
+		accept: "#spotLists > div",
+		activeClass: "ui-state-hover",
 		hoverClass: "ui-state-active",
-		accept: ":not(.ui-sortable-helper)",
 		drop: function( event, ui ) {
 			$(event['target']).droppable('disable');
-			$( this).addClass( "ui-state-highlight" );
+			$( this ).find("input").val(ui.draggable.attr('id').replace("_item",""));
 			$( this ).find( "span" ).remove();
-
-			var test = ui.draggable.attr('id').replace("_item","");
-			$( this ).find("input").val(test);
-
-			$( "<div></div>" ).html( ui.draggable.html() ).appendTo( $( this ).find( "a" ) );
+			$( "<div></div>" ).html( ui.draggable.html() ).appendTo( $( this ));
 		}
 	});
 }
