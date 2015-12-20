@@ -79,11 +79,12 @@
 						<c:if test="${count < day }">
 							<c:set var="count" value="${day}"/>
 							<div class="cbp_tmtime equal-height-column" style="width:100%;">
-								<span>Day ${day}</span> 
+								<span>Day ${day}</span>
 								<span style="font-size: 15px"><fmt:formatDate pattern="yyyy-MM-dd(E)" value="${plannerDto.start_date}" /></span>
 							</div>
 						</c:if>
 						<i class="cbp_tmicon rounded-x hidden-xs"></i>
+						<c:if test="${item.spot_no != 0 }">
 						<div class="cbp_tmlabel equal-height-column">
 							<h2>${item.spot.spot_name}</h2>
 							<div class="row">
@@ -96,6 +97,7 @@
 								</div>
 							</div>
 						</div>
+						</c:if>
 
 						<!-- 글상자 start-->
 						<div class="panel-group" style="margin:0 0 30px 25%; clear: both; position: relative;">
