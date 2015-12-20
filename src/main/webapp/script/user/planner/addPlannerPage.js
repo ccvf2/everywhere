@@ -10,7 +10,7 @@ $(function() {
 	});
 
 	$( ".dropItem" ).droppable({
-		accept: "#spotLists > div",
+		accept: "#spotItem > div",
 		activeClass: "ui-state-hover",
 		hoverClass: "ui-state-active",
 		drop: function( event, ui ) {
