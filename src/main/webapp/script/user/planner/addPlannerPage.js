@@ -2,7 +2,7 @@
 * 
 */
 $(function() {
-	$( "#spotLists > div" ).draggable({
+	$( "#spotItem > div" ).draggable({
 		appendTo: "body",
 		containment: "document",
 		revert: "invalid",

@@ -65,11 +65,11 @@ function spotListDisp(data){
 					"<div class='overflow-h'>"+
 					"<span><strong><a href='javascript:spotReadPage("+obj.spot[i].spot_no+")'>"+obj.spot[i].spot_name+"</a></strong></span>"+
 					"<small>"+obj.spot[i].spot_note+"</small>"+
-					"</div></div></li>";			
+					"</div></div></li>";
 		}
 	}
-	$("#spotLists").empty(); 
-	$("#spotLists").prepend(str);
+	$("#mCSB_1_container").empty(); 
+	$("#mCSB_1_container").prepend(str);
 }
 
 //명소 업데이트 자바스크립트

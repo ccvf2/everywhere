@@ -117,16 +117,16 @@ function spotReadPage(no) {
 					<hr style="margin : 0px 0px 5px 0px;"/>
 
 					<div>
-						<ul class="list-unstyled mCustomScrollbar margin-bottom-20" data-mcs-theme="minimal-dark">
+						<ul class="list-unstyled mCustomScrollbar margin-bottom-20" data-mcs-theme="minimal-dark" id="spotLists">
 							<c:forEach var="spot" items="${spotList}">
-								<li class="notification" style="margin:0px;border:1px solid #eee;padding:5px 5px;height: 48px;" id="spotLists">
+								<li class="notification" style="margin:0px;border:1px solid #eee;padding:5px 5px;height: 48px;" id="spotItem">
 									<div id="${spot.spot_no}_item" class="ui-widget-content" style="border:0px;">
 										<i style="margin:0;"><img alt="" src="/attatchFile/spot/${spot.spot_photoes[0].save_name}.${spot.spot_photoes[0].extension}" style="width:35px;height:35px;margin-right:5px;"></i>
 										<div class="overflow-h">
 											<span>
 												<strong><a href="javascript:spotReadPage('${spot.spot_no}')">${spot.spot_name}</a></strong>
 											</span>
-											<small>${spot.spot_note}</small>
+											<small><c:out value="${spot.spot_note}"/></small>
 										</div>
 									</div>
 								</li>
