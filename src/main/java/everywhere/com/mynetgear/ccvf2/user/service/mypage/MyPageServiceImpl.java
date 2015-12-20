@@ -129,11 +129,38 @@ public class MyPageServiceImpl implements MyPageService {
 		
 		//int uandMe=Integer.parseInt(request.getParameter("uandMe"));
 		int mem_no=Integer.parseInt(request.getParameter("mem_no"));
+		System.out.println("----------------mem_no : " + mem_no);
+		MemberDto memberDto = memberDao.memberRead(mem_no);
+		System.out.println("---------------memberDto : " + memberDto.toString());
 		
-		List<MemberDto> friends=memberDao.getListFriends(mem_no);
+		List<MemberDto> friendsList=memberDao.getListFriends(mem_no);
 		
-		System.out.println("친구 몇명? :" +friends.size());
+		System.out.println("친구 몇명? :" +friendsList.size());
 		
-		return null;
+		
+		HttpSession session = request.getSession();
+		MemberDto myDto=(MemberDto) session.getAttribute(Constant.SYNN_LOGIN_OBJECT);
+		
+		int mem_no_session=myDto.getMem_no();
+		int mateCheck=2;
+		
+		if(mem_no_session!=mem_no){
+			HashMap<String, Integer> mateMap=new HashMap<String, Integer>();
+			
+			mateMap.put("mem_no", mem_no_session);
+			mateMap.put("mate_no", mem_no);
+			
+			mateCheck=memberDao.getMateCheck(mateMap);
+		}
+		
+		
+		
+		
+		mav.addObject("mateCheck", mateCheck);
+		mav.addObject("memberDto", memberDto);
+		mav.addObject("friendsList", friendsList);
+		mav.setViewName("/user/myPage/myPageFriends");
+		
+		return mav;
 	}
 }

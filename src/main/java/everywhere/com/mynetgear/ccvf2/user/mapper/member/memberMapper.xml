@@ -98,6 +98,6 @@
 			, MEM_PROFILE_PHOTO
 			, MEM_REG_DATE
 		from tbl_member
-		where mem_no IN (select mate_no from tbl_mate where mem_no=#{mem_no});
+		where mem_no IN (select mate_no from tbl_mate where mem_no=#{mem_no})
 	</select>
 </mapper>
