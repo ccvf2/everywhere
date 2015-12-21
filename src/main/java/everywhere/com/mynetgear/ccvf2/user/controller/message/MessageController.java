@@ -6,6 +6,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import everywhere.com.mynetgear.ccvf2.comm.util.common.Constant;
+import everywhere.com.mynetgear.ccvf2.user.dto.member.MemberDto;
 import everywhere.com.mynetgear.ccvf2.user.dto.message.MessageDto;
 import everywhere.com.mynetgear.ccvf2.user.service.message.MessageService;
 
@@ -55,7 +58,9 @@ public class MessageController {
 	@RequestMapping(value="/user/message/messageBox.do", method=RequestMethod.GET)
 	public ModelAndView getListMessageBox(HttpServletRequest request, HttpServletResponse response) {
 		ModelAndView mav = new ModelAndView();
-		int mem_no=Integer.parseInt(request.getParameter("mem_no"));
+		HttpSession session= request.getSession();
+		MemberDto memberDto= (MemberDto)session.getAttribute(Constant.SYNN_LOGIN_OBJECT);
+		int mem_no=memberDto.getMem_no();
 		mav.addObject("mem_no", mem_no);
 		messageService.getListMessageBox(mav);
 		return mav;	
