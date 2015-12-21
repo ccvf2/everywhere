@@ -58,4 +58,30 @@ public class SettingMainServiceImp implements SettingMainService {
 		mav.setViewName("/admin/settingMain/settingMain");
 	}
 
+	@Override
+	public void insertForgroundImgChange(ModelAndView mav) {
+		int result=0;
+		Map<String, Object> map= mav.getModelMap();
+		HttpServletRequest request= (HttpServletRequest)map.get("request");
+		SettingMainDto settingDto = (SettingMainDto)map.get("settingMainDto");
+		
+		//파일을 꺼내서 파일을 저장소에 저장함
+		CommonFileIODto commonFileIODto=commonFileIOService.requestWriteFileAndDTO(request, "mainBackground", backgroundPath);
+		commonFileIODto.setType_code(Constant.SERVICE_SETTING_FRONTIMG);
+		//파일정보를 디비에 작성
+		int seq = commonFileIOService.insertFileInfo(commonFileIODto);
+		
+		
+		//파일고유번호 //PLANNER_NO
+		settingDto.setPlanner_no(seq);
+		//사용여부
+		settingDto.setUse_yn(Constant.SYNB_YN_Y);
+		//세팅URl : 이미지 위치.
+		String path = commonFileIODto.getSave_name()+Constant.SYNB_DOT+commonFileIODto.getExtension();
+		settingDto.setSetting_url(path);
+		settingMainDao.insertForgroundImgChange(settingDto);
+		mav.setViewName("/admin/settingMain/settingMain");
+		
+	}
+
 }

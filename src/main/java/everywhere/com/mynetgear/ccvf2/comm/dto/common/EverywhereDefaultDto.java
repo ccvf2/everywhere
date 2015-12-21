@@ -23,7 +23,8 @@ public class EverywhereDefaultDto extends CommonFileIODto {
 	private String searchCondition3=""; 
 	private String searchCondition4="";
 	
-	private String searchWord="";
+	private String searchWord1="";
+	private String searchWord2="";
 	
 	private List<?> conditionList1;
 	private List<?> conditionList2;
@@ -35,6 +36,8 @@ public class EverywhereDefaultDto extends CommonFileIODto {
 	private String mem_level_code;
 	private String mem_email;
 	private String mem_profile_photo;
+	
+	
 	public int getTotalCount() {
 		return totalCount;
 	}
@@ -101,11 +104,17 @@ public class EverywhereDefaultDto extends CommonFileIODto {
 	public void setSearchCondition4(String searchCondition4) {
 		this.searchCondition4 = searchCondition4;
 	}
-	public String getSearchWord() {
-		return searchWord;
+	public String getSearchWord1() {
+		return searchWord1;
 	}
-	public void setSearchWord(String searchWord) {
-		this.searchWord = searchWord;
+	public void setSearchWord1(String searchWord1) {
+		this.searchWord1 = searchWord1;
+	}
+	public String getSearchWord2() {
+		return searchWord2;
+	}
+	public void setSearchWord2(String searchWord2) {
+		this.searchWord2 = searchWord2;
 	}
 	public List<?> getConditionList1() {
 		return conditionList1;

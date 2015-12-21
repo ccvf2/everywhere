@@ -36,15 +36,12 @@ public class SearchDaoImp implements SearchDao {
 		return sqlTemplate.selectOne("everywhere.com.mynetgear.ccvf2.user.mapper.search.getPlannerCount", hMap);
 	}
 
+
 	@Override
-	public List<SpotDto> getSpotList(int startRow, int endRow, String searchValue) {
-		Map<String, Object> hMap = new HashMap<String, Object>();
-		hMap.put("startRow", startRow);
-		hMap.put("endRow", endRow);
-		hMap.put("searchValue", searchValue);
-		
-		return sqlTemplate.selectList("everywhere.com.mynetgear.ccvf2.user.mapper.search.getSpotList", hMap);
+	public List<SpotDto> getSpotList(SpotDto spotDto) {
+		return sqlTemplate.selectList("everywhere.com.mynetgear.ccvf2.user.mapper.search.getSpotList");
 	}
+	
 
 	@Override
 	public List<PlannerDao> getPlannerList(int startRow, int endRow, String searchValue) {

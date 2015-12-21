@@ -61,12 +61,44 @@
                             </div>
                             <div class="panel-body">
 								<form action="/admin/settingMain/backgroundImgChange.do" name="mainSettingBackImg" id="mainSettingBackImg" method="post" enctype="multipart/form-data"	>
-									<input type="hidden" name="setting_spot_code" value="">
+									<input type="hidden" name="setting_spot_code" value="M8881">
 									<input type="hidden" name="setting_type_code" value="M9990">
 									<input type="hidden" name="setting_url" value="">
 									<!-- <input type="hidden" name="planner_no" value=""> -->
 	                               <input type="file" name="mainBackground">
-	                                <button type="submit" class="btn btn-xs btn-default">Default</button>
+	                                <button type="submit" class="btn btn-xs btn-default">등록</button>
+								</form>                            
+                                <div id="previewDiv"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title"><i class="fa fa-bar-chart-o fa-fw"></i> 슬라이드 이미지 프론트</h3>
+                            </div>
+                            <div class="panel-body">
+								<form action="/admin/settingMain/forgroundImgChange.do" name="mainSettingBackImg" id="mainSettingBackImg" method="post" enctype="multipart/form-data"	>
+									<input type="hidden" name="setting_spot_code" value="M8882">
+									<input type="hidden" name="setting_type_code" value="M9991">
+									<input type="hidden" name="setting_url" value="">
+									<!-- <input type="hidden" name="planner_no" value=""> -->
+	                               <input type="file" name="mainBackground">
+	                               <!--텍스트 내용 -->
+	                               <div class="form-group">
+                                	<label>html로 작성해 주세요</label>
+	                               <textarea class="form-control" rows="10" name="setting_text">
+							            <div class="da-slide">
+							                <h2><i>USING BEST WEB</i> <br /> <i>SOLUTIONS WITH</i> <br /> <i>HTML5/CSS3</i></h2>
+							                <p><i>Lorem ipsum dolor amet</i> <br /> <i>tempor incididunt ut</i> <br /> <i>veniam omnis </i></p>
+							                <div class="da-img"><img src="@{image}" alt="image01" /></div>
+							            </div>
+	                               </textarea>
+                            		</div>
+	                                <button type="submit" class="btn btn-xs btn-default">등록</button>
+	                              <span>작성내용중 이미지는 @{image} 를 써주세요.</span>
 								</form>                            
                                 <div id="previewDiv"></div>
                             </div>
