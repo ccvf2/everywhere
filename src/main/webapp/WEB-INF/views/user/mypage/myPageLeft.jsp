@@ -6,8 +6,30 @@
 <meta charset="UTF-8">
 <title>마이페이지 Left</title>
 <script type="text/javascript" src="/assets/plugins/line-icons/icons-lte-ie7.js"></script>
+<c:import url="/WEB-INF/views/common/jquery.jsp"/>
+
 </head>
 <body>
+	<script type="text/javascript">
+		$(function() {
+			var notification = setInterval(function() {
+				//alert('10초에 한번 ㅎ');
+			
+				/* $.ajax({
+					url : "/user/mypage/",
+					type : "get",
+					dataType : "text",
+					success : function(data) {
+						
+					},
+					error : function(xhr, status, errorMsg) {
+						alert(xhr + "," + status + "," + errorMsg);
+					}
+				}); */
+			
+			}, 10*100000000); 
+		});
+	</script>
 	<img class="img-responsive profile-img margin-bottom-20" src="/assets/img/team/img32-md.jpg" alt="">
 	<%-- <c:out value="${session.mem_name}"/><c:out value="(${session.mem_email})"/> --%>
 	<%-- <c:set var="loginMember" value="${mem_object}" scope="session"/> --%>
