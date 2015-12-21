@@ -22,6 +22,16 @@ $(function() {
 	});
 });
 
+function addPlannerPhoto(input){	
+	if (input.files && input.files[0]) {
+		var reader = new FileReader();
+		reader.readAsDataURL(input.files[0]);
+		reader.onloadend = function (e) {
+			$('.breadcrumbs-v1').css('background-image', 'url('+e.target.result +')');
+		}
+	}
+}
+
 function addDay(day_count){
 	var before_day_count = $("#before_day_count").val();
 
@@ -60,7 +70,6 @@ function addDay(day_count){
 		var select = confirm("마지막 일정을 삭제 하시겠습니까?");
 		if(select == true){
 			for(var i = Number(before_day_count); i > Number(day_count.value); i--){
-				alert(i);
 				$("#d"+i+"_items_div").remove();
 				$("#before_day_count").val(day_count.value);
 			}
