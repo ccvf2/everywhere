@@ -75,7 +75,7 @@
 
 			<!-- 메인------------------------------------------------------------------------------------------------------------------------------ -->
             <!-- Profile Content -->
-            <div style="overflow:auto; overflow-x:hidden; max-height:700px; border:1px solid #e5e5e5;">
+            <%-- <div style="overflow:auto; overflow-x:hidden; max-height:700px; border:1px solid #e5e5e5;">
 				<table border="1">
 					<tr>
 						<th>메세지고유번호</th>
@@ -115,12 +115,12 @@
 						<td>${list.send_time}</td>
 						<td>${list.recv_time}</td>
 						<td>${list.unreadCount}</td>
-<%-- 						<td>${list.send_remove_time}</td>
-						<td>${list.recv_remove_time}</td> --%>
+						<td>${list.send_remove_time}</td>
+						<td>${list.recv_remove_time}</td>
 					</tr>
 				</c:forEach>
 				</table>
-            </div>
+            </div> --%>
         
         
         <div style="overflow:auto; overflow-x:hidden; max-height:700px; border:1px solid #e5e5e5;">
@@ -129,9 +129,11 @@
 				<c:choose>
 					<c:when test="${mem_object.mem_no==list.send_mem_no}">
 							<c:set value="${list.recv_mem_no}" var="recv_no"/>
+							<c:set value="${list.recv_mem_name}" var="nameTo"/>
 					</c:when>
 					<c:otherwise>
 							<c:set value="${list.send_mem_no}" var="recv_no"/>
+							<c:set value="${list.send_mem_name}" var="nameTo"/>
 					</c:otherwise>
 				</c:choose>
                 <div class="panel-group acc-v1" id="accordion-1">
@@ -140,7 +142,7 @@
                         <div class="panel-heading">
                             <h4 class="panel-title">
                                 <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion-1" href="#collapse-Four">
-                                    ${list.send_mem_name} 님과의 대화
+                                    ${nameTo}님과의 대화
                                     <c:if test="${list.unreadCount!=0 }">
                                     	<span class="dropcap-bg rounded-x" style="min-width:25px; line-height:10px; font-size:13px; border: double 1px #23c3f2; margin: 0px;">${list.unreadCount}</span>
                                     </c:if>
