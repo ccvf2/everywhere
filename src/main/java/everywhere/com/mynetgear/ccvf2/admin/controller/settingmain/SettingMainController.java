@@ -51,4 +51,12 @@ public class SettingMainController {
 		settingMainService.insertBackgroundImgChange(mav);
 		return mav;	
 	}
+	@RequestMapping(value="/admin/settingMain/forgroundImgChange.do", method=RequestMethod.POST)
+	public ModelAndView forgroundImgChange(HttpServletRequest request, HttpServletResponse response,SettingMainDto dto) {
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("request", request);
+		mav.addObject("settingMainDto", dto);
+		settingMainService.insertForgroundImgChange(mav);
+		return mav;
+	}
 }

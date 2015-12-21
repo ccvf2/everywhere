@@ -17,4 +17,13 @@ public interface SettingMainService {
 	 * @return
 	 */
 	public void insertBackgroundImgChange(ModelAndView mav);
+	
+	
+	/**
+	 * @author 배성욱
+	 * @createDate 2015. 12. 21.
+	 * @described 매소드의 용도를 적어주세요
+	 * @param mav
+	 */
+	public void insertForgroundImgChange(ModelAndView mav);
 }
