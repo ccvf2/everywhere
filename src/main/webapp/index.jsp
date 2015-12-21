@@ -47,12 +47,12 @@
  <hr/>
 
  <h1>사용자</h1>
- <a href="/user/myPage/myPage.do?uandMe=1">마이페이지</a>
+ <a href="/user/myPage/myPage.do?uandMe=S0001">마이페이지</a>
  <hr/>
  <h3>타회원(마이페이지) 이동</h3>
- <a href="/user/myPage/myPage.do?uandMe=2&mem_no=44">봉채윤(tjdrhkd@naver.com)</a><br/>
- <a href="/user/myPage/myPage.do?uandMe=2&mem_no=43">김성광(tjdrhkd2@naver.com)</a><br/>
- <a href="/user/myPage/myPage.do?uandMe=2&mem_no=70">전현준(guswns@naver.com)</a><br/>
+ <a href="/user/myPage/myPage.do?uandMe=S0002&mem_no=327">문희준(user01@everwhere.com)</a><br/>
+ <a href="/user/myPage/myPage.do?uandMe=S0002&mem_no=328">장우혁(user02@everwhere.com)</a><br/>
+
  <hr/>
  <a href="/user/member/register.do">회원가입</a>
  <a href="/user/member/memberRead.do?mem_no=10">회원정보보기</a>
@@ -89,8 +89,8 @@
 <c:choose>
 	<c:when test="${mem_object==null}">
 		<form action="/user/login/login.do" name="memberLogin" method="post">
-		<label>아이디<input type="text" name="mem_email" value="admin@everwhere.com"></label>
-		<label>비밀번호<input type="text" name="mem_pwd" value="1234567890"></label>
+		<label>아이디<input type="text" name="mem_email" value="ccvf2@naver.com"></label>
+		<label>비밀번호<input type="text" name="mem_pwd" value="12345678"></label>
 		<input type="submit" value="로그인">
 		</form>
 	</c:when>

@@ -2,7 +2,7 @@ package everywhere.com.mynetgear.ccvf2.user.dto.planner;
 
 import java.util.Date;
 
-public class PlannerDto {
+public class PlannerDto extends PlannerDtoExt{
 	private int planner_no;
 	private int mem_no;
 	private String planner_ba_code;

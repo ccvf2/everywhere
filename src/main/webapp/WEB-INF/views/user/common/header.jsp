@@ -98,7 +98,7 @@ function plannerCreateReqiest() {
 			                    <li><a href="/admin/main/main.do" style="color: #72c02c;">관리자페이지</a></li>
 			                    <li class="topbar-devider"></li>
 			                    </c:if>
-			                    <li><a href="/user/message/messageBox.do?mem_no=10">쪽지함</a></li>
+			                    <li><a href="/user/message/messageBox.do">쪽지함</a></li>
 	                		</c:otherwise>
 	                	</c:choose>
 	                </ul>
@@ -165,7 +165,7 @@ function plannerCreateReqiest() {
 	
 	                    <!-- Portfolio -->
 	                    <li class="dropdown">
-	                        <a href="/user/myPage/myPage.do?uandMe=1" class="dropdown-toggle">
+	                        <a href="/user/myPage/myPage.do?uandMe=S0001" class="dropdown-toggle">
 	                            마이페이지
 	                        </a>
 	                    </li>
