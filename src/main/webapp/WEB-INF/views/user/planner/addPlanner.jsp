@@ -182,7 +182,7 @@ function spotReadPage(no) {
 								<div class="col col-2 pull-right">
 									<label class="input">
 										<i class="icon-picture input input-file" style="font-size:23px" onclick="addPhoto(this,'${id_value}')">
-											<div class="button" style="background-color:rgba(255, 255, 255, 0);"><input type="file" name="planner_attach_photoes" onchange="addPlannerPhoto(this)" accept="image/*" size="0"/></div>
+											<div class="button" style="background-color:rgba(255, 255, 255, 0);"><input type="file" name="attach_file" onchange="addPlannerPhoto(this)" accept="image/*" size="0"/></div>
 										</i>
 									</label>
 								</div>
