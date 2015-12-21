@@ -137,4 +137,13 @@ public interface MemberDao {
 	 */
 	public int chngePasswordMemberInfo(MemberDto dto);
 
+	/**
+	 * @author 김성광
+	 * @createDate 2015. 12. 21.
+	 * @described 프로필 업데이트
+	 * @param memberDto
+	 * @return
+	 */
+	public int updateProfilePhoto(MemberDto memberDto);
+
 }

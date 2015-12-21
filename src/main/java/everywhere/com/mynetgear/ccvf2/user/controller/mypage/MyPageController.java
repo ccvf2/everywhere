@@ -98,4 +98,16 @@ public class MyPageController {
 	
 		return mav;// new ModelAndView("/user/myPage/myPage");
 	}
+	
+	@RequestMapping(value = "/user/myPage/updateProfilePhoto.do", method = RequestMethod.POST)
+	public ModelAndView updateProfilePhoto(HttpServletRequest request, HttpServletResponse response, MemberDto memberDto) {
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("request", request);
+		mav.addObject("memberDto",memberDto);
+		mav = myPageService.updateProfilePhoto(mav);
+	
+		return mav;// new ModelAndView("/user/myPage/myPage");
+	}
+	
+	
 }

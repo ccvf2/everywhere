@@ -112,4 +112,9 @@
 		update tbl_member set mem_pwd=#{mem_pwd} where mem_no=#{mem_no}
 		<!-- update tbl_member set mem_pwd=#{mem_pwd} where mem_no=10 -->
 	</update>
+	
+	<!--  -->
+	<update id="updateProfilePhoto" parameterType="everywhere.com.mynetgear.ccvf2.user.dto.member.MemberDto">
+		update tbl_member set mem_profile_photo=#{mem_profile_photo} where mem_no=#{mem_no}
+	</update>
 </mapper>
