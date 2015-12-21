@@ -98,7 +98,7 @@ function plannerCreateReqiest() {
 			                    <li><a href="/admin/main/main.do" style="color: #72c02c;">관리자페이지</a></li>
 			                    <li class="topbar-devider"></li>
 			                    </c:if>
-			                    <li><a href="/user/message/messageBox.do?mem_no=10">쪽지함</a></li>
+			                    <li><a href="/user/message/messageBox.do">쪽지함</a></li>
 	                		</c:otherwise>
 	                	</c:choose>
 	                </ul>
@@ -149,9 +149,18 @@ function plannerCreateReqiest() {
 	
 	                    <!-- Pages -->
 	                    <li class="dropdown">
-	                        <a href="javascript:plannerCreateReqiest()" class="dropdown-toggle">
-	                            여행 스케줄 작성
-	                        </a>
+	                    	<c:choose>
+	                    		<c:when test="${mem_object==null}">
+			                        <a href="/user/login/login.do">
+			                            여행 스케줄 작성
+			                        </a>
+	                    		</c:when>
+	                    		<c:otherwise>
+			                        <a href="javascript:plannerCreateReqiest()" class="dropdown-toggle">
+			                            여행 스케줄 작성
+			                        </a>
+	                    		</c:otherwise>
+	                    	</c:choose>
 	                    </li>
 	                    <!-- End Pages -->
 	

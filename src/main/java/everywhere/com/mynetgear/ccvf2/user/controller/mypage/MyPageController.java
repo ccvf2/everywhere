@@ -98,12 +98,4 @@ public class MyPageController {
 	
 		return mav;// new ModelAndView("/user/myPage/myPage");
 	}
-	/*@RequestMapping(value = "/user/myPage/userPage.do", method = RequestMethod.GET)
-	public ModelAndView userPage(HttpServletRequest request, HttpServletResponse response) {
-		ModelAndView mav = new ModelAndView();
-		mav.addObject("request", request);
-		mav = myPageService.moveUserPage(mav);
-
-		return mav;// new ModelAndView("/user/myPage/myPage");
-	}*/
 }
