@@ -7,7 +7,7 @@
 	resultType="everywhere.com.mynetgear.ccvf2.admin.dto.settingmain.SettingMainDto" 
 	parameterType="everywhere.com.mynetgear.ccvf2.admin.dto.settingmain.SettingMainDto">
 		SELECT
-			SETTING_SPOT_CODE
+			*
 		FROM
 			TBL_ADMIN_MAIN_SETTING
 		WHERE
@@ -22,5 +22,27 @@
 							SETTING_TYPE_CODE=#{setting_type_code}
 						)
 	</select>
+	
+	
+	<select id="new_planner" resultType="everywhere.com.mynetgear.ccvf2.user.dto.planner.PlannerDto">
+		SELECT 
+			k.*
+			,(select count(*) from tbl_Common_reply where item_no=k.planner_no and type_code='Z1001') reply_Count
+		FROM
+		  (SELECT rownum rnum,
+		    f.*
+		  FROM
+		    (SELECT t.*
+		    FROM tbl_planner t
+		    WHERE t.USE_YN='Y0002'
+		    ORDER BY t.reg_date DESC
+		    )f
+		  )k
+		WHERE <![CDATA[k.rnum>=1]]>
+		AND <![CDATA[k.rnum  <=3]]>
+	</select>
+	
+	
+	
 	
 </mapper>

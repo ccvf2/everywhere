@@ -33,10 +33,11 @@
     <!--=== Slider ===-->
     <div class="slider-inner">
         <div id="da-slider" class="da-slider" style="background: transparent url(${backgroungImg}) repeat 0% 0%;">
+        <!-- <div id="da-slider" class="da-slider"> -->
             <div class="da-slide">
-                <h2><i>CLEAN &amp; FRESH</i> <br /> <i>FULLY RESPONSIVE</i> <br /> <i>DESIGN</i></h2>
-                <p><i>Lorem ipsum dolor amet</i> <br /> <i>tempor incididunt ut</i> <br /> <i>veniam omnis </i></p>
-                <div class="da-img"><img class="img-responsive" src="/assets/plugins/parallax-slider/img/1.png" alt=""></div>
+                <h2><i>떠나세요~</i> <br /> <i>당신을 기다리는</i> <br /> <i>많은곳들</i></h2>
+                <p><i>일상에 지치고.. 시간에 쫒기고..</i> <br /> <i>갑시다!</i> <br /> <i>슈우우우우~</i></p>
+                <div class="da-img"><img class="img-responsive" src="/attatchFile/admin/forground/Untitled-1.png" alt=""></div>
             </div>
             <div class="da-slide">
                 <h2><i>RESPONSIVE VIDEO</i> <br /> <i>SUPPORT AND</i> <br /> <i>MANY MORE</i></h2>
@@ -65,27 +66,27 @@
 
     	<!-- Recent Works -->
         <div class="row margin-bottom-20">
-        <div class="headline"><h2>Recent Works</h2></div>
+        <div class="headline"><h2>최근등록스케줄</h2></div>
 	        <div class="blog_masonry_3col">
 		        <div class="container content grid-boxes" >
 		        
 		<div>
 			<a href="/user/planner/readPlanner.do?planner_no=${planner.planner_no}"> ${planner.title} </a>
 		</div>
-					<c:forEach var="planner" items="${plannerList}">
+ 					<c:forEach var="list1" items="${list1}">
 		            <div class="col-md-4">
 		            <div class="grid-boxes-in">
 		                <img class="img-responsive" src="/assets/img/main/img3.jpg" alt="" style="width: 360px; height: 227px;">
 		                <div class="grid-boxes-caption">
-		                    <h3><a href="/user/planner/readPlanner.do?planner_no=${planner.planner_no}">${planner.title}</a></h3>
+		                    <h3><a href="/user/planner/readPlanner.do?planner_no=${list1.planner_no}">${list1.title}</a></h3>
 		                    <ul class="list-inline grid-boxes-news">
 		                        <li><span>By</span> <a href="#">Kathy Reyes</a></li>
 		                        <li>|</li>
-		                        <li><i class="fa fa-clock-o"></i> July 06, 2014</li>
+		                        <li><i class="fa fa-clock-o"></i> ${list1.reg_date}</li>
 		                        <li>|</li>
-		                        <li><a href="#"><i class="fa fa-comments-o"></i> 06</a></li>
+		                        <li><a href="#"><i class="fa fa-comments-o"></i> ${list1.reply_Count}</a></li>
 		                    </ul>
-		                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+		                    <p><c:out value="${list1.memo}"></c:out> </p>
 		                </div>
 		            </div>
 		            </div>

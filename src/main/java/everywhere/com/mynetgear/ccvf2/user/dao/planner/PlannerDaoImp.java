@@ -105,5 +105,13 @@ public class PlannerDaoImp implements PlannerDao {
 		}
 		
 		return check;
+	}
+
+	/** 가장최근에 등록된 플레너 */
+	@Override
+	public List<PlannerDto> getListPlanner_main() {
+		List<PlannerDto> list=null;
+		list=sqlTemplate.selectList("new_planner");
+		return list;
 	}	
 }

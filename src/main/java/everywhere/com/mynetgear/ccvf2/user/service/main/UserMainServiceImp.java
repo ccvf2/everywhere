@@ -1,5 +1,7 @@
 package everywhere.com.mynetgear.ccvf2.user.service.main;
 
+import java.util.List;
+
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -8,6 +10,9 @@ import everywhere.com.mynetgear.ccvf2.admin.dto.settingmain.SettingMainDto;
 import everywhere.com.mynetgear.ccvf2.comm.util.common.Constant;
 import everywhere.com.mynetgear.ccvf2.comm.util.common.StringUtil;
 import everywhere.com.mynetgear.ccvf2.user.dao.main.UserMainDao;
+import everywhere.com.mynetgear.ccvf2.user.dao.planner.PlannerDao;
+import everywhere.com.mynetgear.ccvf2.user.dao.spot.SpotDao;
+import everywhere.com.mynetgear.ccvf2.user.dto.planner.PlannerDto;
 
 /**
  * @author 배성욱
@@ -19,7 +24,10 @@ import everywhere.com.mynetgear.ccvf2.user.dao.main.UserMainDao;
 public class UserMainServiceImp implements UserMainService {
 	@Autowired
 	private UserMainDao userMainDao;
-	
+	@Autowired
+	private PlannerDao plannerDao;
+	@Autowired
+	private SpotDao spotDao;
 	/* (non-Javadoc)
 	 * @see everywhere.com.mynetgear.ccvf2.user.service.main.UserMainService#getOneBackGroundImg()
 	 */
@@ -39,9 +47,19 @@ public class UserMainServiceImp implements UserMainService {
 				dto.setSetting_url(path);
 			}
 		}
-		
 		return dto;
 	}
+
+	/* (non-Javadoc)
+	 * @see everywhere.com.mynetgear.ccvf2.user.service.main.UserMainService#getListPlanner()
+	 */
+	@Override
+	public List<PlannerDto> getListPlanner() {
+		List<PlannerDto> list=plannerDao.getListPlanner_main();
+		return list;
+	}
+	
+	
 	
 
 }
