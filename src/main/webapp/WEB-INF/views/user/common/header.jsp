@@ -165,7 +165,7 @@ function plannerCreateReqiest() {
 	
 	                    <!-- Portfolio -->
 	                    <li class="dropdown">
-	                        <a href="/user/myPage/myPage.do?uandMe=1" class="dropdown-toggle">
+	                        <a href="/user/myPage/myPage.do?uandMe=S0001" class="dropdown-toggle">
 	                            마이페이지
 	                        </a>
 	                    </li>

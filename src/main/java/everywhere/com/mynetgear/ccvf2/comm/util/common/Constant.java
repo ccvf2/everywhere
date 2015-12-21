@@ -145,6 +145,8 @@ public class Constant {
 	/**서비스페이지메인셋팅위치코드: 슬라이드이미지 앞이미지*/
 	public static final String SERVICE_SETTING_FRONTIMG = "M9991";
 	
-	
-	
+	/**마이페이지, 타회원페이지 상태코드 MY*/
+	public static final String MYPAGE_CODE_M="S0001";
+	/**마이페이지, 타회원페이지 상태코드 YOU*/
+	public static final String MYPAGE_CODE_U="S0002";
 }

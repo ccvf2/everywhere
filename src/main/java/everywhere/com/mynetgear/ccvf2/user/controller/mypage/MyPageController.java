@@ -4,6 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -34,9 +35,9 @@ public class MyPageController {
 		mav.addObject("response", response);
 		
 		// 코드값에 따라 자신의 페이지 이동 & 타회원 페이지 이동
-		int uandMe=Integer.parseInt(request.getParameter("uandMe"));
+		String uandMe=request.getParameter("uandMe");
 		
-		if(uandMe==1){
+		if(StringUtils.equals(uandMe,Constant.MYPAGE_CODE_M)){
 			//System.out.println("마이페이지로 이동");
 			mav=myPageService.myPage(mav);
 		}else{
@@ -80,9 +81,6 @@ public class MyPageController {
 	
 		return mav;// new ModelAndView("/user/myPage/myPage");
 	}
-	
-	
-	
 		
 	/**
 	 * @author 김성광
