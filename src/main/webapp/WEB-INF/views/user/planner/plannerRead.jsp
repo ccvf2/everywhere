@@ -11,8 +11,15 @@
 
 	<!-- CSS Page Style -->
 	<link rel="stylesheet" href="/assets/css/pages/shortcode_timeline2.css">
-	</head>
-	<body>
+	<script type="text/javascript">
+	function setBackground(image){
+		if(image != null){
+			$('.breadcrumbs-v1').css('background-image', 'url(/attatchFile/planner/'+image+')');
+		}
+	}
+	</script>
+</head>
+<body onload="setBackground('${plannerDto.attach_file}')">
 	<fmt:formatDate var="start_date" pattern="yyyy-MM-dd" value="${plannerDto.start_date}"/>
 	<fmt:formatDate var="end_date" pattern="yyyy-MM-dd" value="${plannerDto.end_date}"/>
 	<input type="hidden" name="planner_no" value="${plannerDto.planner_no}"/>
@@ -45,10 +52,10 @@
 				<c:if test="${mem_object.mem_profile_photo == null || mem_object.mem_profile_photo == '' }">
 					<img class="img-responsive profile-img" src="/assets/img/team/img32-md.jpg" alt="">
 				</c:if>
-				<ul class="list-group sidebar-nav-v1 margin-bottom-40">
-					<li class="list-group-item list-toggle">                   
+				<ul class="list-group sidebar-nav-v1 margin-bottom-40 active">
+					<li class="list-group-item list-toggle">
 						<a data-toggle="collapse" data-parent="#sidebar-nav" href="#collapse-buttons">${mem_object.mem_name}</a>
-						<ul id="collapse-buttons" class="collapse">
+						<ul id="collapse-buttons" class="collapse in">
 							<li>
 								<a href="shortcode_btn_general.html"><i class="fa fa-flask"></i> 마이페이지 이동</a>
 							</li>
@@ -64,7 +71,7 @@
 			<!--Tag Box v4-->
 			<div class="col-md-9">
 				<div class="tag-box tag-box-v4 rounded margin-bottom-40">
-					<p>${plannerDto.memo }</p>
+					<p>${plannerDto.memo}</p>
 				</div>
 			</div>
 			<!--End Tag Box v4-->
@@ -103,24 +110,23 @@
 						<div class="panel-group" style="margin:0 0 30px 25%; clear: both; position: relative;">
 							<div class="panel panel-default rounded-2x">
 								<div class="panel-body">
-									<div class="row">
-										<c:if test="${item.item_photoes[0].save_name != null}">
-											<div class="col-md-4">
-												<img class="img-responsive" src="/attatchFile/item/${item.item_photoes[0].save_name}.${item.item_photoes[0].extension}" alt="">
-											</div>
-										</c:if>
-										<div class="col-md-8">
+									<c:if test="${item.item_photoes[0].save_name != null}">
+										<div class="row" style="margin:3px;">
+											<img class="img-responsive" src="/attatchFile/item/${item.item_photoes[0].save_name}.${item.item_photoes[0].extension}" alt="">
+										</div>
+									</c:if>
+									<c:if test="${item.note != null }">
+										<div class="row" style="border:1px solid #EEE;margin:5px;">
 											${item.note}
 										</div>
-										<c:if test="${item.moneyList != null }">
-											<hr/>
-											<div class="col-md-8">
+										<c:if test="${item.moneyList.size() != 0 }">
+											<div class="row">
 												<c:forEach var="money" items="${item.moneyList}">
 													${money.money_title } ${money.price }
 												</c:forEach>
 											</div>
 										</c:if>
-									</div>
+									</c:if>
 								</div>
 							</div>
 						</div>
@@ -140,5 +146,6 @@
 		<c:import url="/WEB-INF/views/user/common/footer.jsp"/>
 	</div>
 	<!--=== End Footer Version 1 ===-->
+	
 </body>
 </html>
