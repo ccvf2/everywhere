@@ -89,8 +89,8 @@
 <c:choose>
 	<c:when test="${mem_object==null}">
 		<form action="/user/login/login.do" name="memberLogin" method="post">
-		<label>아이디<input type="text" name="mem_email" value="admin@everwhere.com"></label>
-		<label>비밀번호<input type="text" name="mem_pwd" value="1234567890"></label>
+		<label>아이디<input type="text" name="mem_email" value="ccvf2@naver.com"></label>
+		<label>비밀번호<input type="text" name="mem_pwd" value="12345678"></label>
 		<input type="submit" value="로그인">
 		</form>
 	</c:when>

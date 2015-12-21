@@ -24,4 +24,7 @@ public interface PlannerDao {
 	public int updatePlanner(PlannerDto plannerDto);
 
 	public int deletePlanner(int planner_no);
+	
+	
+	public List<PlannerDto> getListPlanner_main();
 }
