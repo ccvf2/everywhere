@@ -37,10 +37,10 @@ public class MyPageController {
 		int uandMe=Integer.parseInt(request.getParameter("uandMe"));
 		
 		if(uandMe==1){
-			System.out.println("마이페이지로 이동");
+			//System.out.println("마이페이지로 이동");
 			mav=myPageService.myPage(mav);
 		}else{
-			System.out.println("타회원 페이지로 이동");
+			//System.out.println("타회원 페이지로 이동");
 			mav=myPageService.moveUserPage(mav);
 		}
 		

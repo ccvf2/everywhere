@@ -62,7 +62,7 @@ public class MyPageServiceImpl implements MyPageService {
 		
 		HttpSession session = request.getSession();
 		MemberDto memberDto=(MemberDto) session.getAttribute(Constant.SYNN_LOGIN_OBJECT);
-		System.out.println("========================\n"+memberDto.toString());
+		//System.out.println("========================\n"+memberDto.toString());
 		
 		mav.addObject("mateCheck", 2);
 		mav.addObject("memberDto", memberDto);
@@ -88,7 +88,7 @@ public class MyPageServiceImpl implements MyPageService {
 		
 		int mateCheck=memberDao.mateInsert(mateMap);
 		
-		System.out.println("친구 추가 완료 :(mateCheck) : " + mateCheck);
+		//System.out.println("친구 추가 완료 :(mateCheck) : " + mateCheck);
 		
 		mav.addObject("mateCheck", mateCheck);
 		mav.addObject("memberDto", memberDto);
@@ -135,9 +135,7 @@ public class MyPageServiceImpl implements MyPageService {
 		
 		List<MemberDto> friendsList=memberDao.getListFriends(mem_no);
 		
-		System.out.println("친구 몇명? :" +friendsList.size());
-		
-		
+		//System.out.println("친구 몇명? :" +friendsList.size());
 		HttpSession session = request.getSession();
 		MemberDto myDto=(MemberDto) session.getAttribute(Constant.SYNN_LOGIN_OBJECT);
 		
@@ -146,15 +144,11 @@ public class MyPageServiceImpl implements MyPageService {
 		
 		if(mem_no_session!=mem_no){
 			HashMap<String, Integer> mateMap=new HashMap<String, Integer>();
-			
 			mateMap.put("mem_no", mem_no_session);
 			mateMap.put("mate_no", mem_no);
 			
 			mateCheck=memberDao.getMateCheck(mateMap);
 		}
-		
-		
-		
 		
 		mav.addObject("mateCheck", mateCheck);
 		mav.addObject("memberDto", memberDto);

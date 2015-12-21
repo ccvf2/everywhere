@@ -26,7 +26,6 @@
 <div class="wrapper">
     <!--=== Header ===-->
     <div class="header">
-    		<c:import url="/WEB-INF/views/common/jquery.jsp"/>
 			<c:import url="/WEB-INF/views/user/common/utilImport.jsp"/>
 			<c:import url="/WEB-INF/views/user/common/header.jsp"/>
 	</div>
