@@ -124,6 +124,17 @@
         
         
         <div style="overflow:auto; overflow-x:hidden; max-height:700px; border:1px solid #e5e5e5;">
+        <c:choose>
+        	<c:when test="${messageBoxList==null || messageBoxList.size()==0}">
+                <!--Box Shadow Effects3/4-->
+                <div class="shadow-wrapper">
+                    <div class="tag-box tag-box-v1 box-shadow shadow-effect-2">
+                        <h2>받은쪽지함이 없습니다.!</h2>
+                        <p>지금 쪽지를 보내 보세요.<br/> 당신의 친구가 여행동행을 구하고 있을지도 모릅니다. 이미 여행중인 친구라면 생각하지 못했던 인사가 더욱 반갑습니다.</p>
+                    </div>
+                </div>
+        	</c:when>
+        	<c:otherwise>
                 <!-- Accordion v1 -->
 				<c:forEach var="list" items="${messageBoxList}">
 				<c:choose>
@@ -168,6 +179,8 @@
                 </div>
                 <!-- End Accordion v1 -->
                 </c:forEach>
+        	</c:otherwise>
+        </c:choose>
 
             </div>
             <!-- End Content -->
