@@ -30,6 +30,28 @@
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+    
+    <script type="text/javascript">
+		function spotReadPage(no) {
+			//alert(no);
+			var makeDiv ="<div id='showModal"+no+"'></div>";
+			var requestURL="/user/spot/spotReadPage.do?spot_no="+no;
+				$.ajax({
+							url : requestURL,
+							type : "GET",
+							dataType : "html",
+							success : function(data) {
+								$("body").append(makeDiv);
+								$("#showModal"+no).append(data)
+							},
+							error : function() {
+								alert("목록 가져오기 실패");
+							}
+						})
+		}
+	</script>
+    
+    
   	<c:import url="/WEB-INF/views/common/jquery.jsp"/>
 	<c:import url="/WEB-INF/views/user/common/utilImport.jsp"/>
   </head>
@@ -94,9 +116,43 @@
 	                    </footer> -->
 	                </form>
 	                
+	                
+					<%-- <div>
+						<ul class="list-unstyled mCustomScrollbar margin-bottom-20" data-mcs-theme="minimal-dark" id="spotLists">
+							<c:forEach var="spot" items="${spotList}">
+								<li class="notification" style="margin:0px;border:1px solid #eee;padding:5px 5px;height: 48px;" id="spotItem">
+									<div id="${spot.spot_no}_item" class="ui-widget-content" style="border:0px;">
+										<i style="margin:0;"><img alt="" src="/attatchFile/spot/${spot.spot_photoes[0].save_name}.${spot.spot_photoes[0].extension}" style="width:35px;height:35px;margin-right:5px;"></i>
+										<div class="overflow-h">
+											<span>
+												<strong><a href="javascript:spotReadPage('${spot.spot_no}')">${spot.spot_name}</a></strong>
+											</span>
+											<small><c:out value="${spot.spot_note}"/></small>
+										</div>
+									</div>
+								</li>
+							</c:forEach>
+						</ul>
+					</div>
+	                 --%>
+	                
+	                
 	              <div class="tag-box tag-box-v4 margin-bottom-20" style="padding : 0px; border: 1px #bbb;">
 						<ul class="list-unstyled mCustomScrollbar margin-bottom-20 _mCS_1 mCS-autoHide" data-mcs-theme="minimal-dark" id="spotLists" style="position: relative; overflow: visible;">
-							<div id="mCSB_1" class="mCustomScrollBox mCS-minimal-dark mCSB_vertical mCSB_outside" tabindex="0">
+							<c:forEach var="spot" items="${spotList}">
+								<li class="notification" style="margin:0px;border:1px solid #eee;padding:5px 5px;height: 48px;overflow:hidden;" id="spotItem">
+									<div id="${spot.spot_no}_item" class="ui-widget-content" style="border:0px;">
+										<i style="margin:0; float:left;"><img alt="" src="/attatchFile/spot/${spot.spot_photoes[0].save_name}.${spot.spot_photoes[0].extension}" style="width:35px;height:35px;margin-right:5px;"></i>
+										<div class="overflow-h">
+											<span>
+												<strong><a href="javascript:spotReadPage('${spot.spot_no}')">${spot.spot_name}</a></strong>
+											</span><br/>
+											<small><c:out value="${spot.spot_note}"/></small>
+										</div>
+									</div>
+								</li>
+							</c:forEach>
+							<!-- <div id="mCSB_1" class="mCustomScrollBox mCS-minimal-dark mCSB_vertical mCSB_outside" tabindex="0">
 								<div id="mCSB_1_container" class="mCSB_container" style="position: relative; top: 0px; left: 0px;" dir="ltr">
 									<li class="notification" style="margin:0px;border:1px solid #eee;padding:5px 5px;height: 48px;overflow:hidden;" id="spotItem">
 									<div id="86_item" class="rounded">
@@ -171,7 +227,7 @@
 									</div>
 									</li>
 								</div>
-							</div>
+							</div> -->
 							<div id="mCSB_1_scrollbar_vertical" class="mCSB_scrollTools mCSB_1_scrollbar mCS-minimal-dark mCSB_scrollTools_vertical" style="display: block;">
 								<div class="mCSB_draggerContainer">
 									<div id="mCSB_1_dragger_vertical" class="mCSB_dragger" style="position: absolute; min-height: 50px; display: block; height: 247px; max-height: 286px; top: 0px;" oncontextmenu="return false;">
@@ -187,12 +243,11 @@
 						<!--End Notification-->
 					</div>
 						              
-	              
-	              
-	              
-	              
-	              
-	                
+
+
+
+
+
 	             
 		               
 	            </div>
