@@ -31,6 +31,12 @@
 		});
 	</script>
 	<img class="img-responsive profile-img margin-bottom-20" src="/assets/img/team/img32-md.jpg" alt="">
+	<form action="/admin/settingMain/backgroundImgChange.do" name="mainSettingBackImg" id="mainSettingBackImg" method="post" enctype="multipart/form-data"	>
+		<input type="hidden" name="setting_url" value="">
+		<!-- <input type="hidden" name="planner_no" value=""> -->
+        <input type="file" name="mainBackground">
+        <button type="submit" class="btn btn-xs btn-default">Default</button>
+	</form>
 	<%-- <c:out value="${session.mem_name}"/><c:out value="(${session.mem_email})"/> --%>
 	<%-- <c:set var="loginMember" value="${mem_object}" scope="session"/> --%>
 	<c:set var="memberDto" value="${memberDto}"/>
@@ -41,10 +47,8 @@
 	<c:if test="${mateCheck==1}">
 		<a href="/user/myPage/mateDelete.do?mem_no=${memberDto.mem_no}">친구삭제</a>
 	</c:if>
-	
+
     <ul class="list-group sidebar-nav-v1 margin-bottom-40" id="sidebar-nav-1">
-        <li class="list-group-item">
-        </li>
         <li class="list-group-item">
             <a href="/user/myPage/friends.do?mem_no=${memberDto.mem_no}"><i class="fa fa-group"></i> 친구</a>
         </li>
@@ -55,21 +59,23 @@
             <a href="/user/visitor/visitorWrite.do?mem_no=${memberDto.mem_no}"><i class="fa fa-pencil-square-o"></i> 방명록</a>
         </li>
         <li class="list-group-item">
-            <a href="#"><i class="fa fa-comments"></i> 쪽지함</a>
-        </li>
-        <li class="list-group-item">
             <a href="#"><i class="fa fa-history"></i> 내 활동</a>
         </li>
         <li class="list-group-item">
             <a href="#"><i class="fa fa-star-o"></i> 즐겨찾기</a>
         </li>
-        <li class="list-group-item">
-            <a href="#"><i class="fa fa-cog"></i> 설정</a>
-        </li>
+        <c:if test="${mateCheck==2}">
+	        <li class="list-group-item">
+	            <a href="#"><i class="fa fa-comments"></i> 쪽지함</a>
+	        </li>
+	        <li class="list-group-item">
+	            <a href="#"><i class="fa fa-cog"></i> 정보수정</a>
+	        </li>
+        </c:if>
     </ul>
 
     <!--Notification-->
-    <div class="panel-heading-v2 overflow-h">
+   <!--  <div class="panel-heading-v2 overflow-h">
         <h2 class="heading-xs pull-left"><i class="fa fa-bell-o"></i> 알림</h2>
         <a href="#"><i class="fa fa-cog pull-right"></i></a>
     </div>
@@ -116,16 +122,16 @@
                 <small>23/12 15:15 pm</small>
             </div>
         </li>
-    </ul>
+    </ul> -->
     <!-- <button type="button" class="btn-u btn-u-default btn-u-sm btn-block">Load More</button> -->
     <!--End Notification-->
 
     <div class="margin-bottom-50"></div>
 
     <!--Datepicker-->
-    <form action="#" id="sky-form2" class="sky-form">
+   <!--  <form action="#" id="sky-form2" class="sky-form">
         <div id="inline-start"></div>
-    </form>
+    </form> -->
     <!--End Datepicker-->
 </body>
 </html>
