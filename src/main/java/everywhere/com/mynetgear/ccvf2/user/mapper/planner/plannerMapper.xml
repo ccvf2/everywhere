@@ -33,9 +33,10 @@
 	
 	<update id="update_planner" parameterType="everywhere.com.mynetgear.ccvf2.user.dto.planner.PlannerDto">
 		update tbl_planner set title=#{title},
+								attach_file=#{attach_file, jdbcType=VARCHAR},
 								memo=#{memo, jdbcType=VARCHAR},
-				 				start_date=#{start_date},
-				 				end_date=#{end_date}
+								start_date=#{start_date},
+								end_date=#{end_date}
 		where planner_no=#{planner_no}
 	</update>
 	
@@ -78,7 +79,18 @@
 	</select> 
 
 	<select id="get_planner_item" resultType="everywhere.com.mynetgear.ccvf2.user.dto.planner.PlannerDto" parameterType="int">
-		select * from tbl_planner where planner_no=#{planner_no}
+		select 
+			pl.PLANNER_NO
+			, pl.MEM_NO
+			, pl.PLANNER_BA_CODE
+			, pl.TITLE
+			, (select save_name||'.'||EXTENSION from tbl_common_file where FILE_NO=pl.ATTACH_FILE)ATTACH_FILE  
+			, pl.MEMO
+			, pl.START_DATE
+			, pl.END_DATE
+			, pl.REG_DATE
+			, pl.USE_YN
+		from tbl_planner pl where pl.planner_no=#{planner_no}
 	</select>
 	
 	<delete id="delete_planner" parameterType="int">
