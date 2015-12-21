@@ -96,8 +96,8 @@ function plannerCreateReqiest() {
 			                    <li class="topbar-devider"></li>
 			                    <c:if test="${mem_object.mem_level_code=='M0001'}">
 			                    <li><a href="/admin/main/main.do" style="color: #72c02c;">관리자페이지</a></li>
-			                    </c:if>
 			                    <li class="topbar-devider"></li>
+			                    </c:if>
 			                    <li><a href="/user/message/messageBox.do?mem_no=10">쪽지함</a></li>
 	                		</c:otherwise>
 	                	</c:choose>
