@@ -56,7 +56,8 @@
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-				<input type="submit" class="btn btn-primary"/>
+				<!-- <input type="submit" class="btn-u btn-u-default" value="쓰기"/> -->
+				<input type="submit" class="btn btn-default" value="쓰기"/>
 			</div>
 		</form>
 		</div>
