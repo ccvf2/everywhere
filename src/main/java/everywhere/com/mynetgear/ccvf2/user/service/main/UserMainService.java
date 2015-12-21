@@ -1,6 +1,9 @@
 package everywhere.com.mynetgear.ccvf2.user.service.main;
 
+import java.util.List;
+
 import everywhere.com.mynetgear.ccvf2.admin.dto.settingmain.SettingMainDto;
+import everywhere.com.mynetgear.ccvf2.user.dto.planner.PlannerDto;
 
 /**
  * @author 배성욱
@@ -16,4 +19,11 @@ public interface UserMainService {
 	 * @return
 	 */
 	public SettingMainDto getOneBackGroundImg();
+	/**
+	 * @author 배성욱
+	 * @createDate 2015. 12. 21.
+	 * @described 매소드의 용도를 적어주세요
+	 * @return
+	 */
+	public List<PlannerDto> getListPlanner();
 }
