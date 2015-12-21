@@ -13,7 +13,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import everywhere.com.mynetgear.ccvf2.comm.util.common.Constant;
 import everywhere.com.mynetgear.ccvf2.user.dao.member.MemberDao;
+import everywhere.com.mynetgear.ccvf2.user.dao.planner.PlannerDao;
 import everywhere.com.mynetgear.ccvf2.user.dto.member.MemberDto;
+import everywhere.com.mynetgear.ccvf2.user.dto.planner.PlannerDto;
 
 /**
  * @author 김성광
@@ -25,7 +27,28 @@ import everywhere.com.mynetgear.ccvf2.user.dto.member.MemberDto;
 public class MyPageServiceImpl implements MyPageService {
 	@Autowired
 	private MemberDao memberDao;
+	@Autowired
+	private PlannerDao plannerDao;
+	
 
+	@Override
+	public ModelAndView myPage(ModelAndView mav) {
+		Map<String, Object> map = mav.getModelMap();
+		HttpServletRequest request= (HttpServletRequest)map.get("request");
+		
+		HttpSession session = request.getSession();
+		MemberDto memberDto=(MemberDto) session.getAttribute(Constant.SYNN_LOGIN_OBJECT);
+		
+		int mem_no=64;
+		List<PlannerDto> plannerList = plannerDao.getPlannerList(mem_no);
+
+		mav.addObject("plannerList", plannerList);
+		mav.addObject("mateCheck", 2);
+		mav.addObject("memberDto", memberDto);
+		mav.setViewName("/user/myPage/myPage");
+		return mav;
+	}
+	
 	@Override
 	public ModelAndView moveUserPage(ModelAndView mav) {
 		Map<String, Object> map = mav.getModelMap();
@@ -52,19 +75,6 @@ public class MyPageServiceImpl implements MyPageService {
 		return mav;
 	}
 
-	@Override
-	public ModelAndView myPage(ModelAndView mav) {
-		Map<String, Object> map = mav.getModelMap();
-		HttpServletRequest request= (HttpServletRequest)map.get("request");
-		
-		HttpSession session = request.getSession();
-		MemberDto memberDto=(MemberDto) session.getAttribute(Constant.SYNN_LOGIN_OBJECT);
-		
-		mav.addObject("mateCheck", 2);
-		mav.addObject("memberDto", memberDto);
-		mav.setViewName("/user/myPage/myPage");
-		return mav;
-	}
 
 	@Override
 	public ModelAndView mateInsert(ModelAndView mav) {
