@@ -29,11 +29,14 @@ function addDay(day_count){
 		var select = confirm("일정 추가 하시겠습니까?");
 		if(select == true){
 			//Item 용 레퍼런스 복사 후 name값 변경
-			var html = $('#dayDiv').html();
-			var copy = "d"+day_count.value+"_item";
-			var newHtml = html.replace(/d0_item/g, copy);
-
-			$("#submit_btn").before(newHtml);
+			for(var i = Number(before_day_count)+1; i <= Number(day_count.value); i++){
+				alert(i);
+				var html = $('#dayDiv').html();
+				var copy = "d"+i+"_item";
+				var newHtml = html.replace(/d0_item/g, copy);
+	
+				$("#submit_btn").before(newHtml);
+			}
 			$("#d"+day_count.value+"_items_date").text("Day " + day_count.value)
 
 			$( ".dropItem" ).droppable({
@@ -56,8 +59,12 @@ function addDay(day_count){
 	}else{
 		var select = confirm("마지막 일정을 삭제 하시겠습니까?");
 		if(select == true){
-			$("#d"+before_day_count+"_items_div").remove();
-			$("#before_day_count").val(day_count.value);
+			for(var i = Number(before_day_count); i > Number(day_count.value); i--){
+				alert(i);
+				$("#d"+i+"_items_div").remove();
+				$("#before_day_count").val(day_count.value);
+			}
+			
 		}else{
 			day_count.value = before_day_count;
 			return;
