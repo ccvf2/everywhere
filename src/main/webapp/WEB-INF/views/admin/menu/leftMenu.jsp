@@ -10,16 +10,16 @@
 <body>
             <div class="collapse navbar-collapse navbar-ex1-collapse">
                 <ul class="nav navbar-nav side-nav">
-                    <li class="active">
+                    <!-- <li>
                         <a href="index.html"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
-                    </li>
+                    </li> -->
                     <li>
                         <a href="/admin/chart/chartView.do"><i class="fa fa-fw fa-bar-chart-o"></i> 통계보기</a>
                     </li>
                     <li>
                         <a href="/admin/member/adminMemberList.do"><i class="fa fa-fw fa-table"></i>회원관리</a>
                     </li>
-                    <li>
+                   <!--  <li>
                         <a href="forms.html"><i class="fa fa-fw fa-edit"></i> Forms</a>
                     </li>
                     <li>
@@ -27,7 +27,7 @@
                     </li>
                     <li>
                         <a href="bootstrap-grid.html"><i class="fa fa-fw fa-wrench"></i> Bootstrap Grid</a>
-                    </li>
+                    </li> -->
                     <li>
                         <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-arrows-v"></i>메일템플릿<i class="fa fa-fw fa-caret-down"></i></a>
                         <ul id="demo" class="collapse">

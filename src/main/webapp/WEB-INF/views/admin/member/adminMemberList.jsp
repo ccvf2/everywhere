@@ -35,7 +35,7 @@
                         </h1>
                         <ol class="breadcrumb">
                             <li class="active">
-                                <i class="fa fa-dashboard"></i> Dashboard
+                                <i class="fa fa-dashboard"></i> 관리자 회원관리
                             </li>
                         </ol>
                     </div>

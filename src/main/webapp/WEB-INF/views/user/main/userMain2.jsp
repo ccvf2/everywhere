@@ -69,12 +69,15 @@
 	        <div class="blog_masonry_3col">
 		        <div class="container content grid-boxes" >
 		        
-		        
+		<div>
+			<a href="/user/planner/readPlanner.do?planner_no=${planner.planner_no}"> ${planner.title} </a>
+		</div>
+					<c:forEach var="planner" items="${plannerList}">
 		            <div class="col-md-4">
 		            <div class="grid-boxes-in">
 		                <img class="img-responsive" src="/assets/img/main/img3.jpg" alt="" style="width: 360px; height: 227px;">
 		                <div class="grid-boxes-caption">
-		                    <h3><a href="#">Unify Clean and Fresh Fully Responsive Template</a></h3>
+		                    <h3><a href="/user/planner/readPlanner.do?planner_no=${planner.planner_no}">${planner.title}</a></h3>
 		                    <ul class="list-inline grid-boxes-news">
 		                        <li><span>By</span> <a href="#">Kathy Reyes</a></li>
 		                        <li>|</li>
@@ -86,100 +89,10 @@
 		                </div>
 		            </div>
 		            </div>
+					</c:forEach>
 		            
 		            
-		            
-		            <div class="col-md-4">
-		            <div class="grid-boxes-in">
-		                <img class="img-responsive" src="/assets/img/main/img3.jpg" alt="" style="width: 360px; height: 227px;">
-		                <div class="grid-boxes-caption">
-		                    <h3><a href="#">Unify Clean and Fresh Fully Responsive Template</a></h3>
-		                    <ul class="list-inline grid-boxes-news">
-		                        <li><span>By</span> <a href="#">Kathy Reyes</a></li>
-		                        <li>|</li>
-		                        <li><i class="fa fa-clock-o"></i> July 06, 2014</li>
-		                        <li>|</li>
-		                        <li><a href="#"><i class="fa fa-comments-o"></i> 06</a></li>
-		                    </ul>
-		                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
-		                </div>
-		            </div>
-		            </div>
-		            
-		            
-		            <div class="col-md-4">
-		            <div class="grid-boxes-in">
-		                <img class="img-responsive" src="/assets/img/main/img3.jpg" alt="" style="width: 360px; height: 227px;">
-		                <div class="grid-boxes-caption">
-		                    <h3><a href="#">Unify Clean and Fresh Fully Responsive Template</a></h3>
-		                    <ul class="list-inline grid-boxes-news">
-		                        <li><span>By</span> <a href="#">Kathy Reyes</a></li>
-		                        <li>|</li>
-		                        <li><i class="fa fa-clock-o"></i> July 06, 2014</li>
-		                        <li>|</li>
-		                        <li><a href="#"><i class="fa fa-comments-o"></i> 06</a></li>
-		                    </ul>
-		                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
-		                </div>
-		            </div>
-		            </div>
-		            
-		            
-		            
-		            
-		            <div class="col-md-4">
-		            <div class="grid-boxes-in">
-		                <img class="img-responsive" src="/assets/img/main/img3.jpg" alt="" style="width: 360px; height: 227px;">
-		                <div class="grid-boxes-caption">
-		                    <h3><a href="#">Unify Clean and Fresh Fully Responsive Template</a></h3>
-		                    <ul class="list-inline grid-boxes-news">
-		                        <li><span>By</span> <a href="#">Kathy Reyes</a></li>
-		                        <li>|</li>
-		                        <li><i class="fa fa-clock-o"></i> July 06, 2014</li>
-		                        <li>|</li>
-		                        <li><a href="#"><i class="fa fa-comments-o"></i> 06</a></li>
-		                    </ul>
-		                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
-		                </div>
-		            </div>
-		            </div>
-		            
-		            
-		            <div class="col-md-4">
-		            <div class="grid-boxes-in">
-		                <img class="img-responsive" src="/assets/img/main/img3.jpg" alt="" style="width: 360px; height: 227px;">
-		                <div class="grid-boxes-caption">
-		                    <h3><a href="#">Unify Clean and Fresh Fully Responsive Template</a></h3>
-		                    <ul class="list-inline grid-boxes-news">
-		                        <li><span>By</span> <a href="#">Kathy Reyes</a></li>
-		                        <li>|</li>
-		                        <li><i class="fa fa-clock-o"></i> July 06, 2014</li>
-		                        <li>|</li>
-		                        <li><a href="#"><i class="fa fa-comments-o"></i> 06</a></li>
-		                    </ul>
-		                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
-		                </div>
-		            </div>
-		            </div>
-		            
-		            
-		            <div class="col-md-4">
-		            <div class="grid-boxes-in">
-		                <img class="img-responsive" src="/assets/img/main/img3.jpg" alt="" style="width: 360px; height: 227px;">
-		                <div class="grid-boxes-caption">
-		                    <h3><a href="#">Unify Clean and Fresh Fully Responsive Template</a></h3>
-		                    <ul class="list-inline grid-boxes-news">
-		                        <li><span>By</span> <a href="#">Kathy Reyes</a></li>
-		                        <li>|</li>
-		                        <li><i class="fa fa-clock-o"></i> July 06, 2014</li>
-		                        <li>|</li>
-		                        <li><a href="#"><i class="fa fa-comments-o"></i> 06</a></li>
-		                    </ul>
-		                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
-		                </div>
-		            </div>
-		            </div>
-		            
+
 		            
 				</div>
 			</div>
