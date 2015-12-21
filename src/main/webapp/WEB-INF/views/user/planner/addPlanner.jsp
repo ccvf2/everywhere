@@ -83,6 +83,7 @@ function spotReadPage(no) {
 
 					<div class="panel-heading-v2 overflow-h">
 						<form class="sky-form">
+						<input type="hidden" id="spot_page" value="1"/>
 							<!-- 나라 -->
 							<label class="select">
 								<select name="country_code" id="selectCountry" onchange="selectSpotList(true)">
@@ -133,7 +134,7 @@ function spotReadPage(no) {
 							</c:forEach>
 						</ul>
 					</div>
-					<button type="button" class="btn-u btn-u-default btn-u-sm btn-block">Load More</button>
+					<button type="button" class="btn-u btn-u-default btn-u-sm btn-block" onclick="selectMoreSpotList()">Load More</button>
 					<!--End Notification-->
 				</div>
 
