@@ -149,9 +149,18 @@ function plannerCreateReqiest() {
 	
 	                    <!-- Pages -->
 	                    <li class="dropdown">
-	                        <a href="javascript:plannerCreateReqiest()" class="dropdown-toggle">
-	                            여행 스케줄 작성
-	                        </a>
+	                    	<c:choose>
+	                    		<c:when test="${mem_object==null}">
+			                        <a href="/user/login/login.do">
+			                            여행 스케줄 작성
+			                        </a>
+	                    		</c:when>
+	                    		<c:otherwise>
+			                        <a href="javascript:plannerCreateReqiest()" class="dropdown-toggle">
+			                            여행 스케줄 작성
+			                        </a>
+	                    		</c:otherwise>
+	                    	</c:choose>
 	                    </li>
 	                    <!-- End Pages -->
 	

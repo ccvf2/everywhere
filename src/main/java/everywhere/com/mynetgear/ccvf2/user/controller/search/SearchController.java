@@ -40,6 +40,22 @@ public class SearchController {
 	
 	/**
 	 * @author 곽성국	
+	 * @createDate 2015. 12. 21.
+	 * @described ajax 요청을 통해 명소 리스트를 json으로 반환함
+	 * @param request
+	 * @param response
+	 * @return
+	 */
+	@RequestMapping(value="/user/search/getSpotList.ajax", method=RequestMethod.GET)
+	public ModelAndView getSpotList(HttpServletRequest request, HttpServletResponse response) {
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("request", request);
+		mav.addObject("response", response);
+		searchService.getSpotList(mav);
+		return null;
+	}
+	/**
+	 * @author 곽성국	
 	 * @createDate 2015. 12. 19.
 	 * @described 스케줄을 검색한다.
 	 * @param request

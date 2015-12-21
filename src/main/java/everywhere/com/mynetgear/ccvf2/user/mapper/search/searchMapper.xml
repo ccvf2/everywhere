@@ -25,8 +25,13 @@
 	</select>
 	
 	<!-- 명소의 리스트를 반환 -->
-	<select id="getSpotList" parameterType="java.util.Map" resultType="everywhere.com.mynetgear.ccvf2.user.dto.spot.SpotDto">
-		select * from tbl_spot
+	<select id="getSpotList" resultType="everywhere.com.mynetgear.ccvf2.user.dto.spot.SpotDto">
+		<![CDATA[
+			select * from (
+				select rownum rnum, a.* from
+					(select * from tbl_spot order by spot_name asc) a)
+			where rnum >= 1 and rnum <= 10
+		]]>
 	</select>
 	
 	<!-- 스케줄의 리스트를 반환 -->

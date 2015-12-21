@@ -34,4 +34,12 @@ public interface SearchService {
 	 */
 	void searchTotal(ModelAndView mav);
 
+	/**
+	 * @author 곽성국	
+	 * @createDate 2015. 12. 21.
+	 * @described ajax요청을 통해 명소 리스트를 json으로 반환함
+	 * @param mav
+	 */
+	void getSpotList(ModelAndView mav);
+
 }

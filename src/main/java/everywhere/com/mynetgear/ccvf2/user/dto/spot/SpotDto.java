@@ -4,8 +4,9 @@ import java.io.File;
 import java.util.List;
 
 import everywhere.com.mynetgear.ccvf2.comm.dto.common.CommonFileIODto;
+import everywhere.com.mynetgear.ccvf2.comm.dto.common.EverywhereDefaultDto;
 
-public class SpotDto {
+public class SpotDto extends EverywhereDefaultDto {
 	private int spot_no;
 	private int mem_no;
 	private String country_code;

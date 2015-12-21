@@ -9,7 +9,6 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -45,6 +44,9 @@ public class PlannerServiceImp implements PlannerService {
 	
 	@Value("${attach.item.path}")
 	private String itemPath;
+	
+	@Value("${attach.planner.path}")
+	private String plannerPath;
 
 	@Override
 	public void insertPlanner(ModelAndView mav) {
@@ -104,7 +106,7 @@ public class PlannerServiceImp implements PlannerService {
 		HttpServletRequest request = (HttpServletRequest)map.get("request");
 		int planner_no = Integer.parseInt(request.getParameter("planner_no"));
 
-		PlannerDto plannerDto = plannerDao.getOnePlanner(planner_no);
+		PlannerDto plannerDto = plannerDao.getOnePlanner(planner_no);		
 		List<ItemDto> itemList = plannerDao.getItemList(planner_no);
 
 		for(int i = 0; i < itemList.size(); i++){
@@ -214,8 +216,17 @@ public class PlannerServiceImp implements PlannerService {
 		plannerDto.setMem_no(mem_no);		
 		plannerDto.setTitle(request.getParameter("planner_title"));
 		plannerDto.setMemo(request.getParameter("planner_memo"));
+		
+		CommonFileIODto commonFileIODto = commonFileIOService.requestWriteFileAndDTO(request, "attach_file", plannerPath);
+		if(commonFileIODto != null){
+			commonFileIODto.setType_code(Constant.FILE_TYPE_ITEM);
+			commonFileIODto.setWrite_no(planner_no);
+			String planner_photo_num = commonFileIOService.insertFileInfo(commonFileIODto) + "";
+			plannerDto.setAttach_file(planner_photo_num);
+		}
+
 		String start_date = request.getParameter("start_date");
-		String day_count = request.getParameter("day_count");
+		String day_count = request.getParameter("day_count");		
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
 		try {

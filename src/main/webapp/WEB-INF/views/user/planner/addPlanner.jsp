@@ -172,11 +172,18 @@ function spotReadPage(no) {
 										<i class="icon-append fa fa-calendar"></i>
 										<input type="text" name="start_date" id="start" placeholder="Start date" value="${start_date}">
 									</label>
-									</div>
-									<div class="col col-2" style="padding-left: 0px;">
-										<label class="input">
+								</div>
+								<div class="col col-2" style="padding-left: 0px;">
+									<label class="input">
 										<input type="number" min="1" value="${day_count}" name="day_count" id="day_count" onchange="addDay(this)" style="padding:5px;width:55px;">
 										<input type="hidden" value="${day_count}" id="before_day_count">
+									</label>
+								</div>
+								<div class="col col-2 pull-right">
+									<label class="input">
+										<i class="icon-picture input input-file" style="font-size:23px" onclick="addPhoto(this,'${id_value}')">
+											<div class="button" style="background-color:rgba(255, 255, 255, 0);"><input type="file" name="attach_file" onchange="addPlannerPhoto(this)" accept="image/*" size="0"/></div>
+										</i>
 									</label>
 								</div>
 							</div> 
