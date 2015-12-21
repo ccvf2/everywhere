@@ -67,9 +67,7 @@ function spotListDisp(data){
 			note=note.replace("<div id='condentAll'>"," ");
 			note=note.replace("</div>"," ");
 			note=note.replace("<br/>"," ");
-			
-			
-			
+		
 			str += "<li class='notification' style='margin:0px;border:1px solid #eee;padding:5px 5px;height: 48px;' id='spotItem'>"+
 					"<div id='"+obj.spot[i].spot_no+"_item' class='rounded'>"+
 					"<i style='margin:0;'><img alt='' src='/attatchFile/spot/"+obj.spot[i].spot_photo_save_name+"."+obj.spot[i].spot_photo_extension+"' style='width:35px;height:35px;margin-right:5px;'></i>"+
