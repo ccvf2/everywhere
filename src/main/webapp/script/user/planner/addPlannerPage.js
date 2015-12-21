@@ -22,12 +22,28 @@ $(function() {
 	});
 });
 
+var extensions = [".jpg", ".jpeg", ".bmp", ".gif", ".png"]; 
+function checkExt(fileName){
+	var ext = fileName.substring(fileName.lastIndexOf('.'));
+	ext = ext.toLowerCase();
+	for(var i = 0; i < extensions.length; i++){
+		if(extensions[i] == ext)
+			return true;
+	}
+	alert("이미지 파일만 등록해주세요");
+	return false;
+}
+
 function addPlannerPhoto(input){	
 	if (input.files && input.files[0]) {
-		var reader = new FileReader();
-		reader.readAsDataURL(input.files[0]);
-		reader.onloadend = function (e) {
-			$('.breadcrumbs-v1').css('background-image', 'url('+e.target.result +')');
+		var isImg = checkExt(input.value);
+		
+		if(isImg == true){
+			var reader = new FileReader();
+			reader.readAsDataURL(input.files[0]);
+			reader.onloadend = function (e) {
+				$('.breadcrumbs-v1').css('background-image', 'url('+e.target.result +')');
+			}
 		}
 	}
 }
@@ -167,30 +183,32 @@ function addMoney(input_name){
 
 function addPhoto(input, input_name){
 	//input_name : d1_item1
-
 	if (input.files && input.files[0]) {
-		var photoDiv = document.getElementById(input_name+"_photo");
-		if(photoDiv == null){
-			photoDiv = document.createElement("div");
-			photoDiv.id = input_name + "_photo";
-			photoDiv.className  = "panel-body";
-			$("#"+input_name+"_note").before(photoDiv);
+		var isImg = checkExt(input.value);		
+		if(isImg == true){
+			var photoDiv = document.getElementById(input_name+"_photo");
+			if(photoDiv == null){
+				photoDiv = document.createElement("div");
+				photoDiv.id = input_name + "_photo";
+				photoDiv.className  = "panel-body";
+				$("#"+input_name+"_note").before(photoDiv);
 
-			var preview = document.createElement("img");
-			preview.id = input_name+"_preview";
+				var preview = document.createElement("img");
+				preview.id = input_name+"_preview";
 
-			photoDiv.appendChild(preview);
+				photoDiv.appendChild(preview);
+			}
+
+			var reader = new FileReader();
+
+			reader.onload = function (e) {
+				var preview = input_name+"_preview";
+				$('#'+preview).attr('src', e.target.result);
+				$('#'+preview).attr('width', 400);
+				$('#'+preview).attr('height', 300);
+				input.parentNode.nextSibling.value = input.value;
+			}
+			reader.readAsDataURL(input.files[0]);
 		}
-
-		var reader = new FileReader();
-
-		reader.onload = function (e) {
-			var preview = input_name+"_preview";
-			$('#'+preview).attr('src', e.target.result);
-			$('#'+preview).attr('width', 400);
-			$('#'+preview).attr('height', 300);
-			input.parentNode.nextSibling.value = input.value;
-		}
-		reader.readAsDataURL(input.files[0]);
 	}
 }
