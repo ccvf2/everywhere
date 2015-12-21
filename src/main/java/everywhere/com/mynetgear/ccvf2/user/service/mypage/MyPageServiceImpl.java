@@ -25,8 +25,6 @@ import everywhere.com.mynetgear.ccvf2.user.dto.member.MemberDto;
 public class MyPageServiceImpl implements MyPageService {
 	@Autowired
 	private MemberDao memberDao;
-	
-	
 
 	@Override
 	public ModelAndView moveUserPage(ModelAndView mav) {
@@ -40,7 +38,6 @@ public class MyPageServiceImpl implements MyPageService {
 		MemberDto myDto=(MemberDto) session.getAttribute(Constant.SYNN_LOGIN_OBJECT);
 		
 		int mem_no=myDto.getMem_no();
-		
 		HashMap<String, Integer> mateMap=new HashMap<String, Integer>();
 		
 		mateMap.put("mem_no", mem_no);
@@ -62,7 +59,6 @@ public class MyPageServiceImpl implements MyPageService {
 		
 		HttpSession session = request.getSession();
 		MemberDto memberDto=(MemberDto) session.getAttribute(Constant.SYNN_LOGIN_OBJECT);
-		//System.out.println("========================\n"+memberDto.toString());
 		
 		mav.addObject("mateCheck", 2);
 		mav.addObject("memberDto", memberDto);
@@ -87,8 +83,6 @@ public class MyPageServiceImpl implements MyPageService {
 		mateMap.put("mate_no", mate_no);
 		
 		int mateCheck=memberDao.mateInsert(mateMap);
-		
-		//System.out.println("친구 추가 완료 :(mateCheck) : " + mateCheck);
 		
 		mav.addObject("mateCheck", mateCheck);
 		mav.addObject("memberDto", memberDto);
@@ -127,15 +121,11 @@ public class MyPageServiceImpl implements MyPageService {
 		Map<String, Object> map = mav.getModelMap();
 		HttpServletRequest request= (HttpServletRequest)map.get("request");
 		
-		//int uandMe=Integer.parseInt(request.getParameter("uandMe"));
 		int mem_no=Integer.parseInt(request.getParameter("mem_no"));
-		System.out.println("----------------mem_no : " + mem_no);
 		MemberDto memberDto = memberDao.memberRead(mem_no);
-		System.out.println("---------------memberDto : " + memberDto.toString());
 		
 		List<MemberDto> friendsList=memberDao.getListFriends(mem_no);
 		
-		//System.out.println("친구 몇명? :" +friendsList.size());
 		HttpSession session = request.getSession();
 		MemberDto myDto=(MemberDto) session.getAttribute(Constant.SYNN_LOGIN_OBJECT);
 		

@@ -30,16 +30,22 @@
 			}, 10*100000000); 
 		});
 	</script>
+	<c:choose>
+		<c:when test="${memberDto==null}">
+			<c:set var="memberDto" value="${mem_object}"/>		
+		</c:when>
+		<c:otherwise>
+			<c:set var="memberDto" value="${memberDto}"/>
+		</c:otherwise>
+	</c:choose>
 	<img class="img-responsive profile-img margin-bottom-20" src="/assets/img/team/img32-md.jpg" alt="">
-	<form action="/admin/settingMain/backgroundImgChange.do" name="mainSettingBackImg" id="mainSettingBackImg" method="post" enctype="multipart/form-data"	>
+	<!-- <form action="/admin/settingMain/backgroundImgChange.do" name="mainSettingBackImg" id="mainSettingBackImg" method="post" enctype="multipart/form-data"	>
 		<input type="hidden" name="setting_url" value="">
-		<!-- <input type="hidden" name="planner_no" value=""> -->
+		<input type="hidden" name="planner_no" value="">
         <input type="file" name="mainBackground">
         <button type="submit" class="btn btn-xs btn-default">Default</button>
-	</form>
-	<%-- <c:out value="${session.mem_name}"/><c:out value="(${session.mem_email})"/> --%>
-	<%-- <c:set var="loginMember" value="${mem_object}" scope="session"/> --%>
-	<c:set var="memberDto" value="${memberDto}"/>
+	</form> -->
+	
 	<c:out value="${memberDto.mem_name}"/><c:out value="(${memberDto.mem_email})"/>
 	<c:if test="${mateCheck==0}">
 		<a href="/user/myPage/mateInsert.do?mem_no=${memberDto.mem_no}">친구추가</a>
