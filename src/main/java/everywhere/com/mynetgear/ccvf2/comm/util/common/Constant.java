@@ -149,4 +149,23 @@ public class Constant {
 	public static final String MYPAGE_CODE_M="S0001";
 	/**마이페이지, 타회원페이지 상태코드 YOU*/
 	public static final String MYPAGE_CODE_U="S0002";
+	
+	
+	/**가계부 분류 코드: 관광지*/
+	public static final String MONEY_FLIGHT = "D0001";
+	/**가계부 분류 코드: 숙박*/
+	public static final String MONEY_ACCOMM = "D0002";
+	/**가계부 분류 코드: 교통*/
+	public static final String MONEY_TRANSIT = "D0003";
+	/**가계부 분류 코드: 쇼핑*/
+	public static final String MONEY_SHOPPING = "D0004";
+	/**가계부 분류 코드: 식사*/
+	public static final String MONEY_FOOD = "D0005";
+	/**가계부 분류 코드: 입장료*/
+	public static final String MONEY_ADMISSION = "D0006";
+	/**가계부 분류 코드: 오락*/
+	public static final String MONEY_PLAY = "D0007";
+	/**가계부 분류 코드: 기타*/
+	public static final String MONEY_ETC = "D0008";
+		
 }

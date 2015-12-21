@@ -10,6 +10,7 @@
 	<title>여행 계획</title>
 
 	<!-- CSS Page Style -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 	<link rel="stylesheet" href="/assets/css/pages/shortcode_timeline2.css">
 	<script type="text/javascript">
 	function setBackground(image){
@@ -18,6 +19,24 @@
 		}
 	}
 	</script>
+	<script type="text/javascript">
+	function spotReadPage(no) {
+	var makeDiv ="<div id='showModal"+no+"'></div>";
+	var requestURL="/user/spot/spotReadPage.do?spot_no="+no;
+		$.ajax({
+			url : requestURL,
+			type : "GET",
+			dataType : "html",
+			success : function(data) {
+				$("body").append(makeDiv);
+				$("#showModal"+no).append(data)
+			},
+			error : function() {
+				alert("목록 가져오기 실패");
+			}
+		})
+}
+</script>
 </head>
 <body onload="setBackground('${plannerDto.attach_file}')">
 	<fmt:formatDate var="start_date" pattern="yyyy-MM-dd" value="${plannerDto.start_date}"/>
@@ -52,7 +71,7 @@
 				<c:if test="${mem_object.mem_profile_photo == null || mem_object.mem_profile_photo == '' }">
 					<img class="img-responsive profile-img" src="/assets/img/team/img32-md.jpg" alt="">
 				</c:if>
-				<ul class="list-group sidebar-nav-v1 margin-bottom-40 active">
+				<ul class="list-group sidebar-nav-v1 margin-bottom-20 active">
 					<li class="list-group-item list-toggle">
 						<a data-toggle="collapse" data-parent="#sidebar-nav" href="#collapse-buttons">${mem_object.mem_name}</a>
 						<ul id="collapse-buttons" class="collapse in">
@@ -62,6 +81,22 @@
 							<li>
 								<a href="shortcode_btn_brands.html"><i class="fa fa-html5"></i> 쪽지 보내기 </a>
 							</li>
+						</ul>
+					</li>
+				</ul>
+				
+				<ul class="list-group sidebar-nav-v1 margin-bottom-20 active">
+					<li class="list-group-item list-toggle">
+						<a data-toggle="collapse" href="#collapse-money">total : ${moneyTotal[8]}</a>
+						<ul id="collapse-money" class="collapse in">
+							<li><a><i class="fa fa-plane"></i> 항공료 : ${moneyTotal[0]}</a></li>
+							<li><a><i class="fa fa-hotel"></i> 숙박비 : ${moneyTotal[1]} </a></li>
+							<li><a><i class="fa fa-bus"></i> 교통비 : ${moneyTotal[2]}</a></li>
+							<li><a><i class="fa fa-shopping-bag"></i> 쇼핑비 : ${moneyTotal[3]}</a></li>
+							<li><a><i class="fa fa-cutlery"></i> 식사비 : ${moneyTotal[4]}</a></li>
+							<li><a><i class="fa fa-ticket"></i> 입장료 : ${moneyTotal[5]}</a></li>
+							<li><a><i class="fa fa-gamepad"></i> 오락비 : ${moneyTotal[6]}</a></li>
+							<li><a><i class="fa fa-bars"></i> 기  타 : ${moneyTotal[7]}</a></li>
 						</ul>
 					</li>
 				</ul>
@@ -93,13 +128,13 @@
 						<i class="cbp_tmicon rounded-x hidden-xs"></i>
 						<c:if test="${item.spot_no != 0 }">
 						<div class="cbp_tmlabel equal-height-column">
-							<h2>${item.spot.spot_name}</h2>
+							<h2><a href="javascript:spotReadPage('${item.spot.spot_no}')">${item.spot.spot_name}</a></h2>
 							<div class="row">
 								<div class="col-md-4">
 									<img class="img-responsive" src="/attatchFile/spot/${item.spot.spot_photoes[0].save_name}.${item.spot.spot_photoes[0].extension}" alt=""> 
 									<div class="md-margin-bottom-20"></div>
 								</div>
-								<div class="col-md-8">    
+								<div class="col-md-8">
 									<p>${item.spot.spot_note}</p>
 								</div>
 							</div>
@@ -107,29 +142,30 @@
 						</c:if>
 
 						<!-- 글상자 start-->
-						<div class="panel-group" style="margin:0 0 30px 25%; clear: both; position: relative;">
-							<div class="panel panel-default rounded-2x">
-								<div class="panel-body">
-									<c:if test="${item.item_photoes[0].save_name != null}">
-										<div class="row" style="margin:3px;">
-											<img class="img-responsive" src="/attatchFile/item/${item.item_photoes[0].save_name}.${item.item_photoes[0].extension}" alt="">
-										</div>
-									</c:if>
-									<c:if test="${item.note != null }">
-										<div class="row" style="border:1px solid #EEE;margin:5px;">
+						<c:if test="${item.note != null }">
+							<div class="panel-group" style="margin:0 0 30px 25%; clear: both; position: relative;">
+								<div class="panel panel-default rounded-2x">
+									<div class="panel-body" style="padding:8px;">
+										<c:if test="${item.item_photoes[0].save_name != null}">
+											<div class="row" style="margin:5px;">
+												<img class="img-responsive" src="/attatchFile/item/${item.item_photoes[0].save_name}.${item.item_photoes[0].extension}" alt="">
+											</div>
+										</c:if>
+										<div class="row" style="margin:5px;">
 											${item.note}
 										</div>
 										<c:if test="${item.moneyList.size() != 0 }">
-											<div class="row">
+											<div class="row"  style="margin:5px;">
+												<hr style="margin:5px 0px;"/>
 												<c:forEach var="money" items="${item.moneyList}">
-													${money.money_title } ${money.price }
+													<p style="margin:3px">${money.money_title } ${money.price }</p>
 												</c:forEach>
 											</div>
 										</c:if>
-									</c:if>
+									</div>
 								</div>
 							</div>
-						</div>
+						</c:if>
 						<!-- 글상자 end -->
 					</li>
 					</c:forEach>

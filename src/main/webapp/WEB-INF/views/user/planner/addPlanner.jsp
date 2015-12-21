@@ -38,8 +38,6 @@ function spotReadPage(no) {
 					}
 				})
 }
-
-
 </script>
 <body>
 	<div class="wrapper">
@@ -201,9 +199,9 @@ function spotReadPage(no) {
 											<input type="hidden" name="${id_value}_no"/>
 											<div class="panel panel-default">
 												<div class="panel-heading ui-widget-header dropItem">
-												<a data-toggle="collapse" href="#collapse_${id_value}">
-													<i class="icon-note pull-right"></i>
-												</a>
+													<a data-toggle="collapse" href="#collapse_${id_value}">
+														<i class="icon-note pull-right"></i>
+													</a>
 													<h4 class="panel-title">
 														<span>Add Spot</span>
 													</h4>
