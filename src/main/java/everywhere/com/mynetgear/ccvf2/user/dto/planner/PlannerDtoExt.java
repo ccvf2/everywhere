@@ -8,13 +8,18 @@ package everywhere.com.mynetgear.ccvf2.user.dto.planner;
  */
 public class PlannerDtoExt {
 	private int reply_Count;
-
+	private String mem_name;
 	public int getReply_Count() {
 		return reply_Count;
 	}
-
 	public void setReply_Count(int reply_Count) {
 		this.reply_Count = reply_Count;
+	}
+	public String getMem_name() {
+		return mem_name;
+	}
+	public void setMem_name(String mem_name) {
+		this.mem_name = mem_name;
 	}
 
 

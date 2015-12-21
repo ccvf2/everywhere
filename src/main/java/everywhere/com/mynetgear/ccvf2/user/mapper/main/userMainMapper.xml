@@ -28,6 +28,7 @@
 		SELECT 
 			k.*
 			,(select count(*) from tbl_Common_reply where item_no=k.planner_no and type_code='Z1001') reply_Count
+			,(select mem_name from tbl_member where mem_no=k.mem_no) mem_name
 		FROM
 		  (SELECT rownum rnum,
 		    f.*
