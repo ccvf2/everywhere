@@ -44,5 +44,12 @@ public interface VisitorService {
 	 * @param mav
 	 */
 	public void visitorDelete(ModelAndView mav);
+	/**
+	 * @author 김준호
+	 * @createDate 2015. 12. 21.
+	 * @described 친구 방명록
+	 * @param mav
+	 */
+	public void friendWrite(ModelAndView mav);
 
 }

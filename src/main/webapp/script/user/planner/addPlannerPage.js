@@ -22,6 +22,32 @@ $(function() {
 	});
 });
 
+var extensions = [".jpg", ".jpeg", ".bmp", ".gif", ".png"]; 
+function checkExt(fileName){
+	var ext = fileName.substring(fileName.lastIndexOf('.'));
+	ext = ext.toLowerCase();
+	for(var i = 0; i < extensions.length; i++){
+		if(extensions[i] == ext)
+			return true;
+	}
+	alert("이미지 파일만 등록해주세요");
+	return false;
+}
+
+function addPlannerPhoto(input){	
+	if (input.files && input.files[0]) {
+		var isImg = checkExt(input.value);
+		
+		if(isImg == true){
+			var reader = new FileReader();
+			reader.readAsDataURL(input.files[0]);
+			reader.onloadend = function (e) {
+				$('.breadcrumbs-v1').css('background-image', 'url('+e.target.result +')');
+			}
+		}
+	}
+}
+
 function addDay(day_count){
 	var before_day_count = $("#before_day_count").val();
 
@@ -29,11 +55,14 @@ function addDay(day_count){
 		var select = confirm("일정 추가 하시겠습니까?");
 		if(select == true){
 			//Item 용 레퍼런스 복사 후 name값 변경
-			var html = $('#dayDiv').html();
-			var copy = "d"+day_count.value+"_item";
-			var newHtml = html.replace(/d0_item/g, copy);
-
-			$("#submit_btn").before(newHtml);
+			for(var i = Number(before_day_count)+1; i <= Number(day_count.value); i++){
+				alert(i);
+				var html = $('#dayDiv').html();
+				var copy = "d"+i+"_item";
+				var newHtml = html.replace(/d0_item/g, copy);
+	
+				$("#submit_btn").before(newHtml);
+			}
 			$("#d"+day_count.value+"_items_date").text("Day " + day_count.value)
 
 			$( ".dropItem" ).droppable({
@@ -56,8 +85,11 @@ function addDay(day_count){
 	}else{
 		var select = confirm("마지막 일정을 삭제 하시겠습니까?");
 		if(select == true){
-			$("#d"+before_day_count+"_items_div").remove();
-			$("#before_day_count").val(day_count.value);
+			for(var i = Number(before_day_count); i > Number(day_count.value); i--){
+				$("#d"+i+"_items_div").remove();
+				$("#before_day_count").val(day_count.value);
+			}
+			
 		}else{
 			day_count.value = before_day_count;
 			return;
@@ -151,30 +183,32 @@ function addMoney(input_name){
 
 function addPhoto(input, input_name){
 	//input_name : d1_item1
-
 	if (input.files && input.files[0]) {
-		var photoDiv = document.getElementById(input_name+"_photo");
-		if(photoDiv == null){
-			photoDiv = document.createElement("div");
-			photoDiv.id = input_name + "_photo";
-			photoDiv.className  = "panel-body";
-			$("#"+input_name+"_note").before(photoDiv);
+		var isImg = checkExt(input.value);		
+		if(isImg == true){
+			var photoDiv = document.getElementById(input_name+"_photo");
+			if(photoDiv == null){
+				photoDiv = document.createElement("div");
+				photoDiv.id = input_name + "_photo";
+				photoDiv.className  = "panel-body";
+				$("#"+input_name+"_note").before(photoDiv);
 
-			var preview = document.createElement("img");
-			preview.id = input_name+"_preview";
+				var preview = document.createElement("img");
+				preview.id = input_name+"_preview";
 
-			photoDiv.appendChild(preview);
+				photoDiv.appendChild(preview);
+			}
+
+			var reader = new FileReader();
+
+			reader.onload = function (e) {
+				var preview = input_name+"_preview";
+				$('#'+preview).attr('src', e.target.result);
+				$('#'+preview).attr('width', 400);
+				$('#'+preview).attr('height', 300);
+				input.parentNode.nextSibling.value = input.value;
+			}
+			reader.readAsDataURL(input.files[0]);
 		}
-
-		var reader = new FileReader();
-
-		reader.onload = function (e) {
-			var preview = input_name+"_preview";
-			$('#'+preview).attr('src', e.target.result);
-			$('#'+preview).attr('width', 400);
-			$('#'+preview).attr('height', 300);
-			input.parentNode.nextSibling.value = input.value;
-		}
-		reader.readAsDataURL(input.files[0]);
 	}
 }

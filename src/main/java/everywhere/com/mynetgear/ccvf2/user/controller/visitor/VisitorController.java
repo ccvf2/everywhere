@@ -3,12 +3,14 @@ package everywhere.com.mynetgear.ccvf2.user.controller.visitor;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import everywhere.com.mynetgear.ccvf2.comm.util.common.Constant;
 import everywhere.com.mynetgear.ccvf2.user.dto.visitor.VisitorDto;
 import everywhere.com.mynetgear.ccvf2.user.service.visitor.VisitorService;
 
@@ -35,8 +37,16 @@ public class VisitorController {
 	public ModelAndView visitorWrite(HttpServletRequest request, HttpServletResponse response) {
 		ModelAndView mav=new ModelAndView();
 		mav.addObject("request", request);
-		visitorService.visitorWrite(mav);
+		mav.addObject("response", response);
 		
+		// 코드값에 따라 자신의 페이지 이동 & 타회원 페이지 이동
+		String uandMe=request.getParameter("uandMe");
+		
+		if(StringUtils.equals(uandMe,Constant.MYPAGE_CODE_M)){
+			visitorService.visitorWrite(mav);
+		}else{
+			visitorService.friendWrite(mav);
+		}
 		return mav;
 	}
 	
