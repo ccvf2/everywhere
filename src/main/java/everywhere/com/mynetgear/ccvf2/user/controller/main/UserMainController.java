@@ -34,7 +34,8 @@ public class UserMainController {
 		ModelAndView mav = new ModelAndView("/user/main/userMain2");
 		SettingMainDto settingMainDto=userMainService.getOneBackGroundImg();
 		//메인페이지 띄우기
-
+		//List<PlannerDto> plannerList=plannerService.getPlannerList(인자값);
+		
 		//가장 최근에 등록된 플레너
 		List<PlannerDto> list1=userMainService.getListPlanner();
 		List<PlannerDto> list2=userMainService.getListPlanner();
