@@ -34,8 +34,6 @@ public class VisitorServiceImp implements VisitorService {
 	public void visitorWrite(ModelAndView mav) {
 		Map<String, Object> map=mav.getModelMap();
 		HttpServletRequest request=(HttpServletRequest)map.get("request");
-//		int mem_no=Integer.parseInt(request.getParameter("mem_no"));
-//		System.out.println("VisitorService write mem_no:"+mem_no);
 		
 		HttpSession session = request.getSession();
 		MemberDto memberDto=(MemberDto) session.getAttribute(Constant.SYNN_LOGIN_OBJECT);
@@ -60,7 +58,6 @@ public class VisitorServiceImp implements VisitorService {
 		}
 		System.out.println("VisitorService write visitorList:"+visitorList.size());
 		
-//		mav.addObject("mem_no", mem_no);
 		mav.addObject("mateCheck", 2);
 		mav.addObject("memberDto", memberDto);
 		mav.addObject("visitorList", visitorList);
@@ -76,6 +73,9 @@ public class VisitorServiceImp implements VisitorService {
 		VisitorDto visitorDto=(VisitorDto)map.get("visitorDto");
 		HttpServletRequest request=(HttpServletRequest)map.get("request");
 		
+		HttpSession session = request.getSession();
+		MemberDto memberDto=(MemberDto) session.getAttribute(Constant.SYNN_LOGIN_OBJECT);
+		
 		int mem_no=Integer.parseInt(request.getParameter("mem_no"));
 		visitorDto.setMem_no(mem_no);
 		visitorDto.setVisitor_status_code(Constant.SYNB_YN_Y);
@@ -83,6 +83,8 @@ public class VisitorServiceImp implements VisitorService {
 		int check=visitorDao.visitorInsert(visitorDto);
 		System.out.println("VisitorService writeOk check:"+check);
 		
+		mav.addObject("mateCheck", 2);
+		mav.addObject("memberDto", memberDto);
 		mav.addObject("check", check);
 		mav.setViewName("/user/visitor/visitorWriteOk");
 	}
