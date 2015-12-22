@@ -10,10 +10,10 @@
 	</select>
 	
 	<select id="check_sweet" parameterType="everywhere.com.mynetgear.ccvf2.user.dto.sweet.SweetDto" resultType="int" >
-		select sweet_no from tbl_sweet where mem_no=#{mem_no} and planner_no=#{planner_no} 
+		select count(*) from tbl_sweet where mem_no=#{mem_no} and planner_no=#{planner_no} 
 	</select>
 	
 	<select id="get_total_sweet" parameterType="int" resultType="int">
-		select nvl(count(*),0) from tbl_sweet where planner_no=#{planner_no}
+		select count(*) from tbl_sweet where planner_no=#{planner_no}
 	</select>
 </mapper>

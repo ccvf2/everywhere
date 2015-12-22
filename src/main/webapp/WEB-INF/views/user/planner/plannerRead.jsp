@@ -24,6 +24,14 @@
 		-webkit-border-radius: 10px 10px 0 0;
 		-moz-border-radius: 10px 10px 0 0;
 	}
+	.btn-share-group i{
+		font-size:24px;
+		text-align: center;
+		display: inline-block;;
+	}
+	.btn-share-group .txt-info{
+		display: block;
+	}
 	.btn-bookmark {
 		border-left: 1px solid #ccc;
 		border-right: 1px solid #ccc;
@@ -40,16 +48,9 @@
 		text-decoration: none;
 		cursor: pointer;
 	}
-	
 	</style>
 	<script type="text/javascript">
-	function setBackground(image, reader_mem_no, writer_mem_no){
-		if(image != null){
-			$('.breadcrumbs-v1').css('background-image', 'url(/attatchFile/planner/'+image+')');
-		}
-		if(read_mem_no != writer_mem_no)
-			$("#likeBtn").attr("href", "javascript:insertSweet('${mem_object.mem_no}', '${plannerDto.planner_no}')");
-	}
+	
 	</script>
 	<script type="text/javascript">
 	function spotReadPage(no) {
@@ -70,7 +71,7 @@
 }
 </script>
 </head>
-<body onload="setBackground('${plannerDto.attach_file}', '${mem_object.mem_no}', '${plannerWriter.mem_no }')">
+<body onload="setBackground('${plannerDto.attach_file}', '${plannerDto.planner_no}','${checkSweet}', '${checkBookMark}')">
 	<fmt:formatDate var="start_date" pattern="yyyy-MM-dd" value="${plannerDto.start_date}"/>
 	<fmt:formatDate var="end_date" pattern="yyyy-MM-dd" value="${plannerDto.end_date}"/>
 	<input type="hidden" name="planner_no" value="${plannerDto.planner_no}"/>
@@ -120,15 +121,15 @@
 
 				<div class="btn-share-group">
 					<a id="likeBtn" class="btn-like " title="좋아요">
-						<span><img src="https://d254i4serkgq8u.cloudfront.net/images/bg-btn-like.png" alt="" class="off"><img src="https://d254i4serkgq8u.cloudfront.net/images/bg-btn-like-on.png" alt="" class="on"><span class="plan-detail-view-like-count">${sweet_count }</span></span>
+						<span><i class="fa fa-heart-o" ></i><i class="fa fa-heart" style="color:green"></i><span class="plan-detail-view-like-count"> ${sweet_count }</span></span>
 						<span class="txt-info">추천</span>
 					</a><!-- 좋아요 -->
 					<a id="bookmarkBtn" class="btn-bookmark  " title="북마크">
-						<span><img src="https://d254i4serkgq8u.cloudfront.net/images/bg-btn-bookmark.png" alt="" class="off"><img src="https://d254i4serkgq8u.cloudfront.net/images/bg-btn-bookmark-on.png" alt="" class="on"><span class="plan-detail-view-bookmark-count">8</span></span>
+						<span><i class="fa fa-bookmark-o" ></i><i class="fa fa-bookmark" style="color:green"></i><span class="plan-detail-view-bookmark-count"> ${bookmark_count }</span></span>
 						<span class="txt-info">북마크</span>
 					</a><!-- 북마크 -->
 					<a id="customizeBtn" class="btn-customize " title="커스터마이즈">
-						<span><img src="https://d254i4serkgq8u.cloudfront.net/images/bg-btn-customize.png" alt="" class="off"><img src="https://d254i4serkgq8u.cloudfront.net/images/bg-btn-customize-on.png" alt="" class="on"><span class="plan-detail-view-scrap-count">1</span></span>
+						<span><i class="fa  fa-files-o" ></i><i class="fa fa-files" style="color:green"></i><span class="plan-detail-view-scrap-count">1</span></span>
 						<span class="txt-info">커스터마이즈</span>
 					</a><!--커스터마이즈 -->
 				</div>

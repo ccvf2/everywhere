@@ -12,7 +12,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.ModelAndView;
 
+import everywhere.com.mynetgear.ccvf2.comm.util.common.Constant;
 import everywhere.com.mynetgear.ccvf2.user.dao.sweet.SweetDao;
+import everywhere.com.mynetgear.ccvf2.user.dto.member.MemberDto;
 import everywhere.com.mynetgear.ccvf2.user.dto.sweet.SweetDto;
 
 @Component
@@ -26,18 +28,21 @@ public class SweetServiceImp implements SweetService {
 		HttpServletRequest request = (HttpServletRequest)map.get("request");
 		HttpServletResponse response = (HttpServletResponse)map.get("response");
 		
-		String mem_no = request.getParameter("mem_no");
 		String planner_no = request.getParameter("planner_no");
+		MemberDto userInfo = (MemberDto)request.getSession().getAttribute(Constant.SYNN_LOGIN_OBJECT);
 		
 		SweetDto sweetDto = new SweetDto();
-		sweetDto.setMem_no(Integer.parseInt(mem_no));
+		sweetDto.setMem_no(userInfo.getMem_no());
 		sweetDto.setPlanner_no(Integer.parseInt(planner_no));
 		
 		int result = sweetDao.insertSweet(sweetDto);
 		try {
 			response.setContentType("application/html;charset=utf8");
 			PrintWriter out = response.getWriter();
-			out.print(result);
+			if(result > 0)
+				out.print(sweetDao.getTotalSweet(sweetDto.getPlanner_no()));
+			else
+				out.print(result);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -57,7 +62,4 @@ public class SweetServiceImp implements SweetService {
 	public int getTotalSweet(int planner_no) {
 		return sweetDao.getTotalSweet(planner_no);
 	}
-	
-	
-
 }
