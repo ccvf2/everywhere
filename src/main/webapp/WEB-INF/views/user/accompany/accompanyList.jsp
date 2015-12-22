@@ -176,7 +176,14 @@
 													</c:if>
 												</c:forEach>
 											</td>
-											<td><a href ="/user/accompany/accompanyRead.do?accompany_no=${accompanyDto.accompany_no}&currentPage=${currentPage}" style="color:inherit;" title="${accompanyDto.title}">${accompanyDto.title}</a>&nbsp;[${accompanyDto.reply_count}]</td>
+											<td>
+												<a href ="/user/accompany/accompanyRead.do?accompany_no=${accompanyDto.accompany_no}&currentPage=${currentPage}" style="color:inherit;" title="${accompanyDto.title}">
+													${accompanyDto.title}
+													</a>&nbsp;[${accompanyDto.reply_count}]
+													<c:if test="${accompanyDto.attach_file!=null}">
+														<i class="fa fa-picture-o" title="이미지 있음"></i>
+													</c:if>
+											</td>	
 											<td>${accompanyDto.mem_name}</td>
 											<td>
 												<fmt:formatDate var="writeDate" value="${accompanyDto.write_date}" pattern="yy-MM-dd"/>

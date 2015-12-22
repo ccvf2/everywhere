@@ -19,6 +19,7 @@ public class AccompanyDto extends AccompanyDtoExt {
 	private String title;
 	private String content;
 	private String accompany_status_code;
+	private String attach_file;
 	private String use_yn;
 	private String gender_code;
 	private int hits;
@@ -139,5 +140,13 @@ public class AccompanyDto extends AccompanyDtoExt {
 
 	public void setMem_name(String mem_name) {
 		this.mem_name = mem_name;
+	}
+
+	public String getAttach_file() {
+		return attach_file;
+	}
+
+	public void setAttach_file(String attach_file) {
+		this.attach_file = attach_file;
 	}
 }
