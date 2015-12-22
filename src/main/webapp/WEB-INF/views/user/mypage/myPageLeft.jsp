@@ -12,10 +12,12 @@
 <body>
 	<script type="text/javascript">
 		$(function() {
-			var profileNum=0;
-			$("#profileP").click(function(){
-				$("#profileP").text("취소");
-				$("#updatePhoto").show();
+			$("#profileP").toggle(function() {
+					$("#profileP").text("취소");
+					$("#updatePhoto").show();
+				}, function() {
+					$("#profileP").text("프로필사진변경");
+					$("#updatePhoto").hide();
 			});
 			
 			$("#mem_profile").change(function() {
@@ -51,11 +53,11 @@
 			<c:set var="profile" value="/assets/img/team/img32-md.jpg"/>		
 		</c:when>
 		<c:otherwise>
-			<c:set var="profile" value="/attatchFile/member/${commonFileIODto.save_name}.${commonFileIODto.extension}"/>
+			<c:set var="profile" value="/attatchFile/member/${memberDto.mem_profile_photo}"/>
 		</c:otherwise>
 	</c:choose>
 	 
-	<a id="profileP">프로필사진변경</a>
+	<a id="profileP"><span>프로필사진변경</span></a>
 	<img id="imgout" class="img-responsive profile-img margin-bottom-20" src="${profile}" alt="">
 	<div id="updatePhoto" style="display: none;">
 		<form action="/user/myPage/updateProfilePhoto.do" method="post" enctype="multipart/form-data">
@@ -99,65 +101,6 @@
 	        </li>
         </c:if>
     </ul>
-
-    <!--Notification-->
-   <!--  <div class="panel-heading-v2 overflow-h">
-        <h2 class="heading-xs pull-left"><i class="fa fa-bell-o"></i> 알림</h2>
-        <a href="#"><i class="fa fa-cog pull-right"></i></a>
-    </div>
-    <ul class="list-unstyled mCustomScrollbar margin-bottom-20" data-mcs-theme="minimal-dark">
-        <li class="notification">
-            <i class="icon-custom icon-sm rounded-x icon-bg-red icon-line icon-envelope"></i>
-            <div class="overflow-h">
-                <span><strong>Albert Heller</strong> has sent you email.</span>
-                <small>Two minutes ago</small>
-            </div>
-        </li>
-        <li class="notification">
-            <img class="rounded-x" src="/assets/img/testimonials/img6.jpg" alt="">
-            <div class="overflow-h">
-                <span><strong>Taylor Lee</strong> started following you.</span>
-                <small>Today 18:25 pm</small>
-            </div>
-        </li>
-        <li class="notification">
-            <i class="icon-custom icon-sm rounded-x icon-bg-yellow icon-line fa fa-bolt"></i>
-            <div class="overflow-h">
-                <span><strong>Natasha Kolnikova</strong> accepted your invitation.</span>
-                <small>Yesterday 1:07 pm</small>
-            </div>
-        </li>
-        <li class="notification">
-            <img class="rounded-x" src="/assets/img/testimonials/img1.jpg" alt="">
-            <div class="overflow-h">
-                <span><strong>Mikel Andrews</strong> commented on your Timeline.</span>
-                <small>23/12 11:01 am</small>
-            </div>
-        </li>
-        <li class="notification">
-            <i class="icon-custom icon-sm rounded-x icon-bg-blue icon-line fa fa-comments"></i>
-            <div class="overflow-h">
-                <span><strong>Bruno Js.</strong> added you to group chating.</span>
-                <small>Yesterday 1:07 pm</small>
-            </div>
-        </li>
-        <li class="notification">
-            <img class="rounded-x" src="/assets/img/testimonials/img6.jpg" alt="">
-            <div class="overflow-h">
-                <span><strong>Taylor Lee</strong> changed profile picture.</span>
-                <small>23/12 15:15 pm</small>
-            </div>
-        </li>
-    </ul> -->
-    <!-- <button type="button" class="btn-u btn-u-default btn-u-sm btn-block">Load More</button> -->
-    <!--End Notification-->
-
     <div class="margin-bottom-50"></div>
-
-    <!--Datepicker-->
-   <!--  <form action="#" id="sky-form2" class="sky-form">
-        <div id="inline-start"></div>
-    </form> -->
-    <!--End Datepicker-->
 </body>
 </html>
