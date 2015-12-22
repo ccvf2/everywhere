@@ -46,6 +46,10 @@
 			var accompany_no=${accompanyDto.accompany_no};
 			var mem_no=${mem_object.mem_no}
 			commonReplyInit('S0010', mem_no, accompany_no,"");
+			$("#formWrap").removeClass();
+	        $("#formWrap").addClass("news-v3-in margin-bottom-20");
+	        $("#formWrapInner").removeClass();
+	        $("#formWrapInner").addClass("news-v3-in margin-bottom-20");
 		});
 	</script>
 	<c:import url="/WEB-INF/views/common/jquery.jsp"/>
