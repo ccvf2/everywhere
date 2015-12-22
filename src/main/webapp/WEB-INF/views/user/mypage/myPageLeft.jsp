@@ -56,9 +56,15 @@
 			<c:set var="profile" value="/attatchFile/member/${memberDto.mem_profile_photo}"/>
 		</c:otherwise>
 	</c:choose>
-	 
-	<a id="profileP"><span>프로필사진변경</span></a>
+	
+	<c:if test="${memberDto!=mem_object}">
+		<a id="profileP"><span>프로필사진변경</span></a>
+	</c:if>
+	
 	<img id="imgout" class="img-responsive profile-img margin-bottom-20" src="${profile}" alt="">
+	
+	
+	
 	<div id="updatePhoto" style="display: none;">
 		<form action="/user/myPage/updateProfilePhoto.do" method="post" enctype="multipart/form-data">
 			<input type="hidden" name="mem_no" value="${mem_object.mem_no}">			
