@@ -14,7 +14,8 @@ import everywhere.com.mynetgear.ccvf2.comm.dao.common.CommonFileIODao;
 import everywhere.com.mynetgear.ccvf2.comm.dto.common.CommonFileIODto;
 import everywhere.com.mynetgear.ccvf2.comm.dto.common.MailVO;
 import everywhere.com.mynetgear.ccvf2.comm.util.common.Constant;
-import testpa.MailSend;
+import everywhere.com.mynetgear.ccvf2.comm.util.common.MailSend;
+
 
 /**
  * @author 곽성국
