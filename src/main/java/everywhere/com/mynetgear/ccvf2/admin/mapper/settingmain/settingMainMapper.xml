@@ -3,7 +3,7 @@
 
 <!-- 관리자 회원관리의 mapper -->
 <mapper namespace="everywhere.com.mynetgear.ccvf2.admin.mapper.settingmain.settingMainMapper">
-	<!-- 메인페이지 셋팅 등록 -->
+	<!-- 메인페이지 뒷배경 슬라이드 이미지 -->
 	<insert id="insert_Background_Img_Change" parameterType="everywhere.com.mynetgear.ccvf2.admin.dto.settingmain.SettingMainDto">
 		INSERT INTO
 		TBL_ADMIN_MAIN_SETTING
@@ -22,6 +22,29 @@
 			, #{setting_url}
 			, #{planner_no}
 			, #{use_yn}
+		)
+	</insert>
+	<!-- 메인페이지 앞배경 슬라이드 이미지 -->
+	<insert id="insert_Forground_Img_Change" parameterType="everywhere.com.mynetgear.ccvf2.admin.dto.settingmain.SettingMainDto">
+		INSERT INTO
+		TBL_ADMIN_MAIN_SETTING
+		(
+			SETTING_NO
+			, SETTING_SPOT_CODE
+			, SETTING_TYPE_CODE
+			, SETTING_URL
+			, PLANNER_NO
+			, USE_YN
+			, SETTING_TEXT
+		)
+		VALUES(
+			TBL_ADMIN_MAIN_SETTING_NO_SEQ.NEXTVAL
+			, #{setting_spot_code}
+			, #{setting_type_code}
+			, #{setting_url}
+			, #{planner_no}
+			, #{use_yn}
+			, #{setting_text}
 		)
 	</insert>
 </mapper>

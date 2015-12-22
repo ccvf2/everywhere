@@ -12,23 +12,30 @@
 <body>
 	<script type="text/javascript">
 		$(function() {
-			var notification = setInterval(function() {
-				//alert('10초에 한번 ㅎ');
+			var profileNum=0;
+			$("#profileP").click(function(){
+				$("#profileP").text("취소");
+				$("#updatePhoto").show();
+			});
 			
-				/* $.ajax({
-					url : "/user/mypage/",
-					type : "get",
-					dataType : "text",
-					success : function(data) {
-						
-					},
-					error : function(xhr, status, errorMsg) {
-						alert(xhr + "," + status + "," + errorMsg);
-					}
-				}); */
-			
-			}, 10*100000000); 
+			$("#mem_profile").change(function() {
+				readImg('mem_profile', 'imgout');
+			});
 		});
+		
+		function readImg(inputId, outputId) {
+			var file = document.getElementById(inputId).files[0];
+			var reader = new FileReader();
+			reader.readAsDataURL(file);
+			reader.onload = function() {
+				var output = document.getElementById(outputId);
+				output.src = reader.result;
+			}
+			reader.onerror = function(e) {
+				alert("읽기 오류:" + e.target.error.code);
+				return;
+			}
+		}
 	</script>
 	<c:choose>
 		<c:when test="${memberDto==null}">
@@ -38,13 +45,26 @@
 			<c:set var="memberDto" value="${memberDto}"/>
 		</c:otherwise>
 	</c:choose>
-	<img class="img-responsive profile-img margin-bottom-20" src="/assets/img/team/img32-md.jpg" alt="">
-	<!-- <form action="/admin/settingMain/backgroundImgChange.do" name="mainSettingBackImg" id="mainSettingBackImg" method="post" enctype="multipart/form-data"	>
-		<input type="hidden" name="setting_url" value="">
-		<input type="hidden" name="planner_no" value="">
-        <input type="file" name="mainBackground">
-        <button type="submit" class="btn btn-xs btn-default">Default</button>
-	</form> -->
+	
+	<c:choose>
+		<c:when test="${memberDto.mem_profile_photo==null}">
+			<c:set var="profile" value="/assets/img/team/img32-md.jpg"/>		
+		</c:when>
+		<c:otherwise>
+			<c:set var="profile" value="/attatchFile/member/${commonFileIODto.save_name}.${commonFileIODto.extension}"/>
+		</c:otherwise>
+	</c:choose>
+	 
+	<a id="profileP">프로필사진변경</a>
+	<img id="imgout" class="img-responsive profile-img margin-bottom-20" src="${profile}" alt="">
+	<div id="updatePhoto" style="display: none;">
+		<form action="/user/myPage/updateProfilePhoto.do" method="post" enctype="multipart/form-data">
+			<input type="hidden" name="mem_no" value="${mem_object.mem_no}">			
+			<input type="hidden" name="mem_level_code" value="${mem_object.mem_level_code}">
+	        <input type="file" id="mem_profile" name="mem_profile" style="width: 200px; float: left;"/>
+	        <button type="submit" class="btn btn-xs btn-default" style="width: 50px;">변경</button>
+		</form>
+	</div>
 	
 	<c:out value="${memberDto.mem_name}"/><c:out value="(${memberDto.mem_email})"/>
 	<c:if test="${mateCheck==0}">

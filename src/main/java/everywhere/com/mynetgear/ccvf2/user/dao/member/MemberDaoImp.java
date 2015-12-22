@@ -100,4 +100,9 @@ public class MemberDaoImp implements MemberDao {
 		return sqlTemplate.update("chngePasswordMemberInfo",dto);
 	}
 
+	@Override
+	public int updateProfilePhoto(MemberDto memberDto) {
+		return sqlTemplate.insert("updateProfilePhoto", memberDto);
+	}
+
 }

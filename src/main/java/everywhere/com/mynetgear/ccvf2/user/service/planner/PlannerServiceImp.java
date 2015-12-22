@@ -9,7 +9,6 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -45,6 +44,9 @@ public class PlannerServiceImp implements PlannerService {
 	
 	@Value("${attach.item.path}")
 	private String itemPath;
+	
+	@Value("${attach.planner.path}")
+	private String plannerPath;
 
 	@Override
 	public void insertPlanner(ModelAndView mav) {
@@ -104,8 +106,9 @@ public class PlannerServiceImp implements PlannerService {
 		HttpServletRequest request = (HttpServletRequest)map.get("request");
 		int planner_no = Integer.parseInt(request.getParameter("planner_no"));
 
-		PlannerDto plannerDto = plannerDao.getOnePlanner(planner_no);
+		PlannerDto plannerDto = plannerDao.getOnePlanner(planner_no);		
 		List<ItemDto> itemList = plannerDao.getItemList(planner_no);
+		double[] moneyTotal = new double[9];
 
 		for(int i = 0; i < itemList.size(); i++){
 			//아이템 별 명소 정보 가져오기
@@ -144,11 +147,34 @@ public class PlannerServiceImp implements PlannerService {
 			
 			List<MoneyDto> moneyList = plannerDao.getMoneyList(itemList.get(i).getItem_no());
 			itemList.get(i).setMoneyList(moneyList);
+			
+			for(int j = 0; j < moneyList.size(); j++){
+				String type_code = moneyList.get(j).getMoney_type_code();
+				if(type_code.equals(Constant.MONEY_FLIGHT)){
+					moneyTotal[0]+=moneyList.get(j).getPrice();
+				}else if(type_code.equals(Constant.MONEY_ACCOMM)){
+					moneyTotal[1]+=moneyList.get(j).getPrice();
+				}else if(type_code.equals(Constant.MONEY_TRANSIT)){
+					moneyTotal[2]+=moneyList.get(j).getPrice();
+				}else if(type_code.equals(Constant.MONEY_SHOPPING)){
+					moneyTotal[3]+=moneyList.get(j).getPrice();
+				}else if(type_code.equals(Constant.MONEY_FOOD)){
+					moneyTotal[4]+=moneyList.get(j).getPrice();
+				}else if(type_code.equals(Constant.MONEY_ADMISSION)){
+					moneyTotal[5]+=moneyList.get(j).getPrice();
+				}else if(type_code.equals(Constant.MONEY_PLAY)){
+					moneyTotal[6]+=moneyList.get(j).getPrice();
+				}else if(type_code.equals(Constant.MONEY_ETC)){
+					moneyTotal[7]+=moneyList.get(j).getPrice();
+				}
+				moneyTotal[8]+=moneyList.get(j).getPrice();
+			}
 		}
 
 		EverywhereAspect.logger.info(EverywhereAspect.logMsg + itemList.size());
 
 		mav.addObject("plannerDto", plannerDto);
+		mav.addObject("moneyTotal", moneyTotal);
 		mav.addObject("itemList", itemList);
 		mav.setViewName("user/planner/plannerRead");
 	}
@@ -213,9 +239,18 @@ public class PlannerServiceImp implements PlannerService {
 		int mem_no = Integer.parseInt(request.getParameter("mem_no"));
 		plannerDto.setMem_no(mem_no);		
 		plannerDto.setTitle(request.getParameter("planner_title"));
-		plannerDto.setMemo(request.getParameter("planner_memo"));
+		plannerDto.setMemo(request.getParameter("planner_memo").replace("\r\n", "<br/>"));
+		
+		CommonFileIODto commonFileIODto = commonFileIOService.requestWriteFileAndDTO(request, "attach_file", plannerPath);
+		if(commonFileIODto != null){
+			commonFileIODto.setType_code(Constant.FILE_TYPE_ITEM);
+			commonFileIODto.setWrite_no(planner_no);
+			String planner_photo_num = commonFileIOService.insertFileInfo(commonFileIODto) + "";
+			plannerDto.setAttach_file(planner_photo_num);
+		}
+
 		String start_date = request.getParameter("start_date");
-		String day_count = request.getParameter("day_count");
+		String day_count = request.getParameter("day_count");		
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
 		try {

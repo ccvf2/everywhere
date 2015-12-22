@@ -8,9 +8,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.ModelAndView;
 
+import everywhere.com.mynetgear.ccvf2.comm.dao.common.CommonFileIODao;
+import everywhere.com.mynetgear.ccvf2.comm.dto.common.CommonFileIODto;
+import everywhere.com.mynetgear.ccvf2.comm.service.common.CommonFileIOService;
 import everywhere.com.mynetgear.ccvf2.comm.util.common.Constant;
 import everywhere.com.mynetgear.ccvf2.user.dao.member.MemberDao;
 import everywhere.com.mynetgear.ccvf2.user.dao.planner.PlannerDao;
@@ -30,6 +34,14 @@ public class MyPageServiceImpl implements MyPageService {
 	@Autowired
 	private PlannerDao plannerDao;
 	
+	@Autowired
+	private CommonFileIOService commonFileIOService;
+	@Autowired
+	private CommonFileIODao commonFileIoDao; 
+	
+	@Value("${attach.member.path}")
+	private String memberPath;
+	
 
 	@Override
 	public ModelAndView myPage(ModelAndView mav) {
@@ -41,7 +53,10 @@ public class MyPageServiceImpl implements MyPageService {
 		
 		int mem_no=64;
 		List<PlannerDto> plannerList = plannerDao.getPlannerList(mem_no);
-
+		
+		CommonFileIODto commonFileIODto=commonFileIoDao.getOneFileDto(Integer.parseInt(memberDto.getMem_profile_photo()));
+		
+		mav.addObject("commonFileIODto", commonFileIODto);
 		mav.addObject("plannerList", plannerList);
 		mav.addObject("mateCheck", 2);
 		mav.addObject("memberDto", memberDto);
@@ -154,6 +169,46 @@ public class MyPageServiceImpl implements MyPageService {
 		mav.addObject("memberDto", memberDto);
 		mav.addObject("friendsList", friendsList);
 		mav.setViewName("/user/myPage/myPageFriends");
+		
+		return mav;
+	}
+
+	@Override
+	public ModelAndView updateProfilePhoto(ModelAndView mav) {
+		Map<String, Object> map=mav.getModelMap();
+		HttpServletRequest request = (HttpServletRequest)map.get("request");
+		MemberDto memberDto=(MemberDto) map.get("memberDto");
+		
+		
+		CommonFileIODto commonFileIODto = commonFileIOService.requestWriteFileAndDTO(request, "mem_profile", memberPath);
+		
+		if(commonFileIODto != null){
+			commonFileIODto.setType_code(Constant.FILE_TYPE_SPOT);
+			commonFileIODto.setWrite_no(memberDto.getMem_no());
+			int mem_profile_photo = commonFileIOService.insertFileInfo(commonFileIODto);
+			System.out.println("mem_profile_photo : " + mem_profile_photo);
+			memberDto.setMem_profile_photo(""+mem_profile_photo);
+		}
+		System.out.println(memberDto);
+		int result = memberDao.updateProfilePhoto(memberDto);
+		System.out.println("result : " + result);
+		
+		
+		memberDto=memberDao.memberRead(memberDto.getMem_no());
+		commonFileIODto=commonFileIoDao.getOneFileDto(Integer.parseInt(memberDto.getMem_profile_photo()));
+		
+		
+		int mem_no=64;
+		List<PlannerDto> plannerList = plannerDao.getPlannerList(mem_no);
+
+		
+		mav.addObject("commonFileIODto", commonFileIODto);
+		mav.addObject("plannerList", plannerList);
+		mav.addObject("mateCheck", 2);
+		mav.addObject("memberDto", memberDto);
+		mav.addObject("result", result);
+		mav.setViewName("/user/myPage/myPage");
+		
 		
 		return mav;
 	}

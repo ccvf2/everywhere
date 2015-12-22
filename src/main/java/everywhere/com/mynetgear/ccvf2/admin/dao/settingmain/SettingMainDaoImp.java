@@ -20,12 +20,17 @@ public class SettingMainDaoImp implements SettingMainDao {
 	/* 트랜젝션 처리시 */
 	@Autowired
 	private PlatformTransactionManager transactionManager;
-	/* (non-Javadoc)
-	 * @see everywhere.com.mynetgear.ccvf2.admin.dao.settingmain.SettingMainDao#insertBackgroundImgChange(java.util.HashMap)
-	 */
+	
+	/** 메인페이지의 뒷부분 슬라이드 이미지 */
 	@Override
 	public int insertBackgroundImgChange(SettingMainDto settingDto) {
 		int result=sqlTemplate.insert("insert_Background_Img_Change", settingDto);
+		return result;
+	}
+	/** 메인페이지의 앞부분 슬라이드 이미지 */
+	@Override
+	public int insertForgroundImgChange(SettingMainDto settingDto) {
+		int result=sqlTemplate.insert("insert_Forground_Img_Change", settingDto);
 		return result;
 	}
 

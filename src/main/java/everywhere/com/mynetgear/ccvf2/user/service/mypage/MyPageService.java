@@ -13,4 +13,6 @@ public interface MyPageService {
 	public ModelAndView mateDelete(ModelAndView mav);
 
 	public ModelAndView getListFriends(ModelAndView mav);
+
+	public ModelAndView updateProfilePhoto(ModelAndView mav);
 }

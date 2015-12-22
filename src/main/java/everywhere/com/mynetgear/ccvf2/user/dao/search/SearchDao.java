@@ -31,17 +31,7 @@ public interface SearchDao {
 	 */
 	int getPlannerCount(String searchValue);
 
-	/**
-	 * @author 곽성국	
-	 * @createDate 2015. 12. 19.
-	 * @described 스케줄의 검색 결과 리스트를 가져온다.
-	 * @param startRow
-	 * @param endRow
-	 * @param searchValue
-	 * @return
-	 */
-	List<SpotDto> getSpotList(int startRow, int endRow, String searchValue);
-
+	
 	/**
 	 * @author 곽성국	
 	 * @createDate 2015. 12. 19.
@@ -52,5 +42,15 @@ public interface SearchDao {
 	 * @return
 	 */
 	List<PlannerDao> getPlannerList(int startRow, int endRow, String searchValue);
+
+	/**
+	 * @author 곽성국	
+	 * @createDate 2015. 12. 21.
+	 * @described 명소의 리스트를 가져온다.
+	 * @param spotDto
+	 * @param currentPage
+	 * @return
+	 */
+	List<SpotDto> getSpotList(SpotDto spotDto);
 
 }

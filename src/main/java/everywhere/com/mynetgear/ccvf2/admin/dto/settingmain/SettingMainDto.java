@@ -19,6 +19,8 @@ public class SettingMainDto {
 	private int planner_no;
 	/** 사용자메인페이지 셋팅 : 사용여부 */
 	private String  use_yn;
+	/** 사용자메인페이지 셋팅 : 셋딩될 내용 */
+	private String setting_text;
 	public int getSetting_no() {
 		return setting_no;
 	}
@@ -55,6 +57,15 @@ public class SettingMainDto {
 	public void setUse_yn(String use_yn) {
 		this.use_yn = use_yn;
 	}
+	public String getSetting_text() {
+		return setting_text;
+	}
+	public void setSetting_text(String setting_text) {
+		this.setting_text = setting_text;
+	}
+	
+	
+	
 	
 	
 }
