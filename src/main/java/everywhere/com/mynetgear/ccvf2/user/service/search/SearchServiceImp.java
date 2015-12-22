@@ -1,17 +1,11 @@
 package everywhere.com.mynetgear.ccvf2.user.service.search;
 
-import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.lang.StringUtils;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.ModelAndView;
@@ -23,6 +17,7 @@ import everywhere.com.mynetgear.ccvf2.comm.dto.commoncode.CommonCodeDto;
 import everywhere.com.mynetgear.ccvf2.comm.service.commoncode.CommonCodeService;
 import everywhere.com.mynetgear.ccvf2.user.dao.planner.PlannerDao;
 import everywhere.com.mynetgear.ccvf2.user.dao.search.SearchDao;
+import everywhere.com.mynetgear.ccvf2.user.dto.search.SpotDtoExt;
 import everywhere.com.mynetgear.ccvf2.user.dto.spot.SpotDto;
 
 /**
@@ -48,6 +43,7 @@ public class SearchServiceImp implements SearchService {
 		HttpServletRequest request = (HttpServletRequest) map.get("request");
 		
 		//처음에 header 에서 요청한 검색어를 받아야함
+		//String search = request.getParameter("search");
 		
 		//현재 페이지
 		String spotPage = request.getParameter("spotPage");
@@ -61,7 +57,7 @@ public class SearchServiceImp implements SearchService {
 		String city_code = request.getParameter("city_code");
 		String spot_type_code = request.getParameter("spot_type_code");
 		
-		SpotDto spotDto = new SpotDto();
+		SpotDtoExt spotDto = new SpotDtoExt();
 		spotDto.setCountry_code(country_code);
 		spotDto.setCity_code(city_code);
 		spotDto.setSpot_type_code(spot_type_code);
@@ -107,7 +103,7 @@ public class SearchServiceImp implements SearchService {
 		String city_code = request.getParameter("city_code");
 		String spot_type_code = request.getParameter("spot_type_code");
 		
-		SpotDto spotDto = new SpotDto();
+		SpotDtoExt spotDto = new SpotDtoExt();
 		spotDto.setCountry_code(country_code);
 		spotDto.setCity_code(city_code);
 		spotDto.setSpot_type_code(spot_type_code);
@@ -220,10 +216,10 @@ public class SearchServiceImp implements SearchService {
 		//게시글 리스트 가져옴
 		SpotDto spotDto = new SpotDto();
 		spotDto.setCurrentPage(currentPage);
-		List<SpotDto> spotList = searchDao.getSpotList(spotDto);
+		//List<SpotDto> spotList = searchDao.getSpotList(spotDto);
 		List<PlannerDao> plannerList = searchDao.getPlannerList(startRow, endRow, searchValue);
 		
-		mav.addObject("spotList", spotList);
+	//	mav.addObject("spotList", spotList);
 		mav.addObject("spotCount", spotCount);
 		mav.addObject("plannerList", plannerList);
 		mav.addObject("plannerCount", plannerCount);
