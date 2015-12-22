@@ -195,10 +195,11 @@
                    <!-- 댓글을 뿌릴 영역 START-->
 					<div id="replyArea">
 						<div id="replywrap">
-							<div id="replyListArea">
-							</div>
-							<div id="replyWriteArea">
-							</div>
+							<div id="replyListArea"></div>
+							<div id="replyWriteArea"></div>
+							<c:if test="${mem_Object.mem_no!=null}">
+								<div id="replyWriteArea"></div>
+							</c:if>
 						</div>
 					</div>
 					<!-- 댓글을 뿌릴 영역 END-->
