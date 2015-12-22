@@ -52,6 +52,9 @@
 	<c:import url="/WEB-INF/views/user/common/utilImport.jsp"/>	
   </head>
   <body>
+  	<!-- 글 작성일 계산을 위한 현제 날짜 -->
+  	<jsp:useBean id="now" class="java.util.Date"/>
+  	<fmt:formatDate var="nowDate" value="${now}" pattern="yy-MM-dd"/>
 	  <div class="wrapper">
 	    <!--=== Header ===-->
 	    <!-- Header가 꼭 imprt 되어 있어야 한다.(안그러면화면이깨짐) -->
@@ -91,10 +94,20 @@
                    <div class="headline-v2"><h2>최근 글</h2></div>
                     <!-- Latest Links -->
                     <ul class="list-unstyled blog-latest-posts margin-bottom-50">
+                    	<fmt:formatDate var="nowDate" value="${now}" pattern="yy-MM-dd"/>
                     	<c:forEach var="recentAccompanyDto" items="${recentAccompanyList}">
                     		<li>
-                    			<h3><a href="/user/accompany/accompanyRead.do?accompany_no=${recentAccompanyDto.accompany_no}&currentPage=${currentPage}">${recentAccompanyDto.title}</a></h3>
-                    			<small><fmt:formatDate pattern="MM-dd" value="${recentAccompanyDto.write_date}"/> / <a href="#">${recentAccompanyDto.mem_name}</a></small>
+                    			<h3><a href="/user/accompany/accompanyRead.do?accompany_no=${recentAccompanyDto.accompany_no}&currentPage=${currentPage}" title="${recentAccompanyDto.title}">${recentAccompanyDto.title}</a></h3>
+                    			<small>
+									<fmt:formatDate var="recentWriteDate" value="${recentAccompanyDto.write_date}" pattern="yy-MM-dd"/>
+												
+                    				<c:if test="${recentWriteDate eq nowDate}"><!-- 현재 -->
+										<fmt:formatDate pattern="HH:mm" value="${recentAccompanyDto.write_date}"/>
+									</c:if>
+									<c:if test="${recentWriteDate lt nowDate}"><!-- 과거 -->
+										<fmt:formatDate pattern="yyyy-MM-dd" value="${recentAccompanyDto.write_date}"/>
+									</c:if> / <a href="/user/myPage/myPage.do?uandMe=S0002&mem_no=${recentAccompanyDto.mem_no}">${recentAccompanyDto.mem_name}</a>
+								</small>
                     			<p>${fn:substring(recentAccompanyDto.content, 0, 70)}
 						        <c:if test="${fn:length(albumDto.content) >70}">
 						        	…
@@ -112,7 +125,7 @@
                     <div class="news-v3 bg-color-white margin-bottom-30">
                         <div class="news-v3-in">
                             <ul class="list-inline posted-info">
-                                <li>By <a href="#">${accompanyDto.mem_name}</a></li>
+                                <li>By <a href="/user/myPage/myPage.do?uandMe=S0002&mem_no=${accompanyDto.mem_no}">${accompanyDto.mem_name}</a></li>
                                 <li>In <a href="/user/accompany/accompanyList.do?pageNumber=${currentPage}">동행구하기 게시판</a></li>
                                 <li>Hits ${accompanyDto.hits}</li>
                                 <li>Posted <fmt:formatDate pattern="yyyy-MM-dd hh:mm" value="${accompanyDto.write_date}"/></li>
