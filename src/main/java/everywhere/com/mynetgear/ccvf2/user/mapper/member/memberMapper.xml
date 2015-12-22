@@ -13,7 +13,21 @@
 	</insert>
 	
 	<select id="memberRead" parameterType="int" resultType="everywhere.com.mynetgear.ccvf2.user.dto.member.MemberDto">
-		select * from tbl_member where mem_no=#{mem_no}
+		select 
+			k.MEM_NO
+			, k.MEM_EMAIL
+			,k.MEM_NAME
+			,k.MEM_PHONE
+			,k.MEM_INTEREST
+			,k.MEM_STATUS_CODE
+			,k.MEM_LEVEL_CODE
+			,k.MEM_P_STATUS_CODE
+			,(select SAVE_NAME||'.'||EXTENSION from tbl_common_file where FILE_NO=k.MEM_PROFILE_PHOTO) MEM_PROFILE_PHOTO
+			,k.MEM_REG_DATE
+ 		from
+ 			tbl_member k
+ 		where
+ 			k.mem_no=#{mem_no}
 	</select>
 	
 	<update id="memberUpdate" parameterType="everywhere.com.mynetgear.ccvf2.user.dto.member.MemberDto">
