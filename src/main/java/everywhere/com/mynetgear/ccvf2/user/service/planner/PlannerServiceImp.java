@@ -22,9 +22,12 @@ import everywhere.com.mynetgear.ccvf2.comm.dto.commoncode.CommonCodeDto;
 import everywhere.com.mynetgear.ccvf2.comm.service.common.CommonFileIOService;
 import everywhere.com.mynetgear.ccvf2.comm.service.commoncode.CommonCodeService;
 import everywhere.com.mynetgear.ccvf2.comm.util.common.Constant;
+import everywhere.com.mynetgear.ccvf2.user.dao.bookmark.BookMarkDao;
 import everywhere.com.mynetgear.ccvf2.user.dao.member.MemberDao;
 import everywhere.com.mynetgear.ccvf2.user.dao.planner.PlannerDao;
 import everywhere.com.mynetgear.ccvf2.user.dao.spot.SpotDao;
+import everywhere.com.mynetgear.ccvf2.user.dao.sweet.SweetDao;
+import everywhere.com.mynetgear.ccvf2.user.dto.bookmark.BookMarkDto;
 import everywhere.com.mynetgear.ccvf2.user.dto.member.MemberDto;
 import everywhere.com.mynetgear.ccvf2.user.dto.planner.ItemDto;
 import everywhere.com.mynetgear.ccvf2.user.dto.planner.MoneyDto;
@@ -48,7 +51,9 @@ public class PlannerServiceImp implements PlannerService {
 	@Autowired
 	private MemberDao memberDao;
 	@Autowired
-	private SweetService sweetService;
+	private SweetDao sweetDao;
+	@Autowired
+	private BookMarkDao bookMarkDao;
 	
 	@Value("${attach.item.path}")
 	private String itemPath;
@@ -194,7 +199,8 @@ public class PlannerServiceImp implements PlannerService {
 		EverywhereAspect.logger.info(EverywhereAspect.logMsg + itemList.size());
 		
 		// 해당 Planner의 추천 개수를 가져오기
-		int sweet_count = sweetService.getTotalSweet(planner_no);
+		int sweet_count = sweetDao.getTotalSweet(planner_no);
+		int bookmark_count = 0;
 		
 		// 해당 Planner의 추천, 즐겨찾기 등 버튼 활성화 정보를 가저오기
 		// 로그인 안한 사람은 숫자 -1, 로그인 했으나 이미 추천&즐겨찾기 안했으면 숫자 0, 했으면 숫자 1가 리턴된다.
@@ -202,11 +208,17 @@ public class PlannerServiceImp implements PlannerService {
 		int checkBookMark = -1;
 		// 로그인을 안했거나, 글쓴이가 로그인한 사람과 동일할때를 제외
 		if(mem_no != plannerDto.getMem_no() && mem_no != 0){
-			System.out.println("mem_no : " + mem_no + ", planner_no : " + plannerDto.getMem_no());
 			SweetDto sweetDto = new SweetDto();
 			sweetDto.setMem_no(mem_no);
 			sweetDto.setPlanner_no(planner_no);
-			checkSweet = sweetService.isSweet(sweetDto);
+			checkSweet = sweetDao.isSweet(sweetDto);
+			
+			BookMarkDto bookMarkDto = new BookMarkDto();
+			bookMarkDto.setMem_no(mem_no);;
+			bookMarkDto.setBookmark_type_code(Constant.BOOKMARK_TYPE_PLANNER);
+			bookMarkDto.setItem_no(planner_no);
+			checkBookMark = bookMarkDao.isBookMarked(bookMarkDto);
+			bookmark_count = bookMarkDao.getTotalBookMark(bookMarkDto);
 		}
 
 		mav.addObject("plannerDto", plannerDto);
@@ -214,6 +226,7 @@ public class PlannerServiceImp implements PlannerService {
 		mav.addObject("plannerWriter", plannerWriter);
 		mav.addObject("itemList", itemList);
 		mav.addObject("sweet_count", sweet_count);
+		mav.addObject("bookmark_count", bookmark_count);
 		mav.addObject("checkSweet", checkSweet);
 		mav.addObject("checkBookMark", checkBookMark);
 		mav.setViewName("user/planner/plannerRead");

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="everywhere.com.mynetgear.ccvf2.user.mapper.bookmark">
+	<insert id="insert_bookmark" parameterType="everywhere.com.mynetgear.ccvf2.user.dto.bookmark.BookMarkDto">
+		insert into tbl_bookmark values(tbl_bookmark_bookmark_no_seq.nextVal, #{mem_no}, #{bookmark_type_code}, #{item_no})
+	</insert>
+	
+	<select id="check_bookmark" parameterType="everywhere.com.mynetgear.ccvf2.user.dto.bookmark.BookMarkDto" resultType="int">
+		select count(*) 
+		from tbl_bookmark 
+		where bookmark_type_code=#{bookmark_type_code}
+				and item_no=#{item_no}
+				and mem_no=#{mem_no}
+	</select>
+
+	<select id="get_total_bookMark" parameterType="everywhere.com.mynetgear.ccvf2.user.dto.bookmark.BookMarkDto" resultType="int">
+		select count(*)
+		from tbl_bookmark
+		where bookmark_type_code=#{bookmark_type_code}
+				and item_no=#{item_no}
+	</select>
+
+	<select id="get_list_bookmark" parameterType="everywhere.com.mynetgear.ccvf2.user.dto.bookmark.BookMarkDto" resultType="everywhere.com.mynetgear.ccvf2.user.dto.bookmark.BookMarkDto">
+		select * from tbl_bookmark 
+		where bookmark_type_code=#{bookmark_type_code}
+				and mem_no=#{mem_no};
+	</select>
+	
+	<delete id="delete_bookmark" parameterType="everywhere.com.mynetgear.ccvf2.user.dto.bookmark.BookMarkDto">
+		delete from tbl_bookmark
+		where bookmark_type_code=#{bookmark_type_code}
+				and item_no=#{item_no}
+				and mem_no=#{mem_no}
+	</delete>
+</mapper>
