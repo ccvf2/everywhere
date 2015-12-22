@@ -22,12 +22,16 @@ import everywhere.com.mynetgear.ccvf2.comm.dto.commoncode.CommonCodeDto;
 import everywhere.com.mynetgear.ccvf2.comm.service.common.CommonFileIOService;
 import everywhere.com.mynetgear.ccvf2.comm.service.commoncode.CommonCodeService;
 import everywhere.com.mynetgear.ccvf2.comm.util.common.Constant;
+import everywhere.com.mynetgear.ccvf2.user.dao.member.MemberDao;
 import everywhere.com.mynetgear.ccvf2.user.dao.planner.PlannerDao;
 import everywhere.com.mynetgear.ccvf2.user.dao.spot.SpotDao;
+import everywhere.com.mynetgear.ccvf2.user.dto.member.MemberDto;
 import everywhere.com.mynetgear.ccvf2.user.dto.planner.ItemDto;
 import everywhere.com.mynetgear.ccvf2.user.dto.planner.MoneyDto;
 import everywhere.com.mynetgear.ccvf2.user.dto.planner.PlannerDto;
 import everywhere.com.mynetgear.ccvf2.user.dto.spot.SpotDto;
+import everywhere.com.mynetgear.ccvf2.user.dto.sweet.SweetDto;
+import everywhere.com.mynetgear.ccvf2.user.service.sweet.SweetService;
 
 @Component
 public class PlannerServiceImp implements PlannerService {
@@ -41,6 +45,10 @@ public class PlannerServiceImp implements PlannerService {
 	private CommonFileIOService commonFileIOService;
 	@Autowired
 	private CommonCodeService commonCodeService;
+	@Autowired
+	private MemberDao memberDao;
+	@Autowired
+	private SweetService sweetService;
 	
 	@Value("${attach.item.path}")
 	private String itemPath;
@@ -73,7 +81,6 @@ public class PlannerServiceImp implements PlannerService {
 
 		plannerDto.setPlanner_ba_code(planner_ba_code);
 		plannerDto.setUse_yn(Constant.SYNB_YN_N);
-		System.out.println(plannerDto);
 
 		int check = plannerDao.insertPlanner(plannerDto);
 		EverywhereAspect.logger.info(EverywhereAspect.logMsg + check);
@@ -106,7 +113,18 @@ public class PlannerServiceImp implements PlannerService {
 		HttpServletRequest request = (HttpServletRequest)map.get("request");
 		int planner_no = Integer.parseInt(request.getParameter("planner_no"));
 
-		PlannerDto plannerDto = plannerDao.getOnePlanner(planner_no);		
+		MemberDto userInfo = (MemberDto)request.getSession().getAttribute(Constant.SYNN_LOGIN_OBJECT);
+		int mem_no = 0;
+		if(userInfo != null)
+			mem_no = userInfo.getMem_no();
+
+		PlannerDto plannerDto = plannerDao.getOnePlanner(planner_no);
+
+		// Planner 작성자의 정보를 가져온다.
+		MemberDto plannerWriter = new MemberDto();
+		plannerWriter = memberDao.memberRead(plannerDto.getMem_no());
+
+		// Planner에 저장되어 있는 아이템 항목들을 가져오기
 		List<ItemDto> itemList = plannerDao.getItemList(planner_no);
 		double[] moneyTotal = new double[9];
 
@@ -143,11 +161,13 @@ public class PlannerServiceImp implements PlannerService {
 					fileList.add(fileIODto);
 				}
 				itemList.get(i).setItem_photoes(fileList);
-			}
-			
+			}			
+
+			// 아이템 별 가계부 가져오기
 			List<MoneyDto> moneyList = plannerDao.getMoneyList(itemList.get(i).getItem_no());
 			itemList.get(i).setMoneyList(moneyList);
-			
+
+			// 총 비용을 더해주기
 			for(int j = 0; j < moneyList.size(); j++){
 				String type_code = moneyList.get(j).getMoney_type_code();
 				if(type_code.equals(Constant.MONEY_FLIGHT)){
@@ -172,10 +192,30 @@ public class PlannerServiceImp implements PlannerService {
 		}
 
 		EverywhereAspect.logger.info(EverywhereAspect.logMsg + itemList.size());
+		
+		// 해당 Planner의 추천 개수를 가져오기
+		int sweet_count = sweetService.getTotalSweet(planner_no);
+		
+		// 해당 Planner의 추천, 즐겨찾기 등 버튼 활성화 정보를 가저오기
+		// 로그인 안한 사람은 숫자 -1, 로그인 했으나 이미 추천&즐겨찾기 안했으면 숫자 0, 했으면 숫자 1가 리턴된다.
+		int checkSweet = -1;
+		int checkBookMark = -1;
+		// 로그인을 안했거나, 글쓴이가 로그인한 사람과 동일할때를 제외
+		if(mem_no != plannerDto.getMem_no() && mem_no != 0){
+			System.out.println("mem_no : " + mem_no + ", planner_no : " + plannerDto.getMem_no());
+			SweetDto sweetDto = new SweetDto();
+			sweetDto.setMem_no(mem_no);
+			sweetDto.setPlanner_no(planner_no);
+			checkSweet = sweetService.isSweet(sweetDto);
+		}
 
 		mav.addObject("plannerDto", plannerDto);
 		mav.addObject("moneyTotal", moneyTotal);
+		mav.addObject("plannerWriter", plannerWriter);
 		mav.addObject("itemList", itemList);
+		mav.addObject("sweet_count", sweet_count);
+		mav.addObject("checkSweet", checkSweet);
+		mav.addObject("checkBookMark", checkBookMark);
 		mav.setViewName("user/planner/plannerRead");
 	}
 
