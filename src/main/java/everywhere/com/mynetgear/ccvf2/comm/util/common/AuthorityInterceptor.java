@@ -45,6 +45,7 @@ public class AuthorityInterceptor extends HandlerInterceptorAdapter {
 		urlList.add("/WEB-INF/views/user/");
 		urlList.add("/user/member/emailCheck.ajax");
 		urlList.add("/user/main/assets/");
+		urlList.add("/user/planner/readPlanner.do");
 
 		for (String urlException : urlList) {
 			if (uri.indexOf(urlException) > -1) {
