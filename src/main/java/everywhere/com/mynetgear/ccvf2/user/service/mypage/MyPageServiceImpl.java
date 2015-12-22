@@ -181,7 +181,7 @@ public class MyPageServiceImpl implements MyPageService {
 		CommonFileIODto commonFileIODto = commonFileIOService.requestWriteFileAndDTO(request, "mem_profile", memberPath);
 		
 		if(commonFileIODto != null){
-			commonFileIODto.setType_code(Constant.FILE_TYPE_SPOT);
+			commonFileIODto.setType_code(Constant.FILE_TYPE_PROFILE);
 			commonFileIODto.setWrite_no(memberDto.getMem_no());
 			int mem_profile_photo = commonFileIOService.insertFileInfo(commonFileIODto);
 			System.out.println("mem_profile_photo : " + mem_profile_photo);

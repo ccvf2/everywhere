@@ -133,6 +133,8 @@ public class Constant {
 	public static final String FILE_TYPE_ACCOMPANY = "F0003";
 	/** 파일 사용처 코드 : 공통 이메일 쓰기 */
 	public static final String FILE_TYPE_EMAIL = "F0004";
+	/** 파일 사용처 코드 : 회원 프로필 사진 */
+	public static final String FILE_TYPE_PROFILE = "F0005";
 	
 	
 
@@ -167,5 +169,7 @@ public class Constant {
 	public static final String MONEY_PLAY = "D0007";
 	/**가계부 분류 코드: 기타*/
 	public static final String MONEY_ETC = "D0008";
+	
+	
 		
 }
