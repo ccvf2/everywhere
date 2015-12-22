@@ -76,7 +76,7 @@
 			  accompany.end_date, 
 			  accompany.title, 
 			  accompany.content,
-			  (select SAVE_NAME||'.'||EXTENSION from tbl_common_file where FILE_NO=accompany.attach_file) attach_file, 
+			  (select SAVE_NAME||'.'||EXTENSION from tbl_common_file where FILE_NO=accompany.attach_file) attach_file,
 			  accompany.accompany_status_code, 
 			  accompany.gender_code, 
 			  accompany.use_yn, 
