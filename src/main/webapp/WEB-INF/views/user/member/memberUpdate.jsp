@@ -8,6 +8,11 @@
 <c:import url="/WEB-INF/views/common/jquery.jsp" />
 <script type="text/javascript">
 	var checked = false;
+	
+	$(function(){
+		$("#memberUpdateInfo").modal();
+	});
+	
 	function registerForm(form) {
 
 		//alert("ok1");
@@ -47,9 +52,7 @@
 <c:import url="/WEB-INF/views/user/common/utilImport.jsp"/>
 </head>
 <body>
-	<button class="btn-u" data-toggle="modal" data-target="#myModal">회원정보수정</button>
-	
-	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal fade" id="memberUpdateInfo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<form name="regForm" id="sky-form4" class="sky-form" action="/user/member/memberUpdate.do" method="post" onsubmit="return registerForm(this)">

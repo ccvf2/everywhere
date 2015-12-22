@@ -110,17 +110,17 @@ public class MemberServiceImp implements MemberService {
 	public void memberUpdate(ModelAndView mav) {
 		Map<String, Object> map=mav.getModelMap();
 		HttpServletRequest request=(HttpServletRequest)map.get("request");
-		MemberDto memberDto=(MemberDto)map.get("memberDto");
+		//MemberDto memberDto=(MemberDto)map.get("memberDto");
 		
 		int mem_no=Integer.parseInt(request.getParameter("mem_no"));
 		System.out.println("memberService update mem_no:"+mem_no);
-		memberDto.setMem_no(mem_no);
+		/*memberDto.setMem_no(mem_no);
 		
 		memberDto=memberDao.memberRead(mem_no);
-		System.out.println("memberService update memberDto:"+memberDto.toString());
-		List<CommonCodeDto> list=commonCodeService.getListCodeGroup("I0001");
-		
-		mav.addObject("interestList", list);
+		System.out.println("memberService update memberDto:"+memberDto.toString());*/
+		//List<CommonCodeDto> list=commonCodeService.getListCodeGroup("I0001");
+		MemberDto memberDto=memberDao.memberRead(mem_no);
+//		mav.addObject("interestList", list);
 		mav.addObject("memberDto", memberDto);
 		mav.setViewName("/user/member/memberUpdate");
 	}

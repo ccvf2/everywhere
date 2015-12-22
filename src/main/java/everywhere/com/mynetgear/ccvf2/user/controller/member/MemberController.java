@@ -103,16 +103,10 @@ public class MemberController {
 	 * @return
 	 */
 	@RequestMapping(value="/user/member/memberUpdate.do", method=RequestMethod.GET)
-	public ModelAndView memberUpdate(HttpServletRequest request, HttpServletResponse response, MemberDto memberDto) {
+	public ModelAndView memberUpdate(HttpServletRequest request, HttpServletResponse response) {
 		ModelAndView mav=new ModelAndView();
-		
-		int mem_no=Integer.parseInt(request.getParameter("mem_no"));
-		System.out.println("memberController update mem_no:"+mem_no);
-		
+
 		mav.addObject("request", request);
-		mav.addObject("memberDto", memberDto);
-		System.out.println("memberController update memberDto:"+memberDto.toString());
-		mav.addObject("mem_no", mem_no);
 		memberService.memberUpdate(mav);
 		
 		return mav;
