@@ -1,9 +1,11 @@
 package everywhere.com.mynetgear.ccvf2.admin.service.settingmain;
 
+import java.io.File;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -30,6 +32,8 @@ public class SettingMainServiceImp implements SettingMainService {
 	@Value("${attach.admin.mainBackground.path}")
 	private String backgroundPath; 
 	
+	@Value("${attach.admin.mainForground.path}")
+	private String forgroundPath; 
 	/* (non-Javadoc)
 	 * @see everywhere.com.mynetgear.ccvf2.admin.service.settingmain.SettingMainService#insertBackgroundImgChange(org.springframework.web.servlet.ModelAndView)
 	 */
@@ -66,14 +70,17 @@ public class SettingMainServiceImp implements SettingMainService {
 		SettingMainDto settingDto = (SettingMainDto)map.get("settingMainDto");
 		
 		//파일을 꺼내서 파일을 저장소에 저장함
-		CommonFileIODto commonFileIODto=commonFileIOService.requestWriteFileAndDTO(request, "mainBackground", backgroundPath);
+		CommonFileIODto commonFileIODto=commonFileIOService.requestWriteFileAndDTO(request, "mainBackground", forgroundPath);
 		commonFileIODto.setType_code(Constant.SERVICE_SETTING_FRONTIMG);
 		//파일정보를 디비에 작성
 		int seq = commonFileIOService.insertFileInfo(commonFileIODto);
-		
-		
 		//파일고유번호 //PLANNER_NO
 		settingDto.setPlanner_no(seq);
+		
+		String FilePathIMG= "/attatchFile/admin/forground"+File.separator+commonFileIODto.getSave_name()+Constant.SYNB_DOT+commonFileIODto.getExtension();
+		//태그수정
+		settingDto.setSetting_text(StringUtils.replace(settingDto.getSetting_text(), "@{image}", FilePathIMG));
+		
 		//사용여부
 		settingDto.setUse_yn(Constant.SYNB_YN_Y);
 		//세팅URl : 이미지 위치.

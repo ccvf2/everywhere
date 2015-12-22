@@ -28,11 +28,25 @@ public class UserMainDaoImp implements UserMainDao {
 		SettingMainDto dto = new SettingMainDto();
 		dto.setUse_yn(Constant.SYNB_YN_Y);
 		dto.setSetting_type_code(Constant.SERVICE_SETTING_BACKGROUNDIMG);
-		SettingMainDto result=sqlTemplate.selectOne("select_service_main_background_img", dto);
+		dto.setSetting_spot_code(Constant.SERVICE_SETTING_SPOT_BACKGROUNDIMG);
+		SettingMainDto result=sqlTemplate.selectOne("select_service_main_slide_back_img", dto);
 		//System.out.println(result);
 		//List<Object> list=sqlTemplate.selectOne("select_service_main_background_img", dto);
 		return  result;
 		//return null;
+	}
+
+	/* (non-Javadoc)
+	 * @see everywhere.com.mynetgear.ccvf2.user.dao.main.UserMainDao#getOneForGroundImg()
+	 */
+	@Override
+	public List<SettingMainDto> getOneForGroundImg() {
+		SettingMainDto dto = new SettingMainDto();
+		dto.setUse_yn(Constant.SYNB_YN_Y);
+		dto.setSetting_type_code(Constant.SERVICE_SETTING_FRONTIMG);
+		dto.setSetting_spot_code(Constant.SERVICE_SETTING_SPOT_FRONTIMG);
+		List<SettingMainDto> list=sqlTemplate.selectList("select_service_main_slide_fornt_img", dto);
+		return  list;
 	}
 
 }

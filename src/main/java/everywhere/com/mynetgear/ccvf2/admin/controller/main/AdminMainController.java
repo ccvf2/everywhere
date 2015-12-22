@@ -20,7 +20,7 @@ import everywhere.com.mynetgear.ccvf2.comm.service.common.CommonFileIOService;
 import everywhere.com.mynetgear.ccvf2.comm.service.common.CommonFileIOServiceImp;
 import everywhere.com.mynetgear.ccvf2.comm.service.commoncode.CommonCodeService;
 import everywhere.com.mynetgear.ccvf2.comm.util.common.Constant;
-import testpa.MailSend;
+import everywhere.com.mynetgear.ccvf2.comm.util.common.MailSend;
 
 /**
  * @author 배성욱

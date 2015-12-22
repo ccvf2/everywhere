@@ -188,8 +188,8 @@
 		                        <!-- 글 내용 끝 -->
 		                        <!-- 파일 시작 -->
 	                        	<section>
-		                            <label for="file" class="input input-file">
-		                                <div class="button"><input type="file" name="file" multiple="" onchange="this.parentNode.nextSibling.value = this.value">Browse</div><input type="text" placeholder="파일 첨부" readonly="">
+		                            <label for="accompany_file" class="input input-file">
+		                                <div class="button"><input type="file" name="accompany_file" accept="image/*" onchange="this.parentNode.nextSibling.value = this.value">Browse</div><input type="text" placeholder="파일 첨부" readonly="">
 		                            </label>
 		                        </section>
 		                        <!-- 파일 끝 -->

@@ -1,8 +1,4 @@
-package testpa;
-
-
-import java.io.File;
-import java.io.FileInputStream;
+package everywhere.com.mynetgear.ccvf2.comm.util.common;
 import java.util.Date;
 import java.util.Properties;
 
@@ -20,12 +16,10 @@ import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMessage.RecipientType;
 import javax.mail.internet.MimeMultipart;
-import javax.mail.util.ByteArrayDataSource;
 
 import org.apache.commons.lang.StringUtils;
 
 import everywhere.com.mynetgear.ccvf2.comm.dto.common.MailVO;
-import everywhere.com.mynetgear.ccvf2.comm.util.common.Constant;
 
 /**
  * @author 배성욱

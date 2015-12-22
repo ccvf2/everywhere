@@ -56,6 +56,7 @@ public class AccompanyDaoImp implements AccompanyDao {
 	}
 	
 	
+	
 	@Override
 	public AccompanyDto readAccompany(int accompany_no) {
 		Map<String, Object> hMap = new HashMap<String, Object>();
@@ -72,7 +73,6 @@ public class AccompanyDaoImp implements AccompanyDao {
 			sqlTemplate.update("everywhere.com.mynetgear.ccvf2.user.mapper.accompany.updateAccompanyHits", accompany_no);
 			// 읽기
 			board = sqlTemplate.selectOne("everywhere.com.mynetgear.ccvf2.user.mapper.accompany.getOneAccompany", hMap);
-			
 			transactionManager.commit(status);
 		} catch (Exception e) {
 			sqlTemplate.rollback();
@@ -117,5 +117,12 @@ public class AccompanyDaoImp implements AccompanyDao {
 	@Override
 	public int getAccompanyNextSeq() {
 		return sqlTemplate.selectOne("everywhere.com.mynetgear.ccvf2.user.mapper.accompany.getAccompanyNextSeq");
+	}
+
+	@Override
+	public AccompanyDto getOneAccompany(int accompany_no) {
+		Map<String, Object> hMap = new HashMap<String, Object>();
+		hMap.put("accompany_no", accompany_no);
+		return sqlTemplate.selectOne("everywhere.com.mynetgear.ccvf2.user.mapper.accompany.getOneAccompany", hMap);
 	}
 }
