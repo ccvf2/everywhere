@@ -139,7 +139,10 @@
 						  		</c:if>
 							</c:forEach>
 						  	<br/><hr/>
-                            
+					  	
+							<c:if test="${accompanyDto.attach_file!=null}">
+								<img class="img-responsive full-width" src="/attatchFile/accompany/${accompanyDto.attach_file}" alt="${accompanyDto.attach_file}">		
+							</c:if>
                             ${accompanyDto.content}
                             
                             <ul class="post-shares post-shares-lg">

@@ -14,7 +14,6 @@ import org.springframework.web.servlet.ModelAndView;
 import everywhere.com.mynetgear.ccvf2.admin.dto.settingmain.SettingMainDto;
 import everywhere.com.mynetgear.ccvf2.user.dto.planner.PlannerDto;
 import everywhere.com.mynetgear.ccvf2.user.service.main.UserMainService;
-import everywhere.com.mynetgear.ccvf2.user.service.planner.PlannerService;
 
 /**
  * @author 배성욱
@@ -33,6 +32,8 @@ public class UserMainController {
 	public ModelAndView userMainPage(HttpServletRequest request, HttpServletResponse response) {
 		ModelAndView mav = new ModelAndView("/user/main/userMain2");
 		SettingMainDto settingMainDto=userMainService.getOneBackGroundImg();
+		List<SettingMainDto> forground=userMainService.getOneForGroundImg();
+		
 		//메인페이지 띄우기
 		//List<PlannerDto> plannerList=plannerService.getPlannerList(인자값);
 		
@@ -46,7 +47,9 @@ public class UserMainController {
 		mav.addObject("list2",list2);
 		mav.addObject("list3",list3);
 		mav.addObject("list4",list4);
-
+		
+		
+		mav.addObject("forgroung", forground);
 		mav.addObject("backgroungImg",settingMainDto.getSetting_url());
 		return mav;
 	}
