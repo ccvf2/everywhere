@@ -12,6 +12,8 @@
 	<!-- CSS Page Style -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 	<link rel="stylesheet" href="/assets/css/pages/shortcode_timeline2.css">
+	
+	<script type="text/javascript" src="/script/user/planner/plannerRead.js"></script>
 	<style type="text/css">
 	.btn-share-group {
 		height: 70px;
@@ -41,10 +43,12 @@
 	
 	</style>
 	<script type="text/javascript">
-	function setBackground(image){
+	function setBackground(image, reader_mem_no, writer_mem_no){
 		if(image != null){
 			$('.breadcrumbs-v1').css('background-image', 'url(/attatchFile/planner/'+image+')');
 		}
+		if(read_mem_no != writer_mem_no)
+			$("#likeBtn").attr("href", "javascript:insertSweet('${mem_object.mem_no}', '${plannerDto.planner_no}')");
 	}
 	</script>
 	<script type="text/javascript">
@@ -66,7 +70,7 @@
 }
 </script>
 </head>
-<body onload="setBackground('${plannerDto.attach_file}')">
+<body onload="setBackground('${plannerDto.attach_file}', '${mem_object.mem_no}', '${plannerWriter.mem_no }')">
 	<fmt:formatDate var="start_date" pattern="yyyy-MM-dd" value="${plannerDto.start_date}"/>
 	<fmt:formatDate var="end_date" pattern="yyyy-MM-dd" value="${plannerDto.end_date}"/>
 	<input type="hidden" name="planner_no" value="${plannerDto.planner_no}"/>
@@ -114,10 +118,9 @@
 					</li>
 				</ul>
 
-				
 				<div class="btn-share-group">
 					<a id="likeBtn" class="btn-like " title="좋아요">
-						<span><img src="https://d254i4serkgq8u.cloudfront.net/images/bg-btn-like.png" alt="" class="off"><img src="https://d254i4serkgq8u.cloudfront.net/images/bg-btn-like-on.png" alt="" class="on"><span class="plan-detail-view-like-count">0</span></span>
+						<span><img src="https://d254i4serkgq8u.cloudfront.net/images/bg-btn-like.png" alt="" class="off"><img src="https://d254i4serkgq8u.cloudfront.net/images/bg-btn-like-on.png" alt="" class="on"><span class="plan-detail-view-like-count">${sweet_count }</span></span>
 						<span class="txt-info">추천</span>
 					</a><!-- 좋아요 -->
 					<a id="bookmarkBtn" class="btn-bookmark  " title="북마크">

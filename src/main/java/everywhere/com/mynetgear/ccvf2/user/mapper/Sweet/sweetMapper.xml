@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="everywhere.com.mynetgear.ccvf2.user.mapper.sweet">
+	<insert id="insert_sweet" parameterType="everywhere.com.mynetgear.ccvf2.user.dto.sweet.SweetDto">
+		insert into tbl_sweet values(tbl_sweet_sweet_no_seq.nextVal, #{mem_no}, #{planner_no})
+	</insert>
+	
+	<select id="get_list_sweet" parameterType="int" resultType="everywhere.com.mynetgear.ccvf2.user.dto.sweet.SweetDto">
+		select * from tbl_sweet where mem_no=#{mem_no}
+	</select>
+	
+	<select id="check_sweet" parameterType="everywhere.com.mynetgear.ccvf2.user.dto.sweet.SweetDto" resultType="int" >
+		select sweet_no from tbl_sweet where mem_no=#{mem_no} and planner_no=#{planner_no} 
+	</select>
+	
+	<select id="get_total_sweet" parameterType="int" resultType="int">
+		select nvl(count(*),0) from tbl_sweet where planner_no=#{planner_no}
+	</select>
+</mapper>

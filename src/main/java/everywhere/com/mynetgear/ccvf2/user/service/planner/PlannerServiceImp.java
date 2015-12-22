@@ -30,6 +30,7 @@ import everywhere.com.mynetgear.ccvf2.user.dto.planner.ItemDto;
 import everywhere.com.mynetgear.ccvf2.user.dto.planner.MoneyDto;
 import everywhere.com.mynetgear.ccvf2.user.dto.planner.PlannerDto;
 import everywhere.com.mynetgear.ccvf2.user.dto.spot.SpotDto;
+import everywhere.com.mynetgear.ccvf2.user.service.sweet.SweetService;
 
 @Component
 public class PlannerServiceImp implements PlannerService {
@@ -45,6 +46,8 @@ public class PlannerServiceImp implements PlannerService {
 	private CommonCodeService commonCodeService;
 	@Autowired
 	private MemberDao memberDao;
+	@Autowired
+	private SweetService sweetService;
 	
 	@Value("${attach.item.path}")
 	private String itemPath;
@@ -180,11 +183,14 @@ public class PlannerServiceImp implements PlannerService {
 		}
 
 		EverywhereAspect.logger.info(EverywhereAspect.logMsg + itemList.size());
+		
+		int sweet_count = sweetService.getTotalSweet(planner_no);
 
 		mav.addObject("plannerDto", plannerDto);
 		mav.addObject("moneyTotal", moneyTotal);
 		mav.addObject("plannerWriter", plannerWriter);
 		mav.addObject("itemList", itemList);
+		mav.addObject("sweet_count", sweet_count);
 		mav.setViewName("user/planner/plannerRead");
 	}
 
