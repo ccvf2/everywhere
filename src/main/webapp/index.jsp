@@ -55,12 +55,12 @@
 
  <hr/>
  <a href="/user/member/register.do">회원가입</a>
- <a href="/user/member/memberRead.do?mem_no=10">회원정보보기</a>
- <a href="/user/member/memberUpdate.do?mem_no=10">회원정보수정</a>
- <a href="/user/member/memberDelete.do?mem_no=10">회원정보삭제</a>
+ <a href="/user/member/memberRead.do?mem_no=${mem_object.mem_no}">회원정보보기</a>
+ <a href="/user/member/memberUpdate.do?mem_no=${mem_object.mem_no}">회원정보수정</a>
+ <a href="/user/member/memberDelete.do?mem_no=${mem_object.mem_no}">회원정보삭제</a>
  <hr/> 
 
- <a href="/user/visitor/visitorWrite.do?uandMe=S0001&mem_no=${memberDto.mem_no}">방명록쓰기</a>
+ <a href="/user/visitor/visitorWrite.do?mem_no=${mem_object.mem_no}">방명록쓰기</a>
  <hr/> 
 
  <a href="/user/accompany/accompanyMain.do">회원동행구하기</a>
