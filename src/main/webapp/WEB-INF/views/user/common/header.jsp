@@ -70,8 +70,6 @@ function plannerCreateReqiest() {
 <title>타이틀 입력</title>
 
 </head>
- alertempty :${empty alert_msg}<br/>
- alert_msg:${alert_msg}
 <c:if test="${(empty alert_msg)==false}">
 <script type="text/javascript">
 alert('${alert_msg}');
