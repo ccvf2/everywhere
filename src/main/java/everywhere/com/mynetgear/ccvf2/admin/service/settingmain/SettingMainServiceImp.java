@@ -1,6 +1,7 @@
 package everywhere.com.mynetgear.ccvf2.admin.service.settingmain;
 
 import java.io.File;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -88,6 +89,17 @@ public class SettingMainServiceImp implements SettingMainService {
 		settingDto.setSetting_url(path);
 		settingMainDao.insertForgroundImgChange(settingDto);
 		mav.setViewName("/admin/settingMain/settingMain");
+		
+	}
+
+	/* (non-Javadoc)
+	 * @see everywhere.com.mynetgear.ccvf2.admin.service.settingmain.SettingMainService#getListBackground(org.springframework.web.servlet.ModelAndView)
+	 */
+	@Override
+	public void getListBackground(ModelAndView mav) {
+	List<SettingMainDto> list= settingMainDao.getListBackground();
+	mav.addObject("settingList",list);
+	mav.setViewName("/admin/settingMain/background");
 		
 	}
 

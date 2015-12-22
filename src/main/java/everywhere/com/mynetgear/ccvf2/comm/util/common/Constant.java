@@ -176,4 +176,10 @@ public class Constant {
 	public static final String SERVICE_SETTING_SPOT_BACKGROUNDIMG = "M8881";
 	/**서비스페이지메인셋팅위치코드: 슬라이드이미지 앞이미지*/
 	public static final String SERVICE_SETTING_SPOT_FRONTIMG = "M8882";
+	
+	
+	/**이동할페이지: 로그인전 시도했던 페이지로 이동*/
+	public static final String CALLBACK_URL = "callback_url";
+	
+	
 }
