@@ -50,11 +50,11 @@
                 <c:import url="/WEB-INF/views/user/mypage/myPageLeft.jsp"/>
             </div>
             <!--End Left Sidebar-->
-
+			count:${count}
 			<!-- 메인------------------------------------------------------------------------------------------------------------------------------ -->
             <!-- Profile Content -->
             <div class="col-md-9">
-            	<c:if test="${count==0&&currentPage==1}">
+            	<c:if test="${count==0||currentPage==1}">
 					<div class="panel panel-u margin-bottom-40">
 		            	<div class="panel-heading" style="height:30px;" align="left">
 		                	<h3 class="panel-title" style="margin-top:0px;">No.${visitorDto.visitor_no}</h3>
@@ -75,24 +75,6 @@
 		        	</div>
 				</c:if>
 				<c:if test="${count>0}">
-					<div class="panel panel-u margin-bottom-40">
-		            	<div class="panel-heading" style="height:30px;" align="left">
-		                	<h3 class="panel-title" style="margin-top:0px;">No.${visitorDto.visitor_no}</h3>
-		               	</div>
-		                <div class="panel-body">
-		                    <form class="margin-bottom-40" role="form" action="/user/visitor/visitorWrite.do" method="post" onsubmit="return visitorForm(this)">
-								<div class="form-group" align="left">
-									<span>아이디:${visitorDto.mem_no}</span>
-								</div>
-								<div class="form-group">
-									<textarea class="form-control" rows="7" cols="65" name="visitor_content" style="resize:none;"></textarea>
-								</div>
-								<div class="form-group" align="right">
-									<input type="submit" class="btn-u" value="작성"/>
-								</div>
-							</form>
-						</div>
-		        	</div>
 					<c:forEach var="visitor" items="${visitorList}">
 						<div class="panel panel-u margin-bottom-40">
 		            		<div class="panel-heading" style="height:30px;" align="left">
@@ -107,8 +89,8 @@
 									<div align="left">${visitor.visitor_content}</div>
 								</div>
 								<div class="form-group" align="right"> 
-									<a class="btn-u" href="/user/visitor/visitorUpdate.do?visitor_no=${visitor.visitor_no}&pageNumber=${currentPage}">수정</a> 
-									<a class="btn-u" href="/user/visitor/visitorDelete.do?visitor_no=${visitor.visitor_no}&pageNumber=${currentPage}">삭제</a>
+									<a class="btn-u" href="/user/visitor/visitorUpdate.do?mem_no=${memberDto.mem_no}&visitor_no=${visitor.visitor_no}&pageNumber=${currentPage}">수정</a> 
+									<a class="btn-u" href="/user/visitor/visitorDelete.do?mem_no=${memberDto.mem_no}&visitor_no=${visitor.visitor_no}&pageNumber=${currentPage}">삭제</a>
 								</div>
 							</div>
 						</div>
@@ -116,11 +98,12 @@
 				</c:if>
 			</div>
 			
-			<div class="col-md-9" align="center">
+			<div align="center">
 				<c:if test="${count>0}">
 					<c:set var="pageBlock" value="${3}"/>
 				</c:if>
-		       	<fmt:parseNumber var="rs" value="${(currentPage-1)/pageBlock}" integerOnly="true"/>
+				
+				<fmt:parseNumber var="rs" value="${(currentPage-1)/pageBlock}" integerOnly="true"/>
 				<c:set var="startPage" value="${rs*pageBlock+1}"/>
 				<c:set var="endPage" value="${startPage+pageBlock-1}"/>
 				
@@ -131,15 +114,15 @@
 				</c:if>
 				
 				<c:if test="${startPage>pageBlock}">
-					<a href="/user/visitor/visitorWrite.do?pageNumber=${startPage-pageBlock}">[이전]</a>
+					<a href="/user/visitor/visitorWrite.do?mem_no=${memberDto.mem_no}&pageNumber=${startPage-pageBlock}">[이전]</a>
 				</c:if>
 				
 				<c:forEach var="i" begin="${startPage}" end="${endPage}">
-					<a href="/user/visitor/visitorWrite.do?pageNumber=${i}">[${i}]</a>
+					<a href="/user/visitor/visitorWrite.do?mem_no=${memberDto.mem_no}&pageNumber=${i}">[${i}]</a>
 				</c:forEach>
 				
 				<c:if test="${endPage<pageCount}">
-					<a href="/user/visitor/visitorWrite.do?pageNumber=${startPage+pageBlock}">[다음]</a>
+					<a href="/user/visitor/visitorWrite.do?mem_no=${memberDto.mem_no}&pageNumber=${startPage+pageBlock}">[다음]</a>
 				</c:if>
 			</div>
             <!-- End Profile Content -->
