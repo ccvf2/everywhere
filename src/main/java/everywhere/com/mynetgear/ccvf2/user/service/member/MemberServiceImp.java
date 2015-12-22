@@ -131,9 +131,9 @@ public class MemberServiceImp implements MemberService {
 		HttpServletRequest request=(HttpServletRequest)map.get("request");
 		MemberDto memberDto=(MemberDto)map.get("memberDto");
 		
-		if(!memberDto.getMem_p_status_code().equals("M2001")) {
-			memberDto.setMem_p_status_code(Constant.MEMBER_P_STATUS_LOCK);
-		}
+//		if(!memberDto.getMem_p_status_code().equals("M2001")) {
+//			memberDto.setMem_p_status_code(Constant.MEMBER_P_STATUS_LOCK);
+//		}
 		
 		//비밀번호 암호화
 		String pw =SecurityUtil.Sha256Encrypt(memberDto.getMem_email(), memberDto.getMem_pwd());
