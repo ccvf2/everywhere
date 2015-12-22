@@ -3,6 +3,7 @@ package everywhere.com.mynetgear.ccvf2.user.dao.search;
 import java.util.List;
 
 import everywhere.com.mynetgear.ccvf2.user.dao.planner.PlannerDao;
+import everywhere.com.mynetgear.ccvf2.user.dto.search.SpotDtoExt;
 import everywhere.com.mynetgear.ccvf2.user.dto.spot.SpotDto;
 
 /**
@@ -51,6 +52,6 @@ public interface SearchDao {
 	 * @param currentPage
 	 * @return
 	 */
-	List<SpotDto> getSpotList(SpotDto spotDto);
+	List<SpotDto> getSpotList(SpotDtoExt spotDto);
 
 }

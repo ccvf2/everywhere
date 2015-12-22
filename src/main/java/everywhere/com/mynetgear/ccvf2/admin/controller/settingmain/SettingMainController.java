@@ -1,5 +1,7 @@
 package everywhere.com.mynetgear.ccvf2.admin.controller.settingmain;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -38,7 +40,7 @@ public class SettingMainController {
 	/**
 	 * @author 배성욱
 	 * @createDate 2015. 12. 18.
-	 * @described 백그라운드 이미지 변경
+	 * @described 슬라이드의 뒷 이미지 변경
 	 * @param request
 	 * @param response
 	 * @return
@@ -51,12 +53,39 @@ public class SettingMainController {
 		settingMainService.insertBackgroundImgChange(mav);
 		return mav;	
 	}
+	/**
+	 * @author 배성욱
+	 * @createDate 2015. 12. 22.
+	 * @described 슬라이드의 앞이미지와 내용 추가
+	 * @param request
+	 * @param response
+	 * @param dto
+	 * @return
+	 */
 	@RequestMapping(value="/admin/settingMain/forgroundImgChange.do", method=RequestMethod.POST)
 	public ModelAndView forgroundImgChange(HttpServletRequest request, HttpServletResponse response,SettingMainDto dto) {
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("request", request);
 		mav.addObject("settingMainDto", dto);
 		settingMainService.insertForgroundImgChange(mav);
+		return mav;
+	}
+	/**
+	 * @author 배성욱
+	 * @createDate 2015. 12. 22.
+	 * @described 매소드의 용도를 적어주세요
+	 * @param request
+	 * @param response
+	 * @param dto
+	 * @return
+	 */
+	@RequestMapping(value="/admin/settingMain/backgroundList.do", method=RequestMethod.GET)
+	public ModelAndView backgroundList(HttpServletRequest request, HttpServletResponse response) {
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("request", request);
+		
+		settingMainService.getListBackground(mav);
+		
 		return mav;
 	}
 }

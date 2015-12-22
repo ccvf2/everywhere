@@ -1,5 +1,7 @@
 package everywhere.com.mynetgear.ccvf2.admin.dao.settingmain;
 
+import java.util.List;
+
 import everywhere.com.mynetgear.ccvf2.admin.dto.settingmain.SettingMainDto;
 
 /**
@@ -26,4 +28,15 @@ public interface SettingMainDao {
 	 * @return
 	 */
 	public int insertForgroundImgChange(SettingMainDto settingDto);
+	
+	
+	/**
+	 * @author 배성욱
+	 * @createDate 2015. 12. 22.
+	 * @described 백그라운드 목록을 불러오기
+	 * @return
+	 */
+	public List<SettingMainDto> getListBackground();
+	
+	
 }

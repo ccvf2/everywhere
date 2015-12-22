@@ -25,12 +25,31 @@
 	</select>
 	
 	<!-- 명소의 리스트를 반환 -->
-	<select id="getSpotList" resultType="everywhere.com.mynetgear.ccvf2.user.dto.spot.SpotDto">
+	<select id="getSpotList" resultType="everywhere.com.mynetgear.ccvf2.user.dto.search.SpotDtoExt">
 		<![CDATA[
-			select * from (
-				select rownum rnum, a.* from
-					(select * from tbl_spot order by spot_name asc) a)
-			where rnum >= 1 and rnum <= 10
+			select spot.rnum,
+			      spot.spot_no,
+			      spot.mem_no,
+			      spot.country_code,
+			      spot.city_code,
+			      (select code_name from tbl_common_code where code=spot.city_code) city_name,
+			      spot.spot_name,
+			      spot.spot_type_code,
+			      spot.mem_level_code,
+			      spot.spot_note,
+			      spot.attach_file,
+			      spot.spot_addr,
+			      spot.spot_lat,
+			      spot.spot_long,
+			      spot.total_star_score,
+			      spot.count_star_score,
+			      tbl_member.mem_name
+			from 
+			  (select rownum rnum, a.* from 
+			    (select * from tbl_spot order by spot_name asc) a
+			  ) spot, tbl_member
+			where spot.rnum >= 1 and spot.rnum <= 30
+			and tbl_member.mem_no = spot.mem_no
 		]]>
 	</select>
 	

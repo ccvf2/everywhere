@@ -47,4 +47,14 @@
 			, #{setting_text}
 		)
 	</insert>
+	
+	<select id="select_list_Background_setting" resultType="everywhere.com.mynetgear.ccvf2.admin.dto.settingmain.SettingMainDto">
+		SELECT
+			* 
+		FROM
+			TBL_ADMIN_MAIN_SETTING
+		WHERE
+			SETTING_TYPE_CODE='M9991'
+	</select>
+	
 </mapper>

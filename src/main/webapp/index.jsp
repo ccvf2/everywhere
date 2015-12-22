@@ -84,6 +84,11 @@
 <hr/>
 <a href="javascript:test()">test</a>
 <hr/>
+
+
+
+	<a href="/admin/settingMain/backgroundList.do">백스라운드 설정 목록</a>
+<hr/>
 <h2>로그인</h2>
  <a href="/user/login/login.do">로그인 페이지</a>
 <c:choose>
@@ -108,4 +113,5 @@
 	</c:otherwise>
 </c:choose>
 </body>
+
 </html>

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 
 import everywhere.com.mynetgear.ccvf2.comm.util.common.Constant;
 import everywhere.com.mynetgear.ccvf2.user.dao.planner.PlannerDao;
+import everywhere.com.mynetgear.ccvf2.user.dto.search.SpotDtoExt;
 import everywhere.com.mynetgear.ccvf2.user.dto.spot.SpotDto;
 
 /**
@@ -38,7 +39,7 @@ public class SearchDaoImp implements SearchDao {
 
 
 	@Override
-	public List<SpotDto> getSpotList(SpotDto spotDto) {
+	public List<SpotDto> getSpotList(SpotDtoExt spotDto) {
 		return sqlTemplate.selectList("everywhere.com.mynetgear.ccvf2.user.mapper.search.getSpotList");
 	}
 	

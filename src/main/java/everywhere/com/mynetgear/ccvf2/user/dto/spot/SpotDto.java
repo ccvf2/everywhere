@@ -1,6 +1,5 @@
 package everywhere.com.mynetgear.ccvf2.user.dto.spot;
 
-import java.io.File;
 import java.util.List;
 
 import everywhere.com.mynetgear.ccvf2.comm.dto.common.CommonFileIODto;

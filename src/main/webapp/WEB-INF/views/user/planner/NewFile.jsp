@@ -15,7 +15,10 @@
 			})
 		});
 </script>
-
+<script type="text/javascript" src="/script/common/datepicker.js"></script>
+<style type="text/css">
+	.datepicker{z-index:100000 !important;}
+</style>
 </head>
 
 <!-- 여행스케줄쓰기 -->
@@ -33,7 +36,6 @@
 				<h4 class="modal-title">새일정 만들기..</h4>
 			</div>
 			<div class="modal-body">
-				<p>One fine body&hellip;</p>
 				<div class="input-group">
 					<span class="input-group-addon" id="basic-addon1">여행제목</span> 
 					<input type="text" class="form-control" name="title" placeholder="예) 나의 3박 4일 제주여행기"
@@ -55,9 +57,9 @@
 				</div>
 			</div>
 			<div class="modal-footer">
-				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				<button type="button" class="btn-u btn-u-default" data-dismiss="modal">닫기</button>
 				<!-- <input type="submit" class="btn-u btn-u-default" value="쓰기"/> -->
-				<input type="submit" class="btn btn-default" value="쓰기"/>
+				<input type="submit" class="btn-u" value="쓰기"/>
 			</div>
 		</form>
 		</div>
