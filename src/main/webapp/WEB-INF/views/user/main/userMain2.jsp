@@ -35,23 +35,21 @@
     <div class="slider-inner">
         <div id="da-slider" class="da-slider" style="background: transparent url(${backgroungImg}) repeat 0% 0%;">
         <!-- <div id="da-slider" class="da-slider"> -->
-            <div class="da-slide">
+        
+<%--             <div class="da-slide">
                 <h2><i>떠나세요~</i> <br /> <i>당신을 기다리는</i> <br /> <i>많은곳들</i></h2>
                 <p><i>일상에 지치고.. 시간에 쫒기고..</i> <br /> <i>갑시다!</i> <br /> <i>슈우우우우~</i></p>
-                <div class="da-img"><img class="img-responsive" src="/attatchFile/admin/forground/Untitled-1.png" alt=""></div>
-            </div>
-            <div class="da-slide">
-                <h2><i>RESPONSIVE VIDEO</i> <br /> <i>SUPPORT AND</i> <br /> <i>MANY MORE</i></h2>
-                <p><i>Lorem ipsum dolor amet</i> <br /> <i>tempor incididunt ut</i></p>
-                <div class="da-img">
-                   <!--  <iframe src="http://player.vimeo.com/video/47911018" width="530" height="300" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe> -->
-                </div>
-            </div>
-            <div class="da-slide">
-                <h2><i>USING BEST WEB</i> <br /> <i>SOLUTIONS WITH</i> <br /> <i>HTML5/CSS3</i></h2>
-                <p><i>Lorem ipsum dolor amet</i> <br /> <i>tempor incididunt ut</i> <br /> <i>veniam omnis </i></p>
-                <div class="da-img"><img src="/assets/plugins/parallax-slider/img/html5andcss3.png" alt="image01" /></div>
-            </div>
+                <div class="da-img"><img class="img-responsive" src="/attatchFile/admin/forground/${imglist.setting_url}" alt=""></div>
+            </div> --%>
+        	<c:forEach items="${forgroung}" var="imglist">
+        		<c:out value="${imglist.setting_text}" escapeXml="false"/>
+        	</c:forEach>
+            
+            
+            
+            
+            
+            
             <div class="da-arrows">
                 <span class="da-arrows-prev"></span>
                 <span class="da-arrows-next"></span>
@@ -84,9 +82,9 @@
 		                        <li>|</li>
 		                        <li><i class="fa fa-clock-o"></i><fmt:formatDate pattern="yyyy-MM-dd" value="${list1.reg_date}"/></li>
 		                        <li>|</li>
-		                        <li><a href="#"><i class="fa fa-comments-o"></i> ${list1.reply_Count}</a></li>
+		                        <li><a href="#"><i class="fa fa-comments-o"></i><c:out value="${list1.reply_Count}" escapeXml="false"/></a></li>
 		                    </ul>
-		                    <p><c:out value="${list1.memo}"></c:out> </p>
+		                    <p><c:out value="${list1.memo}" escapeXml="false"/> </p>
 		                </div>
 		            </div>
 		            </div>

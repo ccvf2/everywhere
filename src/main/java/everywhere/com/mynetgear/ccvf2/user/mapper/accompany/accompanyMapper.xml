@@ -17,7 +17,7 @@
 		<result property="gender_code" column="GENDER_CODE"/>
 		<result property="mem_name" column="MEM_NAME"/>	
 		<result property="reply_count" column="reply_count"/>
-
+		<result property="attach_file" column="attach_file"/>
 	</resultMap> 
 	
 	<!-- 동행구하기 게시판 쓰기 -->
@@ -34,7 +34,8 @@
 		 	content,
 		 	accompany_status_code,
 		    gender_code,
-		    use_yn
+		    use_yn,
+		    attach_file
 		)
 		values
 		(
@@ -47,7 +48,8 @@
 			#{content},
 			#{accompany_status_code},
 			#{gender_code},
-			#{use_yn}
+			#{use_yn},
+			#{attach_file}
 		)
 	</insert>
 	
@@ -74,7 +76,7 @@
 			  accompany.end_date, 
 			  accompany.title, 
 			  accompany.content,
-			  accompany.attach_file, 
+			  (select SAVE_NAME||'.'||EXTENSION from tbl_common_file where FILE_NO=accompany.attach_file) attach_file, 
 			  accompany.accompany_status_code, 
 			  accompany.gender_code, 
 			  accompany.use_yn, 
@@ -107,21 +109,6 @@
 			where accompany.mem_no = member.mem_no
 	</select>
 	
-	<!-- 게시글 읽기 -->
-	<select id="readAccompany" parameterType="java.util.Map" resultMap="accompanyMap">
-		SELECT b.*,
-      	(
-	        SELECT count(*) 
-	        FROM tbl_common_reply 
-	        WHERE item_no=accompany_no AND type_code='S0010'
-		) AS reply_count
-	    FROM
-	      (
-	        SELECT *		  	
-	        FROM tbl_accompany
-	        WHERE accompany_no=${accompany_no}
-	        AND use_yn=${use_yn}) b;
-	</select>
 	
 	<!-- 게시글 조회수 증가 -->
 	<update id="updateAccompanyHits" parameterType="int">
@@ -139,12 +126,12 @@
 			  accompany.end_date, 
 			  accompany.title, 
 			  accompany.content,
-			  accompany.attach_file, 
 			  accompany.accompany_status_code, 
 			  accompany.gender_code, 
 			  accompany.use_yn, 
 			  accompany.hits,
-			  member.mem_name
+			  member.mem_name,
+			  (select SAVE_NAME||'.'||EXTENSION from tbl_common_file where FILE_NO=accompany.attach_file) attach_file
 		from tbl_accompany accompany, tbl_member member
 		where accompany.mem_no = member.mem_no
 		and accompany.accompany_no=#{accompany_no}
@@ -174,7 +161,8 @@
 		    title=#{title},
 		    content=#{content},
 		    accompany_status_code=#{accompany_status_code},
-		    gender_code=#{gender_code}
+		    gender_code=#{gender_code},
+		    attach_file=#{attach_file}
 		WHERE accompany_no=#{accompany_no}
 	</update>
 	

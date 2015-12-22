@@ -97,5 +97,14 @@ public interface AccompanyDao {
 	 */
 	int getAccompanyNextSeq();
 
+	/**
+	 * @author 곽성국	
+	 * @createDate 2015. 12. 22.
+	 * @described 동행구하기 게시글을 가져온다.
+	 * @param accompany_no
+	 * @return
+	 */
+	AccompanyDto getOneAccompany(int accompany_no);
+
 
 }

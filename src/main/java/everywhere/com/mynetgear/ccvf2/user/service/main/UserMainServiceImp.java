@@ -49,6 +49,12 @@ public class UserMainServiceImp implements UserMainService {
 		}
 		return dto;
 	}
+	@Override
+	public List<SettingMainDto> getOneForGroundImg() {
+		List<SettingMainDto> list = userMainDao.getOneForGroundImg();
+		
+		return list;
+	}
 
 	/* (non-Javadoc)
 	 * @see everywhere.com.mynetgear.ccvf2.user.service.main.UserMainService#getListPlanner()

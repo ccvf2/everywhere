@@ -3,7 +3,7 @@
 <mapper namespace="everywhere.com.mynetgear.ccvf2.user.mapper.main.userMainMapper">
 	
 	<!-- 슬라이드 이미지의 백그라운드 이미지 셋팅값 -->
-	<select id="select_service_main_background_img" 
+	<select id="select_service_main_slide_back_img" 
 	resultType="everywhere.com.mynetgear.ccvf2.admin.dto.settingmain.SettingMainDto" 
 	parameterType="everywhere.com.mynetgear.ccvf2.admin.dto.settingmain.SettingMainDto">
 		SELECT
@@ -20,7 +20,28 @@
 							USE_YN=#{use_yn}
 						AND
 							SETTING_TYPE_CODE=#{setting_type_code}
+					<if test="setting_spot_code != '' ">
+						AND
+							SETTING_SPOT_CODE=#{setting_spot_code}
+					</if>
 						)
+	</select>
+	<!-- 슬라이드 이미지의 백그라운드 이미지 셋팅값 -->
+	<select id="select_service_main_slide_fornt_img" 
+	resultType="everywhere.com.mynetgear.ccvf2.admin.dto.settingmain.SettingMainDto" 
+	parameterType="everywhere.com.mynetgear.ccvf2.admin.dto.settingmain.SettingMainDto">
+		SELECT
+			*
+		FROM
+			TBL_ADMIN_MAIN_SETTING
+		WHERE
+			USE_YN=#{use_yn}
+		AND
+			SETTING_TYPE_CODE=#{setting_type_code}
+	<if test="setting_spot_code != '' ">
+		AND
+			SETTING_SPOT_CODE=#{setting_spot_code}
+	</if>
 	</select>
 	
 	

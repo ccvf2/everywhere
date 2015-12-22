@@ -146,6 +146,7 @@
                         
                         <!-- 폼 태그 시작 -->
                         	<form name="accompanyForm" class="sky-form" action="/user/accompany/accompanyUpdateOk.do" method="post" onsubmit="return writeCheck()" enctype="multipart/form-data">
+                        		<input type="hidden" name="accompany_no" value="${accompanyDto.accompany_no}"/>
 			                    <header>동행구하기 글 수정하기</header>
 			                    <fieldset>
 			                    <!-- 글 종류와 구하는 성별 시작 -->
@@ -200,13 +201,13 @@
                                     <section class="col col-6">
                                         <label class="input">
                                             <i class="icon-append fa fa-calendar"></i>
-                                            <input type="text" name="start_date" id="start" placeholder="시작일">
+                                            <input type="text" name="start_date" id="start" placeholder="시작일" value="${start_date}">
                                         </label>
                                     </section>
                                     <section class="col col-6">
                                         <label class="input">
                                             <i class="icon-append fa fa-calendar"></i>
-                                            <input type="text" name="start_date" id="finish" placeholder="종료일">
+                                            <input type="text" name="end_date" id="finish" placeholder="종료일" value="${end_date}">
                                         </label>
                                     </section>
 		                        </div>
@@ -222,7 +223,7 @@
 		                        <!-- 파일 시작 -->
 	                        	<section>
 		                            <label for="file" class="input input-file">
-		                                <div class="button"><input type="file" name="file" multiple="" onchange="this.parentNode.nextSibling.value = this.value">Browse</div><input type="text" placeholder="파일 첨부" readonly="">
+		                                <div class="button"><input type="file" name="accompany_file" multiple="" onchange="this.parentNode.nextSibling.value = this.value">Browse</div><input type="text" placeholder="${accompanyDto.attach_file}" readonly="">
 		                            </label>
 		                        </section>
 		                        <!-- 파일 끝 -->
