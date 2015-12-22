@@ -44,18 +44,6 @@
 		}
 	}
 </script>
-<script type="text/javascript">
-	var mem_p_status_code="";
-	function pStatusDefault() {
-		var value=confirm("기존 인증정보가 초기화됩니다. 계속 하시겠습니까?");
-		if(value==true) {
-			document.getElementById("sky-form4").mem_p_status_code.value="M2002";
-			alert("번호가 변경되었습니다. 다시 인증해주세요.")
-		} else {
-			alert("취소되었습니다.");
-		}
-	}
-</script>
 <c:import url="/WEB-INF/views/user/common/utilImport.jsp"/>
 </head>
 <body>
@@ -102,7 +90,7 @@
 		                            <section>
 		                            	<label class="input">
 		                                	<i class="icon-append fa fa-phone"></i>
-		                                    <input type="text" name="mem_phone" placeholder="Phonenumber" value="${memberDto.mem_phone}" onChange="pStatusDefault()">
+		                                    <input type="text" name="mem_phone" placeholder="Phonenumber" value="${memberDto.mem_phone}">
 		                                    <b class="tooltip tooltip-top-right">회원님의 전화번호를 입력해주세요.</b>
 			                                <a class="btn-u" href="javascript:pStatusChange()">번호인증</a>
 											<input type="hidden" name="mem_p_status_code" value="${mem_p_status_code}">
