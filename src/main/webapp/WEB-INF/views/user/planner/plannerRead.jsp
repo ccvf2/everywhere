@@ -12,6 +12,34 @@
 	<!-- CSS Page Style -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 	<link rel="stylesheet" href="/assets/css/pages/shortcode_timeline2.css">
+	<style type="text/css">
+	.btn-share-group {
+		height: 70px;
+		padding: 15px 0;
+		border-bottom: 1px solid #ddd;
+		background: #eee;
+		border-radius: 10px 10px 0 0;
+		-webkit-border-radius: 10px 10px 0 0;
+		-moz-border-radius: 10px 10px 0 0;
+	}
+	.btn-bookmark {
+		border-left: 1px solid #ccc;
+		border-right: 1px solid #ccc;
+	}
+	.btn-share-group a {
+		display: block;
+		float: left;
+		width: 33.33%;
+		height: 45px;
+		line-height: 15px;
+		padding-top: 5px;
+		text-align: center;
+		color: #666;
+		text-decoration: none;
+		cursor: pointer;
+	}
+	
+	</style>
 	<script type="text/javascript">
 	function setBackground(image){
 		if(image != null){
@@ -64,16 +92,17 @@
 		<div class="row">
 			<!-- Begin Sidebar Menu -->
 			<div class="col-md-3">
-				<!--멤버프로필 사진 -->
-				<c:if test="${mem_object.mem_profile_photo != null || mem_object.mem_profile_photo != '' }">
-					<img class="img-responsive profile-img margin-bottom-20" src="${mem_object.mem_profile_photo}" alt="">
+				<!--글쓴이 정보 -->
+				${plannerWriter.mem_profile_photo }
+				<c:if test="${plannerWriter.mem_profile_photo != null || plannerWriter.mem_profile_photo != '' }">				
+					<img class="img-responsive profile-img margin-bottom-20" src="${plannerWriter.mem_profile_photo}" alt="">
 				</c:if>
-				<c:if test="${mem_object.mem_profile_photo == null || mem_object.mem_profile_photo == '' }">
+				<c:if test="${plannerWriter.mem_profile_photo == null || plannerWriter.mem_profile_photo == '' }">
 					<img class="img-responsive profile-img" src="/assets/img/team/img32-md.jpg" alt="">
 				</c:if>
 				<ul class="list-group sidebar-nav-v1 margin-bottom-20 active">
 					<li class="list-group-item list-toggle">
-						<a data-toggle="collapse" data-parent="#sidebar-nav" href="#collapse-buttons">${mem_object.mem_name}</a>
+						<a data-toggle="collapse" data-parent="#sidebar-nav" href="#collapse-buttons">${plannerWriter.mem_name}</a>
 						<ul id="collapse-buttons" class="collapse in">
 							<li>
 								<a href="shortcode_btn_general.html"><i class="fa fa-flask"></i> 마이페이지 이동</a>
@@ -84,6 +113,23 @@
 						</ul>
 					</li>
 				</ul>
+
+				
+				<div class="btn-share-group">
+					<a id="likeBtn" class="btn-like " title="좋아요">
+						<span><img src="https://d254i4serkgq8u.cloudfront.net/images/bg-btn-like.png" alt="" class="off"><img src="https://d254i4serkgq8u.cloudfront.net/images/bg-btn-like-on.png" alt="" class="on"><span class="plan-detail-view-like-count">0</span></span>
+						<span class="txt-info">추천</span>
+					</a><!-- 좋아요 -->
+					<a id="bookmarkBtn" class="btn-bookmark  " title="북마크">
+						<span><img src="https://d254i4serkgq8u.cloudfront.net/images/bg-btn-bookmark.png" alt="" class="off"><img src="https://d254i4serkgq8u.cloudfront.net/images/bg-btn-bookmark-on.png" alt="" class="on"><span class="plan-detail-view-bookmark-count">8</span></span>
+						<span class="txt-info">북마크</span>
+					</a><!-- 북마크 -->
+					<a id="customizeBtn" class="btn-customize " title="커스터마이즈">
+						<span><img src="https://d254i4serkgq8u.cloudfront.net/images/bg-btn-customize.png" alt="" class="off"><img src="https://d254i4serkgq8u.cloudfront.net/images/bg-btn-customize-on.png" alt="" class="on"><span class="plan-detail-view-scrap-count">1</span></span>
+						<span class="txt-info">커스터마이즈</span>
+					</a><!--커스터마이즈 -->
+				</div>
+
 				
 				<ul class="list-group sidebar-nav-v1 margin-bottom-20 active">
 					<li class="list-group-item list-toggle">

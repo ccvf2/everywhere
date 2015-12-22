@@ -22,8 +22,10 @@ import everywhere.com.mynetgear.ccvf2.comm.dto.commoncode.CommonCodeDto;
 import everywhere.com.mynetgear.ccvf2.comm.service.common.CommonFileIOService;
 import everywhere.com.mynetgear.ccvf2.comm.service.commoncode.CommonCodeService;
 import everywhere.com.mynetgear.ccvf2.comm.util.common.Constant;
+import everywhere.com.mynetgear.ccvf2.user.dao.member.MemberDao;
 import everywhere.com.mynetgear.ccvf2.user.dao.planner.PlannerDao;
 import everywhere.com.mynetgear.ccvf2.user.dao.spot.SpotDao;
+import everywhere.com.mynetgear.ccvf2.user.dto.member.MemberDto;
 import everywhere.com.mynetgear.ccvf2.user.dto.planner.ItemDto;
 import everywhere.com.mynetgear.ccvf2.user.dto.planner.MoneyDto;
 import everywhere.com.mynetgear.ccvf2.user.dto.planner.PlannerDto;
@@ -41,6 +43,8 @@ public class PlannerServiceImp implements PlannerService {
 	private CommonFileIOService commonFileIOService;
 	@Autowired
 	private CommonCodeService commonCodeService;
+	@Autowired
+	private MemberDao memberDao;
 	
 	@Value("${attach.item.path}")
 	private String itemPath;
@@ -106,7 +110,11 @@ public class PlannerServiceImp implements PlannerService {
 		HttpServletRequest request = (HttpServletRequest)map.get("request");
 		int planner_no = Integer.parseInt(request.getParameter("planner_no"));
 
-		PlannerDto plannerDto = plannerDao.getOnePlanner(planner_no);		
+		PlannerDto plannerDto = plannerDao.getOnePlanner(planner_no);
+
+		MemberDto plannerWriter = new MemberDto();
+		plannerWriter = memberDao.memberRead(plannerDto.getMem_no());
+
 		List<ItemDto> itemList = plannerDao.getItemList(planner_no);
 		double[] moneyTotal = new double[9];
 
@@ -143,8 +151,8 @@ public class PlannerServiceImp implements PlannerService {
 					fileList.add(fileIODto);
 				}
 				itemList.get(i).setItem_photoes(fileList);
-			}
-			
+			}			
+
 			List<MoneyDto> moneyList = plannerDao.getMoneyList(itemList.get(i).getItem_no());
 			itemList.get(i).setMoneyList(moneyList);
 			
@@ -175,6 +183,7 @@ public class PlannerServiceImp implements PlannerService {
 
 		mav.addObject("plannerDto", plannerDto);
 		mav.addObject("moneyTotal", moneyTotal);
+		mav.addObject("plannerWriter", plannerWriter);
 		mav.addObject("itemList", itemList);
 		mav.setViewName("user/planner/plannerRead");
 	}
