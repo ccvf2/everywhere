@@ -131,6 +131,7 @@ public interface MemberDao {
 	public List<MemberDto> getListTotalMember();
 	/**
 	 * @author 배성욱
+	 * @param dto 
 	 * @createDate 2015. 12. 20.
 	 * @described 비밀번호 일괄변환용 맴버목록
 	 * @return
