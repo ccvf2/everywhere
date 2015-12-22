@@ -168,4 +168,8 @@ public class Constant {
 	/**가계부 분류 코드: 기타*/
 	public static final String MONEY_ETC = "D0008";
 		
+	/**서비스페이지메인셋팅위치코드: 슬라이드이미지 뒷배경*/
+	public static final String SERVICE_SETTING_SPOT_BACKGROUNDIMG = "M8881";
+	/**서비스페이지메인셋팅위치코드: 슬라이드이미지 앞이미지*/
+	public static final String SERVICE_SETTING_SPOT_FRONTIMG = "M8882";
 }

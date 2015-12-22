@@ -26,4 +26,11 @@ public interface UserMainService {
 	 * @return
 	 */
 	public List<PlannerDto> getListPlanner();
+	/**
+	 * @author 배성욱
+	 * @createDate 2015. 12. 22.
+	 * @described 매소드의 용도를 적어주세요
+	 * @return
+	 */
+	public List<SettingMainDto> getOneForGroundImg();
 }

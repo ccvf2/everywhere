@@ -1,5 +1,7 @@
 package everywhere.com.mynetgear.ccvf2.user.dao.main;
 
+import java.util.List;
+
 import everywhere.com.mynetgear.ccvf2.admin.dto.settingmain.SettingMainDto;
 
 /**
@@ -16,4 +18,13 @@ public interface UserMainDao {
 	 * @return
 	 */
 	public SettingMainDto getOneBackGroundImg();
+	
+	
+	/**
+	 * @author 배성욱
+	 * @createDate 2015. 12. 22.
+	 * @described 매소드의 용도를 적어주세요
+	 * @return
+	 */
+	public List<SettingMainDto> getOneForGroundImg();
 }
