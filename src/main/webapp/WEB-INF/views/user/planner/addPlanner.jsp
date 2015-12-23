@@ -142,7 +142,7 @@ function spotReadPage(no) {
 		<!--Tag Box v4-->
 		<div class="col-md-9">
 			<div class="profile-body margin-bottom-20">
-				<form action="/user/planner/writePlanner.do" id="plannerform" class="sky-form" style="border:none;" onsubmit="checkPlanner(this)" method="post" enctype="multipart/form-data">
+				<form action="/user/planner/writePlanner.do" id="plannerform" class="sky-form" style="border:none;" onsubmit="return false;" method="post" enctype="multipart/form-data">
 					<fmt:formatDate var="start_date" pattern="yyyy-MM-dd" value="${plannerDto.start_date}"/>
 					<input type="hidden" name="planner_no" value="${plannerDto.planner_no}"/>
 					<input type="hidden" name="mem_no" value="${mem_object.mem_no}">
@@ -154,7 +154,6 @@ function spotReadPage(no) {
 								<b class="tooltip tooltip-top-right">여행에 대한 짧은 메모를 입력해주세요</b>
 							</label>
 							<div class="row" style="margin-bottom:5px;">
-							
 								<div class="col col-4">
 									<label class="input">
 										<i class="icon-append fa fa-calendar"></i>
@@ -198,9 +197,9 @@ function spotReadPage(no) {
 													<input type="hidden" id="${id_value}_spot_no" name="${id_value}_spot_no" value="0"/>
 												</div>
 												<div id="collapse_${id_value}" class="panel-collapse collapse">
-													<div id="${id_value}_note"class="panel-body" style="padding:0px">
+													<div id="${id_value}_note_div" class="panel-body" style="padding:0px">
 														<label class="textarea" style="margin:0">
-															<textarea style="border:0px" rows="3" name="${id_value}_note" placeholder="Write some notes.."></textarea>
+															<textarea style="border:0px" rows="3" id="${id_value}_note" name="${id_value}_note" placeholder="Write some notes.."></textarea>
 														</label>
 													</div>
 													<input type="hidden" id="${id_value}_money_count" name="${id_value}_money_count" value="0"/>
@@ -223,7 +222,7 @@ function spotReadPage(no) {
 								</ul>
 							</div>
 						</c:forEach>
-						<button type="submit" class="btn-u" id="submit_btn">Submit</button>
+						<button type="button" class="btn-u" id="submit_btn" onclick="checkPlanner()">Submit</button>
 					</form>
 				</div>
 			</div>
@@ -247,14 +246,14 @@ function spotReadPage(no) {
 									<i class="icon-note pull-right"></i>
 								</a>
 								<h4 class="panel-title">
-									<span>Add Spot</span>
+									<span>Drag spot to add</span>
 								</h4>
 								<input type="hidden" id="d0_item1_spot_no" name="d0_item1_spot_no" value="0"/>
 							</div>
 							<div id="collapse_d0_item1" class="panel-collapse collapse">
-								<div id="d0_item1_note"class="panel-body" style="padding:0px">
+								<div id="d0_item1_note_div" class="panel-body" style="padding:0px">
 									<label class="textarea" style="margin:0">
-										<textarea style="border:0px" rows="3" name="d0_item1_note" placeholder="Write some notes.."></textarea>
+										<textarea style="border:0px" rows="3" id="d0_item1_note" name="d0_item1_note" placeholder="Write some notes.."></textarea>
 									</label>
 								</div>
 								<input type="hidden" id="d0_item1_money_count" name="d0_item1_money_count" value="0"/>

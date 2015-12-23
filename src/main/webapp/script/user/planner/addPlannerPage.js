@@ -29,8 +29,19 @@ function setDroppable(){
 	});
 }
 
-function checkPlanner(plannerForm){
-	
+function checkPlanner(){
+	var day = $("#day_count").val();
+	for(var i= 1; i <= Number(day); i++){
+		var item_count = $("#d"+i+"_item_count").val();
+		for(var j = 1; j <= Number(item_count); j++){
+			var test = $("#d"+i+"_item"+j+"_note").val().replace(/ /g, '');
+			if($("#d"+i+"_item"+j+"_spot_no").val()=='0' && test == ''){
+				alert("day"+i+"의"+j+"번째가 공백입니다.");
+				return false;
+			}
+		}
+	}
+	return false;
 }
 
 var extensions = [".jpg", ".jpeg", ".bmp", ".gif", ".png"]; 
@@ -67,14 +78,13 @@ function addDay(day_count){
 		if(select == true){
 			//Item 용 레퍼런스 복사 후 name값 변경
 			for(var i = Number(before_day_count)+1; i <= Number(day_count.value); i++){
-				alert(i);
 				var html = $('#dayDiv').html();
 				var copy = "d"+i+"_item";
 				var newHtml = html.replace(/d0_item/g, copy);
-	
+
 				$("#submit_btn").before(newHtml);
+				$("#d"+i+"_items_date").text("Day " + i)
 			}
-			$("#d"+day_count.value+"_items_date").text("Day " + day_count.value)
 
 			setDroppable();
 
@@ -123,7 +133,7 @@ function addMoney(input_name){
 		moneyDiv = document.createElement("div");
 		moneyDiv.id = "money"+input_name;
 		moneyDiv.className  = "panel-body";
-		$("#"+input_name+"_note").after(moneyDiv);
+		$("#"+input_name+"_note_div").after(moneyDiv);
 	}
 
 	var div = document.createElement("div");
@@ -148,26 +158,36 @@ function addMoney(input_name){
 	moneySelect.name=input_name+"_money"+money_count.value +"_type_code";
 
 	var label = document.createElement("label");
-	label.className = "select";
+	var iTag = document.createElement("i");
+	label.className = "select col col-3";
 	for (i = 0; i < money_type.length; i++) {
 		var moneyOption = new Option(money_type[i], money_code[i]);
 		moneySelect.options.add(moneyOption);
 	}
 	label.appendChild(moneySelect)
+	label.appendChild(iTag);
 	div.appendChild(label);
 
+	var notelabel = document.createElement("label");
+	notelabel.className = "input col col-5";
 	var noteInput = document.createElement("input");
 	noteInput.type="text";
+	noteInput.className = "col col-5";
 	noteInput.name= input_name+"_money"+money_count.value+"_title";
 	noteInput.placeholder="예) 기념품";
-	div.appendChild(noteInput);
+	notelabel.appendChild(noteInput);
+	div.appendChild(notelabel);
 
+	var pricelabel = document.createElement("label");
+	pricelabel.className = "input col col-4";
 	var priceInput = document.createElement("input");
 	priceInput.style.marginLeft="10px";
 	priceInput.type="text";
+	priceInput.className = "col col-4";
 	priceInput.name= input_name+"_money"+money_count.value+"_price";
 	priceInput.placeholder="3000";
-	div.appendChild(priceInput);
+	pricelabel.appendChild(priceInput);
+	div.appendChild(pricelabel);
 
 	moneyDiv.appendChild(div);
 }
@@ -175,7 +195,7 @@ function addMoney(input_name){
 function addPhoto(input, input_name){
 	//input_name : d1_item1
 	if (input.files && input.files[0]) {
-		var isImg = checkExt(input.value);		
+		var isImg = checkExt(input.value);
 		if(isImg == true){
 			var photoDiv = document.getElementById(input_name+"_photo");
 			if(photoDiv == null){
