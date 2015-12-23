@@ -80,12 +80,7 @@ function spotListDisp(data){
 	$("#mCSB_1_container").empty(); 
 	$("#mCSB_1_container").prepend(str);
 	
-	$( "#spotItem > div" ).draggable({
-		appendTo: "body",
-		containment: "document",
-		revert: "invalid",
-		helper: "clone"
-	});
+	setDraggable();
 }
 
 //여기
@@ -101,7 +96,6 @@ function selectMoreSpotList(city){
 		readCityList(true);
 	}
 	var params = "country_code=" + countrycode + "&city_code=" + citycode + "&spot_type_code="+typecode+"&spot_page="+spot_page.value;
-	alert(params);
 	var url = "/user/spot/selectSpotListForPlanner.ajax?" + params;
 	$.ajax({
 		url:url,
@@ -130,12 +124,7 @@ function moreSpotListDisp(data){
 	}
 	$("#mCSB_1_container").append(str);
 	
-	$( "#spotItem > div" ).draggable({
-		appendTo: "body",
-		containment: "document",
-		revert: "invalid",
-		helper: "clone"
-	});
+	setDraggable();
 }
 //여기 끝
 

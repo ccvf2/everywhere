@@ -11,7 +11,6 @@
 		<result property="visitor_status_code" column="visitor_status_code"/>
 	</resultMap>
 	
-
 	<select id="visitorCount" parameterType="int" resultType="int">
 		select nvl(count(*), 0) from tbl_visitor where mate_mem_no=#{mem_no}
 	</select>

@@ -135,6 +135,8 @@ public class Constant {
 	public static final String FILE_TYPE_EMAIL = "F0004";
 	/** 파일 사용처 코드 : 회원 프로필 사진 */
 	public static final String FILE_TYPE_PROFILE = "F0005";
+	/** 파일 사용처 코드 : 스케줄 사진 */
+	public static final String FILE_TYPE_SCHEDULE = "F0006";
 	
 	
 
@@ -181,8 +183,8 @@ public class Constant {
 	/**이동할페이지: 로그인전 시도했던 페이지로 이동*/
 	public static final String CALLBACK_URL = "callback_url";
 	
-	/**북마크 분류 코드 : 플래너*/
-	public static final String BOOKMARK_TYPE_PLANNER = "E0001";
-	/**북마크 분류 코드 : 친구*/
-	public static final String BOOKMARK_TYPE_FRIEND = "E0002";
+	/**플래너 분류 코드 : 일정*/
+	public static final String SCHEDULE_TYPE_PLANNER = "E0001";
+	/**플래너 분류 코드 : 리뷰*/
+	public static final String SCHEDULE_TYPE_REVIEW = "E0002";
 }
