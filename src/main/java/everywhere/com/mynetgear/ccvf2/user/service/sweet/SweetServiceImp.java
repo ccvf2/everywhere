@@ -2,7 +2,6 @@ package everywhere.com.mynetgear.ccvf2.user.service.sweet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -36,30 +35,13 @@ public class SweetServiceImp implements SweetService {
 		sweetDto.setPlanner_no(Integer.parseInt(planner_no));
 		
 		int result = sweetDao.insertSweet(sweetDto);
+		int sweetTotalCount = sweetDao.getTotalSweet(sweetDto.getPlanner_no());
 		try {
 			response.setContentType("application/html;charset=utf8");
 			PrintWriter out = response.getWriter();
-			if(result > 0)
-				out.print(sweetDao.getTotalSweet(sweetDto.getPlanner_no()));
-			else
-				out.print(result);
+			out.print(result+","+sweetTotalCount);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-	}
-
-	@Override
-	public List<SweetDto> getListSweet(int mem_no) {
-		return sweetDao.getListSweet(mem_no);
-	}
-
-	@Override
-	public int isSweet(SweetDto sweetDto) {
-		return sweetDao.isSweet(sweetDto);
-	}
-
-	@Override
-	public int getTotalSweet(int planner_no) {
-		return sweetDao.getTotalSweet(planner_no);
 	}
 }
