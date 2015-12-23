@@ -6,6 +6,25 @@
 <meta charset="UTF-8">
 <title>마이페이지 Left</title>
 <script type="text/javascript" src="/assets/plugins/line-icons/icons-lte-ie7.js"></script>
+<script type="text/javascript">
+	function memberUpdate(mem_no) {
+		var makeDiv ="<div id='updateMemberInfo'></div>";
+		var requestURL="/user/member/memberUpdate.do?mem_no="+mem_no;
+		
+		$.ajax({
+			url : requestURL,
+			type : "GET",
+			dataType : "html",
+			success : function(data) {
+				$("body").append(makeDiv);
+				$("#memberUpdateForm").append(data)
+			},
+			error : function() {
+				//alert("목록 가져오기 실패");
+			}
+		});
+	}
+</script>
 <c:import url="/WEB-INF/views/common/jquery.jsp"/>
 
 </head>
@@ -86,15 +105,27 @@
 	        <li class="list-group-item">
 	            <a href="/user/myPage/friends.do?mem_no=${memberDto.mem_no}"><i class="fa fa-group"></i> 친구</a>
 	        </li>
+	        <li class="list-group-item">
+	            <a href="#"><i class="fa fa-cubes"></i><c:out value="나의 여행"/></a>
+	        </li>
+	        <li class="list-group-item">
+	            <a href="/user/visitor/visitorWrite.do?uandMe=S0001"><i class="fa fa-pencil-square-o"></i> 방명록</a>
+	        </li>
+		</c:if>
+		<c:if test="${memberDto.mem_no!=mem_object.mem_no}">
+	        <li class="list-group-item">
+	            <a href="#"><i class="fa fa-cubes"></i><c:out value="${memberDto.mem_name}님의 여행"/></a>
+	        </li>
+	        <li class="list-group-item">
+	            <a href="/user/visitor/visitorWrite.do?uandMe=S0002&mem_no=${memberDto.mem_no}">
+	            	<i class="fa fa-pencil-square-o"></i><c:out value="${memberDto.mem_name}님의 방명록"/>
+	      		</a>
+	        </li>
 		</c:if>
         
-        <li class="list-group-item">
-            <a href="#"><i class="fa fa-cubes"></i><c:out value="${memberDto.mem_name}님의 여행"/></a>
-        </li>
         
-        <li class="list-group-item">
-            <a href="/user/visitor/visitorWrite.do?mem_no=${memberDto.mem_no}"><i class="fa fa-pencil-square-o"></i> 방명록</a>
-        </li>
+        
+        
         <c:if test="${mateCheck==2}">
 	        <li class="list-group-item">
 	            <a href="#"><i class="fa fa-star-o"></i> 즐겨찾기</a>
@@ -103,10 +134,11 @@
 	            <a href="#"><i class="fa fa-comments"></i> 쪽지함</a>
 	        </li>
 	        <li class="list-group-item">
-	            <a href="#"><i class="fa fa-cog"></i> 정보수정</a>
+	            <a href="javascript:memberUpdate('${memberDto.mem_no}')"><i class="fa fa-cog"></i> 정보수정</a>
 	        </li>
         </c:if>
     </ul>
     <div class="margin-bottom-50"></div>
+    <div id="memberUpdateForm"></div>
 </body>
 </html>

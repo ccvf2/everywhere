@@ -43,8 +43,10 @@ public class VisitorController {
 		String uandMe=request.getParameter("uandMe");
 		
 		if(StringUtils.equals(uandMe,Constant.MYPAGE_CODE_M)){
+			//System.out.println("마이페이지로 이동");
 			visitorService.visitorWrite(mav);
 		}else{
+			//System.out.println("타회원 페이지로 이동");
 			visitorService.friendWrite(mav);
 		}
 		return mav;

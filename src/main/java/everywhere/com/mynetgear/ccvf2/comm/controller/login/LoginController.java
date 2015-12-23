@@ -57,7 +57,7 @@ public class LoginController {
 		//redirectView.setExposeModelAttributes(true);
 		//return new ModelAndView(redirectView);
 		mav.setViewName("redirect:"+ callback_url);
-		mav.addObject("alert_msg","로그인되었습니다.");
+		//mav.addObject("alert_msg","로그인되었습니다.");
 		return mav;
 	}
 

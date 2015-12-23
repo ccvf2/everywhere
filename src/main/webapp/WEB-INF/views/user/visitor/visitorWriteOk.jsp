@@ -10,13 +10,13 @@
 	<c:if test="${check>0}">
 		<script type="text/javascript">
 			alert("방명록이 등록 되었습니다.");
-			location.href="/user/visitor/visitorWrite.do?mem_no=10";
+			location.href="/user/visitor/visitorWrite.do?mem_no="+${mem_no};
 		</script>
 	</c:if>
 	<c:if test="${check==0}">
 		<script type="text/javascript">
 			alert("방명록이 등록되지 않았습니다. 다시 시도해주세요.");
-			location.href="/user/visitor/visitorWrite.do?mem_no=10";
+			location.href="/user/visitor/visitorWrite.do?mem_no="+${mem_no};
 		</script>
 	</c:if>
 </body>

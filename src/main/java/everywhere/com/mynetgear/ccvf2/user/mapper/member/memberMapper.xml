@@ -15,7 +15,8 @@
 	<select id="memberRead" parameterType="int" resultType="everywhere.com.mynetgear.ccvf2.user.dto.member.MemberDto">
 		select 
 			k.MEM_NO
-			, k.MEM_EMAIL
+			,k.MEM_EMAIL
+			,k.MEM_PWD
 			,k.MEM_NAME
 			,k.MEM_PHONE
 			,k.MEM_INTEREST
@@ -31,7 +32,11 @@
 	</select>
 	
 	<update id="memberUpdate" parameterType="everywhere.com.mynetgear.ccvf2.user.dto.member.MemberDto">
-		update tbl_member set mem_pwd=#{mem_pwd},mem_phone=#{mem_phone},mem_interest=#{mem_interest} where mem_no=#{mem_no}
+		update tbl_member 
+		set mem_pwd=#{mem_pwd}
+		,mem_phone=#{mem_phone}
+		,mem_interest=#{mem_interest} 
+		where mem_no=#{mem_no}
 	</update>
 	
 	<update id="memberDelete" parameterType="everywhere.com.mynetgear.ccvf2.user.dto.member.MemberDto">
@@ -127,8 +132,9 @@
 		<!-- update tbl_member set mem_pwd=#{mem_pwd} where mem_no=10 -->
 	</update>
 	
-	<!--  -->
+	<!-- 프로필사진 바꾸기 -->
 	<update id="updateProfilePhoto" parameterType="everywhere.com.mynetgear.ccvf2.user.dto.member.MemberDto">
 		update tbl_member set mem_profile_photo=#{mem_profile_photo} where mem_no=#{mem_no}
 	</update>
+
 </mapper>
