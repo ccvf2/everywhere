@@ -37,6 +37,8 @@
 				}, function() {
 					$("#profileP").text("프로필사진변경");
 					$("#updatePhoto").hide();
+					
+					$("#imgout").attr("src", $("#hidImg").attr("src")); 
 			});
 			
 			$("#mem_profile").change(function() {
@@ -69,10 +71,12 @@
 	
 	<c:choose>
 		<c:when test="${memberDto.mem_profile_photo==null}">
-			<c:set var="profile" value="/assets/img/team/img32-md.jpg"/>		
+			<c:set var="profile" value="/assets/img/team/img32-md.jpg"/>
+			<input type="hidden" id="hidImg" src="${profile}">	
 		</c:when>
 		<c:otherwise>
 			<c:set var="profile" value="/attatchFile/member/${memberDto.mem_profile_photo}"/>
+			<input type="hidden" id="hidImg" src="${profile}">
 		</c:otherwise>
 	</c:choose>
 	<c:if test="${memberDto.mem_no==mem_object.mem_no}">

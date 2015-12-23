@@ -102,9 +102,7 @@
 
     	<!-- Info Blokcs -->
     	<div class="row margin-bottom-5">
-            <!-- Latest Shots -->
-            <div class="col-md-4">
-    			<div class="headline"><h2>댓글이 많은 순</h2></div>
+        <div class="headline"><h2>댓글이 많은 순</h2></div>
 	        <div class="blog_masonry_3col" style="padding-bottom: 0px;">
 		        <div class="container content grid-boxes" style="padding-top: 0px; padding-bottom: 0px;">
 				<div>
@@ -112,8 +110,8 @@
 				</div>
  					<c:forEach var="list1" items="${list1}">
 		            <div class="col-md-4">
-		            <div class="grid-boxes-in">
-		                <img class="img-responsive" src="/assets/img/main/img3.jpg" alt="" style="width: 360px; height: 227px;">
+		            <div class="grid-boxes-in" style="height: 430px;">
+		                <img class="img-responsive" src="/attatchFile/planner/${list1.attach_file}" alt="" height="80%">
 		                <div class="grid-boxes-caption">
 		                    <h3><a href="/user/planner/readPlanner.do?planner_no=${list1.planner_no}">${list1.title}</a></h3>
 		                    <ul class="list-inline grid-boxes-news">
@@ -121,24 +119,27 @@
 		                        <li>|</li>
 		                        <li><i class="fa fa-clock-o"></i><fmt:formatDate pattern="yyyy-MM-dd" value="${list1.reg_date}"/></li>
 		                        <li>|</li>
-		                        <li><a href="#"><i class="fa fa-comments-o"></i> ${list1.reply_Count}</a></li>
+		                        <li><a href="#"><i class="fa fa-comments-o"></i><c:out value="${list1.reply_Count}" escapeXml="false"/></a></li>
 		                    </ul>
-		                    <p><c:out value="${list1.memo}"></c:out> </p>
+		                    <p>
+		                    	<c:out value="${fn:substring(list1.memo, 0,50)}" escapeXml="false"/>
+		                    	<c:if test="${fn:length(list1.memo) >50}">
+						        	…
+						        </c:if>
+		                    </p>
 		                </div>
 		            </div>
 		            </div>
 					</c:forEach>
 				</div>
 			</div>
-
-            </div><!--/col-md-4-->
-    	</div>
+        </div>
     	<!-- End Info Blokcs -->
+    	
+    	
     	<!-- Info Blokcs -->
     	<div class="row margin-bottom-5">
-            <!-- Latest Shots -->
-            <div class="col-md-4">
-    			<div class="headline"><h2>운영자 추천</h2></div>
+        <div class="headline"><h2>운영자 추천</h2></div>
 	        <div class="blog_masonry_3col" style="padding-bottom: 0px;">
 		        <div class="container content grid-boxes" style="padding-top: 0px; padding-bottom: 0px;">
 				<div>
@@ -146,8 +147,8 @@
 				</div>
  					<c:forEach var="list1" items="${list1}">
 		            <div class="col-md-4">
-		            <div class="grid-boxes-in">
-		                <img class="img-responsive" src="/assets/img/main/img3.jpg" alt="" style="width: 360px; height: 227px;">
+		            <div class="grid-boxes-in" style="height: 430px;">
+		                <img class="img-responsive" src="/attatchFile/planner/${list1.attach_file}" alt="" height="80%">
 		                <div class="grid-boxes-caption">
 		                    <h3><a href="/user/planner/readPlanner.do?planner_no=${list1.planner_no}">${list1.title}</a></h3>
 		                    <ul class="list-inline grid-boxes-news">
@@ -155,18 +156,21 @@
 		                        <li>|</li>
 		                        <li><i class="fa fa-clock-o"></i><fmt:formatDate pattern="yyyy-MM-dd" value="${list1.reg_date}"/></li>
 		                        <li>|</li>
-		                        <li><a href="#"><i class="fa fa-comments-o"></i> ${list1.reply_Count}</a></li>
+		                        <li><a href="#"><i class="fa fa-comments-o"></i><c:out value="${list1.reply_Count}" escapeXml="false"/></a></li>
 		                    </ul>
-		                    <p><c:out value="${list1.memo}"></c:out> </p>
+		                    <p>
+		                    	<c:out value="${fn:substring(list1.memo, 0,50)}" escapeXml="false"/>
+		                    	<c:if test="${fn:length(list1.memo) >50}">
+						        	…
+						        </c:if>
+		                    </p>
 		                </div>
 		            </div>
 		            </div>
 					</c:forEach>
 				</div>
 			</div>
-
-            </div><!--/col-md-4-->
-    	</div>
+        </div>
     	<!-- End Info Blokcs -->
 
 
