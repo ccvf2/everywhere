@@ -13,20 +13,22 @@ import everywhere.com.mynetgear.ccvf2.user.dto.visitor.VisitorDto;
 public interface VisitorDao {
 	/**
 	 * @author 김준호
+	 * @param mem_no 
 	 * @createDate 2015. 12. 10.
 	 * @described 방명록갯수
 	 * @return
 	 */
-	public int getVisitorCount();
+	public int getVisitorCount(int mem_no);
 	/**
 	 * @author 김준호
 	 * @createDate 2015. 12. 10.
 	 * @described 방명록리스트
 	 * @param startRow
 	 * @param endRow
+	 * @param mem_no 
 	 * @return
 	 */
-	public List<VisitorDto> getVisitorList(int startRow, int endRow);
+	public List<VisitorDto> getVisitorList(int startRow, int endRow, int mem_no);
 	/**
 	 * @author 김준호
 	 * @createDate 2015. 12. 11.

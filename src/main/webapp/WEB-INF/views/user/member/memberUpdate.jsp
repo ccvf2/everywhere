@@ -8,6 +8,11 @@
 <c:import url="/WEB-INF/views/common/jquery.jsp" />
 <script type="text/javascript">
 	var checked = false;
+	
+	$(function(){
+		$("#memberUpdateInfo").modal();
+	});
+	
 	function registerForm(form) {
 
 		//alert("ok1");
@@ -47,13 +52,12 @@
 <c:import url="/WEB-INF/views/user/common/utilImport.jsp"/>
 </head>
 <body>
-	<button class="btn-u" data-toggle="modal" data-target="#myModal">회원정보수정</button>
-	
-	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal fade" id="memberUpdateInfo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<form name="regForm" id="sky-form4" class="sky-form" action="/user/member/memberUpdate.do" method="post" onsubmit="return registerForm(this)">
 					<input type="hidden" name="mem_no" value="${memberDto.mem_no}" />
+					<input type="hidden" name="mem_p_status_code" value="${memberDto.mem_p_status_code}" />
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 						<h3 class="modal-title" id="myModalLabel4">회원정보수정</h3>
@@ -66,7 +70,8 @@
 									<section>
 										<label class="input">
 		                                	<i class="icon-append fa fa-envelope"></i>
-		                                	<input type="email" name="mem_email" id="email" value="${memberDto.mem_email}" disabled="disabled">
+		                                	<input type="email"  id="email" value="${memberDto.mem_email}" disabled="disabled">
+		                                	<input type="hidden" name="mem_email"  value="${memberDto.mem_email}">
 		                                	<b class="tooltip tooltip-top-right"></b>
 		                            	</label>
 	                                </section>
@@ -82,7 +87,8 @@
 		                            <section>
 		                            	<label class="input">
 		                                	<i class="icon-append fa fa-user"></i>
-		                                    <input type="text" name="mem_name" value="${memberDto.mem_name}" disabled="disabled">
+		                                    <input type="text" value="${memberDto.mem_name}" disabled="disabled">
+		                                    <input type="hidden" name="mem_name" value="${memberDto.mem_name}">
 		                                    <b class="tooltip tooltip-top-right"></b>
 		                                </label>
 		                            </section>

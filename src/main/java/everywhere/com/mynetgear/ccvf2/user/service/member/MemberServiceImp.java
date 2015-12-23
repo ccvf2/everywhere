@@ -18,7 +18,9 @@ import everywhere.com.mynetgear.ccvf2.comm.service.commoncode.CommonCodeService;
 import everywhere.com.mynetgear.ccvf2.comm.util.common.Constant;
 import everywhere.com.mynetgear.ccvf2.comm.util.common.SecurityUtil;
 import everywhere.com.mynetgear.ccvf2.user.dao.member.MemberDao;
+import everywhere.com.mynetgear.ccvf2.user.dao.planner.PlannerDao;
 import everywhere.com.mynetgear.ccvf2.user.dto.member.MemberDto;
+import everywhere.com.mynetgear.ccvf2.user.dto.planner.PlannerDto;
 
 /**
  * @author 김준호
@@ -32,6 +34,9 @@ public class MemberServiceImp implements MemberService {
 	private MemberDao memberDao;
 	@Autowired
 	private CommonCodeService commonCodeService;
+	@Autowired
+	private PlannerDao plannerDao;
+	
 
 	@Override
 	public void emailCheck(ModelAndView mav) {
@@ -109,25 +114,20 @@ public class MemberServiceImp implements MemberService {
 	public void memberUpdate(ModelAndView mav) {
 		Map<String, Object> map=mav.getModelMap();
 		HttpServletRequest request=(HttpServletRequest)map.get("request");
-		MemberDto memberDto=(MemberDto)map.get("memberDto");
 		
 		int mem_no=Integer.parseInt(request.getParameter("mem_no"));
-		System.out.println("memberService update mem_no:"+mem_no);
-		memberDto.setMem_no(mem_no);
+
+		MemberDto memberDto=memberDao.memberRead(mem_no);
 		
-		memberDto=memberDao.memberRead(mem_no);
-		System.out.println("memberService update memberDto:"+memberDto.toString());
-		List<CommonCodeDto> list=commonCodeService.getListCodeGroup("I0001");
+		memberDto=memberDao.memberRead(memberDto.getMem_no());
+		memberDto.setMem_pwd(null);
 		
-		mav.addObject("interestList", list);
 		mav.addObject("memberDto", memberDto);
-		mav.setViewName("/user/member/memberUpdate");
 	}
 
 	@Override
 	public void memberUpdateOk(ModelAndView mav) {
 		Map<String, Object> map=mav.getModelMap();
-		HttpServletRequest request=(HttpServletRequest)map.get("request");
 		MemberDto memberDto=(MemberDto)map.get("memberDto");
 		
 		if(!memberDto.getMem_p_status_code().equals("M2001")) {
@@ -143,11 +143,7 @@ public class MemberServiceImp implements MemberService {
 		int check=memberDao.memberUpdate(memberDto);
 		System.out.println("memberService updateOk check:"+check);
 		
-		int mem_no=Integer.parseInt(request.getParameter("mem_no"));
-		memberDto=memberDao.memberRead(mem_no);
-		
 		mav.addObject("check", check);
-		mav.addObject("memberDto", memberDto);
 		mav.setViewName("/user/member/memberUpdateOk");
 	}
 

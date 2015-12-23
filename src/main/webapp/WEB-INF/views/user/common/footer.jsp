@@ -10,7 +10,7 @@
 <link rel="stylesheet" href="/resources/demos/style.css">
 <script type="text/javascript" src="/script/common/alert.js"></script> -->
 
-
+</head>
 <script type="text/javascript">
 //everywhereAlert("제목","내용푸터에서 실행");
 </script>
