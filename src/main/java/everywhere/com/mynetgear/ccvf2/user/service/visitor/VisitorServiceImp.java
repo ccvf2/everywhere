@@ -52,6 +52,8 @@ public class VisitorServiceImp implements VisitorService {
 		int startRow = (currentPage - 1) * boardSize + 1;
 		int endRow = currentPage * boardSize;
 		
+		System.out.println("-----------------------------\n-- currentPage : " + currentPage + " , startRow : " + startRow + " , endRow : " + endRow);
+		
 		int count=visitorDao.getVisitorCount(memberDto.getMem_no());
 		System.out.println("VisitorService write count:"+count);
 			
@@ -61,14 +63,9 @@ public class VisitorServiceImp implements VisitorService {
 			System.out.println("VisitorService write visitorList:"+visitorList.size());
 		}
 		
-<<<<<<< HEAD
-=======
-		
 		memberDto=memberDao.memberRead(memberDto.getMem_no());
 		
-		
 		mav.addObject("memberDto", memberDto);
->>>>>>> 8d9183ff71dd9b065ecd2f5cd9c021d4c1bf5b8f
 		mav.addObject("mateCheck", 2);
 		mav.addObject("visitorList", visitorList);
 		mav.addObject("count", count);
@@ -124,12 +121,6 @@ public class VisitorServiceImp implements VisitorService {
 		mav.addObject("currentPage", currentPage);
 		mav.setViewName("/user/visitor/visitorWrite");
 	}
-	
-	
-	
-	
-	
-	
 
 	@Override
 	public void visitorWriteOk(ModelAndView mav) {
@@ -209,57 +200,4 @@ public class VisitorServiceImp implements VisitorService {
 		mav.addObject("check", check);
 		mav.setViewName("/user/visitor/visitorDelete");
 	}
-<<<<<<< HEAD
-
-	@Override
-	public void friendWrite(ModelAndView mav) {
-		Map<String, Object> map=mav.getModelMap();
-		HttpServletRequest request=(HttpServletRequest)map.get("request");
-		int mate_no=Integer.parseInt(request.getParameter("mem_no"));
-		
-		MemberDto memberDto = memberDao.memberRead(mate_no);
-		
-		HttpSession session = request.getSession();
-		MemberDto myDto=(MemberDto) session.getAttribute(Constant.SYNN_LOGIN_OBJECT);
-		
-		int mem_no=myDto.getMem_no();
-		
-		HashMap<String, Integer> mateMap=new HashMap<String, Integer>();
-		
-		mateMap.put("mem_no", mem_no);
-		mateMap.put("mate_no", mate_no);
-		
-		int mateCheck=memberDao.getMateCheck(mateMap);
-		
-		String pageNumber=request.getParameter("pageNumber");
-		if(pageNumber==null) pageNumber="1";
-		
-		int currentPage=Integer.parseInt(pageNumber);
-		
-		int boardSize=3;
-		
-		int startRow=(currentPage-1)*boardSize+1; 
-		int endRow=currentPage*boardSize;
-		
-		int count=visitorDao.getVisitorCount();
-		System.out.println("VisitorService write count:"+count);
-		
-		List<VisitorDto> visitorList=null;
-		if(count>0) {
-			visitorList=visitorDao.getVisitorList(startRow, endRow);
-		}
-		System.out.println("VisitorService write visitorList:"+visitorList.size());
-		System.out.println("VisitorService write mateCheck:"+mateCheck);
-		
-		mav.addObject("mateCheck", mateCheck);
-		mav.addObject("memberDto", memberDto);
-		mav.addObject("visitorList", visitorList);
-		mav.addObject("count", count);
-		mav.addObject("boardSize", boardSize);
-		mav.addObject("currentPage", currentPage);
-		mav.setViewName("/user/visitor/visitorWrite");	
-	}
-
-=======
->>>>>>> 8d9183ff71dd9b065ecd2f5cd9c021d4c1bf5b8f
 }
