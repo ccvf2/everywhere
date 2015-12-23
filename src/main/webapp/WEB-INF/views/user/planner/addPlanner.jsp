@@ -62,17 +62,6 @@ function spotReadPage(no) {
 		<div class="row">
 		<!--Left Sidebar-->
 			<div class="col-md-3 md-margin-bottom-40">
-				<img class="img-responsive profile-img margin-bottom-20" src="/assets/img/team/img32-md.jpg" alt="">
-
-				<ul class="list-group sidebar-nav-v1 margin-bottom-40" id="sidebar-nav-1">
-					<li class="list-group-item">
-						<a href="page_profile.html"><i class="fa fa-bar-chart-o"></i> Overall</a>
-					</li>
-					<li class="list-group-item">
-						<a href="page_profile_me.html"><i class="fa fa-user"></i> Profile</a>
-					</li>
-				</ul>
-
 				<!--Notification-->
 				<div class="tag-box tag-box-v4 rounded-2x margin-bottom-20" style="padding : 7px;">
 					<div class="panel-heading-v2 overflow-h">
@@ -153,7 +142,7 @@ function spotReadPage(no) {
 		<!--Tag Box v4-->
 		<div class="col-md-9">
 			<div class="profile-body margin-bottom-20">
-				<form action="/user/planner/writePlanner.do" id="sky-form" class="sky-form" style="border:none;" onsubmit="" method="post" enctype="multipart/form-data">
+				<form action="/user/planner/writePlanner.do" id="plannerform" class="sky-form" style="border:none;" onsubmit="checkPlanner(this)" method="post" enctype="multipart/form-data">
 					<fmt:formatDate var="start_date" pattern="yyyy-MM-dd" value="${plannerDto.start_date}"/>
 					<input type="hidden" name="planner_no" value="${plannerDto.planner_no}"/>
 					<input type="hidden" name="mem_no" value="${mem_object.mem_no}">
@@ -164,7 +153,8 @@ function spotReadPage(no) {
 								<textarea name="planner_memo" rows="5" placeholder="부산으로 떠나는 즐거운 여행"></textarea>
 								<b class="tooltip tooltip-top-right">여행에 대한 짧은 메모를 입력해주세요</b>
 							</label>
-							<div class="row" style="margin-bottom:5px;">   
+							<div class="row" style="margin-bottom:5px;">
+							
 								<div class="col col-4">
 									<label class="input">
 										<i class="icon-append fa fa-calendar"></i>
@@ -179,7 +169,7 @@ function spotReadPage(no) {
 								</div>
 								<div class="col col-2 pull-right">
 									<label class="input">
-										<i class="icon-picture input input-file" style="font-size:23px" onclick="addPhoto(this,'${id_value}')">
+										<i data-toggle="tooltip" title="배경이미지 수정" class="icon-picture input input-file" style="font-size:23px" onclick="addPhoto(this,'${id_value}')"> 
 											<div class="button" style="background-color:rgba(255, 255, 255, 0);"><input type="file" name="attach_file" onchange="addPlannerPhoto(this)" accept="image/*" size="0"/></div>
 										</i>
 									</label>
@@ -203,7 +193,7 @@ function spotReadPage(no) {
 														<i class="icon-note pull-right"></i>
 													</a>
 													<h4 class="panel-title">
-														<span>Add Spot</span>
+														<span>Drag spot to add</span>
 													</h4>
 													<input type="hidden" id="${id_value}_spot_no" name="${id_value}_spot_no" value="0"/>
 												</div>
@@ -216,11 +206,11 @@ function spotReadPage(no) {
 													<input type="hidden" id="${id_value}_money_count" name="${id_value}_money_count" value="0"/>
 													<div class="project-share">
 														<ul class="list-inline comment-list-v2 pull-right">
-															<li><i class="icon-hourglass" style="font-size:23px" onclick="addTime('${id_value}')"></i></li>
-															<li><i class="icon-picture input input-file" style="font-size:23px" onclick="addPhoto(this,'${id_value}')">
+															<li><i data-toggle="tooltip" title="시간정보 추가" class="icon-hourglass" style="font-size:23px" onclick="addTime('${id_value}')"></i></li>
+															<li><i data-toggle="tooltip" title="사진 추가" class="icon-picture input input-file" style="font-size:23px" onclick="addPhoto(this,'${id_value}')">
 															<div class="button" style="background-color:rgba(255, 255, 255, 0);"><input type="file" name="${id_value}_attach_photoes" onchange="addPhoto(this,'${id_value}')" accept="image/*"/></div>
 																</i></li>
-															<li><i class="icon-credit-card" style="font-size:23px" onclick="addMoney('${id_value}')"></i></li>
+															<li><i data-toggle="tooltip" title="가계부 추가" class="icon-credit-card" style="font-size:23px" onclick="addMoney('${id_value}')"></i></li>
 														</ul>
 													</div>
 												</div>
@@ -229,7 +219,7 @@ function spotReadPage(no) {
 									</li>
 								</ol>
 								<ul class="bs-glyphicons">	 
-									<li style="width:50%; height:100%; padding:0px; border: 0px; text-align: right"><span class="glyphicon glyphicon-plus-sign" onclick="addItem('d${i}_item')"></span></li> 					 
+									<li style="width:50%; height:100%; padding:0px; border: 0px; text-align: right"><span data-toggle="tooltip" title="일정 추가" class="glyphicon glyphicon-plus-sign" onclick="addItem('d${i}_item')"></span></li> 					 
 								</ul>
 							</div>
 						</c:forEach>
@@ -270,11 +260,11 @@ function spotReadPage(no) {
 								<input type="hidden" id="d0_item1_money_count" name="d0_item1_money_count" value="0"/>
 								<div class="project-share">
 									<ul class="list-inline comment-list-v2 pull-right">
-										<li><i class="icon-hourglass" style="font-size:23px" onclick="addTime('d0_item1')"></i></li>
-										<li><i class="icon-picture input input-file" style="font-size:23px" onclick="addPhoto(this,'d0_item1')">
+										<li><i data-toggle="tooltip" title="시간정보 추가" class="icon-hourglass" style="font-size:23px" onclick="addTime('d0_item1')"></i></li>
+										<li><i data-toggle="tooltip" title="사진 추가" class="icon-picture input input-file" style="font-size:23px" onclick="addPhoto(this,'d0_item1')">
 										<div class="button" style="background-color:rgba(255, 255, 255, 0);"><input type="file" name="d0_item1_attach_photoes" onchange="addPhoto(this,'d0_item1')" accept="image/*"/></div>
 										</i></li>
-										<li><i class="icon-credit-card" style="font-size:23px" onclick="addMoney('d0_item1')"></i></li>
+										<li><i data-toggle="tooltip" title="가계부 추가" class="icon-credit-card" style="font-size:23px" onclick="addMoney('d0_item1')"></i></li>
 									</ul>
 								</div>
 							</div>
@@ -283,7 +273,7 @@ function spotReadPage(no) {
 				</li>
 			</ol>
 			<ul class="bs-glyphicons">	 
-				<li style="width:50%; height:100%; padding:0px; border: 0px; text-align: right"><span class="glyphicon glyphicon-plus-sign" onclick="addItem('d0_item')"></span></li>
+				<li style="width:50%; height:100%; padding:0px; border: 0px; text-align: right"><span data-toggle="tooltip" title="일정 추가" class="glyphicon glyphicon-plus-sign" onclick="addItem('d0_item')"></span></li>
 			</ul>
 		</div>
 	</div>

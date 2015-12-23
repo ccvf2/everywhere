@@ -2,13 +2,20 @@
 * 
 */
 $(function() {
+	setDraggable()
+	setDroppable();
+});
+
+function setDraggable(){
 	$( "#spotItem > div" ).draggable({
 		appendTo: "body",
 		containment: "document",
 		revert: "invalid",
 		helper: "clone"
 	});
+}
 
+function setDroppable(){
 	$( ".dropItem" ).droppable({
 		accept: "#spotItem > div",
 		activeClass: "ui-state-hover",
@@ -20,7 +27,11 @@ $(function() {
 			$( "<div></div>" ).html( ui.draggable.html() ).appendTo( $( this ));
 		}
 	});
-});
+}
+
+function checkPlanner(plannerForm){
+	
+}
 
 var extensions = [".jpg", ".jpeg", ".bmp", ".gif", ".png"]; 
 function checkExt(fileName){
@@ -65,18 +76,8 @@ function addDay(day_count){
 			}
 			$("#d"+day_count.value+"_items_date").text("Day " + day_count.value)
 
-			$( ".dropItem" ).droppable({
-				accept: "#spotItem > div",
-				activeClass: "ui-state-hover",
-				hoverClass: "ui-state-active",
-				drop: function( event, ui ) {
-					$(event['target']).droppable('disable');
-					$( this ).find("input").val(ui.draggable.attr('id').replace("_item",""));
-					$( this ).find( "span" ).remove();
-					$( "<div></div>" ).html( ui.draggable.html() ).appendTo( $( this ));
-				}
-			});
-			
+			setDroppable();
+
 			$("#before_day_count").val(day_count.value);
 		}else{
 			day_count.value = before_day_count;
@@ -110,17 +111,7 @@ function addItem(input_name){
 
 	$("#"+input_name+"_ol").append(newHtml);
 
-	$( ".dropItem" ).droppable({
-		accept: "#spotItem > div",
-		activeClass: "ui-state-hover",
-		hoverClass: "ui-state-active",
-		drop: function( event, ui ) {
-			$(event['target']).droppable('disable');
-			$( this ).find("input").val(ui.draggable.attr('id').replace("_item",""));
-			$( this ).find( "span" ).remove();
-			$( "<div></div>" ).html( ui.draggable.html() ).appendTo( $( this ));
-		}
-	});
+	setDroppable();
 }
 
 function addMoney(input_name){
