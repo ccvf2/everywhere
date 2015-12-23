@@ -106,7 +106,7 @@
 						<fmt:parseNumber var="result" value="${(currentPage-1)/pageBlock}" integerOnly="true"/>
 						<c:set var="startPage" value="${result*pageBlock+1}"/>
 						<c:set var="endPage" value="${startPage+pageBlock-1}"/>
-						
+						count : ${count} <br/>
 						startPage : ${startPage}<br/>
 						endPage : ${endPage}<br/>
 						currentPage : ${currentPage}<br/>
@@ -122,9 +122,11 @@
 						<nav>
 						  <ul class="pagination">
 						  	<c:if test="${startPage > pageBlock}">
-							  	<a href="/user/visitor/visitorWrite.do?pageNumber=${currentPage-pageBlock}" aria-label="Previous">
-							        <span aria-hidden="true">&laquo;</span>
-						     	</a>
+							  	<li>
+								  	<a href="/user/visitor/visitorWrite.do?uandMe=S0001&mem_no=${memberDto.mem_no}&pageNumber=${currentPage-pageBlock}" aria-label="Previous">
+								        <span aria-hidden="true">&laquo;</span>
+							     	</a>
+						     	</li>
 							</c:if>
 						    <c:forEach var="i" begin="${startPage}" end="${endPage}">
 								 <c:if test="${i!=currentPage}">
@@ -137,7 +139,7 @@
 							
 					  		<c:if test="${endPage < pageCount }">
 					  			<li>
-							      <a href="/user/visitor/visitorWrite.do?uandMe=S0001&mem_no=${memberDto.mem_no}&pageNumber=${currentPage+pageBlock}" aria-label="Next">
+							      <a href="/user/visitor/visitorWrite.do?uandMe=S0001&mem_no=${memberDto.mem_no}&pageNumber=${startPage+pageBlock}" aria-label="Next">
 							        <span aria-hidden="true">&raquo;</span>
 							      </a>
 							    </li>

@@ -51,16 +51,13 @@ public class VisitorServiceImp implements VisitorService {
 		int currentPage = Integer.parseInt(pageNumber);
 		int startRow = (currentPage - 1) * boardSize + 1;
 		int endRow = currentPage * boardSize;
-		
-		System.out.println("-----------------------------\n-- currentPage : " + currentPage + " , startRow : " + startRow + " , endRow : " + endRow);
+
 		
 		int count=visitorDao.getVisitorCount(memberDto.getMem_no());
-		System.out.println("VisitorService write count:"+count);
 			
 		List<VisitorDto> visitorList=null;
 		if(count>0) {
 			visitorList=visitorDao.getVisitorList(startRow, endRow, memberDto.getMem_no());
-			System.out.println("VisitorService write visitorList:"+visitorList.size());
 		}
 		
 		memberDto=memberDao.memberRead(memberDto.getMem_no());
