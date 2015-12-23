@@ -22,15 +22,16 @@ public class VisitorDaoImp implements VisitorDao {
 	private SqlSessionTemplate sqlTemplate;
 
 	@Override
-	public int getVisitorCount() {
-		return sqlTemplate.selectOne("everywhere.com.mynetgear.ccvf2.user.mapper.visitor.visitorCount");
+	public int getVisitorCount(int mem_no) {
+		return sqlTemplate.selectOne("everywhere.com.mynetgear.ccvf2.user.mapper.visitor.visitorCount", mem_no);
 	}
 
 	@Override
-	public List<VisitorDto> getVisitorList(int startRow, int endRow) {
+	public List<VisitorDto> getVisitorList(int startRow, int endRow, int mem_no) {
 		HashMap<String, Object> hMap=new HashMap<String, Object>();
 		hMap.put("startRow", startRow);
 		hMap.put("endRow", endRow);
+		hMap.put("mate_mem_no", mem_no);
 		hMap.put("visitor_status_code", Constant.SYNB_YN_Y);
 		
 		return sqlTemplate.selectList("everywhere.com.mynetgear.ccvf2.user.mapper.visitor.visitorList", hMap);

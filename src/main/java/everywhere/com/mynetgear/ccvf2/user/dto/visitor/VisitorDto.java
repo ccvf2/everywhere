@@ -14,7 +14,14 @@ public class VisitorDto {
 	private String visitor_content;      // 글내용
 	private Date visitor_write_date;     // 작성일
 	private String visitor_status_code;  // 글상태
+	private int mate_no;				 // 받는 사람 번호
 	
+	public int getMate_no() {
+		return mate_no;
+	}
+	public void setMate_no(int mate_no) {
+		this.mate_no = mate_no;
+	}
 	public int getVisitor_no() {
 		return visitor_no;
 	}
