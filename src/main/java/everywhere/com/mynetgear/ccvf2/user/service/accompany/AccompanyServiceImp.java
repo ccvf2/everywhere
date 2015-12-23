@@ -134,9 +134,13 @@ public class AccompanyServiceImp implements AccompanyService {
 				// 파일 쓰기를 위해 시퀀스를 가져온다.
 				int accompany_no_nextSeq = accompanyDao.getAccompanyNextSeq();
 				accompanyDto.setAccompany_no(accompany_no_nextSeq);
-
-				CommonFileIODto commonFileIODto = commonFileIOService.requestWriteFileAndDTO(request, "accompany_file",
-						accompanyPath);
+				
+				CommonFileIODto commonFileIODto= null;
+				if(request.getParameter("accompany_file") != null) {
+					commonFileIODto = commonFileIOService.requestWriteFileAndDTO(request, "accompany_file",
+							accompanyPath);
+				}
+				
 
 				if (commonFileIODto != null) {
 					commonFileIODto.setType_code(Constant.FILE_TYPE_ACCOMPANY);
@@ -145,6 +149,8 @@ public class AccompanyServiceImp implements AccompanyService {
 					System.out.println("accompanyPhoto : " + accompanyPhoto);
 					accompanyDto.setAttach_file("" + accompanyPhoto);
 				}
+			
+				
 
 				check = accompanyDao.insertAccompany(accompanyDto);
 				EverywhereAspect.logger.info(EverywhereAspect.logMsg + check);

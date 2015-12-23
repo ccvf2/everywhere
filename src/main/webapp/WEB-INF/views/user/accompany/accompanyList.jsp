@@ -127,7 +127,7 @@
                 	<div class="news-v3 bg-color-white margin-bottom-30">
                         <div class="news-v3-in">
                         
-                        	<div class="tab-v2">
+                        	<%-- <div class="tab-v2">
 			                    <ul class="nav nav-tabs">
 			                    	<li class="active"><a href="#" data-toggle="tab">전체</a></li>
 			                    	<c:forEach var="postType" items="${postTypeList}">
@@ -135,7 +135,7 @@
 			                    	</c:forEach>
 			                    </ul>                
 			                </div>
-                        
+                         --%>
 		                	<!-- 게시판 리스트 시작 -->
 		                	<select id="accompany_status_code" onchange="statusFunc()">
 		                		<option value=""  disabled selected style="display:none;">모두</option>
