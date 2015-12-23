@@ -135,6 +135,8 @@ public class Constant {
 	public static final String FILE_TYPE_EMAIL = "F0004";
 	/** 파일 사용처 코드 : 회원 프로필 사진 */
 	public static final String FILE_TYPE_PROFILE = "F0005";
+	/** 파일 사용처 코드 : 스케줄 사진 */
+	public static final String FILE_TYPE_SCHEDULE = "F0006";
 	
 	
 

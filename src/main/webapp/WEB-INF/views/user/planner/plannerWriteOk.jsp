@@ -9,12 +9,8 @@
 <body>
 	<c:if test="${check>0}">
 		<script type="text/javascript">
-		var r = confirm("수정 완료 되었니?");
-		if (r == true) {
-			location.href="/user/planner/readPlanner.do?planner_no=${planner_no}";
-		} else {
-			location.href="/user/planner/writePlanner.do?planner_no=${planner_no}";
-		}
+		alert("스케쥴이 등록되었습니다.");
+		location.href="/user/planner/readPlanner.do?planner_no=${planner_no}";
 		</script>
 	</c:if>
 	<c:if test="${check==0}">

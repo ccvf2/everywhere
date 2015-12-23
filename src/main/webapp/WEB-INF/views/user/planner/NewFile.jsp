@@ -23,7 +23,7 @@
 	<div class="modal-dialog">
 		<div class="modal-content">
 		<form action="/user/planner/plannerCreate.do" method="post" onsubmit="return plannerForm(this)" >
-		<input type="hidden" name="mem_no" value="64">
+		<input type="hidden" name="mem_no" value="${mem_object.mem_no}">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal"
 					aria-label="Close">

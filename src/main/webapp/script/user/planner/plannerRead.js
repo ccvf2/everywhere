@@ -109,3 +109,7 @@ function setBackground(image, planner_no, checkSweet, checkBookMark){
 		$(".fa-bookmark-o").hide();
 	}
 }
+
+function deletePlanner(planner_no){
+	var url = "/user/planner/deletePlanner.do?planner_no="+planner_no;
+}

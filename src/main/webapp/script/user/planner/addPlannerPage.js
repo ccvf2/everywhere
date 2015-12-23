@@ -41,7 +41,7 @@ function checkPlanner(){
 			}
 		}
 	}
-	return false;
+	document.getElementById("plannerform").submit();
 }
 
 var extensions = [".jpg", ".jpeg", ".bmp", ".gif", ".png"]; 

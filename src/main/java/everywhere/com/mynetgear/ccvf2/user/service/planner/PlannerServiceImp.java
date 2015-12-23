@@ -34,7 +34,6 @@ import everywhere.com.mynetgear.ccvf2.user.dto.planner.MoneyDto;
 import everywhere.com.mynetgear.ccvf2.user.dto.planner.PlannerDto;
 import everywhere.com.mynetgear.ccvf2.user.dto.spot.SpotDto;
 import everywhere.com.mynetgear.ccvf2.user.dto.sweet.SweetDto;
-import everywhere.com.mynetgear.ccvf2.user.service.sweet.SweetService;
 
 @Component
 public class PlannerServiceImp implements PlannerService {
@@ -203,11 +202,16 @@ public class PlannerServiceImp implements PlannerService {
 		int bookmark_count = 0;
 		
 		// 해당 Planner의 추천, 즐겨찾기 등 버튼 활성화 정보를 가저오기
-		// 로그인 안한 사람은 숫자 -1, 로그인 했으나 이미 추천&즐겨찾기 안했으면 숫자 0, 했으면 숫자 1가 리턴된다.
+		// 로그인 안한 사람은 숫자 -1, 
 		int checkSweet = -1;
 		int checkBookMark = -1;
-		// 로그인을 안했거나, 글쓴이가 로그인한 사람과 동일할때를 제외
-		if(mem_no != plannerDto.getMem_no() && mem_no != 0){
+		// 로그인 한 사람과 글 쓴 사람이 동일하면 숫자 0
+		if(mem_no == plannerDto.getMem_no()){
+			checkSweet = 0;
+			checkBookMark = 0;
+		}
+		//로그인 했으나 이미 추천&즐겨찾기 안했으면 숫자 0, 했으면 숫자 1가 리턴된다.
+		if(mem_no != 0 && mem_no != plannerDto.getMem_no()){
 			SweetDto sweetDto = new SweetDto();
 			sweetDto.setMem_no(mem_no);
 			sweetDto.setPlanner_no(planner_no);
@@ -296,7 +300,7 @@ public class PlannerServiceImp implements PlannerService {
 		
 		CommonFileIODto commonFileIODto = commonFileIOService.requestWriteFileAndDTO(request, "attach_file", plannerPath);
 		if(commonFileIODto != null){
-			commonFileIODto.setType_code(Constant.FILE_TYPE_ITEM);
+			commonFileIODto.setType_code(Constant.FILE_TYPE_SCHEDULE);
 			commonFileIODto.setWrite_no(planner_no);
 			String planner_photo_num = commonFileIOService.insertFileInfo(commonFileIODto) + "";
 			plannerDto.setAttach_file(planner_photo_num);
