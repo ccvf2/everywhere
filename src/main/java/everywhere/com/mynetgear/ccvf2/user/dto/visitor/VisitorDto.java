@@ -14,14 +14,8 @@ public class VisitorDto {
 	private String visitor_content;      // 글내용
 	private Date visitor_write_date;     // 작성일
 	private String visitor_status_code;  // 글상태
-	private int mate_no;				 // 받는 사람 번호
+	private int mate_mem_no;			 // 받는 사람 번호
 	
-	public int getMate_no() {
-		return mate_no;
-	}
-	public void setMate_no(int mate_no) {
-		this.mate_no = mate_no;
-	}
 	public int getVisitor_no() {
 		return visitor_no;
 	}
@@ -52,10 +46,16 @@ public class VisitorDto {
 	public void setVisitor_status_code(String visitor_status_code) {
 		this.visitor_status_code = visitor_status_code;
 	}
-	public String toString() {
-		String sentence="visitor_no:"+visitor_no+"\nmem_no:"+mem_no+"\nvisitor_content:"+visitor_content
-				       +"\nvisitor_write_date:"+visitor_write_date+"\nvisitor_status_code:"+visitor_status_code;
-		return sentence;
+	public int getMate_mem_no() {
+		return mate_mem_no;
 	}
-	
+	public void setMate_mem_no(int mate_mem_no) {
+		this.mate_mem_no = mate_mem_no;
+	}
+	@Override
+	public String toString() {
+		return "VisitorDto [visitor_no=" + visitor_no + ", mem_no=" + mem_no + ", visitor_content=" + visitor_content
+				+ ", visitor_write_date=" + visitor_write_date + ", visitor_status_code=" + visitor_status_code
+				+ ", mate_mem_no=" + mate_mem_no + "]";
+	}
 }

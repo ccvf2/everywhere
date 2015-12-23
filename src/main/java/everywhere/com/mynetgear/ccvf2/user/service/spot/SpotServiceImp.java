@@ -24,6 +24,7 @@ import everywhere.com.mynetgear.ccvf2.comm.service.common.CommonFileIOService;
 import everywhere.com.mynetgear.ccvf2.comm.service.commoncode.CommonCodeService;
 import everywhere.com.mynetgear.ccvf2.comm.util.common.Constant;
 import everywhere.com.mynetgear.ccvf2.user.dao.spot.SpotDao;
+import everywhere.com.mynetgear.ccvf2.user.dto.member.MemberDto;
 import everywhere.com.mynetgear.ccvf2.user.dto.spot.SpotDto;
 
 
@@ -217,7 +218,9 @@ public class SpotServiceImp implements SpotService{
 	@Override
 	public void insertSpot(ModelAndView mav) {
 		Map<String, Object> map=mav.getModelMap();
-		HttpServletRequest request = (HttpServletRequest)map.get("request");		
+		HttpServletRequest request = (HttpServletRequest)map.get("request");
+		MemberDto userInfo = (MemberDto)request.getSession().getAttribute(Constant.SYNN_LOGIN_OBJECT);
+
 		SpotDto spotDto = (SpotDto)map.get("spotDto");		
 		
 		spotDto.setSpot_no(spotDao.getSpotNextSeq());
@@ -225,7 +228,7 @@ public class SpotServiceImp implements SpotService{
 		CommonFileIODto commonFileIODto = commonFileIOService.requestWriteFileAndDTO(request, "spot_image", spotPath);
 		if(commonFileIODto != null){
 			commonFileIODto.setType_code(Constant.FILE_TYPE_SPOT);
-			commonFileIODto.setWrite_no(spotDto.getSpot_no());
+			commonFileIODto.setWrite_no(userInfo.getMem_no());
 			String spot_photo_num = commonFileIOService.insertFileInfo(commonFileIODto) + ",";
 			System.out.println("spot_photo_num : " + spot_photo_num);
 			spotDto.setAttach_file(spot_photo_num);

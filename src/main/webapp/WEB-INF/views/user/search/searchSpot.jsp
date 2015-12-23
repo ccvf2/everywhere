@@ -48,7 +48,20 @@
 								alert("목록 가져오기 실패");
 							}
 						})
-		}
+		};
+		
+		$(document).ready(function(){
+			$(window).scroll(function(){// 스크롤 이벤트
+				var scrollHeight=$(window).scrollTop() + $(window).height();
+				//$(documenta).height() 는 스크롤의 길이를 의미함
+				
+				//스크롤이 끝까지 닿았을때 발생시킬 코드
+				if(scrollHeight==documentHeight) {
+					selectMoreSpotList();					
+				}
+			});
+			
+		})
 	</script>
     
     
@@ -73,7 +86,7 @@
 	            <!-- Blog Newsletter -->
 	            <div class="blog-newsletter">
 	               <div class="headline-v2"></div>
-            	 	<form action="#" class="sky-form">
+            	 	<form action="#" class="sky-form" onsubmit="searchSpotList()">
 	                    <header>명소 검색</header>
 	                    
 	                    <fieldset style="padding: 15px 15px 5px;">
@@ -81,10 +94,10 @@
 	                    	  <section>
 	                            <label class="input">
 	                            	<!-- 자동완성 input : works in Chrome, Firefox, Opera and IE10. -->
-	                                <input type="text" list="list" name="searchWord1" placeholder="지역 검색">
+	                                <input type="text" list="list" name="searchPlace" placeholder="지역 검색">
 	                                <datalist id="list">
-	                                	<c:forEach var="country" items="${countryList}">
-	                                		<option value="${country.code_name}"></option>
+	                                	<c:forEach var="place" items="${placeList}">
+	                                		<option value="${place.code_name}"></option>
 	                                	</c:forEach>
 	                                </datalist>
 	                            </label>
@@ -92,7 +105,7 @@
 	                    	<!-- 명소 검색 -->
 	                        <section>
 	                            <label class="input">
-	                                <input type="text" name="searchWord2" placeholder="명소 검색">
+	                                <input type="text" name="searchSpot" placeholder="명소 검색">
 	                            </label>
 	                        </section>
 	                    </fieldset>
@@ -110,10 +123,10 @@
 	                        </section>
 	                    </fieldset>
 	                    
-	                    <!--   <footer>
-	                        <button type="submit" class="btn-u">Submit</button>
-	                        <button type="button" class="btn-u btn-u-default" onclick="window.history.back();">Back</button>
-	                    </footer> -->
+	                    <footer>
+	                        <button type="submit" class="btn-u">검색</button>
+	                        <button type="button" class="btn-u btn-u-default" onclick="window.history.back();">뒤로</button>
+	                    </footer>
 	                </form>
 	                
 	                

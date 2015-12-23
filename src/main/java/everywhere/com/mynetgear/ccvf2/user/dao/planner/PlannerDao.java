@@ -15,16 +15,19 @@ public interface PlannerDao {
 	
 	public int getItemNextSeq();
 
-	public List<PlannerDto> getPlannerList(int mem_no);
+	public List<PlannerDto> getPlannerListByMember(int mem_no);
 	public List<ItemDto> getItemList(int planner_no);
 	public List<MoneyDto> getMoneyList(int item_no);
+	
+	public List<PlannerDto> getPlannerListForAll();
 
 	public PlannerDto getOnePlanner(int planner_no);
 
 	public int updatePlanner(PlannerDto plannerDto);
 
 	public int deletePlanner(int planner_no);
-	
-	
+
+	public int updatePlannerStatus(PlannerDto plannerDto);
+
 	public List<PlannerDto> getListPlanner_main();
 }

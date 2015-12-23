@@ -6,7 +6,9 @@ public interface PlannerService {
 
 	public void insertPlanner(ModelAndView mav);
 
-	public void getPlannerList(ModelAndView mav);
+	public void getPlannerListByMember(ModelAndView mav);
+	
+	public void getPlannerListForAll(ModelAndView mav);
 
 	public void getOnePlanner(ModelAndView mav);
 

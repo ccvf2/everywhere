@@ -11,7 +11,6 @@
 		<result property="visitor_status_code" column="visitor_status_code"/>
 	</resultMap>
 	
-
 	<select id="visitorCount" parameterType="int" resultType="int">
 		select nvl(count(*), 0) from tbl_visitor where mate_mem_no=#{mem_no}
 	</select>
@@ -25,7 +24,15 @@
 	</select>
 	
 	<insert id="visitorInsert" parameterType="everywhere.com.mynetgear.ccvf2.user.dto.visitor.VisitorDto">
-		insert into tbl_visitor values(tbl_visitor_visitor_no_seq.nextval, #{mem_no}, #{visitor_content}, sysdate, #{visitor_status_code})
+		insert into tbl_visitor 
+		values(
+		tbl_visitor_visitor_no_seq.nextval
+		, #{mem_no}
+		, #{visitor_content}
+		, sysdate
+		, #{visitor_status_code}
+		, #{mate_mem_no}
+		)
 	</insert>
 	
 	<select id="visitorSelect" parameterType="int" resultMap="visitorDto">
@@ -39,4 +46,17 @@
 	<update id="visitorDelete" parameterType="everywhere.com.mynetgear.ccvf2.user.dto.visitor.VisitorDto">
 		update tbl_visitor set visitor_status_code=#{visitor_status_code} where visitor_no=#{visitor_no}
 	</update>
+	
+	<select id="getVisitorMemberList" parameterType="java.util.Map" resultType="everywhere.com.mynetgear.ccvf2.user.dto.visitor.VisitorDto">
+		<![CDATA[
+			select mem_no, mem_email, mem_name
+			from tbl_member where mem_no in
+			(select mate_mem_no from (select rownum rnum, a.* 
+			from (select * 
+			      from tbl_visitor 
+			      where mate_mem_no=#{mate_mem_no}
+			      order by visitor_no desc) a)    
+			where rnum >= #{startRow} and rnum <= #{endRow} and visitor_status_code=#{visitor_status_code})
+		]]>
+	</select>
 </mapper>

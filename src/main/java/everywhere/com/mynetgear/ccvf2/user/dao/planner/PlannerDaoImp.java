@@ -13,7 +13,6 @@ import org.springframework.transaction.support.DefaultTransactionDefinition;
 import everywhere.com.mynetgear.ccvf2.user.dto.planner.ItemDto;
 import everywhere.com.mynetgear.ccvf2.user.dto.planner.MoneyDto;
 import everywhere.com.mynetgear.ccvf2.user.dto.planner.PlannerDto;
-import everywhere.com.mynetgear.ccvf2.user.dto.spot.SpotDto;
 
 @Component
 public class PlannerDaoImp implements PlannerDao {
@@ -63,7 +62,7 @@ public class PlannerDaoImp implements PlannerDao {
 	}
 
 	@Override
-	public List<PlannerDto> getPlannerList(int mem_no) {
+	public List<PlannerDto> getPlannerListByMember(int mem_no) {
 		return sqlTemplate.selectList("get_planner_list_by_mem_no", mem_no);
 	}
 	
@@ -76,11 +75,16 @@ public class PlannerDaoImp implements PlannerDao {
 	public List<MoneyDto> getMoneyList(int item_no) {
 		return sqlTemplate.selectList("get_money_list", item_no);
 	}
+	
+	@Override
+	public List<PlannerDto> getPlannerListForAll() {
+		return sqlTemplate.selectList("get_planner_list_for_all");
+	}
 
 	@Override
 	public PlannerDto getOnePlanner(int planner_no) {
 		return sqlTemplate.selectOne("get_planner_item", planner_no);
-	}	
+	}
 
 	@Override
 	public int updatePlanner(PlannerDto plannerDto) {
@@ -106,6 +110,11 @@ public class PlannerDaoImp implements PlannerDao {
 		
 		return check;
 	}
+	
+	public int updatePlannerStatus(PlannerDto plannerDto) {
+		return sqlTemplate.update("update_planner_status", plannerDto);
+	}
+
 
 	/** 가장최근에 등록된 플레너 */
 	@Override

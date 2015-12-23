@@ -64,6 +64,7 @@ public class VisitorController {
 	@RequestMapping(value="/user/visitor/visitorWrite.do", method=RequestMethod.POST)
 	public ModelAndView visitorWriteOk(HttpServletRequest request, HttpServletResponse response, VisitorDto visitorDto) {
 		ModelAndView mav=new ModelAndView();
+		mav.addObject("request", request);
 		mav.addObject("visitorDto", visitorDto);
 		visitorService.visitorWriteOk(mav);
 		
