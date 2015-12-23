@@ -34,7 +34,7 @@ public class PlannerController {
 	public ModelAndView getPlannerList(HttpServletRequest request, HttpServletResponse response) {
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("request", request);
-		plannerService.getPlannerList(mav);
+		plannerService.getPlannerListForAll(mav);
 		return mav;
 	}
 	

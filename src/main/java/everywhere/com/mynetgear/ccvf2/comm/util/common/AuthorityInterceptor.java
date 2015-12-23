@@ -46,6 +46,7 @@ public class AuthorityInterceptor extends HandlerInterceptorAdapter {
 		urlList.add("/user/member/emailCheck.ajax");
 		urlList.add("/user/main/assets/");
 		urlList.add("/user/planner/readPlanner.do");
+		urlList.add("/user/planner/plannerList.do");
 		urlList.add("/user/accompany/accompanyList.do");
 		urlList.add("/user/accompany/accompanyRead.do");
 		urlList.add("/user/search/searchSpot.do");

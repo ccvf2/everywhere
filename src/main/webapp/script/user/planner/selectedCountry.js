@@ -80,12 +80,7 @@ function spotListDisp(data){
 	$("#mCSB_1_container").empty(); 
 	$("#mCSB_1_container").prepend(str);
 	
-	$( "#spotItem > div" ).draggable({
-		appendTo: "body",
-		containment: "document",
-		revert: "invalid",
-		helper: "clone"
-	});
+	setDraggable();
 }
 
 //여기
@@ -130,12 +125,7 @@ function moreSpotListDisp(data){
 	}
 	$("#mCSB_1_container").append(str);
 	
-	$( "#spotItem > div" ).draggable({
-		appendTo: "body",
-		containment: "document",
-		revert: "invalid",
-		helper: "clone"
-	});
+	setDraggable();
 }
 //여기 끝
 

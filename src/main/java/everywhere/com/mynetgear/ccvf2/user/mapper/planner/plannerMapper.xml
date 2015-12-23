@@ -69,6 +69,10 @@
 	<select id="get_planner_list_by_mem_no" resultType="everywhere.com.mynetgear.ccvf2.user.dto.planner.PlannerDto" parameterType="int">
 		select * from tbl_planner where mem_no=#{mem_no}
 	</select>
+	
+	<select id="get_planner_list_for_all" resultType="everywhere.com.mynetgear.ccvf2.user.dto.planner.PlannerDto" parameterType="int">
+		select * from tbl_planner order by planner_no desc
+	</select>
 	 
 	<select id="get_item_list" resultType="everywhere.com.mynetgear.ccvf2.user.dto.planner.ItemDto" parameterType="int">
 		select * from tbl_item where planner_no=#{planner_no} order by item_no asc
@@ -105,4 +109,7 @@
 		delete from tbl_money where planner_no=#{planner_no}
 	</delete>
 	
+	<update id="update_planner_status" parameterType="everywhere.com.mynetgear.ccvf2.user.dto.planner.PlannerDto">
+		update tbl_planner set use_yn=#{use_yn} where planner_no=#{planner_no} and mem_no=#{mem_no}
+	</update>
 </mapper>

@@ -74,8 +74,6 @@
 <body onload="setBackground('${plannerDto.attach_file}', '${plannerDto.planner_no}','${checkSweet}', '${checkBookMark}')">
 	<fmt:formatDate var="start_date" pattern="yyyy-MM-dd" value="${plannerDto.start_date}"/>
 	<fmt:formatDate var="end_date" pattern="yyyy-MM-dd" value="${plannerDto.end_date}"/>
-	<input type="hidden" name="planner_no" value="${plannerDto.planner_no}"/>
-	<input type="hidden" name="mem_no" value="64" />
 	<div class="wrapper">
 		<!--=== Header ===-->
 		<div class="header">
@@ -98,9 +96,8 @@
 			<!-- Begin Sidebar Menu -->
 			<div class="col-md-3">
 				<!--글쓴이 정보 -->
-				${plannerWriter.mem_profile_photo }
 				<c:if test="${plannerWriter.mem_profile_photo != null || plannerWriter.mem_profile_photo != '' }">				
-					<img class="img-responsive profile-img margin-bottom-20" src="${plannerWriter.mem_profile_photo}" alt="">
+					<img class="img-responsive profile-img margin-bottom-20" src="/attatchFile/member/${plannerWriter.mem_profile_photo}" alt="">
 				</c:if>
 				<c:if test="${plannerWriter.mem_profile_photo == null || plannerWriter.mem_profile_photo == '' }">
 					<img class="img-responsive profile-img" src="/assets/img/team/img32-md.jpg" alt="">
@@ -108,6 +105,7 @@
 				<ul class="list-group sidebar-nav-v1 margin-bottom-20 active">
 					<li class="list-group-item list-toggle">
 						<a data-toggle="collapse" data-parent="#sidebar-nav" href="#collapse-buttons">${plannerWriter.mem_name}</a>
+						<c:if test="${mem_object.mem_no != plannerWriter.mem_no}">
 						<ul id="collapse-buttons" class="collapse in">
 							<li>
 								<a href="shortcode_btn_general.html"><i class="fa fa-flask"></i> 마이페이지 이동</a>
@@ -116,6 +114,21 @@
 								<a href="shortcode_btn_brands.html"><i class="fa fa-html5"></i> 쪽지 보내기 </a>
 							</li>
 						</ul>
+						</c:if>
+						
+						<c:if test="${mem_object.mem_no == plannerWriter.mem_no}">
+						<ul id="collapse-buttons" class="collapse in">
+							<li>
+								<a href="shortcode_btn_general.html"><i class="fa fa-flask"></i> 글 공개 여부 설정</a>
+							</li>
+							<li>
+								<a href="shortcode_btn_brands.html"><i class="fa fa-html5"></i> 글 수정 </a>
+							</li>
+							<li>
+								<a href="javascript:deletePlanner('${plannerDto.planner_no}')"><i class="fa fa-html5"></i> 글 삭제 </a>
+							</li>
+						</ul>
+						</c:if>
 					</li>
 				</ul>
 
