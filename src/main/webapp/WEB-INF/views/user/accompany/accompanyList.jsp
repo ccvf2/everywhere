@@ -101,15 +101,14 @@
                     		<li>
                     			<h3><a href="/user/accompany/accompanyRead.do?accompany_no=${recentAccompanyDto.accompany_no}&currentPage=${currentPage}" title="${recentAccompanyDto.title}">${recentAccompanyDto.title}</a></h3>
                     			<small>
-                    				
-									<fmt:formatDate var="resentWriteDate" value="${recentAccompanyDto.write_date}" pattern="yy-MM-dd"/>
+									<fmt:formatDate var="recentWriteDate" value="${recentAccompanyDto.write_date}" pattern="yy-MM-dd"/>
 												
-                    				<c:if test="${resentWriteDate eq nowDate}"><!-- 현재 -->
+                    				<c:if test="${recentWriteDate eq nowDate}"><!-- 현재 -->
 										<fmt:formatDate pattern="HH:mm" value="${recentAccompanyDto.write_date}"/>
 									</c:if>
-									<c:if test="${resentWriteDate lt nowDate}"><!-- 과거 -->
-										<fmt:formatDate pattern="MM-dd" value="${recentAccompanyDto.write_date}"/>
-									</c:if> / <a href="#">${recentAccompanyDto.mem_name}</a>
+									<c:if test="${recentWriteDate lt nowDate}"><!-- 과거 -->
+										<fmt:formatDate pattern="yyyy-MM-dd" value="${recentAccompanyDto.write_date}"/>
+									</c:if> / <a href="/user/myPage/myPage.do?uandMe=S0002&mem_no=${recentAccompanyDto.mem_no}">${recentAccompanyDto.mem_name}</a>
 								</small>
                     			<p>${fn:substring(recentAccompanyDto.content, 0, 70)}
 						        <c:if test="${fn:length(albumDto.content) >70}">
@@ -183,8 +182,9 @@
 													<c:if test="${accompanyDto.attach_file!=null}">
 														<i class="fa fa-picture-o" title="이미지 있음"></i>
 													</c:if>
-											</td>	
-											<td>${accompanyDto.mem_name}</td>
+											</td>
+												
+											<td><a href="/user/myPage/myPage.do?uandMe=S0002&mem_no=${accompanyDto.mem_no}" style="text-decoration: none; color: inherit;">${accompanyDto.mem_name}</a></td>
 											<td>
 												<fmt:formatDate var="writeDate" value="${accompanyDto.write_date}" pattern="yy-MM-dd"/>
 												<c:if test="${writeDate eq nowDate}"><!-- 현재 -->

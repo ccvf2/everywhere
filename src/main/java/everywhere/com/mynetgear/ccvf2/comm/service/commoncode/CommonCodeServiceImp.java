@@ -51,6 +51,7 @@ public class CommonCodeServiceImp implements CommonCodeService {
 	public void callCodeSetting(ModelAndView mav) {
 		Map<String, Object> map = mav.getModelMap();
 		HttpServletRequest request= (HttpServletRequest)map.get("request");
+		
 		CommonCodeDto dto= (CommonCodeDto)map.get("commonCodeDto");
 		String code_CRUD= request.getParameter("code_CRUD");
 		

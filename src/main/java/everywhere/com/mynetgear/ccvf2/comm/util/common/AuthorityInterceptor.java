@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -44,12 +45,16 @@ public class AuthorityInterceptor extends HandlerInterceptorAdapter {
 		urlList.add("/WEB-INF/views/user/");
 		urlList.add("/user/member/emailCheck.ajax");
 		urlList.add("/user/main/assets/");
+		urlList.add("/user/planner/readPlanner.do");
+		urlList.add("/user/accompany/accompanyList.do");
+		urlList.add("/user/accompany/accompanyRead.do");
+		urlList.add("/user/search/searchSpot.do");
+		urlList.add("/user/search/searchPlanner.do");
+		urlList.add("/user/search/searchTotal.do");
 
 		for (String urlException : urlList) {
 			if (uri.indexOf(urlException) > -1) {
 				return true;
-			}else{
-				
 			}
 		}
 		
@@ -77,8 +82,12 @@ public class AuthorityInterceptor extends HandlerInterceptorAdapter {
 				return true;
 			}
 			else {
+				request.setAttribute(Constant.CALLBACK_URL, uri);
+				request.setAttribute("alert_msg", "로그인이 필요한 페이지 입니다.");
 				// 로그인화면으로 이동.
-				response.sendRedirect("/user/login/login.do");
+				RequestDispatcher disp =request.getRequestDispatcher("/user/login/login.do");
+				disp.forward(request, response);
+				//response.sendRedirect("/user/login/login.do");
 				return false;
 			}
 		}

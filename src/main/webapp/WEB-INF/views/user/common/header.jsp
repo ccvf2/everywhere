@@ -70,7 +70,14 @@ function plannerCreateReqiest() {
 <title>타이틀 입력</title>
 
 </head>
+<c:if test="${(empty alert_msg)==false}">
+<script type="text/javascript">
+alert('${alert_msg}');
+</script>
+</c:if>
+<%-- <%String alert_msg =(String)request.getAttribute("alert_msg"); %> --%>
 	        <div class="container">
+<%-- alertmag:${alert_msg} --%>
 	            <!-- Logo -->
 	            <a class="logo" href="/user/main/main.do">
 	                <img src="/assets/img/logo1-default.png" alt="Logo">

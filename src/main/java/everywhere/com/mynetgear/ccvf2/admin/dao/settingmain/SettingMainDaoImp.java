@@ -1,5 +1,7 @@
 package everywhere.com.mynetgear.ccvf2.admin.dao.settingmain;
 
+import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -32,6 +34,12 @@ public class SettingMainDaoImp implements SettingMainDao {
 	public int insertForgroundImgChange(SettingMainDto settingDto) {
 		int result=sqlTemplate.insert("insert_Forground_Img_Change", settingDto);
 		return result;
+	}
+	
+	/** 백그라운드 설정 목록을 불러 온다. */
+	@Override
+	public List<SettingMainDto> getListBackground() {
+		return sqlTemplate.selectList("select_list_Background_setting");
 	}
 
 }

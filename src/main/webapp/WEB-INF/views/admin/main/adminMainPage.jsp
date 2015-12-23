@@ -11,7 +11,7 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-
+<script type="text/javascript" src="/script/admin/mainChart.js"></script>
 </head>
 
 <body>
@@ -153,7 +153,7 @@
                                 <h3 class="panel-title"><i class="fa fa-bar-chart-o fa-fw"></i> Area Chart</h3>
                             </div>
                             <div class="panel-body">
-                                <div id="morris-area-chart"></div>
+                                <div id="chartContainer" style="width: 900px; height: 300px;"></div>
                             </div>
                         </div>
                     </div>

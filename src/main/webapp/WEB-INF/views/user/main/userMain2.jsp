@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
 <!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
@@ -73,8 +74,8 @@
 				</div>
  					<c:forEach var="list1" items="${list1}">
 		            <div class="col-md-4">
-		            <div class="grid-boxes-in">
-		                <img class="img-responsive" src="/assets/img/main/img3.jpg" alt="" style="width: 360px; height: 227px;">
+		            <div class="grid-boxes-in" style="height: 430px;">
+		                <img class="img-responsive" src="/attatchFile/planner/${list1.attach_file}" alt="" height="80%">
 		                <div class="grid-boxes-caption">
 		                    <h3><a href="/user/planner/readPlanner.do?planner_no=${list1.planner_no}">${list1.title}</a></h3>
 		                    <ul class="list-inline grid-boxes-news">
@@ -84,7 +85,12 @@
 		                        <li>|</li>
 		                        <li><a href="#"><i class="fa fa-comments-o"></i><c:out value="${list1.reply_Count}" escapeXml="false"/></a></li>
 		                    </ul>
-		                    <p><c:out value="${list1.memo}" escapeXml="false"/> </p>
+		                    <p>
+		                    	<c:out value="${fn:substring(list1.memo, 0,50)}" escapeXml="false"/>
+		                    	<c:if test="${fn:length(list1.memo) >50}">
+						        	…
+						        </c:if>
+		                    </p>
 		                </div>
 		            </div>
 		            </div>
