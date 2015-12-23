@@ -54,6 +54,26 @@ public class SearchController {
 		searchService.getSpotList(mav);
 		return null;
 	}
+	
+	
+	/**
+	 * @author 곽성국	
+	 * @createDate 2015. 12. 23.
+	 * @described 다음 페이지의 명소 리스트를 가져오는 메소드
+	 * @param request
+	 * @param response
+	 * @return
+	 */
+	@RequestMapping(value="/user/search/getMoreSpotList.ajax", method=RequestMethod.GET)
+	public ModelAndView getMoreSpotList(HttpServletRequest request, HttpServletResponse response) {
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("request", request);
+		mav.addObject("response", response);
+		searchService.getMoreSpotList(mav);
+		return null;
+	}
+	
+	
 	/**
 	 * @author 곽성국	
 	 * @createDate 2015. 12. 19.

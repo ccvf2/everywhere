@@ -26,31 +26,51 @@
 	
 	<!-- 명소의 리스트를 반환 -->
 	<select id="getSpotList" resultType="everywhere.com.mynetgear.ccvf2.user.dto.search.SpotDtoExt">
-		<![CDATA[
-			select spot.rnum,
-			      spot.spot_no,
-			      spot.mem_no,
-			      spot.country_code,
-			      spot.city_code,
-			      (select code_name from tbl_common_code where code=spot.city_code) city_name,
-			      spot.spot_name,
-			      spot.spot_type_code,
-			      spot.mem_level_code,
-			      spot.spot_note,
-			      spot.attach_file,
-			      spot.spot_addr,
-			      spot.spot_lat,
-			      spot.spot_long,
-			      spot.total_star_score,
-			      spot.count_star_score,
-			      tbl_member.mem_name
-			from 
-			  (select rownum rnum, a.* from 
-			    (select * from tbl_spot order by spot_name asc) a
-			  ) spot, tbl_member
-			where spot.rnum >= 1 and spot.rnum <= 30
-			and tbl_member.mem_no = spot.mem_no
-		]]>
+		select *
+		from (
+			<![CDATA[
+		    select rownum rnum]]>,
+		  		 results.*
+		    from
+		      (select *
+		       from
+		           (select tbl_spot.spot_no,
+		                  tbl_spot.mem_no,
+		                  tbl_spot.country_code,
+		                  (select code_name from tbl_common_code where code=tbl_spot.country_code) country_name,
+		                  tbl_spot.city_code,
+		                  (select code_name from tbl_common_code where code=tbl_spot.city_code) city_name,
+		                  tbl_spot.spot_name,
+		                  tbl_spot.spot_type_code,
+		                  tbl_spot.mem_level_code,
+		                  tbl_spot.spot_note,
+		                  tbl_spot.attach_file,
+		                  tbl_spot.spot_addr,
+		                  tbl_spot.spot_lat,
+		                  tbl_spot.spot_long,
+		                  tbl_spot.total_star_score,
+		                  tbl_spot.count_star_score,
+		                  tbl_member.mem_name
+		            from tbl_spot, tbl_member
+		            where tbl_member.mem_no = tbl_spot.mem_no
+		            )
+		         <where>
+		         	<choose>
+		         		<when test="searchWord1!=''">
+		         			AND (country_name like '%'||#{searchWord1, jdbcType=VARCHAR}||'%' 
+								or city_name like '%'||#{searchWord1, jdbcType=VARCHAR}||'%')
+		         		</when>
+		         	</choose>
+		         	<choose>
+		         		<when test="searchWord2!=''">
+		         			AND spot_name like '%'||#{searchWord2, jdbcType=VARCHAR}||'%'
+		         		</when>
+		         	</choose>
+		         </where>
+		         ) results)
+		    <![CDATA[
+		    where rnum >=#{startPage} and rnum <=#{endPage}
+		    ]]>
 	</select>
 	
 	<!-- 스케줄의 리스트를 반환 -->
