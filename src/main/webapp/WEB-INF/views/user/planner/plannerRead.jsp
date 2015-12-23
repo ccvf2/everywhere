@@ -97,7 +97,7 @@
 			<div class="col-md-3">
 				<!--글쓴이 정보 -->
 				<c:if test="${plannerWriter.mem_profile_photo != null || plannerWriter.mem_profile_photo != '' }">				
-					<img class="img-responsive profile-img margin-bottom-20" src="${plannerWriter.mem_profile_photo}" alt="">
+					<img class="img-responsive profile-img margin-bottom-20" src="/attatchFile/member/${plannerWriter.mem_profile_photo}" alt="">
 				</c:if>
 				<c:if test="${plannerWriter.mem_profile_photo == null || plannerWriter.mem_profile_photo == '' }">
 					<img class="img-responsive profile-img" src="/assets/img/team/img32-md.jpg" alt="">
