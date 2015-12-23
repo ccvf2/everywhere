@@ -40,7 +40,11 @@ public class SearchDaoImp implements SearchDao {
 
 	@Override
 	public List<SpotDto> getSpotList(SpotDtoExt spotDto) {
-		return sqlTemplate.selectList("everywhere.com.mynetgear.ccvf2.user.mapper.search.getSpotList");
+		int spotSize = 15;
+		spotDto.setStartPage((spotDto.getCurrentPage()-1) * spotSize + 1);
+		spotDto.setEndPage(spotDto.getCurrentPage()*spotSize);
+		
+		return sqlTemplate.selectList("everywhere.com.mynetgear.ccvf2.user.mapper.search.getSpotList", spotDto);
 	}
 	
 
