@@ -142,7 +142,7 @@ alert('${alert_msg}');
 	                    </li>
 	                    <!-- End Search Block -->
 	                    <li class="dropdown <c:if test="${ fn:startsWith(path, '/user/member')}">${ on }</c:if>">
-	                        <a href="/user/planner/plannerList.do?mem_no=64" class="dropdown-toggle" >
+	                        <a href="/user/planner/plannerList.do?mem_no=${mem_object.mem_no }" class="dropdown-toggle" >
 	                           리뷰
 	                        </a>
 <!-- 	                        <ul class="dropdown-menu">
