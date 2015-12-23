@@ -11,13 +11,8 @@
 		<result property="visitor_status_code" column="visitor_status_code"/>
 	</resultMap>
 	
-<<<<<<< HEAD
-	<select id="visitorCount" resultType="int">
-		<![CDATA[select nvl(count(*) from tbl_visitor]]>
-=======
 	<select id="visitorCount" parameterType="int" resultType="int">
 		select nvl(count(*), 0) from tbl_visitor where mate_mem_no=#{mem_no}
->>>>>>> 8d9183ff71dd9b065ecd2f5cd9c021d4c1bf5b8f
 	</select>
 	
 	<select id="visitorList" parameterType="java.util.HashMap" resultMap="visitorDto">
