@@ -54,45 +54,26 @@
 			<!-- 메인------------------------------------------------------------------------------------------------------------------------------ -->
             <!-- Profile Content -->
             <div class="col-md-9">
-            	<c:if test="${count==0&&currentPage==1}">
-					<div class="panel panel-u margin-bottom-40">
-		            	<div class="panel-heading" style="height:30px;" align="left">
-		                	<h3 class="panel-title" style="margin-top:0px;">No.${visitorDto.visitor_no}</h3>
-		               	</div>
-		                <div class="panel-body">
-		                    <form class="margin-bottom-40" role="form" action="/user/visitor/visitorWrite.do" method="post" onsubmit="return visitorForm(this)">
-								<div class="form-group" align="left">
-									<span>아이디:${mem_no}</span>
-								</div>
-								<div class="form-group">
-									<textarea class="form-control" rows="7" cols="65" name="visitor_content" style="resize:none;"></textarea>
-								</div>
-								<div class="form-group" align="right">
-									<input type="submit" class="btn-u" value="작성"/>
-								</div>
-							</form>
-						</div>
-		        	</div>
-				</c:if>
-				<c:if test="${count>0}">
-					<div class="panel panel-u margin-bottom-40">
-		            	<div class="panel-heading" style="height:30px;" align="left">
-		                	<h3 class="panel-title" style="margin-top:0px;">No.${visitorDto.visitor_no}</h3>
-		               	</div>
-		                <div class="panel-body">
-		                    <form class="margin-bottom-40" role="form" action="/user/visitor/visitorWrite.do" method="post" onsubmit="return visitorForm(this)">
-								<div class="form-group" align="left">
-									<span>아이디:${visitorDto.mem_no}</span>
-								</div>
-								<div class="form-group">
-									<textarea class="form-control" rows="7" cols="65" name="visitor_content" style="resize:none;"></textarea>
-								</div>
-								<div class="form-group" align="right">
-									<input type="submit" class="btn-u" value="작성"/>
-								</div>
-							</form>
-						</div>
-		        	</div>
+				<div class="panel panel-u margin-bottom-40">
+	            	<div class="panel-heading" style="height:30px;" align="left">
+	                	<h3 class="panel-title" style="margin-top:0px;">No.${visitorDto.visitor_no}</h3>
+	               	</div>
+	                <div class="panel-body">
+	                    <form class="margin-bottom-40" role="form" action="/user/visitor/visitorWrite.do" method="post" onsubmit="return visitorForm(this)">
+							<div class="form-group" align="left">
+								<span>아이디:${visitorDto.mem_no}</span>
+							</div>
+							<div class="form-group">
+								<textarea class="form-control" rows="5" cols="65" name="visitor_content" style="resize:none;"></textarea>
+							</div>
+							<div class="form-group" align="right">
+								<input type="submit" class="btn-u" value="작성"/>
+							</div>
+						</form>
+					</div>
+	        	</div>
+	        	
+	        	<c:if test="${count>0}">
 					<c:forEach var="visitor" items="${visitorList}">
 						<div class="panel panel-u margin-bottom-40">
 		            		<div class="panel-heading" style="height:30px;" align="left">
@@ -114,37 +95,59 @@
 						</div>
 					</c:forEach>
 				</c:if>
+				<div align="center">
+				<c:if test="${count>0}">
+					<div class="btn-group" role="group" aria-label="First group" align="center">
+						<c:set var="pageBlock" value="3" />
+						<c:set var="pageCount" value="${count/boardSize+(count%boardSize==0?0:1)}"/>
+							
+						<fmt:parseNumber var="result" value="${(currentPage-1)/pageBlock}" integerOnly="true"/>
+						
+						<c:set var="startPage" value="${result*pageBlock+1}"/>
+						<c:set var="endPage" value="${startPage+pageBlock-1}"/>
+						
+						<!-- 마지막 페이지가 페이지 수보다 작으면 -->
+						<c:if test="${endPage > pageCount }">
+							<c:set var="endPage" value="${pageCount }"/>
+						</c:if>
+						
+						<!-- 페이징 -->
+						<nav>
+						  <ul class="pagination">
+						  	<c:if test="${startPage > pageBlock}">
+							  	<a href="/user/visitor/visitorWrite.do?pageNumber=${currentPage-pageBlock}" aria-label="Previous">
+							        <span aria-hidden="true">&laquo;</span>
+						     	</a>
+							</c:if>
+						    <c:forEach var="i" begin="${startPage}" end="${endPage}">
+								 <c:if test="${i!=currentPage}">
+								 	<li><a href="/user/visitor/visitorWrite.do?pageNumber=${i}" role="button" class="btn btn-default">${i}</a></li>
+								 </c:if>
+								 <c:if test="${i==currentPage}">
+								 	<li class="active"><a href="/user/visitor/visitorWrite.do?pageNumber=${i}" role="button" class="btn btn-default">${i}</a></li>
+								 </c:if>
+							</c:forEach>
+							
+					  		<c:if test="${endPage < pageCount }">
+					  			<li>
+							      <a href="/user/visitor/visitorWrite.do?pageNumber=${currentPage+pageBlock}" aria-label="Next">
+							        <span aria-hidden="true">&raquo;</span>
+							      </a>
+							    </li>
+							</c:if>
+						  </ul>
+						</nav>
+						<!-- 페이징 끝 -->
+					</div>
+				</c:if>
+				</div>
 			</div>
 			
-			<div class="col-md-9" align="center">
-				<c:if test="${count>0}">
-					<c:set var="pageBlock" value="${3}"/>
-				</c:if>
-		       	<fmt:parseNumber var="rs" value="${(currentPage-1)/pageBlock}" integerOnly="true"/>
-				<c:set var="startPage" value="${rs*pageBlock+1}"/>
-				<c:set var="endPage" value="${startPage+pageBlock-1}"/>
-				
-				<c:set var="pageCount" value="${count/boardSize+(count%boardSize==0 ? 0:1)}"/>
-				
-				<c:if test="${endPage>pageCount}">
-					<c:set var="endPage" value="${pageCount}"/>
-				</c:if>
-				
-				<c:if test="${startPage>pageBlock}">
-					<a href="/user/visitor/visitorWrite.do?pageNumber=${startPage-pageBlock}">[이전]</a>
-				</c:if>
-				
-				<c:forEach var="i" begin="${startPage}" end="${endPage}">
-					<a href="/user/visitor/visitorWrite.do?pageNumber=${i}">[${i}]</a>
-				</c:forEach>
-				
-				<c:if test="${endPage<pageCount}">
-					<a href="/user/visitor/visitorWrite.do?pageNumber=${startPage+pageBlock}">[다음]</a>
-				</c:if>
-			</div>
-            <!-- End Profile Content -->
-            <!-- 메인------------------------------------------------------------------------------------------------------------------------------ -->
-        </div>
+			
+	            <!-- End Profile Content -->
+	            <!-- 메인------------------------------------------------------------------------------------------------------------------------------ -->
+	        <!--  -->
+		</div>
     </div><!--/container-->
     <!--=== End Profile ===-->
 

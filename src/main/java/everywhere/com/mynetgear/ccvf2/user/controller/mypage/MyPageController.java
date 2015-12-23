@@ -2,7 +2,6 @@ package everywhere.com.mynetgear.ccvf2.user.controller.mypage;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +14,12 @@ import everywhere.com.mynetgear.ccvf2.comm.util.common.Constant;
 import everywhere.com.mynetgear.ccvf2.user.dto.member.MemberDto;
 import everywhere.com.mynetgear.ccvf2.user.service.mypage.MyPageService;
 
+/**
+ * @author 김성광
+ * @createDate 2015. 12. 22.
+ * @described 마이페이지 컨트롤러
+ * @reference class
+ */
 @Controller
 public class MyPageController {
 	@Autowired
