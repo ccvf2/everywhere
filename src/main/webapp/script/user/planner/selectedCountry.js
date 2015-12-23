@@ -96,7 +96,6 @@ function selectMoreSpotList(city){
 		readCityList(true);
 	}
 	var params = "country_code=" + countrycode + "&city_code=" + citycode + "&spot_type_code="+typecode+"&spot_page="+spot_page.value;
-	alert(params);
 	var url = "/user/spot/selectSpotListForPlanner.ajax?" + params;
 	$.ajax({
 		url:url,
