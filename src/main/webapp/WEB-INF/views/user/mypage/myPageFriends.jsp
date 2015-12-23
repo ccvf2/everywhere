@@ -53,12 +53,20 @@
                     		<div class="alert alert-info alert-dismissable">
                     			<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
 	                            <i class="fa fa-info-circle"></i>  <strong><c:out value="${memberDto.mem_name}"/>님의 친구들</strong>&nbsp;&nbsp;&nbsp; <c:out value="${friendsList.size()}"/>명.
-	                       	</div>
+                       	</div>
 	            			<c:forEach var="friendsList" items="${friendsList}"  varStatus="i">
+	            				<c:choose>
+									<c:when test="${friendsList.mem_profile_photo==null}">
+										<c:set var="friendProfile" value="/assets/img/testimonials/user.jpg"/>
+									</c:when>
+									<c:otherwise>
+										<c:set var="friendProfile" value="/attatchFile/member/${friendsList.mem_profile_photo}"/>
+									</c:otherwise>
+								</c:choose>
 		                    	<c:if test="${i.index%2==0}">
 			                        <div class="col-sm-6 sm-margin-bottom-20">
 			                            <div class="profile-blog">
-			                                <img class="rounded-x" src="/assets/img/testimonials/user.jpg" alt="">
+			                                <img class="rounded-x" src="${friendProfile}" alt="">
 			                                <div class="name-location">
 			                                    <strong><a href="/user/myPage/myPage.do?uandMe=S0002&mem_no=${friendsList.mem_no}"><c:out value="${friendsList.mem_name}"/></a></strong>
 			                                    <span><i class="fa fa-map-marker"></i><a href="/user/myPage/myPage.do?uandMe=S0002&mem_no=${friendsList.mem_no}"><c:out value="${friendsList.mem_email}"/></a></span>
@@ -76,7 +84,7 @@
 								<c:if test="${i.index%2==1}">
 			                        <div class="col-sm-6">
 			                            <div class="profile-blog">
-			                                <img class="rounded-x" src="/assets/img/testimonials/user.jpg" alt="">
+			                                <img class="rounded-x" src="${friendProfile}" alt="">
 			                                <div class="name-location">
 			                                    <strong><a href="/user/myPage/myPage.do?uandMe=S0002&mem_no=${friendsList.mem_no}"><c:out value="${friendsList.mem_name}"/></a></strong>
 			                                    <span><i class="fa fa-map-marker"></i><a href="/user/myPage/myPage.do?uandMe=S0002&mem_no=${friendsList.mem_no}"><c:out value="${friendsList.mem_email}"/></a></span>
