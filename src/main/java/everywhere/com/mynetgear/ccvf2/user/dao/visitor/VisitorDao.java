@@ -2,6 +2,7 @@ package everywhere.com.mynetgear.ccvf2.user.dao.visitor;
 
 import java.util.List;
 
+import everywhere.com.mynetgear.ccvf2.user.dto.member.MemberDto;
 import everywhere.com.mynetgear.ccvf2.user.dto.visitor.VisitorDto;
 
 /**
@@ -61,5 +62,8 @@ public interface VisitorDao {
 	 * @return
 	 */
 	public int visitorDelete(VisitorDto visitorDto);
+	
+	
+	public List<MemberDto> getVisitorMemberList(int startRow, int endRow, int mem_no);
 
 }

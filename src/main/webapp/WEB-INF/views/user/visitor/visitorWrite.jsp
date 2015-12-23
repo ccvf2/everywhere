@@ -51,117 +51,110 @@
             </div>
             <!--End Left Sidebar-->
 			<!-- 메인------------------------------------------------------------------------------------------------------------------------------ -->
-            <!-- Profile Content -->
             <div class="col-md-9">
-				<div class="panel panel-u margin-bottom-40">
-	            	<div class="panel-heading" style="height:30px;" align="left">
-	                	<h3 class="panel-title" style="margin-top:0px;">No.${visitorDto.visitor_no}</h3>
-	               	</div>
-	                <div class="panel-body">
-	                    <form class="margin-bottom-40" role="form" action="/user/visitor/visitorWrite.do" method="post" onsubmit="return visitorForm(this)">
-							<div class="form-group" align="left">
-								<span>아이디:${visitorDto.mem_no}</span>
-							</div>
-							<div class="form-group">
-								<textarea class="form-control" rows="5" cols="65" name="visitor_content" style="resize:none;"></textarea>
-							</div>
-							<div class="form-group" align="right">
-								<input type="submit" class="btn-u" value="작성"/>
-							</div>
-						</form>
-					</div>
-	        	</div>
-	        	
-	        	<c:if test="${count>0}">
-					<c:forEach var="visitor" items="${visitorList}">
-						<div class="panel panel-u margin-bottom-40">
-		            		<div class="panel-heading" style="height:30px;" align="left">
-		                		<h3 class="panel-title" style="float:left; margin-top:0px; margin-right:620px;">No.${visitor.visitor_no}</h3>
-								<fmt:formatDate value="${visitor.visitor_write_date}" type="both"/>
-		                	</div>
-		                	<div class="panel-body">
-		                    	<div class="form-group" align="left">
-									<a href="/user/mypage/myPage.do?mem_no=${visitor.mem_no}">아이디:${visitor.mem_no}</a>
+            	<c:if test="${memberDto.mem_no!=mem_object.mem_no}">
+	                <div class="clearfix margin-bottom-30"></div>
+	                <div class="shadow-wrapper">
+	                    <blockquote class="hero box-shadow shadow-effect-2">
+		                    <form action="/user/visitor/visitorWrite.do" method="post" onsubmit="return visitorForm(this)">
+		                    	<input type="hidden" name="mem_no" value="${mem_object.mem_no}">	<!-- 보내는사람 no -->
+		                    	<input type="hidden" name="mate_mem_no" value="${memberDto.mem_no}"> <!-- 받는 사람 no -->
+		                    	
+		                    	<p><em><c:out value="from.${memberDto.mem_name} (${memberDto.mem_email})"/></em></p>
+		                        <p><em>
+									<textarea class="form-control" rows="4" cols="65" name="visitor_content" style="resize:none;"></textarea>
+		                        </em></p> 
+		                        <small><em><c:out value="to.${mem_object.mem_name} (${memberDto.mem_email})"/></em></small>
+		                        <div align="right">
+									<input type="submit" value="작성"/>
 								</div>
-								<div class="form-group" style="height:110px;">
-									<div align="left">${visitor.visitor_content}</div>
-								</div>
-								<div class="form-group" align="right"> 
-									<a class="btn-u" href="/user/visitor/visitorUpdate.do?mem_no=${memberDto.mem_no}&visitor_no=${visitor.visitor_no}&pageNumber=${currentPage}">수정</a> 
-									<a class="btn-u" href="/user/visitor/visitorDelete.do?mem_no=${memberDto.mem_no}&visitor_no=${visitor.visitor_no}&pageNumber=${currentPage}">삭제</a>
-								</div>
-							</div>
-						</div>
+							</form>
+	                    </blockquote>
+	                </div>
+                </c:if>
+                
+                <c:if test="${count>0}">
+					<c:forEach var="visitor" items="${visitorList}" varStatus="i">
+						<div class="clearfix margin-bottom-30"></div>
+		                <div class="shadow-wrapper">
+		                    <blockquote class="hero box-shadow shadow-effect-2">
+			                    <form action="/user/visitor/visitorWrite.do" method="post" onsubmit="return visitorForm(this)">
+			                    	<div align="left" style="float: left;">
+				                    	<a href="/user/mypage/myPage.do?uanMe=S0002&mem_no=${visitor.mem_no}">
+				                    		<%-- <c:out value="아이디:${memberList.get(i.index).mem_email}"/> --%>
+				                    	</a>
+			                    	</div>
+			                    	<div align="right" style="float: right;"><fmt:formatDate value="${visitor.visitor_write_date}" type="both"/></div><br/>
+			                        <p><em>
+										<c:out value="${visitor.visitor_content}"/>
+			                        </em></p> 
+			                        <small><em><c:out value="to.${visitor.mem_no} (${visitor.mem_no})"/></em></small>
+			                        <!-- <div align="right">
+										<input type="submit" value="작성"/>
+									</div> -->
+								</form>
+		                    </blockquote>
+		                </div>
+						
 					</c:forEach>
 				</c:if>
-			
-			
 				<div align="center">
-				<c:if test="${count>0}">
-					<div class="btn-group" role="group" aria-label="First group" align="center">
-						<c:set var="pageBlock" value="3" />
-															<!-- 1-->
-						<c:set var="pageCount" value="${count/boardSize+(count%boardSize==0?0:1)}"/>
+					<c:if test="${count>0}">
+						<div class="btn-group" role="group" aria-label="First group" align="center">
+							<c:set var="pageBlock" value="3" />
+							<c:set var="pageCount" value="${count/boardSize+(count%boardSize==0?0:1)}"/>
+							<fmt:parseNumber var="result" value="${(currentPage-1)/pageBlock}" integerOnly="true"/>
+							<c:set var="startPage" value="${result*pageBlock+1}"/>
+							<c:set var="endPage" value="${startPage+pageBlock-1}"/>
 							
-						<fmt:parseNumber var="result" value="${(currentPage-1)/pageBlock}" integerOnly="true"/>
-						<c:set var="startPage" value="${result*pageBlock+1}"/>
-						<c:set var="endPage" value="${startPage+pageBlock-1}"/>
-						count : ${count} <br/>
-						startPage : ${startPage}<br/>
-						endPage : ${endPage}<br/>
-						currentPage : ${currentPage}<br/>
-						pageCount : ${pageCount}<br/>
-						count/boardSize+(count%boardSize==0?0:1) : ${count/boardSize+(count%boardSize==0?0:1)}<br/>
-						result : ${result}, ${(currentPage-1)/pageBlock}
-						<!-- 마지막 페이지가 페이지 수보다 작으면 -->
-						<c:if test="${endPage > pageCount }">
-							<c:set var="endPage" value="${pageCount}"/>
-						</c:if>
-						
-						<!-- 페이징 -->
-						<nav>
-						  <ul class="pagination">
-						  	<c:if test="${startPage > pageBlock}">
-							  	<li>
-								  	<a href="/user/visitor/visitorWrite.do?uandMe=S0001&mem_no=${memberDto.mem_no}&pageNumber=${currentPage-pageBlock}" aria-label="Previous">
-								        <span aria-hidden="true">&laquo;</span>
-							     	</a>
-						     	</li>
+							<!-- 마지막 페이지가 페이지 수보다 작으면 -->
+							<c:if test="${endPage > pageCount }">
+								<c:set var="endPage" value="${pageCount}"/>
 							</c:if>
-						    <c:forEach var="i" begin="${startPage}" end="${endPage}">
-								 <c:if test="${i!=currentPage}">
-								 	<li><a href="/user/visitor/visitorWrite.do?uandMe=S0001&mem_no=${memberDto.mem_no}&pageNumber=${i}" role="button" class="btn btn-default">${i}</a></li>
-								 </c:if>
-								 <c:if test="${i==currentPage}">
-								 	<li class="active"><a href="#" role="button" class="btn btn-default">${i}</a></li>
-								 </c:if>
-							</c:forEach>
 							
-					  		<c:if test="${endPage < pageCount }">
-					  			<li>
-							      <a href="/user/visitor/visitorWrite.do?uandMe=S0001&mem_no=${memberDto.mem_no}&pageNumber=${startPage+pageBlock}" aria-label="Next">
-							        <span aria-hidden="true">&raquo;</span>
-							      </a>
-							    </li>
-							</c:if>
-						  </ul>
-						  
-						  <%-- <c:if test="${memberDto.mem_no==mem_object.mem_no}">
-								<c:forEach var="i" begin="${startPage}" end="${endPage}">
-								 	<li class="active"><a href="/user/visitor/visitorWrite.do?uandMe=S0001&mem_no=${memberDto.mem_no}&pageNumber=${i}" role="button" class="btn btn-default">${i}</a></li>
+							<!-- 페이징 -->
+							<c:choose>
+								<c:when test="${memberDto.mem_no==mem_object.mem_no}">
+									<c:set var="uandMe" value="uandMe=S0001"/>		
+								</c:when>
+								<c:otherwise>
+									<c:set var="uandMe" value="uandMe=S0002"/>
+								</c:otherwise>
+							</c:choose>
+							
+							<nav>
+							  <ul class="pagination">
+							  	<c:if test="${startPage > pageBlock}">
+								  	<li>
+									  	<a href="/user/visitor/visitorWrite.do?${uandMe}&mem_no=${memberDto.mem_no}&pageNumber=${currentPage-pageBlock}" aria-label="Previous">
+									        <span aria-hidden="true">&laquo;</span>
+								     	</a>
+							     	</li>
+								</c:if>
+							    <c:forEach var="i" begin="${startPage}" end="${endPage}">
+									 <c:if test="${i!=currentPage}">
+									 	<li><a href="/user/visitor/visitorWrite.do?${uandMe}&mem_no=${memberDto.mem_no}&pageNumber=${i}" role="button" class="btn btn-default">${i}</a></li>
+									 </c:if>
+									 <c:if test="${i==currentPage}">
+									 	<li class="active"><a href="#" role="button" class="btn btn-default">${i}</a></li>
+									 </c:if>
 								</c:forEach>
-							</c:if> --%>
-						</nav>
-						<!-- 페이징 끝 -->
-					</div>
-				</c:if>
+								
+						  		<c:if test="${endPage < pageCount }">
+						  			<li>
+								      <a href="/user/visitor/visitorWrite.do?${uandMe}&mem_no=${memberDto.mem_no}&pageNumber=${startPage+pageBlock}" aria-label="Next">
+								        <span aria-hidden="true">&raquo;</span>
+								      </a>
+								    </li>
+								</c:if>
+							  </ul>
+							</nav>
+							<!-- 페이징 끝 -->
+						</div>
+					</c:if>
 				</div>
-			</div>
-			
-			
-	            <!-- End Profile Content -->
-	            <!-- 메인------------------------------------------------------------------------------------------------------------------------------ -->
-	        <!--  -->
+            </div>
+            <!-- 메인------------------------------------------------------------------------------------------------------------------------------ -->
 		</div>
     </div><!--/container-->
     <!--=== End Profile ===-->

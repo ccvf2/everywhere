@@ -106,10 +106,15 @@ public class VisitorServiceImp implements VisitorService {
 		System.out.println("VisitorService write count:"+count);
 			
 		List<VisitorDto> visitorList=null;
+		List<MemberDto> memberList=null;
 		if(count>0) {
 			visitorList=visitorDao.getVisitorList(startRow, endRow, mate_no);
+			memberList=visitorDao.getVisitorMemberList(startRow, endRow, mate_no);
+
+			//System.out.println("\n\n ----------- memberList.size() : " + memberList.size());
 		}
 		
+		mav.addObject("memberList", memberList);
 		mav.addObject("mateCheck", mateCheck);
 		mav.addObject("memberDto", memberDto);
 		mav.addObject("visitorList", visitorList);
@@ -125,12 +130,25 @@ public class VisitorServiceImp implements VisitorService {
 		VisitorDto visitorDto=(VisitorDto)map.get("visitorDto");
 		HttpServletRequest request=(HttpServletRequest)map.get("request");
 		
-		HttpSession session = request.getSession();
-		MemberDto memberDto=(MemberDto) session.getAttribute(Constant.SYNN_LOGIN_OBJECT);
-		
-		int mem_no=Integer.parseInt(request.getParameter("mem_no"));
-		visitorDto.setMem_no(mem_no);
 		visitorDto.setVisitor_status_code(Constant.SYNB_YN_Y);
+		visitorDto.setVisitor_content(visitorDto.getVisitor_content().replace("\r\n", "<br/>"));
+		System.out.println(visitorDto.toString());
+		
+		int check=visitorDao.visitorInsert(visitorDto);
+		
+		MemberDto memberDto = memberDao.memberRead(visitorDto.getMate_mem_no());
+		
+		mav.addObject("mateCheck", 2);
+		mav.addObject("memberDto", memberDto);
+		mav.addObject("check", check);
+		mav.setViewName("/user/visitor/visitorWriteOk");
+		
+		/*HttpSession session = request.getSession();
+		MemberDto memberDto=(MemberDto) session.getAttribute(Constant.SYNN_LOGIN_OBJECT);*/
+		
+		//int mem_no=Integer.parseInt(request.getParameter("mem_no"));
+		/*visitorDto.setMem_no(mem_no);
+		
 		
 		int check=visitorDao.visitorInsert(visitorDto);
 		System.out.println("VisitorService writeOk check:"+check);
@@ -138,7 +156,7 @@ public class VisitorServiceImp implements VisitorService {
 		mav.addObject("mateCheck", 2);
 		mav.addObject("memberDto", memberDto);
 		mav.addObject("check", check);
-		mav.setViewName("/user/visitor/visitorWriteOk");
+		mav.setViewName("/user/visitor/visitorWriteOk");*/
 	}
 
 	@Override
