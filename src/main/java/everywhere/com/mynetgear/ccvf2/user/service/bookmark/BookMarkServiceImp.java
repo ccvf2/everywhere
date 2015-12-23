@@ -64,17 +64,17 @@ public class BookMarkServiceImp implements BookMarkService {
 		MemberDto userInfo = (MemberDto)request.getSession().getAttribute(Constant.SYNN_LOGIN_OBJECT);
 
 		String planner_no = request.getParameter("planner_no");
-		String friend_no = request.getParameter("friend_no");
+		String review_no = request.getParameter("review_no");
 
 		BookMarkDto bookMark = new BookMarkDto();
 		bookMark.setMem_no(userInfo.getMem_no());
 		if(planner_no != null){
-			bookMark.setBookmark_type_code(Constant.BOOKMARK_TYPE_PLANNER);
+			bookMark.setBookmark_type_code(Constant.SCHEDULE_TYPE_PLANNER);
 			bookMark.setItem_no(Integer.parseInt(planner_no));
 		}
-		if(friend_no != null){
-			bookMark.setBookmark_type_code(Constant.BOOKMARK_TYPE_FRIEND);
-			bookMark.setItem_no(Integer.parseInt(friend_no));
+		if(review_no != null){
+			bookMark.setBookmark_type_code(Constant.SCHEDULE_TYPE_REVIEW);
+			bookMark.setItem_no(Integer.parseInt(review_no));
 		}
 		
 		return bookMark;

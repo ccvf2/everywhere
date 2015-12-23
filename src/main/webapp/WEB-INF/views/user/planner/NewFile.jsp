@@ -47,8 +47,8 @@
 				</div>
 				<div>
 					<div class="radio">
-					  <label><input type="radio" name="planner_ba_code" value="P0002">여행스케쥴</label>
-					  <label><input type="radio" name="planner_ba_code" value="P0001">여행리뷰</label>
+					  <label><input type="radio" name="planner_ba_code" value="E0001">여행스케쥴</label>
+					  <label><input type="radio" name="planner_ba_code" value="E0002">여행리뷰</label>
 					</div>
 				</div>
 			</div>

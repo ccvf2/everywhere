@@ -183,8 +183,8 @@ public class Constant {
 	/**이동할페이지: 로그인전 시도했던 페이지로 이동*/
 	public static final String CALLBACK_URL = "callback_url";
 	
-	/**북마크 분류 코드 : 플래너*/
-	public static final String BOOKMARK_TYPE_PLANNER = "E0001";
-	/**북마크 분류 코드 : 친구*/
-	public static final String BOOKMARK_TYPE_FRIEND = "E0002";
+	/**플래너 분류 코드 : 일정*/
+	public static final String SCHEDULE_TYPE_PLANNER = "E0001";
+	/**플래너 분류 코드 : 리뷰*/
+	public static final String SCHEDULE_TYPE_REVIEW = "E0002";
 }

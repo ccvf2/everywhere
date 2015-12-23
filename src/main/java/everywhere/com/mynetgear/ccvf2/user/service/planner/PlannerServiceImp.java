@@ -100,12 +100,22 @@ public class PlannerServiceImp implements PlannerService {
 	}
 
 	@Override
-	public void getPlannerList(ModelAndView mav) {
+	public void getPlannerListByMember(ModelAndView mav) {
 		Map<String, Object> map=mav.getModelMap();
 		HttpServletRequest request = (HttpServletRequest)map.get("request");
 		int mem_no = Integer.parseInt(request.getParameter("mem_no"));
 
-		List<PlannerDto> plannerList = plannerDao.getPlannerList(mem_no);
+		List<PlannerDto> plannerList = plannerDao.getPlannerListByMember(mem_no);
+
+		mav.addObject("plannerList", plannerList);
+		mav.setViewName("user/planner/plannerList");
+	}
+	
+	@Override
+	public void getPlannerListForAll(ModelAndView mav) {
+		Map<String, Object> map=mav.getModelMap();
+		
+		List<PlannerDto> plannerList = plannerDao.getPlannerListForAll();
 
 		mav.addObject("plannerList", plannerList);
 		mav.setViewName("user/planner/plannerList");
@@ -219,7 +229,7 @@ public class PlannerServiceImp implements PlannerService {
 			
 			BookMarkDto bookMarkDto = new BookMarkDto();
 			bookMarkDto.setMem_no(mem_no);;
-			bookMarkDto.setBookmark_type_code(Constant.BOOKMARK_TYPE_PLANNER);
+			bookMarkDto.setBookmark_type_code(Constant.SCHEDULE_TYPE_PLANNER);
 			bookMarkDto.setItem_no(planner_no);
 			checkBookMark = bookMarkDao.isBookMarked(bookMarkDto);
 			bookmark_count = bookMarkDao.getTotalBookMark(bookMarkDto);
@@ -280,6 +290,7 @@ public class PlannerServiceImp implements PlannerService {
 	public void writePlannerOk(ModelAndView mav) {
 		Map<String, Object> map=mav.getModelMap();
 		HttpServletRequest request = (HttpServletRequest)map.get("request");
+		MemberDto userInfo = (MemberDto)request.getSession().getAttribute(Constant.SYNN_LOGIN_OBJECT);
 
 		System.out.println("**** request ****");
 		Enumeration params = request.getParameterNames(); 
@@ -293,15 +304,15 @@ public class PlannerServiceImp implements PlannerService {
 
 		int planner_no = Integer.parseInt(request.getParameter("planner_no"));
 		plannerDto.setPlanner_no(planner_no);		
-		int mem_no = Integer.parseInt(request.getParameter("mem_no"));
+		int mem_no = userInfo.getMem_no();
 		plannerDto.setMem_no(mem_no);		
 		plannerDto.setTitle(request.getParameter("planner_title"));
 		plannerDto.setMemo(request.getParameter("planner_memo").replace("\r\n", "<br/>"));
-		
+
 		CommonFileIODto commonFileIODto = commonFileIOService.requestWriteFileAndDTO(request, "attach_file", plannerPath);
 		if(commonFileIODto != null){
 			commonFileIODto.setType_code(Constant.FILE_TYPE_SCHEDULE);
-			commonFileIODto.setWrite_no(planner_no);
+			commonFileIODto.setWrite_no(mem_no);
 			String planner_photo_num = commonFileIOService.insertFileInfo(commonFileIODto) + "";
 			plannerDto.setAttach_file(planner_photo_num);
 		}
@@ -362,7 +373,8 @@ public class PlannerServiceImp implements PlannerService {
 				CommonFileIODto commonFileIODto = commonFileIOService.requestWriteFileAndDTO(request, itemString + "_attach_photoes", itemPath);
 				if(commonFileIODto != null){
 					commonFileIODto.setType_code(Constant.FILE_TYPE_ITEM);
-					commonFileIODto.setWrite_no(planner_no);
+					
+					commonFileIODto.setWrite_no(mem_no);
 					String item_photo_num = commonFileIOService.insertFileInfo(commonFileIODto) + ",";
 					System.out.println("item_photo_num : " + item_photo_num);
 					itemDto.setAttach_photoes(item_photo_num);
@@ -396,9 +408,15 @@ public class PlannerServiceImp implements PlannerService {
 	public void deletePlanner(ModelAndView mav) {
 		Map<String, Object> map=mav.getModelMap();
 		HttpServletRequest request = (HttpServletRequest)map.get("request");
+		MemberDto userInfo = (MemberDto)request.getSession().getAttribute(Constant.SYNN_LOGIN_OBJECT);
 		int planner_no = Integer.parseInt(request.getParameter("planner_no"));
+		
+		PlannerDto plannerDto = new PlannerDto();
+		plannerDto.setUse_yn(Constant.SYNB_YN_N);
+		plannerDto.setPlanner_no(planner_no);
+		plannerDto.setMem_no(userInfo.getMem_no());
 
-		int check = plannerDao.deletePlanner(planner_no);
+		int check = plannerDao.updatePlannerStatus(plannerDto);
 
 		mav.addObject("check", check);
 		mav.setViewName("user/planner/plannerDelete");
