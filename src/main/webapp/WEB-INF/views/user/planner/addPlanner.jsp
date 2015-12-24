@@ -19,32 +19,6 @@
 	<!-- 도시&국가 셀렉트박스 -->
 	<script type="text/javascript" src="/script/user/planner/selectedCountry.js"></script>	
 	<script type="text/javascript" src="/script/user/planner/addPlannerPage.js"></script>	
-	
-	<!-- 사이드 바 고정 -->
-	<style type="text/css">
-		.affix-top,.affix{
-		 position: static;
-		}
-		
-		@media (min-width: 979px) {
-		  #sidebar.affix-top {
-		    position: static;
-		  	width:228px;
-		  }
-		  
-		  #sidebar.affix {
-		    position: fixed;
-		    top:70px;
-		    width:228px;
-		  }
-		}
-		
-		#sidebar li.active {
-		  border:0 #eee solid;
-		  border-right-width:5px;
-		}
-	</style>
-	<!-- 사이드바 고정 끝 -->
 </head>
 <script type="text/javascript">
 	function spotReadPage(no) {
@@ -86,16 +60,16 @@
 		
 		/* smooth scrolling sections */
 		$('a[href*=#]:not([href=#])').click(function() {
-		    if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
-		      var target = $(this.hash);
-		      target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
-		      if (target.length) {
-		        $('html,body').animate({
-		          scrollTop: target.offset().top - 50
-		        }, 1000);
-		        return false;
-		      }
-		    }
+			if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
+				var target = $(this.hash);
+				target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
+				if (target.length) 	{
+					$('html,body').animate({
+					scrollTop: target.offset().top - 50}, 1000
+					);
+					return false;
+				}
+			}
 		});
 	});
 </script>
@@ -123,67 +97,82 @@
 		<div class="row">
 		<!--Left Sidebar-->
 			<div class="col-md-3 md-margin-bottom-40" id="leftCol">
-				<!--Notification-->
-				<div class="tag-box tag-box-v4 rounded-2x margin-bottom-20 affix-top" style="padding : 7px;" id="sidebar">
-					<div class="panel-heading-v2 overflow-h">
-						<h2 class="heading-xs pull-left"><i class="fa fa-map-marker"></i> Spot</h2>
-					</div>
-
-					<div class="panel-heading-v2 overflow-h">
-						<form class="sky-form">
-						<input type="hidden" id="spot_page" value="1"/>
-							<!-- 나라 -->
-							<label class="select">
-								<select name="country_code" id="selectCountry" onchange="selectSpotList(true)">
-									<option value=""> Country </option>
-									<c:forEach var="country" items="${countryList}" >
-										<option value="${country.code}">${country.code_name}</option>
-									</c:forEach>
-								</select>
-								<i></i>
-							</label>
-
-							<!-- 도시 -->
-							<label class="select">
-								<select name="city_code" id="selectCity" onchange="selectSpotList(false)">
-									<option value=""> City </option>
-								</select>
-								<i></i>
-							</label>
-
-							<!-- 명소타입 -->
-							<label class="select">
-								<select name="spot_type_code" id="selectType" onchange="selectSpotList(false)">
-									<option value=""> SpotType </option>
-									<c:forEach var="spotType" items="${spotTypeList}">
-										<option value="${spotType.code}">${spotType.code_name}</option>
-									</c:forEach>
-								</select>
-								<i></i>
-							</label>
-						</form>
-					</div>
-					<hr style="margin : 0px 0px 5px 0px;"/>
-
-					<div>
-						<ul class="list-unstyled mCustomScrollbar margin-bottom-20" data-mcs-theme="minimal-dark" id="spotLists">
-							<c:forEach var="spot" items="${spotList}">
-								<li class="notification" style="margin:0px;border:1px solid #eee;padding:5px 5px;height: 48px;" id="spotItem">
-									<div id="${spot.spot_no}_item" class="ui-widget-content" style="border:0px;">
-										<i style="margin:0;"><img alt="" src="/attatchFile/spot/${spot.spot_photoes[0].save_name}.${spot.spot_photoes[0].extension}" style="width:35px;height:35px;margin-right:5px;"></i>
-										<div class="overflow-h">
-											<span>
-												<strong><a href="javascript:spotReadPage('${spot.spot_no}')">${spot.spot_name}</a></strong>
-											</span>
-											<small><c:out value="${spot.spot_note}"/></small>
+				<!-- 사이드 바 메뉴 고정 -->
+				<div class="affix-top" id="sidebar">
+					<!--Notification-->
+					<div class="tag-box tag-box-v4 rounded-2x margin-bottom-20" style="padding : 7px;">
+						<div class="panel-heading-v2 overflow-h">
+							<h2 class="heading-xs pull-left"><i class="fa fa-map-marker"></i> Spot</h2>
+						</div>
+	
+						<div class="panel-heading-v2 overflow-h">
+							<form class="sky-form">
+							<input type="hidden" id="spot_page" value="1"/>
+								<!-- 나라 -->
+								<label class="select">
+									<select name="country_code" id="selectCountry" onchange="selectSpotList(true)">
+										<option value=""> Country </option>
+										<c:forEach var="country" items="${countryList}" >
+											<option value="${country.code}">${country.code_name}</option>
+										</c:forEach>
+									</select>
+									<i></i>
+								</label>
+	
+								<!-- 도시 -->
+								<label class="select">
+									<select name="city_code" id="selectCity" onchange="selectSpotList(false)">
+										<option value=""> City </option>
+									</select>
+									<i></i>
+								</label>
+	
+								<!-- 명소타입 -->
+								<label class="select">
+									<select name="spot_type_code" id="selectType" onchange="selectSpotList(false)">
+										<option value=""> SpotType </option>
+										<c:forEach var="spotType" items="${spotTypeList}">
+											<option value="${spotType.code}">${spotType.code_name}</option>
+										</c:forEach>
+									</select>
+									<i></i>
+								</label>
+							</form>
+						</div>
+						<hr style="margin : 0px 0px 5px 0px;"/>
+	
+						<div>
+							<ul class="list-unstyled mCustomScrollbar margin-bottom-20" data-mcs-theme="minimal-dark" id="spotLists">
+								<c:forEach var="spot" items="${spotList}">
+									<li class="notification" style="margin:0px;border:1px solid #eee;padding:5px 5px;height: 48px;" id="spotItem">
+										<div id="${spot.spot_no}_item" class="ui-widget-content" style="border:0px;">
+											<i style="margin:0;"><img alt="" src="/attatchFile/spot/${spot.spot_photoes[0].save_name}.${spot.spot_photoes[0].extension}" style="width:35px;height:35px;margin-right:5px;"></i>
+											<div class="overflow-h">
+												<span>
+													<strong><a href="javascript:spotReadPage('${spot.spot_no}')">${spot.spot_name}</a></strong>
+												</span>
+												<small><c:out value="${spot.spot_note}"/></small>
+											</div>
 										</div>
-									</div>
-								</li>
-							</c:forEach>
-						</ul>
+									</li>
+								</c:forEach>
+							</ul>
+						</div>
+						<button type="button" class="btn-u btn-u-default btn-u-sm btn-block" onclick="selectMoreSpotList()">Load More</button>
+						<!--End Notification-->
 					</div>
-					<button type="button" class="btn-u btn-u-default btn-u-sm btn-block" onclick="selectMoreSpotList()">Load More</button>
-					<!--End Notification-->
+					
+					<div class="tag-box tag-box-v4 rounded-2x margin-bottom-20" style="padding : 7px;">
+						<form action="#" id="sky-form" class="sky-form">
+						<!--Datepicker-->
+							<div class="row">
+								<section class="col col-3">
+									<div id="inline-start"></div>
+								</section>
+							</div>
+						</form>
+					<!--End Datepicker-->
+					</div>
 				</div>
 			</div>
 			<!--End Left Sidebar-->
