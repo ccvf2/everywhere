@@ -19,26 +19,87 @@
 	<!-- 도시&국가 셀렉트박스 -->
 	<script type="text/javascript" src="/script/user/planner/selectedCountry.js"></script>	
 	<script type="text/javascript" src="/script/user/planner/addPlannerPage.js"></script>	
+	
+	<!-- 사이드 바 고정 -->
+	<style type="text/css">
+		.affix-top,.affix{
+		 position: static;
+		}
+		
+		@media (min-width: 979px) {
+		  #sidebar.affix-top {
+		    position: static;
+		  	width:228px;
+		  }
+		  
+		  #sidebar.affix {
+		    position: fixed;
+		    top:70px;
+		    width:228px;
+		  }
+		}
+		
+		#sidebar li.active {
+		  border:0 #eee solid;
+		  border-right-width:5px;
+		}
+	</style>
+	<!-- 사이드바 고정 끝 -->
 </head>
 <script type="text/javascript">
-function spotReadPage(no) {
-	//alert(no);
-	var makeDiv ="<div id='showModal"+no+"'></div>";
-	var requestURL="/user/spot/spotReadPage.do?spot_no="+no;
+	function spotReadPage(no) {
+		//alert(no);
+		var makeDiv ="<div id='showModal"+no+"'></div>";
+		var requestURL="/user/spot/spotReadPage.do?spot_no="+no;
+		
 		$.ajax({
-					url : requestURL,
-					type : "GET",
-					dataType : "html",
-					success : function(data) {
-						$("body").append(makeDiv);
-						$("#showModal"+no).append(data)
-					},
-					error : function() {
-						alert("목록 가져오기 실패");
-					}
-				})
-}
+			url : requestURL,
+			type : "GET",
+			dataType : "html",
+			success : function(data) {
+				$("body").append(makeDiv);
+				$("#showModal"+no).append(data)
+			},
+			error : function() {
+				alert("목록 가져오기 실패");
+			}
+		})
+	}
+	/*사이드 바 메뉴 고정을 위한 스크립트*/
+	$(document).ready(function(){
+		/* activate sidebar */
+		$('#sidebar').affix({
+		  offset: {
+		    top: 205
+		  }
+		});
+		
+		/* 사이드바 고정을 위한 스크립트 */
+		/* activate scrollspy menu */
+		var $body   = $(document.body);
+		var navHeight = $('.navbar').outerHeight(true) + 10;
+		
+		$body.scrollspy({
+			target: '#leftCol',
+			offset: navHeight
+		});
+		
+		/* smooth scrolling sections */
+		$('a[href*=#]:not([href=#])').click(function() {
+		    if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
+		      var target = $(this.hash);
+		      target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
+		      if (target.length) {
+		        $('html,body').animate({
+		          scrollTop: target.offset().top - 50
+		        }, 1000);
+		        return false;
+		      }
+		    }
+		});
+	});
 </script>
+
 <body>
 	<div class="wrapper">
 		<!--=== Header ===-->	
@@ -61,9 +122,9 @@ function spotReadPage(no) {
 	<div class="container content profile" >
 		<div class="row">
 		<!--Left Sidebar-->
-			<div class="col-md-3 md-margin-bottom-40">
+			<div class="col-md-3 md-margin-bottom-40" id="leftCol">
 				<!--Notification-->
-				<div class="tag-box tag-box-v4 rounded-2x margin-bottom-20" style="padding : 7px;">
+				<div class="tag-box tag-box-v4 rounded-2x margin-bottom-20 affix-top" style="padding : 7px;" id="sidebar">
 					<div class="panel-heading-v2 overflow-h">
 						<h2 class="heading-xs pull-left"><i class="fa fa-map-marker"></i> Spot</h2>
 					</div>
@@ -123,18 +184,6 @@ function spotReadPage(no) {
 					</div>
 					<button type="button" class="btn-u btn-u-default btn-u-sm btn-block" onclick="selectMoreSpotList()">Load More</button>
 					<!--End Notification-->
-				</div>
-
-				<div class="tag-box tag-box-v4 rounded-2x margin-bottom-20" style="padding : 7px;">
-				<form action="#" id="sky-form" class="sky-form">
-				<!--Datepicker-->
-					<div class="row">
-						<section class="col col-3">
-							<div id="inline-start"></div>
-						</section>
-					</div>
-				</form>
-				<!--End Datepicker-->
 				</div>
 			</div>
 			<!--End Left Sidebar-->
