@@ -383,12 +383,7 @@
 					</div>
 
 					<div class="modal-footer">
-						<div align="left">
-							<h3>이미 아이디가 있습니까?</h3>
-						</div>
-
 						<div align="right">
-							<a class="btn-u btn-u-default" href="/user/login/login.do">로그인</a>
 							<button type="submit" class="btn-u">회원가입</button>
 						</div>
 					</div>
