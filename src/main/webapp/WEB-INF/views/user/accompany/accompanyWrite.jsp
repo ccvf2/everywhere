@@ -195,7 +195,7 @@
 		                        <!-- 파일 끝 -->
 		                        <footer>
 			                        <button type="submit" class="btn-u">글쓰기</button>
-			                        <input class="btn-u btn-u-default	" type="button" value="취소" onclick="location.href='/user/accompany/accompanyList.do'" />
+			                        <input class="btn-u btn-u-default" type="button" value="취소" onclick="location.href='/user/accompany/accompanyList.do'" />
 			                        <div class="progress"></div>
 			                    </footer>  
 			                    <div class="message">
