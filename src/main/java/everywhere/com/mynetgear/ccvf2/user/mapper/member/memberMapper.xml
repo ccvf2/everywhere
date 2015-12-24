@@ -2,16 +2,20 @@
 <!DOCTYPE mapper
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 회원가입 mapper -->
 <mapper namespace="everywhere.com.mynetgear.ccvf2.user.mapper.member">
+	<!-- 이메일 체크 쿼리 -->
 	<select id="emailCheck" parameterType="String" resultType="String">
 		select mem_email from tbl_member where mem_email=#{email}
 	</select>
 	
+	<!-- 회원가입 쿼리 -->
 	<insert id="memberRegist" parameterType="everywhere.com.mynetgear.ccvf2.user.dto.member.MemberDto">
 		insert into tbl_member values
 		(tbl_member_mem_no_seq.nextval,#{mem_email},#{mem_pwd},#{mem_name},#{mem_phone},#{mem_interest},#{mem_status_code},#{mem_level_code},#{mem_p_status_code},#{mem_profile_photo},sysdate)
 	</insert>
 	
+	<!-- 회원정보보기 쿼리 -->
 	<select id="memberRead" parameterType="int" resultType="everywhere.com.mynetgear.ccvf2.user.dto.member.MemberDto">
 		select 
 			k.MEM_NO
@@ -31,6 +35,7 @@
  			k.mem_no=#{mem_no}
 	</select>
 	
+	<!-- 회원정보수정 쿼리 -->
 	<update id="memberUpdate" parameterType="everywhere.com.mynetgear.ccvf2.user.dto.member.MemberDto">
 		update tbl_member 
 		set mem_pwd=#{mem_pwd}
@@ -39,6 +44,7 @@
 		where mem_no=#{mem_no}
 	</update>
 	
+	<!-- 회원정보삭제(비활성화) 쿼리 -->
 	<update id="memberDelete" parameterType="everywhere.com.mynetgear.ccvf2.user.dto.member.MemberDto">
 		update tbl_member set mem_status_code=#{mem_status_code} where mem_no=#{mem_no} and mem_pwd=#{mem_pwd}
 	</update>
