@@ -1,5 +1,7 @@
 package everywhere.com.mynetgear.ccvf2.user.service.planner;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -9,6 +11,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -100,21 +103,25 @@ public class PlannerServiceImp implements PlannerService {
 	}
 
 	@Override
-	public void getPlannerListByMember(ModelAndView mav) {
-		Map<String, Object> map=mav.getModelMap();
-		HttpServletRequest request = (HttpServletRequest)map.get("request");
-		int mem_no = Integer.parseInt(request.getParameter("mem_no"));
+	public List<PlannerDto> getPlannerListByMember(HttpServletRequest request) {
+		String mem_email = request.getParameter("mem_email");
+		MemberDto userInfo = (MemberDto)request.getSession().getAttribute(Constant.SYNN_LOGIN_OBJECT);
 
-		List<PlannerDto> plannerList = plannerDao.getPlannerListByMember(mem_no);
+		PlannerDto plannerDto = new PlannerDto();
+		if(mem_email == userInfo.getMem_email()){
+			plannerDto.setMem_no(userInfo.getMem_no());
+			plannerDto.setUse_yn(Constant.SYNB_YN_D);
+		}else{
+			MemberDto userDto = memberDao.getOneMemberInfoAsEmail(mem_email);
+			plannerDto.setMem_no(userDto.getMem_no());
+			plannerDto.setUse_yn(Constant.SYNB_YN_Y);
+		}
 
-		mav.addObject("plannerList", plannerList);
-		mav.setViewName("user/planner/plannerList");
+		return plannerDao.getPlannerListByMember(plannerDto);
 	}
 	
 	@Override
 	public void getPlannerListForAll(ModelAndView mav) {
-		Map<String, Object> map=mav.getModelMap();
-		
 		List<PlannerDto> plannerList = plannerDao.getPlannerListForAll();
 
 		mav.addObject("plannerList", plannerList);
@@ -215,12 +222,12 @@ public class PlannerServiceImp implements PlannerService {
 		// 로그인 안한 사람은 숫자 -1, 
 		int checkSweet = -1;
 		int checkBookMark = -1;
-		// 로그인 한 사람과 글 쓴 사람이 동일하면 숫자 0
+		// 로그인 한 사람과 글 쓴 사람이 동일하면 숫자 2
 		if(mem_no == plannerDto.getMem_no()){
-			checkSweet = 0;
-			checkBookMark = 0;
+			checkSweet = 2;
+			checkBookMark = 2;
 		}
-		//로그인 했으나 이미 추천&즐겨찾기 안했으면 숫자 0, 했으면 숫자 1가 리턴된다.
+		//로그인 했으나 추천&즐겨찾기 안했으면 숫자 0, 했으면 숫자 1가 리턴된다.
 		if(mem_no != 0 && mem_no != plannerDto.getMem_no()){
 			SweetDto sweetDto = new SweetDto();
 			sweetDto.setMem_no(mem_no);
@@ -228,7 +235,7 @@ public class PlannerServiceImp implements PlannerService {
 			checkSweet = sweetDao.isSweet(sweetDto);
 			
 			BookMarkDto bookMarkDto = new BookMarkDto();
-			bookMarkDto.setMem_no(mem_no);;
+			bookMarkDto.setMem_no(mem_no);
 			bookMarkDto.setBookmark_type_code(Constant.SCHEDULE_TYPE_PLANNER);
 			bookMarkDto.setItem_no(planner_no);
 			checkBookMark = bookMarkDao.isBookMarked(bookMarkDto);
@@ -405,6 +412,35 @@ public class PlannerServiceImp implements PlannerService {
 	}
 
 	@Override
+	public void lockPlanner(ModelAndView mav) {
+		Map<String, Object> map=mav.getModelMap();
+		HttpServletRequest request = (HttpServletRequest)map.get("request");
+		HttpServletResponse response = (HttpServletResponse)map.get("response");
+		MemberDto userInfo = (MemberDto)request.getSession().getAttribute(Constant.SYNN_LOGIN_OBJECT);
+		int planner_no = Integer.parseInt(request.getParameter("planner_no"));
+		boolean isLock = Boolean.parseBoolean(request.getParameter("isLock"));
+		PlannerDto plannerDto = new PlannerDto();
+
+		if(isLock == true)
+			plannerDto.setUse_yn(Constant.SYNB_YN_N);
+		else
+			plannerDto.setUse_yn(Constant.SYNB_YN_Y);
+
+		plannerDto.setPlanner_no(planner_no);
+		plannerDto.setMem_no(userInfo.getMem_no());
+		
+		int check = plannerDao.updatePlannerStatus(plannerDto);
+		
+		try {
+			response.setContentType("application/html;charset=utf8");
+			PrintWriter out = response.getWriter();
+			out.print(check+","+isLock);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	@Override
 	public void deletePlanner(ModelAndView mav) {
 		Map<String, Object> map=mav.getModelMap();
 		HttpServletRequest request = (HttpServletRequest)map.get("request");
@@ -412,13 +448,14 @@ public class PlannerServiceImp implements PlannerService {
 		int planner_no = Integer.parseInt(request.getParameter("planner_no"));
 		
 		PlannerDto plannerDto = new PlannerDto();
-		plannerDto.setUse_yn(Constant.SYNB_YN_N);
+		plannerDto.setUse_yn(Constant.SYNB_YN_D);
 		plannerDto.setPlanner_no(planner_no);
 		plannerDto.setMem_no(userInfo.getMem_no());
 
 		int check = plannerDao.updatePlannerStatus(plannerDto);
 
 		mav.addObject("check", check);
+		mav.addObject("planner_no", planner_no);
 		mav.setViewName("user/planner/plannerDelete");
 	}
 }

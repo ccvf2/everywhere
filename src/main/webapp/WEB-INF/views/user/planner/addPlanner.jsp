@@ -15,8 +15,8 @@
 	<link rel="stylesheet" href="/assets/plugins/scrollbar/css/jquery.mCustomScrollbar.css">
 
 	<!-- 도시&국가 셀렉트박스 -->
-	<script type="text/javascript" src="/script/user/planner/selectedCountry.js"></script>	
-	<script type="text/javascript" src="/script/user/planner/addPlannerPage.js"></script>	
+	<script type="text/javascript" src="/script/user/planner/selectedCountry.js"></script>
+	<script type="text/javascript" src="/script/user/planner/addPlannerPage.js"></script>
 </head>
 <script type="text/javascript">
 	function spotReadPage(no) {

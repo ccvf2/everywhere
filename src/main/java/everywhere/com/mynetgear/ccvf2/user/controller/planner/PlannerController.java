@@ -78,6 +78,15 @@ public class PlannerController {
 		return mav;
 	}
 
+	@RequestMapping(value = "/user/planner/lockPlanner.ajax", method = RequestMethod.GET)
+	public ModelAndView lockPlanner(HttpServletRequest request, HttpServletResponse response) {
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("request", request);
+		mav.addObject("response", response);
+		plannerService.lockPlanner(mav);
+		return null;
+	}
+
 	@RequestMapping(value = "/user/planner/deletePlanner.do", method = RequestMethod.GET)
 	public ModelAndView deletePlanner(HttpServletRequest request, HttpServletResponse response) {
 		ModelAndView mav = new ModelAndView();

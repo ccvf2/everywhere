@@ -1,6 +1,17 @@
 /**
- * 
+ *창! 
  */
+
+function startup(use_yn, writer_no, mem_no){
+	if(use_yn == 'Y0002' && writer_no != mem_no){
+		alert("비공개 글입니다");
+		window.history.back();
+	}
+	if(use_yn == 'Y0003'){
+		alert("삭제된 글입니다.");
+		window.history.back();
+	}
+}
 
 function insertSweet(planner_no, checkSweet){
 	if(checkSweet == '-1'){
@@ -87,29 +98,87 @@ function deleteBookMark(planner_no, checkBookMark){
 		})
 }
 
-function setBackground(image, planner_no, checkSweet, checkBookMark){
+function setPlanner(image, planner_no, checkSweet, checkBookMark, use_yn){
 	if(image != null){
 		$('.breadcrumbs-v1').css('background-image', 'url(/attatchFile/planner/'+image+')');
 	}
 	
-	if(checkSweet <= '0'){
-		$("#likeBtn").attr("href", "javascript:insertSweet('"+planner_no+"', '"+checkSweet+"')");
+	if(checkSweet < '1'){
+		$("#likeBtn").attr("href", "javascript:insertSweet("+planner_no+", "+checkSweet+")");
 		$(".fa-heart").hide();
 	}
+	else if(checkSweet == 2)
+		$(".fa-heart").hide();
 	else{
 		$(".fa-heart-o").hide();
 	}
 
 	if(checkBookMark <= '0'){
-		$("#bookmarkBtn").attr("href", "javascript:insertBookMark('"+planner_no+"', '"+checkBookMark+"')");
+		$("#bookmarkBtn").attr("href", "javascript:insertBookMark("+planner_no+", "+checkBookMark+")");
+		$(".fa-bookmark").hide();
+	}
+	else if(checkBookMark == '2'){
 		$(".fa-bookmark").hide();
 	}
 	else{
-		$("#bookmarkBtn").attr("href", "javascript:deleteBookMark('"+planner_no+"', '"+checkBookMark+"')");
+		$("#bookmarkBtn").attr("href", "javascript:deleteBookMark("+planner_no+", "+checkBookMark+")");
 		$(".fa-bookmark-o").hide();
 	}
+	
+	if(use_yn == 'Y0001')
+		$('#planner_unlock').hide();
+	else if(use_yn == 'Y0002')
+		$('#planner_lock').hide();
+}
+
+function lockPlanner(planner_no, isLock){
+	var params = "planner_no="+planner_no+"&isLock="+isLock;
+	var url = "/user/planner/lockPlanner.ajax?" + params;
+	alert(url);
+	$.ajax({
+		url : url,
+		type : "GET",
+		dataType : "text",
+		success : function(data) {
+			if(data != ''){
+				var result = data.split(",");
+				if(result[0] == '1' && result[1] == 'true'){
+					$('#planner_unlock').show();
+					$('#planner_lock').hide();
+				}else if(result[0] == '1' && result[1] == 'false'){
+					$('#planner_lock').show();
+					$('#planner_unlock').hide();
+				}else
+					alert("글 상태 변경이 실패되었습니다.")
+			}
+		},
+		error : function() {
+			alert("글 상태 변경이 실패되었습니다.")
+		}
+	})
 }
 
 function deletePlanner(planner_no){
+	var answer = confirm("정말로 삭제하시겠습니까?");
+	if(answer == false)
+		return;
 	var url = "/user/planner/deletePlanner.do?planner_no="+planner_no;
+	location.href = url;
+}
+
+function spotReadPage(no) {
+	var makeDiv ="<div id='showModal"+no+"'></div>";
+	var requestURL="/user/spot/spotReadPage.do?spot_no="+no;
+		$.ajax({
+			url : requestURL,
+			type : "GET",
+			dataType : "html",
+			success : function(data) {
+				$("body").append(makeDiv);
+				$("#showModal"+no).append(data)
+			},
+			error : function() {
+				alert("목록 가져오기 실패");
+			}
+		})
 }
