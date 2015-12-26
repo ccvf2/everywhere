@@ -13,8 +13,6 @@
 
 	<!-- CSS Implementing Plugins -->
 	<link rel="stylesheet" href="/assets/plugins/scrollbar/css/jquery.mCustomScrollbar.css">
-	<link rel="stylesheet" href="/assets/plugins/sky-forms-pro/skyforms/css/sky-forms.css">
-	<link rel="stylesheet" href="/assets/plugins/sky-forms-pro/skyforms/custom/custom-sky-forms.css">
 
 	<!-- 도시&국가 셀렉트박스 -->
 	<script type="text/javascript" src="/script/user/planner/selectedCountry.js"></script>	
@@ -39,40 +37,14 @@
 			}
 		})
 	}
-	/*사이드 바 메뉴 고정을 위한 스크립트*/
-	$(document).ready(function(){
-		/* activate sidebar */
-		$('#sidebar').affix({
-		  offset: {
-		    top: 205
-		  }
-		});
-		
-		/* 사이드바 고정을 위한 스크립트 */
-		/* activate scrollspy menu */
-		var $body   = $(document.body);
-		var navHeight = $('.navbar').outerHeight(true) + 10;
-		
-		$body.scrollspy({
-			target: '#leftCol',
-			offset: navHeight
-		});
-		
-		/* smooth scrolling sections */
-		$('a[href*=#]:not([href=#])').click(function() {
-			if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
-				var target = $(this.hash);
-				target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
-				if (target.length) 	{
-					$('html,body').animate({
-					scrollTop: target.offset().top - 50}, 1000
-					);
-					return false;
-				}
-			}
-		});
-	});
 </script>
+
+<style>
+.affix {
+	top : 0px;
+	width : 18.447%;
+}
+</style>
 
 <body>
 	<div class="wrapper">
@@ -96,9 +68,9 @@
 	<div class="container content profile" >
 		<div class="row">
 		<!--Left Sidebar-->
-			<div class="col-md-3 md-margin-bottom-40" id="leftCol">
+			<nav class="col-sm-3 md-margin-bottom-40" >
 				<!-- 사이드 바 메뉴 고정 -->
-				<div class="affix-top" id="sidebar">
+				<div class="nav nav-pills nav-stacked" data-spy="affix" data-offset-top="307" id="sidebar">
 					<!--Notification-->
 					<div class="tag-box tag-box-v4 rounded-2x margin-bottom-20" style="padding : 7px;">
 						<div class="panel-heading-v2 overflow-h">
@@ -151,7 +123,7 @@
 												<span>
 													<strong><a href="javascript:spotReadPage('${spot.spot_no}')">${spot.spot_name}</a></strong>
 												</span>
-												<small><c:out value="${spot.spot_note}"/></small>
+												<span><small><c:out value="${spot.spot_note}"/></small></span>
 											</div>
 										</div>
 									</li>
@@ -174,7 +146,7 @@
 					<!--End Datepicker-->
 					</div>
 				</div>
-			</div>
+			</nav>
 			<!--End Left Sidebar-->
 
 		<!--Tag Box v4-->
@@ -195,7 +167,7 @@
 								<div class="col col-4">
 									<label class="input">
 										<i class="icon-append fa fa-calendar"></i>
-										<input type="text" name="start_date" id="start" placeholder="Start date" value="${start_date}">
+										<input type="date" name="start_date" placeholder="Start Date" value="${start_date }">
 									</label>
 								</div>
 								<div class="col col-2" style="padding-left: 0px;">
@@ -221,11 +193,11 @@
 								<h2 class="heading-xs" id="d${i}_items_date">Day ${i}</h2>
 								<c:set var="id_value" value="d${i}_item1"/>
 									<ol class="list-unstyled" id="d${i}_item_ol">
-										<li>
+										<li id="d${i}_item1_li">
 										<div class="panel-group">
 											<input type="hidden" name="${id_value}_no"/>
 											<div class="panel panel-default">
-												<div class="panel-heading ui-widget-header dropItem">
+												<div class="ui-widget-header dropItem" style="height:52px;">
 													<a data-toggle="collapse" href="#collapse_${id_value}">
 														<i class="icon-note pull-right"></i>
 													</a>
@@ -242,6 +214,9 @@
 													</div>
 													<input type="hidden" id="${id_value}_money_count" name="${id_value}_money_count" value="0"/>
 													<div class="project-share">
+														<ul class="list-inline comment-list-v2" style="float: left">
+															<li><i data-toggle="tooltip" title="일정삭제" class="icon-trash" style="font-size:23px" onclick="deleteItem('${id_value}')"></i></li>
+														</ul>
 														<ul class="list-inline comment-list-v2 pull-right">
 															<li><i data-toggle="tooltip" title="시간정보 추가" class="icon-hourglass" style="font-size:23px" onclick="addTime('${id_value}')"></i></li>
 															<li><i data-toggle="tooltip" title="사진 추가" class="icon-picture input input-file" style="font-size:23px" onclick="addPhoto(this,'${id_value}')">
@@ -275,11 +250,11 @@
 			<h2 class="heading-xs" id="d0_items_date">Day 0</h2>
 			<c:set var="id_value" value="d0_item1"/>
 			<ol class="list-unstyled" id="d0_item_ol">
-				<li>
+				<li id="d0_item1_li">
 					<div class="panel-group ">
 						<input type="hidden" name="d0_item1_no"/>
 						<div class="panel panel-default">
-							<div class="panel-heading ui-widget-header dropItem">
+							<div class="ui-widget-header dropItem" style="height:52px;">
 								<a data-toggle="collapse" href="#collapse_d0_item1">
 									<i class="icon-note pull-right"></i>
 								</a>
@@ -296,6 +271,9 @@
 								</div>
 								<input type="hidden" id="d0_item1_money_count" name="d0_item1_money_count" value="0"/>
 								<div class="project-share">
+									<ul class="list-inline comment-list-v2" style="float: left">
+										<li><i data-toggle="tooltip" title="일정삭제" class="icon-trash" style="font-size:23px" onclick="deleteItem('${id_value}')"></i></li>
+									</ul>
 									<ul class="list-inline comment-list-v2 pull-right">
 										<li><i data-toggle="tooltip" title="시간정보 추가" class="icon-hourglass" style="font-size:23px" onclick="addTime('d0_item1')"></i></li>
 										<li><i data-toggle="tooltip" title="사진 추가" class="icon-picture input input-file" style="font-size:23px" onclick="addPhoto(this,'d0_item1')">
@@ -316,28 +294,14 @@
 	</div>
 	<!-- 동적 입력창을 위한 HTML 값 finish -->
 
-	<!-- JS Implementing Plugins -->
-	<script src="/assets/plugins/sky-forms-pro/skyforms/js/jquery.maskedinput.min.js"></script>
-	<script src="/assets/plugins/sky-forms-pro/skyforms/js/jquery-ui.min.js"></script>
-	<script src="/assets/plugins/sky-forms-pro/skyforms/js/jquery.validate.min.js"></script>
-	<!-- JS Customization -->
-	<script type="text/javascript" src="/assets/js/custom.js"></script>
 	<!-- JS Page Level -->
-	<script type="text/javascript" src="/assets/plugins/sky-forms-pro/skyforms/js/jquery-ui.min.js"></script>
-
-	<script type="text/javascript" src="/assets/js/plugins/style-switcher.js"></script>
 	<script type="text/javascript" src="/assets/plugins/scrollbar/js/jquery.mCustomScrollbar.concat.min.js"></script>
-	<script type="text/javascript" src="/assets/js/plugins/masking.js"></script>
-	<script type="text/javascript" src="/assets/js/plugins/datepicker2.js"></script>
-	<script type="text/javascript" src="/assets/js/plugins/validation.js"></script>
-	<script type="text/javascript" src="/assets/js/plugins/style-switcher.js"></script>
+	<script type="text/javascript" src="/assets/js/plugins/datepicker.js"></script>
 
 	<script type="text/javascript">
 	jQuery(document).ready(function() {
 		App.initScrollBar();
-		Masking.initMasking();
 		Datepicker.initDatepicker();
-		Validation.initValidation();
 	});
 	</script>
 </body>
