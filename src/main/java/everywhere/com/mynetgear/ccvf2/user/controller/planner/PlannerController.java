@@ -94,4 +94,12 @@ public class PlannerController {
 		plannerService.deletePlanner(mav);
 		return mav;
 	}
+	
+	@RequestMapping(value = "/user/planner/updatePlanner.do", method = RequestMethod.GET)
+	public ModelAndView updatePlanner(HttpServletRequest request, HttpServletResponse response) {
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("request", request);
+		plannerService.updatePlanner(mav);
+		return mav;
+	}
 }

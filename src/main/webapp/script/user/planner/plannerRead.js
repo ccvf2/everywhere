@@ -166,6 +166,11 @@ function deletePlanner(planner_no){
 	location.href = url;
 }
 
+function modifyPlanner(planner_no){
+	var url = "/user/planner/updatePlanner.do?planner_no="+planner_no;
+	location.href = url;
+}
+
 function spotReadPage(no) {
 	var makeDiv ="<div id='showModal"+no+"'></div>";
 	var requestURL="/user/spot/spotReadPage.do?spot_no="+no;

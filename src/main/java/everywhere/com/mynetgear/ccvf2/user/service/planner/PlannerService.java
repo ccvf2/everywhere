@@ -27,4 +27,6 @@ public interface PlannerService {
 	public void deletePlanner(ModelAndView mav);
 
 	public void getSpotList(ModelAndView mav);
+	
+	public void updatePlanner(ModelAndView mav);
 }

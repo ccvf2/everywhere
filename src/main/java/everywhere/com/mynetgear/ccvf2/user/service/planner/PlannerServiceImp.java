@@ -458,4 +458,66 @@ public class PlannerServiceImp implements PlannerService {
 		mav.addObject("planner_no", planner_no);
 		mav.setViewName("user/planner/plannerDelete");
 	}
+	
+	@Override
+	public void updatePlanner(ModelAndView mav) {
+		Map<String, Object> map=mav.getModelMap();
+		HttpServletRequest request = (HttpServletRequest)map.get("request");
+		int planner_no = Integer.parseInt(request.getParameter("planner_no"));
+
+		PlannerDto plannerDto = plannerDao.getOnePlanner(planner_no);
+
+		// Planner에 저장되어 있는 아이템 항목들을 가져오기
+		List<ItemDto> itemList = plannerDao.getItemList(planner_no);
+
+		for(int i = 0; i < itemList.size(); i++){
+			//아이템 별 명소 정보 가져오기
+			SpotDto spot = spotDao.getOneSpot(itemList.get(i).getSpot_no());
+			if(spot != null){
+				if(spot.getAttach_file() != null){
+					String[] attach_no = spot.getAttach_file().split(",");
+					// 명소 이미지 추가
+					List<CommonFileIODto> fileList = new ArrayList<CommonFileIODto>();
+					for(int j = 0; j < attach_no.length; j++){
+						int file_no = Integer.parseInt(attach_no[j]);
+						System.out.println("file_no : " + file_no);
+						CommonFileIODto fileIODto =  commonFileIoDao.getOneFileDto(file_no);
+						System.out.println(fileIODto);
+						fileList.add(fileIODto);
+					}
+					spot.setSpot_photoes(fileList);
+				}
+				itemList.get(i).setSpot(spot);
+			}
+
+			// 아이템 별 사진 가져오기
+			if(itemList.get(i).getAttach_photoes()!=null){
+				System.out.println("*********************************************");
+				String[] attach_no = itemList.get(i).getAttach_photoes().split(",");
+				List<CommonFileIODto> fileList = new ArrayList<CommonFileIODto>();
+				for(int j = 0; j < attach_no.length; j++){
+					int file_no = Integer.parseInt(attach_no[j]);
+					System.out.println("file_no : " + file_no);
+					CommonFileIODto fileIODto =  commonFileIoDao.getOneFileDto(file_no);
+					System.out.println(fileIODto);
+					fileList.add(fileIODto);
+				}
+				itemList.get(i).setItem_photoes(fileList);
+			}			
+
+			// 아이템 별 가계부 가져오기
+			List<MoneyDto> moneyList = plannerDao.getMoneyList(itemList.get(i).getItem_no());
+			itemList.get(i).setMoneyList(moneyList);
+		}
+		
+		long diff = plannerDto.getEnd_date().getTime() - plannerDto.getStart_date().getTime();
+		long diffDays = diff / (24 * 60 * 60 * 1000);
+
+		getSpotList(mav);
+		mav.addObject("day_count", diffDays+1);
+
+		mav.addObject("plannerDto", plannerDto);
+		mav.addObject("itemList", itemList);
+		mav.setViewName("user/planner/plannerUpdate");
+	}
 }
