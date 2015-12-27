@@ -16,9 +16,9 @@ function readCityList(check){
 			var result = data.split("|");
 			var str = "";
 			if(check==true) {
-				str+="<option value='' selected> City </option>";
+				str+="<option value='' selected> 도시 </option>";
 			}else{
-				str+="<option value='' selected disabled>City</option>";
+				str+="<option value='' selected disabled> 도시 </option>";
 			}
 			for(i = 0; i < result.length-1; i++){
 				var code = result[i].split(",");
@@ -39,7 +39,13 @@ function selectSpotList(city){
 	var typecode = document.getElementById("selectType").value;
 
 	if(city==true) {
-		readCityList(true);
+		if(countrycode != '')
+			readCityList(true);
+		else{
+			var str="<option value='' selected> 도시 </option>";
+			$("#selectCity").empty(); 
+			$("#selectCity").prepend(str);
+		}
 	}
 	var params = "country_code=" + countrycode + "&city_code=" + citycode + "&spot_type_code="+typecode;
 	var url = "/user/spot/selectSpotList.ajax?" + params;
@@ -141,6 +147,25 @@ function deleteSpot(spot_no){
 	if (check == true) {
 		location.href=urlName;
 	} else {
-	   	alert("취소하셨습니다");
+		alert("취소하셨습니다");
 	}
+}
+
+function spotReadPage(no) {
+	//alert(no);
+	var makeDiv ="<div id='showModal"+no+"'></div>";
+	var requestURL="/user/spot/spotReadPage.do?spot_no="+no;
+	
+	$.ajax({
+		url : requestURL,
+		type : "GET",
+		dataType : "html",
+		success : function(data) {
+			$("body").append(makeDiv);
+			$("#showModal"+no).append(data)
+		},
+		error : function() {
+			alert("목록 가져오기 실패");
+		}
+	})
 }
