@@ -8,7 +8,7 @@ $(function() {
 
 function setBackground(attach_image){
 	if(attach_image != null)
-		$('.breadcrumbs-v1').css('background-image', 'url(/attatchFile/planner/'+image+')');
+		$('.breadcrumbs-v1').css('background-image', 'url(/attatchFile/planner/'+attach_image+')');
 }
 
 function setDraggable(){

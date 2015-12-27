@@ -133,13 +133,14 @@
 					<c:forEach var="item" items="${itemList}">
 					<li class="equal-height-columns">
 						<fmt:formatNumber var="day" value="${item.item_order / 10100}" type="number" maxFractionDigits="0"/>
-						<c:if test="${count < day }">
-							<c:set var="count" value="${day}"/>
 							<div class="cbp_tmtime equal-height-column" style="width:100%;">
-								<span>Day ${day}</span>
-								<span style="font-size: 15px"><fmt:formatDate pattern="yyyy-MM-dd(E)" value="${plannerDto.start_date}" /></span>
+								<c:if test="${count < day }">
+									<c:set var="count" value="${day}"/>
+									<span>Day ${day}</span>
+									<span style="font-size: 15px">${dateList[count-1]}</span>
+								</c:if>
+								<span style="font-size: 12px">${item.item_time}</span>
 							</div>
-						</c:if>
 						<i class="cbp_tmicon rounded-x hidden-xs"></i>
 						<c:if test="${item.spot_no != 0 }">
 						<div class="cbp_tmlabel equal-height-column">

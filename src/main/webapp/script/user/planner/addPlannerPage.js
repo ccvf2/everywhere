@@ -162,6 +162,7 @@ function addMoney(input_name){
 		moneyDiv = document.createElement("div");
 		moneyDiv.id = "money"+input_name;
 		moneyDiv.className  = "panel-body";
+		moneyDiv.style.borderTop = 'solid 1px #EEEEEE';
 		$("#"+input_name+"_note_div").after(moneyDiv);
 	}
 
@@ -211,7 +212,7 @@ function addMoney(input_name){
 	pricelabel.className = "input col col-4";
 	var priceInput = document.createElement("input");
 	priceInput.style.marginLeft="10px";
-	priceInput.type="text";
+	priceInput.type="number";
 	priceInput.className = "col col-4";
 	priceInput.name= input_name+"_money"+money_count.value+"_price";
 	priceInput.placeholder="3000";

@@ -215,14 +215,15 @@
 													<input type="hidden" id="${id_value}_money_count" name="${id_value}_money_count" value="0"/>
 													<div class="project-share">
 														<ul class="list-inline comment-list-v2" style="float: left">
-															<li><i data-toggle="tooltip" title="일정삭제" class="icon-trash" style="font-size:23px" onclick="deleteItem('${id_value}')"></i></li>
+															<li>시간 : </li>
+															<li><input type="text" name="${id_value}_time" maxlength="20" placeholder="예) 8시 ~ 10시 사이"/> </li>
 														</ul>
 														<ul class="list-inline comment-list-v2 pull-right">
-															<li><i data-toggle="tooltip" title="시간정보 추가" class="icon-hourglass" style="font-size:23px" onclick="addTime('${id_value}')"></i></li>
 															<li><i data-toggle="tooltip" title="사진 추가" class="icon-picture input input-file" style="font-size:23px" onclick="addPhoto(this,'${id_value}')">
 															<div class="button" style="background-color:rgba(255, 255, 255, 0);"><input type="file" name="${id_value}_attach_photoes" onchange="addPhoto(this,'${id_value}')" accept="image/*"/></div>
 																</i></li>
 															<li><i data-toggle="tooltip" title="가계부 추가" class="icon-credit-card" style="font-size:23px" onclick="addMoney('${id_value}')"></i></li>
+															<li><i data-toggle="tooltip" title="일정삭제" class="icon-trash" style="font-size:23px" onclick="deleteItem('${id_value}')"></i></li>
 														</ul>
 													</div>
 												</div>
@@ -272,14 +273,15 @@
 								<input type="hidden" id="d0_item1_money_count" name="d0_item1_money_count" value="0"/>
 								<div class="project-share">
 									<ul class="list-inline comment-list-v2" style="float: left">
-										<li><i data-toggle="tooltip" title="일정삭제" class="icon-trash" style="font-size:23px" onclick="deleteItem('${id_value}')"></i></li>
+										<li>시간 : </li>
+										<li><input type="text" name="d0_item1_time" maxlength="20" placeholder="예) 8시 ~ 10시 사이"/> </li>
 									</ul>
 									<ul class="list-inline comment-list-v2 pull-right">
-										<li><i data-toggle="tooltip" title="시간정보 추가" class="icon-hourglass" style="font-size:23px" onclick="addTime('d0_item1')"></i></li>
 										<li><i data-toggle="tooltip" title="사진 추가" class="icon-picture input input-file" style="font-size:23px" onclick="addPhoto(this,'d0_item1')">
 										<div class="button" style="background-color:rgba(255, 255, 255, 0);"><input type="file" name="d0_item1_attach_photoes" onchange="addPhoto(this,'d0_item1')" accept="image/*"/></div>
 										</i></li>
 										<li><i data-toggle="tooltip" title="가계부 추가" class="icon-credit-card" style="font-size:23px" onclick="addMoney('d0_item1')"></i></li>
+										<li><i data-toggle="tooltip" title="일정삭제" class="icon-trash" style="font-size:23px" onclick="deleteItem('d0_item1')"></i></li>
 									</ul>
 								</div>
 							</div>

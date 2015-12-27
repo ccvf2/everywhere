@@ -7,6 +7,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Enumeration;
+import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Map;
 
@@ -140,6 +141,20 @@ public class PlannerServiceImp implements PlannerService {
 			mem_no = userInfo.getMem_no();
 
 		PlannerDto plannerDto = plannerDao.getOnePlanner(planner_no);
+		
+		// planner 날짜 정보 계산
+		long diff = plannerDto.getEnd_date().getTime() - plannerDto.getStart_date().getTime();
+		int dayCount = (int) diff / (24 * 60 * 60 * 1000);
+		String[] dateList = new String[dayCount+1];
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd (E)");
+		Calendar cal = new GregorianCalendar();
+		cal.setTime(plannerDto.getStart_date());
+		System.out.println("****Date****");
+		for(int i = 0; i <= dayCount; i++){
+			dateList[i] = sdf.format(cal.getTime());
+			System.out.println(dateList[i]);
+			cal.add(Calendar.DATE, 1);
+		}
 
 		// Planner 작성자의 정보를 가져온다.
 		MemberDto plannerWriter = new MemberDto();
@@ -243,6 +258,7 @@ public class PlannerServiceImp implements PlannerService {
 		}
 
 		mav.addObject("plannerDto", plannerDto);
+		mav.addObject("dateList", dateList);
 		mav.addObject("moneyTotal", moneyTotal);
 		mav.addObject("plannerWriter", plannerWriter);
 		mav.addObject("itemList", itemList);
@@ -376,6 +392,7 @@ public class PlannerServiceImp implements PlannerService {
 				String itemOrder = i + "010" + j;
 				itemDto.setItem_order(Integer.parseInt(itemOrder));
 				itemDto.setNote(request.getParameter(itemString+"_note").replace("\r\n", "<br/>"));
+				itemDto.setItem_time(request.getParameter(itemString+"_time"));
 
 				CommonFileIODto commonFileIODto = commonFileIOService.requestWriteFileAndDTO(request, itemString + "_attach_photoes", itemPath);
 				if(commonFileIODto != null){
@@ -404,7 +421,12 @@ public class PlannerServiceImp implements PlannerService {
 					moneyDto.setMoney_type_code(request.getParameter(moneyString+"_type_code"));
 					moneyDto.setMoney_currency_code(request.getParameter(moneyString+"_currency_code"));
 					moneyDto.setMoney_title(request.getParameter(moneyString+"_title"));
-					moneyDto.setPrice(Double.parseDouble(request.getParameter(moneyString+"_price")));
+					// 가계부 방어코드
+					String price = request.getParameter(moneyString+"_price");
+					if(price == null || price.equals("")){
+						price = "0";
+					}
+					moneyDto.setPrice(Double.parseDouble(price));
 					moneyList.add(moneyDto);
 				}
 			}
