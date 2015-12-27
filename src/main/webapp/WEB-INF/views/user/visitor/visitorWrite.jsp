@@ -78,16 +78,14 @@
 						<div class="clearfix margin-bottom-30"></div>
 		                <div class="shadow-wrapper">
 		                    <blockquote class="hero box-shadow shadow-effect-2">
-			                    	<div align="left" style="float: left;">
-			                    		<c:choose>
-			                    			<c:when test="${visitor.mem_no==mem_object.mem_no}">
-			                    				<c:set var="url" value="/user/myPage/myPage.do?uandMe=S0001"/>
-			                    			</c:when>
-			                    			<c:when test="${visitor.mem_no!=mem_object.mem_no}">
-			                    				<c:set var="url" value="/user/myPage/myPage.do?uandMe=S0002"/>
-			                    			</c:when>
-			                    		</c:choose>
-			                    	</div>
+		                    		<c:choose>
+		                    			<c:when test="${visitor.mem_no==mem_object.mem_no}">
+		                    				<c:set var="url" value="/user/myPage/myPage.do?uandMe=S0001"/>
+		                    			</c:when>
+		                    			<c:when test="${visitor.mem_no!=mem_object.mem_no}">
+		                    				<c:set var="url" value="/user/myPage/myPage.do?uandMe=S0002"/>
+		                    			</c:when>
+		                    		</c:choose>
 			                    	<div align="right" style="float: right; font-size:0.8em;"><fmt:formatDate value="${visitor.visitor_write_date}" type="both"/></div><br/>
 			                        <p><em>
 										<c:out value="${visitor.visitor_content}"/>
