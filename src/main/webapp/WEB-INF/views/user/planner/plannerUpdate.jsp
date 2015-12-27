@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %> 
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,29 +17,8 @@
 
 	<!-- 도시&국가 셀렉트박스 -->
 	<script type="text/javascript" src="/script/user/planner/selectedCountry.js"></script>
-	<script type="text/javascript" src="/script/user/planner/addPlannerPage.js"></script>
+	<script type="text/javascript" src="/script/user/planner/plannerUpdate.js"></script>
 </head>
-<script type="text/javascript">
-	function spotReadPage(no) {
-		//alert(no);
-		var makeDiv ="<div id='showModal"+no+"'></div>";
-		var requestURL="/user/spot/spotReadPage.do?spot_no="+no;
-		
-		$.ajax({
-			url : requestURL,
-			type : "GET",
-			dataType : "html",
-			success : function(data) {
-				$("body").append(makeDiv);
-				$("#showModal"+no).append(data)
-			},
-			error : function() {
-				alert("목록 가져오기 실패");
-			}
-		})
-	}
-</script>
-
 <style>
 .affix {
 	top : 0px;
@@ -46,7 +26,7 @@
 }
 </style>
 
-<body>
+<body onload="setBackground('${plannerDto.attach_file}')">
 	<div class="wrapper">
 		<!--=== Header ===-->	
 		<div class="header">
@@ -160,7 +140,7 @@
 						<div class="tag-box tag-box-v4 rounded-2x margin-bottom-30">
 							<label class="textarea">
 								<i class="icon-append fa fa-question-circle"></i>
-								<textarea name="planner_memo" rows="5" placeholder="부산으로 떠나는 즐거운 여행"></textarea>
+								<textarea name="planner_memo" rows="5" placeholder="부산으로 떠나는 즐거운 여행">${plannerDto.memo}</textarea>
 								<b class="tooltip tooltip-top-right">여행에 대한 짧은 메모를 입력해주세요</b>
 							</label>
 							<div class="row" style="margin-bottom:5px;">
@@ -187,55 +167,66 @@
 						</div>
 
 						<!-- Day Schedule -->
+						<c:set var="item_count" value="${fn:length(itemList)}"/>
+						<c:set var="read_count" value="0"/>
 						<c:forEach var="i" begin="1" end="${day_count}">
 							<div class="tag-box tag-box-v4 rounded-2x margin-bottom-30" id="d${i}_items_div">
-								<input type="hidden" id="d${i}_item_count" name="d${i}_item_count" value="1">
 								<h2 class="heading-xs" id="d${i}_items_date">Day ${i}</h2>
-								<c:set var="id_value" value="d${i}_item1"/>
 									<ol class="list-unstyled" id="d${i}_item_ol">
-										<li id="d${i}_item1_li">
-										<div class="panel-group">
-											<input type="hidden" name="${id_value}_no"/>
-											<div class="panel panel-default">
-												<div class="ui-widget-header dropItem" style="height:52px;">
-													<a data-toggle="collapse" href="#collapse_${id_value}">
-														<i class="icon-note pull-right"></i>
-													</a>
-													<h4 class="panel-title">
-														<span>Drag spot to add</span>
-													</h4>
-													<input type="hidden" id="${id_value}_spot_no" name="${id_value}_spot_no" value="0"/>
-												</div>
-												<div id="collapse_${id_value}" class="panel-collapse collapse">
-													<div id="${id_value}_note_div" class="panel-body" style="padding:0px">
-														<label class="textarea" style="margin:0">
-															<textarea style="border:0px" rows="3" id="${id_value}_note" name="${id_value}_note" placeholder="Write some notes.."></textarea>
-														</label>
+									<c:set var="day_item_count" value="0"/>
+									<c:forEach var="index" begin="${read_count}" end="${item_count}">
+									<fmt:formatNumber var="day" value="${itemList[index].item_order / 10100}" type="number" maxFractionDigits="0"/>
+										<c:if test="${i == day }">
+											<c:set var="day_item_count" value="${day_item_count+1}"/>
+											<c:set var="id_value" value="d${i}_item${day_item_count}"/>
+											<li id="d${i}_item1_li">
+											<div class="panel-group">
+												<input type="hidden" name="${id_value}_no" value="${itemList[index].item_no}"/>
+												<div class="panel panel-default">
+													<div class="ui-widget-header dropItem" style="height:52px;">
+														<a data-toggle="collapse" href="#collapse_${id_value}">
+															<i class="icon-note pull-right"></i>
+														</a>
+														<h4 class="panel-title">
+															<span>Drag spot to add</span>
+														</h4>
+														<input type="hidden" id="${id_value}_spot_no" name="${id_value}_spot_no" value="0"/>
 													</div>
-													<input type="hidden" id="${id_value}_money_count" name="${id_value}_money_count" value="0"/>
-													<div class="project-share">
-														<ul class="list-inline comment-list-v2" style="float: left">
-															<li><i data-toggle="tooltip" title="일정삭제" class="icon-trash" style="font-size:23px" onclick="deleteItem('${id_value}')"></i></li>
-														</ul>
-														<ul class="list-inline comment-list-v2 pull-right">
-															<li><i data-toggle="tooltip" title="시간정보 추가" class="icon-hourglass" style="font-size:23px" onclick="addTime('${id_value}')"></i></li>
-															<li><i data-toggle="tooltip" title="사진 추가" class="icon-picture input input-file" style="font-size:23px" onclick="addPhoto(this,'${id_value}')">
-															<div class="button" style="background-color:rgba(255, 255, 255, 0);"><input type="file" name="${id_value}_attach_photoes" onchange="addPhoto(this,'${id_value}')" accept="image/*"/></div>
-																</i></li>
-															<li><i data-toggle="tooltip" title="가계부 추가" class="icon-credit-card" style="font-size:23px" onclick="addMoney('${id_value}')"></i></li>
-														</ul>
+													<div id="collapse_${id_value}" class="panel-collapse collapse">
+														<div id="${id_value}_note_div" class="panel-body" style="padding:0px">
+															<label class="textarea" style="margin:0">
+																<textarea style="border:0px" rows="3" id="${id_value}_note" name="${id_value}_note" placeholder="Write some notes..">${itemList[index].note}</textarea>
+															</label>
+														</div>
+														<input type="hidden" id="${id_value}_money_count" name="${id_value}_money_count" value="0"/>
+														<div class="project-share">
+															<ul class="list-inline comment-list-v2" style="float: left">
+																<li><i data-toggle="tooltip" title="일정삭제" class="icon-trash" style="font-size:23px" onclick="deleteItem('${id_value}')"></i></li>
+															</ul>
+															<ul class="list-inline comment-list-v2 pull-right">
+																<li><i data-toggle="tooltip" title="시간정보 추가" class="icon-hourglass" style="font-size:23px" onclick="addTime('${id_value}')"></i></li>
+																<li><i data-toggle="tooltip" title="사진 추가" class="icon-picture input input-file" style="font-size:23px" onclick="addPhoto(this,'${id_value}')">
+																<div class="button" style="background-color:rgba(255, 255, 255, 0);"><input type="file" name="${id_value}_attach_photoes" onchange="addPhoto(this,'${id_value}')" accept="image/*"/></div>
+																	</i></li>
+																<li><i data-toggle="tooltip" title="가계부 추가" class="icon-credit-card" style="font-size:23px" onclick="addMoney('${id_value}')"></i></li>
+															</ul>
+														</div>
 													</div>
 												</div>
-											</div>
-										</div> 
-									</li>
+											</div> 
+										</li>
+										<c:set var="read_count" value="${index}"/>
+									</c:if>
+									
+									</c:forEach>
 								</ol>
 								<ul class="bs-glyphicons">	 
 									<li style="width:50%; height:100%; padding:0px; border: 0px; text-align: right"><span data-toggle="tooltip" title="일정 추가" class="glyphicon glyphicon-plus-sign" onclick="addItem('d${i}_item')"></span></li> 					 
 								</ul>
+								<input type="hidden" id="d${i}_item_count" name="d${i}_item_count" value="${day_item_count}">
 							</div>
 						</c:forEach>
-						<button type="button" class="btn-u" id="submit_btn" onclick="checkPlanner()">Submit</button>
+						<button type="button" class="btn-u" id="submit_btn" onclick="">Submit</button>
 					</form>
 				</div>
 			</div>

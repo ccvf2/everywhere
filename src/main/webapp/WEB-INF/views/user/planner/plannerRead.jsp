@@ -14,64 +14,13 @@
 	<link rel="stylesheet" href="/assets/css/pages/shortcode_timeline2.css">
 	
 	<script type="text/javascript" src="/script/user/planner/plannerRead.js"></script>
-	<style type="text/css">
-	.btn-share-group {
-		height: 70px;
-		padding: 15px 0;
-		border-bottom: 1px solid #ddd;
-		background: #eee;
-		border-radius: 10px 10px 0 0;
-		-webkit-border-radius: 10px 10px 0 0;
-		-moz-border-radius: 10px 10px 0 0;
-	}
-	.btn-share-group i{
-		font-size:24px;
-		text-align: center;
-		display: inline-block;;
-	}
-	.btn-share-group .txt-info{
-		display: block;
-	}
-	.btn-bookmark {
-		border-left: 1px solid #ccc;
-		border-right: 1px solid #ccc;
-	}
-	.btn-share-group a {
-		display: block;
-		float: left;
-		width: 33.33%;
-		height: 45px;
-		line-height: 15px;
-		padding-top: 5px;
-		text-align: center;
-		color: #666;
-		text-decoration: none;
-		cursor: pointer;
-	}
-	</style>
-	<script type="text/javascript">
-	
-	</script>
-	<script type="text/javascript">
-	function spotReadPage(no) {
-	var makeDiv ="<div id='showModal"+no+"'></div>";
-	var requestURL="/user/spot/spotReadPage.do?spot_no="+no;
-		$.ajax({
-			url : requestURL,
-			type : "GET",
-			dataType : "html",
-			success : function(data) {
-				$("body").append(makeDiv);
-				$("#showModal"+no).append(data)
-			},
-			error : function() {
-				alert("목록 가져오기 실패");
-			}
-		})
-}
-</script>
+	<link rel="stylesheet" href="/css/user/planner/plannerRead.css"/>
 </head>
-<body onload="setBackground('${plannerDto.attach_file}', '${plannerDto.planner_no}','${checkSweet}', '${checkBookMark}')">
+<body onload="setPlanner('${plannerDto.attach_file}', '${plannerDto.planner_no}','${checkSweet}', '${checkBookMark}', '${plannerDto.use_yn}')">
+	<script type="text/javascript">
+		$(document).ready(startup('${plannerDto.use_yn}','${plannerDto.mem_no}', '${mem_object.mem_no}'));
+	</script>
+	
 	<fmt:formatDate var="start_date" pattern="yyyy-MM-dd" value="${plannerDto.start_date}"/>
 	<fmt:formatDate var="end_date" pattern="yyyy-MM-dd" value="${plannerDto.end_date}"/>
 	<div class="wrapper">
@@ -96,7 +45,7 @@
 			<!-- Begin Sidebar Menu -->
 			<div class="col-md-3">
 				<!--글쓴이 정보 -->
-				<c:if test="${plannerWriter.mem_profile_photo != null || plannerWriter.mem_profile_photo != '' }">				
+				<c:if test="${plannerWriter.mem_profile_photo != null || plannerWriter.mem_profile_photo != '' }">
 					<img class="img-responsive profile-img margin-bottom-20" src="/attatchFile/member/${plannerWriter.mem_profile_photo}" alt="">
 				</c:if>
 				<c:if test="${plannerWriter.mem_profile_photo == null || plannerWriter.mem_profile_photo == '' }">
@@ -108,24 +57,27 @@
 						<c:if test="${mem_object.mem_no != plannerWriter.mem_no}">
 						<ul id="collapse-buttons" class="collapse in">
 							<li>
-								<a href="shortcode_btn_general.html"><i class="fa fa-flask"></i> 마이페이지 이동</a>
+								<a href="shortcode_btn_general.html"><i class="fa fa-home"></i> 친구페이지 이동</a>
 							</li>
 							<li>
-								<a href="shortcode_btn_brands.html"><i class="fa fa-html5"></i> 쪽지 보내기 </a>
+								<a href="shortcode_btn_brands.html"><i class="fa fa-comments-o"></i> 쪽지 보내기 </a>
 							</li>
 						</ul>
 						</c:if>
 						
 						<c:if test="${mem_object.mem_no == plannerWriter.mem_no}">
 						<ul id="collapse-buttons" class="collapse in">
-							<li>
-								<a href="shortcode_btn_general.html"><i class="fa fa-flask"></i> 글 공개 여부 설정</a>
+							<li id="planner_lock">
+								<a href="javascript:lockPlanner(${plannerDto.planner_no}, true)"><i class="fa fa-unlock"></i> 글 공개 ▶  비공개</a>
+							</li>
+							<li id="planner_unlock">
+								<a href="javascript:lockPlanner(${plannerDto.planner_no}, false)"><i class="fa fa-lock"></i> 글 비공개 ▶  공개</a>
 							</li>
 							<li>
-								<a href="shortcode_btn_brands.html"><i class="fa fa-html5"></i> 글 수정 </a>
+								<a href="javascript:modifyPlanner(${plannerDto.planner_no})"><i class="fa fa-pencil-square-o"></i> 글 수정 </a>
 							</li>
 							<li>
-								<a href="javascript:deletePlanner('${plannerDto.planner_no}')"><i class="fa fa-html5"></i> 글 삭제 </a>
+								<a href="javascript:deletePlanner(${plannerDto.planner_no})"><i class="fa fa-trash-o"></i> 글 삭제 </a>
 							</li>
 						</ul>
 						</c:if>

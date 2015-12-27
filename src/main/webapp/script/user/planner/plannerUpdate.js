@@ -6,6 +6,11 @@ $(function() {
 	setDroppable();
 });
 
+function setBackground(attach_image){
+	if(attach_image != null)
+		$('.breadcrumbs-v1').css('background-image', 'url(/attatchFile/planner/'+image+')');
+}
+
 function setDraggable(){
 	$( "#spotItem > div" ).draggable({
 		appendTo: "body",
