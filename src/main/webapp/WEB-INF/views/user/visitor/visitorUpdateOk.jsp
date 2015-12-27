@@ -10,13 +10,13 @@
 	<c:if test="${check>0}">
 		<script type="text/javascript">
 			alert("방명록이 수정 되었습니다.");
-			location.href="/user/visitor/visitorWrite.do?mem_no="+${mem_no};
+			location.href="/user/visitor/visitorWrite.do?uandMe=S0002mem_no="+${mem_no};
 		</script>
 	</c:if>
 	<c:if test="${check==0}">
 		<script type="text/javascript">
 			alert("방명록이 수정되지 않았습니다. 다시 시도해주세요.");
-			location.href="/user/visitor/visitorWrite.do?mem_no="+${mem_no};
+			location.href="/user/visitor/visitorWrite.do?uandMe=S0002mem_no="+${mem_no};
 		</script>
 	</c:if>
 </body>
