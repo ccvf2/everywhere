@@ -48,17 +48,31 @@
 		}
 		
 		var title = document.forms["accompanyForm"]["title"].value;
-	    if (title == null || x == "") {
+	    if (title == null) {
 	        alert("제목을 입력하세요");
 	        document.forms["accompanyForm"]["title"].focus();
 	        return false;
 	    }
 	    
 	    var content = document.forms["accompanyForm"]["content"].value;
-	    if (content == null || x == "") {
+	    if (content == null || content == "") {
 	        alert("제목을 입력하세요");
 	        document.forms["accompanyForm"]["title"].focus();
 	        return false;
+	    }
+	    
+	    var start_date = document.forms["accompanyForm"]["start_date"].value;
+	    if (start_date == null || start_date=="") {
+	    	alert("시작일을 선택해주세요");
+	    	document.forms["accompanyForm"]["start_date"].focus();
+	    	return false;
+	    }
+	    
+	    var end_date = document.forms["accompanyForm"]["end_date"].value;
+	    if (end_date==null || end_date=="") {
+	    	alert("종료일을 선택해주세요");
+	    	document.forms["accompanyForm"]["end_date"].focus();
+	    	return false;
 	    }
 	}
 	
@@ -73,7 +87,7 @@
 <body>
 	<div class="wrapper">
 		<!--=== Header ===-->
-	    <!-- Header가 꼭 imprt 되어 있어야 한다.(안그러면화면이깨짐) -->
+	    <!-- Header가 꼭 import 되어 있어야 한다.(안그러면화면이깨짐) -->
 	    <div class="header">
 			<c:import url="/WEB-INF/views/user/common/header.jsp"/>
 	    </div>
