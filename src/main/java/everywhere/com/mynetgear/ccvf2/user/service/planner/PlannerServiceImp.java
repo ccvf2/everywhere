@@ -105,15 +105,16 @@ public class PlannerServiceImp implements PlannerService {
 
 	@Override
 	public List<PlannerDto> getPlannerListByMember(HttpServletRequest request) {
-		int mem_no = Integer.parseInt(request.getParameter("mem_no"));
 		MemberDto userInfo = (MemberDto)request.getSession().getAttribute(Constant.SYNN_LOGIN_OBJECT);
+		String mem_no = request.getParameter("mem_no");
 
+		// 자기 페이지에서 plannerList를 불러오면 request에 mem_no가 없음 
 		PlannerDto plannerDto = new PlannerDto();
-		if(mem_no == userInfo.getMem_no()){
+		if(mem_no == null){
 			plannerDto.setMem_no(userInfo.getMem_no());
 			plannerDto.setUse_yn(Constant.SYNB_YN_D);
 		}else{
-			plannerDto.setMem_no(mem_no);
+			plannerDto.setMem_no(Integer.parseInt(mem_no));
 			plannerDto.setUse_yn(Constant.SYNB_YN_Y);
 		}
 
