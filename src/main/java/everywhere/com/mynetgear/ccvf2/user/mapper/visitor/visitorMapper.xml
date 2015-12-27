@@ -49,13 +49,26 @@
 	
 	<select id="getVisitorMemberList" parameterType="java.util.Map" resultType="everywhere.com.mynetgear.ccvf2.user.dto.member.MemberDto">
 		<![CDATA[
-			select mem_no, mem_email, mem_name from tbl_member where mem_no in
-			(select mem_no from (select rownum rnum, a.* 
-			from (select * 
-			      from tbl_visitor 
-			      where mate_mem_no=#{mate_mem_no}
-			      order by visitor_no desc) a)    
-			where rnum >= #{startRow} and rnum <= #{endRow} and visitor_status_code=#{visitor_status_code})
+			SELECT 
+			yy.visitor_no
+			,yy.mem_no
+			,(SELECT mem_name FROM tbl_member WHERE mem_no=yy.mem_no)mem_name
+			,(SELECT mem_email FROM tbl_member WHERE mem_no=yy.mem_no)mem_email
+			,yy.visitor_content
+			,yy.visitor_write_date
+			,yy.visitor_status_code
+			,yy.mate_mem_no
+			,(SELECT mem_name FROM tbl_member WHERE mem_no=yy.mate_mem_no)mate_mem_no
+			,(SELECT mem_email FROM tbl_member WHERE mem_no=yy.mate_mem_no)mate_mem_email
+			      FROM
+						(SELECT kk.* FROM (SELECT ROWNUM rnum, A.* 
+			        FROM (SELECT * 
+			              FROM tbl_visitor 
+			              WHERE mate_mem_no=184
+			              ORDER BY visitor_no DESC) A)kk    
+						WHERE kk.rnum >= 1
+			      AND kk.rnum <= 10
+			      AND kk.visitor_status_code='Y0001')yy;
 		]]>
 	</select>
 </mapper>
