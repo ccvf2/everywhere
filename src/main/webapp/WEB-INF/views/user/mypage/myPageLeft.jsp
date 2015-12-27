@@ -130,7 +130,7 @@
         
         
         
-        <c:if test="${mateCheck==2}">
+        <c:if test="${memberDto.mem_no==mem_object.mem_no}">
 	        <li class="list-group-item">
 	            <a href="#"><i class="fa fa-star-o"></i> 즐겨찾기</a>
 	        </li>
