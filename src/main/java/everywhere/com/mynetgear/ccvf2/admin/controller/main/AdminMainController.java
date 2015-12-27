@@ -81,8 +81,6 @@ public class AdminMainController {
         int monthS=Integer.parseInt(monthE)-2;
 		String year=date.substring(0, 4);
 		
-		//System.out.println("monthS : " + monthS + ", monthE : " + monthE +", year : " + year);
-		
 		List<Integer> chartList=chartDao.getChartMonthList(monthS+"", monthE, year);
         
 		JSONArray jarray=new JSONArray();
@@ -94,7 +92,6 @@ public class AdminMainController {
 			jarray.add(map);
 		}
 		String jsonData = jarray.toJSONString();
-		System.out.println("----------------------jsonData : " + jsonData);
 		response.setContentType("application/json;charset=UTF-8");
 		PrintWriter out = response.getWriter();
 		out.print(jsonData);
