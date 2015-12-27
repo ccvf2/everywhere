@@ -113,8 +113,7 @@ public class PlannerServiceImp implements PlannerService {
 			plannerDto.setMem_no(userInfo.getMem_no());
 			plannerDto.setUse_yn(Constant.SYNB_YN_D);
 		}else{
-			MemberDto userDto = memberDao.getOneMemberInfoAsEmail(mem_no);
-			plannerDto.setMem_no(userDto.getMem_no());
+			plannerDto.setMem_no(mem_no);
 			plannerDto.setUse_yn(Constant.SYNB_YN_Y);
 		}
 
