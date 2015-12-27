@@ -8,7 +8,7 @@ function typeCheckbox() {
 }
 
 //검색을 하였을때 실행되는 코드
-function selectSpotList(city){
+function searchSpotList(){
 	var searchPlace = document.getElementById("searchPlace").value;
 	var searchSpot = document.getElementById("searchSpot").value;
 	//체크 박스에서 선택된 값 가져와야 함
@@ -20,7 +20,7 @@ function selectSpotList(city){
 		url:url,
 		type:"get",
 		dataType:"text",
-		success:searchtListDisp,
+		success:searchListDisp,
 		error:function(xhr, status, errorMsg){
 			alert(xhr+","+status+","+errorMsg);
 		}
@@ -30,7 +30,7 @@ function selectSpotList(city){
 function searchListDisp(data){
 	var search_page = document.getElementById("search_page");
 	//첫번째 검색이므로 페이지가 1페이지 이다.
-	search_page.value = 1;
+	//search_page = 1;
 	var str="";
 	//검색결과가 널이 아닌 경우
 	if(data != ""){
@@ -48,7 +48,7 @@ function searchListDisp(data){
 					"<i style='margin:0; float:left;'><img alt='' src='/attatchFile/spot/"+obj.spot[i].spot_photo_save_name+"."+obj.spot[i].spot_photo_extension+"' style='width:35px;height:35px;margin-right:5px;'></i>"+
 					"<div class='overflow-h'>"+
 					"<span><strong><a href='javascript:spotReadPage("+obj.spot[i].spot_no+")'>"+obj.spot[i].spot_name+"</a></strong></span>"+
-					"<small>"+note+"</small>"+
+					"<sm  all>"+note+"</small>"+
 					"</div></div></li>";
 		}
 	}
@@ -58,7 +58,7 @@ function searchListDisp(data){
 	
 }
 
-//스크롤이 제일  하단에 도달하였을때 실행되는 코드
+//스크롤이 제일  하단에 도달하였을때 실행되어야 할 코드
 function searchMoreSpotList(){
 	var search_page = document.getElementById("search_page");
 	spot_page.value = Number(search_page.value)+1;
