@@ -6,6 +6,8 @@
 <head>
 	<c:import url="/WEB-INF/views/common/jquery.jsp"/>
 	<c:import url="/WEB-INF/views/user/common/utilImport.jsp"/>
+	<!-- 공통댓글관련 함수  -->
+	<script type="text/javascript" src="/script/common/commonReply.js"></script>
 	<meta charset="utf-8">
 	<title>여행 계획</title>
 
@@ -18,7 +20,15 @@
 </head>
 <body onload="setPlanner('${plannerDto.attach_file}', '${plannerDto.planner_no}','${checkSweet}', '${checkBookMark}', '${plannerDto.use_yn}')">
 	<script type="text/javascript">
-		$(document).ready(startup('${plannerDto.use_yn}','${plannerDto.mem_no}', '${mem_object.mem_no}'));
+	$(document).ready(function() {
+		var planner_no=${plannerDto.planner_no};
+		var mem_no=${mem_object.mem_no}
+		commonReplyInit('R0002', mem_no, planner_no,"");
+		$("#formWrap").removeClass();
+		$("#formWrap").addClass("news-v3-in margin-bottom-20");
+		$("#formWrapInner").removeClass();
+		$("#formWrapInner").addClass("news-v3-in margin-bottom-20");
+	});
 	</script>
 	
 	<fmt:formatDate var="start_date" pattern="yyyy-MM-dd" value="${plannerDto.start_date}"/>
@@ -28,172 +38,176 @@
 		<div class="header">
 			<c:import url="/WEB-INF/views/user/common/header.jsp"/>
 		</div>
-	<!--=== End Header ===-->
+		<!--=== End Header ===-->
 
-	<!--=== Breadcrumbs ===-->
-	<div class="breadcrumbs-v1">
-		<div class="container" style="height: 50px;">
-			<c:if test="${plannerDto.planner_ba_code == 'E0001'}">
-				<span>여행 스케줄</span>
-			</c:if>
-			<c:if test="${plannerDto.planner_ba_code == 'E0002'}">
-				<span>여행 리뷰</span>
-			</c:if>
-			<h1>${plannerDto.title}</h1>
+		<!--=== Breadcrumbs ===-->
+		<div class="breadcrumbs-v1">
+			<div class="container" style="height: 50px;">
+				<c:if test="${plannerDto.planner_ba_code == 'E0001'}">
+					<span>여행 스케줄</span>
+				</c:if>
+				<c:if test="${plannerDto.planner_ba_code == 'E0002'}">
+					<span>여행 리뷰</span>
+				</c:if>
+				<h1>${plannerDto.title}</h1>
+			</div>
 		</div>
-	</div>
-	<!--=== End Breadcrumbs ===-->
+		<!--=== End Breadcrumbs ===-->
+	
+		<!--=== Content Part ===-->
+		<div class="container content">
+			<div class="row">
+				<!-- Begin Sidebar Menu -->
+				<div class="col-md-3">
+					<!--글쓴이 정보 -->
+					<c:if test="${plannerWriter.mem_profile_photo != null || plannerWriter.mem_profile_photo != '' }">
+						<img class="img-responsive profile-img margin-bottom-20" src="/attatchFile/member/${plannerWriter.mem_profile_photo}" alt="">
+					</c:if>
+					<c:if test="${plannerWriter.mem_profile_photo == null || plannerWriter.mem_profile_photo == '' }">
+						<img class="img-responsive profile-img" src="/assets/img/team/img32-md.jpg" alt="">
+					</c:if>
+					<ul class="list-group sidebar-nav-v1 margin-bottom-20 active">
+						<li class="list-group-item list-toggle">
+							<a data-toggle="collapse" data-parent="#sidebar-nav" href="#collapse-buttons">${plannerWriter.mem_name}</a>
+							<c:if test="${mem_object.mem_no != plannerWriter.mem_no}">
+							<ul id="collapse-buttons" class="collapse in">
+								<li>
+									<a href="shortcode_btn_general.html"><i class="fa fa-home"></i> 친구페이지 이동</a>
+								</li>
+								<li>
+									<a href="shortcode_btn_brands.html"><i class="fa fa-comments-o"></i> 쪽지 보내기 </a>
+								</li>
+							</ul>
+							</c:if>
 
-	<!--=== Content Part ===-->
-	<div class="container content">
-		<div class="row">
-			<!-- Begin Sidebar Menu -->
-			<div class="col-md-3">
-				<!--글쓴이 정보 -->
-				<c:if test="${plannerWriter.mem_profile_photo != null || plannerWriter.mem_profile_photo != '' }">
-					<img class="img-responsive profile-img margin-bottom-20" src="/attatchFile/member/${plannerWriter.mem_profile_photo}" alt="">
-				</c:if>
-				<c:if test="${plannerWriter.mem_profile_photo == null || plannerWriter.mem_profile_photo == '' }">
-					<img class="img-responsive profile-img" src="/assets/img/team/img32-md.jpg" alt="">
-				</c:if>
-				<ul class="list-group sidebar-nav-v1 margin-bottom-20 active">
-					<li class="list-group-item list-toggle">
-						<a data-toggle="collapse" data-parent="#sidebar-nav" href="#collapse-buttons">${plannerWriter.mem_name}</a>
-						<c:if test="${mem_object.mem_no != plannerWriter.mem_no}">
-						<ul id="collapse-buttons" class="collapse in">
-							<li>
-								<a href="shortcode_btn_general.html"><i class="fa fa-home"></i> 친구페이지 이동</a>
-							</li>
-							<li>
-								<a href="shortcode_btn_brands.html"><i class="fa fa-comments-o"></i> 쪽지 보내기 </a>
-							</li>
-						</ul>
-						</c:if>
-						
-						<c:if test="${mem_object.mem_no == plannerWriter.mem_no}">
-						<ul id="collapse-buttons" class="collapse in">
-							<li id="planner_lock">
-								<a href="javascript:lockPlanner(${plannerDto.planner_no}, true)"><i class="fa fa-unlock"></i> 글 공개 ▶  비공개</a>
-							</li>
-							<li id="planner_unlock">
-								<a href="javascript:lockPlanner(${plannerDto.planner_no}, false)"><i class="fa fa-lock"></i> 글 비공개 ▶  공개</a>
-							</li>
-							<li>
-								<a href="javascript:modifyPlanner(${plannerDto.planner_no})"><i class="fa fa-pencil-square-o"></i> 글 수정 </a>
-							</li>
-							<li>
-								<a href="javascript:deletePlanner(${plannerDto.planner_no})"><i class="fa fa-trash-o"></i> 글 삭제 </a>
-							</li>
-						</ul>
-						</c:if>
-					</li>
-				</ul>
+							<c:if test="${mem_object.mem_no == plannerWriter.mem_no}">
+							<ul id="collapse-buttons" class="collapse in">
+								<li id="planner_lock">
+									<a href="javascript:lockPlanner(${plannerDto.planner_no}, true)"><i class="fa fa-unlock"></i> 글 공개 ▶  비공개</a>
+								</li>
+								<li id="planner_unlock">
+									<a href="javascript:lockPlanner(${plannerDto.planner_no}, false)"><i class="fa fa-lock"></i> 글 비공개 ▶  공개</a>
+								</li>
+								<li>
+									<a href="javascript:modifyPlanner(${plannerDto.planner_no})"><i class="fa fa-pencil-square-o"></i> 글 수정 </a>
+								</li>
+								<li>
+									<a href="javascript:deletePlanner(${plannerDto.planner_no})"><i class="fa fa-trash-o"></i> 글 삭제 </a>
+								</li>
+							</ul>
+							</c:if>
+						</li>
+					</ul>
 
-				<div class="btn-share-group">
-					<a id="likeBtn" class="btn-like " title="좋아요">
-						<span><i class="fa fa-heart-o" ></i><i class="fa fa-heart" style="color:green"></i><span class="plan-detail-view-like-count"> ${sweet_count }</span></span>
-						<span class="txt-info">추천</span>
-					</a><!-- 좋아요 -->
-					<a id="bookmarkBtn" class="btn-bookmark  " title="북마크">
-						<span><i class="fa fa-bookmark-o" ></i><i class="fa fa-bookmark" style="color:green"></i><span class="plan-detail-view-bookmark-count"> ${bookmark_count }</span></span>
-						<span class="txt-info">북마크</span>
-					</a><!-- 북마크 -->
-					<a id="customizeBtn" class="btn-customize " title="커스터마이즈">
-						<span><i class="fa  fa-files-o" ></i><i class="fa fa-files" style="color:green"></i><span class="plan-detail-view-scrap-count">1</span></span>
-						<span class="txt-info">커스터마이즈</span>
-					</a><!--커스터마이즈 -->
+					<div class="btn-share-group">
+						<a id="likeBtn" class="btn-like " title="좋아요">
+							<span><i class="fa fa-heart-o" ></i><i class="fa fa-heart" style="color:green"></i><span class="plan-detail-view-like-count"> ${sweet_count }</span></span>
+							<span class="txt-info">추천</span>
+						</a><!-- 좋아요 -->
+						<a id="bookmarkBtn" class="btn-bookmark  " title="북마크">
+							<span><i class="fa fa-bookmark-o" ></i><i class="fa fa-bookmark" style="color:green"></i><span class="plan-detail-view-bookmark-count"> ${bookmark_count }</span></span>
+							<span class="txt-info">북마크</span>
+						</a><!-- 북마크 -->
+						<a id="customizeBtn" class="btn-customize " title="커스터마이즈">
+							<span><i class="fa  fa-files-o" ></i><i class="fa fa-files" style="color:green"></i><span class="plan-detail-view-scrap-count">1</span></span>
+							<span class="txt-info">커스터마이즈</span>
+						</a><!--커스터마이즈 -->
+					</div>
+
+					<ul class="list-group sidebar-nav-v1 margin-bottom-20 active">
+						<li class="list-group-item list-toggle">
+							<a data-toggle="collapse" href="#collapse-money">total : ${moneyTotal[8]}</a>
+							<ul id="collapse-money" class="collapse in">
+								<li><a><i class="fa fa-plane"></i> 항공료 : ${moneyTotal[0]}</a></li>
+								<li><a><i class="fa fa-hotel"></i> 숙박비 : ${moneyTotal[1]} </a></li>
+								<li><a><i class="fa fa-bus"></i> 교통비 : ${moneyTotal[2]}</a></li>
+								<li><a><i class="fa fa-shopping-bag"></i> 쇼핑비 : ${moneyTotal[3]}</a></li>
+								<li><a><i class="fa fa-cutlery"></i> 식사비 : ${moneyTotal[4]}</a></li>
+								<li><a><i class="fa fa-ticket"></i> 입장료 : ${moneyTotal[5]}</a></li>
+								<li><a><i class="fa fa-gamepad"></i> 오락비 : ${moneyTotal[6]}</a></li>
+								<li><a><i class="fa fa-bars"></i> 기  타 : ${moneyTotal[7]}</a></li>
+							</ul>
+						</li>
+					</ul>
 				</div>
+				<!-- End Sidebar Menu -->
 
-				
-				<ul class="list-group sidebar-nav-v1 margin-bottom-20 active">
-					<li class="list-group-item list-toggle">
-						<a data-toggle="collapse" href="#collapse-money">total : ${moneyTotal[8]}</a>
-						<ul id="collapse-money" class="collapse in">
-							<li><a><i class="fa fa-plane"></i> 항공료 : ${moneyTotal[0]}</a></li>
-							<li><a><i class="fa fa-hotel"></i> 숙박비 : ${moneyTotal[1]} </a></li>
-							<li><a><i class="fa fa-bus"></i> 교통비 : ${moneyTotal[2]}</a></li>
-							<li><a><i class="fa fa-shopping-bag"></i> 쇼핑비 : ${moneyTotal[3]}</a></li>
-							<li><a><i class="fa fa-cutlery"></i> 식사비 : ${moneyTotal[4]}</a></li>
-							<li><a><i class="fa fa-ticket"></i> 입장료 : ${moneyTotal[5]}</a></li>
-							<li><a><i class="fa fa-gamepad"></i> 오락비 : ${moneyTotal[6]}</a></li>
-							<li><a><i class="fa fa-bars"></i> 기  타 : ${moneyTotal[7]}</a></li>
-						</ul>
-					</li>
-				</ul>
-			</div>
-			<!-- End Sidebar Menu -->
+				<!--Tag Box v4-->
+				<div class="col-md-9">
+					<div class="tag-box tag-box-v4 rounded margin-bottom-40">
+						<p>${plannerDto.memo}</p>
+					</div>
 
-			<!--Tag Box v4-->
-			<div class="col-md-9">
-				<div class="tag-box tag-box-v4 rounded margin-bottom-40">
-					<p>${plannerDto.memo}</p>
-				</div>
-			</div>
-			<!--End Tag Box v4-->
-
-			<!-- Begin Content -->
-			<div class="col-md-9">
-				<ul class="timeline-v2" >
-					<fmt:formatNumber var="count" value="0"/>
-					<c:forEach var="item" items="${itemList}">
-					<li class="equal-height-columns">
-						<fmt:formatNumber var="day" value="${item.item_order / 10100}" type="number" maxFractionDigits="0"/>
-							<div class="cbp_tmtime equal-height-column" style="width:100%;">
-								<c:if test="${count < day }">
-									<c:set var="count" value="${day}"/>
-									<span>Day ${day}</span>
-									<span style="font-size: 15px">${dateList[count-1]}</span>
-								</c:if>
-								<span style="font-size: 12px">${item.item_time}</span>
-							</div>
-						<i class="cbp_tmicon rounded-x hidden-xs"></i>
-						<c:if test="${item.spot_no != 0 }">
-						<div class="cbp_tmlabel equal-height-column">
-							<h2><a href="javascript:spotReadPage('${item.spot.spot_no}')">${item.spot.spot_name}</a></h2>
-							<div class="row">
-								<div class="col-md-4">
-									<img class="img-responsive" src="/attatchFile/spot/${item.spot.spot_photoes[0].save_name}.${item.spot.spot_photoes[0].extension}" alt=""> 
-									<div class="md-margin-bottom-20"></div>
+					<ul class="timeline-v2" >
+						<fmt:formatNumber var="count" value="0"/>
+						<c:forEach var="item" items="${itemList}">
+						<li class="equal-height-columns">
+							<fmt:formatNumber var="day" value="${item.item_order / 10100}" type="number" maxFractionDigits="0"/>
+								<div class="cbp_tmtime equal-height-column" style="width:100%;">
+									<c:if test="${count < day }">
+										<c:set var="count" value="${day}"/>
+										<span>Day ${day}</span>
+										<span style="font-size: 15px">${dateList[count-1]}</span>
+									</c:if>
+									<span style="font-size: 12px">${item.item_time}</span>
 								</div>
-								<div class="col-md-8">
-									<p>${item.spot.spot_note}</p>
-								</div>
-							</div>
-						</div>
-						</c:if>
-
-						<!-- 글상자 start-->
-						<c:if test="${item.note != null }">
-							<div class="panel-group" style="margin:0 0 30px 25%; clear: both; position: relative;">
-								<div class="panel panel-default rounded-2x">
-									<div class="panel-body" style="padding:8px;">
-										<c:if test="${item.item_photoes[0].save_name != null}">
-											<div class="row" style="margin:5px;">
-												<img class="img-responsive" src="/attatchFile/item/${item.item_photoes[0].save_name}.${item.item_photoes[0].extension}" alt="">
-											</div>
-										</c:if>
-										<div class="row" style="margin:5px;">
-											${item.note}
-										</div>
-										<c:if test="${item.moneyList.size() != 0 }">
-											<div class="row"  style="margin:5px;">
-												<hr style="margin:5px 0px;"/>
-												<c:forEach var="money" items="${item.moneyList}">
-													<p style="margin:3px">${money.money_title } ${money.price }</p>
-												</c:forEach>
-											</div>
-										</c:if>
+							<i class="cbp_tmicon rounded-x hidden-xs"></i>
+							<c:if test="${item.spot_no != 0 }">
+							<div class="cbp_tmlabel equal-height-column">
+								<h2><a href="javascript:spotReadPage('${item.spot.spot_no}')">${item.spot.spot_name}</a></h2>
+								<div class="row">
+									<div class="col-md-4">
+										<img class="img-responsive" src="/attatchFile/spot/${item.spot.spot_photoes[0].save_name}.${item.spot.spot_photoes[0].extension}" alt=""> 
+										<div class="md-margin-bottom-20"></div>
+									</div>
+									<div class="col-md-8">
+										<p>${item.spot.spot_note}</p>
 									</div>
 								</div>
 							</div>
-						</c:if>
-						<!-- 글상자 end -->
-					</li>
-					</c:forEach>
-				</ul>
+							</c:if>
+
+							<!-- 글상자 start-->
+							<c:if test="${item.note != null }">
+								<div class="panel-group" style="margin:0 0 30px 25%; clear: both; position: relative;">
+									<div class="panel panel-default rounded-2x">
+										<div class="panel-body" style="padding:8px;">
+											<c:if test="${item.item_photoes[0].save_name != null}">
+												<div class="row" style="margin:5px;">
+													<img class="img-responsive" src="/attatchFile/item/${item.item_photoes[0].save_name}.${item.item_photoes[0].extension}" alt="">
+												</div>
+											</c:if>
+											<div class="row" style="margin:5px;">
+												${item.note}
+											</div>
+											<c:if test="${item.moneyList.size() != 0 }">
+												<div class="row"  style="margin:5px;">
+													<hr style="margin:5px 0px;"/>
+													<c:forEach var="money" items="${item.moneyList}">
+														<p style="margin:3px">${money.money_title } ${money.price }</p>
+													</c:forEach>
+												</div>
+											</c:if>
+										</div>
+									</div>
+								</div>
+							</c:if>
+							<!-- 글상자 end -->
+						</li>
+						</c:forEach>
+					</ul>
+					
+					<div id="replyArea">
+						<div id="replywrap">
+							<div id="replyListArea"></div>
+							<c:if test="${mem_Object.mem_no!=''}">
+								<div id="replyWriteArea"></div>
+							</c:if>
+						</div>
+					</div>
+				</div>
+				<!--End Tag Box v4-->
 			</div>
-			</div>
-			<!-- End Content -->
 		</div>
 	</div><!--/container-->     
 	<!--=== End Content Part ===-->
@@ -203,6 +217,5 @@
 		<c:import url="/WEB-INF/views/user/common/footer.jsp"/>
 	</div>
 	<!--=== End Footer Version 1 ===-->
-	
 </body>
 </html>
