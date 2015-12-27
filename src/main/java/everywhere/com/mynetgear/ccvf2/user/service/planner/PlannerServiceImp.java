@@ -142,6 +142,12 @@ public class PlannerServiceImp implements PlannerService {
 
 		PlannerDto plannerDto = plannerDao.getOnePlanner(planner_no);
 		
+		// 비공개 글이거나 삭제된 글이면 우선 404 처리
+		String use_yn = plannerDto.getUse_yn();
+		if(use_yn.equals(Constant.SYNB_YN_D) || 
+				(use_yn.equals(Constant.SYNB_YN_N) && userInfo.getMem_no() != plannerDto.getMem_no()))
+			return;
+		
 		// planner 날짜 정보 계산
 		long diff = plannerDto.getEnd_date().getTime() - plannerDto.getStart_date().getTime();
 		int dayCount = (int) diff / (24 * 60 * 60 * 1000);
