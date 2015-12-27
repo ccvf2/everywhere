@@ -17,6 +17,9 @@
 	<!-- 도시&국가 셀렉트박스 -->
 	<script type="text/javascript" src="/script/user/planner/selectedCountry.js"></script>
 	<script type="text/javascript" src="/script/user/planner/addPlannerPage.js"></script>
+	<script type="text/javascript" src="/script/user/spot/addSpotPage.js"></script>
+	<script type="text/javascript" src="/script/user/spot/googleMap.js"></script>
+	<script async defer src="https://maps.googleapis.com/maps/api/js?sensor=true"></script>
 </head>
 <style>
 .affix {
@@ -54,6 +57,9 @@
 					<div class="tag-box tag-box-v4 rounded-2x margin-bottom-20" style="padding : 7px;">
 						<div class="panel-heading-v2 overflow-h">
 							<h2 class="heading-xs pull-left"><i class="fa fa-map-marker"></i> 명소</h2>
+							<div style="float: right">
+							<button type="button" class="btn-u btn-u-red" id="spotAdd_btn" onclick="addSpot()">명소추가</button>
+							</div>
 						</div>
 	
 						<div class="panel-heading-v2 overflow-h">

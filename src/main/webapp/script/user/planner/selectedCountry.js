@@ -3,7 +3,7 @@
  */
 var values = [];
 
-//명소 쓰기 페이지에서 나라 선택할때 해당 도시 가져오기
+//일정 쓰기 페이지에서 나라 선택할때 해당 도시 가져오기
 function readCityList(check){
 	var countrycode = document.getElementById("selectCountry").value;
 	var params = "country_code=" + countrycode;
@@ -134,23 +134,6 @@ function moreSpotListDisp(data){
 }
 //여기 끝
 
-//명소 업데이트 자바스크립트
-function updateSpot(spot_no){
-	var urlName="/user/spot/updateSpot.do?spot_no="+spot_no;
-	location.href=urlName;
-}
-
-//명소 삭제 자바스크립트
-function deleteSpot(spot_no){
-	var urlName="/user/spot/delete.do?spot_no="+spot_no;
-	var check = confirm("삭제하시겠습니까?");
-	if (check == true) {
-		location.href=urlName;
-	} else {
-		alert("취소하셨습니다");
-	}
-}
-
 function spotReadPage(no) {
 	//alert(no);
 	var makeDiv ="<div id='showModal"+no+"'></div>";
@@ -163,6 +146,25 @@ function spotReadPage(no) {
 		success : function(data) {
 			$("body").append(makeDiv);
 			$("#showModal"+no).append(data)
+		},
+		error : function() {
+			alert("목록 가져오기 실패");
+		}
+	})
+}
+
+function addSpot(){
+	var div ="<div id='spotAddModal'></div>";
+	var requestURL="/user/spot/addSpotPage.do";
+	
+	$.ajax({
+		url : requestURL,
+		type : "GET",
+		dataType : "html",
+		success : function(data) {
+			$("body").append(div);
+			$("#spotAddModal").append(data);
+			initialize();
 		},
 		error : function() {
 			alert("목록 가져오기 실패");
