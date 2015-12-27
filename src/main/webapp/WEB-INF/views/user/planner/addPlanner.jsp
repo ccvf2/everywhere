@@ -18,27 +18,6 @@
 	<script type="text/javascript" src="/script/user/planner/selectedCountry.js"></script>
 	<script type="text/javascript" src="/script/user/planner/addPlannerPage.js"></script>
 </head>
-<script type="text/javascript">
-	function spotReadPage(no) {
-		//alert(no);
-		var makeDiv ="<div id='showModal"+no+"'></div>";
-		var requestURL="/user/spot/spotReadPage.do?spot_no="+no;
-		
-		$.ajax({
-			url : requestURL,
-			type : "GET",
-			dataType : "html",
-			success : function(data) {
-				$("body").append(makeDiv);
-				$("#showModal"+no).append(data)
-			},
-			error : function() {
-				alert("목록 가져오기 실패");
-			}
-		})
-	}
-</script>
-
 <style>
 .affix {
 	top : 0px;
@@ -74,7 +53,7 @@
 					<!--Notification-->
 					<div class="tag-box tag-box-v4 rounded-2x margin-bottom-20" style="padding : 7px;">
 						<div class="panel-heading-v2 overflow-h">
-							<h2 class="heading-xs pull-left"><i class="fa fa-map-marker"></i> Spot</h2>
+							<h2 class="heading-xs pull-left"><i class="fa fa-map-marker"></i> 명소</h2>
 						</div>
 	
 						<div class="panel-heading-v2 overflow-h">
@@ -83,7 +62,7 @@
 								<!-- 나라 -->
 								<label class="select">
 									<select name="country_code" id="selectCountry" onchange="selectSpotList(true)">
-										<option value=""> Country </option>
+										<option value=""> 나라 </option>
 										<c:forEach var="country" items="${countryList}" >
 											<option value="${country.code}">${country.code_name}</option>
 										</c:forEach>
@@ -94,7 +73,7 @@
 								<!-- 도시 -->
 								<label class="select">
 									<select name="city_code" id="selectCity" onchange="selectSpotList(false)">
-										<option value=""> City </option>
+										<option value=""> 도시 </option>
 									</select>
 									<i></i>
 								</label>
@@ -102,7 +81,7 @@
 								<!-- 명소타입 -->
 								<label class="select">
 									<select name="spot_type_code" id="selectType" onchange="selectSpotList(false)">
-										<option value=""> SpotType </option>
+										<option value=""> 명소타입 </option>
 										<c:forEach var="spotType" items="${spotTypeList}">
 											<option value="${spotType.code}">${spotType.code_name}</option>
 										</c:forEach>
@@ -114,7 +93,7 @@
 						<hr style="margin : 0px 0px 5px 0px;"/>
 	
 						<div>
-							<ul class="list-unstyled mCustomScrollbar margin-bottom-20" data-mcs-theme="minimal-dark" id="spotLists">
+							<ul class="list-unstyled mCustomScrollbar margin-bottom-5" data-mcs-theme="minimal-dark" id="spotLists">
 								<c:forEach var="spot" items="${spotList}">
 									<li class="notification" style="margin:0px;border:1px solid #eee;padding:5px 5px;height: 48px;" id="spotItem">
 										<div id="${spot.spot_no}_item" class="ui-widget-content" style="border:0px;">
@@ -130,20 +109,9 @@
 								</c:forEach>
 							</ul>
 						</div>
+						<hr style="margin : 0px 0px 5px 0px;"/>
 						<button type="button" class="btn-u btn-u-default btn-u-sm btn-block" onclick="selectMoreSpotList()">Load More</button>
 						<!--End Notification-->
-					</div>
-					
-					<div class="tag-box tag-box-v4 rounded-2x margin-bottom-20" style="padding : 7px;">
-						<form action="#" id="sky-form" class="sky-form">
-						<!--Datepicker-->
-							<div class="row">
-								<section class="col col-3">
-									<div id="inline-start"></div>
-								</section>
-							</div>
-						</form>
-					<!--End Datepicker-->
 					</div>
 				</div>
 			</nav>
@@ -163,21 +131,24 @@
 								<textarea name="planner_memo" rows="5" placeholder="부산으로 떠나는 즐거운 여행"></textarea>
 								<b class="tooltip tooltip-top-right">여행에 대한 짧은 메모를 입력해주세요</b>
 							</label>
-							<div class="row" style="margin-bottom:5px;">
+							<div class="row">
 								<div class="col col-4">
+									<span>여행시작날짜</span> 
 									<label class="input">
 										<i class="icon-append fa fa-calendar"></i>
 										<input type="date" name="start_date" placeholder="Start Date" value="${start_date }">
 									</label>
 								</div>
 								<div class="col col-2" style="padding-left: 0px;">
+									<span>여행기간</span> 
 									<label class="input">
 										<input type="number" min="1" value="${day_count}" name="day_count" id="day_count" onchange="addDay(this)" style="padding:5px;width:55px;">
 										<input type="hidden" value="${day_count}" id="before_day_count">
 									</label>
 								</div>
-								<div class="col col-2 pull-right">
-									<label class="input">
+								<div class="pull-right" style="margin-right: 20px;">
+									<span>배경 이미지 수정</span> 
+									<label class="input" style="text-align: right">
 										<i data-toggle="tooltip" title="배경이미지 수정" class="icon-picture input input-file" style="font-size:23px" onclick="addPhoto(this,'${id_value}')"> 
 											<div class="button" style="background-color:rgba(255, 255, 255, 0);"><input type="file" name="attach_file" onchange="addPlannerPhoto(this)" accept="image/*" size="0"/></div>
 										</i>
@@ -202,7 +173,7 @@
 														<i class="icon-note pull-right"></i>
 													</a>
 													<h4 class="panel-title">
-														<span>Drag spot to add</span>
+														<span> 명소를 여기로 끌어와 주세요 </span>
 													</h4>
 													<input type="hidden" id="${id_value}_spot_no" name="${id_value}_spot_no" value="0"/>
 												</div>
@@ -260,7 +231,7 @@
 									<i class="icon-note pull-right"></i>
 								</a>
 								<h4 class="panel-title">
-									<span>Drag spot to add</span>
+									<span> 명소를 여기로 끌어와 주세요 </span>
 								</h4>
 								<input type="hidden" id="d0_item1_spot_no" name="d0_item1_spot_no" value="0"/>
 							</div>
@@ -298,12 +269,10 @@
 
 	<!-- JS Page Level -->
 	<script type="text/javascript" src="/assets/plugins/scrollbar/js/jquery.mCustomScrollbar.concat.min.js"></script>
-	<script type="text/javascript" src="/assets/js/plugins/datepicker.js"></script>
-
+	
 	<script type="text/javascript">
 	jQuery(document).ready(function() {
 		App.initScrollBar();
-		Datepicker.initDatepicker();
 	});
 	</script>
 </body>
