@@ -105,15 +105,15 @@ public class PlannerServiceImp implements PlannerService {
 
 	@Override
 	public List<PlannerDto> getPlannerListByMember(HttpServletRequest request) {
-		String mem_email = request.getParameter("mem_email");
+		int mem_no = Integer.parseInt(request.getParameter("mem_no"));
 		MemberDto userInfo = (MemberDto)request.getSession().getAttribute(Constant.SYNN_LOGIN_OBJECT);
 
 		PlannerDto plannerDto = new PlannerDto();
-		if(mem_email == userInfo.getMem_email()){
+		if(mem_no == userInfo.getMem_no()){
 			plannerDto.setMem_no(userInfo.getMem_no());
 			plannerDto.setUse_yn(Constant.SYNB_YN_D);
 		}else{
-			MemberDto userDto = memberDao.getOneMemberInfoAsEmail(mem_email);
+			MemberDto userDto = memberDao.getOneMemberInfoAsEmail(mem_no);
 			plannerDto.setMem_no(userDto.getMem_no());
 			plannerDto.setUse_yn(Constant.SYNB_YN_Y);
 		}

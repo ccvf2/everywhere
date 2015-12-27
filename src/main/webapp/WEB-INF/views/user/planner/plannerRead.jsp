@@ -33,7 +33,12 @@
 	<!--=== Breadcrumbs ===-->
 	<div class="breadcrumbs-v1">
 		<div class="container" style="height: 50px;">
-			<span>Blog Item Page</span>
+			<c:if test="${plannerDto.planner_ba_code == 'E0001'}">
+				<span>여행 스케줄</span>
+			</c:if>
+			<c:if test="${plannerDto.planner_ba_code == 'E0002'}">
+				<span>여행 리뷰</span>
+			</c:if>
 			<h1>${plannerDto.title}</h1>
 		</div>
 	</div>
