@@ -19,6 +19,7 @@ import everywhere.com.mynetgear.ccvf2.user.dao.member.MemberDao;
 import everywhere.com.mynetgear.ccvf2.user.dao.planner.PlannerDao;
 import everywhere.com.mynetgear.ccvf2.user.dto.member.MemberDto;
 import everywhere.com.mynetgear.ccvf2.user.dto.planner.PlannerDto;
+import everywhere.com.mynetgear.ccvf2.user.service.planner.PlannerService;
 
 /**
  * @author 김성광
@@ -31,7 +32,7 @@ public class MyPageServiceImpl implements MyPageService {
 	@Autowired
 	private MemberDao memberDao;
 	@Autowired
-	private PlannerDao plannerDao;
+	private PlannerService plannerService;
 	
 	@Autowired
 	private CommonFileIOService commonFileIOService;
@@ -48,7 +49,7 @@ public class MyPageServiceImpl implements MyPageService {
 		MemberDto memberDto=(MemberDto) session.getAttribute(Constant.SYNN_LOGIN_OBJECT);
 		
 		int mem_no=64;
-		List<PlannerDto> plannerList = plannerDao.getPlannerListByMember(mem_no);
+		List<PlannerDto> plannerList = plannerService.getPlannerListByMember(request);
 		
 		memberDto=memberDao.memberRead(memberDto.getMem_no());
 		
@@ -76,7 +77,7 @@ public class MyPageServiceImpl implements MyPageService {
 		mateMap.put("mate_no", mate_no);
 		
 		int mateCheck=memberDao.getMateCheck(mateMap);
-		List<PlannerDto> plannerList = plannerDao.getPlannerListByMember(mem_no);
+		List<PlannerDto> plannerList = plannerService.getPlannerListByMember(request);
 		
 		memberDto=memberDao.memberRead(memberDto.getMem_no());
 		
@@ -194,7 +195,7 @@ public class MyPageServiceImpl implements MyPageService {
 		memberDto=memberDao.memberRead(memberDto.getMem_no());
 		
 		int mem_no=64;
-		List<PlannerDto> plannerList = plannerDao.getPlannerListByMember(mem_no);
+		List<PlannerDto> plannerList = plannerService.getPlannerListByMember(request);
 		
 		mav.addObject("plannerList", plannerList);
 		mav.addObject("mateCheck", 2);

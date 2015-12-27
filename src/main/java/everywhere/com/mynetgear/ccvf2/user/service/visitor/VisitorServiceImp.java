@@ -111,7 +111,8 @@ public class VisitorServiceImp implements VisitorService {
 			visitorList=visitorDao.getVisitorList(startRow, endRow, mate_no);
 			memberList=visitorDao.getVisitorMemberList(startRow, endRow, mate_no);
 
-			//System.out.println("\n\n ----------- memberList.size() : " + memberList.size());
+			System.out.println("\n\n ----------- memberList.size() : " + memberList.size());
+			System.out.println("memberList.get(0) : " + memberList.get(0));
 		}
 		
 		mav.addObject("memberList", memberList);

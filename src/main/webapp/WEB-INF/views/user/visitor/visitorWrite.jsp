@@ -78,10 +78,17 @@
 						<div class="clearfix margin-bottom-30"></div>
 		                <div class="shadow-wrapper">
 		                    <blockquote class="hero box-shadow shadow-effect-2">
-			                    <form action="/user/visitor/visitorWrite.do" method="post" onsubmit="return visitorForm(this)">
 			                    	<div align="left" style="float: left;">
-				                    	<a href="/user/mypage/myPage.do?uanMe=S0002&mem_no=${visitor.mem_no}">
-				                    		<%-- <c:out value="아이디:${memberList.get(i.index).mem_email}"/> --%>
+			                    		<c:choose>
+			                    			<c:when test="${visitor.mem_no==mem_object.mem_no}">
+			                    				<c:set var="url" value="/user/myPage/myPage.do?uandMe=S0001"/>
+			                    			</c:when>
+			                    			<c:when test="${visitor.mem_no!=mem_object.mem_no}">
+			                    				<c:set var="url" value="/user/myPage/myPage.do?uandMe=S0002"/>
+			                    			</c:when>
+			                    		</c:choose>
+				                    	<a href="${url}&mem_no=${visitor.mem_no}">
+				                    		<c:out value="${memberList.get(i.index).mem_name}(${memberList.get(i.index).mem_email})"/>
 				                    	</a>
 			                    	</div>
 			                    	<div align="right" style="float: right;"><fmt:formatDate value="${visitor.visitor_write_date}" type="both"/></div><br/>
@@ -92,7 +99,6 @@
 			                        <!-- <div align="right">
 										<input type="submit" value="작성"/>
 									</div> -->
-								</form>
 		                    </blockquote>
 		                </div>
 						
