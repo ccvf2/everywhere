@@ -62,8 +62,4 @@ public interface VisitorDao {
 	 * @return
 	 */
 	public int visitorDelete(VisitorDto visitorDto);
-	
-	
-	public List<MemberDto> getVisitorMemberList(int startRow, int endRow, int mem_no);
-
 }
