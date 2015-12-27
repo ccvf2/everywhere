@@ -38,15 +38,12 @@
 			location.href="/user/accompany/accompanyList.do?search="+search+"&accompany_status_code="+status;
 		}
 		
-		function statusFunc() {
-			var status = document.getElementById("accompany_status_code").value;
-			location.href="/user/accompany/accompanyList.do?accompany_status_code="+status;
-		}
-		
 		$(document).ready(function(){
 		    $(".nav-tabs a").click(function(){
 		        $(this).tab('show');
-		        alert();
+		        $(this).parent().addClass("active");
+		        
+		        location.href="/user/accompany/accompanyList.do?accompany_status_code="+$(this).text();
 		    });
 		});
 	</script>
@@ -131,27 +128,18 @@
                 <div class="col-md-9">
                 	<div class="news-v3 bg-color-white margin-bottom-30">
                         <div class="news-v3-in">
-                        
-                        <!-- 탭 시작 -->
-                        	<%-- <div class="tab-v2">
-			                    <ul class="nav nav-tabs">
-			                    	<li class="active"><a href="#" data-toggle="tab">전체</a></li>
-			                    	<c:forEach var="postType" items="${postTypeList}">
-			                    		 <li class=""><a href="#" data-toggle="tab">${postType.code_name}</a></li>
+                        	
+                       		<!-- 탭 시작 -->
+                        	<div class="tab-v2">
+                        		<ul class="nav nav-tabs">
+                        			<li class="active"><a href="#">전체</a></li>
+                        			<c:forEach var="postType" items="${postTypeList}">
+			                    		 <li><a href="#">${postType.code_name}</a></li>
 			                    	</c:forEach>
-			                    </ul>                
+								</ul>
 			                </div>
-                         --%>
                          	<!-- 탭 끝 -->
                          	
-		                	<!-- 게시판 리스트 시작 -->
-		                	<select id="accompany_status_code" onchange="statusFunc()">
-		                		<option value=""  disabled selected style="display:none;">모두</option>
-								<c:forEach var="postType" items="${postTypeList}">
-									<option value="${postType.code}">${postType.code_name}</option>
-								</c:forEach>
-							</select>
-							
 							<!-- 검색결과가 있는 경우에만 검색 결과 수를 표시한다. -->
 		                	<c:if test="${searchValue != '' || searchValue ne null}">
 		                		<span class="results-number">${seachValue} Total: ${count} results</span><br/><br/>

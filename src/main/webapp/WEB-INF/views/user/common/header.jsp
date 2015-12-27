@@ -8,63 +8,72 @@
     <meta name="description" content="">
     <meta name="author" content="">
 <script>
-//로그인 폼 모달
-function loginFormReqiest() {
-	var makeDiv ="<div id='loginForm'></div>";
-	var requestURL="/user/login/loginModal.do";
+	//로그인 폼 모달
+	function loginFormReqiest() {
+		var makeDiv ="<div id='loginForm'></div>";
+		var requestURL="/user/login/loginModal.do";
+		
 		$.ajax({
-					url : requestURL,
-					type : "GET",
-					dataType : "html",
-					success : function(data) {
-						$("body").append(makeDiv);
-						$("#loginForm").append(data)
-					},
-					error : function() {
-						alert("목록 가져오기 실패");
-					}
-				})
-}
+			url : requestURL,
+			type : "GET",
+			dataType : "html",
+			success : function(data) {
+				$("body").append(makeDiv);
+				$("#loginForm").append(data)
+			},
+			error : function() {
+				alert("목록 가져오기 실패");
+			}
+		})
+	}
 
 
-//회원가입 폼 모달
-function joinFormReqiest() {
-	var makeDiv ="<div id='joinForm'></div>";
-	var requestURL="/user/member/register.do";
+	//회원가입 폼 모달
+	function joinFormReqiest() {
+		var makeDiv ="<div id='joinForm'></div>";
+		var requestURL="/user/member/register.do";
+		
 		$.ajax({
-					url : requestURL,
-					type : "GET",
-					dataType : "html",
-					success : function(data) {
-						$("body").append(makeDiv);
-						$("#joinForm").append(data)
-					},
-					error : function() {
-						alert("목록 가져오기 실패");
-					}
-				})
-}
+			url : requestURL,
+			type : "GET",
+			dataType : "html",
+			success : function(data) {
+				$("body").append(makeDiv);
+				$("#joinForm").append(data)
+			},
+			error : function() {
+				alert("목록 가져오기 실패");
+			}
+		})
+	}
 
-//여행스케줄 작성 모달
-function plannerCreateReqiest() {
-	//alert("Qyd")
-	var makeDiv2 ="<div id='plannerCreateForm'></div>";
-	var requestURL="/user/planner/plannerCreate.do";
+	//여행스케줄 작성 모달
+	function plannerCreateReqiest() {
+		//alert("Qyd")
+		var makeDiv2 ="<div id='plannerCreateForm'></div>";
+		var requestURL="/user/planner/plannerCreate.do";
+		
  		$.ajax({
-					url : requestURL,
-					type : "GET",
-					dataType : "html",
-					success : function(data) {
-						//alert(data);
-						$("body").append(makeDiv2);
-						$("#plannerCreateForm").append(data);
-					},
-					error : function() {
-						alert("목록 가져오기 실패"); 
-					}
-				});
-}
-
+			url : requestURL,
+			type : "GET",
+			dataType : "html",
+			success : function(data) {
+				//alert(data);
+				$("body").append(makeDiv2);
+				$("#plannerCreateForm").append(data);
+			},
+			error : function() {
+				alert("목록 가져오기 실패"); 
+			}
+		});
+	}
+	
+	/* 통합검색을 위한 스크립트 */
+	function searchTotal() {
+		var searchTotalValue=document.getElementById("searchTotalValue").value;
+		location.href="/user/search/searchTotal.do?search="+searchTotalValue;
+	}
+	
 </script>
 <meta charset="UTF-8">
 <title>타이틀 입력</title>
@@ -133,9 +142,9 @@ alert('${alert_msg}');
 	                        <i class="search fa fa-search search-btn"></i>
 	                        <div class="search-open">
 	                            <div class="input-group animatedfadeInDown ">
-	                                <input type="text" class="form-control" placeholder="Search">
+	                                <input type="text" class="form-control" id="searchTotalValue" placeholder="Search">
 	                                <span class="input-group-btn">
-	                                    <a class="btn-u" type="button" href="/user/search/searchTotal.do">Go</a>
+	                                    <a class="btn-u" type="button" href="javascript:searchTotal()">Go</a>
 	                                </span>
 	                            </div>
 	                        </div>
