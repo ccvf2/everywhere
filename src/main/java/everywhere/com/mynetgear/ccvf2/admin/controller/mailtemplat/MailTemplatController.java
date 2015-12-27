@@ -26,4 +26,11 @@ public class MailTemplatController {
 		mailTemplatService.mailTemplatList(mav);
 		return mav;
 	}
+	@RequestMapping(value="/admin/mailtemplat/mailTemplatInsert.do", method=RequestMethod.GET)
+	public ModelAndView mailTemplatInsertView() {
+		ModelAndView mav= new ModelAndView("/admin/mailTemplat/mailTemplatInsert");
+		System.out.println("mailTemplatInsert 컨트롤러");
+		//mailTemplatService.mailTemplatList(mav);
+		return mav;
+	}
 }
