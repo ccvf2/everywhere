@@ -69,15 +69,10 @@
 			                                <img class="rounded-x" src="${friendProfile}" alt="">
 			                                <div class="name-location">
 			                                    <strong><a href="/user/myPage/myPage.do?uandMe=S0002&mem_no=${friendsList.mem_no}"><c:out value="${friendsList.mem_name}"/></a></strong>
-			                                    <span><i class="fa fa-map-marker"></i><a href="/user/myPage/myPage.do?uandMe=S0002&mem_no=${friendsList.mem_no}"><c:out value="${friendsList.mem_email}"/></a></span>
+			                                    <span><i class="fa fa-map-marker"></i><a href="/user/message/messageTalkList.do?recv_mem_no=${friendsList.mem_no}"><c:out value="${friendsList.mem_email}"/></a></span>
 			                                </div>
 			                                <div class="clearfix margin-bottom-20"></div>
 			                                <hr>
-			                                <ul class="list-inline share-list">
-			                                    <li><i class="fa fa-bell"></i><a href="#">12 Notifications</a></li>
-			                                    <li><i class="fa fa-group"></i><a href="#">54 Followers</a></li>
-			                                    <li><i class="fa fa-share"></i><a href="#">Share</a></li>
-			                                </ul>
 			                            </div>
 			                        </div>
 								</c:if>
@@ -87,15 +82,10 @@
 			                                <img class="rounded-x" src="${friendProfile}" alt="">
 			                                <div class="name-location">
 			                                    <strong><a href="/user/myPage/myPage.do?uandMe=S0002&mem_no=${friendsList.mem_no}"><c:out value="${friendsList.mem_name}"/></a></strong>
-			                                    <span><i class="fa fa-map-marker"></i><a href="/user/myPage/myPage.do?uandMe=S0002&mem_no=${friendsList.mem_no}"><c:out value="${friendsList.mem_email}"/></a></span>
+			                                    <span><i class="fa fa-map-marker"></i><a href="/user/message/messageTalkList.do?recv_mem_no=${friendsList.mem_no}"><c:out value="${friendsList.mem_email}"/></a></span>
 			                                </div>
 			                                <div class="clearfix margin-bottom-20"></div>
 			                                <hr>
-			                                <ul class="list-inline share-list">
-			                                    <li><i class="fa fa-bell"></i><a href="#">37 Notifications</a></li>
-			                                    <li><i class="fa fa-group"></i><a href="#">46 Followers</a></li>
-			                                    <li><i class="fa fa-share"></i><a href="#">Share</a></li>
-			                                </ul>
 			                            </div>
 			                        </div>
 			                    </c:if>

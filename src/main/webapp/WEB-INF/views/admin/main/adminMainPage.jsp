@@ -153,7 +153,55 @@
                                 <h3 class="panel-title"><i class="fa fa-bar-chart-o fa-fw"></i> Area Chart</h3>
                             </div>
                             <div class="panel-body">
-                                <div id="chartContainer" style="width: 900px; height: 300px;"></div>
+                            	<script type="text/javascript">
+                               		$(function(){
+                               			$.ajax({
+                							url: "/admin/main/main.ajax",
+                							type:"get",
+                							dataType:"text",
+                							success:function(data){
+                								var jsonObjectList=JSON.parse(data);
+                								var arrayData=[];
+                								for(var i=0; i < jsonObjectList.length; i++){ 
+                									arrayData.push({ x: i+1, y: jsonObjectList[i].stats_count, label: jsonObjectList[i].stats_month+"월"});
+                								}
+                								
+                								var mainChart = {
+                               				      title: {
+                               				         text: "최근 3개월 접속자 수"
+                               				      },
+                               				                animationEnabled: true,
+                        				              data: [
+               								      {
+               								         type: "column", //column, line, area, bar, pie, etc
+               								         dataPoints: arrayData
+               								      }]
+                               				   	};
+                               				   	$("#chartContainer").CanvasJSChart(mainChart);
+                               				   	
+                               				 var mainChart = {
+	                           				      title: {
+	                           				         text: ""
+	                           				      },
+	                           				                animationEnabled: true,
+	                    				              data: [
+	           								      {
+	           								         type: "pie", //column, line, area, bar, pie, etc
+	           								         dataPoints: arrayData
+	           								      }]
+                           				   	};
+                           				   	$("#chartContainer2").CanvasJSChart(mainChart);
+                								
+                							},
+                							error:function(xhr, status, errorMsg){
+                								//alert(xhr+","+status+","+errorMsg);
+                							}
+                						});
+                               		});
+                               	
+                               	</script>
+                                <div id="chartContainer" style="width: 500px; height: 300px; float: left;"></div>
+                                <div id="chartContainer2" style="width: 500px; height: 300px; float: left;"></div>
                             </div>
                         </div>
                     </div>

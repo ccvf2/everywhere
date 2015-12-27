@@ -48,8 +48,17 @@ public class MyPageServiceImpl implements MyPageService {
 		HttpSession session = request.getSession();
 		MemberDto memberDto=(MemberDto) session.getAttribute(Constant.SYNN_LOGIN_OBJECT);
 		
-		int mem_no=64;
 		List<PlannerDto> plannerList = plannerService.getPlannerListByMember(request);
+		System.out.println("---------------plannerList.size() : " + plannerList.size());
+		if(plannerList.size()>0){
+			for(int i=0; i<plannerList.size(); i++){
+				PlannerDto dto= plannerList.get(i);
+				dto.setMemo(dto.getMemo().replace("<br/>", "\r\n"));
+				System.out.println("dto.toString() : " + dto.toString()); 
+				plannerList.set(i, dto);
+			}
+		}
+		
 		
 		memberDto=memberDao.memberRead(memberDto.getMem_no());
 		
@@ -194,7 +203,6 @@ public class MyPageServiceImpl implements MyPageService {
 		
 		memberDto=memberDao.memberRead(memberDto.getMem_no());
 		
-		int mem_no=64;
 		List<PlannerDto> plannerList = plannerService.getPlannerListByMember(request);
 		
 		mav.addObject("plannerList", plannerList);
