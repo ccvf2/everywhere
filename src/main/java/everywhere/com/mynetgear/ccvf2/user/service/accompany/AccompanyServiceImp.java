@@ -385,7 +385,11 @@ public class AccompanyServiceImp implements AccompanyService {
 					//기존 파일 삭제
 					//기존에 업로드 되어있던 파일을 삭제하기 위해서 업데이트 이전의 DTO를 가져옴
 					AccompanyDto oldAccompanyDto = accompanyDao.getOneAccompany(accompanyDto.getAccompany_no());
-					commonFileIOService.requestDeleteFile(accompanyPath, oldAccompanyDto.getAttach_file());
+					//기존 글에 사진이 존제할 경우에만 파일을 삭제한다.
+					if(oldAccompanyDto.getAttach_file()!=null) {
+						commonFileIOService.requestDeleteFile(accompanyPath, oldAccompanyDto.getAttach_file());
+					}
+					
 					//새로운 파일 쓰기 작업 시작
 					commonFileIODto.setType_code(Constant.FILE_TYPE_ACCOMPANY);
 					commonFileIODto.setWrite_no(accompanyDto.getAccompany_no());
