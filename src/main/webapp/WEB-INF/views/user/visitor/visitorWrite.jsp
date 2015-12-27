@@ -87,22 +87,30 @@
 			                    				<c:set var="url" value="/user/myPage/myPage.do?uandMe=S0002"/>
 			                    			</c:when>
 			                    		</c:choose>
-				                    	<a href="${url}&mem_no=${visitor.mem_no}">
-				                    		<c:out value="${memberList.get(i.index).mem_name}(${memberList.get(i.index).mem_email})"/>
-				                    	</a>
 			                    	</div>
-			                    	<div align="right" style="float: right;"><fmt:formatDate value="${visitor.visitor_write_date}" type="both"/></div><br/>
+			                    	<div align="right" style="float: right; font-size:0.8em;"><fmt:formatDate value="${visitor.visitor_write_date}" type="both"/></div><br/>
 			                        <p><em>
 										<c:out value="${visitor.visitor_content}"/>
 			                        </em></p> 
-			                        <small><em><c:out value="to.${visitor.mem_no} (${visitor.mem_no})"/></em></small>
-			                        <!-- <div align="right">
-										<input type="submit" value="작성"/>
-									</div> -->
+			                        <small><em>
+			                        <a href="${url}&mem_no=${visitor.mem_no}">
+				                    	<c:out value="${memberList.get(i.index).mem_name}(${memberList.get(i.index).mem_email})"/>
+				                    </a>
+				                    </em></small>
 		                    </blockquote>
 		                </div>
 						
 					</c:forEach>
+				</c:if>
+				<c:if test="${count==0}">
+					<div class="shadow-wrapper">
+	                    <div class="tag-box tag-box-v1 box-shadow shadow-effect-2">
+	                        <h2>아직 작성된 방명록이 없군요.</h2>
+	                        <p>
+	                         더 많은 친구를 추가하여, 회원들과 다양한 소식을 함께 즐기세요.<br/>
+	                        </p>
+	                    </div>
+	                </div>
 				</c:if>
 				<div align="center">
 					<c:if test="${count>0}">
