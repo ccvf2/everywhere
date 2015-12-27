@@ -66,7 +66,7 @@ function getListSuccess(jsonData, status, xhr) {
 		if(item.mem_profile_photo==""){
 			photoPath=defaultPhoto;
 		}else{
-			photoPath=item.mem_profile_photo
+			photoPath="/attatchFile/member/"+item.mem_profile_photo
 		}
 		
 		$("#"+i).append("<a class='pull-left' href='#'><img class='media-object rounded-2x' src='"+photoPath+"' alt='' /></a>");
