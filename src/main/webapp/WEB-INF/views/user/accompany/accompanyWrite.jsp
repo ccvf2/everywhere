@@ -151,7 +151,12 @@
 	                               		<label class="label">글 종류</label> 
 		                                <label class="select">
 		                                    <select name="accompany_status_code">
-												<c:forEach var="postType" items="${postTypeList}">
+		                                    	<!-- 어드민인 경우만 공지를 작성 가능 -->
+		                                    	<c:set var="startIndex" value="1"></c:set>
+		                                    	<c:if test="${mem_object.mem_level_code=='M0001'}">
+		                                    		<c:set var="startIndex" value="0"></c:set>
+		                                    	</c:if>
+												<c:forEach begin="${startIndex}" var="postType" items="${postTypeList}">
 													<option value="${postType.code}">${postType.code_name}</option>
 												</c:forEach>
 											</select>
