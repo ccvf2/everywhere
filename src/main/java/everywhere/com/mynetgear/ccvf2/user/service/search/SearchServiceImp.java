@@ -271,12 +271,6 @@ public class SearchServiceImp implements SearchService {
 		//처음에 header 에서 요청한 검색어를 받아야함
 		String searchValue = request.getParameter("search");
 		
-		//검색된 결과 수 가져옴
-		int spotCount = 0;
-		int plannerCount = 0;
-		//spotCount = searchDao.getSpotCount(searchValue);
-		//plannerCount = searchDao.getPlannerCount(searchValue);
-		EverywhereAspect.logger.info(EverywhereAspect.logMsg + "spotCount:" + spotCount + "\tplannerCount:" + plannerCount);
 		
 		int currentPage = 1;
 		//한 페이지에 보여줄 게시물 수
@@ -286,6 +280,13 @@ public class SearchServiceImp implements SearchService {
 		spotDto.setEndPage(currentPage*boardSize);
 		spotDto.setSearchWord1(searchValue);
 		spotDto.setSearchWord2(searchValue);
+		
+		//검색된 결과 수 가져옴
+		int spotCount = 0;
+		int plannerCount = 0;
+		spotCount = searchDao.getSpotCount(spotDto);
+		//plannerCount = searchDao.getPlannerCount(searchValue);
+		EverywhereAspect.logger.info(EverywhereAspect.logMsg + "spotCount:" + spotCount + "\tplannerCount:" + plannerCount);
 		
 		List<SpotDto> searchSpotList = searchDao.getSpotList(spotDto);
 		EverywhereAspect.logger.info(EverywhereAspect.logMsg + searchSpotList.size());
