@@ -15,7 +15,7 @@ public interface PlannerDao {
 	
 	public int getItemNextSeq();
 
-	public List<PlannerDto> getPlannerListByMember(int mem_no);
+	public List<PlannerDto> getPlannerListByMember(PlannerDto plannerDto);
 	public List<ItemDto> getItemList(int planner_no);
 	public List<MoneyDto> getMoneyList(int item_no);
 	

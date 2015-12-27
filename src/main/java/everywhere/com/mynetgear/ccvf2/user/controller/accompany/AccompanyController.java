@@ -40,8 +40,7 @@ public class AccompanyController {
 	public ModelAndView mainAccompany(HttpServletRequest request, HttpServletResponse response) {
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("request", request);
-		accompanyService.mainAccompany(mav);
-		
+		mav.setViewName("user/accompany/accompanyMainPage");
 		return mav;
 	}
 	

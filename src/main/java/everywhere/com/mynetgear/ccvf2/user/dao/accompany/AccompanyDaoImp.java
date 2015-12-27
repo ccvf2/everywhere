@@ -38,19 +38,19 @@ public class AccompanyDaoImp implements AccompanyDao {
 	@Override
 	public int getAccompanyCount(String searchValue, String accompany_status_code) {
 		Map<String, Object> hMap = new HashMap<String, Object>();
-		hMap.put("use_yn", Constant.SYNB_YN_Y);
-		hMap.put("searchValue", searchValue);
-		hMap.put("accompany_status_code", accompany_status_code);
+		hMap.put("use_yn", Constant.SYNB_YN_Y);		// 게시글을 활성화한다.
+		hMap.put("searchValue", searchValue);		// 검색 값이 있는 경우
+		hMap.put("accompany_status_code", accompany_status_code);	//동행구하기 상태 (공지, 여행중, 한국출발, 완료)
 		return sqlTemplate.selectOne("everywhere.com.mynetgear.ccvf2.user.mapper.accompany.getAccompanyCount", hMap);
 	}
 
 	@Override
 	public List<AccompanyDto> getAccompanyList(int startRow, int endRow, String searchValue, String accompany_status_code) {
 		Map<String, Object> hMap = new HashMap<String, Object>();
-		hMap.put("startRow", startRow);
+		hMap.put("startRow", startRow);	
 		hMap.put("endRow", endRow);
-		hMap.put("use_yn", Constant.SYNB_YN_Y);
-		hMap.put("accompany_status_code", accompany_status_code);
+		hMap.put("use_yn", Constant.SYNB_YN_Y);	//활성화 된 게시물만 가져오기 위함
+		hMap.put("accompany_status_code", accompany_status_code);	
 		hMap.put("searchValue", searchValue);
 		return sqlTemplate.selectList("everywhere.com.mynetgear.ccvf2.user.mapper.accompany.getAccompanyList", hMap);
 	}
@@ -74,7 +74,7 @@ public class AccompanyDaoImp implements AccompanyDao {
 			// 읽기
 			board = sqlTemplate.selectOne("everywhere.com.mynetgear.ccvf2.user.mapper.accompany.getOneAccompany", hMap);
 			transactionManager.commit(status);
-		} catch (Exception e) {
+		} catch (Exception e) {	// 오류 발생시 롤백
 			sqlTemplate.rollback();
 			transactionManager.rollback(status);
 		}
@@ -85,8 +85,9 @@ public class AccompanyDaoImp implements AccompanyDao {
 	@Override
 	public int checkUserAccompany(int accompany_no, int mem_no) {
 		Map<String, Integer> hMap = new HashMap<String, Integer>();
-		hMap.put("accompany_no", accompany_no);
-		hMap.put("mem_no", mem_no);
+		hMap.put("accompany_no", accompany_no);	//게시글 번호
+		hMap.put("mem_no", mem_no);				//회원번호
+		//비교하여 check값 돌려줌
 		return sqlTemplate.selectOne("everywhere.com.mynetgear.ccvf2.user.mapper.accompany.checkUserAccompany", hMap);
 	}
 
@@ -108,7 +109,9 @@ public class AccompanyDaoImp implements AccompanyDao {
 	@Override
 	public List<AccompanyDto> getRecentAccompanyList() {
 		Map<String, Object> hMap = new HashMap<String, Object>();
+		//활성화 된 글만
 		hMap.put("use_yn", Constant.SYNB_YN_Y);
+		//공지글은 제외하고 보여준다.
 		hMap.put("accompany_status_code", Constant.ACCOMPANY_TYPE_NOTICE);
 		
 		return sqlTemplate.selectList("everywhere.com.mynetgear.ccvf2.user.mapper.accompany.getRecentAccompanyList", hMap);

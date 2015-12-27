@@ -18,8 +18,8 @@ function setDraggable(){
 function setDroppable(){
 	$( ".dropItem" ).droppable({
 		accept: "#spotItem > div",
-		activeClass: "ui-state-hover",
-		hoverClass: "ui-state-active",
+		activeClass: "ui-state-active",
+		hoverClass: "ui-state-highlight",
 		drop: function( event, ui ) {
 			$(event['target']).droppable('disable');
 			$( this ).find("input").val(ui.draggable.attr('id').replace("_item",""));
@@ -124,6 +124,35 @@ function addItem(input_name){
 	setDroppable();
 }
 
+function deleteItem(input_name){
+	//input_name = d1_item1
+	var day_label = input_name.substr(0,7); //d1_item
+	var day_item_count = document.getElementById(input_name.substr(0,7)+"_count");
+	if(day_item_count.value == '1'){
+		alert('Day 일정은 최소 한개는 필요합니다.');
+		return;
+	}
+	$("#"+input_name+"_li").remove()
+	for(var i = Number(input_name.substr(7,8))+1; i <= Number(day_item_count.value); i++){
+		var oldExp = new RegExp(day_label+i, 'g');
+		var newExp = day_label+(i-1);
+		$("[name*='"+day_label+i+"']").each(function(){
+			//alert($(this).attr('name'));
+			$(this).attr('name', $(this).attr('name').replace(oldExp, newExp));
+			//alert($(this).attr('name'));
+		})
+		
+		$("[id*='"+day_label+i+"']").each(function(){
+			$(this).attr('id', $(this).attr('id').replace(oldExp, newExp));
+		})
+		
+		$("[href*='"+day_label+i+"']").each(function(){
+			$(this).attr('href', $(this).attr('href').replace(oldExp, newExp));
+		})
+	}
+	day_item_count.value = Number(day_item_count.value)-1;
+}
+
 function addMoney(input_name){
 	//input_name : d1_item1
 
@@ -133,6 +162,7 @@ function addMoney(input_name){
 		moneyDiv = document.createElement("div");
 		moneyDiv.id = "money"+input_name;
 		moneyDiv.className  = "panel-body";
+		moneyDiv.style.borderTop = 'solid 1px #EEEEEE';
 		$("#"+input_name+"_note_div").after(moneyDiv);
 	}
 
@@ -182,7 +212,7 @@ function addMoney(input_name){
 	pricelabel.className = "input col col-4";
 	var priceInput = document.createElement("input");
 	priceInput.style.marginLeft="10px";
-	priceInput.type="text";
+	priceInput.type="number";
 	priceInput.className = "col col-4";
 	priceInput.name= input_name+"_money"+money_count.value+"_price";
 	priceInput.placeholder="3000";

@@ -71,7 +71,8 @@ public class PasswordSecur {
 		int numOfRows=100;
 		//도시코드
 		int areaCode=1;
-		String requestUrl="http://api.visitkorea.or.kr/openapi/service/rest/KorService/areaBasedList?ServiceKey=ccG6MDZvttNoXzutJHYMjBFR3AWZFCe%2B22ZHpIoB1ufPrRk48dGNhxEPYOdaNjsQowDwMpegNEU03lcRgm%2BXUw%3D%3D&MobileOS=ETC&MobileApp=everywhere&areaCode="+areaCode+"&numOfRows="+numOfRows+"&pageNo="+currentPage;
+		String requestUrl="";
+			requestUrl="http://api.visitkorea.or.kr/openapi/service/rest/KorService/areaBasedList?ServiceKey=ccG6MDZvttNoXzutJHYMjBFR3AWZFCe%2B22ZHpIoB1ufPrRk48dGNhxEPYOdaNjsQowDwMpegNEU03lcRgm%2BXUw%3D%3D&MobileOS=ETC&MobileApp=everywhere&areaCode="+areaCode+"&numOfRows="+numOfRows+"&pageNo="+currentPage;
 		
 		int totalCnt=totalCount(requestUrl);
 		int rollCount=(Integer)totalCnt/numOfRows;
@@ -81,16 +82,18 @@ public class PasswordSecur {
 		}
 		
 			for (int j = 0; j < rollCount; j++) {
-				//관광명소 일괄 넣기
-				ArrayList<SpotDto> list=start(requestUrl);
+			String url="http://api.visitkorea.or.kr/openapi/service/rest/KorService/areaBasedList?ServiceKey=ccG6MDZvttNoXzutJHYMjBFR3AWZFCe%2B22ZHpIoB1ufPrRk48dGNhxEPYOdaNjsQowDwMpegNEU03lcRgm%2BXUw%3D%3D&MobileOS=ETC&MobileApp=everywhere&areaCode="+areaCode+"&numOfRows="+numOfRows+"&pageNo="+currentPage;
+			System.out.println(Constant.LOG_ID1+ url);	
+			//관광명소 일괄 넣기
+				ArrayList<SpotDto> list=start(url);
 				int size=list.size();
 				for (int i = 0; i < size; i++) {
 					SpotDto dto= list.get(i);
 						dto.setSpot_no(spotDao.getSpotNextSeq());
 						int result = spotDao.insertSpot(dto);
-						System.out.println(Constant.LOG_ID3+dto.getSpot_name()+":::성공");
+						System.out.println(Constant.LOG_ID2+dto.getSpot_name()+":::성공");
 				}
-				currentPage++;
+				++currentPage;
 				System.out.println("-------------------------------------------------------------------------------------------");
 				System.out.println("PAGECOUNT:"+rollCount+"/"+currentPage);
 				System.out.println("-------------------------------------------------------------------------------------------");

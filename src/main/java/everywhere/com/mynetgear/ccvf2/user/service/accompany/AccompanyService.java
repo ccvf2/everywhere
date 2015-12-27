@@ -37,14 +37,6 @@ public interface AccompanyService {
 	/**
 	 * @author 곽성국	
 	 * @createDate 2015. 12. 8.
-	 * @described 매소드의 용도를 적어주세요
-	 * @param mav
-	 */
-	void mainAccompany(ModelAndView mav);
-
-	/**
-	 * @author 곽성국	
-	 * @createDate 2015. 12. 8.
 	 * @described 동행구하기 read
 	 * @param mav
 	 */

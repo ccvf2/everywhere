@@ -13,32 +13,39 @@
 
 	<!-- CSS Implementing Plugins -->
 	<link rel="stylesheet" href="/assets/plugins/scrollbar/css/jquery.mCustomScrollbar.css">
-	<link rel="stylesheet" href="/assets/plugins/sky-forms-pro/skyforms/css/sky-forms.css">
-	<link rel="stylesheet" href="/assets/plugins/sky-forms-pro/skyforms/custom/custom-sky-forms.css">
 
 	<!-- 도시&국가 셀렉트박스 -->
-	<script type="text/javascript" src="/script/user/planner/selectedCountry.js"></script>	
-	<script type="text/javascript" src="/script/user/planner/addPlannerPage.js"></script>	
+	<script type="text/javascript" src="/script/user/planner/selectedCountry.js"></script>
+	<script type="text/javascript" src="/script/user/planner/addPlannerPage.js"></script>
 </head>
 <script type="text/javascript">
-function spotReadPage(no) {
-	//alert(no);
-	var makeDiv ="<div id='showModal"+no+"'></div>";
-	var requestURL="/user/spot/spotReadPage.do?spot_no="+no;
+	function spotReadPage(no) {
+		//alert(no);
+		var makeDiv ="<div id='showModal"+no+"'></div>";
+		var requestURL="/user/spot/spotReadPage.do?spot_no="+no;
+		
 		$.ajax({
-					url : requestURL,
-					type : "GET",
-					dataType : "html",
-					success : function(data) {
-						$("body").append(makeDiv);
-						$("#showModal"+no).append(data)
-					},
-					error : function() {
-						alert("목록 가져오기 실패");
-					}
-				})
-}
+			url : requestURL,
+			type : "GET",
+			dataType : "html",
+			success : function(data) {
+				$("body").append(makeDiv);
+				$("#showModal"+no).append(data)
+			},
+			error : function() {
+				alert("목록 가져오기 실패");
+			}
+		})
+	}
 </script>
+
+<style>
+.affix {
+	top : 0px;
+	width : 18.447%;
+}
+</style>
+
 <body>
 	<div class="wrapper">
 		<!--=== Header ===-->	
@@ -61,82 +68,85 @@ function spotReadPage(no) {
 	<div class="container content profile" >
 		<div class="row">
 		<!--Left Sidebar-->
-			<div class="col-md-3 md-margin-bottom-40">
-				<!--Notification-->
-				<div class="tag-box tag-box-v4 rounded-2x margin-bottom-20" style="padding : 7px;">
-					<div class="panel-heading-v2 overflow-h">
-						<h2 class="heading-xs pull-left"><i class="fa fa-map-marker"></i> Spot</h2>
-					</div>
-
-					<div class="panel-heading-v2 overflow-h">
-						<form class="sky-form">
-						<input type="hidden" id="spot_page" value="1"/>
-							<!-- 나라 -->
-							<label class="select">
-								<select name="country_code" id="selectCountry" onchange="selectSpotList(true)">
-									<option value=""> Country </option>
-									<c:forEach var="country" items="${countryList}" >
-										<option value="${country.code}">${country.code_name}</option>
-									</c:forEach>
-								</select>
-								<i></i>
-							</label>
-
-							<!-- 도시 -->
-							<label class="select">
-								<select name="city_code" id="selectCity" onchange="selectSpotList(false)">
-									<option value=""> City </option>
-								</select>
-								<i></i>
-							</label>
-
-							<!-- 명소타입 -->
-							<label class="select">
-								<select name="spot_type_code" id="selectType" onchange="selectSpotList(false)">
-									<option value=""> SpotType </option>
-									<c:forEach var="spotType" items="${spotTypeList}">
-										<option value="${spotType.code}">${spotType.code_name}</option>
-									</c:forEach>
-								</select>
-								<i></i>
-							</label>
-						</form>
-					</div>
-					<hr style="margin : 0px 0px 5px 0px;"/>
-
-					<div>
-						<ul class="list-unstyled mCustomScrollbar margin-bottom-20" data-mcs-theme="minimal-dark" id="spotLists">
-							<c:forEach var="spot" items="${spotList}">
-								<li class="notification" style="margin:0px;border:1px solid #eee;padding:5px 5px;height: 48px;" id="spotItem">
-									<div id="${spot.spot_no}_item" class="ui-widget-content" style="border:0px;">
-										<i style="margin:0;"><img alt="" src="/attatchFile/spot/${spot.spot_photoes[0].save_name}.${spot.spot_photoes[0].extension}" style="width:35px;height:35px;margin-right:5px;"></i>
-										<div class="overflow-h">
-											<span>
-												<strong><a href="javascript:spotReadPage('${spot.spot_no}')">${spot.spot_name}</a></strong>
-											</span>
-											<small><c:out value="${spot.spot_note}"/></small>
+			<nav class="col-sm-3 md-margin-bottom-40" >
+				<!-- 사이드 바 메뉴 고정 -->
+				<div class="nav nav-pills nav-stacked" data-spy="affix" data-offset-top="307" id="sidebar">
+					<!--Notification-->
+					<div class="tag-box tag-box-v4 rounded-2x margin-bottom-20" style="padding : 7px;">
+						<div class="panel-heading-v2 overflow-h">
+							<h2 class="heading-xs pull-left"><i class="fa fa-map-marker"></i> Spot</h2>
+						</div>
+	
+						<div class="panel-heading-v2 overflow-h">
+							<form class="sky-form">
+							<input type="hidden" id="spot_page" value="1"/>
+								<!-- 나라 -->
+								<label class="select">
+									<select name="country_code" id="selectCountry" onchange="selectSpotList(true)">
+										<option value=""> Country </option>
+										<c:forEach var="country" items="${countryList}" >
+											<option value="${country.code}">${country.code_name}</option>
+										</c:forEach>
+									</select>
+									<i></i>
+								</label>
+	
+								<!-- 도시 -->
+								<label class="select">
+									<select name="city_code" id="selectCity" onchange="selectSpotList(false)">
+										<option value=""> City </option>
+									</select>
+									<i></i>
+								</label>
+	
+								<!-- 명소타입 -->
+								<label class="select">
+									<select name="spot_type_code" id="selectType" onchange="selectSpotList(false)">
+										<option value=""> SpotType </option>
+										<c:forEach var="spotType" items="${spotTypeList}">
+											<option value="${spotType.code}">${spotType.code_name}</option>
+										</c:forEach>
+									</select>
+									<i></i>
+								</label>
+							</form>
+						</div>
+						<hr style="margin : 0px 0px 5px 0px;"/>
+	
+						<div>
+							<ul class="list-unstyled mCustomScrollbar margin-bottom-20" data-mcs-theme="minimal-dark" id="spotLists">
+								<c:forEach var="spot" items="${spotList}">
+									<li class="notification" style="margin:0px;border:1px solid #eee;padding:5px 5px;height: 48px;" id="spotItem">
+										<div id="${spot.spot_no}_item" class="ui-widget-content" style="border:0px;">
+											<i style="margin:0;"><img alt="" src="/attatchFile/spot/${spot.spot_photoes[0].save_name}.${spot.spot_photoes[0].extension}" style="width:35px;height:35px;margin-right:5px;"></i>
+											<div class="overflow-h">
+												<span>
+													<strong><a href="javascript:spotReadPage('${spot.spot_no}')">${spot.spot_name}</a></strong>
+												</span>
+												<span><small><c:out value="${spot.spot_note}"/></small></span>
+											</div>
 										</div>
-									</div>
-								</li>
-							</c:forEach>
-						</ul>
+									</li>
+								</c:forEach>
+							</ul>
+						</div>
+						<button type="button" class="btn-u btn-u-default btn-u-sm btn-block" onclick="selectMoreSpotList()">Load More</button>
+						<!--End Notification-->
 					</div>
-					<button type="button" class="btn-u btn-u-default btn-u-sm btn-block" onclick="selectMoreSpotList()">Load More</button>
-					<!--End Notification-->
-				</div>
-
-				<div class="tag-box tag-box-v4 rounded-2x margin-bottom-20" style="padding : 7px;">
-				<form action="#" id="sky-form" class="sky-form">
-				<!--Datepicker-->
-					<div class="row">
-						<section class="col col-3">
-							<div id="inline-start"></div>
-						</section>
+					
+					<div class="tag-box tag-box-v4 rounded-2x margin-bottom-20" style="padding : 7px;">
+						<form action="#" id="sky-form" class="sky-form">
+						<!--Datepicker-->
+							<div class="row">
+								<section class="col col-3">
+									<div id="inline-start"></div>
+								</section>
+							</div>
+						</form>
+					<!--End Datepicker-->
 					</div>
-				</form>
-				<!--End Datepicker-->
 				</div>
-			</div>
+			</nav>
 			<!--End Left Sidebar-->
 
 		<!--Tag Box v4-->
@@ -157,7 +167,7 @@ function spotReadPage(no) {
 								<div class="col col-4">
 									<label class="input">
 										<i class="icon-append fa fa-calendar"></i>
-										<input type="text" name="start_date" id="start" placeholder="Start date" value="${start_date}">
+										<input type="date" name="start_date" placeholder="Start Date" value="${start_date }">
 									</label>
 								</div>
 								<div class="col col-2" style="padding-left: 0px;">
@@ -183,11 +193,11 @@ function spotReadPage(no) {
 								<h2 class="heading-xs" id="d${i}_items_date">Day ${i}</h2>
 								<c:set var="id_value" value="d${i}_item1"/>
 									<ol class="list-unstyled" id="d${i}_item_ol">
-										<li>
+										<li id="d${i}_item1_li">
 										<div class="panel-group">
 											<input type="hidden" name="${id_value}_no"/>
 											<div class="panel panel-default">
-												<div class="panel-heading ui-widget-header dropItem">
+												<div class="ui-widget-header dropItem" style="height:52px;">
 													<a data-toggle="collapse" href="#collapse_${id_value}">
 														<i class="icon-note pull-right"></i>
 													</a>
@@ -204,12 +214,16 @@ function spotReadPage(no) {
 													</div>
 													<input type="hidden" id="${id_value}_money_count" name="${id_value}_money_count" value="0"/>
 													<div class="project-share">
+														<ul class="list-inline comment-list-v2" style="float: left">
+															<li>시간 : </li>
+															<li><input type="text" name="${id_value}_time" maxlength="20" placeholder="예) 8시 ~ 10시 사이"/> </li>
+														</ul>
 														<ul class="list-inline comment-list-v2 pull-right">
-															<li><i data-toggle="tooltip" title="시간정보 추가" class="icon-hourglass" style="font-size:23px" onclick="addTime('${id_value}')"></i></li>
 															<li><i data-toggle="tooltip" title="사진 추가" class="icon-picture input input-file" style="font-size:23px" onclick="addPhoto(this,'${id_value}')">
 															<div class="button" style="background-color:rgba(255, 255, 255, 0);"><input type="file" name="${id_value}_attach_photoes" onchange="addPhoto(this,'${id_value}')" accept="image/*"/></div>
 																</i></li>
 															<li><i data-toggle="tooltip" title="가계부 추가" class="icon-credit-card" style="font-size:23px" onclick="addMoney('${id_value}')"></i></li>
+															<li><i data-toggle="tooltip" title="일정삭제" class="icon-trash" style="font-size:23px" onclick="deleteItem('${id_value}')"></i></li>
 														</ul>
 													</div>
 												</div>
@@ -237,11 +251,11 @@ function spotReadPage(no) {
 			<h2 class="heading-xs" id="d0_items_date">Day 0</h2>
 			<c:set var="id_value" value="d0_item1"/>
 			<ol class="list-unstyled" id="d0_item_ol">
-				<li>
+				<li id="d0_item1_li">
 					<div class="panel-group ">
 						<input type="hidden" name="d0_item1_no"/>
 						<div class="panel panel-default">
-							<div class="panel-heading ui-widget-header dropItem">
+							<div class="ui-widget-header dropItem" style="height:52px;">
 								<a data-toggle="collapse" href="#collapse_d0_item1">
 									<i class="icon-note pull-right"></i>
 								</a>
@@ -258,12 +272,16 @@ function spotReadPage(no) {
 								</div>
 								<input type="hidden" id="d0_item1_money_count" name="d0_item1_money_count" value="0"/>
 								<div class="project-share">
+									<ul class="list-inline comment-list-v2" style="float: left">
+										<li>시간 : </li>
+										<li><input type="text" name="d0_item1_time" maxlength="20" placeholder="예) 8시 ~ 10시 사이"/> </li>
+									</ul>
 									<ul class="list-inline comment-list-v2 pull-right">
-										<li><i data-toggle="tooltip" title="시간정보 추가" class="icon-hourglass" style="font-size:23px" onclick="addTime('d0_item1')"></i></li>
 										<li><i data-toggle="tooltip" title="사진 추가" class="icon-picture input input-file" style="font-size:23px" onclick="addPhoto(this,'d0_item1')">
 										<div class="button" style="background-color:rgba(255, 255, 255, 0);"><input type="file" name="d0_item1_attach_photoes" onchange="addPhoto(this,'d0_item1')" accept="image/*"/></div>
 										</i></li>
 										<li><i data-toggle="tooltip" title="가계부 추가" class="icon-credit-card" style="font-size:23px" onclick="addMoney('d0_item1')"></i></li>
+										<li><i data-toggle="tooltip" title="일정삭제" class="icon-trash" style="font-size:23px" onclick="deleteItem('d0_item1')"></i></li>
 									</ul>
 								</div>
 							</div>
@@ -278,28 +296,14 @@ function spotReadPage(no) {
 	</div>
 	<!-- 동적 입력창을 위한 HTML 값 finish -->
 
-	<!-- JS Implementing Plugins -->
-	<script src="/assets/plugins/sky-forms-pro/skyforms/js/jquery.maskedinput.min.js"></script>
-	<script src="/assets/plugins/sky-forms-pro/skyforms/js/jquery-ui.min.js"></script>
-	<script src="/assets/plugins/sky-forms-pro/skyforms/js/jquery.validate.min.js"></script>
-	<!-- JS Customization -->
-	<script type="text/javascript" src="/assets/js/custom.js"></script>
 	<!-- JS Page Level -->
-	<script type="text/javascript" src="/assets/plugins/sky-forms-pro/skyforms/js/jquery-ui.min.js"></script>
-
-	<script type="text/javascript" src="/assets/js/plugins/style-switcher.js"></script>
 	<script type="text/javascript" src="/assets/plugins/scrollbar/js/jquery.mCustomScrollbar.concat.min.js"></script>
-	<script type="text/javascript" src="/assets/js/plugins/masking.js"></script>
-	<script type="text/javascript" src="/assets/js/plugins/datepicker2.js"></script>
-	<script type="text/javascript" src="/assets/js/plugins/validation.js"></script>
-	<script type="text/javascript" src="/assets/js/plugins/style-switcher.js"></script>
+	<script type="text/javascript" src="/assets/js/plugins/datepicker.js"></script>
 
 	<script type="text/javascript">
 	jQuery(document).ready(function() {
 		App.initScrollBar();
-		Masking.initMasking();
 		Datepicker.initDatepicker();
-		Validation.initValidation();
 	});
 	</script>
 </body>
