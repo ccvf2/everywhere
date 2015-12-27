@@ -83,78 +83,85 @@
 
 			<!-- 메인------------------------------------------------------------------------------------------------------------------------------ -->
             <!-- Profile Content -->
-            mem_object.mem_no=${mem_object.mem_no}
-            <div style="overflow:auto; overflow-x:hidden; max-height:700px; border:1px solid #e5e5e5;">
-            <c:forEach var="list" items="${parsonTalkList}">
-            	<c:choose>
-            		<c:when test="${list.recv_mem_no!=mem_object.mem_no}">
-            			<!-- 자기글 일때. -->
-            			<div class="row">
-	            		<div class="col-md-12">
-		            		<div class="col-md-5" style="float:right">
-		                        <div id="testimonials-1" class="carousel slide testimonials testimonials-v2 testimonials-bg-dark">
-		                            <div class="carousel-inner">
-		                                <div class="item active">
-		                      				<!-- <span class="magazine-badge label-red">Travel</span> -->
-		                                    <p>${list.message}</p>
-			                                <div class="testimonial-info" style="text-align: right;">
-			                                    <span class="testimonial-author">
-			                                        <c:out value="${list.send_mem_name}" />
-			                                        <em>
-		                                        		<c:out value="${list.recv_time}" />, 
-			                                        	<c:out value="${list.send_mem_email}" /> 
-			                                        </em>
-			                                    </span>
-			                                </div>
-		                                </div>
-		                            </div>
-		                        </div>
-		                    </div>
-	                    </div>
-	                    </div>
-            		</c:when>
-            		<c:when test="${list.recv_mem_no==mem_object.mem_no}">
-            		<c:set var="revc" value="${list.recv_mem_no}"/>
-            			<!-- 상대방 일때. -->
-            			<div class="row">
-			            <div class="col-md-12">
-				            <div class="col-md-5" style="float:left;">
-								<div class="margin-bottom-5">
-				                    <div id="testimonials-1" class="carousel slide testimonials testimonials-v1">
-				                        <div class="carousel-inner">
-				                            <div class="item active">
-				                                <p style="text-align: right;">${list.message}</p>
-				                                <div class="testimonial-info">
-				                                    <span class="testimonial-author">
-				                                        <c:out value="${list.send_mem_name}" />
-				                                        <em>
-				                                        <c:out value="${list.send_mem_email}" />,
-			                                        	<c:choose>
-			                                        		<c:when test="${list.recv_time=='' ||list.recv_time==null}">읽지않음</c:when>
-			                                        		<c:otherwise><c:out value="${list.recv_time}" /></c:otherwise>
-			                                        	</c:choose>
-				                                        </em>
-				                                    </span>
+            <div>
+            <div style="overflow:auto; overflow-x:hidden; min-height:300px; max-height:700px; border:1px solid #e5e5e5;">
+            <c:choose>
+	            <c:when test="${parsonTalkList.size()!=0}">
+		            <c:forEach var="list" items="${parsonTalkList}">
+		            	<c:choose>
+		            		<c:when test="${list.recv_mem_no!=mem_object.mem_no}">
+		            			<!-- 자기글 일때. -->
+		            			<div class="row">
+			            		<div class="col-md-12">
+				            		<div class="col-md-5" style="float:right">
+				                        <div id="testimonials-1" class="carousel slide testimonials testimonials-v2 testimonials-bg-dark">
+				                            <div class="carousel-inner">
+				                                <div class="item active">
+				                      				<!-- <span class="magazine-badge label-red">Travel</span> -->
+				                                    <p>${list.message}</p>
+					                                <div class="testimonial-info" style="text-align: right;">
+					                                    <span class="testimonial-author">
+					                                        <c:out value="${list.send_mem_name}" />
+					                                        <em>
+				                                        		<c:out value="${list.recv_time}" />, 
+					                                        	<c:out value="${list.send_mem_email}" /> 
+					                                        </em>
+					                                    </span>
+					                                </div>
 				                                </div>
 				                            </div>
 				                        </div>
-				
 				                    </div>
-				                </div>
-				            </div>
-			            </div>
-			            </div>
-			        </c:when>
-            		<c:otherwise>
-            		</c:otherwise>
-            	</c:choose>
-            </c:forEach>
+			                    </div>
+			                    </div>
+		            		</c:when>
+		            		<c:when test="${list.recv_mem_no==mem_object.mem_no}">
+		            		<c:set var="revc" value="${list.recv_mem_no}"/>
+		            			<!-- 상대방 일때. -->
+		            			<div class="row">
+					            <div class="col-md-12">
+						            <div class="col-md-5" style="float:left;">
+										<div class="margin-bottom-5">
+						                    <div id="testimonials-1" class="carousel slide testimonials testimonials-v1">
+						                        <div class="carousel-inner">
+						                            <div class="item active">
+						                                <p style="text-align: right;">${list.message}</p>
+						                                <div class="testimonial-info">
+						                                    <span class="testimonial-author">
+						                                        <c:out value="${list.send_mem_name}" />
+						                                        <em>
+						                                        <c:out value="${list.send_mem_email}" />,
+					                                        	<c:choose>
+					                                        		<c:when test="${list.recv_time=='' ||list.recv_time==null}">읽지않음</c:when>
+					                                        		<c:otherwise><c:out value="${list.recv_time}" /></c:otherwise>
+					                                        	</c:choose>
+						                                        </em>
+						                                    </span>
+						                                </div>
+						                            </div>
+						                        </div>
+						
+						                    </div>
+						                </div>
+						            </div>
+					            </div>
+					            </div>
+					        </c:when>
+		            		<c:otherwise>
+		            		</c:otherwise>
+		            	</c:choose>
+		            </c:forEach>
+	            </c:when>
+	            <c:otherwise>
+		            			<p>쪽지내용이 없습니다.</p>
+	            </c:otherwise>
+            </c:choose>
             </div>
 
 
-			<div class="col-md-9">
+			<div class="col-md-9" style="float: right;">
 			<hr>
-                    <h2 class="margin-bottom-20">Post a Comment</h2>
+                    <h2 class="margin-bottom-5">쪽지내용을 적어주세요.</h2>
                     <!-- Form -->
                     <form name="sendMessage" id="sky-form3" class="sky-form comment-style">
 						<c:choose>
@@ -165,28 +172,27 @@
 								<c:set value="${param.msg_group_no}" var="group_no"/>
 							</c:otherwise>
 						</c:choose>
-                       group_no:<c:out value="${group_no }" />
                        <input type="hidden" name="send_mem_no" value="${mem_object.mem_no}">
                        <input type="hidden" name="recv_mem_no" value="${param.recv_mem_no}"> 
                        <input type="hidden" name="msg_group_no" value="${group_no}">
                        
                         
                         <fieldset>
-                            <div class="row sky-space-30">
+                            <div class="row sky-space-10">
                                 <div class="col-md-6">
                                     <div>
-                                        <input type="text" name="email" id="email" placeholder="Email" class="form-control" style="border:1px solid #e5e5e5;">
+                                        <!-- <input type="text" name="email" id="email" placeholder="Email" class="form-control" style="border:1px solid #e5e5e5;"> -->
                                     </div>
                                 </div>
                             </div>
 
                             <div class="sky-space-30">
                                 <div>
-                                    <textarea rows="8" name="message" id="message" placeholder="Write comment here ..." class="form-control" style="border:1px solid #e5e5e5;"></textarea>
+                                    <textarea rows="8" name="message" id="message" placeholder="여기에 쪽지내용을 적어주세요." class="form-control" style="border:1px solid #e5e5e5;"></textarea>
                                 </div>
                             </div>
 
-                            <p><button type="submit" class="btn-u" onclick="formSubmit(sendMessage)">Submit</button></p>
+                            <p><button type="submit" class="btn-u" onclick="formSubmit(sendMessage)">보내기</button></p>
                         </fieldset>
 
                         <div class="message">
@@ -195,6 +201,7 @@
                         </div>
                     </form>
                     <!-- End Form -->
+			</div>
 			</div>
         </div>
 
