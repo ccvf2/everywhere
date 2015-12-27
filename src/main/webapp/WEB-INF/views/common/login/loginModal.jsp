@@ -12,6 +12,7 @@
 			<div class="modal-content">
 				<form class="reg-page" action="/user/login/login.do" name="memberLogin" method="post">
 					<div class="reg-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 						<h2>Login to your account</h2>
 					</div>
 						<div class="input-group margin-bottom-20">

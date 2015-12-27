@@ -67,11 +67,22 @@
 	</insert>
 	
 	<select id="get_planner_list_by_mem_no" resultType="everywhere.com.mynetgear.ccvf2.user.dto.planner.PlannerDto" parameterType="int">
-		select * from tbl_planner where mem_no=#{mem_no}
+		select * from tbl_planner
+		<where>
+			mem_no=#{mem_no}
+			<choose>
+				<when test="use_yn != 'Y0003'">
+				AND use_yn=#{use_yn}
+				</when>
+				<when test="use_yn == 'Y0003'">
+				AND use_yn!=#{use_yn}
+				</when>
+			</choose>
+		</where>
 	</select>
 	
-	<select id="get_planner_list_for_all" resultType="everywhere.com.mynetgear.ccvf2.user.dto.planner.PlannerDto" parameterType="int">
-		select * from tbl_planner order by planner_no desc
+	<select id="get_planner_list_for_all" resultType="everywhere.com.mynetgear.ccvf2.user.dto.planner.PlannerDto">
+		select * from tbl_planner where use_yn='Y0001' order by planner_no desc
 	</select>
 	 
 	<select id="get_item_list" resultType="everywhere.com.mynetgear.ccvf2.user.dto.planner.ItemDto" parameterType="int">

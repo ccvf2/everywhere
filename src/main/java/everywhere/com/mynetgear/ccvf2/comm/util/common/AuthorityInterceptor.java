@@ -45,8 +45,10 @@ public class AuthorityInterceptor extends HandlerInterceptorAdapter {
 		urlList.add("/WEB-INF/views/user/");
 		urlList.add("/user/member/emailCheck.ajax");
 		urlList.add("/user/main/assets/");
+		urlList.add("/user/spot/spotReadPage.do");
 		urlList.add("/user/planner/readPlanner.do");
 		urlList.add("/user/planner/plannerList.do");
+		urlList.add("/user/planner/updatePlanner.do"); //희진) 추후 삭제 예정
 		urlList.add("/user/accompany/accompanyList.do");
 		urlList.add("/user/accompany/accompanyRead.do");
 		urlList.add("/user/search/searchSpot.do");

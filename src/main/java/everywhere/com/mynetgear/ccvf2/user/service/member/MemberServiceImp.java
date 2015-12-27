@@ -75,16 +75,20 @@ public class MemberServiceImp implements MemberService {
 		String pw=SecurityUtil.Sha256Encrypt(memberDto.getMem_email(), memberDto.getMem_pwd());
 		memberDto.setMem_pwd(pw);
 		
+		// 번호인증 초기화
 		System.out.println("memberDto getMem_p_status_code2 :"+memberDto.getMem_p_status_code());
 		if(!memberDto.getMem_p_status_code().equals("M2001")) {
 			memberDto.setMem_p_status_code(Constant.MEMBER_P_STATUS_LOCK);
 		}
 		
+		// 회원 등급
 		memberDto.setMem_level_code(Constant.MEMBER_LEVEL_USER);
+		// 프로필사진 초기화
 		memberDto.setMem_profile_photo(Constant.SYNB_NULL);
+		// 회원 활성화 상태
 		memberDto.setMem_status_code(Constant.MEMBER_STATUS_LOCK);
 		System.out.println("memberService registerOk memberDto:"+memberDto.toString());
-		
+		// 회원가입 성공여부 체크
 		int check=memberDao.registerOk(memberDto);
 		System.out.println("memberService registerOk check:"+check);
 		
@@ -99,10 +103,10 @@ public class MemberServiceImp implements MemberService {
 		
 		int mem_no=Integer.parseInt(request.getParameter("mem_no"));
 		System.out.println("memberService read mem_no:"+mem_no);
-		
+		// 회원번호로 정보 가져오기
 		MemberDto memberDto=memberDao.memberRead(mem_no);
 		System.out.println("memberService read memberDto:"+memberDto.toString());
-		memberDto=memberDao.memberRead(mem_no);
+		// 관심분야 데이터 가져오기
 		List<CommonCodeDto> list=commonCodeService.getListCodeGroup("I0001");
 		
 		mav.addObject("interestList", list);
@@ -116,7 +120,7 @@ public class MemberServiceImp implements MemberService {
 		HttpServletRequest request=(HttpServletRequest)map.get("request");
 		
 		int mem_no=Integer.parseInt(request.getParameter("mem_no"));
-
+		// 회원번호로 정보 가져오기
 		MemberDto memberDto=memberDao.memberRead(mem_no);
 		
 		memberDto=memberDao.memberRead(memberDto.getMem_no());
@@ -129,7 +133,7 @@ public class MemberServiceImp implements MemberService {
 	public void memberUpdateOk(ModelAndView mav) {
 		Map<String, Object> map=mav.getModelMap();
 		MemberDto memberDto=(MemberDto)map.get("memberDto");
-		
+		// 번호인증 초기화
 		if(!memberDto.getMem_p_status_code().equals("M2001")) {
 			memberDto.setMem_p_status_code(Constant.MEMBER_P_STATUS_LOCK);
 		}
@@ -139,7 +143,7 @@ public class MemberServiceImp implements MemberService {
 		memberDto.setMem_pwd(pw);
 		
 		System.out.println("memberService updateOk memberDto:"+memberDto.toString());
-		
+		// 새로 입력한 정보로 업데이트
 		int check=memberDao.memberUpdate(memberDto);
 		System.out.println("memberService updateOk check:"+check);
 		
@@ -156,7 +160,7 @@ public class MemberServiceImp implements MemberService {
 		int mem_no=Integer.parseInt(request.getParameter("mem_no"));
 		System.out.println("memberService delete mem_no:"+mem_no);
 		memberDto.setMem_no(mem_no);
-		
+		// 회원번호로 정보 가져오기
 		memberDto=memberDao.memberRead(mem_no);
 		System.out.println("memberServiceImp delete memberDto:"+memberDto.toString());
 		
@@ -173,7 +177,7 @@ public class MemberServiceImp implements MemberService {
 		//비밀번호 암호화
 		String pw=SecurityUtil.Sha256Encrypt(memberDto.getMem_email(), memberDto.getMem_pwd());
 		memberDto.setMem_pwd(pw);
-		
+		// 회원 비활성화로 변경
 		int mem_no=Integer.parseInt(request.getParameter("mem_no"));
 		memberDto.setMem_no(mem_no);
 		memberDto.setMem_status_code(Constant.MEMBER_STATUS_WITHDRAW);

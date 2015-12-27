@@ -7,6 +7,8 @@
 <c:import url="/WEB-INF/views/user/common/utilImport.jsp" />
 <meta charset="UTF-8">
 <title>여행스케줄쓰기</title>
+
+<script type="text/javascript" src="/assets/js/plugins/datepicker.js"></script>
 <script type="text/javascript">
 		$(function() { 
 			$('#plannerCreate').modal('show');
@@ -25,29 +27,26 @@
 		<form action="/user/planner/plannerCreate.do" method="post" onsubmit="return plannerForm(this)" >
 		<input type="hidden" name="mem_no" value="${mem_object.mem_no}">
 			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal"
-					aria-label="Close">
-					<span aria-hidden="true">&times;</span>
-				</button>
-				<h4 class="modal-title">새일정 만들기..</h4>
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title"><i class="fa fa-paper-plane-o"></i>새일정 만들기</h4>
 			</div>
 			<div class="modal-body">
-				<div class="input-group">
+				<div class="input-group margin-bottom-20">
 					<span class="input-group-addon" id="basic-addon1">여행제목</span> 
-					<input type="text" class="form-control" name="title" placeholder="예) 나의 3박 4일 제주여행기"
+					<input type="text" class="form-control" required id="title" name="title" placeholder="예) 나의 3박 4일 제주여행기"
 						aria-describedby="basic-addon1">
 				</div>
 				<div>
-					<div class="input-group">
+					<div class="input-group margin-bottom-20">
 						<span class="input-group-addon" id="basic-addon1">여행시작</span> 
-						<input type="date" class="form-control" id="start_date" name="start_date"> 
+						<input type="date" class="form-control" required pattern="\d{4}-\d{1,2}-\d{1,2}" id="start" name="start_date">
 						<span class="input-group-addon" id="basic-addon1">여행끝</span> 
-						<input type="date" class="form-control" id="end_date" name="end_date">
+						<input type="date" class="form-control" required pattern="\d{4}-\d{1,2}-\d{1,2}" id="finish" name="end_date">
 					</div>
 				</div>
 				<div>
-					<div class="radio">
-					  <label><input type="radio" name="planner_ba_code" value="E0001">여행스케쥴</label>
+					<div class="input-group radio">
+					  <label><input type="radio" name="planner_ba_code" value="E0001" checked="checked">여행스케쥴</label> &nbsp;&nbsp;
 					  <label><input type="radio" name="planner_ba_code" value="E0002">여행리뷰</label>
 					</div>
 				</div>

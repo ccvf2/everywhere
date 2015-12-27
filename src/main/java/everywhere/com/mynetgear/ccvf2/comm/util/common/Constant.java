@@ -27,6 +27,8 @@ public class Constant {
 	public static final String SYNB_YN_Y = "Y0001";
 	/** YN : N */
 	public static final String SYNB_YN_N = "Y0002";
+	/** YN : Delete */
+	public static final String SYNB_YN_D = "Y0003";
 
 	/** CRUD : C */
 	public static final String SYNB_CRUD_C = "C";
