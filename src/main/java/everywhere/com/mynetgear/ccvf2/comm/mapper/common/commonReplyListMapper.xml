@@ -40,7 +40,7 @@
 			, reply.REPLY_WRITER_NAME
 			, reply.REPLY_WRITE_DATE
 			, reply.USE_YN
-			, member.MEM_PROFILE_PHOTO
+			, (select SAVE_NAME||'.'||EXTENSION from tbl_common_file where FILE_NO=member.MEM_PROFILE_PHOTO) MEM_PROFILE_PHOTO
 		FROM 
 			TBL_COMMON_REPLY reply, TBL_MEMBER member
 		WHERE
