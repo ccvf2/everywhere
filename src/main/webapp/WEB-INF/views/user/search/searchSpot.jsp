@@ -17,12 +17,33 @@
     <link rel="stylesheet" href="/assets/plugins/scrollbar/css/jquery.mCustomScrollbar.css">
 	<!-- CSS Theme-->
 	<link rel="stylesheet" href="/assets/css/theme-colors/default.css">
-	<!-- JS Page Level -->
-	<script src="/assets/js/app.js"></script>
-
-	<script type="text/javascript" src="/script/common/commonReply.js"></script>
-	<!-- 제이쿼리 라이브러리.(필수) : commonReplyInit() 함수호출 전 선언  -->
-	<script src="/assets/plugins/jquery/jquery.min.js"></script>
+	
+	<!-- 사이드바 고정 -->
+	<style type="text/css">
+		<!-- 사이드 바 고정 -->
+		.affix-top, .affix {
+			position: static;
+		}
+		
+		@media ( min-width : 979px) {
+			#sidebar.affix-top {
+				position: static;
+				width: 228px;
+			}
+			#sidebar.affix {
+				position: fixed;
+				top: 70px;
+				width: 228px;
+			}
+		}
+		
+		#sidebar li.active {
+			border: 0 #eee solid;
+			border-right-width: 5px;
+		}
+		<!--사이드바 고정 끝-->
+	</style>
+	
 	
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -36,32 +57,28 @@
 			//alert(no);
 			var makeDiv ="<div id='showModal"+no+"'></div>";
 			var requestURL="/user/spot/spotReadPage.do?spot_no="+no;
-				$.ajax({
-							url : requestURL,
-							type : "GET",
-							dataType : "html",
-							success : function(data) {
-								$("body").append(makeDiv);
-								$("#showModal"+no).append(data)
-							},
-							error : function() {
-								alert("목록 가져오기 실패");
-							}
-						})
+			$.ajax({
+				url : requestURL,
+				type : "GET",
+				dataType : "html",
+				success : function(data) {
+					$("body").append(makeDiv);
+					$("#showModal"+no).append(data)
+				},
+				error : function() {
+					alert("목록 가져오기 실패");
+				}
+			})
 		};
 		
 		$(document).ready(function(){
-			$(window).scroll(function(){// 스크롤 이벤트
-				var scrollHeight=$(window).scrollTop() + $(window).height();
-				//$(documenta).height() 는 스크롤의 길이를 의미함
-				
-				//스크롤이 끝까지 닿았을때 발생시킬 코드
-				if(scrollHeight==documentHeight) {
-					selectMoreSpotList();					
-				}
+			/*사이드바를 고정하기 위한 코드*/
+			$('#sidebar').affix({
+			  offset: {
+			    top: 0
+			  }
 			});
-			
-		})
+		});
 	</script>
     
     
@@ -81,91 +98,85 @@
 	 	<div class="container">
         	<div class="row">
 			<!-- Blog Sidebar -->
-            <div class="col-md-3">
-            
-	            <!-- Blog Newsletter -->
-	            <div class="blog-newsletter">
-	               <div class="headline-v2"></div>
-            	 	<form action="#" class="sky-form" onsubmit="searchSpotList()">
-	                    <header>명소 검색</header>
-	                    
-	                    <fieldset style="padding: 15px 15px 5px;">
-	                    	<!-- 지역 찾기 -->
-	                    	  <section>
-	                            <label class="input">
-	                            	<!-- 자동완성 input : works in Chrome, Firefox, Opera and IE10. -->
-	                                <input type="text" list="list" name="searchPlace" placeholder="지역 검색">
-	                                <datalist id="list">
-	                                	<c:forEach var="place" items="${placeList}">
-	                                		<option value="${place.code_name}"></option>
-	                                	</c:forEach>
-	                                </datalist>
-	                            </label>
-	                        </section>
-	                    	<!-- 명소 검색 -->
-	                        <section>
-	                            <label class="input">
-	                                <input type="text" name="searchSpot" placeholder="명소 검색">
-	                            </label>
-	                        </section>
-	                    </fieldset>
-	                    
-	                    
-	                    <fieldset style="padding: 15px 15px 5px;">
-	                        <section>
-	                            <label class="label">명소 종류</label>
-	                            <div class="inline-group">
-	                            	<label class="checkbox"><input type="checkbox" name="spot_type_code" checked="checked" value=""><i></i>전체</label>
-	                            	<c:forEach var="spotType" items="${spotTypeList}">
-	                            		<label class="checkbox"><input type="checkbox" name="spot_type_code" value="${spotType.code}"><i></i>${spotType.code_name}</label>
-	                            	</c:forEach>
-	                            </div>
-	                        </section>
-	                    </fieldset>
-	                    
-	                    <footer>
-	                        <button type="submit" class="btn-u">검색</button>
-	                        <button type="button" class="btn-u btn-u-default" onclick="window.history.back();">뒤로</button>
-	                    </footer>
-	                </form>
-	                
-	                
-					
-	                
-	              <div class="tag-box tag-box-v4 margin-bottom-20" style="padding : 0px; border: 1px #bbb;">
-						<ul class="list-unstyled mCustomScrollbar margin-bottom-20 _mCS_1 mCS-autoHide" data-mcs-theme="minimal-dark" id="spotLists" style="position: relative; overflow: visible;">
-							<c:forEach var="spot" items="${searchSpotList}">
-								<li class="notification" style="margin:0px;border:1px solid #eee;padding:5px 5px;height: 48px;overflow:hidden;" id="spotItem">
-									<div id="${spot.spot_no}_item" class="ui-widget-content" style="border:0px;">
-										<i style="margin:0; float:left;"><img alt="" src="/attatchFile/spot/${spot.spot_photoes[0].save_name}.${spot.spot_photoes[0].extension}" style="width:35px;height:35px;margin-right:5px;"></i>
-										<div class="overflow-h">
-											<span>
-												<strong><a href="javascript:spotReadPage('${spot.spot_no}')">${spot.spot_name}</a></strong>
-											</span><br/>
-											<small><c:out value="${spot.spot_note}"/></small>
+			<!-- id값으로 사이드 메뉴 고정 -->
+	            <div class="col-md-3" id="leftCol">
+		            <!-- Blog Newsletter -->
+		            <div class="blog-newsletter" id="sidebar">
+		               <div class="headline-v2"></div>
+	            	 	<form action="#" class="sky-form" onsubmit="searchSpotList()">
+		                    <header>명소 검색</header>
+		                    
+		                    <fieldset style="padding: 15px 15px 5px;">
+		                    	<!-- 지역 찾기 -->
+		                    	  <section>
+		                            <label class="input">
+		                            	<!-- 자동완성 input : works in Chrome, Firefox, Opera and IE10. -->
+		                                <input type="text" list="list" name="searchPlace" id="searchPlace" placeholder="지역 검색" value="${searchPlace}">
+		                                <datalist id="list">
+		                                	<c:forEach var="place" items="${placeList}">
+		                                		<option value="${place.code_name}"></option>
+		                                	</c:forEach>
+		                                </datalist>
+		                            </label>
+		                        </section>
+		                    	<!-- 명소 검색 -->
+		                        <section>
+		                            <label class="input">
+		                                <input type="text" name="searchSpot" id="searchSpot" placeholder="명소 검색" value="${searchSpot}">
+		                            </label>
+		                        </section>
+		                    </fieldset>
+		                    <!-- 명소 종류 선택 시작 -->
+		                    <fieldset style="padding: 15px 15px 5px;">
+		                        <section>
+		                            <label class="label">명소 종류</label>
+		                            <div class="inline-group">
+		                            	<label class="checkbox"><input type="checkbox" name="spot_type_code" checked="checked" value=""><i></i>전체</label>
+		                            	<c:forEach var="spotType" items="${spotTypeList}">
+		                            		<label class="checkbox"><input type="checkbox" name="spot_type_code" value="${spotType.code}"><i></i>${spotType.code_name}</label>
+		                            	</c:forEach>
+		                            </div>
+		                        </section>
+		                    </fieldset>
+		                    <!-- 명소 종류 선택 끝 -->
+		                    <!-- 명소 검색 버튼 시작 -->
+		                    <footer>
+		                        <button type="submit" class="btn-u">검색</button>
+		                        <button type="button" class="btn-u btn-u-default" onclick="window.history.back();">뒤로</button>
+		                    </footer>
+		                </form>
+		              <div class="tag-box tag-box-v4 margin-bottom-20 hidden-xs" style="padding : 0px; border: 1px #bbb;">
+							<ul class="list-unstyled mCustomScrollbar margin-bottom-20 _mCS_1 mCS-autoHide" data-mcs-theme="minimal-dark" id="spotLists" style="position: relative; overflow: visible;">
+								<c:forEach var="spot" items="${searchSpotList}">
+									<li class="notification" style="margin:0px;border:1px solid #eee;padding:5px 5px;height: 48px;overflow:hidden;" id="spotItem">
+										<div id="${spot.spot_no}_item" class="ui-widget-content" style="border:0px;">
+											<i style="margin:0; float:left;"><img alt="" src="/attatchFile/spot/${spot.spot_photoes[0].save_name}.${spot.spot_photoes[0].extension}" style="width:35px;height:35px;margin-right:5px;"></i>
+											<div class="overflow-h">
+												<span>
+													<strong><a href="javascript:spotReadPage('${spot.spot_no}')">${spot.spot_name}</a></strong>
+												</span><br/>
+												<small><c:out value="${spot.spot_note}"/></small>
+											</div>
 										</div>
-									</div>
-								</li>
-							</c:forEach>
-							<div id="mCSB_1_scrollbar_vertical" class="mCSB_scrollTools mCSB_1_scrollbar mCS-minimal-dark mCSB_scrollTools_vertical" style="display: block;">
-								<div class="mCSB_draggerContainer">
-									<div id="mCSB_1_dragger_vertical" class="mCSB_dragger" style="position: absolute; min-height: 50px; display: block; height: 247px; max-height: 286px; top: 0px;" oncontextmenu="return false;">
-										<div class="mCSB_dragger_bar" style="line-height: 50px;">
+									</li>
+								</c:forEach>
+								<div id="mCSB_1_scrollbar_vertical" class="mCSB_scrollTools mCSB_1_scrollbar mCS-minimal-dark mCSB_scrollTools_vertical" style="display: block;">
+									<div class="mCSB_draggerContainer">
+										<div id="mCSB_1_dragger_vertical" class="mCSB_dragger" style="position: absolute; min-height: 50px; display: block; height: 247px; max-height: 286px; top: 0px;" oncontextmenu="return false;">
+											<div class="mCSB_dragger_bar" style="line-height: 50px;">
+											</div>
 										</div>
-									</div>
-									<div class="mCSB_draggerRail">
+										<div class="mCSB_draggerRail">
+										</div>
 									</div>
 								</div>
-							</div>
-						</ul>
-						<button type="button" class="btn-u btn-u-default btn-u-sm btn-block" onclick="selectMoreSpotList()">Load More</button>
-						<!--End Notification-->
-					</div>
-						              
-	            </div>
-	            <!-- End Blog Newsletter -->
-	            
-	         </div>
+							</ul>
+							<button type="button" class="btn-u btn-u-default btn-u-sm btn-block" onclick="selectMoreSpotList()">Load More</button>
+							<!--End Notification-->
+			            </div>
+			            <!-- End Blog Newsletter -->
+		            </div>
+		         </div>
 	         <!-- End sideBar -->
 	         
 	         <!-- 명소 검색 뷰 시작 -->
@@ -187,7 +198,7 @@
 					                    		${spot.city_name}
 					                    	</li>
 					                        <li>|</li>
-					                        <li><span>By</span> <a href="/user/myPage/myPage.do?uandMe=S0002&mem_no=${spot.mem_no}">${spot.mem_name}</a></li>
+					                        <li><span>By</span><a href="/user/myPage/myPage.do?uandMe=S0002&mem_no=${spot.mem_no}">${spot.mem_name}</a></li>
 					                    </ul>                    
 					                    <p>${spot.spot_note}</p>
 					                    <i class="fa fa-star"></i>
@@ -201,11 +212,8 @@
 				        	</c:forEach>
 				        </div><!--/container-->
 				    </div>
-               	
-               	
-                   
                </div>
-	         
+	         	<!-- 명소 아이템 리스트 끝 -->
           	</div>
           	<!-- End Container -->
 
@@ -218,6 +226,11 @@
     </div>
     
     </div>
+    
+    <!-- JS Page Level -->
+	<script src="/assets/js/app.js"></script>
+	<script src="/assets/plugins/jquery/jquery.min.js"></script>
+	<script type="text/javascript" src="/script/user/search/searchSpot.js"></script>
 	<script type="text/javascript" src="/assets/plugins/masonry/jquery.masonry.min.js"></script>
 	<script type="text/javascript" src="/assets/js/pages/blog-masonry.js"></script>
 	<script type="text/javascript" src="/assets/js/plugins/style-switcher.js"></script>

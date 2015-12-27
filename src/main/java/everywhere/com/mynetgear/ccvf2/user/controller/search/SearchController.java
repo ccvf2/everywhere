@@ -52,6 +52,7 @@ public class SearchController {
 		mav.addObject("request", request);
 		mav.addObject("response", response);
 		searchService.getSpotList(mav);
+		System.out.println("getSpotList.ajax is called!!!!!!!!!!!!!!");
 		return null;
 	}
 	

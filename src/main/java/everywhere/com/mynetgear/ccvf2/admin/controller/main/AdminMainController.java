@@ -1,9 +1,17 @@
 package everywhere.com.mynetgear.ccvf2.admin.controller.main;
 
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang.StringUtils;
+import org.json.simple.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -11,7 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-
+import everywhere.com.mynetgear.ccvf2.admin.dao.chart.ChartDao;
 import everywhere.com.mynetgear.ccvf2.admin.service.main.AdminMainService;
 import everywhere.com.mynetgear.ccvf2.comm.dto.common.CommonFileIODto;
 import everywhere.com.mynetgear.ccvf2.comm.dto.common.MailVO;
@@ -36,6 +44,8 @@ public class AdminMainController {
 	private CommonCodeService commonCodeService;
 	@Autowired
 	private CommonFileIOService commonFileIOService;
+	@Autowired
+	private ChartDao chartDao;
 
 	@Value("${attach.temp.path}")
 	private String tempPath;
@@ -51,6 +61,40 @@ public class AdminMainController {
 		System.out.println("컨트롤러");
 		adminMainService.mainPage(mav);
 		return mav;
+	}
+	
+	/**
+	 * @author 김성광
+	 * @createDate 2015. 12. 27.
+	 * @described mainPage chart
+	 * @param request
+	 * @param response
+	 * @throws IOException
+	 */
+	@RequestMapping(value="/admin/main/main.ajax", method=RequestMethod.GET)
+	public void mainPageChart(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		Date d = new Date();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        String date=sdf.format(d);
+        System.out.println("date : " + date.substring(5, 7));
+        String monthE=date.substring(5, 7);
+        int monthS=Integer.parseInt(monthE)-2;
+		String year=date.substring(0, 4);
+		
+		List<Integer> chartList=chartDao.getChartMonthList(monthS+"", monthE, year);
+        
+		JSONArray jarray=new JSONArray();
+		for (int i = 0; i < chartList.size(); i++) {
+			HashMap<String, Object> map=new HashMap<String, Object>();
+			map.put("stats_month", monthS+i);
+			map.put("stats_count", chartList.get(i));
+			
+			jarray.add(map);
+		}
+		String jsonData = jarray.toJSONString();
+		response.setContentType("application/json;charset=UTF-8");
+		PrintWriter out = response.getWriter();
+		out.print(jsonData);
 	}
 
 	@RequestMapping(value="/admin/commoncode/code.do", method=RequestMethod.GET)

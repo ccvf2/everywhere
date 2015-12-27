@@ -41,68 +41,38 @@
             <!--End Left Sidebar-->
 
 			<!-- 메인------------------------------------------------------------------------------------------------------------------------------ -->
-            <!-- Profile Content -->
-            <div class="col-md-9">
-            	<c:if test="${plannerList.size()==0}">
-                     <div class="alert alert-info alert-dismissable">
-                         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                         <i class="fa fa-info-circle"></i>  <strong><c:out value="${memberDto.mem_name}님,"/></strong>&nbsp;&nbsp;&nbsp; 여행 계획을 세워보세요!
-                     </div>
-               	</c:if>
-               	<c:if test="${plannerList.size()>0}">
-	                <ul class="timeline-v1">
-		                <c:forEach var="plannerList" items="${plannerList}" varStatus="i">
-		                	<c:if test="${i.index%2==0}">
-		                		<li>
-			                        <div class="timeline-badge primary"><i class="glyphicon glyphicon-record"></i></div> <!-- 좌측 타임라인 0번째 -->
-			                        <div class="timeline-panel">
-			                            <div class="timeline-heading">
-			                                <img class="img-responsive" src="/assets/img/main/img10.jpg" alt=""/>
-			                            </div>
-			                            <div class="timeline-body text-justify">
-			                                <h2><a href="#">${plannerList.title}</a></h2>
-			                                <p>${plannerList.memo}</p>
-			                                <a class="btn-u btn-u-sm" href="#">Read More</a>
-			                            </div>
-			                            <div class="timeline-footer">
-			                                <ul class="list-unstyled list-inline blog-info">
-			                                    <li><i class="fa fa-clock-o"></i> March 28, 2014</li>
-			                                    <li><i class="fa fa-comments-o"></i> <a href="#">7 Comments</a></li>
-			                                </ul>
-			                                <a class="likes" href="#"><i class="fa fa-heart"></i>239</a>
-			                            </div>
-			                        </div>
-			                    </li>
-				            </c:if>
-				            <c:if test="${i.index%2==1}">
-				            	<li class="timeline-inverted">
-			                        <div class="timeline-badge primary"><i class="glyphicon glyphicon-record invert"></i></div> <!-- 우측 타임라인 1번째 -->
-			                        <div class="timeline-panel">
-			                            <div class="timeline-heading">
-			                                <img class="img-responsive" src="/assets/img/main/img12.jpg" alt=""/>
-			                            </div>
-			                            <div class="timeline-body text-justify">
-			                                <h2><a href="#">${plannerList.title}</a></h2>
-			                                <p>${plannerList.memo}</p>
-			                                <a class="btn-u btn-u-sm" href="#">Read More</a>
-			                            </div>
-			                            <div class="timeline-footer">
-			                                <ul class="list-unstyled list-inline blog-info">
-			                                    <li><i class="fa fa-clock-o"></i> March 16, 2014</li>
-			                                    <li><i class="fa fa-comments-o"></i> <a href="#">12 Comments</a></li>
-			                                </ul>
-			                                <a class="likes" href="#"><i class="fa fa-heart"></i>87</a>
-			                            </div>
-			                        </div>
-			                    </li>
-				            </c:if>
-		                </c:forEach>
-                    
-	                    <li class="clearfix" style="float: none;"></li>
-	                </ul>
-	        	</c:if>
-            </div>
-            <!-- End Profile Content -->
+			<!--=== News Block ===-->
+	        	<div class="col-md-9">
+		        	<c:if test="${plannerList.size()==0}">
+	                     <div class="shadow-wrapper">
+		                    <div class="tag-box tag-box-v1 box-shadow shadow-effect-2">
+		                        <h2>아직 여행계획이 없으시군요.</h2>
+		                        <p>새로운 여행계획.<br/>
+		                         당신만의 여행계획을 만들어보세요.<br/>
+		                         </p>
+		                    </div>
+		                </div>
+					</c:if>
+					<c:if test="${plannerList.size()>0}">
+						<c:forEach var="plannerList" items="${plannerList}">
+							<div class="col-md-4 sm-margin-bottom-30">
+				                <div class="news-v2-badge">
+				                	${plannerList.attach_file}
+				                    <img class="img-responsive" src="${plannerList.attach_file}" alt="">
+				                </div>
+				                <div class="news-v2-desc bg-color-light">
+				                    <h3><a href="#"><c:out value="${plannerList.title}"/></a></h3>
+				                    <small><a href="#">추천수 100</a></small>
+				                    <p>
+				                    	<c:out value="${plannerList.memo}"/>
+							        </p>
+				                </div>
+			            	</div>
+		            	</c:forEach>
+					</c:if>
+					
+		        </div>
+		    <!--=== End News Block ===-->
             <!-- 메인------------------------------------------------------------------------------------------------------------------------------ -->
         </div>
     </div><!--/container-->

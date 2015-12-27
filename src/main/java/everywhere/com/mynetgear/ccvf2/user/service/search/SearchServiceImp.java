@@ -57,6 +57,7 @@ public class SearchServiceImp implements SearchService {
 		if(spotPage == null)
 			spotPage = "1";
 		int currentPage = Integer.parseInt(spotPage);
+		int spotSize = 15;
 		
 		//지역 검색값
 		String searchPlace = request.getParameter("searchPlace");
@@ -64,7 +65,11 @@ public class SearchServiceImp implements SearchService {
 		String searchSpot = request.getParameter("searchSpot");
 		
 		SpotDtoExt spotDto = new SpotDtoExt();
+	
 		spotDto.setCurrentPage(currentPage);
+		spotDto.setStartPage((currentPage-1) * spotSize + 1);
+		spotDto.setEndPage(currentPage*spotSize);
+		
 		spotDto.setSearchWord1(searchPlace);
 		spotDto.setSearchWord2(searchSpot);
 		List<SpotDto> searchSpotList = searchDao.getSpotList(spotDto);
@@ -90,6 +95,8 @@ public class SearchServiceImp implements SearchService {
 		
 		List<CommonCodeDto> spotTypeList = commonCodeService.getListCodeGroup("T0001");
 		
+		mav.addObject("searchSpot", searchSpot);
+		mav.addObject("searchPlace", searchPlace);
 		mav.addObject("searchSpotList", searchSpotList);
 		mav.addObject("placeList", placeList);
 		mav.addObject("spotTypeList", spotTypeList);
@@ -260,39 +267,64 @@ public class SearchServiceImp implements SearchService {
 	public void searchTotal(ModelAndView mav) {
 		Map<String, Object> map = mav.getModelMap();
 		HttpServletRequest request = (HttpServletRequest) map.get("request");
-		
-		//검색 값
+
+		//처음에 header 에서 요청한 검색어를 받아야함
 		String searchValue = request.getParameter("search");
-		
-		//한 페이지에 보여줄 게시물 수
-		int boardSize = 6;
-		
-		int currentPage = 1;
-		int startRow = (currentPage - 1) * boardSize + 1;
-		int endRow = currentPage * boardSize;
 		
 		//검색된 결과 수 가져옴
 		int spotCount = 0;
 		int plannerCount = 0;
-		
-		spotCount = searchDao.getSpotCount(searchValue);
-		plannerCount = searchDao.getPlannerCount(searchValue);
+		//spotCount = searchDao.getSpotCount(searchValue);
+		//plannerCount = searchDao.getPlannerCount(searchValue);
 		EverywhereAspect.logger.info(EverywhereAspect.logMsg + "spotCount:" + spotCount + "\tplannerCount:" + plannerCount);
-		//추후 변경 필요
-		//게시글 리스트 가져옴
-		SpotDto spotDto = new SpotDto();
-		spotDto.setCurrentPage(currentPage);
-		//List<SpotDto> spotList = searchDao.getSpotList(spotDto);
-		List<PlannerDao> plannerList = searchDao.getPlannerList(startRow, endRow, searchValue);
 		
-	//	mav.addObject("spotList", spotList);
+		int currentPage = 1;
+		//한 페이지에 보여줄 게시물 수
+		int boardSize = 6;
+		SpotDtoExt spotDto = new SpotDtoExt();
+		spotDto.setStartPage((currentPage-1) * boardSize + 1);
+		spotDto.setEndPage(currentPage*boardSize);
+		spotDto.setSearchWord1(searchValue);
+		spotDto.setSearchWord2(searchValue);
+		
+		List<SpotDto> searchSpotList = searchDao.getSpotList(spotDto);
+		EverywhereAspect.logger.info(EverywhereAspect.logMsg + searchSpotList.size());
+		for(int i = 0; i < searchSpotList.size(); i++) {
+			if(searchSpotList.get(i).getAttach_file() != null) {
+				String[] attach_no = searchSpotList.get(i).getAttach_file().split(",");
+				List<CommonFileIODto> fileList = new ArrayList<CommonFileIODto>();
+				CommonFileIODto fileIODto = commonFileIODao.getOneFileDto(Integer.parseInt(attach_no[0]));
+				fileList.add(fileIODto);
+				System.out.println(fileIODto);
+				searchSpotList.get(i).setSpot_photoes(fileList);
+			}
+		}
+		
+		// 나라 리스트로 도시 리스트를 가져옴
+		List<CommonCodeDto> countryList = commonCodeService.getListCodeGroup("B0000");
+		List<CommonCodeDto> placeList = new ArrayList<CommonCodeDto>();
+		for(int i=0; i<countryList.size(); i++) {
+			placeList.addAll(commonCodeService.getListCodeGroup(countryList.get(i).getCode()));
+		}
+		// 나라 리스트와 도시 리스트를 한 곳에 합체
+		placeList.addAll(countryList);
+		
+		List<CommonCodeDto> spotTypeList = commonCodeService.getListCodeGroup("T0001");
+		
+		
+		
+		
+		
+//		List<PlannerDao> plannerList = searchDao.getPlannerList(startRow, endRow, searchValue);
+		
+		mav.addObject("searchValue", searchValue);
+		mav.addObject("searchSpotList", searchSpotList);
+		mav.addObject("placeList", placeList);
+		mav.addObject("spotTypeList", spotTypeList);
+		mav.addObject("countryList", countryList);
 		mav.addObject("spotCount", spotCount);
-		mav.addObject("plannerList", plannerList);
+		//mav.addObject("plannerList", plannerList);
 		mav.addObject("plannerCount", plannerCount);
 		mav.setViewName("user/search/searchTotal");
 	}
-
-
-
-
 }

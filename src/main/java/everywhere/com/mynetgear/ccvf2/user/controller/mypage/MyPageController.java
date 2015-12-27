@@ -43,6 +43,7 @@ public class MyPageController {
 		// 코드값에 따라 자신의 페이지 이동 & 타회원 페이지 이동
 		//String uandMe=request.getParameter("uandMe");
 		
+		System.out.println("uandMe : " + uandMe);
 		if(StringUtils.equals(uandMe,Constant.MYPAGE_CODE_M)){
 			//System.out.println("마이페이지로 이동");
 			mav=myPageService.myPage(mav);
