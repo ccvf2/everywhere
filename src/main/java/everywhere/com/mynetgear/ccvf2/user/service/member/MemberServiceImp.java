@@ -120,13 +120,18 @@ public class MemberServiceImp implements MemberService {
 		HttpServletRequest request=(HttpServletRequest)map.get("request");
 		
 		int mem_no=Integer.parseInt(request.getParameter("mem_no"));
+		System.out.println("memberService update mem_no:"+mem_no);
 		// 회원번호로 정보 가져오기
 		MemberDto memberDto=memberDao.memberRead(mem_no);
+		System.out.println("memberService read memberDto:"+memberDto.toString());
+		// 관심분야 데이터 가져오기
+		List<CommonCodeDto> list=commonCodeService.getListCodeGroup("I0001");
 		
-		memberDto=memberDao.memberRead(memberDto.getMem_no());
 		memberDto.setMem_pwd(null);
 		
+		mav.addObject("interestList", list);
 		mav.addObject("memberDto", memberDto);
+		mav.setViewName("/user/member/memberUpdate");
 	}
 
 	@Override
