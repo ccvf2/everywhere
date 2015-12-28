@@ -151,6 +151,49 @@
 	AND
 		<![CDATA[ BB.rnum <= #{endRow}]]>
 	</select>
+	<select id="get_planner_list_for_all_Count" resultType="int" parameterType="everywhere.com.mynetgear.ccvf2.user.dto.planner.PlannerDto">
+	SELECT
+		count(*)
+	FROM
+		(SELECT
+			ROWNUM rnum
+			, AA.*
+		FROM
+			(SELECT
+				PLA.PLANNER_NO
+				, PLA.MEM_NO
+				, PLA.PLANNER_BA_CODE
+				, PLA.TITLE
+				, (SELECT SAVE_NAME||'.'||EXTENSION FROM TBL_COMMON_FILE WHERE FILE_NO=PLA.ATTACH_FILE)ATTACH_FILE
+				, PLA.MEMO
+				, PLA.START_DATE
+				, PLA.END_DATE
+				, PLA.REG_DATE
+				, PLA.USE_YN
+				, MEM.MEM_NAME
+				, MEM.MEM_EMAIL
+				, (SELECT SAVE_NAME||'.'||EXTENSION FROM TBL_COMMON_FILE WHERE FILE_NO=MEM.MEM_PROFILE_PHOTO) MEM_PROFILE_PHOTO
+				, (SELECT COUNT(1) FROM TBL_SWEET WHERE PLANNER_NO=PLA.PLANNER_NO)sweet_count
+				, (SELECT COUNT(1) FROM TBL_COMMON_REPLY WHERE ITEM_NO=PLA.PLANNER_NO AND TYPE_CODE=PLA.PLANNER_BA_CODE)reply_Count
+				, (SELECT COUNT(1) FROM TBL_BOOKMARK WHERE ITEM_NO=PLA.PLANNER_NO AND BOOKMARK_TYPE_CODE=PLA.PLANNER_BA_CODE)bookmark_Count
+			FROM
+				TBL_PLANNER PLA, TBL_MEMBER MEM
+			WHERE
+				PLA.USE_YN='Y0001'
+			AND 
+				PLA.MEM_NO= MEM.MEM_NO
+			<if test="searchCondition1!=''">
+			AND
+				PLA.PLANNER_BA_CODE=#{searchCondition1}
+			</if>
+			<if test="searchWord1!=''">
+			AND
+				PLA.TITLE LIKE '%'||#{searchWord1}||'%'
+			</if>
+			
+				)AA
+			)BB
+	</select>
 	 
 	<select id="get_item_list" resultType="everywhere.com.mynetgear.ccvf2.user.dto.planner.ItemDto" parameterType="int">
 		select * from tbl_item where planner_no=#{planner_no} order by item_no asc

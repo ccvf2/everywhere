@@ -77,6 +77,10 @@ public class PlannerDaoImp implements PlannerDao {
 	}
 	
 	@Override
+	public int getPlannerListForAllCount(PlannerDto plannerDto) {
+		return sqlTemplate.selectOne("get_planner_list_for_all_Count", plannerDto);
+	}
+	@Override
 	public List<PlannerDto> getPlannerListForAll(PlannerDto plannerDto) {
 		return sqlTemplate.selectList("get_planner_list_for_all", plannerDto);
 	}

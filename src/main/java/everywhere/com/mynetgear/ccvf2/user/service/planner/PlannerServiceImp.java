@@ -126,9 +126,16 @@ public class PlannerServiceImp implements PlannerService {
 		Map<String, Object> map = mav.getModelMap();
 		PlannerDto plannerDto =(PlannerDto)map.get("plannerDto");
 		
+		//글 전체 갯수를 가져오는 쿼리
+		int plannerListTotalCount=plannerDao.getPlannerListForAllCount(plannerDto);
+		plannerDto.setTotalCount(plannerListTotalCount);
+		
+		
 		List<PlannerDto> plannerList = plannerDao.getPlannerListForAll(plannerDto);
 		
+		//글종류를 나타내는 코드 목록
 		List<CommonCodeDto> selectCode=commonCodeService.getListCodeGroup(Constant.SCHEDULE_TYPE_GROUP);
+		//정렬를 나타내는 코드 목록
 		List<CommonCodeDto> sortCode=commonCodeService.getListCodeGroup(Constant.SERACH_SORT_GROUPCODE);
 		
 		//페이징 및 검색 정보를 가진DTO
