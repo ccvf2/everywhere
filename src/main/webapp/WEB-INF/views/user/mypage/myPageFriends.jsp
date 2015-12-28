@@ -19,6 +19,9 @@
     <link rel="stylesheet" href="/assets/plugins/sky-forms-pro/skyforms/custom/custom-sky-forms.css">
     <!-- CSS Implementing Plugins -->
     <link rel="stylesheet" href="/assets/plugins/animate.css">
+    
+    <!-- brand button css -->
+    <link rel="stylesheet" href="/assets/plugins/brand-buttons/brand-buttons.css">
 </head>
 <body>
 <div class="wrapper">
@@ -50,20 +53,37 @@
 	                        </div>
                     	</c:if>
                     	<c:if test="${friendsList.size()>0}">
-                    		<div class="alert alert-info alert-dismissable">
-                    			<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+	                   		<div class="alert alert-info alert-dismissable">
+	                   			<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
 	                            <i class="fa fa-info-circle"></i>  <strong><c:out value="${memberDto.mem_name}"/>님의 친구들</strong>&nbsp;&nbsp;&nbsp; <c:out value="${friendsList.size()}"/>명.
-                       	</div>
-	            			<c:forEach var="friendsList" items="${friendsList}"  varStatus="i">
-	            				<c:choose>
-									<c:when test="${friendsList.mem_profile_photo==null}">
-										<c:set var="friendProfile" value="/assets/img/testimonials/user.jpg"/>
-									</c:when>
-									<c:otherwise>
-										<c:set var="friendProfile" value="/attatchFile/member/${friendsList.mem_profile_photo}"/>
-									</c:otherwise>
-								</c:choose>
-		                    	<c:if test="${i.index%2==0}">
+	                       	</div>
+	                    </c:if>
+                    	<form method="get" id="sky-form3" class="sky-form">
+		                    <header>새로운 친구를 찾아보세요</header>
+		                    <fieldset>      
+								<section>
+		                            <label class="label">친구검색</label>
+		                            <div class="input-group">
+		                            <input type="text" class="form-control" id="search" placeholder="친구이름 or 이메일">
+		                            <span class="input-group-btn">
+		                                <button class="btn-u btn-block" type="button" onclick="javascript:location.href='/user/myPage/searchFriends.do?search='+search.value">검색</button>
+		                            </span>
+		                    	 	</div>
+		                        </section>
+							</fieldset>
+						</form>
+                    	<c:if test="${friendsList.size()>0}">
+                       		<hr/>
+	                       	<div>
+		            			<c:forEach var="friendsList" items="${friendsList}">
+		            				<c:choose>
+										<c:when test="${friendsList.mem_profile_photo==null}">
+											<c:set var="friendProfile" value="/assets/img/testimonials/user.jpg"/>
+										</c:when>
+										<c:otherwise>
+											<c:set var="friendProfile" value="/attatchFile/member/${friendsList.mem_profile_photo}"/>
+										</c:otherwise>
+									</c:choose>
 			                        <div class="col-sm-6 sm-margin-bottom-20">
 			                            <div class="profile-blog">
 			                                <img class="rounded-x" src="${friendProfile}" alt="">
@@ -75,25 +95,12 @@
 			                                <hr>
 			                            </div>
 			                        </div>
-								</c:if>
-								<c:if test="${i.index%2==1}">
-			                        <div class="col-sm-6">
-			                            <div class="profile-blog">
-			                                <img class="rounded-x" src="${friendProfile}" alt="">
-			                                <div class="name-location">
-			                                    <strong><a href="/user/myPage/myPage.do?uandMe=S0002&mem_no=${friendsList.mem_no}"><c:out value="${friendsList.mem_name}"/></a></strong>
-			                                    <span><i class="fa fa-map-marker"></i><a href="/user/message/messageTalkList.do?recv_mem_no=${friendsList.mem_no}"><c:out value="${friendsList.mem_email}"/></a></span>
-			                                </div>
-			                                <div class="clearfix margin-bottom-20"></div>
-			                                <hr>
-			                            </div>
-			                        </div>
-			                    </c:if>
-			                </c:forEach>
+				                </c:forEach>
+			                </div>
 		                </c:if>
-                    </div><!--/end row-->
-                    <button type="button" class="btn-u btn-u-default btn-block text-center">Load More</button>
-                    <!--End Profile Blog-->
+	                </div><!--/end row-->
+	                <button type="button" class="btn-u btn-u-default btn-block text-center">Load More</button>
+	                <!--End Profile Blog-->
                 </div>
             </div>
             <!-- End Profile Content -->

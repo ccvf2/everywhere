@@ -56,7 +56,6 @@ public class VisitorServiceImp implements VisitorService {
 		int count=visitorDao.getVisitorCount(memberDto.getMem_no());
 			
 		List<VisitorDto> visitorList=null;
-		List<MemberDto> memberList=null;
 		if(count>0) {
 			visitorList=visitorDao.getVisitorList(startRow, endRow, memberDto.getMem_no());
 		}
@@ -107,16 +106,10 @@ public class VisitorServiceImp implements VisitorService {
 		System.out.println("VisitorService write count:"+count);
 			
 		List<VisitorDto> visitorList=null;
-		List<MemberDto> memberList=null;
 		if(count>0) {
 			visitorList=visitorDao.getVisitorList(startRow, endRow, mate_no);
-			/*memberList=visitorDao.getVisitorMemberList(startRow, endRow, mate_no);
-
-			System.out.println("\n\n ----------- memberList.size() : " + memberList.size());
-			System.out.println("memberList.get(0) : " + memberList.get(0));*/
 		}
 		
-		//mav.addObject("memberList", memberList);
 		mav.addObject("mateCheck", mateCheck);
 		mav.addObject("memberDto", memberDto);
 		mav.addObject("visitorList", visitorList);
