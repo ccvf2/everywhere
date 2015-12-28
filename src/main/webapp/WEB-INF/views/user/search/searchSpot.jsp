@@ -52,35 +52,6 @@
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
     
-    <script type="text/javascript">
-		function spotReadPage(no) {
-			//alert(no);
-			var makeDiv ="<div id='showModal"+no+"'></div>";
-			var requestURL="/user/spot/spotReadPage.do?spot_no="+no;
-			$.ajax({
-				url : requestURL,
-				type : "GET",
-				dataType : "html",
-				success : function(data) {
-					$("body").append(makeDiv);
-					$("#showModal"+no).append(data)
-				},
-				error : function() {
-					alert("목록 가져오기 실패");
-				}
-			})
-		};
-		
-		$(document).ready(function(){
-			/*사이드바를 고정하기 위한 코드*/
-			$('#sidebar').affix({
-			  offset: {
-			    top: 0
-			  }
-			});
-		});
-	</script>
-    
     
   	<c:import url="/WEB-INF/views/common/jquery.jsp"/>
 	<c:import url="/WEB-INF/views/user/common/utilImport.jsp"/>
@@ -103,7 +74,7 @@
 		            <!-- Blog Newsletter -->
 		            <div class="blog-newsletter" id="sidebar">
 		               <div class="headline-v2"></div>
-	            	 	<form action="#" class="sky-form" onsubmit="searchSpotList()">
+	            	 	<form action="#" class="sky-form" onsubmit="searchSpotList('${currentPage}')">
 		                    <header>명소 검색</header>
 		                    
 		                    <fieldset style="padding: 15px 15px 5px;">
@@ -130,7 +101,7 @@
 		                    <fieldset style="padding: 15px 15px 5px;">
 		                        <section>
 		                            <label class="label">명소 종류</label>
-		                            <div class="inline-group">
+		                            <div>
 		                            	<label class="checkbox"><input type="checkbox" name="spot_type_code" checked="checked" value=""><i></i>전체</label>
 		                            	<c:forEach var="spotType" items="${spotTypeList}">
 		                            		<label class="checkbox"><input type="checkbox" name="spot_type_code" value="${spotType.code}"><i></i>${spotType.code_name}</label>
@@ -141,11 +112,14 @@
 		                    <!-- 명소 종류 선택 끝 -->
 		                    <!-- 명소 검색 버튼 시작 -->
 		                    <footer>
-		                        <button type="submit" class="btn-u">검색</button>
-		                        <button type="button" class="btn-u btn-u-default" onclick="window.history.back();">뒤로</button>
+		                    	<div class="text-center">
+		                        	<button type="submit" class="btn-u">검색</button>
+		                        	<button type="button" class="btn-u btn-u-default" onclick="window.history.back();">뒤로</button>
+	                        	</div>
 		                    </footer>
 		                </form>
-		              <div class="tag-box tag-box-v4 margin-bottom-20 hidden-xs" style="padding : 0px; border: 1px #bbb;">
+		                <!-- 하단 명소 리스트 삭제 -->
+		             <%--  <div class="tag-box tag-box-v4 margin-bottom-20 hidden-xs" style="padding : 0px; border: 1px #bbb;">
 							<ul class="list-unstyled mCustomScrollbar margin-bottom-20 _mCS_1 mCS-autoHide" data-mcs-theme="minimal-dark" id="spotLists" style="position: relative; overflow: visible;">
 								<c:forEach var="spot" items="${searchSpotList}">
 									<li class="notification" style="margin:0px;border:1px solid #eee;padding:5px 5px;height: 48px;overflow:hidden;" id="spotItem">
@@ -174,7 +148,7 @@
 							<button type="button" class="btn-u btn-u-default btn-u-sm btn-block" onclick="selectMoreSpotList()">Load More</button>
 							<!--End Notification-->
 			            </div>
-			            <!-- End Blog Newsletter -->
+			            <!-- End Blog Newsletter --> --%>
 		            </div>
 		         </div>
 	         <!-- End sideBar -->
@@ -185,7 +159,7 @@
 				        <div class="container-fluid content grid-boxes masonry" style="position: relative; height: 2250px; overflow: hidden;">
 				        	<c:forEach var="spot" items="${searchSpotList}">
 				        		<div class="grid-boxes-in masonry-brick" style="position: absolute; width: 300px; top: 40px; left: 15px;">
-					                <a href="javascript:spotReadPage('${spot.spot_no}')"><img class="img-responsive" src="/attatchFile/spot/${spot.spot_photoes[0].save_name}.${spot.spot_photoes[0].extension}	" alt=""></a>
+					                <a href="javascript:spotReadPage('${spot.spot_no}')"><img class="img-responsive" src="/attatchFile/spot/${spot.spot_photoes[0].save_name}.${spot.spot_photoes[0].extension}" onError="this.src='/attatchFile/spot/no_image.jpg'" alt=""></a>
 					                <div class="grid-boxes-caption">
 					                    <h3><a href="javascript:spotReadPage('${spot.spot_no}')">${spot.spot_name}</a></h3>
 					                    <ul class="list-inline grid-boxes-news">
@@ -198,7 +172,7 @@
 					                    		${spot.city_name}
 					                    	</li>
 					                        <li>|</li>
-					                        <li><span>By</span><a href="/user/myPage/myPage.do?uandMe=S0002&mem_no=${spot.mem_no}">${spot.mem_name}</a></li>
+					                        <li><span>By </span><a href="/user/myPage/myPage.do?uandMe=S0002&mem_no=${spot.mem_no}">${spot.mem_name}</a></li>
 					                    </ul>                    
 					                    <p>${spot.spot_note}</p>
 					                    <i class="fa fa-star"></i>
@@ -212,21 +186,66 @@
 				        	</c:forEach>
 				        </div><!--/container-->
 				    </div>
+				    
+				    <!-- 페이징 시작 -->
+				    <div class="text-center">
+					    <c:if test="${count>0 }">
+							<div class="btn-group" role="group" aria-label="First group">
+								<c:set var="pageBlock" value="${5}" />
+								<c:set var="pageCount" value="${count/boardSize+(count%boardSize==0?0:1)}"/>
+									
+								<fmt:parseNumber var="result" value="${(currentPage-1)/pageBlock }" integerOnly="true"/>
+								
+								<c:set var="startPage" value="${result*pageBlock+1}"/>
+								<c:set var="endPage" value="${startPage+pageBlock-1}"/>
+								
+								<!-- 마지막 페이지가 페이지 수보다 작으면 -->
+								<c:if test="${endPage > pageCount }">
+									<c:set var="endPage" value="${pageCount }"/>
+								</c:if>
+								
+								<!-- 페이징 -->
+								<nav>
+								  <ul class="pagination">
+								  	<c:if test="${startPage > pageBlock}">
+									  	<li>
+										  	<a href="javascript:searchSpotList('${currentPage-pageBlock}')" aria-label="Previous">
+										        <span aria-hidden="true">«</span>
+									     	</a>
+								     	</li>
+									</c:if>
+								    <c:forEach var="i" begin="${startPage}" end="${endPage}">
+										 <c:if test="${i!=currentPage}">
+										 	<li><a href="javascript:searchSpotList('${i}')" role="button" class="btn btn-default">${i}</a></li>
+										 </c:if>
+										 <c:if test="${i==currentPage}">
+										 	<li class="active"><a href="javascript:searchSpotList('${i})" role="button" class="btn btn-default">${i}</a></li>
+										 </c:if>
+									</c:forEach>
+							  		<c:if test="${endPage < pageCount }">
+							  			<li>
+									      <a href="javascript:searchSpotList('${currentPage+pageBlock}')" aria-label="Next">
+									        <span aria-hidden="true">&raquo;</span>
+									      </a>
+									    </li>
+									</c:if>
+								  </ul>
+								</nav>
+								<!-- 페이징 끝 -->
+							</div>
+						</c:if>
+				    </div>
                </div>
 	         	<!-- 명소 아이템 리스트 끝 -->
           	</div>
           	<!-- End Container -->
-
-
-	     <!--=== Footer Version 1 ===-->
+    	</div>
+     <!--=== Footer Version 1 ===-->
 	    <div class="footer-v1">
 			<c:import url="/WEB-INF/views/user/common/footer.jsp"/>
 	    </div>
 	    <!--=== End Footer Version 1 ===-->
     </div>
-    
-    </div>
-    
     <!-- JS Page Level -->
 	<script src="/assets/js/app.js"></script>
 	<script src="/assets/plugins/jquery/jquery.min.js"></script>
@@ -239,6 +258,34 @@
 	    jQuery(document).ready(function() {
 	        App.initScrollBar();
 	    });
+	    
+	    
+	    function spotReadPage(no) {
+			//alert(no);
+			var makeDiv ="<div id='showModal"+no+"'></div>";
+			var requestURL="/user/spot/spotReadPage.do?spot_no="+no;
+			$.ajax({
+				url : requestURL,
+				type : "GET",
+				dataType : "html",
+				success : function(data) {
+					$("body").append(makeDiv);
+					$("#showModal"+no).append(data)
+				},
+				error : function() {
+					alert("목록 가져오기 실패");
+				}
+			})
+		};
+		
+		$(document).ready(function(){
+			/*사이드바를 고정하기 위한 코드*/
+			$('#sidebar').affix({
+			  offset: {
+			    top: 0
+			  }
+			});
+		});
 	</script>
   </body>
 </html>

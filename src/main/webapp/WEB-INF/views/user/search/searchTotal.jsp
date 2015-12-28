@@ -209,7 +209,7 @@
 		<!--명소 검색 결과 -->
 		<div class="row">
 			<div class="col-md-10">
-				<div class="headline"><h2>명소 검색 결과</h2></div>
+				<div class="headline"><h2>${spotCount}개의 명소 검색 결과</h2></div>
 			</div>
  			<div class="col-md-2 col-md-offset-0" style="padding-top: 14px;">
  				<button class="btn-u" type="button" onclick="searchSpot('${searchValue}')">명소 더보기 >></button>

@@ -18,10 +18,10 @@ public interface SearchDao {
 	 * @author 곽성국	
 	 * @createDate 2015. 12. 19.
 	 * @described 명소 검색 결과 개수
-	 * @param searchValue
+	 * @param spotDto
 	 * @return
 	 */
-	int getSpotCount(String searchValue);
+	int getSpotCount(SpotDtoExt spotDto);
 
 	/**
 	 * @author 곽성국	

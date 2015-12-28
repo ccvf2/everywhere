@@ -4,8 +4,8 @@
 var values = [];
 
 //명소 쓰기 페이지에서 나라 선택할때 해당 도시 가져오기
-function readCityList(check){
-	var countrycode = document.getElementById("selectCountry").value;
+function spotReadCityList(check){
+	var countrycode = document.getElementById("spotSelectCountry").value;
 	var params = "country_code=" + countrycode;
 	var url = "/user/spot/selectCountry.ajax?" + params;
 	$.ajax({
@@ -24,51 +24,13 @@ function readCityList(check){
 				var code = result[i].split(",");
 				str+="<option value='"+code[0]+"'>" + code[1] + "</option>";		
 			}
-			$("#selectCity").empty(); 
-			$("#selectCity").prepend(str);
+			$("#spotSelectCity").empty(); 
+			$("#spotSelectCity").prepend(str);
 		},
 		error:function(xhr, status, errorMsg){
 			alert(xhr+","+status+","+errorMsg);
 		}
 	})
-}
-
-function selectSpotList(city){	
-	var countrycode = document.getElementById("selectCountry").value;	
-	var citycode = document.getElementById("selectCity").value;
-	var typecode = document.getElementById("selectType").value;
-	
-	if(city==true) {
-		readCityList(true);
-	}
-	var params = "country_code=" + countrycode + "&city_code=" + citycode + "&spot_type_code="+typecode;
-	var url = "/user/spot/selectSpotList.ajax?" + params;
-	$.ajax({
-		url:url,
-		type:"get",
-		dataType:"text",
-		success:spotListDisp,
-		error:function(xhr, status, errorMsg){
-			alert(xhr+","+status+","+errorMsg);
-		}
-	})
-}
-
-function spotListDisp(data){
-	var str="";
-	if(data != ""){
-		var obj = JSON.parse(data);
-		for(i = 0; i < obj.spot.length; i++){
-			str+="<li class='notification'>"+
-	             "<i class='icon-custom icon-sm rounded-x icon-bg-red icon-line icon-envelope'></i>" +
-	             "<div class='overflow-h'>" +
-	             "<div id='"+obj.spot[i].spot_no+"item' draggable='true' ondragstart='drag(event)'>"+
-	             "<a href='/user/spot/spotReadPage.do?spot_no='"+obj.spot[i].spot_no+"'>"+obj.spot[i].spot_name+"</a>"+
-	             "</div></div></li>";			
-		}
-	}
-	$("#spotLists").empty(); 
-	$("#spotLists").prepend(str);
 }
 
 //명소 업데이트 자바스크립트
@@ -84,6 +46,6 @@ function deleteSpot(spot_no){
 	if (check == true) {
 		location.href=urlName;
 	} else {
-	   	alert("취소하셨습니다");
+		alert("취소하셨습니다");
 	}
 }
