@@ -11,6 +11,8 @@ import everywhere.com.mynetgear.ccvf2.comm.dto.common.EverywhereDefaultDto;
 public class PlannerDtoExt extends EverywhereDefaultDto {
 	private int reply_Count;
 	private String mem_name;
+	private int sweet_count;
+	private int bookmark_Count;
 	public int getReply_Count() {
 		return reply_Count;
 	}
@@ -23,7 +25,20 @@ public class PlannerDtoExt extends EverywhereDefaultDto {
 	public void setMem_name(String mem_name) {
 		this.mem_name = mem_name;
 	}
+	public int getSweet_count() {
+		return sweet_count;
+	}
+	public void setSweet_count(int sweet_count) {
+		this.sweet_count = sweet_count;
+	}
+	public int getBookmark_Count() {
+		return bookmark_Count;
+	}
+	public void setBookmark_Count(int bookmark_Count) {
+		this.bookmark_Count = bookmark_Count;
+	}
 
-
+	
+	
 	
 }

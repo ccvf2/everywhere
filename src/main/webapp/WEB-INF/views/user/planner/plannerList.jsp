@@ -1,144 +1,154 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>My Page</title>
-	<!-- Meta -->
+<html lang="en">
+  <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
-    <meta name="author" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>명소 찾기</title>
     
-    <!-- CSS Page Style -->
-    <link rel="stylesheet" href="/assets/css/pages/profile.css">
-    <link rel="stylesheet" href="/assets/css/pages/shortcode_timeline1.css">
-    <link rel="stylesheet" href="/assets/plugins/font-awesome/css/font-awesome.min.css">
-    <link rel="stylesheet" href="/assets/plugins/scrollbar/css/jquery.mCustomScrollbar.css">
-    <link rel="stylesheet" href="/assets/plugins/sky-forms-pro/skyforms/css/sky-forms.css">
-    <link rel="stylesheet" href="/assets/plugins/sky-forms-pro/skyforms/custom/custom-sky-forms.css">
+    <!-- item 3개씩 나오게 -->
     <link href="/assets/css/pages/blog_masonry_3col.css" rel="stylesheet">
-    <!-- CSS Implementing Plugins -->
-    <link rel="stylesheet" href="/assets/plugins/animate.css">
-</head>
-<body>
-<div class="wrapper">
-    <!--=== Header ===-->
-    <div class="header">
-			<c:import url="/WEB-INF/views/user/common/utilImport.jsp"/>
-			<c:import url="/WEB-INF/views/user/common/header.jsp"/>
-	</div>
-    <!--=== End Header ===-->
-
-    <!--=== Profile ===-->
-    <div class="container content profile">
-    	<div class="row">
-            <!--Left Sidebar-->
-            <div class="col-md-3 md-margin-bottom-40">
-                <c:import url="/WEB-INF/views/user/mypage/myPageLeft.jsp"/>
-            </div>
-            <!--End Left Sidebar-->
-
-			<!-- 메인------------------------------------------------------------------------------------------------------------------------------ -->
-            <!-- Profile Content -->
-            <div class="col-md-9">
-            	<div class="headline"><h2>최근등록스케줄</h2></div>
-			        <div class="blog_masonry_3col" style="padding-bottom: 0px;">
-				        <div class="container content grid-boxes" style="padding-top: 0px; padding-bottom: 0px;">
-						<div>
-							<a href="/user/planner/readPlanner.do?planner_no=${planner.planner_no}"> ${planner.title} </a>
-						</div>
-		 					<c:forEach var="plannerList" items="${plannerList}">
-				            <div class="col-md-4">
-				            <div class="grid-boxes-in" style="height: 430px;">
-				                <img class="img-responsive" src="/attatchFile/planner/${plannerList.attach_file}" alt="" height="80%">
-				                <div class="grid-boxes-caption">
-				                    <h3><a href="/user/planner/readPlanner.do?planner_no=${plannerList.planner_no}">${plannerList.title}</a></h3>
-				                    <ul class="list-inline grid-boxes-news">
-				                        <li><a href="#">${list1.mem_name}</a></li>
-				                        <li>|</li>
-				                        <li><i class="fa fa-clock-o"></i><fmt:formatDate pattern="yyyy-MM-dd" value="${plannerList.reg_date}"/></li>
-				                        <li>|</li>
-				                        <li><a href="#"><i class="fa fa-comments-o"></i><c:out value="${plannerList.reply_Count}" escapeXml="false"/></a></li>
-				                    </ul>
-				                    <p>
-				                    	<c:out value="${fn:substring(plannerList.memo, 0,50)}" escapeXml="false"/>
-				                    	<c:if test="${fn:length(plannerList.memo) >50}">
-								        	…
-								        </c:if>
-				                    </p>
-				                </div>
-				            </div>
-				            </div>
-							</c:forEach>
-						</div>
-					</div>
-					
-					
-					
-					
-            </div>
-            <!-- End Profile Content -->
-            <!-- 메인------------------------------------------------------------------------------------------------------------------------------ -->
-        </div>
-    </div><!--/container-->
-    <!--=== End Profile ===-->
-
-    <!--=== Footer Version 1 ===-->
-    <div class="footer-v1">
-		<c:import url="/WEB-INF/views/user/common/footer.jsp"/>
-	</div>
-    <!--=== End Footer Version 1 ===-->
-</div><!--/wrapper-->
-
-<!-- JS Global Compulsory -->
-<script type="text/javascript" src="/assets/plugins/jquery/jquery.min.js"></script>
-<script type="text/javascript" src="/assets/plugins/jquery/jquery-migrate.min.js"></script>
-<script type="text/javascript" src="/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
-<!-- JS Implementing Plugins -->
-<script type="text/javascript" src="/assets/plugins/back-to-top.js"></script>
-<script type="text/javascript" src="/assets/plugins/smoothScroll.js"></script>
-<script type="text/javascript" src="/assets/plugins/counter/waypoints.min.js"></script>
-<script type="text/javascript" src="/assets/plugins/counter/jquery.counterup.min.js"></script>
-<script type="text/javascript" src="/assets/plugins/sky-forms-pro/skyforms/js/jquery-ui.min.js"></script>
-<script type="text/javascript" src="/assets/plugins/scrollbar/js/jquery.mCustomScrollbar.concat.min.js"></script>
-<!-- JS Customization -->
-<script type="text/javascript" src="/assets/js/custom.js"></script>
-<!-- JS Page Level -->
-<script type="text/javascript" src="/assets/js/app.js"></script>
-<script type="text/javascript" src="/assets/js/plugins/datepicker.js"></script>
+    <!-- 사이드바 검색 결과 -->
+    <link rel="stylesheet" href="/assets/css/pages/profile.css">
+    <link rel="stylesheet" href="/assets/plugins/scrollbar/css/jquery.mCustomScrollbar.css">
+	<!-- CSS Theme-->
+	<link rel="stylesheet" href="/assets/css/theme-colors/default.css">
+	
+	<!-- 사이드바 고정 -->
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
 <script type="text/javascript">
-    jQuery(document).ready(function() {
-        App.init();
-        App.initCounter();
-        App.initScrollBar();
-        Datepicker.initDatepicker();
-    });
-</script>
-<!--[if lt IE 9]>
-    <script src="assets/plugins/respond.js"></script>
-    <script src="assets/plugins/html5shiv.js"></script>
-    <script src="assets/plugins/placeholder-IE-fixes.js"></script>
-<![endif]-->
+//검색조건 변경
+	function changeSearchValue(){
+		var form = document.getElementById("plannerListForm");
+	}
 
-</body>
+//페이지 번호 이동
+	function movePage(pageNumber){
+		var form = document.getElementById("plannerListForm");
+		form.currentPage.value(pageNumber);
+		goSearchForm()
+	}
+
+
+//폼 서브밋
+	function goSearchForm(){
+		var form = document.getElementById("plannerListForm");
+		form.action="/user/planner/plannerList.do";
+		form.method="POST";
+		form.submit();
+	}
+</script>
+  	<c:import url="/WEB-INF/views/common/jquery.jsp"/>
+	<c:import url="/WEB-INF/views/user/common/utilImport.jsp"/>
+  </head>
+  <body>
+	
+   	<div class="wrapper">
+	    <!--=== Header ===-->
+	    <!-- Header가 꼭 imprt 되어 있어야 한다.(안그러면화면이깨짐) -->
+	    <div class="header">
+			<c:import url="/WEB-INF/views/user/common/header.jsp"/>
+	    </div>
+	    <!--=== End Header ===-->
+	 	<div class="container">
+        	<div class="row">
+			<!-- Blog Sidebar -->
+				<c:import url="/WEB-INF/views/user/planner/plannerListLeft.jsp">
+				</c:import>
+	         <!-- End sideBar -->
+	         
+	         <!-- 명소 검색 뷰 시작 -->
+               <div class="col-md-9">
+               		<div class="blog_masonry_3col">
+				        <div class="container-fluid content grid-boxes masonry" style="position: relative; height: 2250px; overflow: hidden;">
+				        	<c:forEach var="planner" items="${plannerList}">
+				        		<div class="grid-boxes-in masonry-brick" style="position: absolute; width: 300px; top: 40px; left: 15px;">
+					                <a href="/user/planner/readPlanner.do?planner_no=${planner.planner_no}">
+					                	<img class="img-responsive" src="/attatchFile/planner/${planner.attach_file}" alt="">
+					                </a>
+					                <div class="grid-boxes-caption">
+					                    <h3><a href="/user/planner/readPlanner.do?planner_no=${planner.planner_no}"> ${planner.title}</a></h3>
+						                 <span><c:out value="${planner.mem_name}"/></span>
+					                    <ul class="list-inline grid-boxes-news">
+					                        <li><i class="fa fa-comments-o" title="댓글">&nbsp;<c:out value="${planner.reply_Count}" escapeXml="false"/></i></li>
+					                        <li>|</li>
+					                        <li><i class="fa fa-heart" title="좋아요">&nbsp;<c:out value="${planner.sweet_count}"/></i></li>
+					                        <li>|</li>
+					                        <li><i class="fa fa-tags" title="북마크">&nbsp;<c:out value="${planner.bookmark_Count}"/></i></li>
+					                        <li>|</li>
+					                        <li><i class="fa fa-pencil" title="등록일"></i><fmt:formatDate pattern="yy-MM-dd" value="${planner.reg_date}"/></li>
+					                    	<li>
+					                    		${planner.memo}
+					                    	</li>
+					                        <li style="border-top: 1px solid;"><i class="fa fa-clock-o" title="여행기간"></i>&nbsp;<fmt:formatDate pattern="yyyy-MM-dd" value="${planner.start_date}"/>&nbsp;~&nbsp;<fmt:formatDate pattern="yyyy-MM-dd" value="${planner.end_date}"/></li>
+					                    </ul>
+					                </div>
+					            </div>
+				        	</c:forEach>
+				        </div><!--/container-->
+				    </div>
+               </div>
+	         	<!-- 명소 아이템 리스트 끝 -->
+          	</div>
+          	<!-- End Container -->
+			<form name="test" id="plannerListForm" method="post" >
+				totalCount:<input type="text" name="totalCount" value="${plannerDto.totalCount}">
+				<br/>
+				startRow:<input type="text" name="startRow" value="${plannerDto.startRow}">
+				<br/>
+				endRow:<input type="text" name="endRow" value="${plannerDto.endRow}">
+				<br/>
+				currentPage:<input type="text" name="currentPage" value="${plannerDto.currentPage}">
+				<br/>
+				pageBlock:<input type="text" name="pageBlock" value="${plannerDto.pageBlock}">
+				<br/>
+				startPage:<input type="text" name="startPage" value="${plannerDto.startPage}">
+				<br/>
+				endPage:<input type="text" name="endPage" value="${plannerDto.endPage}">
+				<br/>
+				SearchCondition1:<input type="text" name="searchCondition1" value="${plannerDto.searchCondition1}">
+				<br/>
+				SearchCondition2:<input type="text" name="searchCondition2" value="${plannerDto.searchCondition2}">
+				<br/>
+				setSearchWord1:<input type="text" name="searchWord1" value="${plannerDto.searchWord1}">
+				<br/>
+				<input type="submit" value="전송">
+			</form>
+	     <!--=== Footer Version 1 ===-->
+	    <!--=== End Footer Version 1 ===-->
+    </div>
+	    <div class="footer-v1">
+			<c:import url="/WEB-INF/views/user/common/footer.jsp"/>
+	    </div>
+    
+    </div>
+    
+    <!-- JS Page Level -->
+	<script src="/assets/js/app.js"></script>
+	<script src="/assets/plugins/jquery/jquery.min.js"></script>
+	<script type="text/javascript" src="/script/user/search/searchSpot.js"></script>
+	<script type="text/javascript" src="/assets/plugins/masonry/jquery.masonry.min.js"></script>
+	<script type="text/javascript" src="/assets/js/pages/blog-masonry.js"></script>
+	<script type="text/javascript" src="/assets/js/plugins/style-switcher.js"></script>
+	<script type="text/javascript" src="/assets/plugins/scrollbar/js/jquery.mCustomScrollbar.concat.min.js"></script>
+	<script type="text/javascript">
+	    jQuery(document).ready(function() {
+	        App.initScrollBar();
+	    });
+	</script>
+  </body>
 </html>
-<%-- <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>타이틀 입력</title>
-</head>
-<body>
-	<c:forEach var="planner" items="${plannerList}">
+<%-- 	<c:forEach var="planner" items="${plannerList}">
 		<div>
 			<a href="/user/planner/readPlanner.do?planner_no=${planner.planner_no}"> ${planner.title} </a>
 		</div>
-	</c:forEach>
-</body>
-</html> --%>
+	</c:forEach> --%>

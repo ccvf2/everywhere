@@ -123,8 +123,19 @@ public class PlannerServiceImp implements PlannerService {
 	
 	@Override
 	public void getPlannerListForAll(ModelAndView mav) {
-		List<PlannerDto> plannerList = plannerDao.getPlannerListForAll();
-
+		Map<String, Object> map = mav.getModelMap();
+		PlannerDto plannerDto =(PlannerDto)map.get("plannerDto");
+		
+		List<PlannerDto> plannerList = plannerDao.getPlannerListForAll(plannerDto);
+		
+		List<CommonCodeDto> selectCode=commonCodeService.getListCodeGroup(Constant.SCHEDULE_TYPE_GROUP);
+		List<CommonCodeDto> sortCode=commonCodeService.getListCodeGroup(Constant.SERACH_SORT_GROUPCODE);
+		
+		//페이징 및 검색 정보를 가진DTO
+		mav.addObject("plannerDto",plannerDto);
+		
+		mav.addObject("selectCode",selectCode);
+		mav.addObject("sortCode",sortCode);
 		mav.addObject("plannerList", plannerList);
 		mav.setViewName("user/planner/plannerList");
 	}
