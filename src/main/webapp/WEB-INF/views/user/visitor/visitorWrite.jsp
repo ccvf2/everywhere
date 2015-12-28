@@ -52,6 +52,19 @@
             <!--End Left Sidebar-->
 			<!-- 메인------------------------------------------------------------------------------------------------------------------------------ -->
             <div class="col-md-9">
+            	<c:if test="${memberDto.mem_no==mem_object.mem_no}">
+	                <c:if test="${count==0}">
+						<div class="shadow-wrapper">
+		                    <div class="tag-box tag-box-v1 box-shadow shadow-effect-2">
+		                        <h2>아직 작성된 방명록이 없군요.</h2>
+		                        <p>
+		                         더 많은 친구를 추가하여, 회원들과 다양한 소식을 함께 즐기세요.<br/>
+		                        </p>
+		                    </div>
+		                </div>
+					</c:if>
+				</c:if>
+				
             	<c:if test="${memberDto.mem_no!=mem_object.mem_no}">
 	                <div class="clearfix margin-bottom-30"></div>
 	                <div class="shadow-wrapper">
@@ -74,27 +87,25 @@
                 </c:if>
                 
                 <c:if test="${count>0}">
-					<c:forEach var="visitor" items="${visitorList}" varStatus="i">
+					<c:forEach var="visitor" items="${visitorList}" >
 						<div class="clearfix margin-bottom-30"></div>
 		                <div class="shadow-wrapper">
 		                    <blockquote class="hero box-shadow shadow-effect-2">
-			                    	<div align="left" style="float: left;">
-			                    		<c:choose>
-			                    			<c:when test="${visitor.mem_no==mem_object.mem_no}">
-			                    				<c:set var="url" value="/user/myPage/myPage.do?uandMe=S0001"/>
-			                    			</c:when>
-			                    			<c:when test="${visitor.mem_no!=mem_object.mem_no}">
-			                    				<c:set var="url" value="/user/myPage/myPage.do?uandMe=S0002"/>
-			                    			</c:when>
-			                    		</c:choose>
-			                    	</div>
+		                    		<c:choose>
+		                    			<c:when test="${visitor.mem_no==mem_object.mem_no}">
+		                    				<c:set var="url" value="/user/myPage/myPage.do?uandMe=S0001"/>
+		                    			</c:when>
+		                    			<c:when test="${visitor.mem_no!=mem_object.mem_no}">
+		                    				<c:set var="url" value="/user/myPage/myPage.do?uandMe=S0002"/>
+		                    			</c:when>
+		                    		</c:choose>
 			                    	<div align="right" style="float: right; font-size:0.8em;"><fmt:formatDate value="${visitor.visitor_write_date}" type="both"/></div><br/>
 			                        <p><em>
 										<c:out value="${visitor.visitor_content}"/>
 			                        </em></p> 
 			                        <small><em>
 			                        <a href="${url}&mem_no=${visitor.mem_no}">
-				                    	<c:out value="${memberList.get(i.index).mem_name}(${memberList.get(i.index).mem_email})"/>
+				                    	<c:out value="${visitor.mem_name}(${visitor.mem_email})"/>
 				                    </a>
 				                    </em></small>
 		                    </blockquote>
@@ -102,16 +113,7 @@
 						
 					</c:forEach>
 				</c:if>
-				<c:if test="${count==0}">
-					<div class="shadow-wrapper">
-	                    <div class="tag-box tag-box-v1 box-shadow shadow-effect-2">
-	                        <h2>아직 작성된 방명록이 없군요.</h2>
-	                        <p>
-	                         더 많은 친구를 추가하여, 회원들과 다양한 소식을 함께 즐기세요.<br/>
-	                        </p>
-	                    </div>
-	                </div>
-				</c:if>
+				
 				<div align="center">
 					<c:if test="${count>0}">
 						<div class="btn-group" role="group" aria-label="First group" align="center">

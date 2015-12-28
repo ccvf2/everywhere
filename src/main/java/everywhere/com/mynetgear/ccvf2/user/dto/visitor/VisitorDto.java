@@ -8,7 +8,7 @@ import java.util.Date;
  * @described 방명록Dto
  * @reference class
  */
-public class VisitorDto {
+public class VisitorDto extends VisitorDtoExt{
 	private int visitor_no;              // 방명록번호
 	private int mem_no;                  // 회원번호
 	private String visitor_content;      // 글내용

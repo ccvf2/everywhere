@@ -116,5 +116,13 @@ public class MyPageController {
 		return mav;// new ModelAndView("/user/myPage/myPage");
 	}
 	
+	@RequestMapping(value = "/user/myPage/searchFriends.do", method = RequestMethod.GET)
+	public ModelAndView searchFriends(HttpServletRequest request, HttpServletResponse response) {
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("request", request);
+		mav = myPageService.searchFriends(mav);
+		
 	
+		return null;
+	}
 }

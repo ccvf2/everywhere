@@ -106,16 +106,10 @@ public class VisitorServiceImp implements VisitorService {
 		System.out.println("VisitorService write count:"+count);
 			
 		List<VisitorDto> visitorList=null;
-		List<MemberDto> memberList=null;
 		if(count>0) {
 			visitorList=visitorDao.getVisitorList(startRow, endRow, mate_no);
-			memberList=visitorDao.getVisitorMemberList(startRow, endRow, mate_no);
-
-			System.out.println("\n\n ----------- memberList.size() : " + memberList.size());
-			System.out.println("memberList.get(0) : " + memberList.get(0));
 		}
 		
-		mav.addObject("memberList", memberList);
 		mav.addObject("mateCheck", mateCheck);
 		mav.addObject("memberDto", memberDto);
 		mav.addObject("visitorList", visitorList);
@@ -143,21 +137,6 @@ public class VisitorServiceImp implements VisitorService {
 		mav.addObject("memberDto", memberDto);
 		mav.addObject("check", check);
 		mav.setViewName("/user/visitor/visitorWriteOk");
-		
-		/*HttpSession session = request.getSession();
-		MemberDto memberDto=(MemberDto) session.getAttribute(Constant.SYNN_LOGIN_OBJECT);*/
-		
-		//int mem_no=Integer.parseInt(request.getParameter("mem_no"));
-		/*visitorDto.setMem_no(mem_no);
-		
-		
-		int check=visitorDao.visitorInsert(visitorDto);
-		System.out.println("VisitorService writeOk check:"+check);
-		
-		mav.addObject("mateCheck", 2);
-		mav.addObject("memberDto", memberDto);
-		mav.addObject("check", check);
-		mav.setViewName("/user/visitor/visitorWriteOk");*/
 	}
 
 	@Override

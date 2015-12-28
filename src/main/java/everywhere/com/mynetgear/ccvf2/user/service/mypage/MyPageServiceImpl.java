@@ -213,4 +213,18 @@ public class MyPageServiceImpl implements MyPageService {
 		
 		return mav;
 	}
+
+	@Override
+	public ModelAndView searchFriends(ModelAndView mav) {
+		Map<String, Object> map=mav.getModelMap();
+		HttpServletRequest request = (HttpServletRequest)map.get("request");
+		String search=request.getParameter("search").trim();
+		System.out.println("search : " + search);
+		
+		//List<MemberDto> friendsList=memberDao.searchFriends();
+		
+		
+		
+		return null;
+	}
 }
