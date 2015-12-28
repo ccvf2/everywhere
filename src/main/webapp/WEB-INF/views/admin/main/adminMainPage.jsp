@@ -200,8 +200,8 @@
                                		});
                                	
                                	</script>
-                                <div id="chartContainer" style="width: 500px; height: 300px; float: left;"></div>
-                                <div id="chartContainer2" style="width: 500px; height: 300px; float: left;"></div>
+                                <div id="chartContainer" style="width: 400px; height: 300px; float: left;"></div>
+                                <div id="chartContainer2" style="width: 400px; height: 300px; float: left;"></div>
                             </div>
                         </div>
                     </div>

@@ -55,10 +55,19 @@
 					</c:if>
 					<c:if test="${plannerList.size()>0}">
 						<c:forEach var="plannerList" items="${plannerList}">
+						
+							<c:choose>
+								<c:when test="${plannerList.attach_file==null}">
+									<c:set var="plannerImg" value="/assets/img/main/img1.jpg"/>
+								</c:when>
+								<c:otherwise>
+									<c:set var="plannerImg" value="${plannerList.attach_file}"/>
+								</c:otherwise>
+							</c:choose>
+						
 							<div class="col-md-4 sm-margin-bottom-30">
 				                <div class="news-v2-badge">
-				                	${plannerList.attach_file}
-				                    <img class="img-responsive" src="${plannerList.attach_file}" alt="">
+				                    <img class="img-responsive" src="${plannerImg}" alt="">
 				                </div>
 				                <div class="news-v2-desc bg-color-light">
 				                    <h3><a href="#"><c:out value="${plannerList.title}"/></a></h3>

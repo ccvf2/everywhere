@@ -7,6 +7,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -15,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 import everywhere.com.mynetgear.ccvf2.comm.dto.common.CommonFileIODto;
 import everywhere.com.mynetgear.ccvf2.comm.service.common.CommonFileIOService;
 import everywhere.com.mynetgear.ccvf2.comm.util.common.Constant;
+import everywhere.com.mynetgear.ccvf2.comm.util.common.StringUtil;
 import everywhere.com.mynetgear.ccvf2.user.dao.member.MemberDao;
 import everywhere.com.mynetgear.ccvf2.user.dao.planner.PlannerDao;
 import everywhere.com.mynetgear.ccvf2.user.dto.member.MemberDto;
@@ -53,7 +55,8 @@ public class MyPageServiceImpl implements MyPageService {
 		if(plannerList.size()>0){
 			for(int i=0; i<plannerList.size(); i++){
 				PlannerDto dto= plannerList.get(i);
-				dto.setMemo(dto.getMemo().replace("<br/>", "\r\n"));
+				StringUtils.clean(dto.getMemo());
+				dto.setMemo(StringUtils.replace(dto.getMemo(), "<br/>", "\r\n"));
 				System.out.println("dto.toString() : " + dto.toString()); 
 				plannerList.set(i, dto);
 			}
@@ -219,12 +222,22 @@ public class MyPageServiceImpl implements MyPageService {
 		Map<String, Object> map=mav.getModelMap();
 		HttpServletRequest request = (HttpServletRequest)map.get("request");
 		String search=request.getParameter("search").trim();
-		System.out.println("search : " + search);
+		//System.out.println("search : " + search);
 		
-		//List<MemberDto> friendsList=memberDao.searchFriends();
+		List<MemberDto> friendsList=memberDao.searchFriends(search);
 		
+		for(int i=0; i<friendsList.size(); i++){
+			System.out.println("-----friendsList : " + friendsList.get(i).toString());
+		}
 		
+		HttpSession session = request.getSession();
+		MemberDto memberDto=(MemberDto) session.getAttribute(Constant.SYNN_LOGIN_OBJECT);
 		
-		return null;
+		memberDto=memberDao.memberRead(memberDto.getMem_no());
+		mav.addObject("memberDto", memberDto);
+		mav.addObject("friendsList", friendsList);
+		mav.setViewName("/user/myPage/myPageFriends");
+		
+		return mav;
 	}
 }

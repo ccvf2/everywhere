@@ -110,7 +110,7 @@
 			mate_no=#{mate_no} 
 	</delete>
 	
-	<select id="getListFriends" resultType="everywhere.com.mynetgear.ccvf2.user.dto.member.MemberDto" parameterType="int">
+	<select id="getListFriends" resultType="everywhere.com.mynetgear.ccvf2.user.dto.member.MemberDto" parameterType="java.util.HashMap">
 		select 
 			k.MEM_NO
 			,k.MEM_EMAIL
@@ -127,6 +127,8 @@
  			tbl_member k
  		where
  			k.mem_no in (select mate_no from tbl_mate where mem_no=#{mem_no})
+ 		and 
+			k.MEM_STATUS_CODE=#{MEMBER_STATUS_ACTIVE}
 	</select>
 	
 	
@@ -145,4 +147,20 @@
 	<update id="updateProfilePhoto" parameterType="everywhere.com.mynetgear.ccvf2.user.dto.member.MemberDto">
 		update tbl_member set mem_profile_photo=#{mem_profile_photo} where mem_no=#{mem_no}
 	</update>
+	
+	<!-- 친구 검색 -->
+	<select id="searchFriends" parameterType="java.util.HashMap" resultType="everywhere.com.mynetgear.ccvf2.user.dto.member.MemberDto">
+		select
+			k.MEM_NO
+			, k.MEM_EMAIL
+			, k.MEM_NAME
+			, (select SAVE_NAME||'.'||EXTENSION from tbl_common_file where FILE_NO=k.MEM_PROFILE_PHOTO) MEM_PROFILE_PHOTO
+		from 
+			tbl_member k
+		where
+			(k.MEM_EMAIL like '%'||#{search, jdbcType=VARCHAR}||'%' 
+										or k.MEM_NAME like '%'||#{search, jdbcType=VARCHAR}||'%')
+		and 
+			k.MEM_STATUS_CODE=#{MEMBER_STATUS_ACTIVE}
+	</select>
 </mapper>

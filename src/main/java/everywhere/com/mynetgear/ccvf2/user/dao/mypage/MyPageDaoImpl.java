@@ -8,6 +8,4 @@ import org.springframework.stereotype.Component;
 public class MyPageDaoImpl implements MyPageDao {
 	@Autowired
 	private SqlSessionTemplate sqlTemplate;
-	
-	
 }
