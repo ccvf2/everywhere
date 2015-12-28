@@ -116,7 +116,7 @@
                     <div class="blog-newsletter">
                         <p>원하는 동행을 검색을 통해 찾아보세요.</p>
                        	<div class="input-group">
-                            <label><input type="text" class="form-control" id="search" placeholder="Search"></label>
+                            <input type="text" class="form-control" id="search" placeholder="Search">
                             <span class="input-group-btn">
                                 <button class="btn-u" type="button" onclick="searchFun()">검색</button>
                             </span>

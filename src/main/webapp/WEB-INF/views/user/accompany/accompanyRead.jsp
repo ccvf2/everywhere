@@ -86,7 +86,7 @@
                     <div class="blog-newsletter">
                         <p>원하는 동행을 검색을 통해 찾아보세요.</p>
                        	<div class="input-group">
-                            <label><input type="text" class="form-control" id="search" placeholder="Search"></label>
+                            <input type="text" class="form-control" id="search" placeholder="Search">
                             <span class="input-group-btn">
                                 <button class="btn-u" type="button" onclick="searchFun()">검색</button>
                             </span>
@@ -158,7 +158,7 @@
 						  	<br/><hr/>
 					  	
 							<c:if test="${accompanyDto.attach_file!=null}">
-								<img class="img-responsive full-width" src="/attatchFile/accompany/${accompanyDto.attach_file}" alt="${accompanyDto.attach_file}">		
+								<img class="img-responsive full-width" src="/attatchFile/accompany/${accompanyDto.attach_file}" alt="${accompanyDto.attach_file}"  onError="this.src='/attatchFile/spot/no_image.jpg'">		
 							</c:if>
                             ${accompanyDto.content}
                             
