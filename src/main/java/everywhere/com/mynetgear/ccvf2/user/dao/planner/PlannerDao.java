@@ -19,7 +19,7 @@ public interface PlannerDao {
 	public List<ItemDto> getItemList(int planner_no);
 	public List<MoneyDto> getMoneyList(int item_no);
 	
-	public List<PlannerDto> getPlannerListForAll();
+	public List<PlannerDto> getPlannerListForAll(PlannerDto plannerDto);
 
 	public PlannerDto getOnePlanner(int planner_no);
 

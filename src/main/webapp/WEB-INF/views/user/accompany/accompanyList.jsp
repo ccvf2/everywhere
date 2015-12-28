@@ -43,7 +43,6 @@
 		        $(this).tab('show');
 		        $(this).parent().addClass("active");
 		        
-		        location.href="/user/accompany/accompanyList.do?accompany_status_code="+$(this).text();
 		    });
 		});
 	</script>
@@ -82,7 +81,7 @@
                     <div class="blog-newsletter">
                         <p>원하는 동행을 검색을 통해 찾아보세요.</p>
                        	<div class="input-group">
-                            <input type="text" class="form-control" id="search" placeholder="Search">
+                            <label><input type="text" class="form-control" id="search" placeholder="Search"></label>
                             <span class="input-group-btn">
                                 <button class="btn-u" type="button" onclick="searchFun()">검색</button>
                             </span>
@@ -219,31 +218,31 @@
 											</c:if>
 											
 											<!-- 페이징 -->
-												<nav>
-												  <ul class="pagination">
-												  	<c:if test="${startPage > pageBlock}">
-													  	<a href="/user/accompany/accompanyList.do?pageNumber=${currentPage-pageBlock}" aria-label="Previous">
-													        <span aria-hidden="true">&laquo;</span>
-												     	</a>
-													</c:if>
-												    <c:forEach var="i" begin="${startPage}" end="${endPage}">
-														 <c:if test="${i!=currentPage}">
-														 	<li><a href="/user/accompany/accompanyList.do?pageNumber=${i}" role="button" class="btn btn-default">${i}</a></li>
-														 </c:if>
-														 <c:if test="${i==currentPage}">
-														 	<li class="active"><a href="/user/accompany/accompanyList.do?pageNumber=${i}" role="button" class="btn btn-default">${i}</a></li>
-														 </c:if>
-													</c:forEach>
-													
-											  		<c:if test="${endPage < pageCount }">
-											  			<li>
-													      <a href="/user/accompany/accompanyList.do?pageNumber=${currentPage+pageBlock}" aria-label="Next">
-													        <span aria-hidden="true">&raquo;</span>
-													      </a>
-													    </li>
-													</c:if>
-												  </ul>
-												</nav>
+											<nav>
+											  <ul class="pagination">
+											  	<c:if test="${startPage > pageBlock}">
+												  	<a href="/user/accompany/accompanyList.do?pageNumber=${currentPage-pageBlock}" aria-label="Previous">
+												        <span aria-hidden="true">&laquo;</span>
+											     	</a>
+												</c:if>
+											    <c:forEach var="i" begin="${startPage}" end="${endPage}">
+													 <c:if test="${i!=currentPage}">
+													 	<li><a href="/user/accompany/accompanyList.do?pageNumber=${i}" role="button" class="btn btn-default">${i}</a></li>
+													 </c:if>
+													 <c:if test="${i==currentPage}">
+													 	<li class="active"><a href="/user/accompany/accompanyList.do?pageNumber=${i}" role="button" class="btn btn-default">${i}</a></li>
+													 </c:if>
+												</c:forEach>
+												
+										  		<c:if test="${endPage < pageCount }">
+										  			<li>
+												      <a href="/user/accompany/accompanyList.do?pageNumber=${currentPage+pageBlock}" aria-label="Next">
+												        <span aria-hidden="true">&raquo;</span>
+												      </a>
+												    </li>
+												</c:if>
+											  </ul>
+											</nav>
 											<!-- 페이징 끝 -->
 										</div>
 									</c:if>

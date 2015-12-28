@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import everywhere.com.mynetgear.ccvf2.comm.util.common.Constant;
 import everywhere.com.mynetgear.ccvf2.user.dto.planner.PlannerDto;
 import everywhere.com.mynetgear.ccvf2.user.service.planner.PlannerService;
 
@@ -47,9 +48,26 @@ public class PlannerController {
 	}
 
 	@RequestMapping(value = "/user/planner/plannerList.do", method = RequestMethod.GET)
-	public ModelAndView getPlannerList(HttpServletRequest request, HttpServletResponse response) {
+	public ModelAndView getPlannerListGET(HttpServletRequest request, HttpServletResponse response,PlannerDto plannerDto) {
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("request", request);
+		//초기값 설정
+		plannerDto.setCurrentPage(1);
+		plannerDto.setSearchCondition1(Constant.SYNB_NULL);
+		plannerDto.setSearchCondition2(Constant.SYNB_NULL);
+		plannerDto.setSearchWord1(Constant.SYNB_NULL);
+		plannerDto.setStartRow(1);
+		plannerDto.setEndRow(10);
+		
+		mav.addObject("plannerDto", plannerDto);
+		plannerService.getPlannerListForAll(mav);
+		return mav;
+	}
+	@RequestMapping(value = "/user/planner/plannerList.do", method = RequestMethod.POST)
+	public ModelAndView getPlannerListPOST(HttpServletRequest request, HttpServletResponse response, PlannerDto plannerDto) {
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("request", request);
+		mav.addObject("plannerDto", plannerDto);
 		plannerService.getPlannerListForAll(mav);
 		return mav;
 	}

@@ -123,8 +123,19 @@ public class PlannerServiceImp implements PlannerService {
 	
 	@Override
 	public void getPlannerListForAll(ModelAndView mav) {
-		List<PlannerDto> plannerList = plannerDao.getPlannerListForAll();
-
+		Map<String, Object> map = mav.getModelMap();
+		PlannerDto plannerDto =(PlannerDto)map.get("plannerDto");
+		
+		List<PlannerDto> plannerList = plannerDao.getPlannerListForAll(plannerDto);
+		
+		List<CommonCodeDto> selectCode=commonCodeService.getListCodeGroup(Constant.SCHEDULE_TYPE_GROUP);
+		List<CommonCodeDto> sortCode=commonCodeService.getListCodeGroup(Constant.SERACH_SORT_GROUPCODE);
+		
+		//페이징 및 검색 정보를 가진DTO
+		mav.addObject("plannerDto",plannerDto);
+		
+		mav.addObject("selectCode",selectCode);
+		mav.addObject("sortCode",sortCode);
 		mav.addObject("plannerList", plannerList);
 		mav.setViewName("user/planner/plannerList");
 	}
@@ -141,6 +152,12 @@ public class PlannerServiceImp implements PlannerService {
 			mem_no = userInfo.getMem_no();
 
 		PlannerDto plannerDto = plannerDao.getOnePlanner(planner_no);
+		
+		// 비공개 글이거나 삭제된 글이면 우선 404 처리
+		String use_yn = plannerDto.getUse_yn();
+		if(use_yn.equals(Constant.SYNB_YN_D) || 
+				(use_yn.equals(Constant.SYNB_YN_N) && userInfo.getMem_no() != plannerDto.getMem_no()))
+			return;
 		
 		// planner 날짜 정보 계산
 		long diff = plannerDto.getEnd_date().getTime() - plannerDto.getStart_date().getTime();

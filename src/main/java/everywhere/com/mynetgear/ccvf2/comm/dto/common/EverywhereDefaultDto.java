@@ -11,7 +11,7 @@ import java.util.List;
 public class EverywhereDefaultDto extends CommonFileIODto {
 	private int totalCount=0;
 	private int startRow;
-	private int startEnd;
+	private int endRow;
 	
 	private int currentPage=1;
 	private int pageBlock=10;
@@ -36,8 +36,6 @@ public class EverywhereDefaultDto extends CommonFileIODto {
 	private String mem_level_code;
 	private String mem_email;
 	private String mem_profile_photo;
-	
-	
 	public int getTotalCount() {
 		return totalCount;
 	}
@@ -50,11 +48,11 @@ public class EverywhereDefaultDto extends CommonFileIODto {
 	public void setStartRow(int startRow) {
 		this.startRow = startRow;
 	}
-	public int getStartEnd() {
-		return startEnd;
+	public int getEndRow() {
+		return endRow;
 	}
-	public void setStartEnd(int startEnd) {
-		this.startEnd = startEnd;
+	public void setEndRow(int endRow) {
+		this.endRow = endRow;
 	}
 	public int getCurrentPage() {
 		return currentPage;
@@ -171,5 +169,7 @@ public class EverywhereDefaultDto extends CommonFileIODto {
 		this.mem_profile_photo = mem_profile_photo;
 	}
 	
+	
+
 	
 }

@@ -25,12 +25,12 @@
                     
                     <div class="input-group margin-bottom-20">
                         <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
-                        <input type="text" name="mem_email" placeholder="Email address" class="form-control" value="admin@everwhere.com">
+                        <label><input type="text" name="mem_email" placeholder="Email address" class="form-control" value="admin@everwhere.com"></label>
                     </div>
                     
                     <div class="input-group margin-bottom-20">
                         <span class="input-group-addon"><i class="fa fa-lock"></i></span>
-                        <input type="password" name="mem_pwd" placeholder="Password" class="form-control" value="1234567890">
+                        <label><input type="password" name="mem_pwd" placeholder="Password" class="form-control" value="1234567890"></label>
                     </div>
                     
                     <div class="row">
