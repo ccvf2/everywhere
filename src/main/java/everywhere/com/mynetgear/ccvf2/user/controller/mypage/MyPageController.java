@@ -121,8 +121,7 @@ public class MyPageController {
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("request", request);
 		mav = myPageService.searchFriends(mav);
-		
 	
-		return null;
+		return mav;
 	}
 }

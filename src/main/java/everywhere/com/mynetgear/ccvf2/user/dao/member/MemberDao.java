@@ -147,4 +147,13 @@ public interface MemberDao {
 	 */
 	public int updateProfilePhoto(MemberDto memberDto);
 
+	/**
+	 * @author 김성광
+	 * @createDate 2015. 12. 23.
+	 * @described 친구 검색
+	 * @param search
+	 * @return
+	 */
+	public List<MemberDto> searchFriends(String search);
+
 }
