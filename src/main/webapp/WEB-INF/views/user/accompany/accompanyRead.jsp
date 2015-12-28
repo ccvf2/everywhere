@@ -158,7 +158,7 @@
 						  	<br/><hr/>
 					  	
 							<c:if test="${accompanyDto.attach_file!=null}">
-								<img class="img-responsive full-width" src="/attatchFile/accompany/${accompanyDto.attach_file}" alt="${accompanyDto.attach_file}">		
+								<img class="img-responsive full-width" src="/attatchFile/accompany/${accompanyDto.attach_file}" alt="${accompanyDto.attach_file}"  onError="this.src='/attatchFile/spot/no_image.jpg'">		
 							</c:if>
                             ${accompanyDto.content}
                             

@@ -202,50 +202,54 @@
 									<button type="button" class="btn-u" onclick="location.href='/user/accompany/accompanyWrite.do'">글쓰기</button>
 								</div>
 								<div class="col-md-10 col-md-pull-2">
-									<c:if test="${count>0 }">
-										<div class="btn-group" role="group" aria-label="First group">
-											<c:set var="pageBlock" value="${5}" />
-											<c:set var="pageCount" value="${count/boardSize+(count%boardSize==0?0:1)}"/>
+									<div class="text-center">
+										<c:if test="${count>0 }">
+											<div class="btn-group" role="group" aria-label="First group">
+												<c:set var="pageBlock" value="${5}" />
+												<c:set var="pageCount" value="${count/boardSize+(count%boardSize==0?0:1)}"/>
+													
+												<fmt:parseNumber var="result" value="${(currentPage-1)/pageBlock }" integerOnly="true"/>
 												
-											<fmt:parseNumber var="result" value="${(currentPage-1)/pageBlock }" integerOnly="true"/>
-											
-											<c:set var="startPage" value="${result*pageBlock+1}"/>
-											<c:set var="endPage" value="${startPage+pageBlock-1}"/>
-											
-											<!-- 마지막 페이지가 페이지 수보다 작으면 -->
-											<c:if test="${endPage > pageCount }">
-												<c:set var="endPage" value="${pageCount }"/>
-											</c:if>
-											
-											<!-- 페이징 -->
-											<nav>
-											  <ul class="pagination">
-											  	<c:if test="${startPage > pageBlock}">
-												  	<a href="/user/accompany/accompanyList.do?pageNumber=${currentPage-pageBlock}" aria-label="Previous">
-												        <span aria-hidden="true">&laquo;</span>
-											     	</a>
-												</c:if>
-											    <c:forEach var="i" begin="${startPage}" end="${endPage}">
-													 <c:if test="${i!=currentPage}">
-													 	<li><a href="/user/accompany/accompanyList.do?pageNumber=${i}" role="button" class="btn btn-default">${i}</a></li>
-													 </c:if>
-													 <c:if test="${i==currentPage}">
-													 	<li class="active"><a href="/user/accompany/accompanyList.do?pageNumber=${i}" role="button" class="btn btn-default">${i}</a></li>
-													 </c:if>
-												</c:forEach>
+												<c:set var="startPage" value="${result*pageBlock+1}"/>
+												<c:set var="endPage" value="${startPage+pageBlock-1}"/>
 												
-										  		<c:if test="${endPage < pageCount }">
-										  			<li>
-												      <a href="/user/accompany/accompanyList.do?pageNumber=${currentPage+pageBlock}" aria-label="Next">
-												        <span aria-hidden="true">&raquo;</span>
-												      </a>
-												    </li>
+												<!-- 마지막 페이지가 페이지 수보다 작으면 -->
+												<c:if test="${endPage > pageCount }">
+													<c:set var="endPage" value="${pageCount }"/>
 												</c:if>
-											  </ul>
-											</nav>
-											<!-- 페이징 끝 -->
-										</div>
-									</c:if>
+												
+												<!-- 페이징 -->
+												
+													<nav>
+													  <ul class="pagination">
+													  	<c:if test="${startPage > pageBlock}">
+														  	<a href="/user/accompany/accompanyList.do?pageNumber=${currentPage-pageBlock}" aria-label="Previous">
+														        <span aria-hidden="true">&laquo;</span>
+													     	</a>
+														</c:if>
+													    <c:forEach var="i" begin="${startPage}" end="${endPage}">
+															 <c:if test="${i!=currentPage}">
+															 	<li><a href="/user/accompany/accompanyList.do?pageNumber=${i}" role="button" class="btn btn-default">${i}</a></li>
+															 </c:if>
+															 <c:if test="${i==currentPage}">
+															 	<li class="active"><a href="/user/accompany/accompanyList.do?pageNumber=${i}" role="button" class="btn btn-default">${i}</a></li>
+															 </c:if>
+														</c:forEach>
+														
+												  		<c:if test="${endPage < pageCount }">
+												  			<li>
+														      <a href="/user/accompany/accompanyList.do?pageNumber=${currentPage+pageBlock}" aria-label="Next">
+														        <span aria-hidden="true">&raquo;</span>
+														      </a>
+														    </li>
+														</c:if>
+													  </ul>
+													</nav>
+												
+												<!-- 페이징 끝 -->
+											</div>
+										</c:if>
+									</div>
 								</div>
 							</div>
 		                	<!-- 게시판 리스트 끝 -->
