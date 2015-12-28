@@ -1,6 +1,28 @@
 /* Add here all your css styles (customizations) */
+#scroll {
+	overflow: scroll;
+	max-height: 400px;
+}
 
+<!-- 사이드 바 고정 -->
+.affix-top, .affix {
+	position: static;
+}
 
-#scroll{overflow:scroll; max-height:400px;}
+@media ( min-width : 979px) {
+	#sidebar.affix-top {
+		position: static;
+		width: 228px;
+	}
+	#sidebar.affix {
+		position: fixed;
+		top: 70px;
+		width: 228px;
+	}
+}
 
-
+#sidebar li.active {
+	border: 0 #eee solid;
+	border-right-width: 5px;
+}
+<!--사이드바 고정 끝-->
