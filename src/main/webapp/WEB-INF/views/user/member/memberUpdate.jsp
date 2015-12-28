@@ -107,7 +107,7 @@
 										<label><font size="5">관심분야</font></label><br/>
 										<span>
 											<c:forEach var="codelist" items="${interestList}">
-												<label style="float:left; margin-right:30px;"><input type="checkbox" name="interestValue" value="${codelist.code}"><font size="3">&nbsp;${codelist.code_name}</font></label>
+												<label style="float:left"><input type="checkbox" name="interestValue" value="${codelist.code}"><font size="3">&nbsp;${codelist.code_name}&nbsp;</font></label>
 											</c:forEach>
 											<input type="hidden" name="mem_interest" value="${memberDto.mem_interest}"/>
 											<c:forTokens var="mem_interest" items="${memberDto.mem_interest}" delims=",">
