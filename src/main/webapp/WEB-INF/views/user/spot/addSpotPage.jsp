@@ -105,7 +105,7 @@
 											<label class="select">
 												<select name="spot_type_code">
 													<option value="0" selected disabled>명소타입</option>
-													<c:forEach var="spotSpotType" items="${spotTypeList}" >
+													<c:forEach var="spotType" items="${spotTypeList}" >
 														<option value="${spotType.code}">${spotType.code_name}</option>
 													</c:forEach> 
 												</select>
@@ -117,7 +117,7 @@
 									<div class="row">
 										<section class="col col-3">
 											<label class="input">
-												<i class="icon-prepend fafa-angle-double-down"></i>
+												<i class="icon-prepend fa fa-angle-double-down"></i>
 												<input type="text" name="spot_name" placeholder="명소명">
 											</label>
 										</section>
@@ -130,7 +130,7 @@
 									</div>
 								</fieldset>
 								<footer>
-									<button type="submit" class="button">Continue</button>
+									<button class="btn-u pull-right" type="submit">명소추가</button>
 								</footer>
 							</form> 
 							</div>

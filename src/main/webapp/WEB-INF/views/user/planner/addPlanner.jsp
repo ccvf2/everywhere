@@ -52,7 +52,7 @@
 		<!--Left Sidebar-->
 			<nav class="col-sm-3 md-margin-bottom-40" >
 				<!-- 사이드 바 메뉴 고정 -->
-				<div class="nav nav-pills nav-stacked" data-spy="affix" data-offset-top="307" id="sidebar">
+				<div class="nav nav-pills nav-stacked" data-spy="affix" data-offset-top="307">
 					<!--Notification-->
 					<div class="tag-box tag-box-v4 rounded-2x margin-bottom-20" style="padding : 7px;">
 						<div class="panel-heading-v2 overflow-h">
@@ -183,7 +183,11 @@
 													</h4>
 													<input type="hidden" id="${id_value}_spot_no" name="${id_value}_spot_no" value="0"/>
 												</div>
-												<div id="collapse_${id_value}" class="panel-collapse collapse">
+												<c:set var="collapse" value=""/>
+												<c:if test="${i == 1 }">
+													<c:set var="collapse" value="in"/>
+												</c:if>
+												<div id="collapse_${id_value}" class="panel-collapse collapse ${collapse}">
 													<div id="${id_value}_note_div" class="panel-body" style="padding:0px">
 														<label class="textarea" style="margin:0">
 															<textarea style="border:0px" rows="3" id="${id_value}_note" name="${id_value}_note" placeholder="Write some notes.."></textarea>

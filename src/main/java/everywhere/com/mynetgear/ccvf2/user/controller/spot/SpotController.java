@@ -68,6 +68,7 @@ public class SpotController {
 	public ModelAndView insertSpot(HttpServletRequest request, HttpServletResponse response, SpotDto spotDto){
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("request", request);
+		mav.addObject("response", response);
 		mav.addObject("spotDto", spotDto);
 		spotService.insertSpot(mav);
 		
