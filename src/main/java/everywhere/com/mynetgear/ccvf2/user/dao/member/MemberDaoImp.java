@@ -7,6 +7,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import everywhere.com.mynetgear.ccvf2.comm.util.common.Constant;
 import everywhere.com.mynetgear.ccvf2.user.dto.member.MemberDto;
 
 /**
@@ -85,7 +86,11 @@ public class MemberDaoImp implements MemberDao {
 	/** 친구 목록*/
 	@Override
 	public List<MemberDto> getListFriends(int mem_no) {
-		return sqlTemplate.selectList("getListFriends", mem_no);
+		HashMap<String, Object> map=new HashMap<String, Object>();
+		map.put("mem_no", mem_no);
+		map.put("MEMBER_STATUS_ACTIVE", Constant.MEMBER_STATUS_ACTIVE);
+		
+		return sqlTemplate.selectList("getListFriends", map);
 	}
 	
 	
@@ -103,6 +108,15 @@ public class MemberDaoImp implements MemberDao {
 	@Override
 	public int updateProfilePhoto(MemberDto memberDto) {
 		return sqlTemplate.insert("updateProfilePhoto", memberDto);
+	}
+
+	@Override
+	public List<MemberDto> searchFriends(String search) {
+		HashMap<String, Object> map=new HashMap<String, Object>();
+		map.put("search", search);
+		map.put("MEMBER_STATUS_ACTIVE", Constant.MEMBER_STATUS_ACTIVE);
+		
+		return sqlTemplate.selectList("searchFriends", map);
 	}
 
 }
