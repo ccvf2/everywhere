@@ -101,8 +101,10 @@
 								<if test="accompany_status_code != null">
 									and accompany_status_code=#{accompany_status_code}
 								</if>
+								<if test="searchValue != null">
 									and (title like '%'||#{searchValue, jdbcType=VARCHAR}||'%' 
 									or content like '%'||#{searchValue, jdbcType=VARCHAR}||'%')
+								</if>
 								ORDER BY<![CDATA[ accompany_no desc]]>
 							)b
 						)
