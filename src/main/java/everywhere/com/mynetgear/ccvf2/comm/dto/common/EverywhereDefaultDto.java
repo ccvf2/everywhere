@@ -15,8 +15,11 @@ public class EverywhereDefaultDto extends CommonFileIODto {
 	
 	private int currentPage=1;
 	private int pageBlock=10;
+	private int pageCount;
 	private int startPage;
 	private int endPage;
+	
+	private int pageBlockGroupCount;
 	
 	private String searchCondition1=""; 
 	private String searchCondition2=""; 
@@ -66,6 +69,12 @@ public class EverywhereDefaultDto extends CommonFileIODto {
 	public void setPageBlock(int pageBlock) {
 		this.pageBlock = pageBlock;
 	}
+	public int getPageCount() {
+		return pageCount;
+	}
+	public void setPageCount(int pageCount) {
+		this.pageCount = pageCount;
+	}
 	public int getStartPage() {
 		return startPage;
 	}
@@ -77,6 +86,12 @@ public class EverywhereDefaultDto extends CommonFileIODto {
 	}
 	public void setEndPage(int endPage) {
 		this.endPage = endPage;
+	}
+	public int getPageBlockGroupCount() {
+		return pageBlockGroupCount;
+	}
+	public void setPageBlockGroupCount(int pageBlockGroupCount) {
+		this.pageBlockGroupCount = pageBlockGroupCount;
 	}
 	public String getSearchCondition1() {
 		return searchCondition1;
@@ -168,7 +183,8 @@ public class EverywhereDefaultDto extends CommonFileIODto {
 	public void setMem_profile_photo(String mem_profile_photo) {
 		this.mem_profile_photo = mem_profile_photo;
 	}
-	
+
+
 	
 
 	

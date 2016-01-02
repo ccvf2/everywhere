@@ -130,6 +130,16 @@ public class PlannerServiceImp implements PlannerService {
 		int plannerListTotalCount=plannerDao.getPlannerListForAllCount(plannerDto);
 		plannerDto.setTotalCount(plannerListTotalCount);
 		
+		//3 화면에 뿌릴 겟수
+		plannerDto.setStartRow((plannerDto.getCurrentPage()-1)*3+1);
+		plannerDto.setEndRow(plannerDto.getCurrentPage()*3);
+		plannerDto.setPageCount(plannerListTotalCount/3+(plannerListTotalCount%3==0?0:1));
+		
+		plannerDto.setPageBlockGroupCount((plannerDto.getCurrentPage()-1)/plannerDto.getPageBlock());
+		
+		plannerDto.setStartPage(plannerDto.getPageBlockGroupCount()*plannerDto.getPageBlock()+1);
+		plannerDto.setEndPage(plannerDto.getStartPage()+plannerDto.getPageBlock()-1);
+		
 		
 		List<PlannerDto> plannerList = plannerDao.getPlannerListForAll(plannerDto);
 		

@@ -132,16 +132,6 @@
 		                        <button class="btn-u" onclick="goSearchForm()">검색</button>
 		                        <button type="button" class="btn-u btn-u-default" onclick="window.history.back();">뒤로</button>
 		                    </footer>
-				totalCount:<input type="text" name="totalCount" value="${plannerDto.totalCount}">
-				startRow:<input type="text" name="startRow" value="${plannerDto.startRow}">
-				endRow:<input type="text" name="endRow" value="${plannerDto.endRow}">
-				currentPage:<input type="text" name="currentPage" value="${plannerDto.currentPage}">
-				pageBlock:<input type="text" name="pageBlock" value="${plannerDto.pageBlock}">
-				startPage:<input type="text" name="startPage" value="${plannerDto.startPage}">
-				endPage:<input type="text" name="endPage" value="${plannerDto.endPage}">
- 				<%-- SearchCondition1:<input type="text" name="searchCondition1" value="${plannerDto.searchCondition1}"> --%>
-				<%-- SearchCondition2:<input type="text" name="searchCondition2" value="${plannerDto.searchCondition2}"> --%>
-				<%-- setSearchWord1:<input type="text" name="searchWord1" value="${plannerDto.searchWord1}"> --%>
 		                </form>
 			            <!-- End Blog Newsletter -->
 		            </div>
@@ -181,6 +171,37 @@
 				    </div>
                </div>
 	         	<!-- 명소 아이템 리스트 끝 -->
+	         	
+	         	<!-- 페이징 -->
+								<nav>
+								  <ul class="pagination">
+								  	<c:if test="${startPage > pageBlock}">
+									  	<li>
+										  	<a href="javascript:searchSpotList('${currentPage-pageBlock}')" aria-label="Previous">
+										        <span aria-hidden="true">«</span>
+									     	</a>
+								     	</li>
+									</c:if>
+								    <c:forEach var="i" begin="${startPage}" end="${endPage}">
+										 <c:if test="${i!=currentPage}">
+										 	<li><a href="javascript:searchSpotList('${i}')" role="button" class="btn btn-default">${i}</a></li>
+										 </c:if>
+										 <c:if test="${i==currentPage}">
+										 	<li class="active"><a href="javascript:searchSpotList('${i})" role="button" class="btn btn-default">${i}</a></li>
+										 </c:if>
+									</c:forEach>
+							  		<c:if test="${endPage < pageCount }">
+							  			<li>
+									      <a href="javascript:searchSpotList('${currentPage+pageBlock}')" aria-label="Next">
+									        <span aria-hidden="true">&raquo;</span>
+									      </a>
+									    </li>
+									</c:if>
+								  </ul>
+								</nav>
+								<!-- 페이징 끝 -->
+	         	
+	         	
           	</div>
           	<!-- End Container -->
 
