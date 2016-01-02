@@ -32,10 +32,34 @@
 	<!-- 제이쿼리 라이브러리.(필수) : commonReplyInit() 함수호출 전 선언  -->
 	<script src="/assets/plugins/jquery/jquery.min.js"></script>
 	<script type="text/javascript">
+		function activeFunction(){
+			//상태값이 전달되지 않았을 경우 게시글 종류로 전체를 active하는 스크립트
+			//먼저 전체 항목 id에 대해 active
+			$("#0000").addClass('active');
+			//H000으로 시작하는 아이디 중에서
+			$("[id*=H000]").each(function() {
+				// H000으로 시작하는 li태그 중에서 active가 있다면 (이전 페이지에서 탭을 선택했음)
+				if($(this).hasClass('active')) {
+					// '전체'탭에 대해서 active제거
+					$("#0000").removeClass();
+					return;
+				}
+			});
+			//alert("전체 ");
+		}
+	/* 
+		hasClass('active')) {
+				//$("#accompany_status_code").value();
+				//$(".nav-tab a:contains('전체')").parent().addClass("active");
+				alert();
+			} */
 		function searchFun() {
 			var search=document.getElementById("search").value;
-			var status=document.getElementById("accompany_status_code").value;
-			location.href="/user/accompany/accompanyList.do?search="+search+"&accompany_status_code="+status;
+			//선택된 탭의 id로부터 코드을 가져옴
+			var accompany_status_code=$(".nav-tabs .active").attr('id');
+			//alert(accompany_status_code);
+			location.href="/user/accompany/accompanyList.do?search="+search+"&accompany_status_code="+accompany_status_code;
+			//location.href="/user/accompany/accompanyList.do?search="+search;
 		}
 		
 		$(document).ready(function(){
@@ -43,13 +67,18 @@
 		        $(this).tab('show');
 		        $(this).parent().addClass("active");
 		        
+		        var search=document.getElementById("search").value;
+				//선택된 탭의 id로부터 코드을 가져옴
+				var accompany_status_code=$(".nav-tabs .active").attr('id');
+				//alert(accompany_status_code);
+				location.href="/user/accompany/accompanyList.do?search="+search+"&accompany_status_code="+accompany_status_code;
 		    });
 		});
 	</script>
   	<c:import url="/WEB-INF/views/common/jquery.jsp"/>
 	<c:import url="/WEB-INF/views/user/common/utilImport.jsp"/>
   </head>
-  <body>
+  <body onload="activeFunction()">
   	<!-- 글 작성일 계산을 위한 현제 날짜 -->
   	<jsp:useBean id="now" class="java.util.Date"/>
   	<fmt:formatDate var="nowDate" value="${now}" pattern="yy-MM-dd"/>
@@ -81,7 +110,7 @@
                     <div class="blog-newsletter">
                         <p>원하는 동행을 검색을 통해 찾아보세요.</p>
                        	<div class="input-group">
-                            <input type="text" class="form-control" id="search" placeholder="Search">
+                            <input type="text" class="form-control" id="search" placeholder="Search" value="${searchValue}">
                             <span class="input-group-btn">
                                 <button class="btn-u" type="button" onclick="searchFun()">검색</button>
                             </span>
@@ -129,20 +158,32 @@
                         <div class="news-v3-in">
                         	
                        		<!-- 탭 시작 -->
+                       		<input type="hidden" id="accompany_status_code" value="${accompany_status_code}">
+                       		
+                       		<c:set var="active" value="${accompany_status_code}"></c:set>
                         	<div class="tab-v2">
                         		<ul class="nav nav-tabs">
-                        			<li class="active"><a href="#">전체</a></li>
+                        			<li id="0000"><a href="#">전체</a></li>
                         			<c:forEach var="postType" items="${postTypeList}">
-			                    		 <li><a href="#">${postType.code_name}</a></li>
+                        				<c:set var="activeClass" value=""></c:set>
+                        				<c:if test="${postType.code==active}">
+                        					<c:set var="activeClass" value="active"></c:set>
+                        				</c:if>
+			                    		<li class="${activeClass}" id="${postType.code}"><a href="#">${postType.code_name}</a></li>
 			                    	</c:forEach>
 								</ul>
 			                </div>
                          	<!-- 탭 끝 -->
                          	
 							<!-- 검색결과가 있는 경우에만 검색 결과 수를 표시한다. -->
-		                	<c:if test="${searchValue != '' || searchValue ne null}">
-		                		<span class="results-number">${seachValue} Total: ${count} results</span><br/><br/>
-		                	</c:if>
+		                	<c:choose>
+		                		<c:when test="${count > 0}">
+		                			<br/><span class="results-number">${seachValue}${count}개의 결과</span><br/><br/>
+		                		</c:when>
+		                		<c:otherwise>
+		                			<br/><span>검색결과가 존재하지 않습니다.</span><br/><br/>
+		                		</c:otherwise>
+		                	</c:choose>
 		                	
 		                	
 		                	<!-- 게시글이 없을 경우 -->

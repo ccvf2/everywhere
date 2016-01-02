@@ -75,7 +75,7 @@
  					<c:forEach var="list1" items="${list1}">
 		            <div class="col-md-4">
 		            <div class="grid-boxes-in" style="height: 430px;">
-		                <img class="img-responsive" src="/attatchFile/planner/${list1.attach_file}" alt="" height="80%">
+		                <img class="img-responsive" src="/attatchFile/planner/${list1.attach_file}" alt="" onError="this.src='/attatchFile/spot/no_image.jpg'" height="80%">
 		                <div class="grid-boxes-caption">
 		                    <h3><a href="/user/planner/readPlanner.do?planner_no=${list1.planner_no}">${list1.title}</a></h3>
 		                    <ul class="list-inline grid-boxes-news">
@@ -111,7 +111,7 @@
  					<c:forEach var="list1" items="${list1}">
 		            <div class="col-md-4">
 		            <div class="grid-boxes-in" style="height: 430px;">
-		                <img class="img-responsive" src="/attatchFile/planner/${list1.attach_file}" alt="" height="80%">
+		                <img class="img-responsive" src="/attatchFile/planner/${list1.attach_file}" onError="this.src='/attatchFile/spot/no_image.jpg'" alt="" height="80%">
 		                <div class="grid-boxes-caption">
 		                    <h3><a href="/user/planner/readPlanner.do?planner_no=${list1.planner_no}">${list1.title}</a></h3>
 		                    <ul class="list-inline grid-boxes-news">
@@ -148,7 +148,7 @@
  					<c:forEach var="list1" items="${list1}">
 		            <div class="col-md-4">
 		            <div class="grid-boxes-in" style="height: 430px;">
-		                <img class="img-responsive" src="/attatchFile/planner/${list1.attach_file}" alt="" height="80%">
+		                <img class="img-responsive" src="/attatchFile/planner/${list1.attach_file}" alt="" onError="this.src='/attatchFile/spot/no_image.jpg'" height="80%">
 		                <div class="grid-boxes-caption">
 		                    <h3><a href="/user/planner/readPlanner.do?planner_no=${list1.planner_no}">${list1.title}</a></h3>
 		                    <ul class="list-inline grid-boxes-news">

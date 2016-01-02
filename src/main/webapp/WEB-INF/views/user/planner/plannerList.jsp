@@ -146,7 +146,7 @@
 				        	<c:forEach var="planner" items="${plannerList}">
 				        		<div class="grid-boxes-in masonry-brick" style="position: absolute; width: 300px; top: 40px; left: 15px;">
 					                <a href="/user/planner/readPlanner.do?planner_no=${planner.planner_no}">
-					                	<img class="img-responsive" src="/attatchFile/planner/${planner.attach_file}" alt="">
+					                	<img class="img-responsive" src="/attatchFile/planner/${planner.attach_file}" onError="this.src='/attatchFile/spot/no_image.jpg'" alt="">
 					                </a>
 					                <div class="grid-boxes-caption">
 					                    <h3><a href="/user/planner/readPlanner.do?planner_no=${planner.planner_no}"> ${planner.title}</a></h3>

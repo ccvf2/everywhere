@@ -219,9 +219,13 @@ public class SpotServiceImp implements SpotService{
 	public void insertSpot(ModelAndView mav) {
 		Map<String, Object> map=mav.getModelMap();
 		HttpServletRequest request = (HttpServletRequest)map.get("request");
+		HttpServletResponse response = (HttpServletResponse)map.get("response");
 		MemberDto userInfo = (MemberDto)request.getSession().getAttribute(Constant.SYNN_LOGIN_OBJECT);
 
-		SpotDto spotDto = (SpotDto)map.get("spotDto");		
+		SpotDto spotDto = (SpotDto)map.get("spotDto");
+		spotDto.setMem_no(userInfo.getMem_no());
+		spotDto.setMem_email(userInfo.getMem_email());
+		spotDto.setMem_level_code(userInfo.getMem_level_code());
 		
 		spotDto.setSpot_no(spotDao.getSpotNextSeq());
 		

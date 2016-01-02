@@ -8,6 +8,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -25,6 +26,7 @@ import everywhere.com.mynetgear.ccvf2.comm.util.common.Constant;
 import everywhere.com.mynetgear.ccvf2.user.dao.accompany.AccompanyDao;
 import everywhere.com.mynetgear.ccvf2.user.dto.accompany.AccompanyDto;
 import everywhere.com.mynetgear.ccvf2.user.dto.member.MemberDto;
+import net.sf.cglib.core.Constants;
 
 /**
  * @author 곽성국
@@ -160,6 +162,12 @@ public class AccompanyServiceImp implements AccompanyService {
 		String searchValue = request.getParameter("search");
 		// 카테고리 파라메터
 		String accompany_status_code = request.getParameter("accompany_status_code");
+		//동행구하기 상태가 어떤 상태에도 포함되지 않은 경우 전체로 선택
+		if(StringUtils.equals(accompany_status_code, Constant.SYNB_NULL) || StringUtils.equals(accompany_status_code, "0000")) {
+			accompany_status_code=null;
+			//System.out.println("널값으로 변경");
+		}
+		
 		// 한 페이지에 보여줄 게시물 수 (추후 변경 필요)
 		int boardSize = 15;
 
@@ -190,7 +198,7 @@ public class AccompanyServiceImp implements AccompanyService {
 			accompanyList = accompanyDao.getAccompanyList(startRow, endRow, searchValue, accompany_status_code);
 		}
 
-		EverywhereAspect.logger.info(EverywhereAspect.logMsg + accompanyList.size());
+		//EverywhereAspect.logger.info(EverywhereAspect.logMsg + accompanyList.size());
 
 		// mem_name테스터
 		// for(int i = 0; i<accompanyList.size(); i++) {
@@ -204,6 +212,7 @@ public class AccompanyServiceImp implements AccompanyService {
 		// 최근 글 용 리스트 5개 가져옴
 		List<AccompanyDto> recentAccompanyList = accompanyDao.getRecentAccompanyList();
 
+		mav.addObject("accompany_status_code", accompany_status_code);//동행구하기 상태값
 		mav.addObject("searchValue", searchValue);	// 검색했던 값 넘김
 		mav.addObject("recentAccompanyList", recentAccompanyList);	//최근 글 5개 리스트
 		mav.addObject("count", count);	//검색 결과 수
