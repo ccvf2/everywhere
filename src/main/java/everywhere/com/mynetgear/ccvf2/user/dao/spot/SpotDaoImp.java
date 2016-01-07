@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.PlatformTransactionManager;
 
-import everywhere.com.mynetgear.ccvf2.comm.dto.commoncode.CommonCodeDto;
 import everywhere.com.mynetgear.ccvf2.user.dto.spot.SpotDto;
 
 /**
@@ -32,14 +31,8 @@ public class SpotDaoImp implements SpotDao {
 	}
 
 	@Override
-	public List<SpotDto> getSpotList(SpotDto spotDto) {
-		return sqlTemplate.selectList("select_spot_list", spotDto);
-	}
-
-	@Override
-	public List<SpotDto> getSpotListForPlanner(SpotDto spotDto, int currNum) {
+	public List<SpotDto> getSpotList(SpotDto spotDto, int currNum, int spotSize) {
 		// 이거
-		int spotSize = 10;
 		int startNum = (currNum-1)*spotSize+1;
 		int endNum = currNum*spotSize;
 		Map <String, Object> hmap = new HashMap<String, Object>();
@@ -49,7 +42,7 @@ public class SpotDaoImp implements SpotDao {
 		hmap.put("startNum", startNum);
 		hmap.put("endNum", endNum);
 		
-		return sqlTemplate.selectList("select_spot_list_for_planner", hmap);
+		return sqlTemplate.selectList("select_spot_list", hmap);
 	}
 	
 	@Override
@@ -80,6 +73,11 @@ public class SpotDaoImp implements SpotDao {
 	@Override
 	public List<SpotDto> getSpotAllListForPlanner() {
 		return sqlTemplate.selectList("select_spot_all_list_for_planner");
+	}
+
+	@Override
+	public int getTotalSpotSize(SpotDto spotDto) {
+		return sqlTemplate.selectOne("select_total_spot_count", spotDto);
 	}
 	
 }
