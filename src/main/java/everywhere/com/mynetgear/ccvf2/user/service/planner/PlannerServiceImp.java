@@ -336,11 +336,13 @@ public class PlannerServiceImp implements PlannerService {
 
 		List<CommonCodeDto> countryList = commonCodeService.getListCodeGroup("B0000");
 		List<CommonCodeDto> spotTypeList = commonCodeService.getListCodeGroup("T0001");
+		
+		int totalSpot = spotDao.getTotalSpotSize(new SpotDto());
 
 		mav.addObject("countryList", countryList);
 		mav.addObject("spotTypeList", spotTypeList);
-
 		mav.addObject("spotList", spotList);
+		mav.addObject("totalSpot", totalSpot);
 	}
 
 	@Override

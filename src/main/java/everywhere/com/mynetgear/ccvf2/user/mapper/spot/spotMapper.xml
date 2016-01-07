@@ -29,17 +29,17 @@
 		(select * from tbl_spot 
 			<where>
 				<choose>
-					<when test="country_code != ''">
+					<when test="country_code != '' and country_code != null">
 					AND country_code=#{country_code}
 					</when>
 				</choose>
 				<choose>
-					<when test="city_code != ''">
+					<when test="city_code != '' and city_code != null">
 					AND city_code=#{city_code}
 					</when>
 				</choose>
 				<choose>
-					<when test="spot_type_code != ''">
+					<when test="spot_type_code != '' and spot_type_code != null">
 					AND spot_type_code=#{spot_type_code}
 					</when>
 				</choose>
@@ -52,17 +52,17 @@
 		select count(*) from tbl_spot
 			<where>
 				<choose>
-					<when test="country_code != ''">
+					<when test="country_code != '' and country_code != null">
 					AND country_code=#{country_code}
 					</when>
 				</choose>
 				<choose>
-					<when test="city_code != ''">
+					<when test="city_code != '' and city_code != null">
 					AND city_code=#{city_code}
 					</when>
 				</choose>
 				<choose>
-					<when test="spot_type_code != ''">
+					<when test="spot_type_code != '' and spot_type_code != null">
 					AND spot_type_code=#{spot_type_code}
 					</when>
 				</choose>

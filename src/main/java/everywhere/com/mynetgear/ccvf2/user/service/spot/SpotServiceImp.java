@@ -114,7 +114,10 @@ public class SpotServiceImp implements SpotService{
 		}
 		
 		int total = spotDao.getTotalSpotSize(spotDto);
-		System.out.println("total : " + total);
+		int curr_spot = spotSize * curr_page;
+		if(curr_spot > total)
+			curr_spot = total;
+		String spotPage = "(" + curr_spot + "/" + total + ")";
 
 		JSONArray jsonArray = new JSONArray();
 		JSONObject rootObj = new JSONObject();
@@ -146,6 +149,7 @@ public class SpotServiceImp implements SpotService{
 		
 		try{
 			rootObj.put("spot", jsonArray);
+			rootObj.put("spotPage", spotPage);
 			String json = rootObj.toJSONString();
 			System.out.println(json);
 			response.setContentType("application/html;charset=UTF-8");

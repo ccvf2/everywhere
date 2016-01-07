@@ -119,7 +119,7 @@ $(document).ready(function () {
 							</ul>
 						</div>
 						<hr style="margin : 0px 0px 5px 0px;"/>
-						<button type="button" class="btn-u btn-u-default btn-u-sm btn-block" onclick="selectMoreSpotList()">Load More</button>
+						<button type="button" class="btn-u btn-u-default btn-u-sm btn-block" id="spotRead" onclick="selectMoreSpotList()">Load More (${spotList.size()}/${totalSpot})</button>
 						<!--End Notification-->
 					</div>
 				</div>

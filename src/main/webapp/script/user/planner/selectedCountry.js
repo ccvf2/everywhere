@@ -82,6 +82,7 @@ function spotListDisp(data){
 					"<small>"+note+"</small>"+
 					"</div></div></li>";
 		}
+		$("#spotRead").text("Load More " + obj.spotPage);
 	}
 	$("#mCSB_1_container").empty(); 
 	$("#mCSB_1_container").prepend(str);
@@ -127,6 +128,7 @@ function moreSpotListDisp(data){
 					"<small>"+obj.spot[i].spot_note+"</small>"+
 					"</div></div></li>";
 		}
+		$("#spotRead").text("Load More " + obj.spotPage);
 	}
 	$("#mCSB_1_container").append(str);
 	
