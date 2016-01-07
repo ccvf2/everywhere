@@ -19,4 +19,5 @@ public interface SpotService {
 	public void updateSpot(ModelAndView mav);
 	public void updateOkSpot(ModelAndView mav);
 	public void deleteSpot(ModelAndView mav);
+	public void ratingSpot(ModelAndView mav);
 }

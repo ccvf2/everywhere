@@ -22,4 +22,5 @@ public interface SpotDao {
 	public SpotDto getOneSpot(int spot_no);
 	public int updateSpot(SpotDto spotDto);
 	public int deleteSpot(int spot_no);
+	public int ratingSpot(SpotDto spotDto);
 }

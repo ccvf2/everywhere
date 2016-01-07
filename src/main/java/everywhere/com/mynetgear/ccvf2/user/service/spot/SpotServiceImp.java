@@ -233,10 +233,16 @@ public class SpotServiceImp implements SpotService{
 		codeDto = commonCodeService.getOneCodeGroup(spotDto.getSpot_type_code());
 		String spot_type = codeDto.getCode_name();
 		
+		double spotScore = 0;
+		if(spotDto.getCount_star_score() != 0){
+			spotScore = Math.round(spotDto.getTotal_star_score() / spotDto.getCount_star_score()*100)/100.0;
+		}
+		
 		mav.addObject("spotDto", spotDto);
 		mav.addObject("countryName", countryName);
 		mav.addObject("cityName", cityName);
 		mav.addObject("spot_type", spot_type);
+		mav.addObject("spotScore", spotScore);
 		mav.setViewName("/user/spot/spotReadPage");
 	}
 
@@ -278,5 +284,34 @@ public class SpotServiceImp implements SpotService{
 		int result = spotDao.deleteSpot(spot_no);
 		System.out.println("result : " + result);
 		mav.addObject("result", result);
-	}	
+	}
+
+	@Override
+	public void ratingSpot(ModelAndView mav) {
+		Map<String, Object> map=mav.getModelMap();
+		HttpServletRequest request = (HttpServletRequest)map.get("request");
+		HttpServletResponse response = (HttpServletResponse)map.get("response");
+		int spot_no = Integer.parseInt(request.getParameter("spot_no"));
+		int score = Integer.parseInt(request.getParameter("score"));
+		
+		SpotDto spotDto = spotDao.getOneSpot(spot_no);
+		spotDto.setTotal_star_score(spotDto.getTotal_star_score()+score);
+		spotDto.setCount_star_score(spotDto.getCount_star_score()+1);
+		
+		int result = spotDao.ratingSpot(spotDto);
+		
+		double spotScore = 0;
+		if(spotDto.getCount_star_score() != 0){
+			spotScore = Math.round(spotDto.getTotal_star_score() / spotDto.getCount_star_score()*100)/100.0;
+		}
+		
+		try {
+			String str = result + "," + spotScore + "," + spotDto.getCount_star_score();
+			response.setContentType("application/html;charset=utf8");
+			PrintWriter out = response.getWriter();
+			out.print(str);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 }

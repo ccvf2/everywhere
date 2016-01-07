@@ -6,11 +6,24 @@
 <meta charset="UTF-8">
 <script type="text/javascript" src="/script/user/spot/googleMap.js"></script>
 <script async defer src="https://maps.googleapis.com/maps/api/js"></script>
+<link rel="stylesheet" href="/assets/plugins/font-awesome/css/font-awesome.min.css">
+<script type="text/javascript" src="/script/user/spot/selectedCountry.js"></script>
 
 <style type="text/css">
 #map {
-   height: 500px;
-   width: 100%;
+	height: 500px;
+	width: 100%;
+}
+
+#spotInfo dd{
+	display: block;
+	float: left;
+	width : 70%;
+}
+#spotInfo dt{
+	display: block;
+	float: left;
+	width : 30%;
 }
 </style>
 </head>
@@ -51,6 +64,27 @@
 					</div>
 
 					<div class="modal-footer">
+						<form action="#" class="sky-form" name="rating-score" style="border: 0px;">
+							<span class="pull-left">
+								<b>명소 평점 : &nbsp;</b>
+							</span>
+							<span id="spot-score" class="pull-left">
+								(${spotScore} / ${spotDto.count_star_score} 명이 평가하셨습니다.)
+							</span>
+							<div class="rating">
+								<button class="btn-u btn-brd btn-brd-hover rounded-4x btn-u-xs pull-right" type="button" onclick="ratingSpot('${spotDto.spot_no}')"><i class="fa fa-star"></i> 평가하기</button>
+								<input type="radio" name="stars-rating" id="stars-rating-5" value="5">
+								<label for="stars-rating-5"><i class="fa fa-star"></i></label>
+								<input type="radio" name="stars-rating" id="stars-rating-4" value="4">
+								<label for="stars-rating-4"><i class="fa fa-star"></i></label>
+								<input type="radio" name="stars-rating" id="stars-rating-3" value="3">
+								<label for="stars-rating-3"><i class="fa fa-star"></i></label>
+								<input type="radio" name="stars-rating" id="stars-rating-2" value="2">
+								<label for="stars-rating-2"><i class="fa fa-star"></i></label>
+								<input type="radio" name="stars-rating" id="stars-rating-1" value="1">
+								<label for="stars-rating-1"><i class="fa fa-star"></i></label>
+							</div>
+						</form>
 					</div>
 				</div>
 			</div>
@@ -66,27 +100,31 @@
 							<div class="row">
 								<div class="col-md-12">
 									<div>
-										<c:set var="mem_no" value="1"/>
-										<input type="hidden" name="mem_no" value="1">
-										<input type="hidden" name="mem_level_code" value="M0002">
-										카테고리 : ${countryName } ${cityName } ${spot_type } <br/>
-										명소명 : ${spotDto.spot_name } <br/>
-										주소 : ${spotDto.spot_addr } <br/>
-										한줄설명 : ${spotDto.spot_note } <br/>
+										<dl id="spotInfo">
+										<dt> 카테고리  </dt>
+										<dd> ${countryName } ${cityName } ${spot_type } </dd>
+										<dt> 명소명  </dt>
+										<dd> ${spotDto.spot_name } </dd>
+										<dt> 주소  </dt>
+										<dd> ${spotDto.spot_addr } </dd>
+										<dt> 한줄설명  </dt>
+										<dd> ${spotDto.spot_note } </dd>
+										</dl>
 										<%-- 위도 : ${spotDto.spot_lat } <br/>
 										경도 : ${spotDto.spot_long } <br/>  --%>
-										<c:if test="${spotDto.mem_no == mem_no }">
-											<input type="button" value="수정" onclick="updateSpot('${spotDto.spot_no}')">
-										</c:if>
-										<c:if test="${spotDto.mem_level_code == 'M0002' }">
-											<input type="button" value="삭제" onclick="deleteSpot('${spotDto.spot_no}')">
-										</c:if>
+										
 									</div>
 								</div>
 							</div>
 						</div>
 
 						<div class="modal-footer">
+							<c:if test="${spotDto.mem_no == mem_object.mem_no }">
+								<input type="button" value="수정" onclick="updateSpot('${spotDto.spot_no}')">
+							</c:if>
+							<c:if test="${mem_object.mem_level_code == 'M0001' }">
+								<input type="button" value="삭제" onclick="deleteSpot('${spotDto.spot_no}')">
+							</c:if>
 						</div>
 				</div>
 			</div>

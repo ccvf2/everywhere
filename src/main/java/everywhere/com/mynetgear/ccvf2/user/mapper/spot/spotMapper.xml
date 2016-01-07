@@ -84,4 +84,8 @@
 	<delete id="delete_spot" parameterType="int">
 		delete from tbl_spot where spot_no=#{spot_no}
 	</delete>
+	
+	<update id="update_spot_rate" parameterType="everywhere.com.mynetgear.ccvf2.user.dto.spot.SpotDto">
+		update tbl_spot set total_star_score=#{total_star_score}, count_star_score=#{count_star_score} where spot_no=#{spot_no}
+	</update>
 </mapper>

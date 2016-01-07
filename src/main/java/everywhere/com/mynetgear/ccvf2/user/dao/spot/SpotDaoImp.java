@@ -79,5 +79,10 @@ public class SpotDaoImp implements SpotDao {
 	public int getTotalSpotSize(SpotDto spotDto) {
 		return sqlTemplate.selectOne("select_total_spot_count", spotDto);
 	}
+
+	@Override
+	public int ratingSpot(SpotDto spotDto) {
+		return sqlTemplate.update("update_spot_rate", spotDto);
+	}
 	
 }

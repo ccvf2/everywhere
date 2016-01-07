@@ -89,7 +89,7 @@ public class SpotController {
 		return mav;
 	}
 	
-	@RequestMapping(value="/user/spot/spotUpdatePage.do", method=RequestMethod.POST)
+	@RequestMapping(value="/user/spot/updateOkSpot.do", method=RequestMethod.POST)
 	public ModelAndView updateSpot(HttpServletRequest request, HttpServletResponse response, SpotDto spotDto){
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("spotDto", spotDto);
@@ -105,15 +105,12 @@ public class SpotController {
 		return mav;
 	}
 	
-	
-	@RequestMapping(value="/user/empty/empty.do", method=RequestMethod.GET)
-	public ModelAndView emptyModel(HttpServletRequest request, HttpServletResponse response){
+	@RequestMapping(value="/user/spot/ratingSpot.ajax", method=RequestMethod.GET)
+	public ModelAndView ratingSpot(HttpServletRequest request, HttpServletResponse response){
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("request", request);
-		String spot_no=request.getParameter("spot_no");
-		mav.addObject("spot_no", spot_no);
-		//spotService.deleteSpot(mav);
-		mav.setViewName("/user/spot/empty");
-		return mav;
+		mav.addObject("response", response);
+		spotService.ratingSpot(mav);
+		return null;
 	}
 }
