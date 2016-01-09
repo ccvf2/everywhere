@@ -166,8 +166,8 @@ alert('${alert_msg}');
 	                    <!-- Pages -->
 	                    <li class="dropdown">
 	                    	<c:choose>
-	                    		<c:when test="${mem_object==null}">
-			                        <a href="/user/login/login.do">
+	                    		<c:when test="${ mem_object.mem_name=='' || mem_object==null }">
+			                        <a href="javascript:loginFormReqiest()">
 			                            여행 스케줄 작성
 			                        </a>
 	                    		</c:when>
