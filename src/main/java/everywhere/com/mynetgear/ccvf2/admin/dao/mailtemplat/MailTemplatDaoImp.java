@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.web.servlet.ModelAndView;
 
-import everywhere.com.mynetgear.ccvf2.admin.dto.mailtemplat.MailTemplatDto;
+import everywhere.com.mynetgear.ccvf2.admin.dto.mailtemplat.MailTemplateDto;
 
 /**
  * @author 배성욱
@@ -25,8 +25,8 @@ public class MailTemplatDaoImp implements MailTemplatDao {
 	private PlatformTransactionManager transactionManager;
 	
 	@Override
-	public List<MailTemplatDto> getListMailtTemplat(MailTemplatDto dto) {
-		List<MailTemplatDto> list= null;
+	public List<MailTemplateDto> getListMailtTemplat(MailTemplateDto dto) {
+		List<MailTemplateDto> list= null;
 		list=sqlTemplate.selectList("select_mailTemplate_list",dto);
 		return list;
 	}

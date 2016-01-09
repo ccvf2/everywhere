@@ -8,7 +8,7 @@ import everywhere.com.mynetgear.ccvf2.comm.dto.common.EverywhereDefaultDto;
  * @described 메일템플릿 DTO
  * @reference class
  */
-public class MailTemplatDto extends EverywhereDefaultDto {
+public class MailTemplateDto extends EverywhereDefaultDto {
 	private int mtemp_no=0;
 	private String mtemp_group_code="";
 	private String mtemp_name="";

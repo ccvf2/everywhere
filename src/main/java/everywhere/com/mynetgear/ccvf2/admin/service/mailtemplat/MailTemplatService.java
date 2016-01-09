@@ -13,7 +13,16 @@ public interface MailTemplatService {
 	 * @author 배성욱
 	 * @createDate 2015. 12. 10.
 	 * @described 매소드의 용도를 적어주세요
-	 * @return
+	 * @param mav
 	 */
 	public void mailTemplatList(ModelAndView mav);
+	
+	
+	/**
+	 * @author 배성욱
+	 * @createDate 2016. 1. 10.
+	 * @described 매소드의 용도를 적어주세요
+	 * @param mav
+	 */
+	public void mailTemplatInsert(ModelAndView mav);
 }

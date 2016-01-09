@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.web.servlet.ModelAndView;
 
-import everywhere.com.mynetgear.ccvf2.admin.dto.mailtemplat.MailTemplatDto;
+import everywhere.com.mynetgear.ccvf2.admin.dto.mailtemplat.MailTemplateDto;
 
 /**
  * @author 배성욱
@@ -20,5 +20,5 @@ public interface MailTemplatDao {
 	 * @param mav
 	 * @return
 	 */
-	public List<MailTemplatDto> getListMailtTemplat(MailTemplatDto dto);
+	public List<MailTemplateDto> getListMailtTemplat(MailTemplateDto dto);
 }

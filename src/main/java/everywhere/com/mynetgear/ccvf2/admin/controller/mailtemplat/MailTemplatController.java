@@ -1,11 +1,15 @@
 package everywhere.com.mynetgear.ccvf2.admin.controller.mailtemplat;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import everywhere.com.mynetgear.ccvf2.admin.dto.mailtemplat.MailTemplateDto;
 import everywhere.com.mynetgear.ccvf2.admin.service.mailtemplat.MailTemplatService;
 
 /**
@@ -22,15 +26,22 @@ public class MailTemplatController {
 	@RequestMapping(value="/admin/mailtemplat/mailTemplatList.do", method=RequestMethod.GET)
 	public ModelAndView mailTemplatList() {
 		ModelAndView mav= new ModelAndView();
-		System.out.println("mailTemplatList 컨트롤러");
 		mailTemplatService.mailTemplatList(mav);
 		return mav;
 	}
 	@RequestMapping(value="/admin/mailtemplat/mailTemplatInsert.do", method=RequestMethod.GET)
 	public ModelAndView mailTemplatInsertView() {
 		ModelAndView mav= new ModelAndView("/admin/mailTemplat/mailTemplatInsert");
-		System.out.println("mailTemplatInsert 컨트롤러");
-		//mailTemplatService.mailTemplatList(mav);
+		return mav;
+	}
+	@RequestMapping(value="/admin/mailtemplat/mailTemplatInsert.do", method=RequestMethod.POST)
+	public ModelAndView mailTemplatInsert(HttpServletRequest request, HttpServletResponse response, MailTemplateDto matilTemplateDto) {
+		ModelAndView mav= new ModelAndView();
+		mav.addObject("request", request);
+		mav.addObject("response", response);
+		mav.addObject("matilTemplateDto", matilTemplateDto);
+		
+		mailTemplatService.mailTemplatInsert(mav);
 		return mav;
 	}
 }
