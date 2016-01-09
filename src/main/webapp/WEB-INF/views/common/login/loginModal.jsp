@@ -11,6 +11,7 @@
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<form class="reg-page" action="/user/login/login.do" name="memberLogin" method="post">
+				<input type="hidden" name="callback_url" value="${callback_url}">
 					<div class="reg-header">
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 						<h2>Login to your account</h2>
