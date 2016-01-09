@@ -24,10 +24,13 @@
 <style>
 .affix {
 	top : 0px;
-	width : 18.447%;
 }
 </style>
-
+<script type="text/javascript">
+$(document).ready(function () {
+	$('.nav-stacked').width($('.col-sm-3').width());
+});
+</script>
 <body>
 	<div class="wrapper">
 		<!--=== Header ===-->	
@@ -169,8 +172,9 @@
 								<input type="hidden" id="d${i}_item_count" name="d${i}_item_count" value="1">
 								<h2 class="heading-xs" id="d${i}_items_date">Day ${i}</h2>
 								<c:set var="id_value" value="d${i}_item1"/>
-									<ol class="list-unstyled" id="d${i}_item_ol">
-										<li id="d${i}_item1_li">
+									<div id="d${i}_item1_div">
+									<ol class="list-unstyled">
+										<li>
 										<div class="panel-group">
 											<input type="hidden" name="${id_value}_no"/>
 											<div class="panel panel-default">
@@ -212,9 +216,10 @@
 										</div> 
 									</li>
 								</ol>
-								<ul class="bs-glyphicons">	 
-									<li style="width:50%; height:100%; padding:0px; border: 0px; text-align: right"><span data-toggle="tooltip" title="일정 추가" class="glyphicon glyphicon-plus-sign" onclick="addItem('d${i}_item')"></span></li> 					 
-								</ul>
+								<ol class="bs-glyphicons">	 
+									<li style="width:100%; height:100%; padding:0px; border: 0px; text-align: center"><span data-toggle="tooltip" title="일정 추가" class="glyphicon glyphicon-plus-sign" onclick="addItem('d${i}_item1')"></span></li> 					 
+								</ol>
+								</div>
 							</div>
 						</c:forEach>
 						<button type="button" class="btn-u" id="submit_btn" onclick="checkPlanner()">Submit</button>
@@ -231,8 +236,9 @@
 			<input type="hidden" id="d0_item_count" name="d0_item_count" value="1">
 			<h2 class="heading-xs" id="d0_items_date">Day 0</h2>
 			<c:set var="id_value" value="d0_item1"/>
-			<ol class="list-unstyled" id="d0_item_ol">
-				<li id="d0_item1_li">
+			<div id="d0_item1_div">
+			<ol class="list-unstyled">
+				<li>
 					<div class="panel-group ">
 						<input type="hidden" name="d0_item1_no"/>
 						<div class="panel panel-default">
@@ -270,9 +276,10 @@
 					</div> 
 				</li>
 			</ol>
-			<ul class="bs-glyphicons">	 
-				<li style="width:50%; height:100%; padding:0px; border: 0px; text-align: right"><span data-toggle="tooltip" title="일정 추가" class="glyphicon glyphicon-plus-sign" onclick="addItem('d0_item')"></span></li>
-			</ul>
+			<ol class="bs-glyphicons">	
+				<li style="width:100%; height:100%; padding:0px; border: 0px; text-align: center"><span data-toggle="tooltip" title="일정 추가" class="glyphicon glyphicon-plus-sign" onclick="addItem('d0_item1')"></span></li>
+			</ol>
+			</div>
 		</div>
 	</div>
 	<!-- 동적 입력창을 위한 HTML 값 finish -->

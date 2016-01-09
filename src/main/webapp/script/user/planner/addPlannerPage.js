@@ -33,10 +33,11 @@ function checkPlanner(){
 	var day = $("#day_count").val();
 	for(var i= 1; i <= Number(day); i++){
 		var item_count = $("#d"+i+"_item_count").val();
-		for(var j = 1; j <= Number(item_count); j++){
+		for(var j = 2; j <= Number(item_count); j++){
 			var test = $("#d"+i+"_item"+j+"_note").val().replace(/ /g, '');
 			if($("#d"+i+"_item"+j+"_spot_no").val()=='0' && test == ''){
 				alert("day"+i+"의"+j+"번째가 공백입니다.");
+				document.getElementById("d"+i+"_item"+j+"_note").focus();
 				return false;
 			}
 		}
@@ -109,31 +110,48 @@ function addDay(day_count){
 }
 
 function addItem(input_name){
-	//input_name = d1_item
-	var day_item_count = document.getElementById(input_name+"_count");
-	day_item_count.value = Number(day_item_count.value)+1;
+	//예) input_name = d1_item1
+	var day_label = input_name.slice(0,-1); //d1_item
+	var day_item_count = document.getElementById(day_label+"_count");
 	
-	var copy = input_name+day_item_count.value;
+	for(var i = Number(day_item_count.value); i > Number(input_name.slice(-1)); i--){
+		var oldExp = new RegExp(day_label+i, 'g');
+		var newExp = day_label+(i+1);
+		$("[name*='"+day_label+i+"']").each(function(){
+			$(this).attr('name', $(this).attr('name').replace(oldExp, newExp));
+		})
+		
+		$("[id*='"+day_label+i+"']").each(function(){
+			$(this).attr('id', $(this).attr('id').replace(oldExp, newExp));
+		})
+		
+		$("[href*='"+day_label+i+"']").each(function(){
+			$(this).attr('href', $(this).attr('href').replace(oldExp, newExp));
+		})
+	}
+	
+	var copy = day_label+(Number(input_name.slice(-1))+1); //d1_item2
 
 	//Item 용 레퍼런스 복사 후 name값 변경
-	var html = $('#d0_item_ol').html();
-	var newHtml = html.replace(/d0_item1/g, copy);
+	var html = $('#d0_item1_div').html();
+	var newHtml = '<div id="'+copy+'_div">' + html.replace(/d0_item1/g, copy) + '</div>';
 
-	$("#"+input_name+"_ol").append(newHtml);
-
+	$("#"+input_name+"_div").after(newHtml);
+	
+	day_item_count.value = Number(day_item_count.value)+1;
 	setDroppable();
 }
 
 function deleteItem(input_name){
 	//input_name = d1_item1
-	var day_label = input_name.substr(0,7); //d1_item
-	var day_item_count = document.getElementById(input_name.substr(0,7)+"_count");
+	var day_label = input_name.slice(0,-1); //d1_item
+	var day_item_count = document.getElementById(day_label+"_count");
 	if(day_item_count.value == '1'){
 		alert('Day 일정은 최소 한개는 필요합니다.');
 		return;
 	}
-	$("#"+input_name+"_li").remove()
-	for(var i = Number(input_name.substr(7,8))+1; i <= Number(day_item_count.value); i++){
+	$("#"+input_name+"_div").remove()
+	for(var i = Number(input_name.slice(-1))+1; i <= Number(day_item_count.value); i++){
 		var oldExp = new RegExp(day_label+i, 'g');
 		var newExp = day_label+(i-1);
 		$("[name*='"+day_label+i+"']").each(function(){
