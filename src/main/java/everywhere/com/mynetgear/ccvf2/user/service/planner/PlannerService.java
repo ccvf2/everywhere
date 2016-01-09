@@ -29,4 +29,6 @@ public interface PlannerService {
 	public void getSpotList(ModelAndView mav);
 	
 	public void updatePlanner(ModelAndView mav);
+
+	public void updatePlannerOk(ModelAndView mav);
 }

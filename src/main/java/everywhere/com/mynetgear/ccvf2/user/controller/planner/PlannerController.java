@@ -120,4 +120,12 @@ public class PlannerController {
 		plannerService.updatePlanner(mav);
 		return mav;
 	}
+	
+	@RequestMapping(value = "/user/planner/updatePlanner.do", method = RequestMethod.POST)
+	public ModelAndView updatePlannerOk(HttpServletRequest request, HttpServletResponse response) {
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("request", request);
+		plannerService.updatePlannerOk(mav);
+		return mav;
+	}
 }

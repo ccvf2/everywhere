@@ -377,7 +377,7 @@ public class PlannerServiceImp implements PlannerService {
 		}
 
 		String start_date = request.getParameter("start_date");
-		String day_count = request.getParameter("day_count");		
+		int day_count = Integer.parseInt(request.getParameter("day_count")) - 1;
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
 		try {
@@ -385,7 +385,7 @@ public class PlannerServiceImp implements PlannerService {
 
 			Calendar cal = Calendar.getInstance();
 			cal.setTime(plannerDto.getStart_date());
-			cal.add(Calendar.DATE, Integer.parseInt(day_count));
+			cal.add(Calendar.DATE, day_count);
 			plannerDto.setEnd_date(cal.getTime());
 		} catch (ParseException e) {
 			e.printStackTrace();
@@ -569,13 +569,81 @@ public class PlannerServiceImp implements PlannerService {
 		}
 		
 		long diff = plannerDto.getEnd_date().getTime() - plannerDto.getStart_date().getTime();
-		long diffDays = diff / (24 * 60 * 60 * 1000);
+		int dayCount = (int) diff / (24 * 60 * 60 * 1000) + 1;
+		int[] dayItemCount = new int[dayCount];
+		for(int i = 0; i < itemList.size(); i++){
+			int tmp = (itemList.get(i).getItem_order() / 10000) - 1;
+			dayItemCount[tmp]++;
+		}
 
 		getSpotList(mav);
-		mav.addObject("day_count", diffDays+1);
-
+		mav.addObject("dayCount", dayCount);
+		mav.addObject("dayItemCount", dayItemCount);
 		mav.addObject("plannerDto", plannerDto);
 		mav.addObject("itemList", itemList);
 		mav.setViewName("user/planner/plannerUpdate");
+	}
+
+	@Override
+	public void updatePlannerOk(ModelAndView mav) {
+		Map<String, Object> map=mav.getModelMap();
+		HttpServletRequest request = (HttpServletRequest)map.get("request");
+		MemberDto userInfo = (MemberDto)request.getSession().getAttribute(Constant.SYNN_LOGIN_OBJECT);
+		int mem_no = userInfo.getMem_no();
+
+		System.out.println("**** request ****");
+		Enumeration params = request.getParameterNames(); 
+		while(params.hasMoreElements()){
+		 String paramName = (String)params.nextElement();
+		 System.out.println(paramName + " : "+request.getParameter(paramName));
+		}
+
+		//플래너 수정
+		int planner_no = Integer.parseInt(request.getParameter("planner_no"));
+		PlannerDto plannerDto = plannerDao.getOnePlanner(planner_no);
+		plannerDto.setTitle(request.getParameter("planner_title"));
+		plannerDto.setMemo(request.getParameter("planner_memo").replace("\r\n", "<br/>"));
+
+		if(!request.getParameter("attach_file").equals(plannerDto.getAttach_file())){
+			System.out.println("배경이미지 수정됨!!!!!!");
+			CommonFileIODto commonFileIODto = commonFileIOService.requestWriteFileAndDTO(request, "attach_file", plannerPath);
+			if(commonFileIODto != null){
+				commonFileIODto.setType_code(Constant.FILE_TYPE_SCHEDULE);
+				commonFileIODto.setWrite_no(mem_no);
+				String planner_photo_num = commonFileIOService.insertFileInfo(commonFileIODto) + "";
+				plannerDto.setAttach_file(planner_photo_num);
+			}
+		}
+
+		String start_date = request.getParameter("start_date");
+		int day_count = Integer.parseInt(request.getParameter("day_count")) - 1;
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+
+		try {
+			plannerDto.setStart_date(dateFormat.parse(start_date));
+
+			Calendar cal = Calendar.getInstance();
+			cal.setTime(plannerDto.getStart_date());
+			cal.add(Calendar.DATE, day_count);
+			plannerDto.setEnd_date(cal.getTime());
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+
+		//아이템 추가
+		List<ItemDto> itemList = new ArrayList<ItemDto>();
+		List<MoneyDto> moneyList = new ArrayList<MoneyDto>();
+		setWriteItems(request, itemList, moneyList, planner_no, mem_no);
+
+		System.out.println(plannerDto);
+		System.out.println(itemList);
+		System.out.println(moneyList);
+
+		int check = plannerDao.insertPlanner(plannerDto, itemList, moneyList);
+		EverywhereAspect.logger.info(EverywhereAspect.logMsg + check);
+
+		mav.addObject("planner_no", plannerDto.getPlanner_no());
+		mav.addObject("check", check);
+		mav.setViewName("user/planner/plannerUpdateOk");
 	}
 }
