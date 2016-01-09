@@ -33,7 +33,7 @@
 				<value>classpath:/everywhere/com/mynetgear/ccvf2/admin/mapper/settingmain/settingMainMapper.xml</value>
 				<value>classpath:/everywhere/com/mynetgear/ccvf2/user/mapper/main/userMainMapper.xml</value>
 				<value>classpath:/everywhere/com/mynetgear/ccvf2/user/mapper/search/searchMapper.xml</value>
-				<value>classpath:/everywhere/com/mynetgear/ccvf2/user/mapper/sweet/sweetMapper.xml</value>
+				<value>classpath:/everywhere/com/mynetgear/ccvf2/user/mapper/Sweet/sweetMapper.xml</value>
 				<value>classpath:/everywhere/com/mynetgear/ccvf2/user/mapper/bookmark/bookMarkMapper.xml</value>
 			</list>
 		</property>
