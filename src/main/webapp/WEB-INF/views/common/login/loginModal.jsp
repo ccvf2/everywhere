@@ -18,7 +18,7 @@
 					</div>
 						<div class="input-group margin-bottom-20">
 							<span class="input-group-addon"><i class="fa fa-envelope"></i></span>
-							<input type="text" name="mem_email" placeholder="Email address" class="form-control" value="admin@everwhere.com">
+							<input type="text" name="mem_email" placeholder="Email address" class="form-control" value="admin@everywhere.com">
 						</div>
 						<div class="input-group margin-bottom-20">
 							<span class="input-group-addon"><i class="fa fa-lock"></i></span>

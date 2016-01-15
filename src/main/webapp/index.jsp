@@ -50,8 +50,8 @@
  <a href="/user/myPage/myPage.do?uandMe=S0001">마이페이지</a>
  <hr/>
  <h3>타회원(마이페이지) 이동</h3>
- <a href="/user/myPage/myPage.do?uandMe=S0002&mem_no=327">문희준(user01@everwhere.com)</a><br/>
- <a href="/user/myPage/myPage.do?uandMe=S0002&mem_no=328">장우혁(user02@everwhere.com)</a><br/>
+ <a href="/user/myPage/myPage.do?uandMe=S0002&mem_no=327">문희준(user01@everywhere.com)</a><br/>
+ <a href="/user/myPage/myPage.do?uandMe=S0002&mem_no=328">장우혁(user02@everywhere.com)</a><br/>
 
  <hr/>
  <a href="/user/member/register.do">회원가입</a>
