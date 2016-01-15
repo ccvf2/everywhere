@@ -34,20 +34,27 @@ public class CommonCodeServiceImp implements CommonCodeService {
 	@Override
 	public void callCodeSettingPage(ModelAndView mav) {
 		Map<String, Object> map = mav.getModelMap();
-		
-		
-		CommonCodeDtoExt dtoImp= new CommonCodeDtoExt();
-		if(map.get("commonCodeDto")==null){
-		}else{
-			//검색조건이 들어있는 DTO
-			dtoImp = (CommonCodeDto)map.get("commonCodeDto");
-		}
-		//검색된 코드목록을 뿌려줄List
-		List<CommonCodeDto> list=commonCodeDao.getListCommonCodeInfo(dtoImp);
-		
-		//검색목록을뿌려줄List(선택목록)
+		HttpServletRequest request= (HttpServletRequest)map.get("request"); 
+		//코드그룹선택을뿌려줄List(선택목록)
 		List<CommonCodeDto> searchConditionList=commonCodeDao.getListCommonCodeSearchConditionList();
-		mav.addObject("searchCondition", dtoImp);
+
+		//초기get 요청시.
+		CommonCodeDtoExt dtoExt= new CommonCodeDtoExt();
+		if(map.get("commonCodeDto")!=null){
+			//검색조건이 들어있는 DTO
+			dtoExt = (CommonCodeDto)map.get("commonCodeDto");
+		}
+		//목록 총 갯수
+		int listTotalCount=commonCodeDao.getListCommonCodeInfoTotalcount(dtoExt);
+		dtoExt.setTotalCount(listTotalCount);
+		
+		//페이징 정보 구함(Evert
+		dtoExt.pageingCalculation(20);
+		
+		//검색된 코드목록을 뿌려줄List
+		List<CommonCodeDto> list=commonCodeDao.getListCommonCodeInfo(dtoExt);
+		
+		mav.addObject("searchCondition", dtoExt);
 		mav.addObject("searchConditionList", searchConditionList);
 		mav.addObject("codeList", list);
 		mav.setViewName("/admin/code/codeSetting");

@@ -42,20 +42,34 @@ public class CommonCodeDaoImp implements CommonCodeDao {
 		return sqlTemplate.update("delete_code_info", dto);
 	}
 	
-	
 	/** 코드 목록가져오기 */
 	@Override
 	public List<CommonCodeDto> getListCommonCodeInfo() {
 		CommonCodeDto CommonCodeDto = new CommonCodeDto();
 		return sqlTemplate.selectList("selectList_code_info",CommonCodeDto);
 	}
-	/** 코드 목록가져오기 */
-	@Override
-	public List<CommonCodeDto> getListCommonCodeInfo(CommonCodeDtoExt dtoImp) {
-		return sqlTemplate.selectList("selectList_code_info",dtoImp);
-	}
 	
+	
+	
+	
+	
+	/** 코드 목록가져오기(매개변수 있는 타입) */
+	@Override
+	public List<CommonCodeDto> getListCommonCodeInfo(CommonCodeDtoExt dtoExt) {
+		return sqlTemplate.selectList("selectList_code_info",dtoExt);
+	}
+	/** 코드 목록 총 갯수(매개변수 있는 타입) */
+	@Override
+	public int getListCommonCodeInfoTotalcount(CommonCodeDtoExt dtoExt) {
+		return  sqlTemplate.selectOne("selectList_code_info_totalCount",dtoExt);
+	}
 
+	
+	
+	
+	
+	
+	
 	
 	/** 코드 1건 가져오기 */
 	@Override
@@ -94,6 +108,14 @@ public class CommonCodeDaoImp implements CommonCodeDao {
 	public String getCodeName(String code) {
 		return sqlTemplate.selectOne("select_code_name", code);
 	}*/
+	/**
+	 * @author 배성욱
+	 * @createDate 2016. 1. 16.
+	 * @described 클래스전체의 하는(큰)일을 적어주세요.
+	 * @reference class
+	 * @param dtoImp
+	 * @return
+	 */
 
 	
 }

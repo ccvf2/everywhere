@@ -104,7 +104,7 @@ public class AdminMainController {
 		return mav;
 	}
 	@RequestMapping(value="/admin/commoncode/code.do", method=RequestMethod.POST)
-	public ModelAndView settingCode(HttpServletRequest request, HttpServletResponse response,CommonCodeDto dto) {
+	public ModelAndView showCode(HttpServletRequest request, HttpServletResponse response,CommonCodeDto dto) {
 		ModelAndView mav= new ModelAndView();
 		mav.addObject("request",request);
 		mav.addObject("commonCodeDto",dto);

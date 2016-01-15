@@ -9,16 +9,24 @@ import java.util.List;
  * @reference class
  */
 public class EverywhereDefaultDto extends CommonFileIODto {
+	/** 글 전체 갯수 */
 	private int totalCount=0;
+	/** 시작글번호 */
 	private int startRow;
+	/** 끝글번호 */
 	private int endRow;
-	
+	/** 현재 선택된 페이지  */
 	private int currentPage=1;
-	private int pageBlock=10;
+	/** 화면에 뿌릴 페이징 갯수 */
+	private int pageBlock=5;
+	/** 총 페이징 수(페이징블록단위) */
 	private int pageCount;
+	/** 화면에 뿌릴 시작 페이징 번호 */
 	private int startPage;
+	/** 화면에 뿌릴 끝 페이징 번호 */
 	private int endPage;
 	
+	/** 화면에 뿌릴 페이징 갯수 */
 	private int pageBlockGroupCount;
 	
 	private String searchCondition1=""; 
@@ -185,7 +193,27 @@ public class EverywhereDefaultDto extends CommonFileIODto {
 	}
 
 
-	
 
-	
+	// 페이징 정보 구하는 매소드(가져올글갯수)
+	public void pageingCalculation(int getRow) {
+		int startRow=(currentPage-1)*getRow+1;
+		this.startRow=startRow;
+		
+		int endRow=currentPage*getRow;
+		this.endRow=endRow;
+		
+		int pageCount=this.totalCount/getRow+(totalCount%getRow==0?0:1);
+		this.pageCount=pageCount;
+		
+		int startPage=((this.currentPage-1)/this.pageBlock)*this.pageBlock+1;
+		this.startPage=startPage;
+		
+		int endPage=this.startPage+this.pageBlock-1;
+		this.endPage=endPage;
+		if(this.endPage>this.pageCount){
+			this.endPage=this.pageCount;
+		}
+		
+		//this.currentPage=currentPage;
+	}
 }
