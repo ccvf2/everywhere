@@ -8,6 +8,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <script type="text/javascript">
+alert("☆★로그인시 아이디패스워드 꼭 확인하세요. 성국이서버는@everwhere   제서버는@everywhere 빠진y가 추가 되었습니다. 비밀번호는 동일하게 1234567890 입니다.-성욱-★☆");
+
 	var requestURL="http://api.visitkorea.or.kr/TourAPI2_manual/sample/searchKeyword_sample2.xml";
 	$(function() {
 		$.ajax({

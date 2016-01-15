@@ -22,6 +22,9 @@
 
     <!-- CSS Customization -->
     <link href="/assets/css/pages/blog_masonry_3col.css" rel="stylesheet">
+    <script type="text/javascript">
+    alert("☆★로그인시 아이디패스워드 꼭 확인하세요. 성국이서버는@everwhere   제서버는@everywhere 빠진y가 추가 되었습니다. 비밀번호는 동일하게 1234567890 입니다.-성욱-★☆");
+    </script>
 </head>
 
 <body>
