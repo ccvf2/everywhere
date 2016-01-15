@@ -25,10 +25,25 @@ public class MailTemplatDaoImp implements MailTemplatDao {
 	private PlatformTransactionManager transactionManager;
 	
 	@Override
-	public List<MailTemplateDto> getListMailtTemplat(MailTemplateDto dto) {
+	public List<MailTemplateDto> getListMailTemplate(MailTemplateDto dto) {
 		List<MailTemplateDto> list= null;
 		list=sqlTemplate.selectList("select_mailTemplate_list",dto);
 		return list;
+	}
+
+	/**
+	 * @author 배성욱
+	 * @createDate 2016. 1. 14.
+	 * @described 메일템플릿 데이터베이스 전송
+	 * @reference class
+	 * @param dto
+	 * @return int
+	 */
+	@Override
+	public int insertMailTemplate(MailTemplateDto dto) {
+		int result=0;
+		result= sqlTemplate.insert("insert_email_template", dto);
+		return result;
 	}
 	
 	

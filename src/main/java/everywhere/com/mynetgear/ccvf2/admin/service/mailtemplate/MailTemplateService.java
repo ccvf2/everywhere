@@ -1,4 +1,4 @@
-package everywhere.com.mynetgear.ccvf2.admin.service.mailtemplat;
+package everywhere.com.mynetgear.ccvf2.admin.service.mailtemplate;
 
 import org.springframework.web.servlet.ModelAndView;
 
@@ -8,14 +8,14 @@ import org.springframework.web.servlet.ModelAndView;
  * @described 클래스전체의 하는(큰)일을 적어주세요.
  * @reference class
  */
-public interface MailTemplatService {
+public interface MailTemplateService {
 	/**
 	 * @author 배성욱
 	 * @createDate 2015. 12. 10.
 	 * @described 매소드의 용도를 적어주세요
 	 * @param mav
 	 */
-	public void mailTemplatList(ModelAndView mav);
+	public void mailTemplateList(ModelAndView mav);
 	
 	
 	/**
@@ -24,5 +24,5 @@ public interface MailTemplatService {
 	 * @described 매소드의 용도를 적어주세요
 	 * @param mav
 	 */
-	public void mailTemplatInsert(ModelAndView mav);
+	public void mailTemplateInsert(ModelAndView mav);
 }

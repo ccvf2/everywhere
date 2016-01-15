@@ -106,6 +106,14 @@ public class AdminMainController {
 	@RequestMapping(value="/admin/commoncode/code.do", method=RequestMethod.POST)
 	public ModelAndView settingCode(HttpServletRequest request, HttpServletResponse response,CommonCodeDto dto) {
 		ModelAndView mav= new ModelAndView();
+		mav.addObject("request",request);
+		mav.addObject("commonCodeDto",dto);
+		commonCodeService.callCodeSettingPage(mav);
+		return mav;
+	}
+	@RequestMapping(value="/admin/commoncode/codeModify.do", method=RequestMethod.POST)
+	public ModelAndView modifyCode(HttpServletRequest request, HttpServletResponse response,CommonCodeDto dto) {
+		ModelAndView mav= new ModelAndView();
 		System.out.println("입력요청");
 		mav.addObject("request",request);
 		mav.addObject("commonCodeDto",dto);
@@ -113,8 +121,16 @@ public class AdminMainController {
 		return mav;
 	}
 	
-	/** 파일 테스트 
-	 * @throws Exception */
+	
+	
+	
+	
+	
+	
+	//---------------------------------테스트 코드----------------------------------------------------------
+	
+/*	*//** 파일 테스트 
+	 * @throws Exception *//*
 	@RequestMapping(value="/test/test2.do", method=RequestMethod.GET)
 	public ModelAndView filetest() throws Exception {
 		System.out.println("파일테스트 입력요청 GET");
@@ -130,10 +146,10 @@ public class AdminMainController {
 		return mav;
 	}
 	
-	/** 파일 테스트 
+	*//** 파일 테스트 
 	 * @param request 
 	 * @param response 
-	 * @return */
+	 * @return *//*
 	@RequestMapping(value="/test/test.do", method=RequestMethod.POST)
 	public ModelAndView filetest(HttpServletRequest request, HttpServletResponse response) {
 		ModelAndView mav= new ModelAndView();
@@ -162,6 +178,6 @@ public class AdminMainController {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("/common/reply/commonReply");
 		return mav;
-	}
+	}*/
 	
 }

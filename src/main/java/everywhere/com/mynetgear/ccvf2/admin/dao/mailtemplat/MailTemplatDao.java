@@ -20,5 +20,14 @@ public interface MailTemplatDao {
 	 * @param mav
 	 * @return
 	 */
-	public List<MailTemplateDto> getListMailtTemplat(MailTemplateDto dto);
+	public List<MailTemplateDto> getListMailTemplate(MailTemplateDto dto);
+	
+	/**
+	 * @author 배성욱
+	 * @createDate 2016. 1. 14.
+	 * @described 메일템플릿등록을 실행
+	 * @param dto
+	 * @return
+	 */
+	public int insertMailTemplate(MailTemplateDto dto);
 }

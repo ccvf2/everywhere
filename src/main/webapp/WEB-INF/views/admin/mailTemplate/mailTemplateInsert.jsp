@@ -5,6 +5,14 @@
 <head>
 <title>관리자-메일템플릿-등록</title>
 </head>
+<script type="text/javascript">
+//폼 전송 매소드
+	function doSubmitForm(){
+		var form=document.getElamentByName("mailTemplateForm");
+			form.action="/admin/mailtemplate/mailTemplateInsert.do";
+			form.submit();
+		}
+</script>
 <body>
     <div id="wrapper">
         <!-- Navigation -->
@@ -40,7 +48,7 @@
                             </div>
                             <div class="panel-body">
                         <div class="table-responsive">
-                         <form role="form">
+                         <form role="form" name="mailTemplateForm" method="post">
                             <table class="table table-bordered table-hover">
                             	<colgroup>
                             		<col width="15%"/>
@@ -51,10 +59,10 @@
                                         <td>
 				                            <div class="form-group">
 				                                <label class="radio-inline">
-				                                    <input type="radio" name="optionsRadiosInline" id="optionsRadiosInline1" value="option1" checked>선택
+				                                    <input type="radio" name="mtemp_use_yn" id="optionsRadiosInline1" value="Y"  checked>선택
 				                                </label>
 				                                <label class="radio-inline">
-				                                    <input type="radio" name="optionsRadiosInline" id="optionsRadiosInline2" value="option2">미선택
+				                                    <input type="radio" name="mtemp_use_yn" id="optionsRadiosInline2" value="N">미선택
 				                                </label>
 				                            </div>
                                         
@@ -65,12 +73,12 @@
                                         <td>
 				                            <div class="form-group">
 				                                <label>Selects</label>
-				                                <select class="form-control">
-				                                    <option>1</option>
-				                                    <option>2</option>
-				                                    <option>3</option>
-				                                    <option>4</option>
-				                                    <option>5</option>
+				                                <select class="form-control" name="mtemp_group_code">
+				                                    <option value="1">1</option>
+				                                    <option value="2">2</option>
+				                                    <option value="3">3</option>
+				                                    <option value="4">4</option>
+				                                    <option value="5">5</option>
 				                                </select>
 				                            </div>
                                         </td>
@@ -79,7 +87,7 @@
                                         <th>메일템플릿 제목:</th>
                                         <td>
 	                                        <div class="form-group">
-				                                <input class="form-control" placeholder="Enter text">
+				                                <input class="form-control" placeholder="Enter text" name="mtemp_name">
 				                            </div>
                                         </td>
                                     </tr>
@@ -87,7 +95,7 @@
                                         <th>메일 제목:</th>
                                         <td>
 	                                        <div class="form-group">
-				                                <input class="form-control" placeholder="Enter text">
+				                                <input class="form-control" placeholder="Enter text" name="mtemp_title">
 				                            </div>
                                         </td>
                                     </tr>
@@ -98,7 +106,7 @@
                                         <th colspan="2">
 				                            <div class="form-group">
 				                                <label>Text area</label>
-				                                <textarea class="form-control" rows="3"></textarea>
+				                                <textarea class="form-control" rows="3" name="mtemp_content"></textarea>
 				                            </div>
                                         </th>
                                     </tr>

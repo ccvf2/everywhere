@@ -20,27 +20,34 @@
 	}
 	
 	
-	//화면에서 폼전송 버튼을 눌럿을 때
+	//화면에서 등록 버튼을 눌럿을 때
 	function insertCcodeFormSubmin(){
-		$("#code_CRUD").val("C"); 
-		$("#codeForm").submit(); 
+		$("#code_CRUD").val("C");
+		var form = document.getElementById("codeForm");
+		form.action="/admin/commoncode/codeModify.do"; 
+		form.submit(); 
 	}
 	
-	//화면에서 폼전송 버튼을 눌럿을 때
+	//화면에서 수정 버튼을 눌럿을 때
 	function updateCcodeFormSubmin(){
 		$("#code_CRUD").val("U"); 
+		$("#codeForm").action="/admin/commoncode/codeModify.do"; 
 		$("#codeForm").submit(); 
 	}
+	//화면에서 삭제 버튼을 눌럿을 때
 	function deleteCodeFormSubmin(){
-		$("#code_CRUD").val("d"); 
+		$("#code_CRUD").val("D"); 
+		$("#codeForm").action="/admin/commoncode/codeModify.do"; 
 		$("#codeForm").submit(); 
 	}
 	
 	
 	
-	//코드셀렉터
+	// 코드셀렉터(코드그룹 조건을 선택했을 때.)
 	function selectCode(search){
-		alert(search);
+		$("#search_code_group").val(search);
+		$("#code_CRUD").val("R"); 
+		$("#codeForm").submit(); 
 	}
 </script>
 </head>
@@ -73,9 +80,10 @@
                             </div>
                             <div class="panel-body">
                             <div class="text-right">
-								<form action="/admin/commoncode/code.do" method="post" id="codeForm">
-								<input type="hidden" name="code_CRUD" id="code_CRUD" value="C">
+								<form method="post" id="codeForm">
+								<input type="hidden" name="code_CRUD" id="code_CRUD" value="">
 								<input type="hidden" name="code_no" id="code_no" value="0">
+								<input type="hidden" name="search_code_group" id="search_code_group" value="${searchCondition.search_code_group}">
 									<table>
 										<tr>
 											<th>고유코드</th>
@@ -117,12 +125,41 @@
                                 <h3 class="panel-title"><i class="fa fa-long-arrow-right"></i> 조건선택</h3>
                             </div>
                             <div class="panel-body">
-                            <div class="text-right">
-									<select class="form-control" onchange="selectCode(this.value)">
+                            <div class="text-left">
+								<div class="form-group">
+                            		<label>코드그룹 : </label>
+									<select class="form-control" onchange="selectCode(this.value)" style="display: inline; width: 80%;">
+										<option value="">전체</option>
 										<c:forEach items="${searchConditionList}" var="codeGroupList">
-											<option value="${codeGroupList.code_group}">${codeGroupList.code_group_name}(${codeGroupList.code_group})</option>
+										 	<c:choose>
+										 		<c:when test="${searchCondition.search_code_group==codeGroupList.code_group}">
+													<option value="${codeGroupList.code_group}" selected="selected">${codeGroupList.code_group_name}(${codeGroupList.code_group})</option>
+										 		</c:when>
+										 		<c:otherwise>
+													<option value="${codeGroupList.code_group}">${codeGroupList.code_group_name}(${codeGroupList.code_group})</option>
+										 		</c:otherwise>
+										 	</c:choose>
 										</c:forEach>
 									</select>
+									<br />
+									<br />
+                            	</div>
+								<div class="form-group">
+                            		<label>검색조건 : 
+                            		<select class="form-control" style="display: inline; width: 70%;" name="searchCondition1">
+                            			<option>전체</option>
+                            			<option>고유코드(code)</option>
+                            			<option>코드명(code_name)</option>
+                            			<option>코드밸류(code_value)</option>
+                            		</select>
+                            		</label>
+									<div class="form-group" style="display: inline;">
+	                            		<label>&nbsp;&nbsp;&nbsp;&nbsp;검색어 : 
+	                            		<input class="form-control" placeholder="검색어를 입력하세요." style="display: inline; width: 70%;" name="searchWord1">&nbsp;&nbsp;
+	                            		</label>
+										<input type="button"  class="btn btn-primary" value="검색">
+									</div>
+                            	</div>
 							</div>
                             </div>
                         </div>

@@ -1,4 +1,4 @@
-package everywhere.com.mynetgear.ccvf2.admin.service.mailtemplat;
+package everywhere.com.mynetgear.ccvf2.admin.service.mailtemplate;
 
 import java.util.List;
 import java.util.Map;
@@ -19,10 +19,10 @@ import everywhere.com.mynetgear.ccvf2.admin.dto.mailtemplat.MailTemplateDto;
  * @reference class
  */
 @Component
-public class MailTemplatServiceImp implements MailTemplatService{
+public class MailTemplateServiceImp implements MailTemplateService{
 
 	@Autowired
-	MailTemplatDao mailTemplatdao;
+	MailTemplatDao mailTemplatedao;
 	/**
 	 * @author 배성욱
 	 * @createDate 2016. 12. 28.
@@ -31,11 +31,11 @@ public class MailTemplatServiceImp implements MailTemplatService{
 	 * @param mav
 	 */
 	@Override
-	public void mailTemplatList(ModelAndView mav) {
+	public void mailTemplateList(ModelAndView mav) {
 		MailTemplateDto dto = new MailTemplateDto();
-		List<MailTemplateDto> list = mailTemplatdao.getListMailtTemplat(dto);
+		List<MailTemplateDto> list = mailTemplatedao.getListMailTemplate(dto);
 		mav.addObject("mailTemplatList",list);
-		mav.setViewName("/admin/mailTemplat/mailTemplatList");
+		mav.setViewName("/admin/mailTemplate/mailTemplateList");
 	}
 	/**
 	 * @author 배성욱
@@ -45,10 +45,11 @@ public class MailTemplatServiceImp implements MailTemplatService{
 	 * @param mav
 	 */
 	@Override
-	public void mailTemplatInsert(ModelAndView mav) {
+	public void mailTemplateInsert(ModelAndView mav) {
 		Map<String, Object> map = mav.getModelMap();
 		HttpServletRequest request= (HttpServletRequest)map.get("request");
 		MailTemplateDto dto = (MailTemplateDto)map.get("matilTemplateDto");
+		int result= mailTemplatedao.insertMailTemplate(dto);
 	}
 
 }

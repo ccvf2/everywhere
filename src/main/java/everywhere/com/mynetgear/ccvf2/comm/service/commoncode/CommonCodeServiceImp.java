@@ -33,10 +33,21 @@ public class CommonCodeServiceImp implements CommonCodeService {
 	 */
 	@Override
 	public void callCodeSettingPage(ModelAndView mav) {
-		//CommonCodeDto dto = new CommonCodeDto();
+		Map<String, Object> map = mav.getModelMap();
+		
+		
 		CommonCodeDtoExt dtoImp= new CommonCodeDtoExt();
+		if(map.get("commonCodeDto")==null){
+		}else{
+			//검색조건이 들어있는 DTO
+			dtoImp = (CommonCodeDto)map.get("commonCodeDto");
+		}
+		//검색된 코드목록을 뿌려줄List
 		List<CommonCodeDto> list=commonCodeDao.getListCommonCodeInfo(dtoImp);
+		
+		//검색목록을뿌려줄List(선택목록)
 		List<CommonCodeDto> searchConditionList=commonCodeDao.getListCommonCodeSearchConditionList();
+		mav.addObject("searchCondition", dtoImp);
 		mav.addObject("searchConditionList", searchConditionList);
 		mav.addObject("codeList", list);
 		mav.setViewName("/admin/code/codeSetting");
