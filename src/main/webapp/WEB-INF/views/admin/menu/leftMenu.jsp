@@ -32,10 +32,10 @@
                         <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-arrows-v"></i>메일템플릿<i class="fa fa-fw fa-caret-down"></i></a>
                         <ul id="demo" class="collapse">
                             <li>
-                                <a href="/admin/mailtemplat/mailTemplatList.do">메일템플릿목록</a>
+                                <a href="/admin/mailtemplate/mailTemplateList.do">메일템플릿목록</a>
                             </li>
                             <li>
-                                <a href="/admin/mailtemplat/mailTemplatInsert.do">메일템플릿 등록</a>
+                                <a href="/admin/mailtemplate/mailTemplateInsert.do">메일템플릿 등록</a>
                             </li>
                         </ul>
                     </li>

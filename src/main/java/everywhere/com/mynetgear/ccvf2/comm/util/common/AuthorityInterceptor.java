@@ -54,6 +54,7 @@ public class AuthorityInterceptor extends HandlerInterceptorAdapter {
 		urlList.add("/user/search/searchSpot.do");
 		urlList.add("/user/search/searchPlanner.do");
 		urlList.add("/user/search/searchTotal.do");
+		urlList.add("/password/passwordChanghe.do");
 
 		for (String urlException : urlList) {
 			if (uri.indexOf(urlException) > -1) {

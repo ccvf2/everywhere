@@ -63,18 +63,26 @@
 
 	<!-- 코드목록 불러오기 -->
 	<select id="selectList_code_info" resultMap="codeMap" parameterType="everywhere.com.mynetgear.ccvf2.comm.dto.commoncode.CommonCodeDtoExt">
-		SELECT
-			code_no
-			,code
-			,code_name
-			,code_group
-			,code_group_name
-			,code_sort
-			,code_value
-			,code_regdate
+	SELECT	
+		row_numbering_table.*
+	FROM
+		(SELECT
+			ROWNUM rnum
+			,original_table.* 
 		FROM
-			tbl_common_code
-		<where>
+			(
+			SELECT
+				code_no
+				,code
+				,code_name
+				,code_group
+				,code_group_name
+				,code_sort
+				,code_value
+				,code_regdate
+			FROM
+				tbl_common_code
+			<where>
 				<choose>
 					<when test="search_code_group != ''">
 					AND code_group=#{search_code_group}
@@ -85,11 +93,68 @@
 					<otherwise>
 					</otherwise>
 				</choose>
+				<if test="searchWord1 != ''">
+					<choose>
+						<when test="searchCondition1 == 'code'">
+						AND code like '%'||#{searchWord1}||'%'
+						</when>
+						<when test="searchCondition1 == 'code_name'">
+						AND code_name like '%'||#{searchWord1}||'%'
+						</when>
+						<when test="searchCondition1 == 'code_value'">
+						AND code_value like '%'||#{searchWord1}||'%'
+						</when>
+						<otherwise>
+						AND (code_value like '%'||#{searchWord1}||'%' OR (code like '%'||#{searchWord1}||'%' or code_name like '%'||#{searchWord1}||'%'))
+						</otherwise>
+					</choose>
+				</if>
+			</where>
+			ORDER BY
+				code_group DESC
+				, code_sort ASC
+				, code_name ASC
+			)original_table
+		)row_numbering_table
+	WHERE
+		<![CDATA[row_numbering_table.rnum >= #{startRow}]]>
+	AND
+		<![CDATA[ row_numbering_table.rnum <= #{endRow}]]>
+	</select>
+	<!-- 코드목록 총 갯수 -->
+	<select id="selectList_code_info_totalCount" resultType="int" parameterType="everywhere.com.mynetgear.ccvf2.comm.dto.commoncode.CommonCodeDtoExt">
+		SELECT
+			count(*)
+		FROM
+			tbl_common_code
+		<where>
+			<choose>
+				<when test="search_code_group != ''">
+				AND code_group=#{search_code_group}
+				</when>
+				<when test="search_code_group_name != ''">
+				AND code_group_name=#{search_code_group}
+				</when>
+				<otherwise>
+				</otherwise>
+			</choose>
+			<if test="searchWord1 != ''">
+				<choose>
+					<when test="searchCondition1 == 'code'">
+					AND code like '%'||#{searchWord1}||'%'
+					</when>
+					<when test="searchCondition1 == 'code_name'">
+					AND code_name like '%'||#{searchWord1}||'%'
+					</when>
+					<when test="searchCondition1 == 'code_value'">
+					AND code_value like '%'||#{searchWord1}||'%'
+					</when>
+					<otherwise>
+					AND (code_value like '%'||#{searchWord1}||'%' OR (code like '%'||#{searchWord1}||'%' or code_name like '%'||#{searchWord1}||'%'))
+					</otherwise>
+				</choose>
+			</if>
 		</where>
-		ORDER BY
-			code_group DESC
-			, code_sort ASC
-			, code_name ASC
 	</select>
 
 	<!-- 코드내용 1건  -->

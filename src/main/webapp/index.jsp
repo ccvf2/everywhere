@@ -8,6 +8,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <script type="text/javascript">
+alert("☆★로그인시 아이디패스워드 꼭 확인하세요. 성국이서버는@everwhere   제서버는@everywhere 빠진y가 추가 되었습니다. 비밀번호는 동일하게 1234567890 입니다.-성욱-★☆");
+
 	var requestURL="http://api.visitkorea.or.kr/TourAPI2_manual/sample/searchKeyword_sample2.xml";
 	$(function() {
 		$.ajax({
@@ -50,8 +52,8 @@
  <a href="/user/myPage/myPage.do?uandMe=S0001">마이페이지</a>
  <hr/>
  <h3>타회원(마이페이지) 이동</h3>
- <a href="/user/myPage/myPage.do?uandMe=S0002&mem_no=327">문희준(user01@everwhere.com)</a><br/>
- <a href="/user/myPage/myPage.do?uandMe=S0002&mem_no=328">장우혁(user02@everwhere.com)</a><br/>
+ <a href="/user/myPage/myPage.do?uandMe=S0002&mem_no=327">문희준(user01@everywhere.com)</a><br/>
+ <a href="/user/myPage/myPage.do?uandMe=S0002&mem_no=328">장우혁(user02@everywhere.com)</a><br/>
 
  <hr/>
  <a href="/user/member/register.do">회원가입</a>
