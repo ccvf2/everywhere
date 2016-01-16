@@ -8,7 +8,6 @@
 <meta charset="UTF-8">
 <title>여행스케줄쓰기</title>
 
-<script type="text/javascript" src="/assets/js/plugins/datepicker.js"></script>
 <script type="text/javascript">
 		$(function() { 
 			$('#plannerCreate').modal('show');
@@ -16,6 +15,15 @@
 				$("#plannerCreate").remove;
 			})
 		});
+		
+		function startSelect(){
+			var selectedDate = $('#start').val();
+			$('#finish').attr('min', selectedDate);
+		}
+		function endSelect(){
+			var selectedDate = $('#finish').val();
+				$('#start').attr( 'max', selectedDate);
+		}
 </script>
 </head>
 
@@ -39,9 +47,9 @@
 				<div>
 					<div class="input-group margin-bottom-20">
 						<span class="input-group-addon" id="basic-addon1">여행시작</span> 
-						<input type="date" class="form-control" required pattern="\d{4}-\d{1,2}-\d{1,2}" id="start" name="start_date">
+						<input type="date" class="form-control" required pattern="\d{4}-\d{1,2}-\d{1,2}" id="start" name="start_date" onchange="startSelect()">
 						<span class="input-group-addon" id="basic-addon1">여행끝</span> 
-						<input type="date" class="form-control" required pattern="\d{4}-\d{1,2}-\d{1,2}" id="finish" name="end_date">
+						<input type="date" class="form-control" required pattern="\d{4}-\d{1,2}-\d{1,2}" id="finish" name="end_date" onchange="endSelect()">
 					</div>
 				</div>
 				<div>
