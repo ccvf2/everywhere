@@ -167,6 +167,10 @@ function deleteItem(input_name){
 		$("[href*='"+day_label+i+"']").each(function(){
 			$(this).attr('href', $(this).attr('href').replace(oldExp, newExp));
 		})
+		
+		$("[onclick*='"+day_label+i+"']").each(function(){
+			$(this).attr('onclick', $(this).attr('onclick').replace(oldExp, newExp));
+		})
 	}
 	day_item_count.value = Number(day_item_count.value)-1;
 }
