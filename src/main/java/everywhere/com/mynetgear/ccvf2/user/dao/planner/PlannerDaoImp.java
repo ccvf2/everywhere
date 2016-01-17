@@ -37,7 +37,7 @@ public class PlannerDaoImp implements PlannerDao {
 	}
 	
 	@Override
-	public int insertPlanner(PlannerDto planner, List<ItemDto> itemList, List<MoneyDto> moneyList) {
+	public int insertPlanner(PlannerDto planner, List<ItemDto> itemList) {
 		int check = 0;
 		TransactionDefinition definition = new DefaultTransactionDefinition();
 		TransactionStatus status = transactionManager.getTransaction(definition);
@@ -45,19 +45,98 @@ public class PlannerDaoImp implements PlannerDao {
 		try{
 			check = sqlTemplate.update("update_planner", planner);
 			for(int i = 0; i < itemList.size(); i++){
-				check = sqlTemplate.insert("insert_item", itemList.get(i));
+				check = insertItem(itemList.get(i));
 			}
-			
-			for(int i = 0; i < moneyList.size(); i++){
-				check = sqlTemplate.insert("insert_money", moneyList.get(i));
-			}			
 			
 			transactionManager.commit(status);
 		}catch(Exception e){
 			transactionManager.rollback(status);
 			e.printStackTrace();
+			check = 0;
 		}
 		
+		return check;
+	}
+	
+	@Override
+	public int updatePlanner(PlannerDto planner, List<ItemDto> itemList) {
+		int check = 0;
+		TransactionDefinition definition = new DefaultTransactionDefinition();
+		TransactionStatus status = transactionManager.getTransaction(definition);
+		
+		try{
+			check = sqlTemplate.update("update_planner", planner);
+			List<ItemDto> oldItemList = sqlTemplate.selectList("get_item_list", planner.getPlanner_no());
+			for(int i = 0; i < itemList.size(); i++){
+				if(itemList.get(i).getItem_no() == 0)
+					check = insertItem(itemList.get(i));
+				else{
+					check = updateItem(itemList.get(i));
+					if(oldItemList.size() > 0){
+						for (ItemDto itemDto : oldItemList) {
+							if(itemDto.getItem_no() == itemList.get(i).getItem_no()){
+								oldItemList.remove(itemDto);
+								break;
+							}
+						}
+					}
+				}
+			}
+		
+			for(int i = 0; i < oldItemList.size(); i++){
+				List<MoneyDto> moneyList = oldItemList.get(i).getMoneyList();
+				if(moneyList != null && moneyList.size() > 0){
+					for (MoneyDto moneyDto : moneyList) {
+						check = sqlTemplate.delete("delete_money_by_money_no", moneyDto.getMoney_no());
+					}
+				}
+				check = sqlTemplate.delete("delete_item_by_item_no", oldItemList.get(i).getItem_no());
+			}
+			
+			transactionManager.commit(status);
+		}catch(Exception e){
+			transactionManager.rollback(status);
+			e.printStackTrace();
+			check = 0;
+		}
+		
+		return check;
+	}
+	
+	public int insertItem(ItemDto itemDto){
+		int check = sqlTemplate.insert("insert_item", itemDto);
+		List<MoneyDto> moneyList = itemDto.getMoneyList();
+		
+		for(int i = 0; i < moneyList.size(); i++){
+			moneyList.get(i).setItem_no(itemDto.getItem_no());
+			check = sqlTemplate.insert("insert_money", moneyList.get(i));
+		}
+		return check;
+	}
+	
+	public int updateItem(ItemDto itemDto){
+		int check = sqlTemplate.update("update_item", itemDto);
+		List<MoneyDto> moneyList = itemDto.getMoneyList();
+		
+		List<MoneyDto> oldMoneyList = sqlTemplate.selectList("get_money_list", itemDto.getItem_no());
+		for(int i = 0; i < moneyList.size(); i++){
+			moneyList.get(i).setItem_no(itemDto.getItem_no());
+			if(moneyList.get(i).getMoney_no() == 0 )
+				check = sqlTemplate.insert("insert_money", moneyList.get(i));
+			else{
+				check = sqlTemplate.update("update_money", moneyList.get(i));
+				for (MoneyDto moneyDto : oldMoneyList) {
+					if(moneyDto.getItem_no() == moneyList.get(i).getMoney_no()){
+						oldMoneyList.remove(moneyDto);
+						break;
+					}
+				}
+			}
+		}
+		
+		for(int i = 0; i < oldMoneyList.size(); i++){
+			check = sqlTemplate.delete("delete_money_by_money_no", oldMoneyList.get(i).getMoney_no());
+		}
 		return check;
 	}
 

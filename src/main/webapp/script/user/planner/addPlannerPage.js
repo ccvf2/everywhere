@@ -128,6 +128,10 @@ function addItem(input_name){
 		$("[href*='"+day_label+i+"']").each(function(){
 			$(this).attr('href', $(this).attr('href').replace(oldExp, newExp));
 		})
+		
+		$("[onclick*='"+day_label+i+"']").each(function(){
+			$(this).attr('onclick', $(this).attr('onclick').replace(oldExp, newExp));
+		})
 	}
 	
 	var copy = day_label+(Number(input_name.slice(-1))+1); //d1_item2

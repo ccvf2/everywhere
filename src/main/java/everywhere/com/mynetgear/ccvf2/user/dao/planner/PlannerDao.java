@@ -9,7 +9,7 @@ import everywhere.com.mynetgear.ccvf2.user.dto.planner.PlannerDto;
 public interface PlannerDao {
 	public int insertPlanner(PlannerDto planner);
 	
-	public int insertPlanner(PlannerDto planner, List<ItemDto> itemList, List<MoneyDto> moneyList);
+	public int insertPlanner(PlannerDto planner, List<ItemDto> itemList);
 
 	public int getPlannerNextSeq();
 	
@@ -26,6 +26,8 @@ public interface PlannerDao {
 	public PlannerDto getOnePlanner(int planner_no);
 
 	public int updatePlanner(PlannerDto plannerDto);
+	
+	public int updatePlanner(PlannerDto plannerDto, List<ItemDto> itemList);
 
 	public int deletePlanner(int planner_no);
 
