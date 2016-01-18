@@ -33,15 +33,15 @@ alert("☆★로그인시 아이디패스워드 꼭 확인하세요. 성국이�
 </head>
 
 <body>
- <h3>spot 추가</h3>
-<a href="/xmlparse/parse.do?areaCode=1">서울</a>
-<a href="/xmlparse/parse.do?areaCode=2">인천</a>
-<a href="/xmlparse/parse.do?areaCode=3">대전</a>
-<a href="/xmlparse/parse.do?areaCode=4">대구</a>
-<a href="/xmlparse/parse.do?areaCode=5">광주</a>
-<a href="/xmlparse/parse.do?areaCode=6">부산</a>
-<a href="/xmlparse/parse.do?areaCode=7">울산</a>
-<a href="/xmlparse/parse.do?areaCode=8">세종</a>
+ <h3>spot 추가※ 절대 누르지마세요.(디비에 마구 쌓여버립니다.)</h3>
+<a href="/a/xmlparse/parse.do?areaCode=1">서울</a>
+<a href="/a/xmlparse/parse.do?areaCode=2">인천</a>
+<a href="/a/xmlparse/parse.do?areaCode=3">대전</a>
+<a href="/a/xmlparse/parse.do?areaCode=4">대구</a>
+<a href="/a/xmlparse/parse.do?areaCode=5">광주</a>
+<a href="/a/xmlparse/parse.do?areaCode=6">부산</a>
+<a href="/a/xmlparse/parse.do?areaCode=7">울산</a>
+<a href="/a/xmlparse/parse.do?areaCode=8">세종</a>
 <hr/>
  <h3>공통사용(모듈)</h3>
  <a href="/test/test2.do">파일테스트</a>
