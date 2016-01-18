@@ -5,7 +5,7 @@ import java.util.List;
 import everywhere.com.mynetgear.ccvf2.comm.dto.common.CommonFileIODto;
 import everywhere.com.mynetgear.ccvf2.user.dto.spot.SpotDto;
 
-public class ItemDto {
+public class ItemDto extends ItemDtoExt{
 	private int item_no;
 	private int planner_no;
 	private int mem_no;
@@ -15,10 +15,6 @@ public class ItemDto {
 	private String attach_photoes;
 	private double item_star_score;
 	private String item_time;
-	
-	private SpotDto spot;
-	private List<CommonFileIODto> item_photoes;
-	private List<MoneyDto> moneyList;
 	
 	public int getItem_no() {
 		return item_no;
@@ -83,31 +79,10 @@ public class ItemDto {
 		this.item_time = item_time;
 	}
 	
-	public List<CommonFileIODto> getItem_photoes() {
-		return item_photoes;
-	}
-	public void setItem_photoes(List<CommonFileIODto> item_photoes) {
-		this.item_photoes = item_photoes;
-	}
-	
-	public List<MoneyDto> getMoneyList() {
-		return moneyList;
-	}
-	public void setMoneyList(List<MoneyDto> moneyList) {
-		this.moneyList = moneyList;
-	}
-	
-	public SpotDto getSpot() {
-		return spot;
-	}
-	public void setSpot(SpotDto spot) {
-		this.spot = spot;
-	}
-	
 	@Override
 	public String toString() {
 		return "ItemDto [item_no=" + item_no + ", planner_no=" + planner_no + ", mem_no=" + mem_no + ", spot_no="
 				+ spot_no + ", item_order=" + item_order + ", note=" + note + ", attach_photoes=" + attach_photoes
-				+ ", item_star_score=" + item_star_score + ", item_time=" + item_time +", moneyList=" + moneyList + "]";
+				+ ", item_star_score=" + item_star_score + ", item_time=" + item_time + "]";
 	}
 }

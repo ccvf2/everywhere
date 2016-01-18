@@ -128,6 +128,10 @@ function addItem(input_name){
 		$("[href*='"+day_label+i+"']").each(function(){
 			$(this).attr('href', $(this).attr('href').replace(oldExp, newExp));
 		})
+		
+		$("[onclick*='"+day_label+i+"']").each(function(){
+			$(this).attr('onclick', $(this).attr('onclick').replace(oldExp, newExp));
+		})
 	}
 	
 	var copy = day_label+(Number(input_name.slice(-1))+1); //d1_item2
@@ -167,6 +171,10 @@ function deleteItem(input_name){
 		$("[href*='"+day_label+i+"']").each(function(){
 			$(this).attr('href', $(this).attr('href').replace(oldExp, newExp));
 		})
+		
+		$("[onclick*='"+day_label+i+"']").each(function(){
+			$(this).attr('onclick', $(this).attr('onclick').replace(oldExp, newExp));
+		})
 	}
 	day_item_count.value = Number(day_item_count.value)-1;
 }
@@ -175,10 +183,10 @@ function addMoney(input_name){
 	//input_name : d1_item1
 
 	//가계부 Div가 있는지 먼저 확인 후에 없으면 만들어준다.
-	var moneyDiv = document.getElementById("money"+input_name);
+	var moneyDiv = document.getElementById(input_name+"_money_div");
 	if(moneyDiv == null){
 		moneyDiv = document.createElement("div");
-		moneyDiv.id = "money"+input_name;
+		moneyDiv.id = input_name+"_money_div";
 		moneyDiv.className  = "panel-body";
 		moneyDiv.style.borderTop = 'solid 1px #EEEEEE';
 		$("#"+input_name+"_note_div").after(moneyDiv);
@@ -250,7 +258,7 @@ function addPhoto(input, input_name){
 				photoDiv = document.createElement("div");
 				photoDiv.id = input_name + "_photo";
 				photoDiv.className  = "panel-body";
-				$("#"+input_name+"_note").before(photoDiv);
+				$("#"+input_name+"_note_div").prepend(photoDiv);
 
 				var preview = document.createElement("img");
 				preview.id = input_name+"_preview";

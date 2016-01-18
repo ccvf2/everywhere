@@ -17,9 +17,10 @@ public interface SpotDao {
 	public int insertSpot(SpotDto spotDto);
 	public List<SpotDto> getSpotAllList();
 	public List<SpotDto> getSpotAllListForPlanner();
-	public List<SpotDto> getSpotList(SpotDto spotDto);
-	public List<SpotDto> getSpotListForPlanner(SpotDto spotDto, int currNum);
+	public List<SpotDto> getSpotList(SpotDto spotDto, int currNum, int spotSize);
+	public int getTotalSpotSize(SpotDto spotDto);
 	public SpotDto getOneSpot(int spot_no);
 	public int updateSpot(SpotDto spotDto);
 	public int deleteSpot(int spot_no);
+	public int ratingSpot(SpotDto spotDto);
 }

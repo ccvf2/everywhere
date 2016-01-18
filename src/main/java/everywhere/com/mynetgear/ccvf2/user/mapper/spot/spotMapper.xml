@@ -23,51 +23,50 @@
 		select * from tbl_spot where spot_no=#{spot_no}
 	</select>
 	
-	<select id="select_spot_list" resultType="everywhere.com.mynetgear.ccvf2.user.dto.spot.SpotDto" parameterType="everywhere.com.mynetgear.ccvf2.user.dto.spot.SpotDto">
-		select * from tbl_spot
-		<where>
-			<choose>
-				<when test="country_code != ''">
-				AND country_code=#{country_code}
-				</when>
-			</choose>
-			<choose>
-				<when test="city_code != ''">
-				AND city_code=#{city_code}
-				</when>
-			</choose>
-			<choose>
-				<when test="spot_type_code != ''">
-				AND spot_type_code=#{spot_type_code}
-				</when>
-			</choose>
-		</where>
-	</select>
-	
-	<select id="select_spot_list_for_planner" resultType="everywhere.com.mynetgear.ccvf2.user.dto.spot.SpotDto" parameterType="java.util.Map">
+	<select id="select_spot_list" resultType="everywhere.com.mynetgear.ccvf2.user.dto.spot.SpotDto" parameterType="java.util.Map">
 		select * from (
 		select rownum rnum, a.* from
 		(select * from tbl_spot 
 			<where>
 				<choose>
-					<when test="country_code != ''">
+					<when test="country_code != '' and country_code != null">
 					AND country_code=#{country_code}
 					</when>
 				</choose>
 				<choose>
-					<when test="city_code != ''">
+					<when test="city_code != '' and city_code != null">
 					AND city_code=#{city_code}
 					</when>
 				</choose>
 				<choose>
-					<when test="spot_type_code != ''">
+					<when test="spot_type_code != '' and spot_type_code != null">
 					AND spot_type_code=#{spot_type_code}
 					</when>
 				</choose>
 			</where>
 		)a)b
 		where rnum<![CDATA[>=]]>#{startNum} and rnum<![CDATA[<=]]>#{endNum}
-
+	</select>
+	
+	<select id="select_total_spot_count" parameterType="everywhere.com.mynetgear.ccvf2.user.dto.spot.SpotDto" resultType="int">
+		select count(*) from tbl_spot
+			<where>
+				<choose>
+					<when test="country_code != '' and country_code != null">
+					AND country_code=#{country_code}
+					</when>
+				</choose>
+				<choose>
+					<when test="city_code != '' and city_code != null">
+					AND city_code=#{city_code}
+					</when>
+				</choose>
+				<choose>
+					<when test="spot_type_code != '' and spot_type_code != null">
+					AND spot_type_code=#{spot_type_code}
+					</when>
+				</choose>
+			</where>
 	</select>
 
 	<insert id="insert_spot" parameterType="everywhere.com.mynetgear.ccvf2.user.dto.spot.SpotDto">
@@ -85,4 +84,8 @@
 	<delete id="delete_spot" parameterType="int">
 		delete from tbl_spot where spot_no=#{spot_no}
 	</delete>
+	
+	<update id="update_spot_rate" parameterType="everywhere.com.mynetgear.ccvf2.user.dto.spot.SpotDto">
+		update tbl_spot set total_star_score=#{total_star_score}, count_star_score=#{count_star_score} where spot_no=#{spot_no}
+	</update>
 </mapper>

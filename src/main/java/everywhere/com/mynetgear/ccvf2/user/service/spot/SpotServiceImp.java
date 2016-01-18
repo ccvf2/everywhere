@@ -80,73 +80,10 @@ public class SpotServiceImp implements SpotService{
 			}
 		}
 	}
+
 	
 	@Override
 	public void selectSpotList(ModelAndView mav) {
-		Map<String, Object> map=mav.getModelMap();
-		HttpServletRequest request = (HttpServletRequest)map.get("request");
-		HttpServletResponse response = (HttpServletResponse)map.get("response");
-		String country_code = request.getParameter("country_code");
-		String city_code = request.getParameter("city_code");
-		String spot_type_code = request.getParameter("spot_type_code");
-		SpotDto spotDto = new SpotDto();
-		spotDto.setCountry_code(country_code);
-		spotDto.setCity_code(city_code);
-		spotDto.setSpot_type_code(spot_type_code);
-		List<SpotDto> selectSpotList = spotDao.getSpotListForPlanner(spotDto, 1);
-		for(int i = 0; i < selectSpotList.size(); i++){
-			if(selectSpotList.get(i).getAttach_file() != null){
-				String[] attach_no = selectSpotList.get(i).getAttach_file().split(",");
-				List<CommonFileIODto> fileList = new ArrayList<CommonFileIODto>();
-				CommonFileIODto fileIODto = commonFileIoDao.getOneFileDto(Integer.parseInt(attach_no[0]));
-				fileList.add(fileIODto);
-				System.out.println(fileIODto);
-				selectSpotList.get(i).setSpot_photoes(fileList);
-			}
-		}
-
-		JSONArray jsonArray = new JSONArray();
-		JSONObject rootObj = new JSONObject();
-		for (int i = 0; i < selectSpotList.size(); i++) {
-			SpotDto dto = selectSpotList.get(i);
-			JSONObject obj = new JSONObject();
-			obj.put("spot_no", dto.getSpot_no());
-			obj.put("mem_no", dto.getMem_no());
-			obj.put("country_code", StringUtils.clean(dto.getCountry_code()));
-			obj.put("city_code", StringUtils.clean(dto.getCity_code()));
-			obj.put("spot_name", StringUtils.clean(dto.getSpot_name()));
-			obj.put("spot_type_code", StringUtils.clean(dto.getSpot_type_code()));
-			obj.put("mem_level_code", StringUtils.clean(dto.getMem_level_code()));
-			obj.put("spot_note", StringUtils.clean(dto.getSpot_note()));
-			obj.put("spot_addr", StringUtils.clean(dto.getSpot_addr()));
-			obj.put("spot_lat", dto.getSpot_lat());
-			obj.put("spot_long", dto.getSpot_long());
-			obj.put("total_star_score", dto.getTotal_star_score());
-			if(dto.getSpot_photoes() != null){
-				obj.put("spot_photo_save_name", StringUtils.clean(dto.getSpot_photoes().get(0).getSave_name()));
-				obj.put("spot_photo_extension", StringUtils.clean(dto.getSpot_photoes().get(0).getExtension()));
-			}else
-			{
-				obj.put("spot_photo_save_name", StringUtils.clean("No_Image"));
-				obj.put("spot_photo_extension", StringUtils.clean("png"));
-			}
-			jsonArray.add(obj);
-		}
-		
-		try{
-			rootObj.put("spot", jsonArray);
-			String json = rootObj.toJSONString();
-			System.out.println(json);
-			response.setContentType("application/html;charset=UTF-8");
-			PrintWriter out = response.getWriter();
-			out.print(json);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-	
-	@Override
-	public void selectSpotListForPlanner(ModelAndView mav) {
 		Map<String, Object> map=mav.getModelMap();
 		HttpServletRequest request = (HttpServletRequest)map.get("request");
 		HttpServletResponse response = (HttpServletResponse)map.get("response");
@@ -158,12 +95,13 @@ public class SpotServiceImp implements SpotService{
 		if(spot_page == null)
 			spot_page = "1";
 		int curr_page = Integer.parseInt(spot_page);
+		int spotSize = 10;
 		
 		SpotDto spotDto = new SpotDto();
 		spotDto.setCountry_code(country_code);
 		spotDto.setCity_code(city_code);
 		spotDto.setSpot_type_code(spot_type_code);
-		List<SpotDto> selectSpotList = spotDao.getSpotListForPlanner(spotDto, curr_page);
+		List<SpotDto> selectSpotList = spotDao.getSpotList(spotDto, curr_page, spotSize);
 		for(int i = 0; i < selectSpotList.size(); i++){
 			if(selectSpotList.get(i).getAttach_file() != null){
 				String[] attach_no = selectSpotList.get(i).getAttach_file().split(",");
@@ -174,6 +112,12 @@ public class SpotServiceImp implements SpotService{
 				selectSpotList.get(i).setSpot_photoes(fileList);
 			}
 		}
+		
+		int total = spotDao.getTotalSpotSize(spotDto);
+		int curr_spot = spotSize * curr_page;
+		if(curr_spot > total)
+			curr_spot = total;
+		String spotPage = "(" + curr_spot + "/" + total + ")";
 
 		JSONArray jsonArray = new JSONArray();
 		JSONObject rootObj = new JSONObject();
@@ -205,6 +149,7 @@ public class SpotServiceImp implements SpotService{
 		
 		try{
 			rootObj.put("spot", jsonArray);
+			rootObj.put("spotPage", spotPage);
 			String json = rootObj.toJSONString();
 			System.out.println(json);
 			response.setContentType("application/html;charset=UTF-8");
@@ -288,10 +233,16 @@ public class SpotServiceImp implements SpotService{
 		codeDto = commonCodeService.getOneCodeGroup(spotDto.getSpot_type_code());
 		String spot_type = codeDto.getCode_name();
 		
+		double spotScore = 0;
+		if(spotDto.getCount_star_score() != 0){
+			spotScore = Math.round(spotDto.getTotal_star_score() / spotDto.getCount_star_score()*100)/100.0;
+		}
+		
 		mav.addObject("spotDto", spotDto);
 		mav.addObject("countryName", countryName);
 		mav.addObject("cityName", cityName);
 		mav.addObject("spot_type", spot_type);
+		mav.addObject("spotScore", spotScore);
 		mav.setViewName("/user/spot/spotReadPage");
 	}
 
@@ -333,5 +284,34 @@ public class SpotServiceImp implements SpotService{
 		int result = spotDao.deleteSpot(spot_no);
 		System.out.println("result : " + result);
 		mav.addObject("result", result);
-	}	
+	}
+
+	@Override
+	public void ratingSpot(ModelAndView mav) {
+		Map<String, Object> map=mav.getModelMap();
+		HttpServletRequest request = (HttpServletRequest)map.get("request");
+		HttpServletResponse response = (HttpServletResponse)map.get("response");
+		int spot_no = Integer.parseInt(request.getParameter("spot_no"));
+		int score = Integer.parseInt(request.getParameter("score"));
+		
+		SpotDto spotDto = spotDao.getOneSpot(spot_no);
+		spotDto.setTotal_star_score(spotDto.getTotal_star_score()+score);
+		spotDto.setCount_star_score(spotDto.getCount_star_score()+1);
+		
+		int result = spotDao.ratingSpot(spotDto);
+		
+		double spotScore = 0;
+		if(spotDto.getCount_star_score() != 0){
+			spotScore = Math.round(spotDto.getTotal_star_score() / spotDto.getCount_star_score()*100)/100.0;
+		}
+		
+		try {
+			String str = result + "," + spotScore + "," + spotDto.getCount_star_score();
+			response.setContentType("application/html;charset=utf8");
+			PrintWriter out = response.getWriter();
+			out.print(str);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 }

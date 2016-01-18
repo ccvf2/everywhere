@@ -142,7 +142,7 @@
 						<fmt:formatNumber var="count" value="0"/>
 						<c:forEach var="item" items="${itemList}">
 						<li class="equal-height-columns">
-							<fmt:formatNumber var="day" value="${item.item_order / 10100}" type="number" maxFractionDigits="0"/>
+							<fmt:formatNumber var="day" value="${item.item_order / 10000}" type="number" maxFractionDigits="0"/>
 								<div class="cbp_tmtime equal-height-column" style="width:100%;">
 									<c:if test="${count < day }">
 										<c:set var="count" value="${day}"/>
@@ -168,7 +168,7 @@
 							</c:if>
 
 							<!-- 글상자 start-->
-							<c:if test="${item.note != null }">
+							<c:if test="${item.note != null || item.item_photoes[0].save_name != null || item.moneyList.size() != 0}">
 								<div class="panel-group" style="margin:0 0 30px 25%; clear: both; position: relative;">
 									<div class="panel panel-default rounded-2x">
 										<div class="panel-body" style="padding:8px;">
@@ -181,13 +181,24 @@
 												${item.note}
 											</div>
 											<c:if test="${item.moneyList.size() != 0 }">
-												<div class="row"  style="margin:5px;">
+												<c:if test="${item.note != null}">
 													<hr style="margin:5px 0px;"/>
+												</c:if>
+												<div class="row"  style="margin:5px;">
 													<c:forEach var="money" items="${item.moneyList}">
 														<p style="margin:3px">${money.money_title } ${money.price }</p>
 													</c:forEach>
 												</div>
 											</c:if>
+										</div>
+									</div>
+								</div>
+							</c:if>
+							<c:if test="${item.spot_no == 0 && item.note == null && item.item_photoes[0].save_name == null && item.moneyList.size() == 0}">
+								<div class="panel-group" style="margin:0 0 30px 25%; clear: both; position: relative;">
+									<div class="panel panel-default rounded-2x">
+										<div class="panel-body" style="padding:8px;">
+											작성된 일정이 없습니다.
 										</div>
 									</div>
 								</div>

@@ -82,6 +82,7 @@ function spotListDisp(data){
 					"<small>"+note+"</small>"+
 					"</div></div></li>";
 		}
+		$("#spotRead").text("Load More " + obj.spotPage);
 	}
 	$("#mCSB_1_container").empty(); 
 	$("#mCSB_1_container").prepend(str);
@@ -102,7 +103,7 @@ function selectMoreSpotList(city){
 		readCityList(true);
 	}
 	var params = "country_code=" + countrycode + "&city_code=" + citycode + "&spot_type_code="+typecode+"&spot_page="+spot_page.value;
-	var url = "/user/spot/selectSpotListForPlanner.ajax?" + params;
+	var url = "/user/spot/selectSpotList.ajax?" + params;
 	$.ajax({
 		url:url,
 		type:"get",
@@ -127,6 +128,7 @@ function moreSpotListDisp(data){
 					"<small>"+obj.spot[i].spot_note+"</small>"+
 					"</div></div></li>";
 		}
+		$("#spotRead").text("Load More " + obj.spotPage);
 	}
 	$("#mCSB_1_container").append(str);
 	
