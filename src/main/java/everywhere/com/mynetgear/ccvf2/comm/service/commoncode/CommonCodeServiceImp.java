@@ -52,7 +52,7 @@ public class CommonCodeServiceImp implements CommonCodeService {
 		dtoExt.pageingCalculation(20);
 		
 		//검색된 코드목록을 뿌려줄List
-		List<CommonCodeDto> list=commonCodeDao.getListCommonCodeInfo(dtoExt);
+		List<CommonCodeDto> list=commonCodeDao.getListCommonCodeInfoAdmin(dtoExt);
 		
 		mav.addObject("searchCondition", dtoExt);
 		mav.addObject("searchConditionList", searchConditionList);

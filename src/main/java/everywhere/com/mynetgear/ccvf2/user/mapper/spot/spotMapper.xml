@@ -73,7 +73,7 @@
 	<insert id="insert_spot" parameterType="everywhere.com.mynetgear.ccvf2.user.dto.spot.SpotDto">
 		insert into tbl_spot values(
 		#{spot_no}, #{mem_no}, #{country_code}, #{city_code}, #{spot_name}, 
-		#{spot_type_code}, #{mem_level_code}, #{spot_note}, #{attach_file}, #{spot_addr}, #{spot_lat}, #{spot_long}, #{total_star_score}, #{count_star_score}
+		#{spot_type_code}, #{mem_level_code}, #{spot_note}, #{attach_file}, #{spot_addr}, #{spot_lat}, #{spot_long}, #{total_star_score}, #{count_star_score}, #{open_api_seq}, SYSDATE
 		)
 	</insert>
 

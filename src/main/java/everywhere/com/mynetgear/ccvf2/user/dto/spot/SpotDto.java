@@ -20,8 +20,39 @@ public class SpotDto extends EverywhereDefaultDto {
 	private double spot_long;
 	private double total_star_score;
 	private int count_star_score;
-	
 	private List<CommonFileIODto> spot_photoes;
+	
+	
+	
+	
+	
+	
+	/** 한국관광공사 api에서 가져온 외부 ITEM_SEQ(고유번호) */
+	private String open_api_seq="0";
+	private String SPOT_REGDATE="";
+	
+	public String getSPOT_REGDATE() {
+		return SPOT_REGDATE;
+	}
+
+	public void setSPOT_REGDATE(String sPOT_REGDATE) {
+		SPOT_REGDATE = sPOT_REGDATE;
+	}
+
+	public String getOpen_api_seq() {
+		return open_api_seq;
+	}
+
+	public void setOpen_api_seq(String open_api_seq) {
+		this.open_api_seq = open_api_seq;
+	}
+
+	
+	
+	
+	
+	
+	
 
 	public int getSpot_no() {
 		return spot_no;

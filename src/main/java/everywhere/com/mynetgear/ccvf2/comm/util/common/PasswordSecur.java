@@ -67,10 +67,11 @@ public class PasswordSecur {
 	
 	@RequestMapping(value="/xmlparse/parse.do", method=RequestMethod.GET)
 	public ModelAndView parse(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		
 		int currentPage=1;
 		int numOfRows=100;
-		//도시코드
-		int areaCode=1;
+		//도시코드(1,2,3,4,5,6,7,8,31,32,33,34,35,36,37,38,39)
+		int areaCode=Integer.parseInt(request.getParameter("areaCode"));
 		String requestUrl="";
 			requestUrl="http://api.visitkorea.or.kr/openapi/service/rest/KorService/areaBasedList?ServiceKey=ccG6MDZvttNoXzutJHYMjBFR3AWZFCe%2B22ZHpIoB1ufPrRk48dGNhxEPYOdaNjsQowDwMpegNEU03lcRgm%2BXUw%3D%3D&MobileOS=ETC&MobileApp=everywhere&areaCode="+areaCode+"&numOfRows="+numOfRows+"&pageNo="+currentPage;
 		
@@ -85,7 +86,7 @@ public class PasswordSecur {
 			String url="http://api.visitkorea.or.kr/openapi/service/rest/KorService/areaBasedList?ServiceKey=ccG6MDZvttNoXzutJHYMjBFR3AWZFCe%2B22ZHpIoB1ufPrRk48dGNhxEPYOdaNjsQowDwMpegNEU03lcRgm%2BXUw%3D%3D&MobileOS=ETC&MobileApp=everywhere&areaCode="+areaCode+"&numOfRows="+numOfRows+"&pageNo="+currentPage;
 			System.out.println(Constant.LOG_ID1+ url);	
 			//관광명소 일괄 넣기
-				ArrayList<SpotDto> list=start(url);
+				ArrayList<SpotDto> list=start(url, areaCode);
 				int size=list.size();
 				for (int i = 0; i < size; i++) {
 					SpotDto dto= list.get(i);
@@ -102,7 +103,38 @@ public class PasswordSecur {
 	}
 	
 	
-	private ArrayList<SpotDto> start(String requestUrl) throws Exception{
+	private ArrayList<SpotDto> start(String requestUrl,int areaCode) throws Exception{
+		//도시코드 설정
+		String cityCode="";
+		if(areaCode==1){
+			//1이면 서울
+			cityCode="C0001";
+		}else if(areaCode==2){
+			//2이면 인천
+			cityCode="C0002";
+		}else if(areaCode==3){
+			//3이면 대전
+			cityCode="C0003";
+		}else if(areaCode==4){
+			//4이면 대구
+			cityCode="C0004";
+		}else if(areaCode==5){
+			//5이면 광주
+			cityCode="C0005";
+		}else if(areaCode==6){
+			//6이면 부산
+			cityCode="C0006";
+		}else if(areaCode==7){
+			//7이면 울산
+			cityCode="C0007";
+		}else if(areaCode==8){
+			//8이면 세종
+			cityCode="C0008";
+		}else{
+			
+		}
+		
+		
         URL url = new URL(requestUrl);
         URLConnection connection = url.openConnection();
  
@@ -113,7 +145,7 @@ public class PasswordSecur {
         	SpotDto dto= new SpotDto();
         	dto.setMem_no(384);
         	dto.setCountry_code("B0001");
-        	dto.setCity_code("C0001");
+        	dto.setCity_code(cityCode);
         	dto.setMem_level_code("M0001");
         	String addr="";
         	String imgSeq="";
@@ -161,12 +193,13 @@ public class PasswordSecur {
                 }else if(node.getNodeName().equals("mapx")){
                 	dto.setSpot_long(Double.parseDouble(node.getTextContent()));
                 }else if(node.getNodeName().equals("firstimage")){
-                	imgSeq+=imgprocess(node.getTextContent());
+                	imgSeq+=imgprocess(node.getTextContent(),cityCode);
                 	imgSeq+=",";
                 }
             }
             
             dto.setSpot_note(start3(contentId,contentTypeId));
+            dto.setOpen_api_seq(contentId);
             dto.setAttach_file(imgSeq);
             dto.setSpot_addr(addr);
             dto.setSpot_type_code(type);
@@ -221,7 +254,7 @@ public class PasswordSecur {
     }
     
     
-    private String imgprocess(String imgUrl){
+    private String imgprocess(String imgUrl,String cityCode){
     	CommonFileIODto commFileDto = new CommonFileIODto();
     	commFileDto.setSave_path(Filepath);
     	
@@ -229,7 +262,7 @@ public class PasswordSecur {
     	commFileDto.setExtension(extension);
     	String realFileName = StringUtils.substringAfterLast(imgUrl, "/");
     	commFileDto.setReal_name(realFileName);
-    	commFileDto.setSave_name("spot_" + System.currentTimeMillis());
+    	commFileDto.setSave_name("spot_("+cityCode+")" + System.currentTimeMillis());
     	
     	String result="";
     	try {
@@ -322,9 +355,9 @@ public class PasswordSecur {
     		for(Node node = descNodes.item(i).getFirstChild(); node!=null; node=node.getNextSibling()){ //첫번째 자식을 시작으로 마지막까지 다음 형제를 실행
     			if(node.getNodeName().equals("infoname")){
     				//제목을 붙임
-    				content.append("<H1 id='infoname'>");
+    				content.append("<span id='infoname'>");
     				content.append(node.getTextContent());
-    				content.append("</H1>");
+    				content.append("</span>");
     			}else if(node.getNodeName().equals("infotext")){
     				content.append("<div id='condentAll'>");
     				content.append(node.getTextContent());

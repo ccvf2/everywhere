@@ -48,6 +48,11 @@ public class CommonCodeDaoImp implements CommonCodeDao {
 		CommonCodeDto CommonCodeDto = new CommonCodeDto();
 		return sqlTemplate.selectList("selectList_code_info",CommonCodeDto);
 	}
+	/** 코드 목록가져오기(매개변수 있는 타입)-관리자 페이지에서만 사용 */
+	@Override
+	public List<CommonCodeDto> getListCommonCodeInfoAdmin(CommonCodeDtoExt dtoExt) {
+		return sqlTemplate.selectList("selectList_code_info_admin",dtoExt);
+	}
 	
 	
 	
