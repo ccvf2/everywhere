@@ -24,5 +24,22 @@ public interface MailTemplateService {
 	 * @described 매소드의 용도를 적어주세요
 	 * @param mav
 	 */
+	public void mailTemplateInsertView(ModelAndView mav);
+	/**
+	 * @author 배성욱
+	 * @createDate 2016. 1. 10.
+	 * @described 매소드의 용도를 적어주세요
+	 * @param mav
+	 */
 	public void mailTemplateInsert(ModelAndView mav);
+	
+	
+	/**
+	 * @author 배성욱
+	 * @createDate 2016. 1. 20.
+	 * @described 메일템플릿 작성 전 활성화된 폼이 있는지 확인.
+	 * @param mav
+	 */
+	public void mailTemplateActiveCheck(ModelAndView mav);
+	
 }

@@ -35,7 +35,6 @@ public class MailTemplatDaoImp implements MailTemplatDao {
 	 * @author 배성욱
 	 * @createDate 2016. 1. 14.
 	 * @described 메일템플릿 데이터베이스 전송
-	 * @reference class
 	 * @param dto
 	 * @return int
 	 */
@@ -43,6 +42,21 @@ public class MailTemplatDaoImp implements MailTemplatDao {
 	public int insertMailTemplate(MailTemplateDto dto) {
 		int result=0;
 		result= sqlTemplate.insert("insert_email_template", dto);
+		return result;
+	}
+
+
+	/**
+	 * @author 배성욱
+	 * @createDate 2016. 1. 20.
+	 * @described 메일템플릿을 등록하기 전에 활성화가된 양식이 있는지확인
+	 * @param dto
+	 * @return int
+	 */
+	@Override
+	public int mailTemplateActiveCheck(MailTemplateDto dto) {
+		int result=0;
+		result= sqlTemplate.selectOne("select_check_mail_template_Active", dto);
 		return result;
 	}
 	

@@ -22,24 +22,26 @@
 
 	//화면에서 등록 버튼을 눌럿을 때
 	function insertCcodeFormSubmin(){
-		$("#code_CRUD").val("C");
 		var form = document.getElementById("codeForm");
+		$("#code_CRUD").val("C");
 		form.action="/admin/commoncode/codeModify.do"; 
 		form.submit(); 
 	}
 
 	//화면에서 수정 버튼을 눌럿을 때
 	function updateCcodeFormSubmin(){
+		var form = document.getElementById("codeForm");
 		$("#code_CRUD").val("U"); 
-		$("#codeForm").action="/admin/commoncode/codeModify.do"; 
-		$("#codeForm").submit(); 
+		form.action="/admin/commoncode/codeModify.do"; 
+		form.submit(); 
 	}
 
 	//화면에서 삭제 버튼을 눌럿을 때
 	function deleteCodeFormSubmin(){
+		var form = document.getElementById("codeForm");
 		$("#code_CRUD").val("D"); 
-		$("#codeForm").action="/admin/commoncode/codeModify.do"; 
-		$("#codeForm").submit(); 
+		form.action="/admin/commoncode/codeModify.do"; 
+		form.submit(); 
 	}
 
 	// 코드셀렉터(코드그룹 조건을 선택했을 때.)
