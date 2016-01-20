@@ -1,9 +1,7 @@
 /**
  * 
  */
-function typeCheckbox() {
-	
-}
+
 
 //검색을 하였을때 실행되는 코드
 function searchSpotList(page){
@@ -16,6 +14,7 @@ function searchSpotList(page){
 	    	spot_type_code+=$(this).val() + ",";
 	    }
 	});
+	alert(spot_type_code);
 	var params = "searchPlace=" + searchPlace + "&searchSpot=" + searchSpot + "&spotPage=" + page + "&spot_type_code=" + spot_type_code;
 	location.href="/user/search/searchSpot.do?" + params;
 }
