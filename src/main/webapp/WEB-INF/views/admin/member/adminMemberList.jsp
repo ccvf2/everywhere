@@ -41,39 +41,105 @@
                     </div>
                 </div>
                 <form>
-	                <!-- 필터들 -->
+	                <!-- 필터 시작 -->
 	                <div class="row">
 	                	<div class="col-xs-6 col-sm-2">
 							<div class="form-group">
 	                          <label>사용자 종류</label>
-	                           	<select name="memLevel" id="memLevel" class="form-control">
-	                           		<option value="" selected="selected">모두</option>
-									<c:forEach var="memLevel" items="${memLevelList}">
-										<option value="${memLevel.code}">${memLevel.code_name}</option>
-									</c:forEach>
-								</select>
+	                          <c:choose>
+	                          	<!-- 선택된 사용자 종류가 있을 경우 -->
+	                          	<c:when test="${adminMemberDto.mem_level_code!=null}">
+	                          		<select name="memLevel" id="memLevel" class="form-control" onchange="searchFun()">
+		                           		<option value="" selected="selected">모두</option>
+										<c:forEach var="memLevel" items="${memLevelList}">
+											<!-- 선택된 사용자 종류를 유지 -->
+											<c:choose>
+												<c:when test="${adminMemberDto.mem_level_code==memLevel.code}">
+													<option value="${memLevel.code}" selected="selected">${memLevel.code_name}</option>
+												</c:when>
+												<c:otherwise>
+													<option value="${memLevel.code}">${memLevel.code_name}</option>
+												</c:otherwise>
+											</c:choose>
+										</c:forEach>
+									</select>
+	                          	</c:when>
+	                          	<!-- 선택된 사용자 종류가 없을 경우 모두를 선택 -->
+	                          	<c:otherwise>
+	                          		<select name="memLevel" id="memLevel" class="form-control" onchange="searchFun()">
+		                           		<option value="" selected="selected">모두</option>
+										<c:forEach var="memLevel" items="${memLevelList}">
+											<option value="${memLevel.code}">${memLevel.code_name}</option>
+										</c:forEach>
+									</select>
+	                          	</c:otherwise>
+	                          </c:choose>
+	                           	
 	                        </div>
 	                    </div>
 	                  	<div class="col-xs-6 col-sm-2">    
 	                        <div class="form-group">
 	                          <label>계정 상태</label>
-	                          <select name="memStatus" id="memStatus" class="form-control">
-	                          		<option value="" selected="selected">모두</option>
-									<c:forEach var="memStatus" items="${memStatusList}">
-										<option value="${memStatus.code}">${memStatus.code_name}</option>
-									</c:forEach>
-							   </select>
+	                          <c:choose>
+	                          	<!-- 이전 페이지에서 계정 상태가 선택되었던 경우 -->
+	                          	<c:when test="${adminMemberDto.mem_status_code!=null}">
+		                          	<select name="memStatus" id="memStatus" class="form-control" onchange="searchFun()">
+			                          		<option value="">모두</option>
+											<c:forEach var="memStatus" items="${memStatusList}">
+												<c:choose>
+													<!-- 이전페이지에서 선택된 계정상태를 선택 -->
+													<c:when test="${adminMemberDto.mem_status_code=={memStatus.code}">
+														<option value="${memStatus.code}" selected="selected">${memStatus.code_name}</option>
+													</c:when>
+													<c:otherwise>
+														<option value="${memStatus.code}">${memStatus.code_name}</option>	
+													</c:otherwise>
+												</c:choose>
+											</c:forEach>
+										</select>	
+		                        </c:when>
+		                        <!-- 선택된 계정 상태가 없는 경우 모두를 선택 -->
+	                          	<c:otherwise>
+	                          		<select name="memStatus" id="memStatus" class="form-control" onchange="searchFun()">
+		                          		<option value="" selected="selected">모두</option>
+										<c:forEach var="memStatus" items="${memStatusList}">
+											<option value="${memStatus.code}">${memStatus.code_name}</option>
+										</c:forEach>
+									</select>	
+	                          	</c:otherwise>
+	                          </c:choose>
+	                          
 	                        </div>
 	                    </div>
 	                  	<div class="col-xs-6 col-sm-2">        
 	                        <div class="form-group">
 	                          <label>핸드폰 인증 상태</label>
-	                           <select name="phoneStatus" id="phoneStatus" class="form-control">
-									<c:forEach var="phoneStatus" items="${phoneStatusList}">
-										<option value="${phoneStatus.code}">${phoneStatus.code_name}</option>
-									</c:forEach>
-									<option value="" selected="selected">모두</option>
-							   </select>
+	                          <c:choose>
+	                          	<c:when test="${adminMemberDto.mem_p_status_code!=null}">
+	                          		<select name="phoneStatus" id="phoneStatus" class="form-control" onchange="searchFun()">
+										<c:forEach var="phoneStatus" items="${phoneStatusList}">
+											<c:choose>
+												<c:when test="${adminMemberDto.mem_p_status_code==phoneStatus.code}">
+													<option value="${phoneStatus.code}" selected="selected">${phoneStatus.code_name}</option>
+												</c:when>
+												<c:otherwise>
+													<option value="${phoneStatus.code}">${phoneStatus.code_name}</option>
+												</c:otherwise>
+											</c:choose>
+										</c:forEach>
+										<option value="" selected="selected">모두</option>
+								   </select>
+	                          	</c:when>
+	                          	<!-- 이전 페이지에서 핸드폰 인증 상태가 선택되지 않았으면 모두 선택 -->
+	                          	<c:otherwise>
+	                          		<select name="phoneStatus" id="phoneStatus" class="form-control" onchange="searchFun()">
+										<c:forEach var="phoneStatus" items="${phoneStatusList}">
+											<option value="${phoneStatus.code}">${phoneStatus.code_name}</option>
+										</c:forEach>
+										<option value="" selected="selected">모두</option>
+								   </select>
+	                          	</c:otherwise>
+	                          </c:choose>
 	                        </div>
 						</div>
 						<div class="col-xs-6 col-sm-3">
@@ -88,6 +154,7 @@
 							<input type="text" name="end_date" id="end_date" class="form-control"/><br/>
 						</div>
 					</div>
+					<!-- 필터 끝 -->
 					
 					<!-- 검색칸 -->
 	                <div class="row">
@@ -102,7 +169,18 @@
 	                	<div class="col-xs-8">
 	                		<label>검색어</label>
 	                		<div class="input-group">
-                                <input type="text" id="search" class="form-control">
+	                			<!--  검색어 가져오기 -->
+	                			<c:choose>
+	                				<c:when test="${adminMemberDto.mem_name!=null}">
+	                					<c:set var="searchValue" value="${adminMemberDto.mem_name}"></c:set>
+	                				</c:when>
+	                				<c:when test="${adminMemberDto.mem_email!=null}">
+	                					<c:set var="searchValue" value="${adminMemberDto.mem_email}"></c:set>
+	                				</c:when>
+	                			</c:choose>
+	                			
+                                <input type="text" id="search" class="form-control" value="${searchValue}">
+                            <!-- 검색 버튼 시작 -->
 		                    <span class="input-group-btn">
 		                    	<button class="btn btn-default" type="button" onclick="searchFun()">
 		                    		<i class="fa fa-search"></i>

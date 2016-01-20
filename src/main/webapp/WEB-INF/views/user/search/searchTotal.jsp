@@ -221,7 +221,7 @@
 			        	<c:forEach var="spot" items="${searchSpotList}">
 			        		<div class="col-md-4">
 					            <div class="grid-boxes-in">
-					                <a href="javascript:spotReadPage('${spot.spot_no}')"><img class="img-responsive" src="/attatchFile/spot/${spot.spot_photoes[0].save_name}.${spot.spot_photoes[0].extension}" alt="" style="width: 360px; height: 227px;"></a>
+					                <a href="javascript:spotReadPage('${spot.spot_no}')"><img class="img-responsive" src="/attatchFile/spot/${spot.spot_photoes[0].save_name}.${spot.spot_photoes[0].extension}" alt="" onError="this.src='/attatchFile/spot/no_image.jpg'" style="width: 360px; height: 227px;"></a>
 					                <div class="grid-boxes-caption">
 					                    <h3><a href="javascript:spotReadPage('${spot.spot_no}')">${spot.spot_name}</a></h3>
 					                    <ul class="list-inline grid-boxes-news">

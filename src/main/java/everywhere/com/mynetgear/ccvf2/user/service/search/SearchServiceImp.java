@@ -104,6 +104,7 @@ public class SearchServiceImp implements SearchService {
 		mav.addObject("searchPlace", searchPlace);
 		mav.addObject("searchSpotList", searchSpotList);
 		mav.addObject("placeList", placeList);
+		mav.addObject("countryList", countryList);
 		mav.addObject("spotTypeList", spotTypeList);
 		mav.setViewName("user/search/searchSpot");
 	}
@@ -112,6 +113,7 @@ public class SearchServiceImp implements SearchService {
 	public void searchPlanner(ModelAndView mav) {
 		Map<String, Object> map = mav.getModelMap();
 		HttpServletRequest request = (HttpServletRequest) map.get("request");
+		/*스케줄 검색*/
 	}
 
 	@Override
@@ -162,10 +164,6 @@ public class SearchServiceImp implements SearchService {
 		placeList.addAll(countryList);
 		
 		List<CommonCodeDto> spotTypeList = commonCodeService.getListCodeGroup("T0001");
-		
-		
-		
-		
 		
 //		List<PlannerDao> plannerList = searchDao.getPlannerList(startRow, endRow, searchValue);
 		

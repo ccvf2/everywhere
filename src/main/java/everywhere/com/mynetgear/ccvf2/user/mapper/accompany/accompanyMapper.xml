@@ -125,7 +125,7 @@
 	
 	<!-- 게시글 가져오기 -->
 	<select id="getOneAccompany" parameterType="int" resultMap="accompanyMap">
-		select  accompany.accompany_no,
+		select accompany.accompany_no,
 			  accompany.mem_no, 
 			  accompany.write_date, 
 			  accompany.start_date, 

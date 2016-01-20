@@ -101,10 +101,10 @@
 		                    <fieldset style="padding: 15px 15px 5px;">
 		                        <section>
 		                            <label class="label">명소 종류</label>
-		                            <div>
-		                            	<label class="checkbox"><input type="checkbox" name="spot_type_code" checked="checked" value=""><i></i>전체</label>
+		                            <div class="select_spot_type">
+		                            	<label class="checkbox"><input type="checkbox" name="spot_type_code" id="check_all" checked="checked" value="T0000"><i></i>전체</label>
 		                            	<c:forEach var="spotType" items="${spotTypeList}">
-		                            		<label class="checkbox"><input type="checkbox" name="spot_type_code" value="${spotType.code}"><i></i>${spotType.code_name}</label>
+		                            		<label class="checkbox"><input type="checkbox" name="spot_type_code" id="${spotType.code}" value="${spotType.code}"><i></i>${spotType.code_name}</label>
 		                            	</c:forEach>
 		                            </div>
 		                        </section>
@@ -175,12 +175,18 @@
 					                        <li><span>By </span><a href="/user/myPage/myPage.do?uandMe=S0002&mem_no=${spot.mem_no}">${spot.mem_name}</a></li>
 					                    </ul>                    
 					                    <p>${spot.spot_note}</p>
+					                    
+					                    <!-- 별점 출력 -->
+					                    <!--<c:if test=" ${spot.count_star_score}==0">
+					                    </c:if>
+					                    ${spot.total_star_score}
+					                    ${spot.count_star_score}
 					                    <i class="fa fa-star"></i>
 					                    <i class="fa fa-star"></i>
 					                    <i class="fa fa-star"></i>
 					                    <i class="fa fa-star-half-o"></i>
 					                    <i class="fa fa-star-o"></i>
-					                    3.5
+					                    3.5-->
 					                </div>
 					            </div>
 				        	</c:forEach>
@@ -193,7 +199,7 @@
 							<div class="btn-group" role="group" aria-label="First group">
 								<c:set var="pageBlock" value="${5}" />
 								<c:set var="pageCount" value="${count/boardSize+(count%boardSize==0?0:1)}"/>
-									
+								
 								<fmt:parseNumber var="result" value="${(currentPage-1)/pageBlock }" integerOnly="true"/>
 								
 								<c:set var="startPage" value="${result*pageBlock+1}"/>
@@ -255,8 +261,25 @@
 	<script type="text/javascript" src="/assets/js/plugins/style-switcher.js"></script>
 	<script type="text/javascript" src="/assets/plugins/scrollbar/js/jquery.mCustomScrollbar.concat.min.js"></script>
 	<script type="text/javascript">
-	    jQuery(document).ready(function() {
-	        App.initScrollBar();
+	    $(document).ready(function() {
+            App.initScrollBar();
+	       	//움직이는 검색바
+	       $('#sidebar').affix({
+			  offset: {
+			    top: 235
+			  }
+			});
+			
+			
+			//전체 체크박스가 선택되었을 경우
+			$("#check_all").click(function(){
+				var chk = $(this).is(":checked");//.attr('checked');
+				if(chk) {
+					$(".select_spot_type input").attr('checked', true);
+				} else {
+					$(".select_spot_type input").attr('checked', false);
+				}
+			});
 	    });
 	    
 	    
@@ -277,15 +300,6 @@
 				}
 			})
 		};
-		
-		$(document).ready(function(){
-			/*사이드바를 고정하기 위한 코드*/
-			$('#sidebar').affix({
-			  offset: {
-			    top: 0
-			  }
-			});
-		});
 	</script>
   </body>
 </html>
