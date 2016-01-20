@@ -11,14 +11,21 @@
 	<select id="select_mailTemplate_list" resultType="everywhere.com.mynetgear.ccvf2.admin.dto.mailtemplat.MailTemplateDto" parameterType="everywhere.com.mynetgear.ccvf2.admin.dto.mailtemplat.MailTemplateDto">
 		SELECT 
 			MTEMP_NO
-			MTEMP_GROUP_CODE
-			MTEMP_NAME
-			MTEMP_TITLE
-			MTEMP_CONTENT
-			MTEMP_USER_YN
-			MTEMP_REGDATE
+			, MTEMP_GROUP_CODE
+			, (select code_name from tbl_common_code where code=MTEMP_GROUP_CODE)MTEMP_GROUP_NAME
+			, MTEMP_NAME
+			, MTEMP_TITLE
+			, MTEMP_CONTENT
+			, MTEMP_ACTIVE
+			, (select code_name from tbl_common_code where code=MTEMP_ACTIVE)MTEMP_ACTIVE_NAME
+			, MTEMP_REGDATE
 		FROM
 			TBL_MAIL_TEMPLATE
+		ORDER BY
+			MTEMP_GROUP_CODE
+		DESC
+			, MTEMP_REGDATE
+		DESC
 	</select>
 	
 	<insert id="insert_email_template" parameterType="everywhere.com.mynetgear.ccvf2.admin.dto.mailtemplat.MailTemplateDto">
@@ -30,7 +37,7 @@
 			, MTEMP_NAME
 			, MTEMP_TITLE
 			, MTEMP_CONTENT
-			, MTEMP_USER_YN
+			, MTEMP_ACTIVE
 			, MTEMP_REGDATE
 		)
 		VALUES(
@@ -39,9 +46,20 @@
 			, #{mtemp_name}
 			, #{mtemp_title}
 			, #{mtemp_content}
-			, #{mtemp_use_yn}
+			, #{mtemp_active}
 			, SYSDATE
 		)
 	</insert>
+	
+	<select id="select_check_mail_template_Active" resultType="int" parameterType="everywhere.com.mynetgear.ccvf2.admin.dto.mailtemplat.MailTemplateDto">
+		SELECT
+			COUNT(*)
+		FROM
+			TBL_MAIL_TEMPLATE
+		WHERE
+			MTEMP_GROUP_CODE=#{mtemp_group_code}
+		AND
+			MTEMP_ACTIVE=#{mtemp_active}
+	</select>
 
 </mapper>

@@ -56,6 +56,7 @@ public class AuthorityInterceptor extends HandlerInterceptorAdapter {
 		urlList.add("/user/search/searchTotal.do");
 		urlList.add("/password/passwordChanghe.do");
 		urlList.add("/xmlparse/parse.do"); //성욱) 추후 삭제 예정
+		urlList.add("/admin/mailtemplate/mailTemplateActiveCheck.ajax");
 
 		for (String urlException : urlList) {
 			if (uri.indexOf(urlException) > -1) {

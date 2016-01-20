@@ -5,15 +5,6 @@
 <head>
 <title>관리자-메일템플릿-등록</title>
 </head>
-<script type="text/javascript">
-//폼 전송 매소드
-	function doSubmitForm(){
-		var form=document.getElamentByName("mailTemplateForm");
-			form.action="/admin/mailtemplate/mailTemplateInsert.do";
-			form.submit();
-		}
-</script>
-<!-- <script type="text/javascript" src="//cdn.tinymce.com/4/tinymce.min.js"></script> -->
 <body>
 	<div id="wrapper">
 		<!-- Navigation -->
@@ -23,6 +14,82 @@
 			<!-- sideMeny -->
 			<c:import url="/WEB-INF/views/admin/menu/leftMenu.jsp"/>
 		</nav>
+<script type="text/javascript">
+	//폼 전송 매소드
+	function doTemplateFormSubmit(){
+		//벨리데이션 체크
+		var templateForm= document.getElementById("mailTemplateForm");
+		var valideCheck=false;
+		
+		if(templateForm.mtemp_group_code.value==''){
+			alert("메일템플릿종류를 선택해주세요.");
+			templateForm.mtemp_group_code.focus();
+			return false;
+		}
+		if(templateForm.mtemp_name.value==''){
+			alert("메일템플릿제목을 작성 해주세요.");
+			templateForm.mtemp_name.focus();
+			return false;
+		}
+		if(templateForm.mtemp_title.value==''){
+			alert("메일제목을 작성 해주세요.");
+			templateForm.mtemp_title.focus();
+			return false;
+		}
+		if(templateForm.mtemp_content.value==''){
+			alert("메일내용을 작성 해주세요.");
+			templateForm.mtemp_content.focus();
+			return false;
+		}
+		alert(tinyMCE.get("mtemp_content").getContent());
+		valideCheck=true;
+		
+		if(valideCheck==true){
+			templateForm.action="/admin/mailtemplate/mailTemplateInsert.do";
+			templateForm.submit();
+			}
+		}
+		
+	//활성화 여부 확인 보내기전 벨리데이션
+	function checkActiveTemplate(){
+		var templateForm= document.getElementById("mailTemplateForm");
+		var checkActive=templateForm.mtemp_active.value;
+		var selectGroup=templateForm.mtemp_group_code.value;
+			if(checkActive!='M1202'&&selectGroup!=''){
+				checkActiveTemplateAJAX(selectGroup,checkActive)	
+			}
+	}
+	
+	//활성화 여부 확인 AJAX요청
+	function checkActiveTemplateAJAX(selectGroup,checkActive){
+		$(function() {
+			$.ajax({
+				  url : "/admin/mailtemplate/mailTemplateActiveCheck.ajax?activeCode="+checkActive+"&groupCode="+selectGroup
+				, type : "GET"
+				, dataType:"text"
+				, success:function(result){checkConfirm(result);}
+			})
+		})
+	}
+	
+	//AJAX후 결과 확인 창
+	function checkConfirm(result){
+		if(result==1){
+			var str="선택된 메일 템플릿종류에 활성화된 템플릿이 존재합니다. 무시하고 이 템플릿을 사용하시겠습니까?";
+			if(confirm(str)){
+			}else{
+				var templateForm= document.getElementById("mailTemplateForm");
+				var checkActive=templateForm.mtemp_active.length;
+				for (var ik = 0; ik < templateForm.mtemp_active.length; ik++) {
+					if(templateForm.mtemp_active[ik].value=="M1202"){
+						templateForm.mtemp_active[ik].checked=true;
+					}
+				}
+			}
+		}
+	}
+	
+</script>
 <!-- 텍스트 에디터 관련 import -->
 <script type="text/javascript" src="/script/tinymce/tinymce.min.js"></script>
 <script type="text/javascript">tinymce.init({
@@ -82,39 +149,40 @@
 							</div>
 							<div class="panel-body">
 						<div class="table-responsive">
-						 <form role="form" name="mailTemplateForm" method="post">
+						 <form role="form" name="mailTemplateForm" id="mailTemplateForm" method="post">
 							<table class="table table-bordered table-hover">
 								<colgroup>
 									<col width="15%"/>
 									<col width="85%"/>
 								</colgroup>
 									<tr>
-										<th>메일템플릿 사용여부:</th>
+										<th><label for="codeList1">메일템플릿 종류:</label></th>
 										<td>
 											<div class="form-group">
-												<label class="radio-inline">
-													<input type="radio" name="mtemp_use_yn" id="optionsRadiosInline1" value="Y">선택
-												</label>
-												<label class="radio-inline">
-													<input type="radio" name="mtemp_use_yn" id="optionsRadiosInline2" value="N" checked>미선택
-												</label>
+												<select class="form-control" name="mtemp_group_code" id="codeList1" onchange="checkActiveTemplate()">
+													<option value="">종류를 선택하세요</option>
+													<c:forEach var="codeList1" items="${templateGroupCodeList}">
+													<option value="${codeList1.code}">${codeList1.code_name}</option>
+													</c:forEach>
+												</select>
 											</div>
-										
 										</td>
 									</tr>
 									<tr>
-										<th>메일템플릿 종류:</th>
+										<th>메일템플릿 사용여부:</th>
 										<td>
 											<div class="form-group">
-												<label>Selects</label>
-												<select class="form-control" name="mtemp_group_code">
-													<option value="1">1</option>
-													<option value="2">2</option>
-													<option value="3">3</option>
-													<option value="4">4</option>
-													<option value="5">5</option>
-												</select>
+												<c:set value="M1202" var="defaultVal" />
+												<c:forEach var="codeList0" items="${templateActive}">
+												<label class="radio-inline">
+													<input type="radio" name="mtemp_active" id="optionsRadiosInline1" 
+													value="${codeList0.code}" onchange="checkActiveTemplate()" 
+													<c:if test="${codeList0.code==defaultVal}">checked="checked"</c:if>>
+														${codeList0.code_name}
+												</label>
+												</c:forEach>
 											</div>
+										
 										</td>
 									</tr>
 									<tr>
@@ -140,14 +208,13 @@
 										<th colspan="2">
 											<div class="form-group">
 												<label>Text area</label>
-												<textarea class="form-control" rows="3" name="mtemp_content"></textarea>
+												<textarea name="mtemp_content"></textarea>
 											</div>
 										</th>
 									</tr>
 									<tr>
 										<th colspan="2">
-											<button>전송</button>
-											<button>취소</button>
+											<a href="javascript:doTemplateFormSubmit()">전송</a>
 										</th>
 									</tr>
 							</table>
