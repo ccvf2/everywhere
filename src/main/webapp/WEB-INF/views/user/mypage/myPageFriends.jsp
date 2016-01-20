@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -49,13 +50,13 @@
                     	<c:if test="${friendsList.size()==0}">
 	                        <div class="alert alert-info alert-dismissable">
 	                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-	                            <i class="fa fa-info-circle"></i>  <strong><c:out value="${memberDto.mem_name}"/>님의 친구들</strong>&nbsp;&nbsp;&nbsp; <c:out value="${friendsList.size()}"/>명. 친구를 추가하세요!
+	                            <i class="fa fa-info-circle"></i>  <strong><c:out value="${memberDto.mem_name}"/>님의 친구들</strong>&nbsp;&nbsp;&nbsp; <c:out value="${count}"/>명. 친구를 추가하세요!
 	                        </div>
                     	</c:if>
                     	<c:if test="${friendsList.size()>0}">
 	                   		<div class="alert alert-info alert-dismissable">
 	                   			<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-	                            <i class="fa fa-info-circle"></i>  <strong><c:out value="${memberDto.mem_name}"/>님의 친구들</strong>&nbsp;&nbsp;&nbsp; <c:out value="${friendsList.size()}"/>명.
+	                            <i class="fa fa-info-circle"></i>  <strong><c:out value="${memberDto.mem_name}"/>님의 친구들</strong>&nbsp;&nbsp;&nbsp; <c:out value="${count}"/>명.
 	                       	</div>
 	                    </c:if>
                     	<form method="get" id="sky-form3" class="sky-form">
@@ -99,7 +100,61 @@
 			                </div>
 		                </c:if>
 	                </div><!--/end row-->
-	                <button type="button" class="btn-u btn-u-default btn-block text-center">Load More</button>
+	                <div align="center">
+						<c:if test="${count>0}">
+							<div class="btn-group" role="group" aria-label="First group" align="center">
+								<c:set var="pageBlock" value="3" />
+								<fmt:parseNumber var="pageCount" value="${count/boardSize+(count%boardSize==0?0:1)}" integerOnly="true"/>
+								<fmt:parseNumber var="result" value="${(currentPage-1)/pageBlock}" integerOnly="true"/>
+								<c:set var="startPage" value="${result*pageBlock+1}"/>
+								<c:set var="endPage" value="${startPage+pageBlock-1}"/>
+								
+								<!-- 마지막 페이지가 페이지 수보다 작으면 -->
+								<c:if test="${endPage > pageCount }">
+									<c:set var="endPage" value="${pageCount}"/>
+								</c:if>
+								
+								<!-- 페이징 -->
+								<c:choose>
+									<c:when test="${memberDto.mem_no==mem_object.mem_no}">
+										<c:set var="uandMe" value="uandMe=S0001"/>		
+									</c:when>
+									<c:otherwise>
+										<c:set var="uandMe" value="uandMe=S0002"/>
+									</c:otherwise>
+								</c:choose>
+								
+								<nav>
+								  <ul class="pagination">
+								  	<c:if test="${startPage > pageBlock}">
+									  	<li>
+										  	<a href="/user/myPage/friends.do?mem_no=${memberDto.mem_no}&pageNumber=${currentPage-pageBlock}" aria-label="Previous">
+										        <span aria-hidden="true">&laquo;</span>
+									     	</a>
+								     	</li>
+									</c:if>
+								    <c:forEach var="i" begin="${startPage}" end="${endPage}">
+										 <c:if test="${i!=currentPage}">
+										 	<li><a href="/user/myPage/friends.do?mem_no=${memberDto.mem_no}&pageNumber=${i}" role="button" class="btn btn-default">${i}</a></li>
+										 </c:if>
+										 <c:if test="${i==currentPage}">
+										 	<li class="active"><a href="#" role="button" class="btn btn-default">${i}</a></li>
+										 </c:if>
+									</c:forEach>
+									
+							  		<c:if test="${endPage < pageCount }">
+							  			<li>
+									      <a href="/user/myPage/friends.do?mem_no=${memberDto.mem_no}&pageNumber=${startPage+pageBlock}" aria-label="Next">
+									        <span aria-hidden="true">&raquo;</span>
+									      </a>
+									    </li>
+									</c:if>
+								  </ul>
+								</nav>
+								<!-- 페이징 끝 -->
+							</div>
+						</c:if>
+					</div>
 	                <!--End Profile Blog-->
                 </div>
             </div>

@@ -85,9 +85,11 @@ public class MemberDaoImp implements MemberDao {
 
 	/** 친구 목록*/
 	@Override
-	public List<MemberDto> getListFriends(int mem_no) {
+	public List<MemberDto> getListFriends(int mem_no, int startRow, int endRow) {
 		HashMap<String, Object> map=new HashMap<String, Object>();
 		map.put("mem_no", mem_no);
+		map.put("startRow", startRow);
+		map.put("endRow", endRow);
 		map.put("MEMBER_STATUS_ACTIVE", Constant.MEMBER_STATUS_ACTIVE);
 		
 		return sqlTemplate.selectList("getListFriends", map);
@@ -117,6 +119,12 @@ public class MemberDaoImp implements MemberDao {
 		map.put("MEMBER_STATUS_ACTIVE", Constant.MEMBER_STATUS_ACTIVE);
 		
 		return sqlTemplate.selectList("searchFriends", map);
+	}
+
+	@Override
+	public int getFriendsCount(int mem_no) {
+		System.out.println("---------getFriendsCountDaoImpl");
+		return sqlTemplate.selectOne("getFriendsCount", mem_no);
 	}
 
 }

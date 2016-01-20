@@ -111,6 +111,7 @@
 	</delete>
 	
 	<select id="getListFriends" resultType="everywhere.com.mynetgear.ccvf2.user.dto.member.MemberDto" parameterType="java.util.HashMap">
+		<![CDATA[
 		select 
 			k.MEM_NO
 			,k.MEM_EMAIL
@@ -125,10 +126,16 @@
 			,k.MEM_REG_DATE
  		from
  			tbl_member k
- 		where
- 			k.mem_no in (select mate_no from tbl_mate where mem_no=#{mem_no})
- 		and 
-			k.MEM_STATUS_CODE=#{MEMBER_STATUS_ACTIVE}
+	    where mem_no in 
+	      (SELECT kk.mate_no 
+				     FROM (SELECT ROWNUM rnum, A.* 
+				           FROM (SELECT * 
+				                 FROM tbl_mate 
+				                 WHERE mem_no=#{mem_no}
+				                 ORDER BY mem_no DESC) A)kk    
+				WHERE kk.rnum >= #{startRow}
+				AND kk.rnum <=#{endRow})
+		]]>
 	</select>
 	
 	
@@ -162,5 +169,9 @@
 										or k.MEM_NAME like '%'||#{search, jdbcType=VARCHAR}||'%')
 		and 
 			k.MEM_STATUS_CODE=#{MEMBER_STATUS_ACTIVE}
+	</select>
+	
+	<select id="getFriendsCount" parameterType="int" resultType="int">
+		select count(*) from tbl_mate where mem_no=#{mem_no}
 	</select>
 </mapper>

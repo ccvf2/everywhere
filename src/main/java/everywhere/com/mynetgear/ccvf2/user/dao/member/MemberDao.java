@@ -117,9 +117,11 @@ public interface MemberDao {
 	 * @createDate 2015. 12. 19.
 	 * @described 친구 목록
 	 * @param mem_no
+	 * @param endRow 
+	 * @param startRow 
 	 * @return
 	 */
-	public List<MemberDto> getListFriends(int mem_no);
+	public List<MemberDto> getListFriends(int mem_no, int startRow, int endRow);
 	
 	
 	/**
@@ -155,5 +157,15 @@ public interface MemberDao {
 	 * @return
 	 */
 	public List<MemberDto> searchFriends(String search);
+	
+	
+	/**
+	 * @author 김성광
+	 * @createDate 2016. 1. 18.
+	 * @described 친구 수
+	 * @param mem_no
+	 * @return
+	 */
+	public int getFriendsCount(int mem_no);
 
 }

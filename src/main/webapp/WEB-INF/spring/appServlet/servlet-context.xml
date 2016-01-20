@@ -59,6 +59,4 @@
 			<beans:ref  bean="authorityInterceptor"/> 
 			</interceptor>
 		</interceptors>
-		
-
 </beans:beans>

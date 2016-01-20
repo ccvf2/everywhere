@@ -157,10 +157,26 @@ public class MyPageServiceImpl implements MyPageService {
 		Map<String, Object> map = mav.getModelMap();
 		HttpServletRequest request= (HttpServletRequest)map.get("request");
 		
+		
 		int mem_no=Integer.parseInt(request.getParameter("mem_no"));
 		MemberDto memberDto = memberDao.memberRead(mem_no);
+		System.out.println("---------------mem_no : " + mem_no);
 		
-		List<MemberDto> friendsList=memberDao.getListFriends(mem_no);
+		String pageNumber=request.getParameter("pageNumber");
+		if(pageNumber==null) pageNumber="1";
+		
+		int boardSize=6;
+		
+		int currentPage = Integer.parseInt(pageNumber);
+		int startRow = (currentPage - 1) * boardSize + 1;
+		int endRow = currentPage * boardSize;
+		
+		System.out.println("------------startRow : " + startRow + " endRow : " + endRow + " currentPage : " + currentPage);
+		int count=memberDao.getFriendsCount(mem_no);
+		List<MemberDto> friendsList=null;
+		if(count>0) {
+			friendsList=memberDao.getListFriends(mem_no, startRow, endRow);
+		}
 		
 		HttpSession session = request.getSession();
 		MemberDto myDto=(MemberDto) session.getAttribute(Constant.SYNN_LOGIN_OBJECT);
@@ -179,6 +195,9 @@ public class MyPageServiceImpl implements MyPageService {
 		mav.addObject("mateCheck", mateCheck);
 		mav.addObject("memberDto", memberDto);
 		mav.addObject("friendsList", friendsList);
+		mav.addObject("count", count);
+		mav.addObject("boardSize", boardSize);
+		mav.addObject("currentPage", currentPage);
 		mav.setViewName("/user/myPage/myPageFriends");
 		
 		return mav;
@@ -222,7 +241,8 @@ public class MyPageServiceImpl implements MyPageService {
 		Map<String, Object> map=mav.getModelMap();
 		HttpServletRequest request = (HttpServletRequest)map.get("request");
 		String search=request.getParameter("search").trim();
-		//System.out.println("search : " + search);
+		search=search.toLowerCase();
+		System.out.println("------------search : " + search);
 		
 		List<MemberDto> friendsList=memberDao.searchFriends(search);
 		
