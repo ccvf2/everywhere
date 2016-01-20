@@ -104,6 +104,7 @@ public class AdminMemberServiceImp implements AdminMemberService {
 		// 핸드폰인증상태 공통 코드 가져옴
 		List<CommonCodeDto> phoneStatusList = commonCodeService.getListCodeGroup("M2001");
 
+		mav.addObject("adminMemberDto", adminMemberDto);
 		mav.addObject("memLevelList", memLevelList);
 		mav.addObject("memStatusList", memStatusList);
 		mav.addObject("phoneStatusList", phoneStatusList);
