@@ -8,7 +8,7 @@ import everywhere.com.mynetgear.ccvf2.comm.dto.common.EverywhereDefaultDto;
  * @described 메일템플릿 DTO
  * @reference class
  */
-public class MailTemplateDto extends EverywhereDefaultDto {
+public class MailTemplateDto extends MailTemplateDtoExt{
 	
 	/** 메일템플릿 : 탬플릿 고유 번호 */
 	private int mtemp_no=0;
@@ -21,7 +21,7 @@ public class MailTemplateDto extends EverywhereDefaultDto {
 	/** 메일템플릿 : 보낼 내용 */
 	private String mtemp_content="";
 	/** 메일템플릿 : 사용여부 */
-	private String mtemp_use_yn="";
+	private String mtemp_active="";
 	
 	
 	public int getMtemp_no() {
@@ -54,12 +54,13 @@ public class MailTemplateDto extends EverywhereDefaultDto {
 	public void setMtemp_content(String mtemp_content) {
 		this.mtemp_content = mtemp_content;
 	}
-	public String getMtemp_use_yn() {
-		return mtemp_use_yn;
+	public String getMtemp_active() {
+		return mtemp_active;
 	}
-	public void setMtemp_use_yn(String mtemp_use_yn) {
-		this.mtemp_use_yn = mtemp_use_yn;
+	public void setMtemp_active(String mtemp_active) {
+		this.mtemp_active = mtemp_active;
 	}
+
 	
 	
 	

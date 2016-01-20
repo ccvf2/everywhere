@@ -35,17 +35,25 @@ public class MailTemplateController {
 		mailTemplateService.mailTemplateList(mav);
 		return mav;
 	}
+	
 	/**
 	 * @author 배성욱
 	 * @createDate 2016. 1. 6.
 	 * @described 메일템플릿등록 화면은 CALL
+	 * @param request
+	 * @param response
+	 * @param matilTemplateDto
 	 * @return
 	 */
 	@RequestMapping(value="/admin/mailtemplate/mailTemplateInsert.do", method=RequestMethod.GET)
-	public ModelAndView mailTemplatInsertView() {
-		ModelAndView mav= new ModelAndView("/admin/mailTemplate/mailTemplateInsert");
+	public ModelAndView mailTemplatInsertView(HttpServletRequest request, HttpServletResponse response) {
+		ModelAndView mav= new ModelAndView();
+		mav.addObject("request", request); 
+		mav.addObject("response", response);
+		mailTemplateService.mailTemplateInsertView(mav);
 		return mav;
 	}
+	
 	/**
 	 * @author 배성욱
 	 * @createDate 2016. 1. 14.
@@ -61,8 +69,24 @@ public class MailTemplateController {
 		mav.addObject("request", request);
 		mav.addObject("response", response);
 		mav.addObject("matilTemplateDto", matilTemplateDto);
-		
 		mailTemplateService.mailTemplateInsert(mav);
 		return mav;
+	}
+	
+	
+	/**
+	 * @author 배성욱
+	 * @createDate 2016. 1. 20.
+	 * @described 메일템플릿 작성 전 활성화된 폼이 있는지 확인.
+	 * @param request
+	 * @param response
+	 */
+	@RequestMapping(value="/admin/mailtemplate/mailTemplateActiveCheck.ajax")
+	public ModelAndView mailTemplateActiveCheck(HttpServletRequest request, HttpServletResponse response) {
+	ModelAndView mav= new ModelAndView();
+	mav.addObject("request",request);
+	mav.addObject("response",response);
+	mailTemplateService.mailTemplateActiveCheck(mav);
+	return null;
 	}
 }

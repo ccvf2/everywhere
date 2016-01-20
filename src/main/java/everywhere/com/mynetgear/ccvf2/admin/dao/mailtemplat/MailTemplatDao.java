@@ -30,4 +30,14 @@ public interface MailTemplatDao {
 	 * @return
 	 */
 	public int insertMailTemplate(MailTemplateDto dto);
+	
+	
+	/**
+	 * @author 배성욱
+	 * @createDate 2016. 1. 20.
+	 * @described 메일템플릿을 등록하기 전에 활성화가된 양식이 있는지확인
+	 * @param dto
+	 * @return
+	 */
+	public int mailTemplateActiveCheck(MailTemplateDto dto);
 }

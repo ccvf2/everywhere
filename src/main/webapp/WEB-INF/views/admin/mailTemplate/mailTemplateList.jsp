@@ -34,14 +34,14 @@
 
 				<div class="row">
 					<div class="col-lg-12">
-					side:${mailTemplatList.size()}
 						<div class="table-responsive">
 							<table class="table table-bordered table-hover table-striped">
 								<colgroup>
 									<col width="5%"/>
 									<col width="10%"/>
-									<col width="40%"/>
+									<col width="30%"/>
 									<col width="45%"/>
+									<col width="10%"/>
 								</colgroup>
 								<thead>
 									<tr>
@@ -49,15 +49,17 @@
 										<th>구분</th>
 										<th>템플릿명</th>
 										<th>메일제목</th>
+										<th>사용여부</th>
 									</tr>
 								</thead>
 								<tbody>
 									<c:forEach items="${mailTemplatList}" var="list" varStatus="index">
 									<tr>
 										<td><c:out value="${index.count}"/></td>
-										<td><c:out value="${list.mtemp_group_code}"/></td>
+										<td><c:out value="${list.mtemp_group_name}"/></td>
 										<td><c:out value="${list.mtemp_name}"/></td>
 										<td><c:out value="${list.mtemp_title}"/></td>
+										<td><c:out value="${list.mtemp_active_name}"/></td>
 									</tr>
 									</c:forEach>
 								</tbody>
