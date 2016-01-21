@@ -59,7 +59,6 @@ public class PasswordSecur {
 	@RequestMapping(value="/password/passwordChanghe.do", method=RequestMethod.GET)
 	public ModelAndView passwordUtil(HttpServletRequest request, HttpServletResponse response) {
 		memberService.passwordUtil();
-		
 		return null;	
 	}
 	
@@ -81,7 +80,6 @@ public class PasswordSecur {
 		if((totalCnt%numOfRows)!=0){
 			rollCount=rollCount+1;
 		}
-		
 			for (int j = 0; j < rollCount; j++) {
 			String url="http://api.visitkorea.or.kr/openapi/service/rest/KorService/areaBasedList?ServiceKey=ccG6MDZvttNoXzutJHYMjBFR3AWZFCe%2B22ZHpIoB1ufPrRk48dGNhxEPYOdaNjsQowDwMpegNEU03lcRgm%2BXUw%3D%3D&MobileOS=ETC&MobileApp=everywhere&areaCode="+areaCode+"&numOfRows="+numOfRows+"&pageNo="+currentPage;
 			System.out.println(Constant.LOG_ID1+ url);	
@@ -90,7 +88,7 @@ public class PasswordSecur {
 				int size=list.size();
 				for (int i = 0; i < size; i++) {
 					SpotDto dto= list.get(i);
-						dto.setSpot_no(spotDao.getSpotNextSeq());
+						//dto.setSpot_no(spotDao.getSpotNextSeq());
 						int result = spotDao.insertSpot(dto);
 						System.out.println(Constant.LOG_ID2+dto.getSpot_name()+":::성공");
 				}

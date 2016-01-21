@@ -184,6 +184,8 @@ public class Constant {
 	
 	/**이동할페이지: 로그인전 시도했던 페이지로 이동*/
 	public static final String CALLBACK_URL = "callback_url";
+	/**이동할페이지: 로그인전 시도했던 페이지로 이동 시 파라메터*/
+	public static final String CALLBACK_PARAM = "callback_param";
 	
 	/**플래너 분류 그룹코드 : 그룹코드*/
 	public static final String SCHEDULE_TYPE_GROUP = "E0001";

@@ -33,6 +33,8 @@ public class LoginServiceImp implements LoginService {
 		String errMsg = "";
 		Map<String, Object> map = mav.getModelMap();
 		HttpServletRequest request= (HttpServletRequest)map.get("request");
+		String callback_url=map.get("callback_url").toString();
+		String callback_param=map.get("callback_param").toString();
 		MemberDto dto = (MemberDto)map.get("memberDto");
 		// XSS 처리fhrm
 		String mem_email = dto.getMem_email();
@@ -58,14 +60,21 @@ public class LoginServiceImp implements LoginService {
 					HttpSession session = request.getSession();
 					session.setAttribute(Constant.SYNN_LOGIN_OBJECT, member);
 
-
-					//mav.setViewName("/user/main/userMain");
+					if(StringUtils.equals(callback_url, Constant.SYNB_NULL)){
+						callback_url="/user/main/main.do";
+					}else{
+						if(StringUtils.equals(callback_param, Constant.SYNB_NULL)){
+							mav.setViewName("redirect:"+ callback_url);
+						}else{
+							mav.setViewName("redirect:"+ callback_url+"?"+callback_param);
+						}
+					}
 			} catch (Exception ex) {
 				ex.printStackTrace();
 			}
 		} else {
 			// 아이디 불일치
-			mav = new ModelAndView("/user/login/login.do");
+			mav.setViewName("redirect:"+ callback_url);
 			mav.addObject(Constant.ALERT_MSG, "로그인 정보가 정확하지 않습니다.");
 		}
 		
