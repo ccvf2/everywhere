@@ -164,15 +164,12 @@ public class SpotServiceImp implements SpotService{
 	public void insertSpot(ModelAndView mav) {
 		Map<String, Object> map=mav.getModelMap();
 		HttpServletRequest request = (HttpServletRequest)map.get("request");
-		HttpServletResponse response = (HttpServletResponse)map.get("response");
 		MemberDto userInfo = (MemberDto)request.getSession().getAttribute(Constant.SYNN_LOGIN_OBJECT);
 
 		SpotDto spotDto = (SpotDto)map.get("spotDto");
 		spotDto.setMem_no(userInfo.getMem_no());
 		spotDto.setMem_email(userInfo.getMem_email());
 		spotDto.setMem_level_code(userInfo.getMem_level_code());
-		
-		spotDto.setSpot_no(spotDao.getSpotNextSeq());
 		
 		CommonFileIODto commonFileIODto = commonFileIOService.requestWriteFileAndDTO(request, "spot_image", spotPath);
 		if(commonFileIODto != null){
@@ -253,6 +250,18 @@ public class SpotServiceImp implements SpotService{
 		int spot_no = Integer.parseInt(request.getParameter("spot_no"));
 		
 		SpotDto spotDto = spotDao.getOneSpot(spot_no);
+		if(spotDto.getAttach_file() != null){
+			String[] attach_no = spotDto.getAttach_file().split(",");
+			List<CommonFileIODto> fileList = new ArrayList<CommonFileIODto>();
+			for(int i = 0; i < attach_no.length; i++){
+				int file_no = Integer.parseInt(attach_no[i]);
+				System.out.println("file_no : " + file_no);
+				CommonFileIODto fileIODto =  commonFileIoDao.getOneFileDto(file_no);
+				System.out.println(fileIODto);
+				fileList.add(fileIODto);				
+			}
+			spotDto.setSpot_photoes(fileList);
+		}
 		List<CommonCodeDto> countryList = commonCodeService.getListCodeGroup("B0000");
 		List<CommonCodeDto> cityList = commonCodeService.getListCodeGroup(spotDto.getCountry_code());
 		List<CommonCodeDto> spotTypeList = commonCodeService.getListCodeGroup("T0001");
@@ -267,8 +276,18 @@ public class SpotServiceImp implements SpotService{
 	
 	public void updateOkSpot(ModelAndView mav) {
 		Map<String, Object> map=mav.getModelMap();
+		HttpServletRequest request = (HttpServletRequest)map.get("request");
+		MemberDto userInfo = (MemberDto)request.getSession().getAttribute(Constant.SYNN_LOGIN_OBJECT);
 		SpotDto spotDto = (SpotDto)map.get("spotDto");
 		
+		CommonFileIODto commonFileIODto = commonFileIOService.requestWriteFileAndDTO(request, "spot_image", spotPath);
+		if(commonFileIODto != null){
+			commonFileIODto.setType_code(Constant.FILE_TYPE_SPOT);
+			commonFileIODto.setWrite_no(userInfo.getMem_no());
+			String spot_photo_num = commonFileIOService.insertFileInfo(commonFileIODto) + ",";
+			System.out.println("spot_photo_num : " + spot_photo_num);
+			spotDto.setAttach_file(spot_photo_num);
+		}
 		int result = spotDao.updateSpot(spotDto);
 		System.out.println("result : " + result);
 		

@@ -1,3 +1,12 @@
+function updateAddr(){
+	var addr = prompt("검색하실 주소를 입력해 주세요");
+	if (addr != null) {
+		var url = "https://maps.googleapis.com/maps/api/geocode/json";
+		var params = "address=" + addr + "&sensor=true";
+		sendRequest("GET", url, fromServer, params);
+	}
+}
+
 function toServer() {
 	var addr = document.getElementById("address").value;
 	var url = "https://maps.googleapis.com/maps/api/geocode/json";
