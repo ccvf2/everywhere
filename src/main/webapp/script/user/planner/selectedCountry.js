@@ -48,7 +48,7 @@ function selectSpotList(city){
 		}
 	}
 	var params = "country_code=" + countrycode + "&city_code=" + citycode + "&spot_type_code="+typecode;
-	var url = "/user/spot/selectSpotList.ajax?" + params;
+	var url = "/user/spot/getSpotList.ajax?" + params;
 	$.ajax({
 		url:url,
 		type:"get",
@@ -103,7 +103,7 @@ function selectMoreSpotList(city){
 		readCityList(true);
 	}
 	var params = "country_code=" + countrycode + "&city_code=" + citycode + "&spot_type_code="+typecode+"&spot_page="+spot_page.value;
-	var url = "/user/spot/selectSpotList.ajax?" + params;
+	var url = "/user/spot/getSpotList.ajax?" + params;
 	$.ajax({
 		url:url,
 		type:"get",

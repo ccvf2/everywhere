@@ -12,9 +12,8 @@ import org.springframework.web.servlet.ModelAndView;
 public interface SpotService {
 	public void addSpotPage(ModelAndView mav);
 	public void readCityList(ModelAndView mav);
-	public void selectSpotList(ModelAndView mav);
-	public void insertSpot(ModelAndView mav);
 	public void getSpotList(ModelAndView mav);
+	public void insertSpot(ModelAndView mav);
 	public void getOneSpot(ModelAndView mav);
 	public void updateSpot(ModelAndView mav);
 	public void updateOkSpot(ModelAndView mav);

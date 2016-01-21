@@ -46,12 +46,12 @@ public class SpotController {
 		return null;
 	}
 	
-	@RequestMapping(value="/user/spot/selectSpotList.ajax", method=RequestMethod.GET)
+	@RequestMapping(value="/user/spot/getSpotList.ajax", method=RequestMethod.GET)
 	public ModelAndView selectSpotList(HttpServletRequest request, HttpServletResponse response){
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("request", request);
 		mav.addObject("response", response);
-		spotService.selectSpotList(mav);
+		spotService.getSpotList(mav);
 		return null;
 	}
 	
@@ -64,13 +64,6 @@ public class SpotController {
 		spotService.insertSpot(mav);
 		
 		return null;
-	}
-	
-	@RequestMapping(value="/user/spot/spotListPage.do", method=RequestMethod.GET)
-	public ModelAndView getSpotList(HttpServletRequest request, HttpServletResponse response){
-		ModelAndView mav = new ModelAndView();
-		spotService.getSpotList(mav);
-		return mav;
 	}
 
 	@RequestMapping(value="/user/spot/spotReadPage.do", method=RequestMethod.GET)

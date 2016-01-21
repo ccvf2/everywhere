@@ -83,7 +83,7 @@ public class SpotServiceImp implements SpotService{
 
 	
 	@Override
-	public void selectSpotList(ModelAndView mav) {
+	public void getSpotList(ModelAndView mav) {
 		Map<String, Object> map=mav.getModelMap();
 		HttpServletRequest request = (HttpServletRequest)map.get("request");
 		HttpServletResponse response = (HttpServletResponse)map.get("response");
@@ -185,19 +185,6 @@ public class SpotServiceImp implements SpotService{
 		System.out.println("result : " + result);
 		
 		mav.addObject("result", result);
-	}
-
-	@Override
-	public void getSpotList(ModelAndView mav) {
-		List<SpotDto> spotList = spotDao.getSpotAllList();
-		
-		List<CommonCodeDto> countryList = commonCodeService.getListCodeGroup("B0000");		
-		List<CommonCodeDto> spotTypeList = commonCodeService.getListCodeGroup("T0001");
-		
-		mav.addObject("countryList", countryList);
-		mav.addObject("spotTypeList", spotTypeList);
-		mav.addObject("spotList", spotList);
-		mav.setViewName("/user/spot/spotListPage");
 	}
 
 	@Override
