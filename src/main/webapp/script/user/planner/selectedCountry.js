@@ -154,22 +154,3 @@ function spotReadPage(no) {
 		}
 	})
 }
-
-function addSpot(){
-	var div ="<div id='spotAddModal'></div>";
-	var requestURL="/user/spot/addSpotPage.do";
-	
-	$.ajax({
-		url : requestURL,
-		type : "GET",
-		dataType : "html",
-		success : function(data) {
-			$("body").append(div);
-			$("#spotAddModal").append(data);
-			initialize();
-		},
-		error : function() {
-			alert("목록 가져오기 실패");
-		}
-	})
-}

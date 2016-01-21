@@ -1,18 +1,20 @@
 /**
  * 
  */
-function readURL(input) {
-    if (input.files && input.files[0]) {
-    	
-        var reader = new FileReader();
-        
-        reader.onload = function (e) {
-            $('#preview').attr('src', e.target.result);
-            input.parentNode.nextSibling.value = input.value;
-        }
-        
-        reader.readAsDataURL(input.files[0]);
-    }
+
+function addSpotPage(){
+	window.open("/user/spot/addSpotPage.do", "", "top=50, left=100, width=980, height=850");
+}
+
+function readImage(input) {
+	if (input.files && input.files[0]) {
+		var reader = new FileReader();
+		reader.onload = function (e) {
+			$('#preview').attr('src', e.target.result);
+			input.parentNode.nextSibling.value = input.value;
+		}
+		reader.readAsDataURL(input.files[0]);
+	}
 }
 
 function addSpotForm(form){

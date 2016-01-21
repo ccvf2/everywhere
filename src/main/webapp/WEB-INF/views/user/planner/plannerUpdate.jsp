@@ -62,7 +62,7 @@ $(document).ready(function () {
 						<div class="panel-heading-v2 overflow-h">
 							<h2 class="heading-xs pull-left"><i class="fa fa-map-marker"></i> 명소</h2>
 							<div style="float: right">
-							<button type="button" class="btn-u btn-u-red" id="spotAdd_btn" onclick="addSpot()">명소추가</button>
+							<button type="button" class="btn-u btn-u-red" id="spotAdd_btn" onclick="addSpotPage()">명소추가</button>
 							</div>
 						</div>
 	

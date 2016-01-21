@@ -18,13 +18,19 @@ html, body, #map  {
 	padding: 0;
 	height: 100%;
 }
-#map {
-}
 </style>
 <script type="text/javascript">
 $(document).ready(function () {
+	$('#preview').height($('#preview').width());
 	$('#map').width($('#preview').width());
 	$('#map').height($('#preview').height());
+});
+$(document).ready(function(){
+	$(window).resize(function(){
+		$('#preview').height($('#preview').width());
+		$('#map').width($('#preview').width());
+		$('#map').height($('#preview').height());
+	});
 });
 </script>
 </head>
@@ -64,10 +70,9 @@ $(document).ready(function () {
 						<div class="col col-5" style="float: right">
 							<section>
 								<label for="file" class="input input-file">
-									<div class="button"><input type="file" id="spot_image" name="spot_image" onchange="readURL(this)" accept="image/*">Add</div>
-									<input type="text" readonly>
+									<div class="button"><input type="file" id="spot_image" name="spot_image" onchange="readImage(this)" accept="image/*">Add</div><input type="text" readonly>
 								</label>
-								<img id="preview" style="border:1px solid #D7D7D7; width : 100%; height:100%;" alt="image" src="/attatchFile/spot/${spotDto.spot_photoes[0].save_name}.${spotDto.spot_photoes[0].extension}">
+								<img id="preview" style="border:1px solid #D7D7D7; width : 100%;" alt="image" src="/attatchFile/spot/${spotDto.spot_photoes[0].save_name}.${spotDto.spot_photoes[0].extension}">
 							</section>
 						</div>
 					</div>

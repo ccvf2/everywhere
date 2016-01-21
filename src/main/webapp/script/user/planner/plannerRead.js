@@ -2,17 +2,6 @@
  *창! 
  */
 
-function startup(use_yn, writer_no, mem_no){
-	if(use_yn == 'Y0002' && writer_no != mem_no){
-		alert("비공개 글입니다");
-		window.history.back();
-	}
-	if(use_yn == 'Y0003'){
-		alert("삭제된 글입니다.");
-		window.history.back();
-	}
-}
-
 function insertSweet(planner_no, checkSweet){
 	if(checkSweet == '-1'){
 		alert("로그인해주세요");
