@@ -3,7 +3,7 @@
  */
 
 function addSpotPage(){
-	window.open("/user/spot/addSpotPage.do", "", "top=50, left=100, width=980, height=850");
+	window.open("/user/spot/spotWrite.do", "", "top=50, left=100, width=980, height=850");
 }
 
 function readImage(input) {
@@ -53,13 +53,13 @@ function addSpotForm(form){
 		return false;
 	}
 	
-	if(form.spot_name.value == null || form.spot_name.value=="0"){
+	if(form.spot_name.value == null || form.spot_name.value.trim()==""){
 		alert("명소명을 입력해주세요.");
 		form.spot_name.focus();
 		return false;
 	}
 	
-	if(form.spot_note.value == null || form.spot_note.value=="0"){
+	if(form.spot_note.value == null || form.spot_note.value.trim()==""){
 		alert("명소에 대한 간단한 설명을 입력해주세요.");
 		form.spot_note.focus();
 		return false;

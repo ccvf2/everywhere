@@ -50,7 +50,8 @@ $(document).ready(function(){
 					</div>
 				</div>
 			</div>
-			<form action="/user/spot/updateOkSpot.do" id="sky-form" class="sky-form rounded" onsubmit="return addSpotForm(this)" method="post" enctype="multipart/form-data">
+			<form action="/user/spot/spotUpdate.do" id="sky-form" class="sky-form rounded" onsubmit="return addSpotForm(this)" method="post" enctype="multipart/form-data">
+				<input type="hidden" name="spot_no" value="${spotDto.spot_no}">
 				<fieldset>
 					<div class="row">
 						<!-- 주소 & 구글맵 -->

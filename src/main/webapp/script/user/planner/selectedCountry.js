@@ -139,7 +139,7 @@ function moreSpotListDisp(data){
 function spotReadPage(no) {
 	//alert(no);
 	var makeDiv ="<div id='showModal"+no+"'></div>";
-	var requestURL="/user/spot/spotReadPage.do?spot_no="+no;
+	var requestURL="/user/spot/spotRead.do?spot_no="+no;
 	
 	$.ajax({
 		url : requestURL,

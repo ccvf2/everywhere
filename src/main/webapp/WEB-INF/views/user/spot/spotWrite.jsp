@@ -48,7 +48,7 @@ $(document).ready(function(){
 	</div>
 	<div class="row">
 		<div class="col-md-12">
-		<form action="/user/spot/addSpotWrite.do" id="sky-form" class="sky-form rounded" onsubmit="return addSpotForm(this)" method="post" enctype="multipart/form-data">
+		<form action="/user/spot/spotWrite.do" id="sky-form" class="sky-form rounded" onsubmit="return addSpotForm(this)" method="post" enctype="multipart/form-data">
 			<fieldset>
 				<div class="row">
 					<!-- 주소 & 구글맵 -->
