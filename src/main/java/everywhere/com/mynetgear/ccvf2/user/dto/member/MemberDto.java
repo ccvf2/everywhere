@@ -2,13 +2,15 @@ package everywhere.com.mynetgear.ccvf2.user.dto.member;
 
 import java.util.Date;
 
+import everywhere.com.mynetgear.ccvf2.user.dto.mate.MateDto;
+
 /**
  * @author 김준호
  * @createDate 2015. 12. 7.
  * @described 회원Dto
  * @reference class
  */
-public class MemberDto {
+public class MemberDto extends MateDto{
 	private int mem_no;                // 회원번호
 	private String mem_email;          // 회원이메일
 	private String mem_pwd;            // 회원비밀번호
