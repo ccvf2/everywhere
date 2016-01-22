@@ -3,14 +3,6 @@
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="everywhere.com.mynetgear.ccvf2.user.mapper.planner">
-	<select id="get_planner_seq_no" resultType="int">
-		select tbl_planner_planner_no_seq.nextVal from dual
-	</select>
-	
-	<select id="get_item_seq_no" resultType="int">
-		select tbl_item_item_no_seq.nextVal from dual
-	</select>
-	
 	<insert id="insert_planner" parameterType="everywhere.com.mynetgear.ccvf2.user.dto.planner.PlannerDto">
 		insert into tbl_planner(planner_no,
 								mem_no,
@@ -20,15 +12,17 @@
 								end_date,
 								reg_date,
 								use_yn)
-		 			values(
-		 				 	#{planner_no},
-		 				 	#{mem_no},
-		 				 	#{planner_ba_code},
-		 				 	#{title},
-		 				 	#{start_date},
-		 				 	#{end_date},
-		 				 	sysdate,
-		 				 	#{use_yn})	
+					values(tbl_planner_planner_no_seq.nextVal,
+							#{mem_no},
+							#{planner_ba_code},
+							#{title},
+							#{start_date},
+							#{end_date},
+							sysdate,
+							#{use_yn})
+		<selectKey keyProperty="planner_no" resultType="Integer" order="AFTER">
+			SELECT tbl_planner_planner_no_seq.currval FROM dual
+		</selectKey>
 	</insert>
 	
 	<update id="update_planner" parameterType="everywhere.com.mynetgear.ccvf2.user.dto.planner.PlannerDto">

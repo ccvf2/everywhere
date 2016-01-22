@@ -35,7 +35,6 @@ function checkPlanner(){
 		var item_count = $("#d"+i+"_item_count").val();
 		for(var j = 1; j <= Number(item_count); j++){
 			var money_count = $("#d"+i+"_item"+j+"_money_count").val();
-			alert(money_count);
 			for(k = 1; k <= Number(money_count); k++){
 				if($("#d"+i+"_item"+j+"_money"+k+"_title").val()== ''){
 					alert("가계부항목에는 공백값이 들어갈수 없습니다.");
@@ -81,13 +80,25 @@ function addPlannerPhoto(input){
 }
 
 function addDay(day_count){
-	var before_day_count = $("#before_day_count").val();
-
-	if(before_day_count < day_count.value){
+	var before_day_count = Number($("#before_day_count").val());
+	var after_day_count = Number(day_count.value);
+	if(after_day_count < 1){
+		alert('1일 이상이어야 합니다');
+		day_count.value = before_day_count;
+		return;
+	}
+	
+	if(after_day_count > 99){
+		alert('99일 이하이어야 합니다');
+		day_count.value = before_day_count;
+		return;
+	}
+		
+	if(before_day_count < after_day_count){
 		var select = confirm("일정 추가 하시겠습니까?");
 		if(select == true){
 			//Item 용 레퍼런스 복사 후 name값 변경
-			for(var i = Number(before_day_count)+1; i <= Number(day_count.value); i++){
+			for(var i = before_day_count+1; i <= after_day_count; i++){
 				var html = $('#dayDiv').html();
 				var copy = "d"+i+"_item";
 				var newHtml = html.replace(/d0_item/g, copy);
@@ -106,9 +117,9 @@ function addDay(day_count){
 	}else{
 		var select = confirm("마지막 일정을 삭제 하시겠습니까?");
 		if(select == true){
-			for(var i = Number(before_day_count); i > Number(day_count.value); i--){
+			for(var i = before_day_count; i > after_day_count; i--){
 				$("#d"+i+"_items_div").remove();
-				$("#before_day_count").val(day_count.value);
+				$("#before_day_count").val(after_day_count);
 			}
 			
 		}else{
@@ -135,6 +146,10 @@ function addItem(input_name){
 	}//d1_item
 	
 	var day_item_count = document.getElementById(day_label+"_count");
+	if(Number(day_item_count.value) == 99){
+		alert('하루 일정은 최대 99개 까지 입니다.');
+		return 0;
+	}
 	
 	for(var i = Number(day_item_count.value); i > label_num; i--){
 		var oldExp = new RegExp(day_label+i, 'g');
