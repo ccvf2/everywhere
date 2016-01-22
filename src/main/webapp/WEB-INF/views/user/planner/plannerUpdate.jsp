@@ -339,7 +339,8 @@ $(document).ready(function () {
 								</c:choose>
 							</div>
 						</c:forEach>
-						<button type="button" class="btn-u" id="submit_btn" onclick="checkPlanner()">Submit</button>
+						<button type="button" class="btn-u pull-right" id="submit_btn" onclick="checkPlanner()">Submit</button>
+						<button type="button" class="btn-u btn-u-default" onclick="window.history.back();">Back</button>
 					</form>
 				</div>
 			</div>

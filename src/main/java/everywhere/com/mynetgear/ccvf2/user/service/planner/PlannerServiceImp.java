@@ -68,7 +68,7 @@ public class PlannerServiceImp implements PlannerService {
 	public void insertPlanner(ModelAndView mav) {
 		Map<String, Object> map=mav.getModelMap();
 		HttpServletRequest request = (HttpServletRequest)map.get("request");
-		String mem_no = request.getParameter("mem_no");
+		MemberDto userInfo = (MemberDto)request.getSession().getAttribute(Constant.SYNN_LOGIN_OBJECT);
 		String title = request.getParameter("title");
 		String start_date = request.getParameter("start_date");
 		String end_date = request.getParameter("end_date");
@@ -76,7 +76,7 @@ public class PlannerServiceImp implements PlannerService {
 		
 		PlannerDto plannerDto = new PlannerDto();
 		plannerDto.setPlanner_no(plannerDao.getPlannerNextSeq());
-		plannerDto.setMem_no(Integer.parseInt(mem_no));
+		plannerDto.setMem_no(userInfo.getMem_no());
 		plannerDto.setTitle(title);
 		
 		try {
@@ -161,9 +161,9 @@ public class PlannerServiceImp implements PlannerService {
 	public void getOnePlanner(ModelAndView mav) {
 		Map<String, Object> map=mav.getModelMap();
 		HttpServletRequest request = (HttpServletRequest)map.get("request");
-		int planner_no = Integer.parseInt(request.getParameter("planner_no"));
-
 		MemberDto userInfo = (MemberDto)request.getSession().getAttribute(Constant.SYNN_LOGIN_OBJECT);
+
+		int planner_no = Integer.parseInt(request.getParameter("planner_no"));
 		int mem_no = 0;
 		if(userInfo != null)
 			mem_no = userInfo.getMem_no();
@@ -521,9 +521,15 @@ public class PlannerServiceImp implements PlannerService {
 	public void updatePlanner(ModelAndView mav) {
 		Map<String, Object> map=mav.getModelMap();
 		HttpServletRequest request = (HttpServletRequest)map.get("request");
-		int planner_no = Integer.parseInt(request.getParameter("planner_no"));
+		MemberDto userInfo = (MemberDto)request.getSession().getAttribute(Constant.SYNN_LOGIN_OBJECT);
 
+		int planner_no = Integer.parseInt(request.getParameter("planner_no"));
 		PlannerDto plannerDto = plannerDao.getOnePlanner(planner_no);
+		
+		// 비공개 글이거나 글쓴이가 다른 경우이면 404 처리
+		String use_yn = plannerDto.getUse_yn();
+		if(use_yn.equals(Constant.SYNB_YN_D) || (userInfo.getMem_no() != plannerDto.getMem_no()))
+			return;
 
 		// Planner에 저장되어 있는 아이템 항목들을 가져오기
 		List<ItemDto> itemList = plannerDao.getItemList(planner_no);
