@@ -30,7 +30,9 @@ function commonReplyInit(type_code,mem_no,item_no,defaultPhotoPath){
 	//목록불러오기 함수요청
 	requestList();
 	//사용자작성화면요청
+	if(this.mem_no!=0){
 	showViewWrite()
+	}
 }
 
 
