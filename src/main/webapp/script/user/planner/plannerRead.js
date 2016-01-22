@@ -123,7 +123,6 @@ function setPlanner(image, planner_no, checkSweet, checkBookMark, use_yn){
 function lockPlanner(planner_no, isLock){
 	var params = "planner_no="+planner_no+"&isLock="+isLock;
 	var url = "/user/planner/lockPlanner.ajax?" + params;
-	alert(url);
 	$.ajax({
 		url : url,
 		type : "GET",
@@ -147,6 +146,32 @@ function lockPlanner(planner_no, isLock){
 	})
 }
 
+function renamePlanner(planner_no){
+	var title = prompt("수정할 제목을 입력해주세요");
+	if (title != null && title != '') {
+		$.ajax({
+			url : "/user/planner/renamePlanner.ajax",
+			type : "POST",
+			data : {"planner_no":planner_no, "title":title},
+			dataType : "text",
+			success : function(data) {
+				if(data != ''){
+					var result = data.split(",");
+					if(result[0] == '1'){
+						document.getElementById("title").innerHTML = result[1];
+					}else
+						alert("일정 제목 변경이 실패되었습니다.")
+				}
+			},
+			error : function() {
+				alert("일정 제목 변경이 실패되었습니다.")
+			}
+		})
+	}else if(title == ''){
+		alert('빈 공백값은 사용할 수 없습니다');
+	}
+}
+
 function deletePlanner(planner_no){
 	var answer = confirm("정말로 삭제하시겠습니까?");
 	if(answer == false)
@@ -155,7 +180,7 @@ function deletePlanner(planner_no){
 	location.href = url;
 }
 
-function modifyPlanner(planner_no){
+function updatePlanner(planner_no){
 	var url = "/user/planner/updatePlanner.do?planner_no="+planner_no;
 	location.href = url;
 }

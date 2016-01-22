@@ -56,7 +56,7 @@
   	<c:import url="/WEB-INF/views/common/jquery.jsp"/>
 	<c:import url="/WEB-INF/views/user/common/utilImport.jsp"/>
   </head>
-  <body>
+  <body onload="checkAll()">
 	
    	<div class="wrapper">
 	    <!--=== Header ===-->
@@ -102,9 +102,9 @@
 		                        <section>
 		                            <label class="label">명소 종류</label>
 		                            <div class="select_spot_type">
-		                            	<label class="checkbox"><input type="checkbox" name="spot_type_code" id="check_all" checked="checked" value="T0000"><i></i>전체</label>
+		                            	<label class="checkbox"><input type="checkbox" name="spot_type_code" id="check_all" checked="checked" onClick="toggleCheck(this)"><i></i>전체</label>
 		                            	<c:forEach var="spotType" items="${spotTypeList}">
-		                            		<label class="checkbox"><input type="checkbox" name="spot_type_code" id="${spotType.code}" value="${spotType.code}"><i></i>${spotType.code_name}</label>
+		                            		<label class="checkbox"><input type="checkbox" name="spot_type_code" id="${spotType.code}" value="${spotType.code}" onClick="disableCheckAll(this)"><i></i>${spotType.code_name}</label>
 		                            	</c:forEach>
 		                            </div>
 		                        </section>
@@ -271,17 +271,37 @@
 			});
 			
 			
-			//전체 체크박스가 선택되었을 경우
+			/* //전체 체크박스가 선택되었을 경우
 			$("#check_all").click(function(){
 				var chk = $(this).is(":checked");//.attr('checked');
 				if(chk) {
 					$(".select_spot_type input").attr('checked', true);
 				} else {
 					$(".select_spot_type input").attr('checked', false);
-				}
-			});
+				} 
+			});*/
 	    });
 	    
+	    //체크박스를 전체 선택하는 함수
+	    function checkAll() {
+	    	checkboxies = document.getElementsByName('spot_type_code');
+	    	for(var i=0, n=checkboxies.length; i<n; i++) {
+	    		checkboxies[i].checked=true;
+	    	}
+	    }
+	    
+	    //전체 선택된 상태에서 전체를 제외한 체크박스를 선택하면 전체가 풀리게 하는 함수
+	    function disableCheckAll(source) {
+	    	document.getElementById("check_all").checked = false;
+	    }
+	    
+	    //전체가 눌리면 나머지도 다 선택됨, 반대도 마찬가지
+	    function toggleCheck(source) {
+	    	checkboxies = document.getElementsByName('spot_type_code');
+	    	for(var i=0, n=checkboxies.length; i<n; i++) {
+	    		checkboxies[i].checked = source.checked;
+	    	}
+	    }
 	    
 	    function spotReadPage(no) {
 			//alert(no);

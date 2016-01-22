@@ -140,7 +140,7 @@
 									</c:if> / <a href="/user/myPage/myPage.do?uandMe=S0002&mem_no=${recentAccompanyDto.mem_no}">${recentAccompanyDto.mem_name}</a>
 								</small>
 								<!-- 글 내용 미리보기의 글자가 70자가 넘어갈 경우 뒷 부분을 ... 처리한다. -->
-                    			<p>${fn:substring(recentAccompanyDto.content, 0, 70)}
+								<p>${fn:substring(recentAccompanyDto.content, 0, 70)}
 						        <c:if test="${fn:length(albumDto.content) >70}">
 						        	…
 						        </c:if></p>

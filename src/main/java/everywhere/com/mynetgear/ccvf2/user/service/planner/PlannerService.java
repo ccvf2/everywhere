@@ -39,7 +39,7 @@ public interface PlannerService {
 	 * @param mav
 	 */
 	public void getOnePlanner(ModelAndView mav);
-	
+
 	/**
 	 * @author 안희진
 	 * @createDate 2015. 12. 23.
@@ -47,6 +47,14 @@ public interface PlannerService {
 	 * @param mav
 	 */
 	public void lockPlanner(ModelAndView mav);
+	
+	/**
+	 * @author 안희진
+	 * @createDate 2015. 12. 23.
+	 * @described 사용자가 자신이 쓴 일정의 제목 변경요청 처리
+	 * @param mav
+	 */
+	public void renamePlanner(ModelAndView mav);
 
 	/**
 	 * @author 안희진

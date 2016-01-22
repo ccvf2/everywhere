@@ -14,7 +14,7 @@ function searchSpotList(page){
 	    	spot_type_code+=$(this).val() + ",";
 	    }
 	});
-	alert(spot_type_code);
+	//alert(spot_type_code);
 	var params = "searchPlace=" + searchPlace + "&searchSpot=" + searchSpot + "&spotPage=" + page + "&spot_type_code=" + spot_type_code;
 	location.href="/user/search/searchSpot.do?" + params;
 }

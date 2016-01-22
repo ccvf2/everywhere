@@ -9,7 +9,7 @@ public class MoneyDto {
 	private String money_type_code;
 	private String money_currency_code;
 	private String money_title;
-	private Double price;
+	private int price;
 	
 	public int getMoney_no() {
 		return money_no;
@@ -67,10 +67,10 @@ public class MoneyDto {
 		this.money_title = money_title;
 	}
 	
-	public Double getPrice() {
+	public int getPrice() {
 		return price;
 	}
-	public void setPrice(Double price) {
+	public void setPrice(int price) {
 		this.price = price;
 	}
 	

@@ -231,6 +231,14 @@
 		from tbl_planner pl where pl.planner_no=#{planner_no}
 	</select>
 	
+	<update id="update_planner_status" parameterType="everywhere.com.mynetgear.ccvf2.user.dto.planner.PlannerDto">
+		update tbl_planner set use_yn=#{use_yn} where planner_no=#{planner_no} and mem_no=#{mem_no}
+	</update>
+	
+	<update id="update_planner_title" parameterType="everywhere.com.mynetgear.ccvf2.user.dto.planner.PlannerDto">
+		update tbl_planner set title=#{title} where planner_no=#{planner_no} and mem_no=#{mem_no}
+	</update>
+	
 	<delete id="delete_planner" parameterType="int">
 		delete from tbl_planner where planner_no=#{planner_no}
 	</delete>
@@ -250,8 +258,4 @@
 	<delete id="delete_money_by_money_no" parameterType="int">
 		delete from tbl_money where money_no=#{money_no}
 	</delete>
-	
-	<update id="update_planner_status" parameterType="everywhere.com.mynetgear.ccvf2.user.dto.planner.PlannerDto">
-		update tbl_planner set use_yn=#{use_yn} where planner_no=#{planner_no} and mem_no=#{mem_no}
-	</update>
 </mapper>

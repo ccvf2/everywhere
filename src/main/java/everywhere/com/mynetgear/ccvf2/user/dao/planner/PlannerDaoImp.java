@@ -82,6 +82,10 @@ public class PlannerDaoImp implements PlannerDao {
 	public int updatePlannerStatus(PlannerDto plannerDto) {
 		return sqlTemplate.update("update_planner_status", plannerDto);
 	}
+	
+	public int updatePlannerTitle(PlannerDto plannerDto) {
+		return sqlTemplate.update("update_planner_title", plannerDto);
+	}
 
 	@Override
 	public int getPlannerListForAllCount(PlannerDto plannerDto) {
