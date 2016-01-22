@@ -116,16 +116,16 @@
 
 					<ul class="list-group sidebar-nav-v1 margin-bottom-20 active">
 						<li class="list-group-item list-toggle">
-							<a data-toggle="collapse" href="#collapse-money">total : ${moneyTotal[8]}</a>
+							<a data-toggle="collapse" href="#collapse-money"><span style="font-weight: bold">총 여행경비 &nbsp; ${moneyTotal[8]}원</span></a>
 							<ul id="collapse-money" class="collapse in">
-								<li><a><i class="fa fa-plane"></i> 항공료 : ${moneyTotal[0]}</a></li>
-								<li><a><i class="fa fa-hotel"></i> 숙박비 : ${moneyTotal[1]} </a></li>
-								<li><a><i class="fa fa-bus"></i> 교통비 : ${moneyTotal[2]}</a></li>
-								<li><a><i class="fa fa-shopping-bag"></i> 쇼핑비 : ${moneyTotal[3]}</a></li>
-								<li><a><i class="fa fa-cutlery"></i> 식사비 : ${moneyTotal[4]}</a></li>
-								<li><a><i class="fa fa-ticket"></i> 입장료 : ${moneyTotal[5]}</a></li>
-								<li><a><i class="fa fa-gamepad"></i> 오락비 : ${moneyTotal[6]}</a></li>
-								<li><a><i class="fa fa-bars"></i> 기  타 : ${moneyTotal[7]}</a></li>
+								<li><a><span style="display:inline-block; width: 30%"><i class="fa fa-plane"></i> 항공료  </span> ${moneyTotal[0]}원</a></li>
+								<li><a><span style="display:inline-block; width: 30%"><i class="fa fa-hotel"></i> 숙박비  </span>${moneyTotal[1]}원 </a></li>
+								<li><a><span style="display:inline-block; width: 30%"><i class="fa fa-bus"></i> 교통비  </span>${moneyTotal[2]}원</a></li>
+								<li><a><span style="display:inline-block; width: 30%"><i class="fa fa-shopping-bag"></i> 쇼핑비  </span>${moneyTotal[3]}원</a></li>
+								<li><a><span style="display:inline-block; width: 30%"><i class="fa fa-cutlery"></i> 식사비  </span>${moneyTotal[4]}원</a></li>
+								<li><a><span style="display:inline-block; width: 30%"><i class="fa fa-ticket"></i> 입장료  </span>${moneyTotal[5]}원</a></li>
+								<li><a><span style="display:inline-block; width: 30%"><i class="fa fa-gamepad"></i> 오락비 </span>${moneyTotal[6]}원</a></li>
+								<li><a><span style="display:inline-block; width: 30%"><i class="fa fa-bars"></i> 기  타 </span>${moneyTotal[7]}원</a></li>
 							</ul>
 						</li>
 					</ul>
@@ -186,7 +186,7 @@
 												</c:if>
 												<div class="row"  style="margin:5px;">
 													<c:forEach var="money" items="${item.moneyList}">
-														<p style="margin:3px">${money.money_title } ${money.price }</p>
+														<p style="margin:3px">${money.money_title } ${money.price }원</p>
 													</c:forEach>
 												</div>
 											</c:if>

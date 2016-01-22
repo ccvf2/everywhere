@@ -224,7 +224,7 @@ public class PlannerServiceImp implements PlannerService {
 					if(price == null || price.equals("")){
 						price = "0";
 					}
-					moneyDto.setPrice(Double.parseDouble(price));
+					moneyDto.setPrice(Integer.parseInt(price));
 					moneyList.add(moneyDto);
 				}
 				itemDto.setMoneyList(moneyList);
@@ -273,7 +273,7 @@ public class PlannerServiceImp implements PlannerService {
 
 		// Planner에 저장되어 있는 아이템 항목들을 가져오기
 		List<ItemDto> itemList = plannerDao.getItemList(planner_no);
-		double[] moneyTotal = new double[9];
+		int[] moneyTotal = new int[9];
 
 		for(int i = 0; i < itemList.size(); i++){
 			//아이템 별 명소 정보 가져오기
