@@ -29,7 +29,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <p>
-                         2015 &copy; everywhere Developer Team( SeongUk BAE, HeeJin ANN, SeongGuk KWAK, SeongGwang KIM, JunHo KIM ).
+                         2015 &copy; everywhere Developer Team( SeongUk BAE, HeeJin ANN, SeongGook KWAK, SeongGwang KIM, JunHo KIM ).
             				<br/> ALL Rights Reserved.
                             <a target="_blank" href="https://twitter.com/htmlstream">Htmlstream</a> | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a>
                         </p>
