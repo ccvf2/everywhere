@@ -45,7 +45,7 @@ public class AuthorityInterceptor extends HandlerInterceptorAdapter {
 		urlList.add("/WEB-INF/views/user/");
 		urlList.add("/user/member/emailCheck.ajax");
 		urlList.add("/user/main/assets/");
-		urlList.add("/user/spot/spotReadPage.do");
+		urlList.add("/user/spot/spotRead.do");
 		urlList.add("/user/planner/readPlanner.do");
 		urlList.add("/user/planner/plannerList.do");
 		urlList.add("/user/planner/updatePlanner.do"); //희진) 추후 삭제 예정
@@ -57,6 +57,7 @@ public class AuthorityInterceptor extends HandlerInterceptorAdapter {
 		urlList.add("/password/passwordChanghe.do");
 		urlList.add("/xmlparse/parse.do"); //성욱) 추후 삭제 예정
 		urlList.add("/admin/mailtemplate/mailTemplateActiveCheck.ajax");
+		urlList.add("/common/reply/replylist.ajax");
 
 		for (String urlException : urlList) {
 			if (uri.indexOf(urlException) > -1) {

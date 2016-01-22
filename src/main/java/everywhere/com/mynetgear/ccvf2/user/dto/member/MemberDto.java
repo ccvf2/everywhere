@@ -1,6 +1,7 @@
 package everywhere.com.mynetgear.ccvf2.user.dto.member;
 
 import java.util.Date;
+
 import everywhere.com.mynetgear.ccvf2.user.dto.mate.MateDto;
 
 /**

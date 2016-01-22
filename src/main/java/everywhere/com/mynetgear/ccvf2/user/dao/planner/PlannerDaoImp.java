@@ -20,17 +20,7 @@ public class PlannerDaoImp implements PlannerDao {
 	private SqlSessionTemplate sqlTemplate;
 	@Autowired
 	private PlatformTransactionManager transactionManager;
-	
-	@Override
-	public int getPlannerNextSeq() {
-		return sqlTemplate.selectOne("get_planner_seq_no");
-	}
-	
-	@Override
-	public int getItemNextSeq() {
-		return sqlTemplate.selectOne("get_item_seq_no");
-	}
-	
+
 	@Override
 	public int insertPlanner(PlannerDto planner) {
 		return sqlTemplate.insert("insert_planner", planner);
@@ -57,7 +47,71 @@ public class PlannerDaoImp implements PlannerDao {
 		
 		return check;
 	}
-	
+
+	public int insertItem(ItemDto itemDto){
+		int check = sqlTemplate.insert("insert_item", itemDto);
+		List<MoneyDto> moneyList = itemDto.getMoneyList();
+		
+		for(int i = 0; i < moneyList.size(); i++){
+			moneyList.get(i).setItem_no(itemDto.getItem_no());
+			check = sqlTemplate.insert("insert_money", moneyList.get(i));
+		}
+		return check;
+	}
+
+	@Override
+	public PlannerDto getOnePlanner(int planner_no) {
+		return sqlTemplate.selectOne("get_planner_item", planner_no);
+	}
+
+	@Override
+	public List<ItemDto> getItemList(int planner_no) {	
+		return sqlTemplate.selectList("get_item_list", planner_no);
+	}
+
+	@Override
+	public List<MoneyDto> getMoneyList(int item_no) {
+		return sqlTemplate.selectList("get_money_list", item_no);
+	}
+
+	@Override
+	public List<PlannerDto> getPlannerListByMember(PlannerDto plannerDto) {
+		return sqlTemplate.selectList("get_planner_list_by_mem_no", plannerDto);
+	}
+
+	public int updatePlannerStatus(PlannerDto plannerDto) {
+		return sqlTemplate.update("update_planner_status", plannerDto);
+	}
+
+	@Override
+	public int getPlannerListForAllCount(PlannerDto plannerDto) {
+		return sqlTemplate.selectOne("get_planner_list_for_all_Count", plannerDto);
+	}
+
+	@Override
+	public List<PlannerDto> getPlannerListForAll(PlannerDto plannerDto) {
+		return sqlTemplate.selectList("get_planner_list_for_all", plannerDto);
+	}
+
+	@Override
+	public int deletePlanner(int planner_no) {
+		int check = 0;
+		TransactionDefinition definition = new DefaultTransactionDefinition();
+		TransactionStatus status = transactionManager.getTransaction(definition);
+		
+		try{
+			check = sqlTemplate.delete("delete_planner", planner_no);
+			check = sqlTemplate.delete("delete_item", planner_no);
+			check = sqlTemplate.delete("delete_money", planner_no);			
+			transactionManager.commit(status);
+		}catch(Exception e){
+			transactionManager.rollback(status);
+			e.printStackTrace();
+		}
+		
+		return check;
+	}
+
 	@Override
 	public int updatePlanner(PlannerDto planner, List<ItemDto> itemList) {
 		int check = 0;
@@ -102,18 +156,7 @@ public class PlannerDaoImp implements PlannerDao {
 		
 		return check;
 	}
-	
-	public int insertItem(ItemDto itemDto){
-		int check = sqlTemplate.insert("insert_item", itemDto);
-		List<MoneyDto> moneyList = itemDto.getMoneyList();
-		
-		for(int i = 0; i < moneyList.size(); i++){
-			moneyList.get(i).setItem_no(itemDto.getItem_no());
-			check = sqlTemplate.insert("insert_money", moneyList.get(i));
-		}
-		return check;
-	}
-	
+
 	public int updateItem(ItemDto itemDto){
 		int check = sqlTemplate.update("update_item", itemDto);
 		List<MoneyDto> moneyList = itemDto.getMoneyList();
@@ -139,65 +182,6 @@ public class PlannerDaoImp implements PlannerDao {
 		}
 		return check;
 	}
-
-	@Override
-	public List<PlannerDto> getPlannerListByMember(PlannerDto plannerDto) {
-		return sqlTemplate.selectList("get_planner_list_by_mem_no", plannerDto);
-	}
-	
-	@Override
-	public List<ItemDto> getItemList(int planner_no) {	
-		return sqlTemplate.selectList("get_item_list", planner_no);
-	}
-
-	@Override
-	public List<MoneyDto> getMoneyList(int item_no) {
-		return sqlTemplate.selectList("get_money_list", item_no);
-	}
-	
-	@Override
-	public int getPlannerListForAllCount(PlannerDto plannerDto) {
-		return sqlTemplate.selectOne("get_planner_list_for_all_Count", plannerDto);
-	}
-	@Override
-	public List<PlannerDto> getPlannerListForAll(PlannerDto plannerDto) {
-		return sqlTemplate.selectList("get_planner_list_for_all", plannerDto);
-	}
-
-	@Override
-	public PlannerDto getOnePlanner(int planner_no) {
-		return sqlTemplate.selectOne("get_planner_item", planner_no);
-	}
-
-	@Override
-	public int updatePlanner(PlannerDto plannerDto) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public int deletePlanner(int planner_no) {
-		int check = 0;
-		TransactionDefinition definition = new DefaultTransactionDefinition();
-		TransactionStatus status = transactionManager.getTransaction(definition);
-		
-		try{
-			check = sqlTemplate.delete("delete_planner", planner_no);
-			check = sqlTemplate.delete("delete_item", planner_no);
-			check = sqlTemplate.delete("delete_money", planner_no);			
-			transactionManager.commit(status);
-		}catch(Exception e){
-			transactionManager.rollback(status);
-			e.printStackTrace();
-		}
-		
-		return check;
-	}
-	
-	public int updatePlannerStatus(PlannerDto plannerDto) {
-		return sqlTemplate.update("update_planner_status", plannerDto);
-	}
-
 
 	/** 가장최근에 등록된 플레너 */
 	@Override

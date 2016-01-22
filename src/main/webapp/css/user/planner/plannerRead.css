@@ -18,12 +18,11 @@
 }
 .btn-bookmark {
 	border-left: 1px solid #ccc;
-	border-right: 1px solid #ccc;
 }
 .btn-share-group a {
 	display: block;
 	float: left;
-	width: 33.33%;
+	width: 50%;
 	height: 45px;
 	line-height: 15px;
 	padding-top: 5px;

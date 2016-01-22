@@ -57,17 +57,15 @@ public class SpotDaoImp implements SpotDao {
 
 	@Override
 	public int updateSpot(SpotDto spotDto) {
-		return sqlTemplate.update("update_spot", spotDto);
+		if(spotDto.getAttach_file() == null && spotDto.getAttach_file().equals(""))
+			return sqlTemplate.update("update_spot", spotDto);
+		else
+			return sqlTemplate.update("update_spot_with_file", spotDto);
 	}
 	
 	@Override
 	public int deleteSpot(int spot_no) {
 		return sqlTemplate.delete("delete_spot", spot_no);
-	}
-
-	@Override
-	public int getSpotNextSeq() {
-		return sqlTemplate.selectOne("get_spot_seq_no");
 	}
 
 	@Override

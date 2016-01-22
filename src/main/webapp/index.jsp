@@ -8,7 +8,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <script type="text/javascript">
-alert("☆★로그인시 아이디패스워드 꼭 확인하세요. 성국이서버는@everwhere   제서버는@everywhere 빠진y가 추가 되었습니다. 비밀번호는 동일하게 1234567890 입니다.-성욱-★☆");
+//alert("☆★로그인시 아이디패스워드 꼭 확인하세요. 성국이서버는@everwhere   제서버는@everywhere 빠진y가 추가 되었습니다. 비밀번호는 동일하게 1234567890 입니다.-성욱-★☆");
 
 	var requestURL="http://api.visitkorea.or.kr/TourAPI2_manual/sample/searchKeyword_sample2.xml";
 	$(function() {
@@ -81,8 +81,7 @@ alert("☆★로그인시 아이디패스워드 꼭 확인하세요. 성국이�
  <a href="/user/planner/plannerList.do?mem_no=64">스케줄 목록</a>
  <a href="/user/planner/writePlanner.do?planner_no=30">스케줄 쓰기 테스트</a>
  <hr/>
- <a href="/user/spot/addSpotPage.do">명소추가</a>
- <a href="user/spot/spotListPage.do">스케줄-명소목록()</a>
+ <a href="/user/spot/spotWrite.do">명소추가</a>
 
  <hr/>
  <a href="/user/main/main.do">유저 메인 페이지</a>

@@ -33,14 +33,22 @@ function checkPlanner(){
 	var day = $("#day_count").val();
 	for(var i= 1; i <= Number(day); i++){
 		var item_count = $("#d"+i+"_item_count").val();
-		for(var j = 2; j <= Number(item_count); j++){
-			var test = $("#d"+i+"_item"+j+"_note").val().replace(/ /g, '');
-			if($("#d"+i+"_item"+j+"_spot_no").val()=='0' && test == ''){
-				alert("day"+i+"의"+j+"번째가 공백입니다.");
-				document.getElementById("d"+i+"_item"+j+"_note").focus();
-				return false;
+		for(var j = 1; j <= Number(item_count); j++){
+			var money_count = $("#d"+i+"_item"+j+"_money_count").val();
+			for(k = 1; k <= Number(money_count); k++){
+				if($("#d"+i+"_item"+j+"_money"+k+"_title").val()== ''){
+					alert("가계부항목에는 공백값이 들어갈수 없습니다.");
+					document.getElementById("d"+i+"_item"+j+"_money"+k+"_title").focus();
+					return false;
+				}
 			}
 		}
+	}
+	var start_day = $("#start_date").val();
+	if( start_day == "") {
+		alert("정확한 날짜를 선택해 주십시요. ");
+		document.getElementById("start_date").focus();
+		return false;
 	}
 	document.getElementById("plannerform").submit();
 }
@@ -72,13 +80,25 @@ function addPlannerPhoto(input){
 }
 
 function addDay(day_count){
-	var before_day_count = $("#before_day_count").val();
-
-	if(before_day_count < day_count.value){
+	var before_day_count = Number($("#before_day_count").val());
+	var after_day_count = Number(day_count.value);
+	if(after_day_count < 1){
+		alert('1일 이상이어야 합니다');
+		day_count.value = before_day_count;
+		return;
+	}
+	
+	if(after_day_count > 99){
+		alert('99일 이하이어야 합니다');
+		day_count.value = before_day_count;
+		return;
+	}
+		
+	if(before_day_count < after_day_count){
 		var select = confirm("일정 추가 하시겠습니까?");
 		if(select == true){
 			//Item 용 레퍼런스 복사 후 name값 변경
-			for(var i = Number(before_day_count)+1; i <= Number(day_count.value); i++){
+			for(var i = before_day_count+1; i <= after_day_count; i++){
 				var html = $('#dayDiv').html();
 				var copy = "d"+i+"_item";
 				var newHtml = html.replace(/d0_item/g, copy);
@@ -97,9 +117,9 @@ function addDay(day_count){
 	}else{
 		var select = confirm("마지막 일정을 삭제 하시겠습니까?");
 		if(select == true){
-			for(var i = Number(before_day_count); i > Number(day_count.value); i--){
+			for(var i = before_day_count; i > after_day_count; i--){
 				$("#d"+i+"_items_div").remove();
-				$("#before_day_count").val(day_count.value);
+				$("#before_day_count").val(after_day_count);
 			}
 			
 		}else{
@@ -108,13 +128,30 @@ function addDay(day_count){
 		}
 	}
 }
-
+function calcDigit(digit){
+	var num = 1;
+	for(var i = 0; i < digit; i++){
+		num *= 10;
+	}
+	return num;
+}
 function addItem(input_name){
 	//예) input_name = d1_item1
-	var day_label = input_name.slice(0,-1); //d1_item
-	var day_item_count = document.getElementById(day_label+"_count");
+	var day_label = input_name; 
+	var label_num = 0;
+	var roof = 0;
+	while(day_label.slice(-1) >= 0 && day_label.slice(-1) <= 9){
+		label_num += (day_label.slice(-1)* calcDigit(roof++));
+		day_label = day_label.slice(0,-1);
+	}//d1_item
 	
-	for(var i = Number(day_item_count.value); i > Number(input_name.slice(-1)); i--){
+	var day_item_count = document.getElementById(day_label+"_count");
+	if(Number(day_item_count.value) == 99){
+		alert('하루 일정은 최대 99개 까지 입니다.');
+		return 0;
+	}
+	
+	for(var i = Number(day_item_count.value); i > label_num; i--){
 		var oldExp = new RegExp(day_label+i, 'g');
 		var newExp = day_label+(i+1);
 		$("[name*='"+day_label+i+"']").each(function(){
@@ -134,7 +171,7 @@ function addItem(input_name){
 		})
 	}
 	
-	var copy = day_label+(Number(input_name.slice(-1))+1); //d1_item2
+	var copy = day_label+(label_num+1); //d1_item2
 
 	//Item 용 레퍼런스 복사 후 name값 변경
 	var html = $('#d0_item1_div').html();
@@ -148,14 +185,21 @@ function addItem(input_name){
 
 function deleteItem(input_name){
 	//input_name = d1_item1
-	var day_label = input_name.slice(0,-1); //d1_item
+	var day_label = input_name; 
+	var label_num = 0;
+	var roof = 0;
+	while(day_label.slice(-1) >= 0 && day_label.slice(-1) <= 9){
+		label_num += (day_label.slice(-1)* calcDigit(roof++));
+		day_label = day_label.slice(0,-1);
+	}//d1_item
+
 	var day_item_count = document.getElementById(day_label+"_count");
 	if(day_item_count.value == '1'){
 		alert('Day 일정은 최소 한개는 필요합니다.');
 		return;
 	}
 	$("#"+input_name+"_div").remove()
-	for(var i = Number(input_name.slice(-1))+1; i <= Number(day_item_count.value); i++){
+	for(var i = label_num+1; i <= Number(day_item_count.value); i++){
 		var oldExp = new RegExp(day_label+i, 'g');
 		var newExp = day_label+(i-1);
 		$("[name*='"+day_label+i+"']").each(function(){
@@ -195,6 +239,7 @@ function addMoney(input_name){
 	var div = document.createElement("div");
 	var money_count = document.getElementById(input_name+"_money_count");
 	money_count.value=Number(money_count.value)+1;
+	div.id = input_name+"_money"+money_count.value+"_div";
 	div.style.marginTop="3px";
 
 	var hiddenInput = document.createElement("input");
@@ -229,25 +274,77 @@ function addMoney(input_name){
 	var noteInput = document.createElement("input");
 	noteInput.type="text";
 	noteInput.className = "col col-5";
+	noteInput.id= input_name+"_money"+money_count.value+"_title";
 	noteInput.name= input_name+"_money"+money_count.value+"_title";
 	noteInput.placeholder="예) 기념품";
 	notelabel.appendChild(noteInput);
 	div.appendChild(notelabel);
 
 	var pricelabel = document.createElement("label");
-	pricelabel.className = "input col col-4";
+	pricelabel.className = "input col col-3";
 	var priceInput = document.createElement("input");
 	priceInput.style.marginLeft="10px";
 	priceInput.type="number";
-	priceInput.className = "col col-4";
+	priceInput.className = "col col-3";
 	priceInput.name= input_name+"_money"+money_count.value+"_price";
 	priceInput.placeholder="3000";
 	pricelabel.appendChild(priceInput);
 	div.appendChild(pricelabel);
 
+	var deletelabel = document.createElement("label");
+	deletelabel.className = "input col col-1";
+	var deleteBtn = document.createElement("button");
+	deleteBtn.className = "rounded-4x btn btn-default";
+	deleteBtn.title = "가계부 삭제";
+	deleteBtn.innerHTML="X";
+	deleteBtn.setAttribute("onClick", "delMoney('"+input_name+"_money"+money_count.value+"')");
+	/*deleteBtn.onclick = function () {
+		delMoney(input_name+"_money"+money_count.value);
+	};*/
+	deletelabel.appendChild(deleteBtn);
+	div.appendChild(deletelabel);
+
 	moneyDiv.appendChild(div);
 }
 
+function delMoney(input_name){
+	//input_name = d1_item10_money1
+	var money_label = input_name; 
+	var label_num = 0;
+	var roof = 0;
+	while(money_label.slice(-1) >= 0 && money_label.slice(-1) <= 9){
+		label_num += (money_label.slice(-1)* calcDigit(roof++));
+		money_label = money_label.slice(0,-1);
+	}//d1_item10_money
+
+	var money_count = document.getElementById(money_label+"_count");
+	$("#"+input_name+"_div").remove()
+	for(var i = label_num+1; i <= Number(money_count.value); i++){
+		var oldExp = new RegExp(money_label+i, 'g');
+		var newExp = money_label+(i-1);
+		$("[name*='"+money_label+i+"']").each(function(){
+			//alert($(this).attr('name'));
+			$(this).attr('name', $(this).attr('name').replace(oldExp, newExp));
+			//alert($(this).attr('name'));
+		})
+		
+		$("[id*='"+money_label+i+"']").each(function(){
+			$(this).attr('id', $(this).attr('id').replace(oldExp, newExp));
+		})
+		
+		$("[href*='"+money_label+i+"']").each(function(){
+			$(this).attr('href', $(this).attr('href').replace(oldExp, newExp));
+		})
+		
+		$("[onclick*='"+money_label+i+"']").each(function(){
+			$(this).attr('onclick', $(this).attr('onclick').replace(oldExp, newExp));
+		})
+	}
+	money_count.value = Number(money_count.value)-1;
+	if(money_count.value == '0'){
+		$("#"+money_label+"_div").remove()
+	}
+}
 function addPhoto(input, input_name){
 	//input_name : d1_item1
 	if (input.files && input.files[0]) {

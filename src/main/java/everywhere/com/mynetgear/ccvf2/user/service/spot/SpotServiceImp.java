@@ -27,32 +27,57 @@ import everywhere.com.mynetgear.ccvf2.user.dao.spot.SpotDao;
 import everywhere.com.mynetgear.ccvf2.user.dto.member.MemberDto;
 import everywhere.com.mynetgear.ccvf2.user.dto.spot.SpotDto;
 
-
 @Component
 public class SpotServiceImp implements SpotService{
 	@Autowired
 	private SpotDao spotDao;
-	
+
 	@Autowired
 	private CommonCodeService commonCodeService;
-	
 	@Autowired
 	private CommonFileIOService commonFileIOService;
 	@Autowired
 	private CommonFileIODao commonFileIoDao;
-	
+
 	@Value("${attach.spot.path}")
 	private String spotPath;
 	
 	@Override
-	public void addSpotPage(ModelAndView mav) {		
+	public void insertSpotView(ModelAndView mav) {
 		List<CommonCodeDto> countryList = commonCodeService.getListCodeGroup("B0000");
-		
 		List<CommonCodeDto> spotTypeList = commonCodeService.getListCodeGroup("T0001");
 		System.out.println(spotPath);
 		mav.addObject("countryList", countryList);
 		mav.addObject("spotTypeList", spotTypeList);
-		mav.setViewName("/user/spot/addSpotPage");
+		mav.setViewName("/user/spot/spotWrite");
+	}
+	
+	@Override
+	public void insertSpot(ModelAndView mav) {
+		Map<String, Object> map=mav.getModelMap();
+		HttpServletRequest request = (HttpServletRequest)map.get("request");
+		MemberDto userInfo = (MemberDto)request.getSession().getAttribute(Constant.SYNN_LOGIN_OBJECT);
+
+		SpotDto spotDto = (SpotDto)map.get("spotDto");
+		spotDto.setMem_no(userInfo.getMem_no());
+		spotDto.setMem_email(userInfo.getMem_email());
+		spotDto.setMem_level_code(userInfo.getMem_level_code());
+		
+		CommonFileIODto commonFileIODto = commonFileIOService.requestWriteFileAndDTO(request, "spot_image", spotPath);
+		if(commonFileIODto != null){
+			commonFileIODto.setType_code(Constant.FILE_TYPE_SPOT);
+			commonFileIODto.setWrite_no(userInfo.getMem_no());
+			String spot_photo_num = commonFileIOService.insertFileInfo(commonFileIODto) + ",";
+			System.out.println("spot_photo_num : " + spot_photo_num);
+			spotDto.setAttach_file(spot_photo_num);
+		}
+		
+		System.out.println(spotDto);
+		int result = spotDao.insertSpot(spotDto);
+		System.out.println("result : " + result);
+		
+		mav.addObject("result", result);
+		mav.setViewName("/user/spot/spotWriteOk");
 	}
 
 	@Override
@@ -81,9 +106,8 @@ public class SpotServiceImp implements SpotService{
 		}
 	}
 
-	
 	@Override
-	public void selectSpotList(ModelAndView mav) {
+	public void getSpotList(ModelAndView mav) {
 		Map<String, Object> map=mav.getModelMap();
 		HttpServletRequest request = (HttpServletRequest)map.get("request");
 		HttpServletResponse response = (HttpServletResponse)map.get("response");
@@ -161,49 +185,6 @@ public class SpotServiceImp implements SpotService{
 	}
 
 	@Override
-	public void insertSpot(ModelAndView mav) {
-		Map<String, Object> map=mav.getModelMap();
-		HttpServletRequest request = (HttpServletRequest)map.get("request");
-		HttpServletResponse response = (HttpServletResponse)map.get("response");
-		MemberDto userInfo = (MemberDto)request.getSession().getAttribute(Constant.SYNN_LOGIN_OBJECT);
-
-		SpotDto spotDto = (SpotDto)map.get("spotDto");
-		spotDto.setMem_no(userInfo.getMem_no());
-		spotDto.setMem_email(userInfo.getMem_email());
-		spotDto.setMem_level_code(userInfo.getMem_level_code());
-		
-		spotDto.setSpot_no(spotDao.getSpotNextSeq());
-		
-		CommonFileIODto commonFileIODto = commonFileIOService.requestWriteFileAndDTO(request, "spot_image", spotPath);
-		if(commonFileIODto != null){
-			commonFileIODto.setType_code(Constant.FILE_TYPE_SPOT);
-			commonFileIODto.setWrite_no(userInfo.getMem_no());
-			String spot_photo_num = commonFileIOService.insertFileInfo(commonFileIODto) + ",";
-			System.out.println("spot_photo_num : " + spot_photo_num);
-			spotDto.setAttach_file(spot_photo_num);
-		}
-		
-		System.out.println(spotDto);
-		int result = spotDao.insertSpot(spotDto);
-		System.out.println("result : " + result);
-		
-		mav.addObject("result", result);
-	}
-
-	@Override
-	public void getSpotList(ModelAndView mav) {
-		List<SpotDto> spotList = spotDao.getSpotAllList();
-		
-		List<CommonCodeDto> countryList = commonCodeService.getListCodeGroup("B0000");		
-		List<CommonCodeDto> spotTypeList = commonCodeService.getListCodeGroup("T0001");
-		
-		mav.addObject("countryList", countryList);
-		mav.addObject("spotTypeList", spotTypeList);
-		mav.addObject("spotList", spotList);
-		mav.setViewName("/user/spot/spotListPage");
-	}
-
-	@Override
 	public void getOneSpot(ModelAndView mav) {
 		Map<String, Object> map=mav.getModelMap();
 		HttpServletRequest request = (HttpServletRequest)map.get("request");
@@ -243,16 +224,33 @@ public class SpotServiceImp implements SpotService{
 		mav.addObject("cityName", cityName);
 		mav.addObject("spot_type", spot_type);
 		mav.addObject("spotScore", spotScore);
-		mav.setViewName("/user/spot/spotReadPage");
+		mav.setViewName("/user/spot/spotRead");
 	}
 
 	@Override
-	public void updateSpot(ModelAndView mav) {
+	public void updateSpotView(ModelAndView mav) {
 		Map<String, Object> map=mav.getModelMap();
 		HttpServletRequest request = (HttpServletRequest)map.get("request");
+		MemberDto userInfo = (MemberDto)request.getSession().getAttribute(Constant.SYNN_LOGIN_OBJECT);
 		int spot_no = Integer.parseInt(request.getParameter("spot_no"));
 		
 		SpotDto spotDto = spotDao.getOneSpot(spot_no);
+		
+		if(spotDto.getMem_no() != userInfo.getMem_no())
+			return;
+		
+		if(spotDto.getAttach_file() != null){
+			String[] attach_no = spotDto.getAttach_file().split(",");
+			List<CommonFileIODto> fileList = new ArrayList<CommonFileIODto>();
+			for(int i = 0; i < attach_no.length; i++){
+				int file_no = Integer.parseInt(attach_no[i]);
+				System.out.println("file_no : " + file_no);
+				CommonFileIODto fileIODto =  commonFileIoDao.getOneFileDto(file_no);
+				System.out.println(fileIODto);
+				fileList.add(fileIODto);
+			}
+			spotDto.setSpot_photoes(fileList);
+		}
 		List<CommonCodeDto> countryList = commonCodeService.getListCodeGroup("B0000");
 		List<CommonCodeDto> cityList = commonCodeService.getListCodeGroup(spotDto.getCountry_code());
 		List<CommonCodeDto> spotTypeList = commonCodeService.getListCodeGroup("T0001");
@@ -262,28 +260,46 @@ public class SpotServiceImp implements SpotService{
 		mav.addObject("spotTypeList", spotTypeList);
 		mav.addObject("spotDto", spotDto);
 		
-		mav.setViewName("/user/spot/spotUpdatePage");
+		mav.setViewName("/user/spot/spotUpdate");
 	}
-	
-	public void updateOkSpot(ModelAndView mav) {
+
+	public void updateSpot(ModelAndView mav) {
 		Map<String, Object> map=mav.getModelMap();
+		HttpServletRequest request = (HttpServletRequest)map.get("request");
+		MemberDto userInfo = (MemberDto)request.getSession().getAttribute(Constant.SYNN_LOGIN_OBJECT);
 		SpotDto spotDto = (SpotDto)map.get("spotDto");
 		
+		CommonFileIODto commonFileIODto = commonFileIOService.requestWriteFileAndDTO(request, "spot_image", spotPath);
+		if(commonFileIODto != null){
+			commonFileIODto.setType_code(Constant.FILE_TYPE_SPOT);
+			commonFileIODto.setWrite_no(userInfo.getMem_no());
+			String spot_photo_num = commonFileIOService.insertFileInfo(commonFileIODto) + ",";
+			System.out.println("spot_photo_num : " + spot_photo_num);
+			spotDto.setAttach_file(spot_photo_num);
+		}
 		int result = spotDao.updateSpot(spotDto);
 		System.out.println("result : " + result);
 		
 		mav.addObject("result", result);
+		mav.addObject("spot_no", spotDto.getSpot_no());
+		mav.setViewName("/user/spot/spotUpdateOk");
 	}
 
 	@Override
 	public void deleteSpot(ModelAndView mav) {
 		Map<String, Object> map=mav.getModelMap();
 		HttpServletRequest request = (HttpServletRequest)map.get("request");
+		MemberDto userInfo = (MemberDto)request.getSession().getAttribute(Constant.SYNN_LOGIN_OBJECT);
+
+		if(userInfo.getMem_level_code() != Constant.MEMBER_LEVEL_ADMIN)
+			return;
+
 		int spot_no = Integer.parseInt(request.getParameter("spot_no"));
 		
 		int result = spotDao.deleteSpot(spot_no);
 		System.out.println("result : " + result);
 		mav.addObject("result", result);
+		mav.setViewName("/user/spot/spotDelete");
 	}
 
 	@Override

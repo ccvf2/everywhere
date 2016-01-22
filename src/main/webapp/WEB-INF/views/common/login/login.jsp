@@ -13,12 +13,12 @@
 	<div class="header">
 		<c:import url="/WEB-INF/views/user/common/header.jsp" />
 	</div>
-		
 	<div class="container content" >
     	<div class="row">
             <div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3">
 				<form class="reg-page" action="/user/login/login.do" name="memberLogin" method="post">
-				<input type="hidden" name="callback_url" value="${callback_url}">
+				<input type="hidden" name="callback_url" value='${callback_url}'>
+				<input type="hidden" name="callback_param" value='${callback_param}'>
                     <div class="reg-header">
                         <h2>Login to your account</h2>
                     </div>

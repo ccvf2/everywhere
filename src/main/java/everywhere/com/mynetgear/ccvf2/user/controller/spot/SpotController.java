@@ -16,97 +16,158 @@ import everywhere.com.mynetgear.ccvf2.user.service.spot.SpotService;
 /**
  * @author 안희진
  * @createDate 2015. 12. 7.
- * @described 명소 추가 컨트롤러
- * @reference Controller
+ * @described 명소 관련 기능(CRUD)을 위한 컨트롤러
+ * @reference class
  */
 @Controller
 public class SpotController {
 	@Autowired
 	private SpotService spotService;
-	
+
 	/**
 	 * @author 안희진
 	 * @createDate 2015. 12. 7.
-	 * @described 장소 추가 화면 페이지
+	 * @described 명소 추가 화면 페이지 요청 처리
+	 * @param request
+	 * @param response
 	 * @return
 	 */
-	@RequestMapping(value="/user/spot/addSpotPage.do", method=RequestMethod.GET)
-	public ModelAndView addSpotPage(HttpServletRequest request, HttpServletResponse response){
+	@RequestMapping(value = "/user/spot/spotWrite.do", method = RequestMethod.GET)
+	public ModelAndView insertSpotView(HttpServletRequest request, HttpServletResponse response) {
 		ModelAndView mav = new ModelAndView();
-		spotService.addSpotPage(mav);
+		spotService.insertSpotView(mav);
 		return mav;
 	}
-	
-	@RequestMapping(value="/user/spot/selectCountry.ajax", method=RequestMethod.GET)
-	public ModelAndView readCityList(HttpServletRequest request, HttpServletResponse response){
+
+	/**
+	 * @author 안희진
+	 * @createDate 2015. 12. 7.
+	 * @described 사용자가 넘겨준 정보로 명소 추가 처리
+	 * @param request
+	 * @param response
+	 * @param spotDto
+	 * @return
+	 */
+	@RequestMapping(value = "/user/spot/spotWrite.do", method = RequestMethod.POST)
+	public ModelAndView insertSpot(HttpServletRequest request, HttpServletResponse response, SpotDto spotDto) {
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("request", request);
+		mav.addObject("response", response);
+		mav.addObject("spotDto", spotDto);
+		spotService.insertSpot(mav);
+		return mav;
+	}
+
+	/**
+	 * @author 안희진
+	 * @createDate 2015. 12. 8.
+	 * @described 국가별 도시 목록을 읽어오는 Ajax 요청 처리
+	 * @param request
+	 * @param response
+	 * @return
+	 */
+	@RequestMapping(value = "/user/spot/selectCountry.ajax", method = RequestMethod.GET)
+	public ModelAndView readCityList(HttpServletRequest request, HttpServletResponse response) {
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("request", request);
 		mav.addObject("response", response);
 		spotService.readCityList(mav);
 		return null;
 	}
-	
-	@RequestMapping(value="/user/spot/selectSpotList.ajax", method=RequestMethod.GET)
-	public ModelAndView selectSpotList(HttpServletRequest request, HttpServletResponse response){
+
+	/**
+	 * @author 안희진
+	 * @createDate 2015. 12. 8.
+	 * @described 명소 목록 가져오는 Ajax 요청 처리
+	 * @param request
+	 * @param response
+	 * @return
+	 */
+	@RequestMapping(value = "/user/spot/getSpotList.ajax", method = RequestMethod.GET)
+	public ModelAndView selectSpotList(HttpServletRequest request, HttpServletResponse response) {
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("request", request);
 		mav.addObject("response", response);
-		spotService.selectSpotList(mav);
-		return null;
-	}
-	
-	@RequestMapping(value="/user/spot/addSpotWrite.do", method=RequestMethod.POST)
-	public ModelAndView insertSpot(HttpServletRequest request, HttpServletResponse response, SpotDto spotDto){
-		ModelAndView mav = new ModelAndView();
-		mav.addObject("request", request);
-		mav.addObject("response", response);
-		mav.addObject("spotDto", spotDto);
-		spotService.insertSpot(mav);
-		
-		return null;
-	}
-	
-	@RequestMapping(value="/user/spot/spotListPage.do", method=RequestMethod.GET)
-	public ModelAndView getSpotList(HttpServletRequest request, HttpServletResponse response){
-		ModelAndView mav = new ModelAndView();
 		spotService.getSpotList(mav);
-		return mav;
+		return null;
 	}
 
-	@RequestMapping(value="/user/spot/spotReadPage.do", method=RequestMethod.GET)
-	public ModelAndView getOneSpot(HttpServletRequest request, HttpServletResponse response){
+	/**
+	 * @author 안희진
+	 * @createDate 2015. 12. 8.
+	 * @described 선택된 명소 정보를 읽어오는 요청 처리
+	 * @param request
+	 * @param response
+	 * @return
+	 */
+	@RequestMapping(value = "/user/spot/spotRead.do", method = RequestMethod.GET)
+	public ModelAndView getOneSpot(HttpServletRequest request, HttpServletResponse response) {
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("request", request);
 		spotService.getOneSpot(mav);
 		return mav;
 	}
-	
-	@RequestMapping(value="/user/spot/updateSpot.do", method=RequestMethod.GET)
-	public ModelAndView updateSpot(HttpServletRequest request, HttpServletResponse response){
+
+	/**
+	 * @author 안희진
+	 * @createDate 2015. 12. 10.
+	 * @described 선택된 명소를 수정하는 페이지 요청 처리
+	 * @param request
+	 * @param response
+	 * @return
+	 */
+	@RequestMapping(value = "/user/spot/spotUpdate.do", method = RequestMethod.GET)
+	public ModelAndView updateSpot(HttpServletRequest request, HttpServletResponse response) {
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("request", request);
+		spotService.updateSpotView(mav);
+		return mav;
+	}
+
+	/**
+	 * @author 안희진
+	 * @createDate 2015. 12. 10.
+	 * @described 선택된 명소를 수정 요청 처리
+	 * @param request
+	 * @param response
+	 * @param spotDto
+	 * @return
+	 */
+	@RequestMapping(value = "/user/spot/spotUpdate.do", method = RequestMethod.POST)
+	public ModelAndView updateSpot(HttpServletRequest request, HttpServletResponse response, SpotDto spotDto) {
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("request", request);
+		mav.addObject("spotDto", spotDto);
 		spotService.updateSpot(mav);
 		return mav;
 	}
-	
-	@RequestMapping(value="/user/spot/updateOkSpot.do", method=RequestMethod.POST)
-	public ModelAndView updateSpot(HttpServletRequest request, HttpServletResponse response, SpotDto spotDto){
-		ModelAndView mav = new ModelAndView();
-		mav.addObject("spotDto", spotDto);
-		spotService.updateOkSpot(mav);
-		return mav;
-	}
-	
-	@RequestMapping(value="/user/spot/delete.do", method=RequestMethod.GET)
-	public ModelAndView deleteSpot(HttpServletRequest request, HttpServletResponse response){
+
+	/**
+	 * @author 안희진
+	 * @createDate 2015. 12. 11.
+	 * @described 선택된 명소 삭제 처리
+	 * @param request
+	 * @param response
+	 * @return
+	 */
+	@RequestMapping(value = "/user/spot/spotDelete.do", method = RequestMethod.GET)
+	public ModelAndView deleteSpot(HttpServletRequest request, HttpServletResponse response) {
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("request", request);
 		spotService.deleteSpot(mav);
 		return mav;
 	}
-	
-	@RequestMapping(value="/user/spot/ratingSpot.ajax", method=RequestMethod.GET)
-	public ModelAndView ratingSpot(HttpServletRequest request, HttpServletResponse response){
+
+	/**
+	 * @author 안희진
+	 * @createDate 2015. 12. 11.
+	 * @described 명소 평점 처리
+	 * @param request
+	 * @param response
+	 * @return
+	 */
+	@RequestMapping(value = "/user/spot/spotRating.ajax", method = RequestMethod.GET)
+	public ModelAndView ratingSpot(HttpServletRequest request, HttpServletResponse response) {
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("request", request);
 		mav.addObject("response", response);

@@ -2,10 +2,6 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="everywhere.com.mynetgear.ccvf2.user.mapper.spot">
-	<select id="get_spot_seq_no" resultType="int">
-		select TBL_SPOT_SPOT_NO_SEQ.nextval from dual
-	</select>
-
 	<select id="select_spot_all_list" resultType="everywhere.com.mynetgear.ccvf2.user.dto.spot.SpotDto">
 		select * from tbl_spot
 	</select>
@@ -71,14 +67,23 @@
 
 	<insert id="insert_spot" parameterType="everywhere.com.mynetgear.ccvf2.user.dto.spot.SpotDto">
 		insert into tbl_spot values(
-		#{spot_no}, #{mem_no}, #{country_code}, #{city_code}, #{spot_name}, 
+		TBL_SPOT_SPOT_NO_SEQ.nextval, #{mem_no}, #{country_code}, #{city_code}, #{spot_name}, 
 		#{spot_type_code}, #{mem_level_code}, #{spot_note}, #{attach_file}, #{spot_addr}, #{spot_lat}, #{spot_long}, #{total_star_score}, #{count_star_score}, #{open_api_seq}, SYSDATE
 		)
 	</insert>
 
 	<update id="update_spot" parameterType="everywhere.com.mynetgear.ccvf2.user.dto.spot.SpotDto">
-		update tbl_spot set city_code=#{city_code}, spot_name=#{spot_name}, spot_type_code=#{spot_type_code}, spot_note=#{spot_note}, spot_addr=#{spot_addr}, 
-							spot_lat=#{spot_lat}, spot_long=#{spot_long} where spot_no=#{spot_no}
+		update tbl_spot set country_code=#{country_code}, city_code=#{city_code}, spot_type_code=#{spot_type_code}, 
+							spot_name=#{spot_name}, spot_note=#{spot_note}, 
+							spot_addr=#{spot_addr}, spot_lat=#{spot_lat}, spot_long=#{spot_long} 
+		where spot_no=#{spot_no}
+	</update>
+	
+	<update id="update_spot_with_file" parameterType="everywhere.com.mynetgear.ccvf2.user.dto.spot.SpotDto">
+		update tbl_spot set country_code=#{country_code}, city_code=#{city_code}, spot_type_code=#{spot_type_code}, 
+							spot_name=#{spot_name}, spot_note=#{spot_note}, attach_file=#{attach_file},
+							spot_addr=#{spot_addr}, spot_lat=#{spot_lat}, spot_long=#{spot_long} 
+		where spot_no=#{spot_no}
 	</update>
 
 	<delete id="delete_spot" parameterType="int">
