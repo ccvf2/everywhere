@@ -47,12 +47,10 @@
 							<div class="form-group">
 	                          <label>사용자 종류</label>
 	                          <c:choose>
-	                          	<!-- 선택된 사용자 종류가 있을 경우 -->
 	                          	<c:when test="${adminMemberDto.mem_level_code!=null}">
 	                          		<select name="memLevel" id="memLevel" class="form-control" onchange="searchFun()">
 		                           		<option value="" selected="selected">모두</option>
 										<c:forEach var="memLevel" items="${memLevelList}">
-											<!-- 선택된 사용자 종류를 유지 -->
 											<c:choose>
 												<c:when test="${adminMemberDto.mem_level_code==memLevel.code}">
 													<option value="${memLevel.code}" selected="selected">${memLevel.code_name}</option>
@@ -64,7 +62,6 @@
 										</c:forEach>
 									</select>
 	                          	</c:when>
-	                          	<!-- 선택된 사용자 종류가 없을 경우 모두를 선택 -->
 	                          	<c:otherwise>
 	                          		<select name="memLevel" id="memLevel" class="form-control" onchange="searchFun()">
 		                           		<option value="" selected="selected">모두</option>
@@ -81,14 +78,12 @@
 	                        <div class="form-group">
 	                          <label>계정 상태</label>
 	                          <c:choose>
-	                          	<!-- 이전 페이지에서 계정 상태가 선택되었던 경우 -->
 	                          	<c:when test="${adminMemberDto.mem_status_code!=null}">
 		                          	<select name="memStatus" id="memStatus" class="form-control" onchange="searchFun()">
 			                          		<option value="">모두</option>
 											<c:forEach var="memStatus" items="${memStatusList}">
 												<c:choose>
-													<!-- 이전페이지에서 선택된 계정상태를 선택 -->
-													<c:when test="${adminMemberDto.mem_status_code=={memStatus.code}">
+													<c:when test="${adminMemberDto.mem_status_code==memStatus.code}">
 														<option value="${memStatus.code}" selected="selected">${memStatus.code_name}</option>
 													</c:when>
 													<c:otherwise>
@@ -98,7 +93,6 @@
 											</c:forEach>
 										</select>	
 		                        </c:when>
-		                        <!-- 선택된 계정 상태가 없는 경우 모두를 선택 -->
 	                          	<c:otherwise>
 	                          		<select name="memStatus" id="memStatus" class="form-control" onchange="searchFun()">
 		                          		<option value="" selected="selected">모두</option>
@@ -114,6 +108,7 @@
 	                  	<div class="col-xs-6 col-sm-2">        
 	                        <div class="form-group">
 	                          <label>핸드폰 인증 상태</label>
+	                          ${adminMemberDto.mem_p_status_code}
 	                          <c:choose>
 	                          	<c:when test="${adminMemberDto.mem_p_status_code!=null}">
 	                          		<select name="phoneStatus" id="phoneStatus" class="form-control" onchange="searchFun()">
@@ -130,7 +125,6 @@
 										<option value="" selected="selected">모두</option>
 								   </select>
 	                          	</c:when>
-	                          	<!-- 이전 페이지에서 핸드폰 인증 상태가 선택되지 않았으면 모두 선택 -->
 	                          	<c:otherwise>
 	                          		<select name="phoneStatus" id="phoneStatus" class="form-control" onchange="searchFun()">
 										<c:forEach var="phoneStatus" items="${phoneStatusList}">
