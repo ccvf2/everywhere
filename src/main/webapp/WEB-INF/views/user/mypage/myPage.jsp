@@ -57,11 +57,11 @@
 						<c:forEach var="plannerList" items="${plannerList}">
 						
 							<c:choose>
-								<c:when test="${plannerList.attach_file==null}">
-									<c:set var="plannerImg" value="/assets/img/main/img1.jpg"/>
+								<c:when test="${plannerList.attach_file.length()<5}">
+									<c:set var="plannerImg" value="/attatchFile/spot/no_image.jpg"/>
 								</c:when>
 								<c:otherwise>
-									<c:set var="plannerImg" value="${plannerList.attach_file}"/>
+									<c:set var="plannerImg" value="/attatchFile/planner/${plannerList.attach_file}"/>
 								</c:otherwise>
 							</c:choose>
 						
@@ -71,7 +71,9 @@
 				                </div>
 				                <div class="news-v2-desc bg-color-light">
 				                    <h3><a href="#"><c:out value="${plannerList.title}"/></a></h3>
-				                    <small><a href="#">추천수 100</a></small>
+				                    <small><a href="#">댓글 ${plannerList.reply_Count}</a></small>
+				                    <small><a href="#">좋아요 ${plannerList.sweet_count}</a></small>
+				                    <small><a href="#">즐겨찾기 ${plannerList.bookmark_Count}</a></small>
 				                    <p>
 				                    	<c:out value="${plannerList.memo}"/>
 							        </p>
@@ -79,7 +81,6 @@
 			            	</div>
 		            	</c:forEach>
 					</c:if>
-					
 		        </div>
 		    <!--=== End News Block ===-->
             <!-- 메인------------------------------------------------------------------------------------------------------------------------------ -->
