@@ -5,6 +5,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,7 +13,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import everywhere.com.mynetgear.ccvf2.admin.dto.settingmain.SettingMainDto;
+import everywhere.com.mynetgear.ccvf2.comm.util.common.Constant;
 import everywhere.com.mynetgear.ccvf2.user.dto.planner.PlannerDto;
+import everywhere.com.mynetgear.ccvf2.user.dto.search.SpotDtoExt;
 import everywhere.com.mynetgear.ccvf2.user.service.main.UserMainService;
 
 /**
@@ -41,16 +44,20 @@ public class UserMainController {
 		List<PlannerDto> list1=userMainService.getListPlanner();
 		List<PlannerDto> list2=userMainService.getListPlanner();
 		List<PlannerDto> list3=userMainService.getListPlanner();
-		List<PlannerDto> list4=userMainService.getListPlanner();
+		List<SpotDtoExt> spotList=userMainService.getListSpotUserMain();
 
 		mav.addObject("list1",list1);
 		mav.addObject("list2",list2);
 		mav.addObject("list3",list3);
-		mav.addObject("list4",list4);
+		mav.addObject("spotList",spotList);
 		
 		
 		mav.addObject("forgroung", forground);
-		mav.addObject("backgroungImg",settingMainDto.getSetting_url());
+		
+		if(StringUtils.equals(settingMainDto.getSetting_url(), Constant.SYNB_NULL)){
+			settingMainDto.setSetting_url("bg.png");
+		}
+		mav.addObject("backgroungImg", settingMainDto.getSetting_url());
 		return mav;
 	}
 	

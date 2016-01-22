@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.PlatformTransactionManager;
 
+import everywhere.com.mynetgear.ccvf2.user.dto.search.SpotDtoExt;
 import everywhere.com.mynetgear.ccvf2.user.dto.spot.SpotDto;
 
 /**
@@ -81,6 +82,18 @@ public class SpotDaoImp implements SpotDao {
 	@Override
 	public int ratingSpot(SpotDto spotDto) {
 		return sqlTemplate.update("update_spot_rate", spotDto);
+	}
+
+	/**
+	 * @author 배성욱
+	 * @createDate 2016. 1. 23.
+	 * @described 메인에 뿌릴 명소 목록6개
+	 * @reference class
+	 * @return
+	 */
+	@Override
+	public List<SpotDtoExt> getListSpotUserMain() {
+		return sqlTemplate.selectList("select_list_spot_user_Main");
 	}
 	
 }

@@ -143,28 +143,29 @@
     	
     	<!-- Info Blokcs -->
     	<div class="row margin-bottom-5">
-        <div class="headline"><h2>핫 플레이스!</h2></div>
+        <div class="headline"><h2>핫 플레이스!</h2>
+					<a href="/user/search/searchSpot.do" style="float: right; line-height:50px;">더보기▶▶</a>
+        </div>
 	        <div class="blog_masonry_3col" style="padding-bottom: 0px;">
 		        <div class="container content grid-boxes" style="padding-top: 0px; padding-bottom: 0px;">
 				<div>
-					<a href="/user/planner/readPlanner.do?planner_no=${planner.planner_no}"> ${planner.title} </a>
 				</div>
- 					<c:forEach var="list1" items="${list1}">
+ 					<c:forEach var="list1" items="${spotList}">
 		            <div class="col-md-4">
 		            <div class="grid-boxes-in" style="height: 430px;">
-		                <img class="img-responsive" src="/attatchFile/planner/${list1.attach_file}" alt="" onError="this.src='/attatchFile/spot/no_image.jpg'" height="80%">
+		                <img class="img-responsive" src="/attatchFile/spot/${list1.attach_file}" alt="${list1.spot_name}" onError="this.src='/attatchFile/spot/no_image.jpg'" height="80%" width="100%">
 		                <div class="grid-boxes-caption">
-		                    <h3><a href="/user/planner/readPlanner.do?planner_no=${list1.planner_no}">${list1.title}</a></h3>
+		                    <h3><a href="/user/planner/readPlanner.do?planner_no=${list1.spot_no}">${list1.spot_name}</a></h3>
 		                    <ul class="list-inline grid-boxes-news">
-		                        <li><a href="#">${list1.mem_name}</a></li>
+		                        <li><a href="#">${list1.spot_name}</a></li>
 		                        <li>|</li>
-		                        <li><i class="fa fa-clock-o"></i><fmt:formatDate pattern="yyyy-MM-dd" value="${list1.reg_date}"/></li>
+		                        <%-- <li><i class="fa fa-clock-o"></i><fmt:formatDate pattern="yyyy-MM-dd" value="${list1.spot_regdate}"/></li> --%>
 		                        <li>|</li>
-		                        <li><a href="#"><i class="fa fa-comments-o"></i><c:out value="${list1.reply_Count}" escapeXml="false"/></a></li>
+		                        <li><a href="#"><i class="fa fa-comments-o"></i><c:out value="${list1.total_star_score}" escapeXml="false"/></a></li>
 		                    </ul>
 		                    <p>
-		                    	<c:out value="${fn:substring(list1.memo, 0,50)}" escapeXml="false"/>
-		                    	<c:if test="${fn:length(list1.memo) >50}">
+		                    	<c:out value="${fn:substring(list1.spot_note, 0,50)}" escapeXml="false"/>
+		                    	<c:if test="${fn:length(list1.spot_note) >50}">
 						        	…
 						        </c:if>
 		                    </p>

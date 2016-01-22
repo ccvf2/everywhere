@@ -3,6 +3,7 @@ package everywhere.com.mynetgear.ccvf2.user.dao.spot;
 import java.util.List;
 
 import everywhere.com.mynetgear.ccvf2.comm.dto.commoncode.CommonCodeDto;
+import everywhere.com.mynetgear.ccvf2.user.dto.search.SpotDtoExt;
 import everywhere.com.mynetgear.ccvf2.user.dto.spot.SpotDto;
 
 public interface SpotDao {
@@ -22,4 +23,7 @@ public interface SpotDao {
 	public int updateSpot(SpotDto spotDto);
 	public int deleteSpot(int spot_no);
 	public int ratingSpot(SpotDto spotDto);
+	
+	//메인에 뿌려질 명소목록(6개)
+	public List<SpotDtoExt> getListSpotUserMain();
 }

@@ -13,6 +13,7 @@ import everywhere.com.mynetgear.ccvf2.user.dao.main.UserMainDao;
 import everywhere.com.mynetgear.ccvf2.user.dao.planner.PlannerDao;
 import everywhere.com.mynetgear.ccvf2.user.dao.spot.SpotDao;
 import everywhere.com.mynetgear.ccvf2.user.dto.planner.PlannerDto;
+import everywhere.com.mynetgear.ccvf2.user.dto.search.SpotDtoExt;
 
 /**
  * @author 배성욱
@@ -62,6 +63,18 @@ public class UserMainServiceImp implements UserMainService {
 	@Override
 	public List<PlannerDto> getListPlanner() {
 		List<PlannerDto> list=plannerDao.getListPlanner_main();
+		return list;
+	}
+	/**
+	 * @author 배성욱
+	 * @createDate 2016. 1. 23.
+	 * @described 메인에 뿌릴 명소 6개 가져오기.
+	 * @reference class
+	 * @return
+	 */
+	@Override
+	public List<SpotDtoExt> getListSpotUserMain() {
+		List<SpotDtoExt> list=spotDao.getListSpotUserMain();
 		return list;
 	}
 	

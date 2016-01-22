@@ -93,4 +93,45 @@
 	<update id="update_spot_rate" parameterType="everywhere.com.mynetgear.ccvf2.user.dto.spot.SpotDto">
 		update tbl_spot set total_star_score=#{total_star_score}, count_star_score=#{count_star_score} where spot_no=#{spot_no}
 	</update>
+	
+	
+	<select id="select_list_spot_user_Main" resultType="everywhere.com.mynetgear.ccvf2.user.dto.search.SpotDtoExt">
+		SELECT
+			*
+		FROM
+			(SELECT
+				ROWNUM RNUM
+				, RTABLE.*
+			FROM
+				(SELECT 
+						SP.SPOT_NO
+					, SP.MEM_NO
+					, SP.COUNTRY_CODE
+					, SP.CITY_CODE
+					, SP.SPOT_NAME
+					, SP.SPOT_TYPE_CODE
+					, SP.MEM_LEVEL_CODE
+					, SP.SPOT_NOTE
+					, (select SAVE_NAME||'.'||EXTENSION from TBL_COMMON_FILE where FILE_NO=replace(SP.ATTACH_FILE,',',''))ATTACH_FILE
+					, SP.SPOT_ADDR
+					, SP.SPOT_LAT
+					, SP.SPOT_LONG
+					, SP.TOTAL_STAR_SCORE
+					, SP.COUNT_STAR_SCORE
+					, SP.OPEN_API_SEQ
+					, SP.SPOT_REGDATE
+					, ROUND( NVL((SP.TOTAL_STAR_SCORE)/DECODE((SP.COUNT_STAR_SCORE),0, NULL,(SP.COUNT_STAR_SCORE)), 0), 1)	AS STAR_SCORE
+					FROM
+						TBL_SPOT SP
+					ORDER BY
+						STAR_SCORE
+					DESC
+						,SP.TOTAL_STAR_SCORE 
+					DESC
+					)RTABLE
+				)TOTALTABLE
+		WHERE
+		RNUM<![CDATA[>=1]]> AND RNUM<![CDATA[<=6]]>
+	</select>
+	
 </mapper>
