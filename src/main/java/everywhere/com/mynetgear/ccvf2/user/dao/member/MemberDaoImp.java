@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 
 import everywhere.com.mynetgear.ccvf2.comm.util.common.Constant;
 import everywhere.com.mynetgear.ccvf2.user.dto.member.MemberDto;
+import everywhere.com.mynetgear.ccvf2.user.dto.planner.PlannerDto;
 
 /**
  * @author 김준호
@@ -125,6 +126,43 @@ public class MemberDaoImp implements MemberDao {
 	public int getFriendsCount(int mem_no) {
 		System.out.println("---------getFriendsCountDaoImpl");
 		return sqlTemplate.selectOne("getFriendsCount", mem_no);
+	}
+
+	@Override
+	public List<PlannerDto> getBookMarkList(int mem_no, int startRow, int endRow) {
+		HashMap<String, Object> map=new HashMap<String, Object>();
+		map.put("mem_no", mem_no);
+		map.put("startRow", startRow);
+		map.put("endRow", endRow);
+		
+		return sqlTemplate.selectList("getBookMarkList", map);
+	}
+
+	@Override
+	public void myPageDeleteBookMark(int item_no, int mem_no) {
+		HashMap<String, Object> map=new HashMap<String, Object>();
+		map.put("item_no", item_no);
+		map.put("mem_no", mem_no);
+		sqlTemplate.delete("myPageDeleteBookMark", map);
+	}
+
+	@Override
+	public int getBookMarkCount(int mem_no) {
+		return sqlTemplate.selectOne("getBookMarkCount", mem_no);
+	}
+
+	@Override
+	public int getPlannerCount(int mem_no) {
+		return sqlTemplate.selectOne("everywhere.com.mynetgear.ccvf2.user.mapper.member.getPlannerCount", mem_no);
+	}
+
+	@Override
+	public List<PlannerDto> getPlannerList(int mem_no, int startRow, int endRow) {
+		HashMap<String, Object> map=new HashMap<String, Object>();
+		map.put("startRow", startRow);
+		map.put("endRow", endRow);
+		map.put("mem_no", mem_no);
+		return sqlTemplate.selectList("everywhere.com.mynetgear.ccvf2.user.mapper.member.getPlannerList", map);
 	}
 
 }

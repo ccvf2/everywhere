@@ -66,4 +66,23 @@ public interface MyPageService {
 	 * @return
 	 */
 	public ModelAndView searchFriends(ModelAndView mav);
+	
+	
+	/**
+	 * @author 김성광
+	 * @createDate 2016. 1. 22.
+	 * @described 즐겨찾기페이지
+	 * @param mav
+	 * @return
+	 */
+	public ModelAndView getBookMarkList(ModelAndView mav);
+
+	/**
+	 * @author 김성광
+	 * @createDate 2016. 1. 22.
+	 * @described 마이페이지 북마크 해제
+	 * @param mav
+	 * @return 
+	 */
+	public ModelAndView myPageDeleteBookMark(ModelAndView mav);
 }

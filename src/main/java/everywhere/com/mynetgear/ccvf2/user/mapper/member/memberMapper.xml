@@ -174,4 +174,96 @@
 	<select id="getFriendsCount" parameterType="int" resultType="int">
 		select count(*) from tbl_mate where mem_no=#{mem_no}
 	</select>
+	
+	<select id="getBookMarkList" parameterType="java.util.HashMap" resultType="everywhere.com.mynetgear.ccvf2.user.dto.planner.PlannerDto">
+		<![CDATA[
+		select *
+		from tbl_planner
+		where planner_no in
+			(select book.item_no
+			from (SELECT ROWNUM rnum, A.* 
+			      FROM (SELECT * 
+			            FROM tbl_bookmark 
+			            WHERE mem_no=#{mem_no}
+			            ORDER BY mem_no DESC) A) book
+			WHERE book.rnum >= #{startRow}
+			AND book.rnum <=#{endRow})
+		]]>
+	</select>
+	
+	<delete id="myPageDeleteBookMark" parameterType="java.util.HashMap">
+		delete from tbl_bookmark
+		where item_no=#{item_no}
+		and mem_no=#{mem_no}
+	</delete>
+	
+	<select id="getBookMarkCount" parameterType="int" resultType="int">
+		select count(*) from tbl_bookmark where mem_no=#{mem_no}
+	</select>
+	
+	<select id="everywhere.com.mynetgear.ccvf2.user.mapper.member.getPlannerCount" parameterType="int" resultType="int">
+		select count(*)
+		from tbl_planner
+		where mem_no=#{mem_no}
+	</select>
+	
+	<select id="everywhere.com.mynetgear.ccvf2.user.mapper.member.getPlannerList" parameterType="java.util.HashMap" resultType="everywhere.com.mynetgear.ccvf2.user.dto.planner.PlannerDto">
+		<![CDATA[
+			select 
+	 			  pla.PLANNER_NO
+				  , pla.MEM_NO
+				  , pla.PLANNER_BA_CODE
+				  , pla.TITLE
+				  , (select save_name||'.'||EXTENSION from tbl_common_file where FILE_NO=pla.ATTACH_FILE)ATTACH_FILE  
+				  , pla.MEMO
+				  , pla.START_DATE
+				  , pla.END_DATE
+				  , pla.REG_DATE
+				  , pla.USE_YN
+			      , nvl(sw.sweet_count, 0) as sweet_count
+			      , nvl(re.re_count, 0) as reply_Count
+			      , nvl(book.bookmark_count, 0) as bookmark_Count
+			from 
+				(select planner_no, count(sweet_no) sweet_count
+				from tbl_sweet
+				where planner_no in 
+				(select pln.planner_no
+                 from (SELECT ROWNUM rnum, A.* 
+                       FROM (SELECT *
+                             FROM tbl_planner 
+                             WHERE mem_no=#{mem_no}
+                             ORDER BY planner_no DESC) A) pln
+                 WHERE pln.rnum >= #{startRow}
+                 AND pln.rnum <=#{endRow})
+				group by planner_no) sw,
+							
+				(select *
+				from tbl_planner
+				where mem_no=#{mem_no}) pla,
+				
+				(select count(reply_no) as re_count, item_no as planner_no
+				from tbl_common_reply
+				where item_no in 
+				(
+				  select planner_no
+				  from tbl_planner
+				  where mem_no=#{mem_no}
+				)
+				group by item_no) re,
+						
+				(select count(bookmark_no) as bookmark_count, item_no as planner_no
+				from tbl_bookmark
+				where item_no in 
+				(
+				  select planner_no
+				  from tbl_planner
+				  where mem_no=#{mem_no}
+				)
+				group by item_no) book
+				
+			where pla.planner_no=sw.planner_no(+)
+			and pla.planner_no=re.planner_no(+)
+			and pla.planner_no=book.planner_no(+)
+		]]>
+	</select>
 </mapper>
