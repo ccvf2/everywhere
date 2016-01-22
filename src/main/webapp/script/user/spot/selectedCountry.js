@@ -43,7 +43,6 @@ function ratingSpot(spot_no){
 	
 	var params = "spot_no="+spot_no+"&score="+score;
 	var url = "/user/spot/spotRating.ajax?" + params;
-	alert(url);
 	$.ajax({
 		url:url,
 		type:"get",
@@ -51,7 +50,6 @@ function ratingSpot(spot_no){
 		success:function(data){
 			var result = data.split(",");
 			if(result[0] == '1'){
-				alert(data);
 				var str = '(' + result[1] + ' / ' + result[2] + ' 명이 평가하셨습니다.)';
 				$("#spot-score").text(str);
 			}

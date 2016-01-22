@@ -102,16 +102,12 @@
 					<div class="btn-share-group">
 						<a id="likeBtn" class="btn-like " title="좋아요">
 							<span><i class="fa fa-heart-o" ></i><i class="fa fa-heart" style="color:green"></i><span class="plan-detail-view-like-count"> ${sweet_count }</span></span>
-							<span class="txt-info">추천</span>
+							<span class="txt-info">좋아요</span>
 						</a><!-- 좋아요 -->
 						<a id="bookmarkBtn" class="btn-bookmark  " title="북마크">
 							<span><i class="fa fa-bookmark-o" ></i><i class="fa fa-bookmark" style="color:green"></i><span class="plan-detail-view-bookmark-count"> ${bookmark_count }</span></span>
 							<span class="txt-info">북마크</span>
 						</a><!-- 북마크 -->
-						<a id="customizeBtn" class="btn-customize " title="커스터마이즈">
-							<span><i class="fa  fa-files-o" ></i><i class="fa fa-files" style="color:green"></i><span class="plan-detail-view-scrap-count">1</span></span>
-							<span class="txt-info">커스터마이즈</span>
-						</a><!--커스터마이즈 -->
 					</div>
 
 					<ul class="list-group sidebar-nav-v1 margin-bottom-20 active">
@@ -157,7 +153,7 @@
 								<h2><a href="javascript:spotReadPage('${item.spot.spot_no}')">${item.spot.spot_name}</a></h2>
 								<div class="row">
 									<div class="col-md-4">
-										<img class="img-responsive" src="/attatchFile/spot/${item.spot.spot_photoes[0].save_name}.${item.spot.spot_photoes[0].extension}" alt=""> 
+										<img class="img-responsive" src="/attatchFile/spot/${item.spot.spot_photoes[0].save_name}.${item.spot.spot_photoes[0].extension}" alt="" style="width: 100%; height: 70%;"> 
 										<div class="md-margin-bottom-20"></div>
 									</div>
 									<div class="col-md-8">
@@ -207,11 +203,10 @@
 						</li>
 						</c:forEach>
 					</ul>
-					
 					<div id="replyArea">
 						<div id="replywrap">
 							<div id="replyListArea"></div>
-							<c:if test="${mem_Object.mem_no!=''}">
+							<c:if test="${mem_object!=null}">
 								<div id="replyWriteArea"></div>
 							</c:if>
 						</div>
@@ -220,7 +215,7 @@
 				<!--End Tag Box v4-->
 			</div>
 		</div>
-	</div><!--/container-->     
+	</div><!--/container-->
 	<!--=== End Content Part ===-->
 
 	<!--=== Footer Version 1 ===-->

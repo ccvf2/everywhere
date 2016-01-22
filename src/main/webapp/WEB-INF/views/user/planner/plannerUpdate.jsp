@@ -30,6 +30,7 @@
 <script type="text/javascript">
 $(document).ready(function () {
 	$('.nav-stacked').width($('.col-sm-3').width());
+	$('.breadcrumbs-v1').css('background-image', 'url(/attatchFile/planner/)');
 });
 </script>
 <body>
@@ -146,7 +147,7 @@ $(document).ready(function () {
 									<span>여행시작날짜</span> 
 									<label class="input">
 										<i class="icon-append fa fa-calendar"></i>
-										<input type="date" name="start_date" placeholder="Start Date" value="${start_date }">
+										<input type="date" id="start_date" name="start_date" required pattern="\d{4}-\d{1,2}-\d{1,2}"  placeholder="Start Date" value="${start_date }">
 									</label>
 								</div>
 								<div class="col col-2" style="padding-left: 0px;">
@@ -173,111 +174,169 @@ $(document).ready(function () {
 							<div class="tag-box tag-box-v4 rounded-2x margin-bottom-30" id="d${i}_items_div">
 								<input type="hidden" id="d${i}_item_count" name="d${i}_item_count" value="${dayItemCount[i-1]}">
 								<h2 class="heading-xs" id="d${i}_items_date">Day ${i}</h2>
-								<c:forEach var="j" begin="1" end="${dayItemCount[i-1]}" step="1">
-								<c:set var="item" value="${itemList[count]}"/>
-								<c:set var="id_value" value="d${i}_item${j}"/>
-									<div id="d${i}_item${j}_div">
+								<c:choose>
+								<c:when test="${dayItemCount[i-1] > 0}">
+									<c:forEach var="j" begin="1" end="${dayItemCount[i-1]}" step="1">
+									<c:set var="item" value="${itemList[count]}"/>
+									<c:set var="id_value" value="d${i}_item${j}"/>
+										<div id="d${i}_item${j}_div">
+										<ol class="list-unstyled">
+											<li>
+											<div class="panel-group">
+												<input type="hidden" name="${id_value}_no" value="${item.item_no}"/>
+												<div class="panel panel-default">
+													<c:if test="${item.spot_no != 0 }">
+														<div class="ui-widget-header" style="height:52px;">
+															<a data-toggle="collapse" href="#collapse_${id_value}">
+																<i class="icon-note pull-right"></i>
+															</a>
+															<div>
+																<i style="margin:0;"><img alt="" src="/attatchFile/spot/${item.spot.spot_photoes[0].save_name}.${item.spot.spot_photoes[0].extension}" style="width:35px;height:35px;margin-right:5px;"></i>
+																<div class="overflow-h">
+																	<span>
+																		<strong><a href="javascript:spotReadPage('${item.spot.spot_no}')">${item.spot.spot_name}</a></strong>
+																	</span>
+																	<span><small><c:out value="${item.spot.spot_note}"/></small></span>
+																</div>
+															</div>
+															<input type="hidden" id="${id_value}_spot_no" name="${id_value}_spot_no" value="${item.spot.spot_no}"/>
+														</div>
+													</c:if>
+													<c:if test="${item.spot_no == 0 }">
+														<div class="ui-widget-header dropItem" style="height:52px;">
+															<a data-toggle="collapse" href="#collapse_${id_value}">
+																<i class="icon-note pull-right"></i>
+															</a>
+																<h4 class="panel-title">
+																	<span> 명소를 여기로 끌어와 주세요 </span>
+																</h4>
+															<input type="hidden" id="${id_value}_spot_no" name="${id_value}_spot_no" value="0"/>
+														</div>
+													</c:if>
+													<div id="collapse_${id_value}" class="panel-collapse collapse in">
+														<div id="${id_value}_note_div" class="panel-body" style="padding:0px">
+															<c:if test="${item.attach_photoes != null }">
+																<div id="${id_value}_photo" class="panel-body">
+																	<img id="${id_value}_preview" src="/attatchFile/item/${item.item_photoes[0].save_name}.${item.item_photoes[0].extension}" width="400" height="300">
+																</div>
+															</c:if>
+															<label class="textarea" style="margin:0">
+																<textarea style="border:0px" rows="3" id="${id_value}_note" name="${id_value}_note" placeholder="Write some notes..">${fn:replace(item.note, '<br/>', '&#0013;')}</textarea>
+															</label>
+														</div>
+														<c:if test="${item.moneyList.size() != 0 }">
+															<div id="${id_value}_money_div" class="panel-body" style="border-top-style: solid; border-top-width: 1px; border-top-color: rgb(238, 238, 238);">
+																<fmt:formatNumber var="k" value="1"/>
+																<c:forEach var="money" items="${item.moneyList}">
+																	<div style="margin-top: 3px;" id="${id_value}_money${k}_div">
+																		<input type="hidden" name="${id_value}_money${k}_no" value="${money.money_no}">
+																		<input type="hidden" name="${id_value}_money${k}_currency_code" value="P0001">
+																		<label class="select col col-3">
+																			<select name="${id_value}_money${k}_type_code">
+																				<option value="D0001">항공</option>
+																				<option value="D0002">숙박</option>
+																				<option value="D0003">교통</option>
+																				<option value="D0004">쇼핑</option>
+																				<option value="D0005">식사</option>
+																				<option value="D0006">입장료</option>
+																				<option value="D0007">오락</option>
+																				<option value="D0008">기타</option>
+																			</select>
+																			<script type="text/javascript">
+																				updateForm.${id_value}_money${k}_type_code.value="${money.money_type_code}";
+																			</script>
+																			<i></i>
+																		</label>
+																		<label class="input col col-5">
+																			<input type="text" class="col col-5" id="${id_value}_money${k}_title" name="${id_value}_money${k}_title" placeholder="예) 기념품" value="${money.money_title}">
+																		</label>
+																		<label class="input col col-3">
+																			<input type="number" class="col col-3" name="${id_value}_money${k}_price" placeholder="3000" style="margin-left: 10px;" value="${money.price}">
+																		</label>
+																		<label class="input col col-1">
+																			<button class="rounded-4x btn btn-default" title="가계부 삭제" onclick="delMoney('${id_value}_money${k}')">X</button>
+																		</label>
+																	</div>
+																</c:forEach>
+															</div>
+														</c:if>
+														<input type="hidden" id="${id_value}_money_count" name="${id_value}_money_count" value="${item.moneyList.size()}"/>
+														<div class="project-share">
+															<ul class="list-inline comment-list-v2" style="float: left">
+																<li>시간 : </li>
+																<li><input type="text" name="${id_value}_time" maxlength="20" placeholder="예) 8시 ~ 10시 사이"/ value="${item.item_time}"> </li>
+															</ul>
+															<ul class="list-inline comment-list-v2 pull-right">
+																<li><i data-toggle="tooltip" title="사진 추가" class="icon-picture input input-file" style="font-size:23px" onclick="addPhoto(this,'${id_value}')">
+																<div class="button" style="background-color:rgba(255, 255, 255, 0);"><input type="file" name="${id_value}_attach_photoes" onchange="addPhoto(this,'${id_value}')" accept="image/*"/></div>
+																	</i></li>
+																<li><i data-toggle="tooltip" title="가계부 추가" class="icon-credit-card" style="font-size:23px" onclick="addMoney('${id_value}')"></i></li>
+																<li><i data-toggle="tooltip" title="일정삭제" class="icon-trash" style="font-size:23px" onclick="deleteItem('${id_value}')"></i></li>
+															</ul>
+														</div>
+													</div>
+												</div>
+											</div> 
+										</li>
+									</ol>
+									<ol class="bs-glyphicons">	 
+										<li style="width:100%; height:100%; padding:0px; border: 0px; text-align: center"><span data-toggle="tooltip" title="일정 추가" class="glyphicon glyphicon-plus-sign" onclick="addItem('d${i}_item${j}')"></span></li> 					 
+									</ol>
+									</div>
+									<fmt:formatNumber var="count" value="${count+1}"/>
+									</c:forEach>
+								</c:when>
+								<c:otherwise>
+									<div id="d${i}_item1_div">
 									<ol class="list-unstyled">
 										<li>
-										<div class="panel-group">
-											<input type="hidden" name="${id_value}_no" value="${item.item_no}"/>
-											<div class="panel panel-default">
-												<c:if test="${item.spot_no != 0 }">
-													<div class="ui-widget-header" style="height:52px;">
-														<a data-toggle="collapse" href="#collapse_${id_value}">
-															<i class="icon-note pull-right"></i>
-														</a>
-														<div>
-															<i style="margin:0;"><img alt="" src="/attatchFile/spot/${item.spot.spot_photoes[0].save_name}.${item.spot.spot_photoes[0].extension}" style="width:35px;height:35px;margin-right:5px;"></i>
-															<div class="overflow-h">
-																<span>
-																	<strong><a href="javascript:spotReadPage('${item.spot.spot_no}')">${item.spot.spot_name}</a></strong>
-																</span>
-																<span><small><c:out value="${item.spot.spot_note}"/></small></span>
-															</div>
-														</div>
-														<input type="hidden" id="${id_value}_spot_no" name="${id_value}_spot_no" value="${item.spot.spot_no}"/>
-													</div>
-												</c:if>
-												<c:if test="${item.spot_no == 0 }">
+											<div class="panel-group">
+												<input type="hidden" name="${id_value}_no"/>
+												<div class="panel panel-default">
 													<div class="ui-widget-header dropItem" style="height:52px;">
 														<a data-toggle="collapse" href="#collapse_${id_value}">
 															<i class="icon-note pull-right"></i>
 														</a>
-															<h4 class="panel-title">
-																<span> 명소를 여기로 끌어와 주세요 </span>
-															</h4>
+														<h4 class="panel-title">
+															<span> 명소를 여기로 끌어와 주세요 </span>
+														</h4>
 														<input type="hidden" id="${id_value}_spot_no" name="${id_value}_spot_no" value="0"/>
 													</div>
-												</c:if>
-												<div id="collapse_${id_value}" class="panel-collapse collapse in">
-													<div id="${id_value}_note_div" class="panel-body" style="padding:0px">
-														<c:if test="${item.attach_photoes != null }">
-															<div id="${id_value}_photo" class="panel-body">
-																<img id="${id_value}_preview" src="/attatchFile/item/${item.item_photoes[0].save_name}.${item.item_photoes[0].extension}" width="400" height="300">
-															</div>
-														</c:if>
-														<label class="textarea" style="margin:0">
-															<textarea style="border:0px" rows="3" id="${id_value}_note" name="${id_value}_note" placeholder="Write some notes..">${fn:replace(item.note, '<br/>', '&#0013;')}</textarea>
-														</label>
-													</div>
-													<c:if test="${item.moneyList.size() != 0 }">
-														<div id="${id_value}_money_div" class="panel-body" style="border-top-style: solid; border-top-width: 1px; border-top-color: rgb(238, 238, 238);">
-															<c:forEach var="money" items="${item.moneyList}">
-																<div style="margin-top: 3px;">
-																	<input type="hidden" name="${id_value}_money1_no" value="${money.money_no}">
-																	<input type="hidden" name="${id_value}_money1_currency_code" value="P0001">
-																	<label class="select col col-3">
-																		<select name="${id_value}_money1_type_code">
-																			<option value="D0001">항공</option>
-																			<option value="D0002">숙박</option>
-																			<option value="D0003">교통</option>
-																			<option value="D0004">쇼핑</option>
-																			<option value="D0005">식사</option>
-																			<option value="D0006">입장료</option>
-																			<option value="D0007">오락</option>
-																			<option value="D0008">기타</option>
-																		</select>
-																		<script type="text/javascript">
-																			updateForm.${id_value}_money1_type_code.value="${money.money_type_code}";
-																		</script>
-																		<i></i>
-																	</label>
-																	<label class="input col col-5">
-																		<input type="text" class="col col-5" name="${id_value}_money1_title" placeholder="예) 기념품" value="${money.money_title}">
-																	</label>
-																	<label class="input col col-4">
-																		<input type="number" class="col col-4" name="${id_value}_money1_price" placeholder="3000" style="margin-left: 10px;" value="${money.price}">
-																	</label>
-																</div>
-															</c:forEach>
-														</div>
+													<c:set var="collapse" value=""/>
+													<c:if test="${i == 1 }">
+														<c:set var="collapse" value="in"/>
 													</c:if>
-													<input type="hidden" id="${id_value}_money_count" name="${id_value}_money_count" value="${item.moneyList.size()}"/>
-													<div class="project-share">
-														<ul class="list-inline comment-list-v2" style="float: left">
-															<li>시간 : </li>
-															<li><input type="text" name="${id_value}_time" maxlength="20" placeholder="예) 8시 ~ 10시 사이"/ value="${item.item_time}"> </li>
-														</ul>
-														<ul class="list-inline comment-list-v2 pull-right">
-															<li><i data-toggle="tooltip" title="사진 추가" class="icon-picture input input-file" style="font-size:23px" onclick="addPhoto(this,'${id_value}')">
-															<div class="button" style="background-color:rgba(255, 255, 255, 0);"><input type="file" name="${id_value}_attach_photoes" onchange="addPhoto(this,'${id_value}')" accept="image/*"/></div>
-																</i></li>
-															<li><i data-toggle="tooltip" title="가계부 추가" class="icon-credit-card" style="font-size:23px" onclick="addMoney('${id_value}')"></i></li>
-															<li><i data-toggle="tooltip" title="일정삭제" class="icon-trash" style="font-size:23px" onclick="deleteItem('${id_value}')"></i></li>
-														</ul>
+													<div id="collapse_${id_value}" class="panel-collapse collapse ${collapse}">
+														<div id="${id_value}_note_div" class="panel-body" style="padding:0px">
+															<label class="textarea" style="margin:0">
+																<textarea style="border:0px" rows="3" id="${id_value}_note" name="${id_value}_note" placeholder="Write some notes.."></textarea>
+															</label>
+														</div>
+														<input type="hidden" id="${id_value}_money_count" name="${id_value}_money_count" value="0"/>
+														<div class="project-share">
+															<ul class="list-inline comment-list-v2" style="float: left">
+																<li>시간 : </li>
+																<li><input type="text" name="${id_value}_time" maxlength="20" placeholder="예) 8시 ~ 10시 사이"/> </li>
+															</ul>
+															<ul class="list-inline comment-list-v2 pull-right">
+																<li><i data-toggle="tooltip" title="사진 추가" class="icon-picture input input-file" style="font-size:23px" onclick="addPhoto(this,'${id_value}')">
+																<div class="button" style="background-color:rgba(255, 255, 255, 0);"><input type="file" name="${id_value}_attach_photoes" onchange="addPhoto(this,'${id_value}')" accept="image/*"/></div>
+																	</i></li>
+																<li><i data-toggle="tooltip" title="가계부 추가" class="icon-credit-card" style="font-size:23px" onclick="addMoney('${id_value}')"></i></li>
+																<li><i data-toggle="tooltip" title="일정삭제" class="icon-trash" style="font-size:23px" onclick="deleteItem('${id_value}')"></i></li>
+															</ul>
+														</div>
 													</div>
 												</div>
-											</div>
-										</div> 
-									</li>
-								</ol>
-								<ol class="bs-glyphicons">	 
-									<li style="width:100%; height:100%; padding:0px; border: 0px; text-align: center"><span data-toggle="tooltip" title="일정 추가" class="glyphicon glyphicon-plus-sign" onclick="addItem('d${i}_item1')"></span></li> 					 
-								</ol>
-								</div>
-								<fmt:formatNumber var="count" value="${count+1}"/>
-								</c:forEach>
+											</div> 
+										</li>
+									</ol>
+									<ol class="bs-glyphicons">	 
+										<li style="width:100%; height:100%; padding:0px; border: 0px; text-align: center"><span data-toggle="tooltip" title="일정 추가" class="glyphicon glyphicon-plus-sign" onclick="addItem('d${i}_item1')"></span></li> 					 
+									</ol>
+									</div>
+									</c:otherwise>
+								</c:choose>
 							</div>
 						</c:forEach>
 						<button type="button" class="btn-u" id="submit_btn" onclick="checkPlanner()">Submit</button>

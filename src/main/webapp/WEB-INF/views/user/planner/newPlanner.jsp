@@ -32,8 +32,7 @@
 <div class="modal fade" id="plannerCreate" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	<div class="modal-dialog">
 		<div class="modal-content">
-		<form action="/user/planner/plannerCreate.do" method="post" onsubmit="return plannerForm(this)" >
-		<input type="hidden" name="mem_no" value="${mem_object.mem_no}">
+		<form action="/user/planner/plannerCreate.do" method="post">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 				<h4 class="modal-title"><i class="fa fa-paper-plane-o"></i>새일정 만들기</h4>
