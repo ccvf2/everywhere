@@ -8,30 +8,26 @@ import everywhere.com.mynetgear.ccvf2.user.dto.planner.PlannerDto;
 
 public interface PlannerDao {
 	public int insertPlanner(PlannerDto planner);
-	
+
 	public int insertPlanner(PlannerDto planner, List<ItemDto> itemList);
 
-	public int getPlannerNextSeq();
-	
-	public int getItemNextSeq();
+	public PlannerDto getOnePlanner(int planner_no);
 
-	public List<PlannerDto> getPlannerListByMember(PlannerDto plannerDto);
 	public List<ItemDto> getItemList(int planner_no);
+
 	public List<MoneyDto> getMoneyList(int item_no);
 	
+	public int updatePlannerStatus(PlannerDto plannerDto);
+
 	public int getPlannerListForAllCount(PlannerDto plannerDto);
 	
 	public List<PlannerDto> getPlannerListForAll(PlannerDto plannerDto);
 
-	public PlannerDto getOnePlanner(int planner_no);
-
-	public int updatePlanner(PlannerDto plannerDto);
-	
-	public int updatePlanner(PlannerDto plannerDto, List<ItemDto> itemList);
+	public List<PlannerDto> getPlannerListByMember(PlannerDto plannerDto);
 
 	public int deletePlanner(int planner_no);
 
-	public int updatePlannerStatus(PlannerDto plannerDto);
+	public int updatePlanner(PlannerDto plannerDto, List<ItemDto> itemList);
 
 	public List<PlannerDto> getListPlanner_main();
 }

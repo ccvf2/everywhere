@@ -68,15 +68,14 @@ public class PlannerServiceImp implements PlannerService {
 	public void insertPlanner(ModelAndView mav) {
 		Map<String, Object> map=mav.getModelMap();
 		HttpServletRequest request = (HttpServletRequest)map.get("request");
-		String mem_no = request.getParameter("mem_no");
+		MemberDto userInfo = (MemberDto)request.getSession().getAttribute(Constant.SYNN_LOGIN_OBJECT);
 		String title = request.getParameter("title");
 		String start_date = request.getParameter("start_date");
 		String end_date = request.getParameter("end_date");
 		String planner_ba_code = request.getParameter("planner_ba_code");
 		
 		PlannerDto plannerDto = new PlannerDto();
-		plannerDto.setPlanner_no(plannerDao.getPlannerNextSeq());
-		plannerDto.setMem_no(Integer.parseInt(mem_no));
+		plannerDto.setMem_no(userInfo.getMem_no());
 		plannerDto.setTitle(title);
 		
 		try {
@@ -96,86 +95,164 @@ public class PlannerServiceImp implements PlannerService {
 		long diff = plannerDto.getEnd_date().getTime() - plannerDto.getStart_date().getTime();
 		long diffDays = diff / (24 * 60 * 60 * 1000);
 
-		getSpotList(mav);
+		getSpotListForPlanner(mav);
 		mav.addObject("plannerDto", plannerDto);
-		mav.addObject("check", check);
 		mav.addObject("day_count", diffDays+1);
 		mav.setViewName("user/planner/addPlanner");
 	}
 
 	@Override
-	public List<PlannerDto> getPlannerListByMember(HttpServletRequest request) {
+	public void writePlanner(ModelAndView mav) {
+		Map<String, Object> map=mav.getModelMap();
+		HttpServletRequest request = (HttpServletRequest)map.get("request");
 		MemberDto userInfo = (MemberDto)request.getSession().getAttribute(Constant.SYNN_LOGIN_OBJECT);
-		String mem_no = request.getParameter("mem_no");
 
-		// 자기 페이지에서 plannerList를 불러오면 request에 mem_no가 없음 
-		PlannerDto plannerDto = new PlannerDto();
-		if(mem_no == null){
-			plannerDto.setMem_no(userInfo.getMem_no());
-			plannerDto.setUse_yn(Constant.SYNB_YN_D);
-		}else{
-			plannerDto.setMem_no(Integer.parseInt(mem_no));
-			plannerDto.setUse_yn(Constant.SYNB_YN_Y);
+		System.out.println("**** request ****");
+		Enumeration params = request.getParameterNames(); 
+		while(params.hasMoreElements()){
+		 String paramName = (String)params.nextElement();
+		 System.out.println(paramName + " : "+request.getParameter(paramName));
 		}
 
-		return plannerDao.getPlannerListByMember(plannerDto);
+		//플래너 추가
+		PlannerDto plannerDto = new PlannerDto();
+
+		int planner_no = Integer.parseInt(request.getParameter("planner_no"));
+		plannerDto.setPlanner_no(planner_no);		
+		int mem_no = userInfo.getMem_no();
+		plannerDto.setMem_no(mem_no);		
+		plannerDto.setTitle(request.getParameter("planner_title"));
+		plannerDto.setMemo(request.getParameter("planner_memo").replace("\r\n", "<br/>"));
+
+		CommonFileIODto commonFileIODto = commonFileIOService.requestWriteFileAndDTO(request, "attach_file", plannerPath);
+		if(commonFileIODto != null){
+			commonFileIODto.setType_code(Constant.FILE_TYPE_SCHEDULE);
+			commonFileIODto.setWrite_no(mem_no);
+			String planner_photo_num = commonFileIOService.insertFileInfo(commonFileIODto) + "";
+			plannerDto.setAttach_file(planner_photo_num);
+		}
+
+		String start_date = request.getParameter("start_date");
+		int day_count = Integer.parseInt(request.getParameter("day_count")) - 1;
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+
+		try {
+			plannerDto.setStart_date(dateFormat.parse(start_date));
+
+			Calendar cal = Calendar.getInstance();
+			cal.setTime(plannerDto.getStart_date());
+			cal.add(Calendar.DATE, day_count);
+			plannerDto.setEnd_date(cal.getTime());
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+
+		//아이템 추가
+		List<ItemDto> itemList = new ArrayList<ItemDto>();
+		setWriteItems(request, itemList, planner_no, mem_no);
+
+		System.out.println(plannerDto);
+		System.out.println(itemList);
+
+		int check = plannerDao.insertPlanner(plannerDto, itemList);
+		EverywhereAspect.logger.info(EverywhereAspect.logMsg + check);
+
+		mav.addObject("planner_no", plannerDto.getPlanner_no());
+		mav.addObject("check", check);
+		mav.setViewName("user/planner/plannerWriteOk");
 	}
-	
-	@Override
-	public void getPlannerListForAll(ModelAndView mav) {
-		Map<String, Object> map = mav.getModelMap();
-		PlannerDto plannerDto =(PlannerDto)map.get("plannerDto");
-		
-		//글 전체 갯수를 가져오는 쿼리
-		int plannerListTotalCount=plannerDao.getPlannerListForAllCount(plannerDto);
-		plannerDto.setTotalCount(plannerListTotalCount);
-		
-		//3 화면에 뿌릴 겟수
-		plannerDto.setStartRow((plannerDto.getCurrentPage()-1)*3+1);
-		plannerDto.setEndRow(plannerDto.getCurrentPage()*3);
-		plannerDto.setPageCount(plannerListTotalCount/3+(plannerListTotalCount%3==0?0:1));
-		
-		plannerDto.setPageBlockGroupCount((plannerDto.getCurrentPage()-1)/plannerDto.getPageBlock());
-		
-		plannerDto.setStartPage(plannerDto.getPageBlockGroupCount()*plannerDto.getPageBlock()+1);
-		plannerDto.setEndPage(plannerDto.getStartPage()+plannerDto.getPageBlock()-1);
-		
-		
-		List<PlannerDto> plannerList = plannerDao.getPlannerListForAll(plannerDto);
-		
-		//글종류를 나타내는 코드 목록
-		List<CommonCodeDto> selectCode=commonCodeService.getListCodeGroup(Constant.SCHEDULE_TYPE_GROUP);
-		//정렬를 나타내는 코드 목록
-		List<CommonCodeDto> sortCode=commonCodeService.getListCodeGroup(Constant.SERACH_SORT_GROUPCODE);
-		
-		//페이징 및 검색 정보를 가진DTO
-		mav.addObject("plannerDto",plannerDto);
-		
-		mav.addObject("selectCode",selectCode);
-		mav.addObject("sortCode",sortCode);
-		mav.addObject("plannerList", plannerList);
-		mav.setViewName("user/planner/plannerList");
+
+	/**
+	 * @author 안희진
+	 * @createDate 2015. 12. 14.
+	 * @described 웹페이지 Form에서 전달받은 값들을 일정에 맞게 처리해서 ItemDto에 넣어주는 함수
+	 * @param request
+	 * @param itemList
+	 * @param planner_no
+	 * @param mem_no
+	 */
+	public void setWriteItems(HttpServletRequest request, List<ItemDto> itemList, int planner_no, int mem_no){
+		int day_count = Integer.parseInt(request.getParameter("day_count"));
+		System.out.println("day_count : " + day_count);
+
+		for(int i = 1; i <= day_count; i++){
+			int item_count = Integer.parseInt(request.getParameter("d"+i+"_item_count"));
+			for(int j = 1; j <= item_count; j++){
+				String itemString = "d"+i+"_item"+j;
+
+				ItemDto itemDto = new ItemDto();
+				String itemNo = request.getParameter(itemString+"_no");
+				if(itemNo.equals("") || itemNo == null )
+					itemNo = "0";
+				itemDto.setItem_no(Integer.parseInt(itemNo));
+				itemDto.setPlanner_no(planner_no);
+				itemDto.setMem_no(mem_no);
+				int spot_no = Integer.parseInt(request.getParameter(itemString+"_spot_no"));
+				itemDto.setSpot_no(spot_no);
+				String itemOrder = i + "01" + String.format("%02d", j);
+				itemDto.setItem_order(Integer.parseInt(itemOrder));
+				itemDto.setNote(request.getParameter(itemString+"_note").replace("\r\n", "<br/>"));
+				itemDto.setItem_time(request.getParameter(itemString+"_time"));
+
+				CommonFileIODto commonFileIODto = commonFileIOService.requestWriteFileAndDTO(request, itemString + "_attach_photoes", itemPath);
+				if(commonFileIODto != null){
+					commonFileIODto.setType_code(Constant.FILE_TYPE_ITEM);
+					
+					commonFileIODto.setWrite_no(mem_no);
+					String item_photo_num = commonFileIOService.insertFileInfo(commonFileIODto) + ",";
+					System.out.println("item_photo_num : " + item_photo_num);
+					itemDto.setAttach_photoes(item_photo_num);
+				}
+
+				String item_time = request.getParameter(itemString+"_time");
+				itemDto.setItem_time(item_time);
+
+				//가계부
+				int money_count = Integer.parseInt(request.getParameter(itemString+"_money_count"));
+				List<MoneyDto> moneyList = new ArrayList<MoneyDto>();
+				for(int k = 1; k <= money_count; k++){
+					String moneyString = itemString + "_money" + k;
+					MoneyDto moneyDto = new MoneyDto();
+					moneyDto.setPlanner_no(planner_no);
+					moneyDto.setMem_no(mem_no);
+					moneyDto.setSpot_no(spot_no);
+					moneyDto.setMoney_type_code(request.getParameter(moneyString+"_type_code"));
+					moneyDto.setMoney_currency_code(request.getParameter(moneyString+"_currency_code"));
+					moneyDto.setMoney_title(request.getParameter(moneyString+"_title"));
+					// 가계부 방어코드
+					String price = request.getParameter(moneyString+"_price");
+					if(price == null || price.equals("")){
+						price = "0";
+					}
+					moneyDto.setPrice(Double.parseDouble(price));
+					moneyList.add(moneyDto);
+				}
+				itemDto.setMoneyList(moneyList);
+				
+				itemList.add(itemDto);
+			}
+		}
 	}
 
 	@Override
 	public void getOnePlanner(ModelAndView mav) {
 		Map<String, Object> map=mav.getModelMap();
 		HttpServletRequest request = (HttpServletRequest)map.get("request");
-		int planner_no = Integer.parseInt(request.getParameter("planner_no"));
-
 		MemberDto userInfo = (MemberDto)request.getSession().getAttribute(Constant.SYNN_LOGIN_OBJECT);
+
+		int planner_no = Integer.parseInt(request.getParameter("planner_no"));
 		int mem_no = 0;
 		if(userInfo != null)
 			mem_no = userInfo.getMem_no();
 
 		PlannerDto plannerDto = plannerDao.getOnePlanner(planner_no);
-		
+
 		// 비공개 글이거나 삭제된 글이면 우선 404 처리
 		String use_yn = plannerDto.getUse_yn();
 		if(use_yn.equals(Constant.SYNB_YN_D) || 
 				(use_yn.equals(Constant.SYNB_YN_N) && userInfo.getMem_no() != plannerDto.getMem_no()))
 			return;
-		
+
 		// planner 날짜 정보 계산
 		long diff = plannerDto.getEnd_date().getTime() - plannerDto.getStart_date().getTime();
 		int dayCount = (int) diff / (24 * 60 * 60 * 1000);
@@ -262,7 +339,7 @@ public class PlannerServiceImp implements PlannerService {
 		}
 
 		EverywhereAspect.logger.info(EverywhereAspect.logMsg + itemList.size());
-		
+
 		// 해당 Planner의 추천 개수를 가져오기
 		int sweet_count = sweetDao.getTotalSweet(planner_no);
 		int bookmark_count = 0;
@@ -303,26 +380,13 @@ public class PlannerServiceImp implements PlannerService {
 		mav.setViewName("user/planner/plannerRead");
 	}
 
-	@Override
-	public void writePlanner(ModelAndView mav) {
-		Map<String, Object> map=mav.getModelMap();
-		HttpServletRequest request = (HttpServletRequest)map.get("request");
-		int planner_no = Integer.parseInt(request.getParameter("planner_no"));
-
-		PlannerDto plannerDto = plannerDao.getOnePlanner(planner_no);
-		mav.addObject("plannerDto", plannerDto);
-		
-		getSpotList(mav);
-
-		long diff = plannerDto.getEnd_date().getTime() - plannerDto.getStart_date().getTime();
-		long diffDays = diff / (24 * 60 * 60 * 1000);
-		mav.addObject("day_count", diffDays+1);
-
-		mav.setViewName("user/planner/addPlanner");
-	}
-
-	@Override
-	public void getSpotList(ModelAndView mav) {
+	/**
+	 * @author 안희진
+	 * @createDate 2015. 12. 14.
+	 * @described 일정 추가, 수정 페이지에서 명소 자료 가져오는 함수
+	 * @param mav
+	 */
+	public void getSpotListForPlanner(ModelAndView mav) {
 		List<SpotDto> spotList = spotDao.getSpotAllListForPlanner();
 		for(int i = 0; i < spotList.size(); i++){
 			String[] attach_no = spotList.get(i).getAttach_file().split(",");
@@ -346,127 +410,57 @@ public class PlannerServiceImp implements PlannerService {
 	}
 
 	@Override
-	public void writePlannerOk(ModelAndView mav) {
-		Map<String, Object> map=mav.getModelMap();
-		HttpServletRequest request = (HttpServletRequest)map.get("request");
+	public List<PlannerDto> getPlannerListByMember(HttpServletRequest request) {
 		MemberDto userInfo = (MemberDto)request.getSession().getAttribute(Constant.SYNN_LOGIN_OBJECT);
+		String mem_no = request.getParameter("mem_no");
 
-		System.out.println("**** request ****");
-		Enumeration params = request.getParameterNames(); 
-		while(params.hasMoreElements()){
-		 String paramName = (String)params.nextElement();
-		 System.out.println(paramName + " : "+request.getParameter(paramName));
-		}
-
-		//플래너 추가
+		// 자기 페이지에서 plannerList를 불러오면 request에 mem_no가 없음 
 		PlannerDto plannerDto = new PlannerDto();
-
-		int planner_no = Integer.parseInt(request.getParameter("planner_no"));
-		plannerDto.setPlanner_no(planner_no);		
-		int mem_no = userInfo.getMem_no();
-		plannerDto.setMem_no(mem_no);		
-		plannerDto.setTitle(request.getParameter("planner_title"));
-		plannerDto.setMemo(request.getParameter("planner_memo").replace("\r\n", "<br/>"));
-
-		CommonFileIODto commonFileIODto = commonFileIOService.requestWriteFileAndDTO(request, "attach_file", plannerPath);
-		if(commonFileIODto != null){
-			commonFileIODto.setType_code(Constant.FILE_TYPE_SCHEDULE);
-			commonFileIODto.setWrite_no(mem_no);
-			String planner_photo_num = commonFileIOService.insertFileInfo(commonFileIODto) + "";
-			plannerDto.setAttach_file(planner_photo_num);
+		if(mem_no == null){
+			plannerDto.setMem_no(userInfo.getMem_no());
+			plannerDto.setUse_yn(Constant.SYNB_YN_D);
+		}else{
+			plannerDto.setMem_no(Integer.parseInt(mem_no));
+			plannerDto.setUse_yn(Constant.SYNB_YN_Y);
 		}
 
-		String start_date = request.getParameter("start_date");
-		int day_count = Integer.parseInt(request.getParameter("day_count")) - 1;
-		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-
-		try {
-			plannerDto.setStart_date(dateFormat.parse(start_date));
-
-			Calendar cal = Calendar.getInstance();
-			cal.setTime(plannerDto.getStart_date());
-			cal.add(Calendar.DATE, day_count);
-			plannerDto.setEnd_date(cal.getTime());
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
-
-		//아이템 추가
-		List<ItemDto> itemList = new ArrayList<ItemDto>();
-		setWriteItems(request, itemList, planner_no, mem_no);
-
-		System.out.println(plannerDto);
-		System.out.println(itemList);
-
-		int check = plannerDao.insertPlanner(plannerDto, itemList);
-		EverywhereAspect.logger.info(EverywhereAspect.logMsg + check);
-
-		mav.addObject("planner_no", plannerDto.getPlanner_no());
-		mav.addObject("check", check);
-		mav.setViewName("user/planner/plannerWriteOk");
+		return plannerDao.getPlannerListByMember(plannerDto);
 	}
-
-	public void setWriteItems(HttpServletRequest request, List<ItemDto> itemList, int planner_no, int mem_no){
-		int day_count = Integer.parseInt(request.getParameter("day_count"));
-		System.out.println("day_count : " + day_count);
-
-		for(int i = 1; i <= day_count; i++){
-			int item_count = Integer.parseInt(request.getParameter("d"+i+"_item_count"));
-			for(int j = 1; j <= item_count; j++){
-				String itemString = "d"+i+"_item"+j;
-
-				ItemDto itemDto = new ItemDto();
-				String itemNo = request.getParameter(itemString+"_no");
-				if(itemNo.equals("") || itemNo == null )
-					itemNo = "0";
-				itemDto.setItem_no(Integer.parseInt(itemNo));
-				itemDto.setPlanner_no(planner_no);
-				itemDto.setMem_no(mem_no);
-				int spot_no = Integer.parseInt(request.getParameter(itemString+"_spot_no"));
-				itemDto.setSpot_no(spot_no);
-				String itemOrder = i + "010" + j;
-				itemDto.setItem_order(Integer.parseInt(itemOrder));
-				itemDto.setNote(request.getParameter(itemString+"_note").replace("\r\n", "<br/>"));
-				itemDto.setItem_time(request.getParameter(itemString+"_time"));
-
-				CommonFileIODto commonFileIODto = commonFileIOService.requestWriteFileAndDTO(request, itemString + "_attach_photoes", itemPath);
-				if(commonFileIODto != null){
-					commonFileIODto.setType_code(Constant.FILE_TYPE_ITEM);
-					
-					commonFileIODto.setWrite_no(mem_no);
-					String item_photo_num = commonFileIOService.insertFileInfo(commonFileIODto) + ",";
-					System.out.println("item_photo_num : " + item_photo_num);
-					itemDto.setAttach_photoes(item_photo_num);
-				}
-
-				String item_time = request.getParameter(itemString+"_time");
-				itemDto.setItem_time(item_time);
-
-				//가계부
-				int money_count = Integer.parseInt(request.getParameter(itemString+"_money_count"));
-				List<MoneyDto> moneyList = new ArrayList<MoneyDto>();
-				for(int k = 1; k <= money_count; k++){
-					String moneyString = itemString + "_money" + k;
-					MoneyDto moneyDto = new MoneyDto();
-					moneyDto.setPlanner_no(planner_no);
-					moneyDto.setMem_no(mem_no);
-					moneyDto.setSpot_no(spot_no);
-					moneyDto.setMoney_type_code(request.getParameter(moneyString+"_type_code"));
-					moneyDto.setMoney_currency_code(request.getParameter(moneyString+"_currency_code"));
-					moneyDto.setMoney_title(request.getParameter(moneyString+"_title"));
-					// 가계부 방어코드
-					String price = request.getParameter(moneyString+"_price");
-					if(price == null || price.equals("")){
-						price = "0";
-					}
-					moneyDto.setPrice(Double.parseDouble(price));
-					moneyList.add(moneyDto);
-				}
-				itemDto.setMoneyList(moneyList);
-				
-				itemList.add(itemDto);
-			}
-		}
+	
+	@Override
+	public void getPlannerListForAll(ModelAndView mav) {
+		Map<String, Object> map = mav.getModelMap();
+		PlannerDto plannerDto =(PlannerDto)map.get("plannerDto");
+		
+		//글 전체 갯수를 가져오는 쿼리
+		int plannerListTotalCount=plannerDao.getPlannerListForAllCount(plannerDto);
+		plannerDto.setTotalCount(plannerListTotalCount);
+		
+		//3 화면에 뿌릴 겟수
+		plannerDto.setStartRow((plannerDto.getCurrentPage()-1)*3+1);
+		plannerDto.setEndRow(plannerDto.getCurrentPage()*3);
+		plannerDto.setPageCount(plannerListTotalCount/3+(plannerListTotalCount%3==0?0:1));
+		
+		plannerDto.setPageBlockGroupCount((plannerDto.getCurrentPage()-1)/plannerDto.getPageBlock());
+		
+		plannerDto.setStartPage(plannerDto.getPageBlockGroupCount()*plannerDto.getPageBlock()+1);
+		plannerDto.setEndPage(plannerDto.getStartPage()+plannerDto.getPageBlock()-1);
+		
+		
+		List<PlannerDto> plannerList = plannerDao.getPlannerListForAll(plannerDto);
+		
+		//글종류를 나타내는 코드 목록
+		List<CommonCodeDto> selectCode=commonCodeService.getListCodeGroup(Constant.SCHEDULE_TYPE_GROUP);
+		//정렬를 나타내는 코드 목록
+		List<CommonCodeDto> sortCode=commonCodeService.getListCodeGroup(Constant.SERACH_SORT_GROUPCODE);
+		
+		//페이징 및 검색 정보를 가진DTO
+		mav.addObject("plannerDto",plannerDto);
+		
+		mav.addObject("selectCode",selectCode);
+		mav.addObject("sortCode",sortCode);
+		mav.addObject("plannerList", plannerList);
+		mav.setViewName("user/planner/plannerList");
 	}
 
 	@Override
@@ -516,14 +510,20 @@ public class PlannerServiceImp implements PlannerService {
 		mav.addObject("planner_no", planner_no);
 		mav.setViewName("user/planner/plannerDelete");
 	}
-	
+
 	@Override
 	public void updatePlanner(ModelAndView mav) {
 		Map<String, Object> map=mav.getModelMap();
 		HttpServletRequest request = (HttpServletRequest)map.get("request");
-		int planner_no = Integer.parseInt(request.getParameter("planner_no"));
+		MemberDto userInfo = (MemberDto)request.getSession().getAttribute(Constant.SYNN_LOGIN_OBJECT);
 
+		int planner_no = Integer.parseInt(request.getParameter("planner_no"));
 		PlannerDto plannerDto = plannerDao.getOnePlanner(planner_no);
+		
+		// 비공개 글이거나 글쓴이가 다른 경우이면 404 처리
+		String use_yn = plannerDto.getUse_yn();
+		if(use_yn.equals(Constant.SYNB_YN_D) || (userInfo.getMem_no() != plannerDto.getMem_no()))
+			return;
 
 		// Planner에 저장되어 있는 아이템 항목들을 가져오기
 		List<ItemDto> itemList = plannerDao.getItemList(planner_no);
@@ -576,7 +576,7 @@ public class PlannerServiceImp implements PlannerService {
 			dayItemCount[tmp]++;
 		}
 
-		getSpotList(mav);
+		getSpotListForPlanner(mav);
 		mav.addObject("dayCount", dayCount);
 		mav.addObject("dayItemCount", dayItemCount);
 		mav.addObject("plannerDto", plannerDto);

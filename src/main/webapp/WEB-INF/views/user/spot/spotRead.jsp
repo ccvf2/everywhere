@@ -91,41 +91,32 @@
 
 			<div class="modal-dialog modal-sm" style="float: left;">
 				<div class="modal-content">
-						<div class="modal-header">
-							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-							<h2 class="modal-title" id="myModalLabel2">기본정보</h2>
-						</div>
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						<h2 class="modal-title" id="myModalLabel2">기본정보</h2>
+					</div>
 
-						<div class="modal-body">
-							<div class="row">
-								<div class="col-md-12">
-									<div>
-										<dl id="spotInfo">
-										<dt> 카테고리  </dt>
-										<dd> ${countryName } ${cityName } ${spot_type } </dd>
-										<dt> 명소명  </dt>
-										<dd> ${spotDto.spot_name } </dd>
-										<dt> 주소  </dt>
-										<dd> ${spotDto.spot_addr } </dd>
-										<dt> 한줄설명  </dt>
-										<dd> ${spotDto.spot_note } </dd>
-										</dl>
-										<%-- 위도 : ${spotDto.spot_lat } <br/>
-										경도 : ${spotDto.spot_long } <br/>  --%>
-										
-									</div>
+					<div class="modal-body">
+						<div class="row">
+							<div class="col-md-12">
+								<div>
+									<dl id="spotInfo">
+									<dt> 카테고리  </dt>
+									<dd> ${countryName } ${cityName } ${spot_type } </dd>
+									<dt> 명소명  </dt>
+									<dd> ${spotDto.spot_name } </dd>
+									<dt> 주소  </dt>
+									<dd> ${spotDto.spot_addr } </dd>
+									<dt> 한줄설명  </dt>
+									<dd> ${spotDto.spot_note } </dd>
+									</dl>
+									<%-- 위도 : ${spotDto.spot_lat } <br/>
+									경도 : ${spotDto.spot_long } <br/>  --%>
+									
 								</div>
 							</div>
 						</div>
-
-						<div class="modal-footer">
-							<c:if test="${spotDto.mem_no == mem_object.mem_no }">
-								<input type="button" value="수정" onclick="updateSpot('${spotDto.spot_no}')">
-							</c:if>
-							<c:if test="${mem_object.mem_level_code == 'M0001' }">
-								<input type="button" value="삭제" onclick="deleteSpot('${spotDto.spot_no}')">
-							</c:if>
-						</div>
+					</div>
 				</div>
 			</div>
 		</div>

@@ -143,7 +143,7 @@ alert('${alert_msg}');
 	                  	<c:set var="active" value=" active" />
 	                  	
 	                    <!-- Search Block -->
-	                    <li>
+	                    <!-- <li>
 	                        <i class="search fa fa-search search-btn"></i>
 	                        <div class="search-open">
 	                            <div class="input-group animatedfadeInDown ">
@@ -153,11 +153,18 @@ alert('${alert_msg}');
 	                                </span>
 	                            </div>
 	                        </div>
-	                    </li>
+	                    </li> -->
 	                    <!-- End Search Block -->
-	                    <li class="dropdown <c:if test="${ fn:startsWith(path, '/user/member')}">${ on }</c:if>">
-	                        <a href="/user/planner/plannerList.do" class="dropdown-toggle" >
-	                           리뷰
+	                    
+	                    <li <c:if test="${ fn:startsWith(path, '/user/member')}">${ on }</c:if>">
+	                        <a href="/user/search/searchSpot.do">
+								명소
+	                        </a>
+	                    </li>
+	                    
+	                    <li <c:if test="${ fn:startsWith(path, '/user/member')}">${ on }</c:if>">
+	                        <a href="/user/planner/plannerList.do">
+								리뷰
 	                        </a>
 <!-- 	                        <ul class="dropdown-menu">
 	                            <li><a href="index.html">Option 1: Default Page</a></li>
@@ -169,16 +176,16 @@ alert('${alert_msg}');
 	                    <!-- End Home -->
 	
 	                    <!-- Pages -->
-	                    <li class="dropdown">
+	                    <li>
 	                    	<c:choose>
 	                    		<c:when test="${ mem_object.mem_name=='' || mem_object==null }">
 			                        <a href="javascript:loginFormReqiest()">
-			                            여행 스케줄 작성
+										여행 스케줄 작성
 			                        </a>
 	                    		</c:when>
 	                    		<c:otherwise>
-			                        <a href="javascript:plannerCreateReqiest()" class="dropdown-toggle">
-			                            여행 스케줄 작성
+			                        <a href="javascript:plannerCreateReqiest()">
+										여행 스케줄 작성
 			                        </a>
 	                    		</c:otherwise>
 	                    	</c:choose>
@@ -186,17 +193,17 @@ alert('${alert_msg}');
 	                    <!-- End Pages -->
 	
 	                    <!-- Blog -->
-	                    <li class="dropdown<c:if test="${ fn:startsWith(path, '/user/member')}">${ on }</c:if>">
-	                        <a href="/user/accompany/accompanyList.do" class="dropdown-toggle">
-	                            여행동행구하기
+	                    <li <c:if test="${ fn:startsWith(path, '/user/member')}">${ on }</c:if>">
+	                        <a href="/user/accompany/accompanyList.do">
+								여행동행구하기
 	                        </a>
 	                     </li>   	                    
 	                    <!-- End Blog -->
 	
 	                    <!-- Portfolio -->
-	                    <li class="dropdown">
-	                        <a href="/user/myPage/myPage.do?uandMe=S0001" class="dropdown-toggle">
-	                            마이페이지
+	                    <li>
+	                        <a href="/user/myPage/myPage.do?uandMe=S0001">
+								마이페이지
 	                        </a>
 	                    </li>
 	                    <!-- End Portfolio -->

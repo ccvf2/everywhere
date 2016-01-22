@@ -139,7 +139,7 @@ function moreSpotListDisp(data){
 function spotReadPage(no) {
 	//alert(no);
 	var makeDiv ="<div id='showModal"+no+"'></div>";
-	var requestURL="/user/spot/spotReadPage.do?spot_no="+no;
+	var requestURL="/user/spot/spotRead.do?spot_no="+no;
 	
 	$.ajax({
 		url : requestURL,
@@ -148,25 +148,6 @@ function spotReadPage(no) {
 		success : function(data) {
 			$("body").append(makeDiv);
 			$("#showModal"+no).append(data)
-		},
-		error : function() {
-			alert("목록 가져오기 실패");
-		}
-	})
-}
-
-function addSpot(){
-	var div ="<div id='spotAddModal'></div>";
-	var requestURL="/user/spot/addSpotPage.do";
-	
-	$.ajax({
-		url : requestURL,
-		type : "GET",
-		dataType : "html",
-		success : function(data) {
-			$("body").append(div);
-			$("#spotAddModal").append(data);
-			initialize();
 		},
 		error : function() {
 			alert("목록 가져오기 실패");
