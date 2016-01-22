@@ -78,6 +78,15 @@ function addPlannerPhoto(input){
 		}
 	}
 }
+function renamePlanner(planner_no){
+	var title = prompt("수정할 제목을 입력해주세요");
+	if (title != null && title != '') {
+		document.getElementById("title").innerHTML = title  + ' <a href="javascript:renamePlanner()"><i class="fa fa-pencil"></i></a>';
+		$('#planner_title').val(title);
+	}else if(title == ''){
+		alert('빈 공백값은 사용할 수 없습니다');
+	}
+}
 
 function addDay(day_count){
 	var before_day_count = Number($("#before_day_count").val());
