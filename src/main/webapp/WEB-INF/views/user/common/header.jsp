@@ -77,19 +77,30 @@
 </script>
 <meta charset="UTF-8">
 <title>타이틀 입력</title>
-
+		<c:if test="${(empty alert_msg)==false}">
+			<!-- 로그인 페이지일 경우는 로그인 모달을 띄우지 않는다. -->
+			<c:choose>
+				<c:when test="${ (mem_object.mem_name=='' || mem_object==null)&& (pageContext.request.requestURI!='/WEB-INF/views/common/login/login.jsp')}">
+					<c:set var="showLoginModal" value="true"/>	
+				</c:when>
+				<c:when test="${ (mem_object.mem_name=='' || mem_object==null)&& (pageContext.request.requestURI!='/WEB-INF/views/common/login/login.jsp')}">
+					<c:set var="showLoginModal" value="false"/>	
+				</c:when>
+				<c:otherwise>
+					<c:set var="showLoginModal" value="false"/>	
+				</c:otherwise>
+			</c:choose>
+		<script type="text/javascript">
+		alert('${alert_msg}');
+			<c:if test="${showLoginModal==true}">
+			loginFormReqiest()
+			</c:if>
+		</script>
+		</c:if>
 </head>
-<c:if test="${(empty alert_msg)==false}">
-<script type="text/javascript">
-alert('${alert_msg}');
-	<c:if test="${ mem_object.mem_name=='' || mem_object==null }">
-	loginFormReqiest()
-	</c:if>
-</script>
-</c:if>
 
 
-<%-- <%String alert_msg =(String)request.getAttribute("alert_msg"); %> --%>
+
 	        <div class="container">
 <%-- alertmag:${alert_msg} --%>
 	            <!-- Logo -->

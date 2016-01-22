@@ -59,7 +59,7 @@ function getListSuccess(jsonData, status, xhr) {
 	for( var i=0 ;i<arrSize;i++ ){
 		var item=arr[i];
 		item.reply_no
-		console.log(item);
+		//console.log(item);
 		$("#replyListArea").append("<div class='media' id='"+i+"'></div>");
 		
 		var photoPath="";
