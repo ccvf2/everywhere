@@ -4,25 +4,25 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <title>여행동행구하기 >${accompanyDto.title} </title>
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
-    <!-- Bootstrap -->
-    <link href="/script/common/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+	<title>여행동행구하기 >${accompanyDto.title} </title>
+	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+	<!--[if lt IE 9]>
+		<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+		<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+	<![endif]-->
+	<!-- Bootstrap -->
+	<link href="/script/common/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
 	<script type="text/javascript" src="/script/common/commonReply.js"></script>
 	<!-- 제이쿼리 라이브러리.(필수) : commonReplyInit() 함수호출 전 선언  -->
 	<script src="/assets/plugins/jquery/jquery.min.js"></script>
-    <script type="text/javascript">
+	<script type="text/javascript">
 		function deleteFunc(accompany_no){
 			var deleteyn=confirm("정말로 삭제하시겠습니까?");
 			if(deleteyn==true){
@@ -44,12 +44,17 @@
 		//defaultPhotoPath:기본으로 뿌릴 이미지 선택,
 		/* 	commonReplyInit(type_code,mem_no,item_no,defaultPhotoPath); */
 			var accompany_no=${accompanyDto.accompany_no};
-			var mem_no=${mem_object.mem_no}
+			var mem_no=0;
+			
+			<c:if test="${accompanyDto.mem_no!=null}">
+				mem_no=${accompanyDto.mem_no};
+			</c:if>
+			
 			commonReplyInit('S0010', mem_no, accompany_no,"");
 			$("#formWrap").removeClass();
-	        $("#formWrap").addClass("news-v3-in margin-bottom-20");
-	        $("#formWrapInner").removeClass();
-	        $("#formWrapInner").addClass("news-v3-in margin-bottom-20");
+			$("#formWrap").addClass("news-v3-in margin-bottom-20");
+			$("#formWrapInner").removeClass();
+			$("#formWrapInner").addClass("news-v3-in margin-bottom-20");
 		});
 	</script>
 	<c:import url="/WEB-INF/views/common/jquery.jsp"/>
@@ -105,7 +110,7 @@
                     			<small>
 									<fmt:formatDate var="recentWriteDate" value="${recentAccompanyDto.write_date}" pattern="yy-MM-dd"/>
 												
-                    				<c:if test="${recentWriteDate eq nowDate}"><!-- 현재 -->
+									<c:if test="${recentWriteDate eq nowDate}"><!-- 현재 -->
 										<fmt:formatDate pattern="HH:mm" value="${recentAccompanyDto.write_date}"/>
 									</c:if>
 									<c:if test="${recentWriteDate lt nowDate}"><!-- 과거 -->
