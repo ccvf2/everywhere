@@ -491,6 +491,33 @@ public class PlannerServiceImp implements PlannerService {
 			e.printStackTrace();
 		}
 	}
+	
+	@Override
+	public void renamePlanner(ModelAndView mav) {
+		Map<String, Object> map=mav.getModelMap();
+		HttpServletRequest request = (HttpServletRequest)map.get("request");
+		HttpServletResponse response = (HttpServletResponse)map.get("response");
+		MemberDto userInfo = (MemberDto)request.getSession().getAttribute(Constant.SYNN_LOGIN_OBJECT);
+
+		int planner_no = Integer.parseInt(request.getParameter("planner_no"));
+		String title = request.getParameter("title");
+		
+		PlannerDto plannerDto = new PlannerDto();
+		plannerDto.setPlanner_no(planner_no);
+		plannerDto.setTitle(title);
+		plannerDto.setMem_no(userInfo.getMem_no());
+		System.out.println(plannerDto);
+		
+		int check = plannerDao.updatePlannerTitle(plannerDto);
+		
+		try {
+			response.setContentType("application/html;charset=utf8");
+			PrintWriter out = response.getWriter();
+			out.print(check+","+title);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 
 	@Override
 	public void deletePlanner(ModelAndView mav) {

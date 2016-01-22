@@ -18,6 +18,8 @@ public interface PlannerDao {
 	public List<MoneyDto> getMoneyList(int item_no);
 	
 	public int updatePlannerStatus(PlannerDto plannerDto);
+	
+	public int updatePlannerTitle(PlannerDto plannerDto);
 
 	public int getPlannerListForAllCount(PlannerDto plannerDto);
 	

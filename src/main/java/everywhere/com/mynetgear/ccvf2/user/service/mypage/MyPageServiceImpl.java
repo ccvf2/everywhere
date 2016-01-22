@@ -50,7 +50,28 @@ public class MyPageServiceImpl implements MyPageService {
 		HttpSession session = request.getSession();
 		MemberDto memberDto=(MemberDto) session.getAttribute(Constant.SYNN_LOGIN_OBJECT);
 		
-		List<PlannerDto> plannerList = plannerService.getPlannerListByMember(request);
+		String pageNumber=request.getParameter("pageNumber");
+		if(pageNumber==null) pageNumber="1";
+		
+		int mem_no=memberDto.getMem_no();
+		int boardSize=10;
+		
+		int currentPage = Integer.parseInt(pageNumber);
+		int startRow = (currentPage - 1) * boardSize + 1;
+		int endRow = currentPage * boardSize;
+		
+		System.out.println("mem_no : " + mem_no);
+		int count=memberDao.getPlannerCount(mem_no);
+		
+		System.out.println("----------------getPlannerCount : " + count);
+		List<PlannerDto> plannerList=null;
+		if(count>0) {
+			plannerList=memberDao.getPlannerList(memberDto.getMem_no(), startRow, endRow);
+		}		
+				
+				
+				
+				
 		System.out.println("---------------plannerList.size() : " + plannerList.size());
 		if(plannerList.size()>0){
 			for(int i=0; i<plannerList.size(); i++){
@@ -63,11 +84,14 @@ public class MyPageServiceImpl implements MyPageService {
 		}
 		
 		
-		memberDto=memberDao.memberRead(memberDto.getMem_no());
+		memberDto=memberDao.memberRead(mem_no);
 		
 		mav.addObject("plannerList", plannerList);
 		mav.addObject("mateCheck", 2);
 		mav.addObject("memberDto", memberDto);
+		mav.addObject("count", count);
+		mav.addObject("boardSize", boardSize);
+		mav.addObject("currentPage", currentPage);
 		mav.setViewName("/user/myPage/myPage");
 		return mav;
 	}
@@ -91,7 +115,7 @@ public class MyPageServiceImpl implements MyPageService {
 		int mateCheck=memberDao.getMateCheck(mateMap);
 		List<PlannerDto> plannerList = plannerService.getPlannerListByMember(request);
 		
-		memberDto=memberDao.memberRead(memberDto.getMem_no());
+		memberDto=memberDao.memberRead(mem_no);
 		
 		mav.addObject("plannerList", plannerList);
 		mav.addObject("mateCheck", mateCheck);
@@ -257,6 +281,74 @@ public class MyPageServiceImpl implements MyPageService {
 		mav.addObject("memberDto", memberDto);
 		mav.addObject("friendsList", friendsList);
 		mav.setViewName("/user/myPage/myPageFriends");
+		
+		return mav;
+	}
+
+	@Override
+	public ModelAndView getBookMarkList(ModelAndView mav) {
+		Map<String, Object> map=mav.getModelMap();
+		HttpServletRequest request = (HttpServletRequest)map.get("request");
+		
+		int mem_no=Integer.parseInt(request.getParameter("mem_no"));
+		
+		String pageNumber=request.getParameter("pageNumber");
+		if(pageNumber==null) pageNumber="1";
+		
+		int boardSize=10;
+		
+		int currentPage = Integer.parseInt(pageNumber);
+		int startRow = (currentPage - 1) * boardSize + 1;
+		int endRow = currentPage * boardSize;
+		int count=memberDao.getBookMarkCount(mem_no);
+		
+		List<PlannerDto> plannerList=null;
+		if(count>0) {
+			plannerList=memberDao.getBookMarkList(mem_no, startRow, endRow);
+		}
+	
+		mav.addObject("plannerList", plannerList);
+		mav.addObject("count", count);
+		mav.addObject("boardSize", boardSize);
+		mav.addObject("currentPage", currentPage);
+		mav.setViewName("/user/myPage/myPageBookMark");
+		
+		return mav;
+	}
+
+	@Override
+	public ModelAndView myPageDeleteBookMark(ModelAndView mav) {
+		Map<String, Object> map=mav.getModelMap();
+		HttpServletRequest request = (HttpServletRequest)map.get("request");
+		
+		int item_no=Integer.parseInt(request.getParameter("item_no"));
+		int mem_no=Integer.parseInt(request.getParameter("mem_no"));
+		
+		System.out.println("item_no : " + item_no + " mem_no : " + mem_no);
+		
+		memberDao.myPageDeleteBookMark(item_no, mem_no);
+		
+		String pageNumber=request.getParameter("pageNumber");
+		if(pageNumber==null) pageNumber="1";
+		
+		int boardSize=10;
+		
+		int currentPage = Integer.parseInt(pageNumber);
+		int startRow = (currentPage - 1) * boardSize + 1;
+		int endRow = currentPage * boardSize;
+		
+		int count=memberDao.getBookMarkCount(mem_no);
+		
+		List<PlannerDto> plannerList=null;
+		if(count>0) {
+			plannerList=memberDao.getBookMarkList(mem_no, startRow, endRow);
+		}
+	
+		mav.addObject("plannerList", plannerList);
+		mav.addObject("count", count);
+		mav.addObject("boardSize", boardSize);
+		mav.addObject("currentPage", currentPage);
+		mav.setViewName("/user/myPage/myPageBookMark");
 		
 		return mav;
 	}

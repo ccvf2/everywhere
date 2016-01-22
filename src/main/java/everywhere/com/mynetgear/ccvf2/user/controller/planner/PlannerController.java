@@ -101,6 +101,23 @@ public class PlannerController {
 		plannerService.lockPlanner(mav);
 		return null;
 	}
+	
+	/**
+	 * @author 안희진
+	 * @createDate 2015. 12. 23.
+	 * @described 사용자가 작성한 일정의 제목수정 ajax 요청 처리
+	 * @param request
+	 * @param response
+	 * @return
+	 */
+	@RequestMapping(value = "/user/planner/renamePlanner.ajax", method = RequestMethod.POST)
+	public ModelAndView renamePlanner(HttpServletRequest request, HttpServletResponse response) {
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("request", request);
+		mav.addObject("response", response);
+		plannerService.renamePlanner(mav);
+		return null;
+	}
 
 	/**
 	 * @author 안희진

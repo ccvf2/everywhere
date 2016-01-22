@@ -22,7 +22,7 @@
 	<script type="text/javascript">
 	$(document).ready(function() {
 		var planner_no=${plannerDto.planner_no};
-		var mem_no=${mem_object.mem_no}
+		var mem_no=${mem_object.mem_no};
 		commonReplyInit('R0002', mem_no, planner_no,"");
 		$("#formWrap").removeClass();
 		$("#formWrap").addClass("news-v3-in margin-bottom-20");
@@ -49,7 +49,7 @@
 				<c:if test="${plannerDto.planner_ba_code == 'E0002'}">
 					<span>여행 리뷰</span>
 				</c:if>
-				<h1>${plannerDto.title}</h1>
+				<h1 id="title">${plannerDto.title}</h1>
 			</div>
 		</div>
 		<!--=== End Breadcrumbs ===-->
@@ -70,31 +70,35 @@
 						<li class="list-group-item list-toggle">
 							<a data-toggle="collapse" data-parent="#sidebar-nav" href="#collapse-buttons">${plannerWriter.mem_name}</a>
 							<c:if test="${mem_object.mem_no != plannerWriter.mem_no}">
-							<ul id="collapse-buttons" class="collapse in">
-								<li>
-									<a href="shortcode_btn_general.html"><i class="fa fa-home"></i> 친구페이지 이동</a>
-								</li>
-								<li>
-									<a href="shortcode_btn_brands.html"><i class="fa fa-comments-o"></i> 쪽지 보내기 </a>
-								</li>
-							</ul>
+								<ul id="collapse-buttons" class="collapse in">
+									<li>
+										<a href="/user/myPage/myPage.do?uandMe=S0002&mem_no=${plannerWriter.mem_no}"><i class="fa fa-home"></i> 친구페이지 이동</a>
+									</li>
+									<li>
+										<a href="/user/message/messageTalkList.do?recv_mem_no=${plannerWriter.mem_no}"><i class="fa fa-comments-o"></i> 쪽지 보내기 </a>
+									</li>
+								</ul>
 							</c:if>
 
 							<c:if test="${mem_object.mem_no == plannerWriter.mem_no}">
-							<ul id="collapse-buttons" class="collapse in">
-								<li id="planner_lock">
-									<a href="javascript:lockPlanner(${plannerDto.planner_no}, true)"><i class="fa fa-unlock"></i> 글 공개 ▶  비공개</a>
-								</li>
-								<li id="planner_unlock">
-									<a href="javascript:lockPlanner(${plannerDto.planner_no}, false)"><i class="fa fa-lock"></i> 글 비공개 ▶  공개</a>
-								</li>
-								<li>
-									<a href="javascript:modifyPlanner(${plannerDto.planner_no})"><i class="fa fa-pencil-square-o"></i> 글 수정 </a>
-								</li>
-								<li>
-									<a href="javascript:deletePlanner(${plannerDto.planner_no})"><i class="fa fa-trash-o"></i> 글 삭제 </a>
-								</li>
-							</ul>
+								<ul id="collapse-buttons" class="collapse in">
+									<li>
+										<a href="javascript:renamePlanner(${plannerDto.planner_no})"><i class="fa fa-pencil"></i> 글  제목 수정 </a>
+									</li>
+									
+									<li id="planner_lock">
+										<a href="javascript:lockPlanner(${plannerDto.planner_no}, true)"><i class="fa fa-unlock"></i> 글 공개 ▶  비공개</a>
+									</li>
+									<li id="planner_unlock">
+										<a href="javascript:lockPlanner(${plannerDto.planner_no}, false)"><i class="fa fa-lock"></i> 글 비공개 ▶  공개</a>
+									</li>
+									<li>
+										<a href="javascript:updatePlanner(${plannerDto.planner_no})"><i class="fa fa-pencil-square-o"></i> 글 수정 </a>
+									</li>
+									<li>
+										<a href="javascript:deletePlanner(${plannerDto.planner_no})"><i class="fa fa-trash-o"></i> 글 삭제 </a>
+									</li>
+								</ul>
 							</c:if>
 						</li>
 					</ul>

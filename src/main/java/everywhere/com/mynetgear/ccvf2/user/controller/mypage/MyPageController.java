@@ -106,6 +106,15 @@ public class MyPageController {
 		return mav;// new ModelAndView("/user/myPage/myPage");
 	}
 	
+	/**
+	 * @author 김성광
+	 * @createDate 2015. 12. 20.
+	 * @described 프로필 사진 업데이트
+	 * @param request
+	 * @param response
+	 * @param memberDto
+	 * @return
+	 */
 	@RequestMapping(value = "/user/myPage/updateProfilePhoto.do", method = RequestMethod.POST)
 	public ModelAndView updateProfilePhoto(HttpServletRequest request, HttpServletResponse response, MemberDto memberDto) {
 		ModelAndView mav = new ModelAndView();
@@ -124,4 +133,33 @@ public class MyPageController {
 	
 		return mav;
 	}
+	
+	@RequestMapping(value = "/user/myPage/getBookMarkList.do", method = RequestMethod.GET)
+	public ModelAndView getBookMarkList(HttpServletRequest request, HttpServletResponse response) {
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("request", request);
+		mav = myPageService.getBookMarkList(mav);
+	
+		return mav;
+	}
+	
+	
+	/**
+	 * @author 김성광
+	 * @createDate 2016. 1. 22.
+	 * @described 마이페이지 북마크 해제
+	 * @param request
+	 * @param response
+	 * @return
+	 */
+	@RequestMapping(value = "/user/myPage/myPageDeleteBookMark.do", method = RequestMethod.GET)
+	public ModelAndView myPageDeleteBookMark(HttpServletRequest request, HttpServletResponse response) {
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("request", request);
+		mav.addObject("response", response);
+		mav = myPageService.myPageDeleteBookMark(mav);
+		
+		return mav;
+	}
+	
 }

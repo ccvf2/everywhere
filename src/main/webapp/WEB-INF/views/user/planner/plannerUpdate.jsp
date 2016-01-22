@@ -45,7 +45,7 @@ $(document).ready(function () {
 		<div class="breadcrumbs-v1">
 			<div class="container" style="height: 50px;">
 				<span></span>
-				<h1>${plannerDto.title}</h1>
+				<h1 id="title">${plannerDto.title} <a href="javascript:renamePlanner()"><i class="fa fa-pencil"></i></a> </h1>
 			</div>
 		</div>
 		<!--=== End Breadcrumbs ===-->
@@ -135,7 +135,7 @@ $(document).ready(function () {
 					<fmt:formatDate var="start_date" pattern="yyyy-MM-dd" value="${plannerDto.start_date}"/>
 					<input type="hidden" name="planner_no" value="${plannerDto.planner_no}"/>
 					<input type="hidden" name="mem_no" value="${mem_object.mem_no}">
-					<input type="hidden" name="planner_title" value="${plannerDto.title}">
+					<input type="hidden" id="planner_title" name="planner_title" value="${plannerDto.title}">
 						<div class="tag-box tag-box-v4 rounded-2x margin-bottom-30">
 							<label class="textarea">
 								<i class="icon-append fa fa-question-circle"></i>

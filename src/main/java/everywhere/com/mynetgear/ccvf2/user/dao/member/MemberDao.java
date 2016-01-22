@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import everywhere.com.mynetgear.ccvf2.user.dto.member.MemberDto;
+import everywhere.com.mynetgear.ccvf2.user.dto.planner.PlannerDto;
 
 /**
  * @author 김준호
@@ -167,5 +168,54 @@ public interface MemberDao {
 	 * @return
 	 */
 	public int getFriendsCount(int mem_no);
+
+	/**
+	 * @author 김성광
+	 * @createDate 2016. 1. 22.
+	 * @described 즐겨찾기 리스트 (planner)
+	 * @param mem_no
+	 * @param endRow 
+	 * @param startRow 
+	 * @return
+	 */
+	public List<PlannerDto> getBookMarkList(int mem_no, int startRow, int endRow);
+
+	/**
+	 * @author 김성광
+	 * @createDate 2016. 1. 22.
+	 * @described 마이페이지 북마크 해제
+	 * @param item_no
+	 * @param mem_no
+	 */
+	public void myPageDeleteBookMark(int item_no, int mem_no);
+
+	/**
+	 * @author 김성광
+	 * @createDate 2016. 1. 22.
+	 * @described 마이페이지 북마크 카운트
+	 * @param mem_no
+	 * @return
+	 */
+	public int getBookMarkCount(int mem_no);
+
+	/**
+	 * @author 김성광
+	 * @createDate 2016. 1. 22.
+	 * @described 마이페이지 플랜 카운트
+	 * @param mem_no
+	 * @return
+	 */
+	public int getPlannerCount(int mem_no);
+
+	/**
+	 * @author 김성광
+	 * @createDate 2016. 1. 22.
+	 * @described 내가 쓴 플레너리스트(즐겨찾기수, 댓글수, 좋아요수)
+	 * @param mem_no
+	 * @param startRow
+	 * @param endRow
+	 * @return
+	 */
+	public List<PlannerDto> getPlannerList(int mem_no, int startRow, int endRow);
 
 }
