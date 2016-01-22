@@ -30,6 +30,8 @@ public class LoginServiceImp implements LoginService {
 
 	@Override
 	public void HandleMemberLogin(ModelAndView mav) {
+		String returnAddress="";
+		
 		String errMsg = "";
 		Map<String, Object> map = mav.getModelMap();
 		HttpServletRequest request= (HttpServletRequest)map.get("request");
@@ -59,14 +61,15 @@ public class LoginServiceImp implements LoginService {
 					// 세션처리
 					HttpSession session = request.getSession();
 					session.setAttribute(Constant.SYNN_LOGIN_OBJECT, member);
-
+					
 					if(StringUtils.equals(callback_url, Constant.SYNB_NULL)){
 						callback_url="/user/main/main.do";
+						mav.clear();
+						returnAddress="redirect:"+ callback_url;
 					}else{
-						if(StringUtils.equals(callback_param, Constant.SYNB_NULL)){
-							mav.setViewName("redirect:"+ callback_url);
-						}else{
-							mav.setViewName("redirect:"+ callback_url+"?"+callback_param);
+						if(StringUtils.equals(callback_param, Constant.SYNB_NULL)==false){
+							mav.clear();
+							returnAddress="redirect:"+ callback_url+"?"+callback_param;
 						}
 					}
 			} catch (Exception ex) {
@@ -74,10 +77,13 @@ public class LoginServiceImp implements LoginService {
 			}
 		} else {
 			// 아이디 불일치
-			mav.setViewName("redirect:"+ callback_url);
 			mav.addObject(Constant.ALERT_MSG, "로그인 정보가 정확하지 않습니다.");
+			mav.addObject(Constant.CALLBACK_URL, callback_url);
+			mav.addObject(Constant.CALLBACK_PARAM, callback_param);
+			callback_url="/user/main/main.do";
+			returnAddress="forward:"+ callback_url;
 		}
-		
+		mav.setViewName(returnAddress);
 	}
 	
 	

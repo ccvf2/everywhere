@@ -82,8 +82,13 @@
 <c:if test="${(empty alert_msg)==false}">
 <script type="text/javascript">
 alert('${alert_msg}');
+	<c:if test="${ mem_object.mem_name=='' || mem_object==null }">
+	loginFormReqiest()
+	</c:if>
 </script>
 </c:if>
+
+
 <%-- <%String alert_msg =(String)request.getAttribute("alert_msg"); %> --%>
 	        <div class="container">
 <%-- alertmag:${alert_msg} --%>

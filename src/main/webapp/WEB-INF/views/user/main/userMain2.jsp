@@ -45,6 +45,7 @@
                 <p><i>일상에 지치고.. 시간에 쫒기고..</i> <br /> <i>갑시다!</i> <br /> <i>슈우우우우~</i></p>
                 <div class="da-img"><img class="img-responsive" src="/attatchFile/admin/forground/${imglist.setting_url}" alt=""></div>
             </div> --%>
+
         	<c:forEach items="${forgroung}" var="imglist">
         		<c:out value="${imglist.setting_text}" escapeXml="false"/>
         	</c:forEach>
@@ -69,7 +70,7 @@
 
     	<!-- Recent Works -->
         <div class="row margin-bottom-5">
-        <div class="headline"><h2>최근등록스케줄</h2></div>
+        <div class="headline"><h2>운영자 추천!</h2></div>
 	        <div class="blog_masonry_3col" style="padding-bottom: 0px;">
 		        <div class="container content grid-boxes" style="padding-top: 0px; padding-bottom: 0px;">
 				<div>
@@ -105,7 +106,7 @@
 
     	<!-- Info Blokcs -->
     	<div class="row margin-bottom-5">
-        <div class="headline"><h2>댓글이 많은 순</h2></div>
+        <div class="headline"><h2>좋아요 많은 순</h2></div>
 	        <div class="blog_masonry_3col" style="padding-bottom: 0px;">
 		        <div class="container content grid-boxes" style="padding-top: 0px; padding-bottom: 0px;">
 				<div>
@@ -142,7 +143,7 @@
     	
     	<!-- Info Blokcs -->
     	<div class="row margin-bottom-5">
-        <div class="headline"><h2>운영자 추천</h2></div>
+        <div class="headline"><h2>핫 플레이스!</h2></div>
 	        <div class="blog_masonry_3col" style="padding-bottom: 0px;">
 		        <div class="container content grid-boxes" style="padding-top: 0px; padding-bottom: 0px;">
 				<div>
