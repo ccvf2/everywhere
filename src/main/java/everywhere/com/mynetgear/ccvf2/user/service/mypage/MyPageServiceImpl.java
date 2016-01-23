@@ -54,7 +54,7 @@ public class MyPageServiceImpl implements MyPageService {
 		if(pageNumber==null) pageNumber="1";
 		
 		int mem_no=memberDto.getMem_no();
-		int boardSize=10;
+		int boardSize=9;
 		
 		int currentPage = Integer.parseInt(pageNumber);
 		int startRow = (currentPage - 1) * boardSize + 1;
@@ -64,13 +64,12 @@ public class MyPageServiceImpl implements MyPageService {
 		int count=memberDao.getPlannerCount(mem_no);
 		
 		System.out.println("----------------getPlannerCount : " + count);
+		String MYPAGE_CODE=Constant.MYPAGE_CODE_M;
+		String search=Constant.SEARCH_N_MYPAGE_CODE;
 		List<PlannerDto> plannerList=null;
 		if(count>0) {
-			plannerList=memberDao.getPlannerList(memberDto.getMem_no(), startRow, endRow);
+			plannerList=memberDao.getPlannerList(memberDto.getMem_no(), startRow, endRow, MYPAGE_CODE, search);
 		}		
-				
-				
-				
 				
 		System.out.println("---------------plannerList.size() : " + plannerList.size());
 		if(plannerList.size()>0){
@@ -82,7 +81,6 @@ public class MyPageServiceImpl implements MyPageService {
 				plannerList.set(i, dto);
 			}
 		}
-		
 		
 		memberDto=memberDao.memberRead(mem_no);
 		
@@ -113,13 +111,51 @@ public class MyPageServiceImpl implements MyPageService {
 		mateMap.put("mate_no", mate_no);
 		
 		int mateCheck=memberDao.getMateCheck(mateMap);
-		List<PlannerDto> plannerList = plannerService.getPlannerListByMember(request);
 		
-		memberDto=memberDao.memberRead(mem_no);
+		String pageNumber=request.getParameter("pageNumber");
+		if(pageNumber==null) pageNumber="1";
+		
+		int boardSize=9;
+		
+		int currentPage = Integer.parseInt(pageNumber);
+		int startRow = (currentPage - 1) * boardSize + 1;
+		int endRow = currentPage * boardSize;
+		
+		System.out.println("mate_no : " + mem_no);
+		int count=memberDao.getPlannerCount(mate_no);
+		
+		System.out.println("----------------getPlannerCount : " + count);
+		
+		String MYPAGE_CODE=Constant.MYPAGE_CODE_U;
+		String search=Constant.SEARCH_N_MYPAGE_CODE;
+		List<PlannerDto> plannerList=null;
+		if(count>0) {
+			plannerList=memberDao.getPlannerList(mate_no, startRow, endRow, MYPAGE_CODE, search);
+		}		
+				
+		System.out.println("---------------plannerList.size() : " + plannerList.size());
+		if(plannerList.size()>0){
+			for(int i=0; i<plannerList.size(); i++){
+				PlannerDto dto= plannerList.get(i);
+				StringUtils.clean(dto.getMemo());
+				dto.setMemo(StringUtils.replace(dto.getMemo(), "<br/>", "\r\n"));
+				System.out.println("dto.toString() : " + dto.toString()); 
+				plannerList.set(i, dto);
+			}
+		}
+		
+		
+		memberDto=memberDao.memberRead(mate_no);
+		
+		
+		System.out.println("----------memberDto 확인 : " + memberDto.toString());
 		
 		mav.addObject("plannerList", plannerList);
 		mav.addObject("mateCheck", mateCheck);
 		mav.addObject("memberDto", memberDto);
+		mav.addObject("count", count);
+		mav.addObject("boardSize", boardSize);
+		mav.addObject("currentPage", currentPage);
 		mav.setViewName("/user/myPage/myPage");
 		
 		return mav;
@@ -291,11 +327,12 @@ public class MyPageServiceImpl implements MyPageService {
 		HttpServletRequest request = (HttpServletRequest)map.get("request");
 		
 		int mem_no=Integer.parseInt(request.getParameter("mem_no"));
+		String list_code=request.getParameter("list_code");
 		
 		String pageNumber=request.getParameter("pageNumber");
 		if(pageNumber==null) pageNumber="1";
 		
-		int boardSize=10;
+		int boardSize=9;
 		
 		int currentPage = Integer.parseInt(pageNumber);
 		int startRow = (currentPage - 1) * boardSize + 1;
@@ -304,9 +341,10 @@ public class MyPageServiceImpl implements MyPageService {
 		
 		List<PlannerDto> plannerList=null;
 		if(count>0) {
-			plannerList=memberDao.getBookMarkList(mem_no, startRow, endRow);
+			plannerList=memberDao.getBookMarkList(mem_no, startRow, endRow, list_code);
 		}
 	
+		mav.addObject("list_code", list_code);
 		mav.addObject("plannerList", plannerList);
 		mav.addObject("count", count);
 		mav.addObject("boardSize", boardSize);
@@ -341,7 +379,7 @@ public class MyPageServiceImpl implements MyPageService {
 		
 		List<PlannerDto> plannerList=null;
 		if(count>0) {
-			plannerList=memberDao.getBookMarkList(mem_no, startRow, endRow);
+			//plannerList=memberDao.getBookMarkList(mem_no, startRow, endRow);
 		}
 	
 		mav.addObject("plannerList", plannerList);

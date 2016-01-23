@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -40,7 +41,15 @@
                 <c:import url="/WEB-INF/views/user/mypage/myPageLeft.jsp"/>
             </div>
             <!--End Left Sidebar-->
-
+			<script type="text/javascript">
+			    $(function(){
+			    	$(".bookmark_list_style").change(function(){
+			    		var list_code=$(".bookmark_list_style").val();
+			    		
+			    		location.href="/user/myPage/getBookMarkList.do?mem_no=${mem_object.mem_no}&list_code="+list_code;
+			    	});
+			    });
+		    </script>
 			<!-- 메인------------------------------------------------------------------------------------------------------------------------------ -->
 			<div class="col-md-9">
                 <!--Basic Table-->
@@ -56,9 +65,10 @@
 						<fieldset>
 							<section>
 								<label class="label">정렬방식변경</label> <label class="select">
-									<select style="width: 200px;">
-										<option value="0">리스트형</option>
-										<option value="1">이미지형</option>
+									<select style="width: 200px;" class="bookmark_list_style">
+										<option value="-----">선택</option>
+										<option value="M1030">이미지형</option>
+										<option value="M1031">리스트형</option>
 									</select> <i></i>
 								</label>
 							</section>
@@ -84,30 +94,61 @@
 				
                 <!--Basic Table-->
                 <c:if test="${count>0}">
-	                <table class="table">
-	                    <thead>
-	                        <tr>
-	                            <th style="width: 5%;"></th>
-	                            <th style="width: 70%;">Planner</th>
-	                            <th>Status</th>
-	                        </tr>
-	                    </thead>
-	                    <tbody>
-	                    	<c:forEach var="plannerList" items="${plannerList}" varStatus="status">
+                	<c:if test="${list_code=='M1030'}">
+                		<c:forEach var="list1" items="${plannerList}">
+				            <div class="col-md-4">
+				            <div class="grid-boxes-in" style="height: 350px; background-color: 	#f0f8ff;">
+				                <img class="img-responsive" src="/attatchFile/planner/${list1.attach_file}" alt="${list1.title}" onError="this.src='/attatchFile/spot/no_image.jpg'" height="80%" width="100%">
+				                <div class="grid-boxes-caption">
+				                   <h3><a href="/user/planner/readPlanner.do?planner_no=${list1.planner_no}">${list1.title}</a></h3>
+				                    <ul class="list-inline grid-boxes-news">
+				                        <li><a href="#">${list1.title}</a></li>
+				                        <li>|</li>
+				                        <li><i class="fa fa-clock-o"></i><fmt:formatDate pattern="yyyy-MM-dd" value="${list1.reg_date}"/></li>
+				                    </ul>
+				                    <div align="right" style="margin-right: 15px;">
+					                    <a href="#"><i class="fa fa-comments-o"></i><c:out value="${list1.reply_Count}" escapeXml="false"/></a>
+					                    <a href="#"><i class="fa fa-heart-o"></i><c:out value="${list1.sweet_count}" escapeXml="false"/></a>
+					                    <a href="#"><i class="fa fa-bookmark-o"></i><c:out value="${list1.bookmark_Count}" escapeXml="false"/></a>
+				                    </div>
+				                    <p>
+				                    	<c:out value="${fn:substring(list1.memo, 0,50)}" escapeXml="false"/>
+				                    	<c:if test="${fn:length(list1.memo) >50}">
+								        	…
+								        </c:if>
+				                    </p>
+				                </div>
+				            </div>
+				            </div>
+						</c:forEach>
+                	</c:if>
+                	<c:if test="${list_code!='M1030'}">
+		                <table class="table">
+		                    <thead>
 		                        <tr>
-		                            <td>${status.count}</td>
-		                            <td>${plannerList.title}</td>
-		                            <td>
-			                            <span class="label label-info"><i class="fa fa-share"></i><a href="/user/planner/readPlanner.do?planner_no=${plannerList.planner_no}">이동</a></span>
-			                            <span class="label label-warning"><a href="/user/myPage/myPageDeleteBookMark.do?item_no=${plannerList.planner_no}&mem_no=${mem_object.mem_no}">삭제</a></span>
-		                            </td>
+		                            <th style="width: 5%;"></th>
+		                            <th style="width: 70%;">Planner</th>
+		                            <th>Status</th>
 		                        </tr>
-	                    	</c:forEach>
-	                    </tbody>
-	                </table>
+		                    </thead>
+		                    <tbody>
+		                    	<c:forEach var="plannerList" items="${plannerList}" varStatus="status">
+			                        <tr>
+			                            <td>${status.count}</td>
+			                            <td>${plannerList.title}</td>
+			                            <td>
+				                            <span class="label label-info"><i class="fa fa-share"></i><a href="/user/planner/readPlanner.do?planner_no=${plannerList.planner_no}">이동</a></span>
+				                            <span class="label label-warning"><a href="/user/myPage/myPageDeleteBookMark.do?item_no=${plannerList.planner_no}&mem_no=${mem_object.mem_no}">삭제</a></span>
+			                            </td>
+			                        </tr>
+		                    	</c:forEach>
+		                    </tbody>
+		                </table>
+		        	</c:if>
                 </c:if>
                 <!--End Basic Table-->
-                <div align="center">
+            </div>
+            <div align="center">
 					<c:if test="${count>0}">
 						<div class="btn-group" role="group" aria-label="First group" align="center">
 							<c:set var="pageBlock" value="3" />
@@ -122,15 +163,6 @@
 							</c:if>
 							
 							<!-- 페이징 -->
-							<c:choose>
-								<c:when test="${memberDto.mem_no==mem_object.mem_no}">
-									<c:set var="uandMe" value="uandMe=S0001"/>		
-								</c:when>
-								<c:otherwise>
-									<c:set var="uandMe" value="uandMe=S0002"/>
-								</c:otherwise>
-							</c:choose>
-							
 							<nav>
 							  <ul class="pagination">
 							  	<c:if test="${startPage > pageBlock}">
@@ -164,10 +196,6 @@
 				</div>
 
                 <div class="margin-bottom-40"></div>
-
-               
-                <!--End Table Striped-->
-            </div>
             <!-- 메인------------------------------------------------------------------------------------------------------------------------------ -->
         </div>
     </div><!--/container-->

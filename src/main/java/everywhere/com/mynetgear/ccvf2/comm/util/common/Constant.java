@@ -201,4 +201,14 @@ public class Constant {
 	public static final String MAIL_TEMPLATE_GROUP_CODE = "T9900";
 	/**메일템플릿 활성화여부 그룹코드 : 그룹코드*/
 	public static final String MAIL_TEMPLATE_ACTIVE_GROUP_CODE = "M1200";
+	
+	/** 마이페이지 여행리스트 검색 사용코드*/
+	public static final String SEARCH_Y_MYPAGE_CODE="M1028";
+	/** 마이페이지 여행리스트 검색 비사용코드*/
+	public static final String SEARCH_N_MYPAGE_CODE="M1029";
+	
+	/** 마이페이지 즐겨찾기 스타일 이미지 코드*/
+	public static final String BOOKMARK_IMG_LIST_CODE="M1030";
+	/** 마이페이지 즐겨찾기 스타일 리스트 코드*/
+	public static final String BOOKMARK_LIST_CODE="M1031";
 }
