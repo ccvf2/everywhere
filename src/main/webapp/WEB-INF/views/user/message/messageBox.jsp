@@ -203,7 +203,7 @@
 </div><!--/wrapper-->
 
 <!-- JS Global Compulsory -->
-<script type="text/javascript" src="/assets/plugins/jquery/jquery.min.js"></script>
+<!-- <script type="text/javascript" src="/assets/plugins/jquery/jquery.min.js"></script> -->
 <script type="text/javascript" src="/assets/plugins/jquery/jquery-migrate.min.js"></script>
 <script type="text/javascript" src="/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
 <!-- JS Implementing Plugins -->
