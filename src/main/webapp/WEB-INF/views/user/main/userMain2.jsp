@@ -37,21 +37,14 @@
     <div class="slider-inner">
         <div id="da-slider" class="da-slider" style="background: transparent url(${backgroungImg}) repeat 0% 0%;">
         <!-- <div id="da-slider" class="da-slider"> -->
-        
 <%--             <div class="da-slide">
                 <h2><i>떠나세요~</i> <br /> <i>당신을 기다리는</i> <br /> <i>많은곳들</i></h2>
                 <p><i>일상에 지치고.. 시간에 쫒기고..</i> <br /> <i>갑시다!</i> <br /> <i>슈우우우우~</i></p>
                 <div class="da-img"><img class="img-responsive" src="/attatchFile/admin/forground/${imglist.setting_url}" alt=""></div>
             </div> --%>
-
         	<c:forEach items="${forgroung}" var="imglist">
         		<c:out value="${imglist.setting_text}" escapeXml="false"/>
         	</c:forEach>
-            
-            
-            
-            
-            
             
             <div class="da-arrows">
                 <span class="da-arrows-prev"></span>
@@ -61,10 +54,8 @@
     </div><!--/slider-->
     <!--=== End Slider ===-->
 
-
     <!--=== Content Part ===-->
     <div class="container content-sm">
-
 
     	<!-- Recent Works -->
         <div class="row margin-bottom-5">
@@ -77,25 +68,44 @@
 				</div>
  					<c:forEach var="suggetList" items="${suggetList}">
 		            <div class="col-md-4">
-		            	<span style="position: absolute; margin-left: 8px; font-size: 1.8em; color: #72c02c;" title="운영자 추천"><i class="fa fa-thumbs-o-up"></i></span>
+		            	<span style="position: absolute; margin-left: 8px; font-size: 1.8em; color: #72c02c;" title="운영자 추천"><i class="fa fa-certificate" style="color: #ffb300;"></i>
+		            	<c:choose>
+		            	<c:when test="${suggetList.planner_ba_code eq 'E0001'}">
+				            <i class="fa fa-calendar-o" title="일정"></i>
+		            	</c:when>
+		            	<c:when test="${suggetList.planner_ba_code eq 'E0002'}">
+				            <i class="fa fa-check-circle" title="리뷰"></i>
+		            	</c:when>
+		            	<c:otherwise>
+		            	</c:otherwise>
+		            </c:choose>
+		            	</span>
 		            <div class="grid-boxes-in" style="height: 430px;">
 		                <img class="img-responsive" src="/attatchFile/planner/${suggetList.attach_file}" alt="" onError="this.src='/attatchFile/spot/no_image.jpg'" style="min-height: 50%;max-height: 51%" width="100%">
-		                <div class="grid-boxes-caption">
+		                <div class="grid-boxes-caption" style="min-height: 180px;">
 		                    <h3><a href="/user/planner/readPlanner.do?planner_no=${suggetList.planner_no}">${suggetList.title}</a></h3>
+		                        <a href="/user/myPage/myPage.do?uandMe=S0002&mem_no=${suggetList.mem_no}">${suggetList.mem_name}</a>
 		                    <ul class="list-inline grid-boxes-news">
-		                        <li><a href="#">${suggetList.mem_name}</a></li>
+		                        <li title="댓글"><a href="#"><i class="fa fa-comments-o"></i><c:out value="${suggetList.reply_Count}" escapeXml="false"/></a></li>
 		                        <li>|</li>
-		                        <li><i class="fa fa-clock-o"></i><fmt:formatDate pattern="yyyy-MM-dd" value="${suggetList.reg_date}"/></li>
+		                        <li title="좋아요"><a href="#"><i class="fa fa-thumbs-o-up"></i><c:out value="${suggetList.sweet_count}" escapeXml="false"/></a></li>
 		                        <li>|</li>
-		                        <li><a href="#"><i class="fa fa-comments-o"></i><c:out value="${suggetList.reply_Count}" escapeXml="false"/></a></li>
+		                        <li title="북마크"><a href="#"><i class="fa fa-tags"></i><c:out value="${suggetList.bookmark_Count}" escapeXml="false"/></a></li>
+		                        <li>|</li>
+		                        <li title="작성일"><i class="fa fa-pencil"></i><fmt:formatDate pattern="yyyy-MM-dd" value="${suggetList.reg_date}"/></li>
 		                    </ul>
 		                    <p>
-		                    	<c:out value="${fn:substring(suggetList.memo, 0,50)}" escapeXml="false"/>
-		                    	<c:if test="${fn:length(suggetList.memo) >50}">
-						        	…
-						        </c:if>
+		                    	<c:choose>
+		                    		<c:when test="${fn:length(suggetList.memo) >30}">
+				                    	<c:out value="${fn:substring(suggetList.memo, 0,30)}" escapeXml="false"/>…
+		                    		</c:when>
+		                    		<c:when test="${fn:length(suggetList.memo) <40}">
+				                    	<c:out value="${suggetList.memo}" escapeXml="false"/>
+		                    		</c:when>
+		                    	</c:choose>
 		                    </p>
 		                </div>
+		                    <div style="margin: 1px auto; text-align: center;"><i class="fa fa-clock-o" title="여행기간"></i>&nbsp;<fmt:formatDate pattern="yyyy-MM-dd" value="${suggetList.start_date}"/>&nbsp;~&nbsp;<fmt:formatDate pattern="yyyy-MM-dd" value="${suggetList.end_date}"/></div>
 		            </div>
 		            </div>
 					</c:forEach>
@@ -126,22 +136,30 @@
 		            
 		            <div class="grid-boxes-in" style="height: 430px;">
 		                <img class="img-responsive" src="/attatchFile/planner/${moreLikeList.attach_file}" onError="this.src='/attatchFile/spot/no_image.jpg'" alt="" style="min-height: 50%;max-height: 51%" width="100%">
-		                <div class="grid-boxes-caption">
+		                <div class="grid-boxes-caption" style="min-height: 180px;">
 		                    <h3><a href="/user/planner/readPlanner.do?planner_no=${moreLikeList.planner_no}">${moreLikeList.title}</a></h3>
+		                        <a href="/user/myPage/myPage.do?uandMe=S0002&mem_no=${moreLikeList.mem_no}">${moreLikeList.mem_name}</a>
 		                    <ul class="list-inline grid-boxes-news">
-		                        <li><a href="#">${moreLikeList.mem_name}</a></li>
+		                        <li title="댓글"><a href="#"><i class="fa fa-comments-o"></i><c:out value="${moreLikeList.reply_Count}" escapeXml="false"/></a></li>
 		                        <li>|</li>
-		                        <li><i class="fa fa-clock-o"></i><fmt:formatDate pattern="yyyy-MM-dd" value="${moreLikeList.reg_date}"/></li>
+		                        <li title="좋아요"><a href="#"><i class="fa fa-thumbs-o-up"></i><c:out value="${moreLikeList.sweet_count}" escapeXml="false"/></a></li>
 		                        <li>|</li>
-		                        <li><a href="#"><i class="fa fa-comments-o"></i><c:out value="${moreLikeList.reply_Count}" escapeXml="false"/></a></li>
+		                        <li title="북마크"><a href="#"><i class="fa fa-tags"></i><c:out value="${moreLikeList.bookmark_Count}" escapeXml="false"/></a></li>
+		                        <li>|</li>
+		                        <li title="작성일"><i class="fa fa-pencil"></i><fmt:formatDate pattern="yyyy-MM-dd" value="${moreLikeList.reg_date}"/></li>
 		                    </ul>
 		                    <p>
-		                    	<c:out value="${fn:substring(moreLikeList.memo, 0,50)}" escapeXml="false"/>
-		                    	<c:if test="${fn:length(moreLikeList.memo) >50}">
-						        	…
-						        </c:if>
+		                    	<c:choose>
+		                    		<c:when test="${fn:length(moreLikeList.memo) >30}">
+				                    	<c:out value="${fn:substring(moreLikeList.memo, 0,30)}" escapeXml="false"/>…
+		                    		</c:when>
+		                    		<c:when test="${fn:length(moreLikeList.memo) <40}">
+				                    	<c:out value="${moreLikeList.memo}" escapeXml="false"/>
+		                    		</c:when>
+		                    	</c:choose>
 		                    </p>
 		                </div>
+		                <div style="margin: 1px auto; text-align: center;"><i class="fa fa-clock-o" title="여행기간"></i>&nbsp;<fmt:formatDate pattern="yyyy-MM-dd" value="${moreLikeList.start_date}"/>&nbsp;~&nbsp;<fmt:formatDate pattern="yyyy-MM-dd" value="${moreLikeList.end_date}"/></div>
 		            </div>
 		            </div>
 					</c:forEach>

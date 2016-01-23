@@ -14,6 +14,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -437,14 +438,29 @@ public class PlannerServiceImp implements PlannerService {
 		plannerDto.setTotalCount(plannerListTotalCount);
 		
 		//3 화면에 뿌릴 겟수
-		plannerDto.setStartRow((plannerDto.getCurrentPage()-1)*3+1);
+/*		plannerDto.setStartRow((plannerDto.getCurrentPage()-1)*3+1);
 		plannerDto.setEndRow(plannerDto.getCurrentPage()*3);
 		plannerDto.setPageCount(plannerListTotalCount/3+(plannerListTotalCount%3==0?0:1));
 		
 		plannerDto.setPageBlockGroupCount((plannerDto.getCurrentPage()-1)/plannerDto.getPageBlock());
 		
 		plannerDto.setStartPage(plannerDto.getPageBlockGroupCount()*plannerDto.getPageBlock()+1);
-		plannerDto.setEndPage(plannerDto.getStartPage()+plannerDto.getPageBlock()-1);
+		plannerDto.setEndPage(plannerDto.getStartPage()+plannerDto.getPageBlock()-1);*/
+		
+		//화면에뿌릴 글갯수
+		int showRow=0;
+		if(map.get("showRow")==null){
+			showRow=15;
+		}else{
+			if(Integer.parseInt(map.get("showRow").toString())==0){
+				showRow=15;
+			}else{
+				showRow=Integer.parseInt(map.get("showRow").toString());
+			}
+		}
+		
+		
+		plannerDto.pageingCalculation(showRow);
 		
 		
 		List<PlannerDto> plannerList = plannerDao.getPlannerListForAll(plannerDto);
@@ -453,12 +469,16 @@ public class PlannerServiceImp implements PlannerService {
 		List<CommonCodeDto> selectCode=commonCodeService.getListCodeGroup(Constant.SCHEDULE_TYPE_GROUP);
 		//정렬를 나타내는 코드 목록
 		List<CommonCodeDto> sortCode=commonCodeService.getListCodeGroup(Constant.SERACH_SORT_GROUPCODE);
+		//화면에 출력할 글갯수를 나타내는 코드 목록
+		List<CommonCodeDto> showRowCode=commonCodeService.getListCodeGroup(Constant.SHOW_ROW_GROUPCODE);
 		
 		//페이징 및 검색 정보를 가진DTO
 		mav.addObject("plannerDto",plannerDto);
+		mav.addObject("showRow",showRow);
 		
 		mav.addObject("selectCode",selectCode);
 		mav.addObject("sortCode",sortCode);
+		mav.addObject("showRowCode",showRowCode);
 		mav.addObject("plannerList", plannerList);
 		mav.setViewName("user/planner/plannerList");
 	}
