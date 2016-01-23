@@ -26,9 +26,7 @@
 	  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 	<![endif]-->
 <script type="text/javascript">
-//검색조건 변경
-	function changeSearchValue(){
-	}
+
 
 	//페이징버튼을 눌렀을때.
 	function movePage(pageNum){
@@ -38,7 +36,7 @@
 		form.method="POST";
 		form.submit(); 
 	}
-	//페이징버튼을 눌렀을때.
+	//글갯수변경을눌렀을때
 	function changeShowRow(showRow){
 		var form = document.getElementById("plannerListForm");
 		form.currentPage.value=1;
@@ -49,7 +47,7 @@
 	}
 
 
-//폼 서브밋
+	//폼 서브밋
 	function goSearchForm(){
 		var form = document.getElementById("plannerListForm");
 		form.currentPage.value=1;
@@ -99,7 +97,7 @@
 								  <section>
 									<label class="input">
 										<!-- 자동완성 input : works in Chrome, Firefox, Opera and IE10. -->
-										<input type="text" list="list" name="searchWord1" id="searchPlace" placeholder="키워드" value="${plannerDto.searchWord1}">
+										<input type="text" list="list" name="searchWord1" id="searchPlace" placeholder="검색어를 입력해 주세요" value="${plannerDto.searchWord1}">
 										<datalist id="list">
 											<c:forEach var="place" items="${placeList}">
 												<option value="${place.code_name}"></option>
@@ -315,8 +313,6 @@
 	
 	<!-- JS Page Level -->
 	<script src="/assets/js/app.js"></script>
-	<script src="/assets/plugins/jquery/jquery.min.js"></script>
-	<script type="text/javascript" src="/script/user/search/searchSpot.js"></script>
 	<script type="text/javascript" src="/assets/plugins/masonry/jquery.masonry.min.js"></script>
 	<script type="text/javascript" src="/assets/js/pages/blog-masonry.js"></script>
 	<script type="text/javascript" src="/assets/js/plugins/style-switcher.js"></script>
