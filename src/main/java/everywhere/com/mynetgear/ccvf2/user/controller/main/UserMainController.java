@@ -33,7 +33,7 @@ public class UserMainController {
 	
 	@RequestMapping(value="/user/main/main.do")
 	public ModelAndView userMainPage(HttpServletRequest request, HttpServletResponse response) {
-		ModelAndView mav = new ModelAndView("/user/main/userMain2");
+		ModelAndView mav = new ModelAndView("/user/main/userMain");
 		SettingMainDto settingMainDto=userMainService.getOneBackGroundImg();
 		List<SettingMainDto> forground=userMainService.getOneForGroundImg();
 		
