@@ -34,6 +34,13 @@ public interface UserMainService {
 	 * @return
 	 */
 	public List<SettingMainDto> getOneForGroundImg();
+	/**
+	 * @author 배성욱
+	 * @createDate 2016. 1. 23.
+	 * @described 운영자 추천 플래너 가져오기 3건
+	 * @return
+	 */
+	public List<PlannerDto> getListAdminSuggest();
 	
 	/**
 	 * @author 배성욱
@@ -42,4 +49,5 @@ public interface UserMainService {
 	 * @return
 	 */
 	public List<SpotDtoExt> getListSpotUserMain();
+
 }

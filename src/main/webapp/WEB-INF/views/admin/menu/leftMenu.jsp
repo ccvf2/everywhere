@@ -29,8 +29,8 @@
                         <a href="bootstrap-grid.html"><i class="fa fa-fw fa-wrench"></i> Bootstrap Grid</a>
                     </li> -->
                     <li>
-                        <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-arrows-v"></i>메일템플릿<i class="fa fa-fw fa-caret-down"></i></a>
-                        <ul id="demo" class="collapse">
+                        <a href="javascript:;" data-toggle="collapse" data-target="#mailTemplateDropDownMenu"><i class="fa fa-fw fa-arrows-v"></i>메일템플릿<i class="fa fa-fw fa-caret-down"></i></a>
+                        <ul id="mailTemplateDropDownMenu" class="collapse">
                             <li>
                                 <a href="/admin/mailtemplate/mailTemplateList.do">메일템플릿목록</a>
                             </li>
@@ -42,8 +42,19 @@
                     <li>
                         <a href="http://localhost:8888/admin/commoncode/code.do"><i class="fa fa-fw fa-file"></i> 공통코드목록</a>
                     </li>
-                    <li>
+                    <!-- <li>
                         <a href="/admin/settingMain/settingMain.do"><i class="fa fa-fw fa-dashboard"></i> 메인화면 수정하기</a>
+                    </li> -->
+                    <li>
+                        <a href="javascript:;" data-toggle="collapse" data-target="#mainSettingDropDownMenu"><i class="fa fa-fw fa-arrows-v"></i>메인화면 수정하기<i class="fa fa-fw fa-caret-down"></i></a>
+                        <ul id="mainSettingDropDownMenu" class="collapse">
+                            <li>
+                                <a href="/admin/settingMain/settingMain.do">슬라이드 수정</a>
+                            </li>
+                            <li>
+                                <a href="/admin/settingMain/choosePlanner.do">운영자 추천 글</a>
+                            </li>
+                        </ul>
                     </li>
                 </ul>
             </div>

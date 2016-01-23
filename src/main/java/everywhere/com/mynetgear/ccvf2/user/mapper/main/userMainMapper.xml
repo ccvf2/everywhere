@@ -73,7 +73,77 @@
 		AND <![CDATA[k.rnum  <=3]]>
 	</select>
 	
+		<select id="select_list_spot_user_Main" resultType="everywhere.com.mynetgear.ccvf2.user.dto.search.SpotDtoExt">
+		SELECT
+			*
+		FROM
+			(SELECT
+				ROWNUM RNUM
+				, RTABLE.*
+			FROM
+				(SELECT 
+						SP.SPOT_NO
+					, SP.MEM_NO
+					, SP.COUNTRY_CODE
+					, (select code_name from TBL_COMMON_CODE where CODE=SP.COUNTRY_CODE) AS COUNTRY_NAME
+					, SP.CITY_CODE
+					, (select code_name from TBL_COMMON_CODE where CODE=SP.CITY_CODE) AS CITY_NAME
+					, SP.SPOT_NAME
+					, SP.SPOT_TYPE_CODE
+					, (select code_name from TBL_COMMON_CODE where CODE=SP.SPOT_TYPE_CODE) AS SPOT_TYPE_NAME
+					, SP.MEM_LEVEL_CODE
+					, SP.SPOT_NOTE
+					, (select SAVE_NAME||'.'||EXTENSION from TBL_COMMON_FILE where FILE_NO=replace(SP.ATTACH_FILE,',','')) AS ATTACH_FILE
+					, SP.SPOT_ADDR
+					, SP.SPOT_LAT
+					, SP.SPOT_LONG
+					, SP.TOTAL_STAR_SCORE
+					, SP.COUNT_STAR_SCORE
+					, SP.OPEN_API_SEQ
+					, SP.SPOT_REGDATE
+					, ROUND( NVL((SP.TOTAL_STAR_SCORE)/DECODE((SP.COUNT_STAR_SCORE),0, NULL,(SP.COUNT_STAR_SCORE)), 0), 1) AS STAR_SCORE
+					FROM
+						TBL_SPOT SP
+					ORDER BY
+						STAR_SCORE
+					DESC
+						,SP.TOTAL_STAR_SCORE 
+					DESC
+					)RTABLE
+				)TOTALTABLE
+		WHERE
+		RNUM<![CDATA[>=1]]> AND RNUM<![CDATA[<=6]]>
+	</select>
 	
+	
+	<select id="select_list_Admin_Suggest" parameterType="everywhere.com.mynetgear.ccvf2.user.dto.planner.PlannerDto">
+		SELECT
+		PLANNER_NO
+		, MEM_NO
+		, PLANNER_BA_CODE
+		, TITLE
+		, ATTACH_FILE
+		, MEMO
+		, START_DATE
+		, END_DATE
+		, REG_DATE
+		, USE_YN
+		FROM TBL_PLANNER
+		WHERE PLANNER_NO IN
+		  (SELECT AA.planner_no
+		  FROM
+		    (SELECT ROWNUM rnum ,
+		      planner_no
+		    FROM TBL_ADMIN_MAIN_SETTING
+		    WHERE SETTING_SPOT_CODE='M8883'
+		    AND SETTING_TYPE_CODE='M9992'
+		    AND USE_YN='Y0001'
+		    ORDER BY SETTING_DATE DESC
+		    )AA
+		  WHERE AA.rnum<![CDATA[>=]]>1
+		  AND AA.rnum<![CDATA[<=]]>13
+		  )	
+	</select>
 	
 	
 </mapper>

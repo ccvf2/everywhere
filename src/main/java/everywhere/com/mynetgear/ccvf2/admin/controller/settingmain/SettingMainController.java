@@ -73,7 +73,7 @@ public class SettingMainController {
 	/**
 	 * @author 배성욱
 	 * @createDate 2015. 12. 22.
-	 * @described 매소드의 용도를 적어주세요
+	 * @described 슬라이드 뒷배경 설정 매소드
 	 * @param request
 	 * @param response
 	 * @param dto
@@ -88,4 +88,24 @@ public class SettingMainController {
 		
 		return mav;
 	}
+	
+	/**
+	 * @author 배성욱
+	 * @createDate 2016. 1. 23.
+	 * @described 서비스 메인의 운영자 추천 선택 화면
+	 * @param request
+	 * @param response
+	 * @return
+	 */
+	@RequestMapping(value="/admin/settingMain/choosePlanner.do", method=RequestMethod.GET)
+	public ModelAndView choosePlannerView(HttpServletRequest request, HttpServletResponse response) {
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("request", request);
+		
+		settingMainService.getChoosePlannerView(mav);
+		return mav;
+	}
+	
+	
+	
 }

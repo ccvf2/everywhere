@@ -40,15 +40,15 @@ public class UserMainController {
 		//메인페이지 띄우기
 		//List<PlannerDto> plannerList=plannerService.getPlannerList(인자값);
 		
-		//가장 최근에 등록된 플레너
-		List<PlannerDto> list1=userMainService.getListPlanner();
-		List<PlannerDto> list2=userMainService.getListPlanner();
-		List<PlannerDto> list3=userMainService.getListPlanner();
+		//운영자 추천
+		//List<PlannerDto> suggetList=userMainService.getListAdminSuggest();
+		//좋아요 많은순
+		List<PlannerDto> moreLikeList=userMainService.getListPlanner();
+		//핫플레이스
 		List<SpotDtoExt> spotList=userMainService.getListSpotUserMain();
 
-		mav.addObject("list1",list1);
-		mav.addObject("list2",list2);
-		mav.addObject("list3",list3);
+		mav.addObject("moreLikeList",moreLikeList);
+		//mav.addObject("suggetList",suggetList);
 		mav.addObject("spotList",spotList);
 		
 		

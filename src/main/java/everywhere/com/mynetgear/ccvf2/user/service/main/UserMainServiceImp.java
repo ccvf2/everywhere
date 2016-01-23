@@ -77,6 +77,18 @@ public class UserMainServiceImp implements UserMainService {
 		List<SpotDtoExt> list=spotDao.getListSpotUserMain();
 		return list;
 	}
+	/**
+	 * @author 배성욱
+	 * @createDate 2016. 1. 23.
+	 * @described 운영자 추천 플래너 가져오기 3건
+	 * @reference class
+	 * @return
+	 */
+	@Override
+	public List<PlannerDto> getListAdminSuggest() {
+		List<PlannerDto> list=plannerDao.getListAdminSuggest();
+		return list;
+	}
 	
 	
 	

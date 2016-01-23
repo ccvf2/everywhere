@@ -54,13 +54,29 @@
 								</thead>
 								<tbody>
 									<c:forEach items="${mailTemplatList}" var="list" varStatus="index">
-									<tr>
-										<td><c:out value="${index.count}"/></td>
-										<td><c:out value="${list.mtemp_group_name}"/></td>
-										<td><c:out value="${list.mtemp_name}"/></td>
-										<td><c:out value="${list.mtemp_title}"/></td>
-										<td><c:out value="${list.mtemp_active_name}"/></td>
-									</tr>
+									<c:choose>
+										<c:when test="${list.mtemp_active eq 'M1201'}">
+											<tr class="success">
+												<td><c:out value="${index.count}"/></td>
+												<td><c:out value="${list.mtemp_group_name}"/></td>
+												<td><c:out value="${list.mtemp_name}"/></td>
+												<td><c:out value="${list.mtemp_title}"/></td>
+												<td><c:out value="${list.mtemp_active_name}"/></td>
+												<td><c:out value="${list.mtemp_active}"/></td>
+											</tr>
+										</c:when>
+										<c:otherwise>
+											<tr>
+												<td><c:out value="${index.count}"/></td>
+												<td><c:out value="${list.mtemp_group_name}"/></td>
+												<td><c:out value="${list.mtemp_name}"/></td>
+												<td><c:out value="${list.mtemp_title}"/></td>
+												<td><c:out value="${list.mtemp_active_name}"/></td>
+												<td><c:out value="${list.mtemp_active}"/></td>
+											</tr>
+										</c:otherwise>
+									</c:choose>
+									
 									</c:forEach>
 								</tbody>
 							</table>

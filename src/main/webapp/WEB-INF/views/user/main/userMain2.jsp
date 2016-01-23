@@ -22,9 +22,7 @@
 
     <!-- CSS Customization -->
     <link href="/assets/css/pages/blog_masonry_3col.css" rel="stylesheet">
-    <script type="text/javascript">
-    //alert("☆★로그인시 아이디패스워드 꼭 확인하세요. 성국이서버는@everwhere   제서버는@everywhere 빠진y가 추가 되었습니다. 비밀번호는 동일하게 1234567890 입니다.-성욱-★☆");
-    </script>
+    <script type="text/javascript" src="/script/user/planner/plannerRead.js"></script>
 </head>
 
 <body>
@@ -70,28 +68,30 @@
 
     	<!-- Recent Works -->
         <div class="row margin-bottom-5">
-        <div class="headline"><h2>운영자 추천!</h2></div>
+        <div class="headline"><h2>운영자 추천!</h2>
+        	<a href="/user/search/searchSpot.do" style="float: right; line-height:50px; font-size: 1.3em;">더보기<i class="fa fa-share"></i></a>
+        </div>
 	        <div class="blog_masonry_3col" style="padding-bottom: 0px;">
 		        <div class="container content grid-boxes" style="padding-top: 0px; padding-bottom: 0px;">
 				<div>
 					<a href="/user/planner/readPlanner.do?planner_no=${planner.planner_no}"> ${planner.title} </a>
 				</div>
- 					<c:forEach var="list1" items="${list1}">
+ 					<c:forEach var="suggetList" items="${suggetList}">
 		            <div class="col-md-4">
 		            <div class="grid-boxes-in" style="height: 430px;">
-		                <img class="img-responsive" src="/attatchFile/planner/${list1.attach_file}" alt="" onError="this.src='/attatchFile/spot/no_image.jpg'" height="80%">
+		                <img class="img-responsive" src="/attatchFile/planner/${suggetList.attach_file}" alt="" onError="this.src='/attatchFile/spot/no_image.jpg'" height="80%">
 		                <div class="grid-boxes-caption">
-		                    <h3><a href="/user/planner/readPlanner.do?planner_no=${list1.planner_no}">${list1.title}</a></h3>
+		                    <h3><a href="/user/planner/readPlanner.do?planner_no=${suggetList.planner_no}">${suggetList.title}</a></h3>
 		                    <ul class="list-inline grid-boxes-news">
-		                        <li><a href="#">${list1.mem_name}</a></li>
+		                        <li><a href="#">${suggetList.mem_name}</a></li>
 		                        <li>|</li>
-		                        <li><i class="fa fa-clock-o"></i><fmt:formatDate pattern="yyyy-MM-dd" value="${list1.reg_date}"/></li>
+		                        <li><i class="fa fa-clock-o"></i><fmt:formatDate pattern="yyyy-MM-dd" value="${suggetList.reg_date}"/></li>
 		                        <li>|</li>
-		                        <li><a href="#"><i class="fa fa-comments-o"></i><c:out value="${list1.reply_Count}" escapeXml="false"/></a></li>
+		                        <li><a href="#"><i class="fa fa-comments-o"></i><c:out value="${suggetList.reply_Count}" escapeXml="false"/></a></li>
 		                    </ul>
 		                    <p>
-		                    	<c:out value="${fn:substring(list1.memo, 0,50)}" escapeXml="false"/>
-		                    	<c:if test="${fn:length(list1.memo) >50}">
+		                    	<c:out value="${fn:substring(suggetList.memo, 0,50)}" escapeXml="false"/>
+		                    	<c:if test="${fn:length(suggetList.memo) >50}">
 						        	…
 						        </c:if>
 		                    </p>
@@ -106,28 +106,38 @@
 
     	<!-- Info Blokcs -->
     	<div class="row margin-bottom-5">
-        <div class="headline"><h2>좋아요 많은 순</h2></div>
+        <div class="headline"><h2>좋아요 많은 순</h2>
+        	<a href="/user/search/searchSpot.do" style="float: right; line-height:50px; font-size: 1.3em;">더보기<i class="fa fa-share"></i></a>
+        </div>
 	        <div class="blog_masonry_3col" style="padding-bottom: 0px;">
 		        <div class="container content grid-boxes" style="padding-top: 0px; padding-bottom: 0px;">
-				<div>
-					<a href="/user/planner/readPlanner.do?planner_no=${planner.planner_no}"> ${planner.title} </a>
-				</div>
- 					<c:forEach var="list1" items="${list1}">
+ 					<c:forEach var="moreLikeList" items="${moreLikeList}">
 		            <div class="col-md-4">
+		            <c:choose>
+		            	<c:when test="${moreLikeList.planner_ba_code eq 'E0001'}">
+				            <span style="position: absolute; margin-left: 8px; font-size: 1.8em;" title="일정"><i class="fa fa-calendar-o"></i></span>
+		            	</c:when>
+		            	<c:when test="${moreLikeList.planner_ba_code eq 'E0002'}">
+				            <span style="position: absolute; margin-left: 8px; font-size: 2em; margin-top: -3px;" title="리뷰"><i class="fa fa-check-circle"></i></span>
+		            	</c:when>
+		            	<c:otherwise>
+		            	</c:otherwise>
+		            </c:choose>
+		            
 		            <div class="grid-boxes-in" style="height: 430px;">
-		                <img class="img-responsive" src="/attatchFile/planner/${list1.attach_file}" onError="this.src='/attatchFile/spot/no_image.jpg'" alt="" height="80%">
+		                <img class="img-responsive" src="/attatchFile/planner/${moreLikeList.attach_file}" onError="this.src='/attatchFile/spot/no_image.jpg'" alt="" height="80%">
 		                <div class="grid-boxes-caption">
-		                    <h3><a href="/user/planner/readPlanner.do?planner_no=${list1.planner_no}">${list1.title}</a></h3>
+		                    <h3><a href="/user/planner/readPlanner.do?planner_no=${moreLikeList.planner_no}">${moreLikeList.title}</a></h3>
 		                    <ul class="list-inline grid-boxes-news">
-		                        <li><a href="#">${list1.mem_name}</a></li>
+		                        <li><a href="#">${moreLikeList.mem_name}</a></li>
 		                        <li>|</li>
-		                        <li><i class="fa fa-clock-o"></i><fmt:formatDate pattern="yyyy-MM-dd" value="${list1.reg_date}"/></li>
+		                        <li><i class="fa fa-clock-o"></i><fmt:formatDate pattern="yyyy-MM-dd" value="${moreLikeList.reg_date}"/></li>
 		                        <li>|</li>
-		                        <li><a href="#"><i class="fa fa-comments-o"></i><c:out value="${list1.reply_Count}" escapeXml="false"/></a></li>
+		                        <li><a href="#"><i class="fa fa-comments-o"></i><c:out value="${moreLikeList.reply_Count}" escapeXml="false"/></a></li>
 		                    </ul>
 		                    <p>
-		                    	<c:out value="${fn:substring(list1.memo, 0,50)}" escapeXml="false"/>
-		                    	<c:if test="${fn:length(list1.memo) >50}">
+		                    	<c:out value="${fn:substring(moreLikeList.memo, 0,50)}" escapeXml="false"/>
+		                    	<c:if test="${fn:length(moreLikeList.memo) >50}">
 						        	…
 						        </c:if>
 		                    </p>
@@ -144,7 +154,7 @@
     	<!-- Info Blokcs -->
     	<div class="row margin-bottom-5">
         <div class="headline"><h2>핫 플레이스!</h2>
-					<a href="/user/search/searchSpot.do" style="float: right; line-height:50px;">더보기▶▶</a>
+					<a href="/user/search/searchSpot.do" style="float: right; line-height:50px; font-size: 1.3em;">더보기<i class="fa fa-share"></i></a>
         </div>
 	        <div class="blog_masonry_3col" style="padding-bottom: 0px;">
 		        <div class="container content grid-boxes" style="padding-top: 0px; padding-bottom: 0px;">
@@ -153,15 +163,24 @@
  					<c:forEach var="list1" items="${spotList}">
 		            <div class="col-md-4">
 		            <div class="grid-boxes-in" style="height: 430px;">
-		                <img class="img-responsive" src="/attatchFile/spot/${list1.attach_file}" alt="${list1.spot_name}" onError="this.src='/attatchFile/spot/no_image.jpg'" height="80%" width="100%">
+		                <a href="javascript:spotReadPage('${list1.spot_no}')"><img class="img-responsive" src="/attatchFile/spot/${list1.attach_file}" alt="${list1.spot_name}" onError="this.src='/attatchFile/spot/no_image.jpg'" height="80%" width="100%" style="max-height: 232px"></a>
 		                <div class="grid-boxes-caption">
-		                    <h3><a href="/user/planner/readPlanner.do?planner_no=${list1.spot_no}">${list1.spot_name}</a></h3>
+		                    <h3><a href="javascript:spotReadPage('${list1.spot_no}')">${list1.spot_name}</a></h3>
 		                    <ul class="list-inline grid-boxes-news">
-		                        <li><a href="#">${list1.spot_name}</a></li>
+		                        <li title="별점 / 등록한 사람"><i class="fa fa-star"></i><c:out value="${list1.star_score}"/> / <i class="fa fa-users"></i>&nbsp;<c:out value="${list1.count_star_score}"/></li>
 		                        <li>|</li>
-		                        <%-- <li><i class="fa fa-clock-o"></i><fmt:formatDate pattern="yyyy-MM-dd" value="${list1.spot_regdate}"/></li> --%>
+		                        <li title="나라:${list1.country_name}"><i class="fa fa-flag"></i><c:out value="${list1.country_name}"/></li>
 		                        <li>|</li>
-		                        <li><a href="#"><i class="fa fa-comments-o"></i><c:out value="${list1.total_star_score}" escapeXml="false"/></a></li>
+		                        <li title="도시:${list1.city_name}"><i class="fa fa-location-arrow"></i><c:out value="${list1.city_name}"/></li>
+		                        <li>|</li>
+		                        <li title="명소종류:${list1.spot_type_name}"><i class="fa fa fa-info"></i><c:out value="${list1.spot_type_name}"/></li>
+		                        <li>|</li>
+		                        <li title="주소:${list1.spot_addr}"><i class="fa fa-map-marker"></i>
+		                        <c:out value="${fn:substring(list1.spot_addr, 0,40)}"/>
+		                    	<c:if test="${fn:length(list1.spot_addr) >40}">
+						        	…
+						        </c:if>
+		                        </li>
 		                    </ul>
 		                    <p>
 		                    	<c:out value="${fn:substring(list1.spot_note, 0,50)}" escapeXml="false"/>
