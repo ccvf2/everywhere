@@ -73,7 +73,7 @@
 	            <div class="col-md-3" id="leftCol">
 		            <!-- Blog Newsletter -->
 		            <div class="blog-newsletter" id="sidebar">
-		               <div class="headline-v2"></div>
+		            	<div class="headline-v2" style="border: 0px;"></div>
 	            	 	<form action="#" class="sky-form" onsubmit="searchSpotList('${currentPage}')">
 		                    <header>명소 검색</header>
 		                    
@@ -102,7 +102,7 @@
 		                        <section>
 		                            <label class="label">명소 종류</label>
 		                            <div class="select_spot_type">
-		                            	<label class="checkbox"><input type="checkbox" name="spot_type_code" id="check_all" checked="checked" onClick="toggleCheck(this)"><i></i>전체</label>
+		                            	<label class="checkbox"><input type="checkbox" name="spot_type_code" id="check_all" checked="checked" value="T0000" onClick="toggleCheck(this)"><i></i>전체</label>
 		                            	<c:forEach var="spotType" items="${spotTypeList}">
 		                            		<label class="checkbox"><input type="checkbox" name="spot_type_code" id="${spotType.code}" value="${spotType.code}" onClick="disableCheckAll(this)"><i></i>${spotType.code_name}</label>
 		                            	</c:forEach>
@@ -153,7 +153,7 @@
 		         </div>
 	         <!-- End sideBar -->
 	         
-	         <!-- 명소 검색 뷰 시작 -->
+	         <!-- 명소 검색 결과 시작 -->
                <div class="col-md-9">
                		<div class="blog_masonry_3col">
 				        <div class="container-fluid content grid-boxes masonry" style="position: relative; height: 2250px; overflow: hidden;">
@@ -261,27 +261,7 @@
 	<script type="text/javascript" src="/assets/js/plugins/style-switcher.js"></script>
 	<script type="text/javascript" src="/assets/plugins/scrollbar/js/jquery.mCustomScrollbar.concat.min.js"></script>
 	<script type="text/javascript">
-	    $(document).ready(function() {
-            App.initScrollBar();
-	       	//움직이는 검색바
-	       $('#sidebar').affix({
-			  offset: {
-			    top: 235
-			  }
-			});
-			
-			
-			/* //전체 체크박스가 선택되었을 경우
-			$("#check_all").click(function(){
-				var chk = $(this).is(":checked");//.attr('checked');
-				if(chk) {
-					$(".select_spot_type input").attr('checked', true);
-				} else {
-					$(".select_spot_type input").attr('checked', false);
-				} 
-			});*/
-	    });
-	    
+
 	    //체크박스를 전체 선택하는 함수
 	    function checkAll() {
 	    	checkboxies = document.getElementsByName('spot_type_code');

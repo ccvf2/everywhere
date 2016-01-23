@@ -29,7 +29,34 @@ function setDroppable(){
 	});
 }
 
+function selectDate(date){
+	var selectedDate = date.value;
+	if(selectedDate != '' && !/^\d{4}\-\d{1,2}\-\d{1,2}$/.test(selectedDate)){
+		alert("날짜 형식이 잘못 되었습니다.");
+		$('#start_date').val(date.defaultValue);
+		return;
+	}
+}
+
 function checkPlanner(){
+	var start_day = $("#start_date").val();
+	if( start_day == "") {
+		alert("정확한 날짜를 선택해 주십시요. ");
+		document.getElementById("start_date").focus();
+		return false;
+	}
+	
+	var dateNum = start_day.split("-");
+	var date = new Date(parseInt(dateNum[0]),parseInt(dateNum[1])-1,parseInt(dateNum[2]));
+	var minDate = new Date("1900-01-01");
+	var maxDate = new Date("2099-12-31");
+	
+	if(minDate.getTime() > date.getTime() || maxDate.getTime() < date.getTime) {
+		alert("여행 시작 날짜는 '1900-01-01' ~ '2099-12-31' 사이여야 합니다.");
+		document.getElementById("start_date").focus();
+		return false;
+	}
+
 	var day = $("#day_count").val();
 	for(var i= 1; i <= Number(day); i++){
 		var item_count = $("#d"+i+"_item_count").val();
@@ -44,12 +71,7 @@ function checkPlanner(){
 			}
 		}
 	}
-	var start_day = $("#start_date").val();
-	if( start_day == "") {
-		alert("정확한 날짜를 선택해 주십시요. ");
-		document.getElementById("start_date").focus();
-		return false;
-	}
+	
 	document.getElementById("plannerform").submit();
 }
 
