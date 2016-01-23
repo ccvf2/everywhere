@@ -41,14 +41,14 @@ public class UserMainController {
 		//List<PlannerDto> plannerList=plannerService.getPlannerList(인자값);
 		
 		//운영자 추천
-		//List<PlannerDto> suggetList=userMainService.getListAdminSuggest();
+		List<PlannerDto> suggetList=userMainService.getListAdminSuggest();
 		//좋아요 많은순
 		List<PlannerDto> moreLikeList=userMainService.getListPlanner();
 		//핫플레이스
 		List<SpotDtoExt> spotList=userMainService.getListSpotUserMain();
 
 		mav.addObject("moreLikeList",moreLikeList);
-		//mav.addObject("suggetList",suggetList);
+		mav.addObject("suggetList",suggetList);
 		mav.addObject("spotList",spotList);
 		
 		

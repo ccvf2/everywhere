@@ -69,7 +69,6 @@
     	<!-- Recent Works -->
         <div class="row margin-bottom-5">
         <div class="headline"><h2>운영자 추천!</h2>
-        	<a href="/user/search/searchSpot.do" style="float: right; line-height:50px; font-size: 1.3em;">더보기<i class="fa fa-share"></i></a>
         </div>
 	        <div class="blog_masonry_3col" style="padding-bottom: 0px;">
 		        <div class="container content grid-boxes" style="padding-top: 0px; padding-bottom: 0px;">
@@ -78,8 +77,9 @@
 				</div>
  					<c:forEach var="suggetList" items="${suggetList}">
 		            <div class="col-md-4">
+		            	<span style="position: absolute; margin-left: 8px; font-size: 1.8em; color: #72c02c;" title="운영자 추천"><i class="fa fa-thumbs-o-up"></i></span>
 		            <div class="grid-boxes-in" style="height: 430px;">
-		                <img class="img-responsive" src="/attatchFile/planner/${suggetList.attach_file}" alt="" onError="this.src='/attatchFile/spot/no_image.jpg'" height="80%">
+		                <img class="img-responsive" src="/attatchFile/planner/${suggetList.attach_file}" alt="" onError="this.src='/attatchFile/spot/no_image.jpg'" style="min-height: 50%;max-height: 51%" width="100%">
 		                <div class="grid-boxes-caption">
 		                    <h3><a href="/user/planner/readPlanner.do?planner_no=${suggetList.planner_no}">${suggetList.title}</a></h3>
 		                    <ul class="list-inline grid-boxes-news">
@@ -115,17 +115,17 @@
 		            <div class="col-md-4">
 		            <c:choose>
 		            	<c:when test="${moreLikeList.planner_ba_code eq 'E0001'}">
-				            <span style="position: absolute; margin-left: 8px; font-size: 1.8em;" title="일정"><i class="fa fa-calendar-o"></i></span>
+				            <span style="position: absolute; margin-left: 8px; font-size: 1.8em; color: #72c02c;" title="일정"><i class="fa fa-calendar-o"></i></span>
 		            	</c:when>
 		            	<c:when test="${moreLikeList.planner_ba_code eq 'E0002'}">
-				            <span style="position: absolute; margin-left: 8px; font-size: 2em; margin-top: -3px;" title="리뷰"><i class="fa fa-check-circle"></i></span>
+				            <span style="position: absolute; margin-left: 8px; font-size: 2em; margin-top: -3px; color: #72c02c;" title="리뷰"><i class="fa fa-check-circle"></i></span>
 		            	</c:when>
 		            	<c:otherwise>
 		            	</c:otherwise>
 		            </c:choose>
 		            
 		            <div class="grid-boxes-in" style="height: 430px;">
-		                <img class="img-responsive" src="/attatchFile/planner/${moreLikeList.attach_file}" onError="this.src='/attatchFile/spot/no_image.jpg'" alt="" height="80%">
+		                <img class="img-responsive" src="/attatchFile/planner/${moreLikeList.attach_file}" onError="this.src='/attatchFile/spot/no_image.jpg'" alt="" style="min-height: 50%;max-height: 51%" width="100%">
 		                <div class="grid-boxes-caption">
 		                    <h3><a href="/user/planner/readPlanner.do?planner_no=${moreLikeList.planner_no}">${moreLikeList.title}</a></h3>
 		                    <ul class="list-inline grid-boxes-news">

@@ -65,12 +65,49 @@
 		  FROM
 		    (SELECT t.*
 		    FROM tbl_planner t
-		    WHERE t.USE_YN='Y0002'
+		    WHERE t.USE_YN='Y0001'
 		    ORDER BY t.reg_date DESC
 		    )f
 		  )k
 		WHERE <![CDATA[k.rnum>=1]]>
 		AND <![CDATA[k.rnum  <=3]]>
+	</select>
+	
+	<!-- 좋아요 많은순 -->
+	<select id="select_List_more_like" resultType="everywhere.com.mynetgear.ccvf2.user.dto.planner.PlannerDto">
+		SELECT BB.* FROM
+			(SELECT
+				ROWNUM RNUM
+				,AA.* 
+			FROM
+				(
+				SELECT 
+					PLA.PLANNER_NO
+					, PLA.MEM_NO
+					, PLA.PLANNER_BA_CODE
+					, PLA.TITLE
+					, (select SAVE_NAME||'.'||EXTENSION from TBL_COMMON_FILE where FILE_NO=replace(PLA.ATTACH_FILE,',','')) AS ATTACH_FILE
+					, PLA.MEMO
+					, PLA.START_DATE
+					, PLA.END_DATE
+					, PLA.REG_DATE
+					, PLA.USE_YN
+					,NVL(COUNTTABLE.COUNTTOTAL,'0')COUNTTOTAL
+				FROM
+					TBL_PLANNER PLA
+				LEFT OUTER JOIN
+					(SELECT PLANNER_NO,COUNT(PLANNER_NO) COUNTTOTAL FROM TBL_SWEET GROUP BY PLANNER_NO ORDER BY COUNTTOTAL DESC)COUNTTABLE
+				ON
+					PLA.PLANNER_NO=COUNTTABLE.PLANNER_NO
+				WHERE
+					PLA.USE_YN='Y0001'
+				)AA
+			ORDER BY
+			AA.COUNTTOTAL
+			DESC
+			)BB
+		WHERE
+		BB.RNUM<![CDATA[>=]]>1 AND BB.RNUM<![CDATA[<=]]>3
 	</select>
 	
 		<select id="select_list_spot_user_Main" resultType="everywhere.com.mynetgear.ccvf2.user.dto.search.SpotDtoExt">
@@ -116,33 +153,45 @@
 	</select>
 	
 	
-	<select id="select_list_Admin_Suggest" parameterType="everywhere.com.mynetgear.ccvf2.user.dto.planner.PlannerDto">
+	<select id="select_list_Admin_Suggest" resultType="everywhere.com.mynetgear.ccvf2.user.dto.planner.PlannerDto">
 		SELECT
-		PLANNER_NO
-		, MEM_NO
-		, PLANNER_BA_CODE
-		, TITLE
-		, ATTACH_FILE
-		, MEMO
-		, START_DATE
-		, END_DATE
-		, REG_DATE
-		, USE_YN
-		FROM TBL_PLANNER
-		WHERE PLANNER_NO IN
-		  (SELECT AA.planner_no
-		  FROM
-		    (SELECT ROWNUM rnum ,
-		      planner_no
-		    FROM TBL_ADMIN_MAIN_SETTING
-		    WHERE SETTING_SPOT_CODE='M8883'
-		    AND SETTING_TYPE_CODE='M9992'
-		    AND USE_YN='Y0001'
-		    ORDER BY SETTING_DATE DESC
-		    )AA
-		  WHERE AA.rnum<![CDATA[>=]]>1
-		  AND AA.rnum<![CDATA[<=]]>13
-		  )	
+			PLANNER_NO
+			, MEM_NO
+			, PLANNER_BA_CODE
+			, TITLE
+			, (select save_name||'.'||EXTENSION from tbl_common_file where file_no=ATTACH_FILE)ATTACH_FILE
+			, MEMO
+			, START_DATE
+			, END_DATE
+			, REG_DATE
+			, USE_YN
+		FROM
+			TBL_PLANNER
+		WHERE
+			PLANNER_NO IN
+			(SELECT
+				AA.planner_no
+			FROM
+				(SELECT
+					ROWNUM rnum ,
+					planner_no
+				FROM
+					TBL_ADMIN_MAIN_SETTING
+				WHERE
+					SETTING_SPOT_CODE='M8883'
+				AND
+					SETTING_TYPE_CODE='M9992'
+				AND
+					USE_YN='Y0001'
+				ORDER BY
+					SETTING_DATE
+				DESC
+				)AA
+			WHERE
+				AA.rnum<![CDATA[>=]]>1
+			AND
+				AA.rnum<![CDATA[<=]]>13
+		)	
 	</select>
 	
 	
