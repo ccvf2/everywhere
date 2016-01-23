@@ -107,10 +107,10 @@
     <ul class="list-group sidebar-nav-v1 margin-bottom-40" id="sidebar-nav-1">
 	    <c:if test="${memberDto.mem_no==mem_object.mem_no}">
 	        <li class="list-group-item">
-	            <a href="/user/myPage/friends.do?mem_no=${memberDto.mem_no}"><i class="fa fa-group"></i> 친구</a>
+	            <a href="/user/myPage/myPage.do?uandMe=S0001"><i class="fa fa-cubes"></i><c:out value="나의 여행"/></a>
 	        </li>
 	        <li class="list-group-item">
-	            <a href="#"><i class="fa fa-cubes"></i><c:out value="나의 여행"/></a>
+	            <a href="/user/myPage/friends.do?mem_no=${memberDto.mem_no}"><i class="fa fa-group"></i> 친구</a>
 	        </li>
 	        <li class="list-group-item">
 	            <a href="/user/visitor/visitorWrite.do?uandMe=S0001"><i class="fa fa-pencil-square-o"></i> 방명록</a>
@@ -118,7 +118,7 @@
 		</c:if>
 		<c:if test="${memberDto.mem_no!=mem_object.mem_no}">
 	        <li class="list-group-item">
-	            <a href="#"><i class="fa fa-cubes"></i><c:out value="${memberDto.mem_name}님의 여행"/></a>
+	            <a href="/user/myPage/myPage.do?uandMe=S0002&mem_no=${memberDto.mem_no}"><i class="fa fa-cubes"></i><c:out value="${memberDto.mem_name}님의 여행"/></a>
 	        </li>
 	        <li class="list-group-item">
 	            <a href="/user/visitor/visitorWrite.do?uandMe=S0002&mem_no=${memberDto.mem_no}">
@@ -132,7 +132,7 @@
         
         <c:if test="${memberDto.mem_no==mem_object.mem_no}">
 	        <li class="list-group-item">
-	            <a href="/user/myPage/getBookMarkList.do?mem_no=${mem_object.mem_no}"><i class="fa fa-star-o"></i> 즐겨찾기</a>
+	            <a href="/user/myPage/getBookMarkList.do?mem_no=${mem_object.mem_no}&list_code=M1030"><i class="fa fa-star-o"></i> 즐겨찾기</a>
 	        </li>
 	        <li class="list-group-item">
 	            <a href="/user/message/messageBox.do"><i class="fa fa-comments"></i> 쪽지함</a>

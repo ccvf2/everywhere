@@ -129,11 +129,13 @@ public class MemberDaoImp implements MemberDao {
 	}
 
 	@Override
-	public List<PlannerDto> getBookMarkList(int mem_no, int startRow, int endRow) {
+	public List<PlannerDto> getBookMarkList(int mem_no, int startRow, int endRow, String list_code) {
 		HashMap<String, Object> map=new HashMap<String, Object>();
 		map.put("mem_no", mem_no);
 		map.put("startRow", startRow);
 		map.put("endRow", endRow);
+		map.put("list_code", list_code);
+		map.put("USE_YN", Constant.SYNB_YN_Y);
 		
 		return sqlTemplate.selectList("getBookMarkList", map);
 	}
@@ -157,11 +159,13 @@ public class MemberDaoImp implements MemberDao {
 	}
 
 	@Override
-	public List<PlannerDto> getPlannerList(int mem_no, int startRow, int endRow) {
+	public List<PlannerDto> getPlannerList(int mem_no, int startRow, int endRow, String MYPAGE_CODE, String search) {
 		HashMap<String, Object> map=new HashMap<String, Object>();
 		map.put("startRow", startRow);
 		map.put("endRow", endRow);
 		map.put("mem_no", mem_no);
+		map.put("MYPAGE_CODE", MYPAGE_CODE);
+		map.put("search", search);
 		return sqlTemplate.selectList("everywhere.com.mynetgear.ccvf2.user.mapper.member.getPlannerList", map);
 	}
 

@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>My Page</title>
+<title>My Page BookMark</title>
 	<!-- Meta -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -41,22 +41,61 @@
                 <c:import url="/WEB-INF/views/user/mypage/myPageLeft.jsp"/>
             </div>
             <!--End Left Sidebar-->
-
+			<script type="text/javascript">
+			    $(function(){
+			    	$(".bookmark_list_style").change(function(){
+			    		var list_code=$(".bookmark_list_style").val();
+			    		
+			    		location.href="/user/myPage/getBookMarkList.do?mem_no=${mem_object.mem_no}&list_code="+list_code;
+			    	});
+			    });
+		    </script>
 			<!-- 메인------------------------------------------------------------------------------------------------------------------------------ -->
-			<!--=== News Block ===-->
-	        	<div class="col-md-9">
-		        	<c:if test="${plannerList.size()==0}">
-	                     <div class="shadow-wrapper">
-		                    <div class="tag-box tag-box-v1 box-shadow shadow-effect-2">
-		                        <h2>아직 여행계획이 없으시군요.</h2>
-		                        <p>새로운 여행계획.<br/>
-		                         당신만의 여행계획을 만들어보세요.<br/>
-		                         </p>
-		                    </div>
-		                </div>
-					</c:if>
-					<c:if test="${count>0}">
-		            	<c:forEach var="list1" items="${plannerList}">
+			<div class="col-md-9">
+                <!--Basic Table-->
+                <div class="margin-bottom-60"></div>
+
+               	<div class="alert alert-info alert-dismissable">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                    <i class="fa fa-info-circle"></i>  <strong><c:out value="${mem_object.mem_name}"/>님의 BookMark</strong>
+                </div>
+                <form method="get" id="sky-form3" class="sky-form">
+					<header>빠른검색으로 찾아보세요</header>
+					<div style="float: left;">
+						<fieldset>
+							<section>
+								<label class="label">정렬방식변경</label> <label class="select">
+									<select style="width: 200px;" class="bookmark_list_style">
+										<option value="-----">선택</option>
+										<option value="M1030">이미지형</option>
+										<option value="M1031">리스트형</option>
+									</select> <i></i>
+								</label>
+							</section>
+						</fieldset>
+					</div>
+					<div>
+						<fieldset>
+							<section>
+								<label class="label">BookMark 검색</label>
+								<div class="input-group">
+									<input type="text" class="form-control" id="search"
+										placeholder="작성자 or 제목" /> <span class="input-group-btn">
+										<button class="btn-u btn-block" type="button"
+											onclick="javascript:location.href='/user/myPage/searchFriends.do?search='+search.value">검색</button>
+									</span>
+								</div>
+							</section>
+						</fieldset>
+					</div>
+					
+					
+				</form>
+				
+                <!--Basic Table-->
+                <c:if test="${count>0}">
+                	<c:if test="${list_code=='M1030'}">
+                		<c:forEach var="list1" items="${plannerList}">
 				            <div class="col-md-4">
 				            <div class="grid-boxes-in" style="height: 350px; background-color: 	#f0f8ff;">
 				                <img class="img-responsive" src="/attatchFile/planner/${list1.attach_file}" alt="${list1.title}" onError="this.src='/attatchFile/spot/no_image.jpg'" height="80%" width="100%">
@@ -82,10 +121,34 @@
 				            </div>
 				            </div>
 						</c:forEach>
-					</c:if>
-		        </div>
-		        
-		        <div align="center">
+                	</c:if>
+                	<c:if test="${list_code!='M1030'}">
+		                <table class="table">
+		                    <thead>
+		                        <tr>
+		                            <th style="width: 5%;"></th>
+		                            <th style="width: 70%;">Planner</th>
+		                            <th>Status</th>
+		                        </tr>
+		                    </thead>
+		                    <tbody>
+		                    	<c:forEach var="plannerList" items="${plannerList}" varStatus="status">
+			                        <tr>
+			                            <td>${status.count}</td>
+			                            <td>${plannerList.title}</td>
+			                            <td>
+				                            <span class="label label-info"><i class="fa fa-share"></i><a href="/user/planner/readPlanner.do?planner_no=${plannerList.planner_no}">이동</a></span>
+				                            <span class="label label-warning"><a href="/user/myPage/myPageDeleteBookMark.do?item_no=${plannerList.planner_no}&mem_no=${mem_object.mem_no}">삭제</a></span>
+			                            </td>
+			                        </tr>
+		                    	</c:forEach>
+		                    </tbody>
+		                </table>
+		        	</c:if>
+                </c:if>
+                <!--End Basic Table-->
+            </div>
+            <div align="center">
 					<c:if test="${count>0}">
 						<div class="btn-group" role="group" aria-label="First group" align="center">
 							<c:set var="pageBlock" value="3" />
@@ -100,27 +163,18 @@
 							</c:if>
 							
 							<!-- 페이징 -->
-							<c:choose>
-								<c:when test="${memberDto.mem_no==mem_object.mem_no}">
-									<c:set var="uandMe" value="uandMe=S0001"/>		
-								</c:when>
-								<c:otherwise>
-									<c:set var="uandMe" value="uandMe=S0002"/>
-								</c:otherwise>
-							</c:choose>
-							
 							<nav>
 							  <ul class="pagination">
 							  	<c:if test="${startPage > pageBlock}">
 								  	<li>
-									  	<a href="/user/myPage/myPage.do?${uandMe}&mem_no=${memberDto.mem_no}&pageNumber=${currentPage-pageBlock}" aria-label="Previous">
+									  	<a href="/user/myPage/getBookMarkList.do?mem_no=${mem_object.mem_no}&pageNumber=${currentPage-pageBlock}" aria-label="Previous">
 									        <span aria-hidden="true">&laquo;</span>
 								     	</a>
 							     	</li>
 								</c:if>
 							    <c:forEach var="i" begin="${startPage}" end="${endPage}">
 									 <c:if test="${i!=currentPage}">
-									 	<li><a href="/user/myPage/myPage.do?${uandMe}&mem_no=${memberDto.mem_no}&pageNumber=${i}" role="button" class="btn btn-default">${i}</a></li>
+									 	<li><a href="/user/myPage/getBookMarkList.do?mem_no=${mem_object.mem_no}&pageNumber=${i}" role="button" class="btn btn-default">${i}</a></li>
 									 </c:if>
 									 <c:if test="${i==currentPage}">
 									 	<li class="active"><a href="#" role="button" class="btn btn-default">${i}</a></li>
@@ -129,7 +183,7 @@
 								
 						  		<c:if test="${endPage < pageCount }">
 						  			<li>
-								      <a href="/user/myPage/myPage.do?${uandMe}&mem_no=${memberDto.mem_no}&pageNumber=${startPage+pageBlock}" aria-label="Next">
+								      <a href="/user/myPage/getBookMarkList.do?mem_no=${mem_object.mem_no}&pageNumber=${startPage+pageBlock}" aria-label="Next">
 								        <span aria-hidden="true">&raquo;</span>
 								      </a>
 								    </li>
@@ -142,7 +196,6 @@
 				</div>
 
                 <div class="margin-bottom-40"></div>
-		        
             <!-- 메인------------------------------------------------------------------------------------------------------------------------------ -->
         </div>
     </div><!--/container-->

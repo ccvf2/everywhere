@@ -176,19 +176,84 @@
 	</select>
 	
 	<select id="getBookMarkList" parameterType="java.util.HashMap" resultType="everywhere.com.mynetgear.ccvf2.user.dto.planner.PlannerDto">
-		<![CDATA[
-		select *
-		from tbl_planner
-		where planner_no in
-			(select book.item_no
-			from (SELECT ROWNUM rnum, A.* 
-			      FROM (SELECT * 
-			            FROM tbl_bookmark 
-			            WHERE mem_no=#{mem_no}
-			            ORDER BY mem_no DESC) A) book
-			WHERE book.rnum >= #{startRow}
-			AND book.rnum <=#{endRow})
-		]]>
+		<if test="list_code =='M1030'">
+			<![CDATA[
+				select pla.PLANNER_NO
+							, pla.MEM_NO
+							, pla.PLANNER_BA_CODE
+							, pla.TITLE
+							, (select save_name||'.'||EXTENSION from tbl_common_file where FILE_NO=pla.ATTACH_FILE)ATTACH_FILE  
+							, pla.MEMO
+							, pla.START_DATE
+							, pla.REG_DATE
+							, pla.USE_YN
+				      ,nvl(book.bookmark_count, 0) as bookmark_Count
+				      ,nvl(sw.sweet_count, 0) as sweet_count
+				      ,nvl(re.re_count, 0) as reply_Count
+				from 
+				    (select plann.*
+				      from (SELECT ROWNUM rnum, A.* 
+				            FROM
+				                  (select *
+				                  from tbl_planner
+				                  where planner_no in (select plaa.item_no as planner_no
+				                                        from (SELECT *
+				                                              FROM tbl_bookmark 
+				                                              WHERE mem_no=#{mem_no}
+				                                              ) plaa
+				                                        )
+				                  and USE_YN=#{USE_YN}
+				                  ORDER BY planner_no DESC) A) plann
+				      WHERE plann.rnum >= #{startRow}
+				      AND plann.rnum <=#{endRow}) pla,
+				
+				    (select count(bookmark_no) as bookmark_count, item_no as planner_no
+				      from tbl_bookmark
+				      where item_no in 
+				      (
+				        SELECT item_no
+				        FROM tbl_bookmark 
+				        WHERE mem_no=#{mem_no}
+				      )
+				      group by item_no) book,
+				      
+				      (select planner_no, count(sweet_no) sweet_count
+				      from tbl_sweet
+				      where planner_no in (SELECT item_no
+				                            FROM tbl_bookmark 
+				                            WHERE mem_no=#{mem_no})
+				      group by planner_no) sw,
+				      
+				      (select count(reply_no) as re_count, item_no as planner_no
+				      from tbl_common_reply
+				      where item_no in 
+				      (
+				        SELECT item_no
+				        FROM tbl_bookmark 
+				        WHERE mem_no=#{mem_no}
+				      )
+				      group by item_no) re
+				      
+				where pla.PLANNER_NO=book.planner_no
+				and pla.PLANNER_NO=sw.planner_no
+				and pla.PLANNER_NO=re.planner_no
+			]]>
+		</if>
+		<if test="list_code =='M1031'">
+			<![CDATA[
+			select *
+			from tbl_planner
+			where planner_no in
+				(select book.item_no
+				from (SELECT ROWNUM rnum, A.* 
+				      FROM (SELECT * 
+				            FROM tbl_bookmark 
+				            WHERE mem_no=#{mem_no}
+				            ORDER BY mem_no DESC) A) book
+				WHERE book.rnum >= #{startRow}
+				AND book.rnum <=#{endRow})
+			]]>
+		</if>
 	</select>
 	
 	<delete id="myPageDeleteBookMark" parameterType="java.util.HashMap">
@@ -226,20 +291,33 @@
 			from 
 				(select planner_no, count(sweet_no) sweet_count
 				from tbl_sweet
-				where planner_no in 
-				(select pln.planner_no
-                 from (SELECT ROWNUM rnum, A.* 
-                       FROM (SELECT *
-                             FROM tbl_planner 
-                             WHERE mem_no=#{mem_no}
-                             ORDER BY planner_no DESC) A) pln
-                 WHERE pln.rnum >= #{startRow}
-                 AND pln.rnum <=#{endRow})
+				where planner_no in (select planner_no
+			                         from tbl_planner
+			                         WHERE mem_no=#{mem_no})
 				group by planner_no) sw,
 							
-				(select *
-				from tbl_planner
-				where mem_no=#{mem_no}) pla,
+				(select plann.*
+				from (SELECT ROWNUM rnum, A.* 
+				      FROM (SELECT *
+				            FROM tbl_planner 
+				            WHERE mem_no=#{mem_no}
+				            ]]>
+							<choose>
+								<when test="MYPAGE_CODE=='S0001'">
+									and (USE_YN='Y0001' or USE_YN='Y0002')
+								</when>
+								<otherwise>
+									and USE_YN='Y0001'
+								</otherwise>
+							</choose>
+				            <if test="search =='M1028'">
+				            	and (title like '%'||#{search, jdbcType=VARCHAR}||'%' 
+										or memo like '%'||#{search, jdbcType=VARCHAR}||'%')
+				            </if>
+				            <![CDATA[
+				            ORDER BY planner_no DESC) A) plann
+				WHERE plann.rnum >= #{startRow}
+				AND plann.rnum <=#{endRow}) pla,
 				
 				(select count(reply_no) as re_count, item_no as planner_no
 				from tbl_common_reply

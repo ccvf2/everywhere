@@ -45,10 +45,10 @@ public class MyPageController {
 		
 		System.out.println("uandMe : " + uandMe);
 		if(StringUtils.equals(uandMe,Constant.MYPAGE_CODE_M)){
-			//System.out.println("마이페이지로 이동");
+			System.out.println("마이페이지로 이동");
 			mav=myPageService.myPage(mav);
-		}else{
-			//System.out.println("타회원 페이지로 이동");
+		}else if(StringUtils.equals(uandMe,Constant.MYPAGE_CODE_U)){
+			System.out.println("타회원 페이지로 이동");
 			mav=myPageService.moveUserPage(mav);
 		}
 		

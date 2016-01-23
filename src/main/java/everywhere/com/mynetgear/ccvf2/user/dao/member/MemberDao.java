@@ -176,9 +176,10 @@ public interface MemberDao {
 	 * @param mem_no
 	 * @param endRow 
 	 * @param startRow 
+	 * @param list_code 
 	 * @return
 	 */
-	public List<PlannerDto> getBookMarkList(int mem_no, int startRow, int endRow);
+	public List<PlannerDto> getBookMarkList(int mem_no, int startRow, int endRow, String list_code);
 
 	/**
 	 * @author 김성광
@@ -214,8 +215,10 @@ public interface MemberDao {
 	 * @param mem_no
 	 * @param startRow
 	 * @param endRow
+	 * @param MYPAGE_CODE 
+	 * @param search 
 	 * @return
 	 */
-	public List<PlannerDto> getPlannerList(int mem_no, int startRow, int endRow);
+	public List<PlannerDto> getPlannerList(int mem_no, int startRow, int endRow, String MYPAGE_CODE, String search);
 
 }
