@@ -48,7 +48,7 @@
 	                          <label>사용자 종류</label>
 	                          <c:choose>
 	                          	<c:when test="${adminMemberDto.mem_level_code!=null}">
-	                          		<select name="memLevel" id="memLevel" class="form-control" onchange="searchFun()">
+	                          		<select name="memLevel" id="memLevel" class="form-control" onchange="searchFun(1)">
 		                           		<option value="" selected="selected">모두</option>
 										<c:forEach var="memLevel" items="${memLevelList}">
 											<c:choose>
@@ -186,7 +186,7 @@
 				</form>
                 <div class="row">
                     <div class="col-lg-12">
-                    	검색결과:${memberList.size()}
+                    	검색결과:${adminMemberDto.totalCount}
                         <div class="table-responsive">
                             <table class="table table-bordered table-hover table-striped">
                             	<colgroup>
@@ -253,6 +253,48 @@
                         </div>
                     </div>
 				</div>
+				
+				
+				<!-- 페이징 시작 -->
+				<div class="text-center">
+					<c:if test="${adminMemberDto.totalCount > 0}">
+						<nav>
+							<ul class="pagination">
+								<!-- 이전 버튼 -->
+								<c:if test="${adminMemberDto.startPage > adminMemberDto.pageBlock}">
+									<li>
+										<a href="javascript:searchFun('${adminMemberDto.currentPage - adminMemberDto.pageBlock}')" aria-label="이전">
+											<span aria-hidden="true">&laquo;</span>
+										</a>
+									</li>
+								</c:if>
+								<!-- 이전 버튼 끝 -->
+								
+								<!-- 페이지 번호 시작 -->
+								<c:forEach var="i" begin="${adminMemberDto.startPage}" end="${adminMemberDto.endPage}">
+									 <c:if test="${i!=adminMemberDto.currentPage}">
+									 	<li><a href="javascript:searchFun('${i}')">${i}</a></li>
+									 </c:if>
+									 <c:if test="${i==adminMemberDto.currentPage}">
+									 	<li class="active"><a href="javascript:searchFun('${i}')">${i}</a></li>
+									 </c:if>
+								</c:forEach>
+								<!-- 페이지 번호 끝 -->
+								
+								<!-- 다음 버튼 -->
+								<c:if test="${endPage < pageCount }">
+									<li>
+										<a href="javascript:searchFun('${adminMemberDto.currentPage+adminMemberDto.pageBlock}')" aria-label="다음">
+											<span aria-hidden="true">&raquo;</span>
+										</a>
+									</li>
+								</c:if>
+								<!-- 다음 버튼 끝 -->
+							</ul>
+						</nav>
+					</c:if>
+				</div>
+				<!-- 페이징 끝 -->
             </div>
             <!-- /.container-fluid -->
         </div>

@@ -2,7 +2,7 @@
  * 관리자 회원관리에서 회원을 검색하는 js
  */
 // 검색 버튼이 눌렷을때 호출됨
-function searchFun() {
+function searchFun(pageNumber) {
 	var search=document.getElementById("search").value;
 	var memLevel=document.getElementById("memLevel").value;
 	var memStatus=document.getElementById("memStatus").value;
@@ -51,6 +51,8 @@ function searchFun() {
 	if(end_date!=""){
 		url+="&end_date="+end_date;
 	}
+	
+	url+="&pageNumber="+pageNumber;
 			
 	location.href=url;
 }
