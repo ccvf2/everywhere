@@ -39,6 +39,12 @@
 					AND spot_type_code=#{spot_type_code}
 					</when>
 				</choose>
+				<choose>
+					<when test="searchWord != '' and searchWord != null">
+					AND (spot_name like '%'||#{searchWord, jdbcType=VARCHAR}||'%' 
+						 OR spot_note like '%'||#{searchWord, jdbcType=VARCHAR}||'%')
+					</when>
+				</choose>
 			</where>
 		)a)b
 		where rnum<![CDATA[>=]]>#{startNum} and rnum<![CDATA[<=]]>#{endNum}
@@ -60,6 +66,12 @@
 				<choose>
 					<when test="spot_type_code != '' and spot_type_code != null">
 					AND spot_type_code=#{spot_type_code}
+					</when>
+				</choose>
+				<choose>
+					<when test="spot_name != '' and spot_name != null">
+					AND (spot_name like '%'||#{spot_name, jdbcType=VARCHAR}||'%' 
+					 	OR spot_note like '%'||#{spot_name, jdbcType=VARCHAR}||'%')
 					</when>
 				</choose>
 			</where>

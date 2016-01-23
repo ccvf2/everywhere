@@ -114,6 +114,7 @@ public class SpotServiceImp implements SpotService{
 		String country_code = request.getParameter("country_code");
 		String city_code = request.getParameter("city_code");
 		String spot_type_code = request.getParameter("spot_type_code");
+		String search = request.getParameter("search");
 
 		String spot_page = request.getParameter("spot_page");
 		if(spot_page == null)
@@ -125,6 +126,7 @@ public class SpotServiceImp implements SpotService{
 		spotDto.setCountry_code(country_code);
 		spotDto.setCity_code(city_code);
 		spotDto.setSpot_type_code(spot_type_code);
+		spotDto.setSpot_name(search);
 		List<SpotDto> selectSpotList = spotDao.getSpotList(spotDto, curr_page, spotSize);
 		for(int i = 0; i < selectSpotList.size(); i++){
 			if(selectSpotList.get(i).getAttach_file() != null){
