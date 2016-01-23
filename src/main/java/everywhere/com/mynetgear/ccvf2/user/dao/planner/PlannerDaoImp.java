@@ -191,7 +191,7 @@ public class PlannerDaoImp implements PlannerDao {
 	@Override
 	public List<PlannerDto> getListPlanner_main() {
 		List<PlannerDto> list=null;
-		list=sqlTemplate.selectList("new_planner");
+		list=sqlTemplate.selectList("select_List_more_like");
 		return list;
 	}
 
