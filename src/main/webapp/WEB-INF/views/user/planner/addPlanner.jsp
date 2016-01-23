@@ -67,8 +67,19 @@ $(document).ready(function () {
 						</div>
 	
 						<div class="panel-heading-v2 overflow-h">
-							<form class="sky-form">
-							<input type="hidden" id="spot_page" value="1"/>
+							<div class="panel-heading-v2 overflow-h">
+							<form class="sky-form" onSubmit="return false;">
+								<input type="hidden" id="spot_page" value="1"/>
+								<label class="input-group">
+									<span class="input">
+										<input type="text"  onKeypress="enterSearch(event)" id="searchWord" placeholder="검색할 명소를 입력해주세요"/>
+									</span>
+									<span class="input-group-btn">
+										<button type="button" class="btn-u btn-u-default" style="margin:0px;" onclick="searchSpot()">
+										<i class="fa fa-search"></i>
+										</button>
+									</span>
+								</label>
 								<!-- 나라 -->
 								<label class="select">
 									<select name="country_code" id="selectCountry" onchange="selectSpotList(true)">

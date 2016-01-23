@@ -40,6 +40,7 @@ public class SpotDaoImp implements SpotDao {
 		hmap.put("country_code", spotDto.getCountry_code());
 		hmap.put("city_code", spotDto.getCity_code());
 		hmap.put("spot_type_code", spotDto.getSpot_type_code());
+		hmap.put("searchWord", spotDto.getSpot_name());
 		hmap.put("startNum", startNum);
 		hmap.put("endNum", endNum);
 		

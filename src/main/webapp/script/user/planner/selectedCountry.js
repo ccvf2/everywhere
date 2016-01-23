@@ -34,6 +34,7 @@ function readCityList(check){
 }
 
 function selectSpotList(city){
+	var search = document.getElementById("searchWord").value;
 	var countrycode = document.getElementById("selectCountry").value;
 	var citycode = document.getElementById("selectCity").value;
 	var typecode = document.getElementById("selectType").value;
@@ -47,12 +48,11 @@ function selectSpotList(city){
 			$("#selectCity").prepend(str);
 		}
 	}
-	var params = "country_code=" + countrycode + "&city_code=" + citycode + "&spot_type_code="+typecode;
-	var url = "/user/spot/getSpotList.ajax?" + params;
 	$.ajax({
-		url:url,
-		type:"get",
-		dataType:"text",
+		url : "/user/spot/getSpotList.ajax",
+		type : "POST",
+		data : {"country_code":countrycode, "city_code":citycode, "spot_type_code":typecode, "search":search},
+		dataType : "text",
 		success:spotListDisp,
 		error:function(xhr, status, errorMsg){
 			alert(xhr+","+status+","+errorMsg);
@@ -90,11 +90,11 @@ function spotListDisp(data){
 	setDraggable();
 }
 
-//여기
 function selectMoreSpotList(city){
 	var spot_page = document.getElementById("spot_page");
 	spot_page.value = Number(spot_page.value)+1;
 
+	var search = document.getElementById("searchWord").value;
 	var countrycode = document.getElementById("selectCountry").value;	
 	var citycode = document.getElementById("selectCity").value;
 	var typecode = document.getElementById("selectType").value;
@@ -102,12 +102,11 @@ function selectMoreSpotList(city){
 	if(city==true) {
 		readCityList(true);
 	}
-	var params = "country_code=" + countrycode + "&city_code=" + citycode + "&spot_type_code="+typecode+"&spot_page="+spot_page.value;
-	var url = "/user/spot/getSpotList.ajax?" + params;
 	$.ajax({
-		url:url,
-		type:"get",
-		dataType:"text",
+		url : "/user/spot/getSpotList.ajax",
+		type : "POST",
+		data : {"country_code":countrycode, "city_code":citycode, "spot_type_code":typecode, "spot_page":spot_page.value, "search":search},
+		dataType : "text",
 		success:moreSpotListDisp,
 		error:function(xhr, status, errorMsg){
 			alert(xhr+","+status+","+errorMsg);
@@ -134,7 +133,32 @@ function moreSpotListDisp(data){
 	
 	setDraggable();
 }
-//여기 끝
+
+function enterSearch(e){
+	if(e.keyCode == 13){
+		searchSpot();
+	}
+}
+
+function searchSpot(){
+	var spot_page = document.getElementById("spot_page");
+	spot_page.value = 1;
+	document.getElementById("selectCountry").selectedIndex = 0;	
+	document.getElementById("selectCity").selectedIndex = 0;
+	document.getElementById("selectType").selectedIndex = 0;
+
+	var search = document.getElementById("searchWord").value;
+	$.ajax({
+		url : "/user/spot/getSpotList.ajax",
+		type : "POST",
+		data : {"search":search},
+		dataType : "text",
+		success:spotListDisp,
+		error:function(xhr, status, errorMsg){
+			alert(xhr+","+status+","+errorMsg);
+		}
+	})
+}
 
 function spotReadPage(no) {
 	//alert(no);

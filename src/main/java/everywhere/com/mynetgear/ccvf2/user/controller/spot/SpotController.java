@@ -83,7 +83,7 @@ public class SpotController {
 	 * @param response
 	 * @return
 	 */
-	@RequestMapping(value = "/user/spot/getSpotList.ajax", method = RequestMethod.GET)
+	@RequestMapping(value = "/user/spot/getSpotList.ajax", method = RequestMethod.POST)
 	public ModelAndView selectSpotList(HttpServletRequest request, HttpServletResponse response) {
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("request", request);
