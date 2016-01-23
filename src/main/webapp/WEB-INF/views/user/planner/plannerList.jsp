@@ -185,11 +185,12 @@
 			 
 			 <!-- 명소 검색 뷰 시작 -->
 			   <div class="col-md-9">
-			<div class="alert alert-info alert-dismissable">
-				<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-				<i class="fa fa-info-circle"></i> 검색된 갯수 : <strong><c:out value="${plannerDto.totalCount}"/></strong>&nbsp;개  ${plannerDto.pageCount}/${plannerDto.currentPage}
-			</div>
 			   		<div class="blog_masonry_3col">
+						<div class="alert alert-info alert-dismissable">
+							<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+							<i class="fa fa-info-circle"></i> 검색된 갯수 : <strong><c:out value="${plannerDto.totalCount}"/></strong>&nbsp;개 
+							<span style="float: right;"><i class="fa fa fa-sort-amount-desc"></i>총페이징 : ${plannerDto.pageCount} / <i class="fa fa-sign-in"></i>현재 페이지 : <strong>${plannerDto.currentPage}</strong></span>
+						</div>
 						<div class="container-fluid content grid-boxes masonry" style="position: relative; height: 2250px; overflow: hidden;">
 							<c:forEach var="planner" items="${plannerList}">
 								<div class="grid-boxes-in masonry-brick" style="position: absolute; width: 300px; top: 40px; left: 15px;">
