@@ -145,7 +145,7 @@ $(document).ready(function () {
 									<span>여행시작날짜</span> 
 									<label class="input">
 										<i class="icon-append fa fa-calendar"></i>
-										<input type="date" id="start_date" name="start_date" placeholder="Start Date" value="${start_date }">
+										<input type="date" id="start_date" name="start_date" onchange="selectDate(this)" value="${start_date }">
 									</label>
 								</div>
 								<div class="col col-2" style="padding-left: 0px;">
