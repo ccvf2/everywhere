@@ -3,7 +3,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -17,84 +17,70 @@
 	<link rel="stylesheet" href="/assets/plugins/scrollbar/css/jquery.mCustomScrollbar.css">
 	<!-- CSS Theme-->
 	<link rel="stylesheet" href="/assets/css/theme-colors/default.css">
+	<script type="text/javascript">
+		//페이징버튼을 눌렀을때.
+		function movePage(pageNum){
+			var form = document.getElementById("plannerListForm");
+			form.currentPage.value=pageNum;
+			form.action="/user/planner/plannerList.do";
+			form.method="POST";
+			form.submit(); 
+		}
+		//글갯수변경을눌렀을때
+		function changeShowRow(showRow){
+			var form = document.getElementById("plannerListForm");
+			form.currentPage.value=1;
+			form.showRow.value=showRow;
+			form.action="/user/planner/plannerList.do";
+			form.method="POST";
+			form.submit(); 
+		}
 	
-	<!-- 사이드바 고정 -->
-	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-	<!--[if lt IE 9]>
-	  <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-	  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-	<![endif]-->
-<script type="text/javascript">
-
-
-	//페이징버튼을 눌렀을때.
-	function movePage(pageNum){
-		var form = document.getElementById("plannerListForm");
-		form.currentPage.value=pageNum;
-		form.action="/user/planner/plannerList.do";
-		form.method="POST";
-		form.submit(); 
-	}
-	//글갯수변경을눌렀을때
-	function changeShowRow(showRow){
-		var form = document.getElementById("plannerListForm");
-		form.currentPage.value=1;
-		form.showRow.value=showRow;
-		form.action="/user/planner/plannerList.do";
-		form.method="POST";
-		form.submit(); 
-	}
-
-
-	//폼 서브밋
-	function goSearchForm(){
-		var form = document.getElementById("plannerListForm");
-		form.currentPage.value=1;
-		form.action="/user/planner/plannerList.do";
-		form.method="POST";
-		form.submit();
-	}
-</script>
-  	<c:import url="/WEB-INF/views/common/jquery.jsp"/>
+	
+		//폼 서브밋
+		function goSearchForm(){
+			var form = document.getElementById("plannerListForm");
+			form.currentPage.value=1;
+			form.action="/user/planner/plannerList.do";
+			form.method="POST";
+			form.submit();
+		}
+	</script>
+	<c:import url="/WEB-INF/views/common/jquery.jsp"/>
 	<c:import url="/WEB-INF/views/user/common/utilImport.jsp"/>
-  </head>
-  <body>
-	
-   	<div class="wrapper">
+</head>
+<body>
+
+	<div class="wrapper">
 		<!--=== Header ===-->
-		<!-- Header가 꼭 imprt 되어 있어야 한다.(안그러면화면이깨짐) -->
 		<div class="header">
 			<c:import url="/WEB-INF/views/user/common/header.jsp"/>
 		</div>
 		<!--=== End Header ===-->
-	 	<div class="container">
+
+		<div class="container">
 			<div class="row">
-			<!-- Blog Sidebar -->
-				<%-- <c:import url="/WEB-INF/views/user/planner/plannerListLeft.jsp">
-				</c:import> --%>
-							<!-- 사이드 메뉴  시작-->
+				<!-- 사이드 메뉴  시작-->
 				<div class="col-md-3" id="leftCol">
 					<!-- Blog Newsletter -->
 					<div class="blog-newsletter" id="sidebar">
-					  <div class="headline-v2" style="border: 0px;"></div>
-					 	<form class="sky-form" id="plannerListForm">
-						<!-- 페이징처리 정보 -->
-						<input type="hidden" name="totalCount" id="totalCount" value="${plannerDto.totalCount}">
-						<input type="hidden" name="startRow" id="startRow" value="${plannerDto.startRow}">
-						<input type="hidden" name="endRow" id="endRow" value="${plannerDto.endRow}">
-						<input type="hidden" name="currentPage" id="currentPage" value="${plannerDto.currentPage}">
-						<input type="hidden" name="pageBlock" id="pageBlock" value="${plannerDto.pageBlock}">
-						<input type="hidden" name="pageCount" id="pageCount" value="${plannerDto.pageCount}">
-						<input type="hidden" name="startPage" id="startPage" value="${plannerDto.startPage}">
-						<input type="hidden" name="endPage" id="endPage" value="${plannerDto.endPage}">
-						<input type="hidden" name="pageBlockGroupCount" id="pageBlockGroupCount" value="${plannerDto.startRow}">
-						<input type="hidden" name="showRow" id="showRow" value="${showRow}">
+						<form class="sky-form" id="plannerListForm">
+							<!-- 페이징처리 정보 -->
+							<input type="hidden" name="totalCount" id="totalCount" value="${plannerDto.totalCount}">
+							<input type="hidden" name="startRow" id="startRow" value="${plannerDto.startRow}">
+							<input type="hidden" name="endRow" id="endRow" value="${plannerDto.endRow}">
+							<input type="hidden" name="currentPage" id="currentPage" value="${plannerDto.currentPage}">
+							<input type="hidden" name="pageBlock" id="pageBlock" value="${plannerDto.pageBlock}">
+							<input type="hidden" name="pageCount" id="pageCount" value="${plannerDto.pageCount}">
+							<input type="hidden" name="startPage" id="startPage" value="${plannerDto.startPage}">
+							<input type="hidden" name="endPage" id="endPage" value="${plannerDto.endPage}">
+							<input type="hidden" name="pageBlockGroupCount" id="pageBlockGroupCount" value="${plannerDto.startRow}">
+							<input type="hidden" name="showRow" id="showRow" value="${showRow}">
 							<header>리뷰 검색</header>
 							
 							<fieldset style="padding: 15px 15px 5px;">
-								<!-- 지역 찾기 -->
-								  <section>
+								<!-- 겁색어 입력부분 -->
+								<section>
 									<label class="input">
 										<!-- 자동완성 input : works in Chrome, Firefox, Opera and IE10. -->
 										<input type="text" list="list" name="searchWord1" id="searchPlace" placeholder="검색어를 입력해 주세요" value="${plannerDto.searchWord1}">
@@ -106,68 +92,68 @@
 									</label>
 								</section>
 							</fieldset>
-							<!-- 명소 종류 선택 시작 -->
+							<!-- 글종류 : 전체|리뷰|일정 -->
 							<fieldset style="padding: 15px 15px 5px;">
 								<section>
 									<label class="label">글종류</label>
 									<div class="">
 										<label class="radio"><input type="radio" name="searchCondition1" value="" checked="checked" onchange="goSearchForm()"><i class="rounded-x"></i>전체</label>
 										<c:forEach var="typeCode" items="${selectCode}">
-										<c:choose>
-											<c:when test="${plannerDto.searchCondition1==typeCode.code}">
-												<label class="radio"><input type="radio" name="searchCondition1" value="${typeCode.code}" checked="checked" onchange="goSearchForm()"><i class="rounded-x"></i>${typeCode.code_name}</label>
-											</c:when>
-											<c:otherwise>
-												<label class="radio"><input type="radio" name="searchCondition1" value="${typeCode.code}" onchange="goSearchForm()"><i class="rounded-x"></i>${typeCode.code_name}</label>
-											</c:otherwise>
-										</c:choose>
+											<c:choose>
+												<c:when test="${plannerDto.searchCondition1==typeCode.code}">
+													<label class="radio"><input type="radio" name="searchCondition1" value="${typeCode.code}" checked="checked" onchange="goSearchForm()"><i class="rounded-x"></i>${typeCode.code_name}</label>
+												</c:when>
+												<c:otherwise>
+													<label class="radio"><input type="radio" name="searchCondition1" value="${typeCode.code}" onchange="goSearchForm()"><i class="rounded-x"></i>${typeCode.code_name}</label>
+												</c:otherwise>
+											</c:choose>
 										</c:forEach>
 										
 									</div>
 								</section>
 							</fieldset>
+							<!-- 정렬순서 -->
 							<fieldset style="padding: 15px 15px 5px;">
 								<section>
 									<label class="label">정렬</label>
 											<label class="select">
 												<select name="searchCondition2" onchange="goSearchForm()">
-															<option value="">선택하세요.</option>
+													<option value="">선택하세요.</option>
 													<c:forEach var="sortCode" items="${sortCode}">
-													<c:choose>
-														<c:when test="${plannerDto.searchCondition2==sortCode.code}">
-															<option value="${sortCode.code}" selected="selected">${sortCode.code_name}</option>
-														</c:when>
-														<c:otherwise>
-															<option value="${sortCode.code}">${sortCode.code_name}</option>
-														</c:otherwise>
-													</c:choose>
+														<c:choose>
+															<c:when test="${plannerDto.searchCondition2==sortCode.code}">
+																<option value="${sortCode.code}" selected="selected">${sortCode.code_name}</option>
+															</c:when>
+															<c:otherwise>
+																<option value="${sortCode.code}">${sortCode.code_name}</option>
+															</c:otherwise>
+														</c:choose>
 													</c:forEach>
 												</select>
 												<i></i>
 											</label>
 								</section>
 							</fieldset>
+							<!-- 글갯수 선택 -->
 							<fieldset style="padding: 15px 15px 5px;">
 								<section>
 									<label class="label">글갯수 선택</label>
-											<label class="select">
-												<select onchange="changeShowRow(this.value)">
-													<c:forEach var="showRowCode" items="${showRowCode}">
-													<c:choose>
-														<c:when test="${showRow==showRowCode.code_name}">
-															<option value="${showRowCode.code_name}" selected="selected">${showRowCode.code_name}개 씩</option>
-														</c:when>
-														<c:otherwise>
-															<option value="${showRowCode.code_name}">${showRowCode.code_name}개 씩</option>
-														</c:otherwise>
-													</c:choose>
-													</c:forEach>
-												</select>
-												<i></i>
-											</label>
+									<label class="select">
+										<select onchange="changeShowRow(this.value)">
+											<c:forEach var="showRowCode" items="${showRowCode}">
+												<c:choose>
+													<c:when test="${showRow==showRowCode.code_name}">
+														<option value="${showRowCode.code_name}" selected="selected">${showRowCode.code_name}개 씩</option>
+													</c:when>
+													<c:otherwise>
+														<option value="${showRowCode.code_name}">${showRowCode.code_name}개 씩</option>
+													</c:otherwise>
+												</c:choose>
+											</c:forEach>
+										</select>
+									</label>
 								</section>
 							</fieldset>
-							<!-- 명소 종류 선택 끝 -->
 							<!-- 명소 검색 버튼 시작 -->
 							<footer>
 							<div class="text-center">
@@ -177,13 +163,12 @@
 						</form>
 						<!-- End Blog Newsletter -->
 					</div>
-				 </div>
-			<!-- 사이드 메뉴  끝 -->
-			 <!-- End sideBar -->
-			 
-			 <!-- 명소 검색 뷰 시작 -->
-			   <div class="col-md-9">
-			   		<div class="blog_masonry_3col">
+				</div>
+				<!-- 사이드 메뉴  끝 -->
+
+				<!-- 리뷰 뷰 시작 -->
+				<div class="col-md-9">
+					<div class="blog_masonry_3col">
 						<div class="alert alert-info alert-dismissable">
 							<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
 							<i class="fa fa-info-circle"></i> 검색된 갯수 : <strong><c:out value="${plannerDto.totalCount}"/></strong>&nbsp;개 
@@ -215,101 +200,64 @@
 								</div>
 							</c:forEach>
 						</div><!--/container-->
+
+						<!-- 페이징처리 부분 Start -->
+						<div class="text-center">
+								<nav>
+									<ul class="pagination">
+									<c:if test="${plannerDto.startPage > plannerDto.pageBlock}">
+										<li>
+											<a href="javascript:movePage('1')" aria-label="Previous">
+												<span aria-hidden="true">&laquo;&laquo;</span>
+											</a>
+										</li>
+										<li>
+											<a href="javascript:movePage(${plannerDto.currentPage-1})" aria-label="Previous">
+												<span aria-hidden="true">&laquo;</span>
+											</a>
+										</li>
+									</c:if>
+
+									<c:forEach var="pageNum" begin="${plannerDto.startPage}" end="${plannerDto.endPage}">
+									<c:choose>
+										<c:when test="${plannerDto.currentPage==pageNum}">
+										<li class="active"><a href="javascript:movePage('${pageNum}')">${pageNum}</a></li>
+										</c:when>
+										<c:otherwise>
+										<li><a href="javascript:movePage('${pageNum}')">${pageNum}</a></li>
+										</c:otherwise>
+									</c:choose>
+									</c:forEach>
+
+									<c:if test="${plannerDto.endPage < plannerDto.pageCount}">
+										<li>
+											<a href="javascript:movePage(${plannerDto.currentPage+1})" aria-label="Next">
+												<span aria-hidden="true">&raquo;</span>
+											</a>
+											</li>
+										<li>
+											<a href="javascript:movePage(${plannerDto.pageCount})" aria-label="Next">
+												<span aria-hidden="true">&raquo;&raquo;</span>
+											</a>
+										</li>
+									</c:if>
+									</ul>
+								</nav>
+						</div>
+						<!-- 페이징처리 부분 End -->
 					</div>
-			   </div>
-			 	<!-- 명소 아이템 리스트 끝 -->
-			 	
-			 	<!-- 페이징 -->
-			 	<%-- <div class="text-center">
-					<nav>
-					  <ul class="pagination">
-					  	<c:if test="${startPage > pageBlock}">
-						  	<li>
-							  	<a href="javascript:searchSpotList('${currentPage-pageBlock}')" aria-label="Previous">
-									<span aria-hidden="true">«</span>
-							 	</a>
-						 	</li>
-						</c:if>
-						<c:forEach var="i" begin="${startPage}" end="${endPage}">
-							 <c:if test="${i!=currentPage}">
-							 	<li><a href="javascript:searchSpotList('${i}')" role="button" class="btn btn-default">${i}</a></li>
-							 </c:if>
-							 <c:if test="${i==currentPage}">
-							 	<li class="active"><a href="javascript:searchSpotList('${i})" role="button" class="btn btn-default">${i}</a></li>
-							 </c:if>
-						</c:forEach>
-				  		<c:if test="${endPage < pageCount }">
-				  			<li>
-							  <a href="javascript:searchSpotList('${currentPage+pageBlock}')" aria-label="Next">
-								<span aria-hidden="true">&raquo;</span>
-							  </a>
-							</li>
-						</c:if>
-					  </ul>
-					</nav>
-			 	</div> --%>
-				<!-- 페이징 끝 -->
-
-				<!-- 페이징처리 부분 Start -->
-				<div class="text-center">
-						<nav>
-							<ul class="pagination">
-							<c:if test="${plannerDto.startPage > plannerDto.pageBlock}">
-								<li>
-									<a href="javascript:movePage('1')" aria-label="Previous">
-										<span aria-hidden="true">&laquo;&laquo;</span>
-									</a>
-								</li>
-								<li>
-									<a href="javascript:movePage(${plannerDto.currentPage-1})" aria-label="Previous">
-										<span aria-hidden="true">&laquo;</span>
-									</a>
-								</li>
-							</c:if>
-
-							<c:forEach var="pageNum" begin="${plannerDto.startPage}" end="${plannerDto.endPage}">
-							<c:choose>
-								<c:when test="${plannerDto.currentPage==pageNum}">
-								<li class="active"><a href="javascript:movePage('${pageNum}')">${pageNum}</a></li>
-								</c:when>
-								<c:otherwise>
-								<li><a href="javascript:movePage('${pageNum}')">${pageNum}</a></li>
-								</c:otherwise>
-							</c:choose>
-							</c:forEach>
-
-							<c:if test="${plannerDto.endPage < plannerDto.pageCount}">
-								<li>
-									<a href="javascript:movePage(${plannerDto.currentPage+1})" aria-label="Next">
-										<span aria-hidden="true">&raquo;</span>
-									</a>
-									</li>
-								<li>
-									<a href="javascript:movePage(${plannerDto.pageCount})" aria-label="Next">
-										<span aria-hidden="true">&raquo;&raquo;</span>
-									</a>
-								</li>
-							</c:if>
-							</ul>
-						</nav>
 				</div>
-				<!-- 페이징처리 부분 End -->
+				<!-- 리뷰 뷰 끝 -->
+			</div>
+			<!-- row END -->
+		</div>
+		<!-- End Container -->
 
-
-
-
-
-		  	</div>
-		  	<!-- End Container -->
-
-		 <!--=== Footer Version 1 ===-->
-		<!--=== End Footer Version 1 ===-->
-	</div>
 		<div class="footer-v1">
 			<c:import url="/WEB-INF/views/user/common/footer.jsp"/>
 		</div>
-	
 	</div>
+	<!-- End wrapper -->
 	
 	<!-- JS Page Level -->
 	<script src="/assets/js/app.js"></script>
@@ -322,10 +270,5 @@
 			App.initScrollBar();
 		});
 	</script>
-  </body>
+</body>
 </html>
-<%-- 	<c:forEach var="planner" items="${plannerList}">
-		<div>
-			<a href="/user/planner/readPlanner.do?planner_no=${planner.planner_no}"> ${planner.title} </a>
-		</div>
-	</c:forEach> --%>
