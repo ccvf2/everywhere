@@ -107,7 +107,7 @@
     	<!-- Info Blokcs -->
     	<div class="row margin-bottom-5">
         <div class="headline"><h2>좋아요 많은 순</h2>
-        	<a href="/user/search/searchSpot.do" style="float: right; line-height:50px; font-size: 1.3em;">더보기<i class="fa fa-share"></i></a>
+        	<a href="/user/planner/plannerList.do" style="float: right; line-height:50px; font-size: 1.3em;">더보기<i class="fa fa-share"></i></a>
         </div>
 	        <div class="blog_masonry_3col" style="padding-bottom: 0px;">
 		        <div class="container content grid-boxes" style="padding-top: 0px; padding-bottom: 0px;">
