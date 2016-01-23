@@ -81,7 +81,9 @@
 			<!-- 로그인 페이지일 경우는 로그인 모달을 띄우지 않는다. -->
 			<c:choose>
 				<c:when test="${ (mem_object.mem_name=='' || mem_object==null)&& (pageContext.request.requestURI!='/WEB-INF/views/common/login/login.jsp')}">
+					<c:if test="${alert_msg!='로그아웃되었습니다.'}">
 					<c:set var="showLoginModal" value="true"/>	
+					</c:if>
 				</c:when>
 				<c:when test="${ (mem_object.mem_name=='' || mem_object==null)&& (pageContext.request.requestURI!='/WEB-INF/views/common/login/login.jsp')}">
 					<c:set var="showLoginModal" value="false"/>	
@@ -205,17 +207,20 @@
 	
 	                    <!-- Blog -->
 	                    <li <c:if test="${ fn:startsWith(path, '/user/member')}">${ on }</c:if>">
-	                        <a href="/user/accompany/accompanyList.do">
-								여행동행구하기
-	                        </a>
-	                     </li>   	                    
+	                        <a href="/user/accompany/accompanyList.do">여행동행구하기</a>
+	                     </li>
 	                    <!-- End Blog -->
 	
 	                    <!-- Portfolio -->
 	                    <li>
-	                        <a href="/user/myPage/myPage.do?uandMe=S0001">
-								마이페이지
-	                        </a>
+	                    	<c:choose>
+	                    		<c:when test="${ mem_object.mem_name=='' || mem_object==null }">
+			                        <a href="javascript:loginFormReqiest()">마이페이지</a>
+	                    		</c:when>
+	                    		<c:otherwise>
+			                        <a href="/user/myPage/myPage.do?uandMe=S0001">마이페이지</a>
+	                    		</c:otherwise>
+	                    	</c:choose>
 	                    </li>
 	                    <!-- End Portfolio -->
 	
