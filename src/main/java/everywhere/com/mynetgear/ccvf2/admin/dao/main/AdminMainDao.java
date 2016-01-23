@@ -20,5 +20,5 @@ public interface AdminMainDao {
 	 * @described test 함수 -interface
 	 * @return 
 	 */
-	public int test();
+	//public int test();
 }
