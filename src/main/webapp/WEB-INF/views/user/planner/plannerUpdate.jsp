@@ -402,6 +402,12 @@ $(document).ready(function () {
 	</div>
 	<!-- 동적 입력창을 위한 HTML 값 finish -->
 
+	<!--=== Footer Version 1 ===-->
+	<div class="footer-v1">
+		<c:import url="/WEB-INF/views/user/common/footer.jsp"/>
+	</div>
+	<!--=== End Footer Version 1 ===-->
+	
 	<!-- JS Page Level -->
 	<script type="text/javascript" src="/assets/plugins/scrollbar/js/jquery.mCustomScrollbar.concat.min.js"></script>
 	
