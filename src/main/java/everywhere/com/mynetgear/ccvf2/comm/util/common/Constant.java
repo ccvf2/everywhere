@@ -197,6 +197,8 @@ public class Constant {
 	
 	/**플래너 분류 그룹코드 : 그룹코드*/
 	public static final String SERACH_SORT_GROUPCODE = "S1101";
+	/**플래너 분류 그룹코드 : 그룹코드*/
+	public static final String SHOW_ROW_GROUPCODE = "A0010";
 	/**메일템플릿 분류 그룹코드 : 그룹코드*/
 	public static final String MAIL_TEMPLATE_GROUP_CODE = "T9900";
 	/**메일템플릿 활성화여부 그룹코드 : 그룹코드*/
