@@ -84,6 +84,8 @@ public class Constant {
 	
 	/** 화면으로 메세지 전송 : alert */
 	public static final String ALERT_MSG = "alert_msg";
+	/** 화면으로 메세지 전송 : alert */
+	public static final String RETURN_URL = "return_url";
 	
 	
 

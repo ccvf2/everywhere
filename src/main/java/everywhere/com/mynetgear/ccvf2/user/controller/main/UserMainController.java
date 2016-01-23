@@ -21,7 +21,7 @@ import everywhere.com.mynetgear.ccvf2.user.service.main.UserMainService;
 /**
  * @author 배성욱
  * @createDate 2015. 12. 11.
- * @described 클래스전체의 하는(큰)일을 적어주세요.
+ * @described 유저메인페이지
  * @reference class
  */
 @Controller
@@ -29,36 +29,42 @@ public class UserMainController {
 	@Autowired
 	private UserMainService userMainService;
 
-	
-	
-	@RequestMapping(value="/user/main/main.do")
+	/**
+	 * @author 배성욱
+	 * @createDate 2016. 12. 11.
+	 * @described 유저 메인페이지 호출
+	 * @param request
+	 * @param response
+	 * @return
+	 */
+	@RequestMapping(value = "/user/main/main.do")
 	public ModelAndView userMainPage(HttpServletRequest request, HttpServletResponse response) {
 		ModelAndView mav = new ModelAndView("/user/main/userMain");
-		SettingMainDto settingMainDto=userMainService.getOneBackGroundImg();
-		List<SettingMainDto> forground=userMainService.getOneForGroundImg();
-		
-		//메인페이지 띄우기
-		//List<PlannerDto> plannerList=plannerService.getPlannerList(인자값);
-		
-		//운영자 추천
-		List<PlannerDto> suggetList=userMainService.getListAdminSuggest();
-		//좋아요 많은순
-		List<PlannerDto> moreLikeList=userMainService.getListPlanner();
-		//핫플레이스
-		List<SpotDtoExt> spotList=userMainService.getListSpotUserMain();
+		//슬라이드 백그라운드 이미지
+		SettingMainDto settingMainDto = userMainService.getOneBackGroundImg();
+		//슬라이드 프론트 내용 & 이미지
+		List<SettingMainDto> forground = userMainService.getOneForGroundImg();
 
-		mav.addObject("moreLikeList",moreLikeList);
-		mav.addObject("suggetList",suggetList);
-		mav.addObject("spotList",spotList);
+		// 운영자 추천
+		List<PlannerDto> suggetList = userMainService.getListAdminSuggest();
+		// 좋아요 많은순
+		List<PlannerDto> moreLikeList = userMainService.getListPlanner();
+		// 핫플레이스
+		List<SpotDtoExt> spotList = userMainService.getListSpotUserMain();
 		
-		
-		mav.addObject("forgroung", forground);
-		
-		if(StringUtils.equals(settingMainDto.getSetting_url(), Constant.SYNB_NULL)){
+		//설정된 값이 없을 경우 기본이미지 셋팅
+		if (StringUtils.equals(settingMainDto.getSetting_url(), Constant.SYNB_NULL)) {
 			settingMainDto.setSetting_url("bg.png");
 		}
+
 		mav.addObject("backgroungImg", settingMainDto.getSetting_url());
+		mav.addObject("forgroung", forground);
+
+		mav.addObject("suggetList", suggetList);
+		mav.addObject("moreLikeList", moreLikeList);
+		mav.addObject("spotList", spotList);
+
 		return mav;
 	}
-	
+
 }
