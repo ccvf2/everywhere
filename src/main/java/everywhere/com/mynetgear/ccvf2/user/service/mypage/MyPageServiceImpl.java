@@ -69,10 +69,8 @@ public class MyPageServiceImpl implements MyPageService {
 		List<PlannerDto> plannerList=null;
 		if(count>0) {
 			plannerList=memberDao.getPlannerList(memberDto.getMem_no(), startRow, endRow, MYPAGE_CODE, search);
-		}		
-				
-		System.out.println("---------------plannerList.size() : " + plannerList.size());
-		if(plannerList.size()>0){
+			System.out.println("---------------plannerList.size() : " + plannerList.size());
+			
 			for(int i=0; i<plannerList.size(); i++){
 				PlannerDto dto= plannerList.get(i);
 				StringUtils.clean(dto.getMemo());
@@ -80,8 +78,8 @@ public class MyPageServiceImpl implements MyPageService {
 				System.out.println("dto.toString() : " + dto.toString()); 
 				plannerList.set(i, dto);
 			}
-		}
-		
+		}		
+				
 		memberDto=memberDao.memberRead(mem_no);
 		
 		mav.addObject("plannerList", plannerList);
@@ -131,10 +129,7 @@ public class MyPageServiceImpl implements MyPageService {
 		List<PlannerDto> plannerList=null;
 		if(count>0) {
 			plannerList=memberDao.getPlannerList(mate_no, startRow, endRow, MYPAGE_CODE, search);
-		}		
-				
-		System.out.println("---------------plannerList.size() : " + plannerList.size());
-		if(plannerList.size()>0){
+			
 			for(int i=0; i<plannerList.size(); i++){
 				PlannerDto dto= plannerList.get(i);
 				StringUtils.clean(dto.getMemo());
@@ -142,11 +137,9 @@ public class MyPageServiceImpl implements MyPageService {
 				System.out.println("dto.toString() : " + dto.toString()); 
 				plannerList.set(i, dto);
 			}
-		}
-		
+		}		
 		
 		memberDto=memberDao.memberRead(mate_no);
-		
 		
 		System.out.println("----------memberDto 확인 : " + memberDto.toString());
 		

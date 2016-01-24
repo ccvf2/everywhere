@@ -21,6 +21,14 @@
 	<!-- CSS Customization -->
 	<link href="/assets/css/pages/blog_masonry_3col.css" rel="stylesheet">
 	<script type="text/javascript" src="/script/user/planner/plannerRead.js"></script>
+	<script type="text/javascript">
+	$(document).ready(function() {
+		$("#searchTotalValue").keypress(function(e) {			//enter검색
+			if(e.keyCode == 13) { searchTotal();return false; }
+		
+		});
+	})
+	</script>
 </head>
 
 <body>
@@ -52,6 +60,31 @@
 		</div>
 		<!--=== End Slider ===-->
 
+		<!--=== Purchase Block ===-->
+		<div class="purchase">
+			<div class="container">
+				<div class="row margin-bottom-5">
+					<!-- <div class="col-md-9 animated fadeInLeft">
+						<span>Unify is a clean and fully responsive incredible Template.</span>
+						<p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi  vehicula sem ut volutpat. Ut non libero magna fusce condimentum eleifend enim a feugiat corrupti quos.</p>
+					</div>
+					<div class="col-md-3 btn-buy animated fadeInRight">
+						<a href="#" class="btn-u btn-u-lg"><i class="fa fa-cloud-download"></i> Download Now</a>
+					</div> -->
+					<form class="sky-form" style="border: 0px; background-color: transparent;">
+						<div class="col-md-9 animated fadeInLeft" >
+								<label class="input" style="display: -webkit-box;line-height: 34px; font-size: 1.4em;">통합검색 : &nbsp;<input type="text" id="searchTotalValue">
+								<a class="btn-u animated fadeInRight" style="margin-left: 5px; display: initial; padding: 9px 15px;" href="javascript:searchTotal()">
+									<i class="fa fa-search"></i> 검색
+								</a>
+								</label>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div><!--/row-->
+		<!-- End Purchase Block -->
+
 		<!--=== Content Part Start ===-->
 		<div class="container content-sm">
 			<!--=== row Start ===-->
@@ -77,7 +110,7 @@
 							</c:choose>
 							</span>
 							
-							<div class="grid-boxes-in" style="height: 430px;">
+							<div class="grid-boxes-in  thumbnails thumbnail-style" style="height: 430px;">
 								<img class="img-responsive" src="/attatchFile/planner/${suggetList.attach_file}" alt="" onError="this.src='/attatchFile/spot/no_image.jpg'" style="min-height: 50%;max-height: 51%" width="100%">
 
 								<div class="grid-boxes-caption" style="min-height: 180px;">
@@ -137,7 +170,7 @@
 								<c:otherwise></c:otherwise>
 							</c:choose>
 
-							<div class="grid-boxes-in" style="height: 430px;">
+							<div class="grid-boxes-in thumbnails thumbnail-style" style="height: 430px;">
 								<img class="img-responsive" src="/attatchFile/planner/${moreLikeList.attach_file}" onError="this.src='/attatchFile/spot/no_image.jpg'" alt="" style="min-height: 50%;max-height: 51%" width="100%">
 
 								<div class="grid-boxes-caption" style="min-height: 180px;">
@@ -176,7 +209,7 @@
 			<!-- End Info Blokcs -->
 
 			<!-- Info Blokcs -->
-			<div class="row margin-bottom-5">
+<%-- 			<div class="row margin-bottom-5">
 				<div class="headline">
 					<h2>핫 플레이스!</h2>
 					<a href="/user/search/searchSpot.do" style="float: right; line-height:50px; font-size: 1.3em;">더보기<i class="fa fa-share"></i></a>
@@ -220,11 +253,79 @@
 						</c:forEach>
 					</div>
 				</div>
-			</div>
+			</div> --%>
 			<!-- End Info Blokcs -->
+
+
+
+
+
+
+	<!-- Recent Works -->
+		<div class="headline">
+		<h2>핫 플레이스!</h2>
+		<a href="/user/search/searchSpot.do" style="float: right; line-height:50px; font-size: 1.3em;">더보기<i class="fa fa-share"></i></a>
+		</div>
+		<div class="row margin-bottom-5">
+			<c:forEach var="list12" items="${spotList}">
+				<div class="col-md-3 col-sm-6">
+					<div class="thumbnails thumbnail-style thumbnail-kenburn" style="border: 1px solid #eee;">
+						<div class="thumbnail-img">
+							<div class="overflow-hidden" style="height: 165px;">
+								<img class="img-responsive" src="/attatchFile/spot/${list12.attach_file}" alt="" style="min-width: 248px; min-height: 165px">
+							</div>
+							<a class="btn-more hover-effect" href="javascript:spotReadPage('${list12.spot_no}')"><i class="fa fa-question-circle"></i> 보기</a>
+						</div>
+						<div class="caption">
+							<h3>
+								<a class="hover-effect" href="javascript:spotReadPage('${list12.spot_no}')">
+									<c:out value="${fn:substring(list12.spot_name, 0,15)}"/>
+									<c:if test="${fn:length(list12.spot_name) >15}">…</c:if>
+									<%-- ${list12.spot_name} --%>
+								</a>
+							</h3>
+							
+							<ul class="list-inline grid-boxes-news">
+								<li title="별점 / 등록한 사람"><i class="fa fa-star"></i><c:out value="${list12.star_score}"/> / <i class="fa fa-users"></i>&nbsp;<c:out value="${list12.count_star_score}"/></li>
+								<li>|</li>
+								<li title="나라:${list12.country_name}"><i class="fa fa-flag"></i><c:out value="${list12.country_name}"/></li>
+								<li>|</li>
+								<li title="도시:${list12.city_name}"><i class="fa fa-location-arrow"></i><c:out value="${list12.city_name}"/></li>
+								<li>|</li>
+							</ul>
+							<ul class="list-inline grid-boxes-news">
+								<li title="명소종류:${list12.spot_type_name}"><i class="fa fa fa-info"></i><c:out value="${list12.spot_type_name}"/></li>
+								<li>|</li>
+								<li title="주소:${list12.spot_addr}">
+									<i class="fa fa-map-marker"></i>
+									<c:out value="${fn:substring(list12.spot_addr, 0,15)}"/>
+									<c:if test="${fn:length(list12.spot_addr) >15}">…</c:if>
+								</li>
+							</ul>
+							
+							<p title="${list12.spot_note}">
+								<c:out value="${fn:substring(list12.spot_note, 0,20)}" escapeXml="false"/>
+								<c:if test="${fn:length(list12.spot_note) >20}">
+									…
+								</c:if>
+							</p>
+						</div>
+					</div>
+				</div>
+			</c:forEach>
+		</div>
+	<!-- End Recent Works -->
+
+
+
+
+
 		</div>
 		<!--=== Content Part End ===-->
-	
+
+
+
+
 		<!--=== Footer Version 1 ===-->
 		<div class="footer-v1">
 			<c:import url="/WEB-INF/views/user/common/footer.jsp"/>
