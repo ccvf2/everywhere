@@ -41,7 +41,7 @@
 		<!--=== End Header ===-->
 
 		<!--=== Breadcrumbs ===-->
-		<div class="breadcrumbs-v1">
+		<div class="breadcrumbs-v5">
 			<div class="container" style="height: 50px;">
 				<c:if test="${plannerDto.planner_ba_code == 'E0001'}">
 					<span>여행 스케줄</span>
