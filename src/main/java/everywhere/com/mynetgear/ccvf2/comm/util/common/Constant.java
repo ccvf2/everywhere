@@ -215,6 +215,8 @@ public class Constant {
 	public static final String BOOKMARK_IMG_LIST_CODE="M1030";
 	/** 마이페이지 즐겨찾기 스타일 리스트 코드*/
 	public static final String BOOKMARK_LIST_CODE="M1031";
-	/** 마이페이지 즐겨찾기 검색 리스트 코드*/
-	public static final String BOOKMARK_SEARCH_LIST_CODE="M1032";
+	/** 마이페이지 즐겨찾기 검색어 사용코드*/
+	public static final String BOOKMARK_SEARCH_Y_CODE="M1032";
+	/** 마이페이지 즐겨찾기 검색어 비사용코드*/
+	public static final String BOOKMARK_SEARCH_N_CODE="M1033";
 }

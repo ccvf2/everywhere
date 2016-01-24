@@ -162,4 +162,22 @@ public class MyPageController {
 		return mav;
 	}
 	
+	
+	/**
+	 * @author 김성광
+	 * @createDate 2016. 1. 24.
+	 * @described 자신의 북마크리스트 내에서의  검색
+	 * @param request
+	 * @param response
+	 * @return
+	 */
+	@RequestMapping(value = "/user/myPage/getBookMarkSearchList.do", method = RequestMethod.GET)
+	public ModelAndView getBookMarkSearchList(HttpServletRequest request, HttpServletResponse response) {
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("request", request);
+		mav.addObject("response", response);
+		mav = myPageService.getBookMarkSearchList(mav);
+		
+		return mav;
+	}
 }

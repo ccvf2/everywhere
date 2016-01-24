@@ -321,6 +321,8 @@ public class MyPageServiceImpl implements MyPageService {
 		
 		int mem_no=Integer.parseInt(request.getParameter("mem_no"));
 		String list_code=request.getParameter("list_code");
+		String BOOKMARK_SEARC_CODE=Constant.BOOKMARK_SEARCH_N_CODE;
+		String search=Constant.BOOKMARK_SEARCH_N_CODE;
 		
 		String pageNumber=request.getParameter("pageNumber");
 		if(pageNumber==null) pageNumber="1";
@@ -334,7 +336,7 @@ public class MyPageServiceImpl implements MyPageService {
 		
 		List<PlannerDto> plannerList=null;
 		if(count>0) {
-			plannerList=memberDao.getBookMarkList(mem_no, startRow, endRow, list_code);
+			plannerList=memberDao.getBookMarkList(mem_no, startRow, endRow, list_code, BOOKMARK_SEARC_CODE, search);
 		}
 	
 		mav.addObject("list_code", list_code);
@@ -354,6 +356,9 @@ public class MyPageServiceImpl implements MyPageService {
 		
 		int item_no=Integer.parseInt(request.getParameter("item_no"));
 		int mem_no=Integer.parseInt(request.getParameter("mem_no"));
+		String list_code=request.getParameter("list_code");
+		String BOOKMARK_SEARC_CODE=Constant.BOOKMARK_SEARCH_N_CODE;
+		String search=Constant.BOOKMARK_SEARCH_N_CODE;
 		
 		System.out.println("item_no : " + item_no + " mem_no : " + mem_no);
 		
@@ -372,9 +377,48 @@ public class MyPageServiceImpl implements MyPageService {
 		
 		List<PlannerDto> plannerList=null;
 		if(count>0) {
-			//plannerList=memberDao.getBookMarkList(mem_no, startRow, endRow);
+			plannerList=memberDao.getBookMarkList(mem_no, startRow, endRow, list_code, BOOKMARK_SEARC_CODE, search);
 		}
 	
+		mav.addObject("list_code", list_code);
+		mav.addObject("plannerList", plannerList);
+		mav.addObject("count", count);
+		mav.addObject("boardSize", boardSize);
+		mav.addObject("currentPage", currentPage);
+		mav.setViewName("/user/myPage/myPageBookMark");
+		
+		return mav;
+	}
+
+	@Override
+	public ModelAndView getBookMarkSearchList(ModelAndView mav) {
+		Map<String, Object> map=mav.getModelMap();
+		HttpServletRequest request = (HttpServletRequest)map.get("request");
+		
+		String list_code=request.getParameter("list_code");
+		String search=request.getParameter("search");
+		int mem_no=Integer.parseInt(request.getParameter("mem_no"));
+		String BOOKMARK_SEARC_CODE=Constant.BOOKMARK_SEARCH_Y_CODE;
+		
+		
+		String pageNumber=request.getParameter("pageNumber");
+		if(pageNumber==null) pageNumber="1";
+		
+		int boardSize=9;
+		
+		int currentPage = Integer.parseInt(pageNumber);
+		int startRow = (currentPage - 1) * boardSize + 1;
+		int endRow = currentPage * boardSize;
+		
+		int count=memberDao.getBookMarkSearchCount(mem_no, search);
+		
+		System.out.println("------- 즐겨찾기 내에서 검색된 결과 수 : " + count);
+		List<PlannerDto> plannerList=null;
+		if(count>0) {
+			plannerList=memberDao.getBookMarkList(mem_no, startRow, endRow, list_code, BOOKMARK_SEARC_CODE, search);
+		}
+	
+		mav.addObject("list_code", list_code);
 		mav.addObject("plannerList", plannerList);
 		mav.addObject("count", count);
 		mav.addObject("boardSize", boardSize);

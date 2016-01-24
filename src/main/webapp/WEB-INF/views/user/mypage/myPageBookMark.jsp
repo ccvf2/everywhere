@@ -81,7 +81,7 @@
 									<input type="text" class="form-control" id="search"
 										placeholder="작성자 or 제목" /> <span class="input-group-btn">
 										<button class="btn-u btn-block" type="button"
-											onclick="javascript:location.href='/user/myPage/getBookMarkSearchList.do?search='+search.value">검색</button>
+											onclick="javascript:location.href='/user/myPage/getBookMarkSearchList.do?list_code=${list_code}&mem_no=${mem_object.mem_no}&search='+search.value">검색</button>
 									</span>
 								</div>
 							</section>
@@ -136,7 +136,7 @@
 			                            <td>${plannerList.title}</td>
 			                            <td>
 				                            <span class="label label-info"><i class="fa fa-share"></i><a href="/user/planner/readPlanner.do?planner_no=${plannerList.planner_no}">이동</a></span>
-				                            <span class="label label-warning"><a href="/user/myPage/myPageDeleteBookMark.do?item_no=${plannerList.planner_no}&mem_no=${mem_object.mem_no}">삭제</a></span>
+				                            <span class="label label-warning"><a href="/user/myPage/myPageDeleteBookMark.do?list_code=${list_code}&item_no=${plannerList.planner_no}&mem_no=${mem_object.mem_no}">삭제</a></span>
 			                            </td>
 			                        </tr>
 		                    	</c:forEach>
