@@ -161,13 +161,14 @@ public class MemberDaoImp implements MemberDao {
 	}
 
 	@Override
-	public List<PlannerDto> getPlannerList(int mem_no, int startRow, int endRow, String MYPAGE_CODE, String search) {
+	public List<PlannerDto> getPlannerList(int mem_no, int startRow, int endRow, String MYPAGE_CODE, String search, String SCHEDULE_TYPE) {
 		HashMap<String, Object> map=new HashMap<String, Object>();
 		map.put("startRow", startRow);
 		map.put("endRow", endRow);
 		map.put("mem_no", mem_no);
 		map.put("MYPAGE_CODE", MYPAGE_CODE);
 		map.put("search", search);
+		map.put("SCHEDULE_TYPE", SCHEDULE_TYPE);
 		return sqlTemplate.selectList("everywhere.com.mynetgear.ccvf2.user.mapper.member.getPlannerList", map);
 	}
 

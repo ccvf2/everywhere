@@ -71,8 +71,8 @@
 				                <img class="img-responsive" src="/attatchFile/planner/${planner.attach_file}" alt="${planner.title}" onError="this.src='/attatchFile/spot/no_image.jpg'" height="80%" width="100%" style="min-height: 170px;">
 				                <div class="grid-boxes-caption">
 										<h3><a href="/user/planner/readPlanner.do?planner_no=${planner.planner_no}"> 
-												<c:out value="${fn:substring(planner.memo, 0,10)}" escapeXml="false"/>
-						                    	<c:if test="${fn:length(planner.memo) >10}">
+												<c:out value="${fn:substring(planner.memo, 0,8)}" escapeXml="false"/>
+						                    	<c:if test="${fn:length(planner.memo) >8}">
 										        	…
 										        </c:if>
 										</a></h3>

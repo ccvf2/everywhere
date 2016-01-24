@@ -219,9 +219,10 @@ public interface MemberDao {
 	 * @param endRow
 	 * @param MYPAGE_CODE 
 	 * @param search 
+	 * @param SCHEDULE_TYPE 
 	 * @return
 	 */
-	public List<PlannerDto> getPlannerList(int mem_no, int startRow, int endRow, String MYPAGE_CODE, String search);
+	public List<PlannerDto> getPlannerList(int mem_no, int startRow, int endRow, String MYPAGE_CODE, String search, String SCHEDULE_TYPE);
 
 	/**
 	 * @author 김성광
