@@ -1,12 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" isErrorPage="true"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%response.setStatus(200); %>
 <!DOCTYPE html>
-<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
-<!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
-<!--[if !IE]><!--> <html lang="ko"> <!--<![endif]-->
+<html>
 <head>
-    <title>404 Error Page 3 | Unify - Responsive Website Template</title>
+    <title>500 Error Page</title>
 
     <!-- Meta -->
     <meta charset="utf-8">
@@ -24,52 +21,48 @@
     <link rel="stylesheet" href="/assets/plugins/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="/assets/css/style.css">
 
-    <!-- CSS Header and Footer -->
-    <link rel="stylesheet" href="/assets/css/headers/header-default.css">
-    <link rel="stylesheet" href="/assets/css/footers/footer-v1.css">
-
-    <!-- CSS Implementing Plugins -->
-    <link rel="stylesheet" href="/assets/plugins/animate.css">
-    <link rel="stylesheet" href="/assets/plugins/line-icons/line-icons.css">
-    <link rel="stylesheet" href="/assets/plugins/font-awesome/css/font-awesome.min.css">
-
     <!-- CSS Page Style -->
-    <link rel="stylesheet" href="/assets/css/pages/page_error4_404.css">
+    <link rel="stylesheet" href="/assets/css/pages/page_404_error1.css">
 
     <!-- CSS Customization -->
     <link rel="stylesheet" href="/assets/css/custom.css">
 </head>
-
 <body>
 
-    <!--=== Error V4 ===-->
-    <div class="container content">
-        <!--Error Block-->
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2">
-                <div class="error-v4">
-                    <a href="#"><img src="/assets/img/logo2-default.png" alt=""></a>
-                    <h1>404</h1>
-                    <span class="sorry">페이지를 찾을 수 없습니다.<br/> 문제가 계속 될 경우 관리자에 문의하세요.</span>
-                    <div class="row">
+<!--=== Content Part ===-->
+<div class="container">
+    <!--Error Block-->
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <div class="error-v2">
+                <span class="error-v2-title">500</span>
+                <span>서버내부오류가 발생하였습니다.</span>
+                <p>문제가 계속 될 경우 관리자에 문의하세요. <br /></p>
                         <div class="col-md-6 col-md-offset-3">
                             <a class="btn-u btn-brd btn-u-light" href="/">메인으로 가기</a>
                         </div>
-                    </div>
-                </div>
+                        <br />
+                        <br />
+                <textarea rows="5" cols="80" style="color: white; background-color: transparent;"><%=exception.getMessage() %></textarea>
             </div>
         </div>
-    </div><!--/container-->
+    </div>
     <!--End Error Block-->
-
     <!--=== Sticky Footer ===-->
-    <div class="container sticky-footer">
-        <p class="copyright-space">
-            2015 &copy; everywhere Developer Team( SeongUk BAE, HeeJin ANN, SeongGuk KWAK, SeongGwang KIM, JunHo KIM ).
-            <br/> ALL Rights Reserved.
-        </p>
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+	    <div class="container sticky-footer">
+	        <p class="copyright-space" style="color: white;">
+	            2015 &copy; everywhere Developer Team( SeongUk BAE, HeeJin ANN, SeongGuk KWAK, SeongGwang KIM, JunHo KIM ).
+	            <br/> ALL Rights Reserved.
+	        </p>
+	    </div>
+    	</div>
     </div>
     <!--=== End Sticky Footer ===-->
+</div><!--/container-->
+<!--=== End Content Part ===-->
+
 
 <!-- JS Global Compulsory -->
 <script type="text/javascript" src="/assets/plugins/jquery/jquery.min.js"></script>
@@ -89,13 +82,17 @@
 </script>
 <script type="text/javascript">
     $.backstretch([
-      "/assets/img/blur/img2.jpg"
-      ])
+      "/assets/img/bg/2.jpg",
+      "/assets/img/bg/8.jpg",
+      ], {
+        fade: 1000,
+        duration: 7000
+    });
 </script>
 <!--[if lt IE 9]>
-    <script src="/assets/plugins/respond.js"></script>
-    <script src="/assets/plugins/html5shiv.js"></script>
-    <script src="/assets/plugins/placeholder-IE-fixes.js"></script>
+    <script src="assets/plugins/respond.js"></script>
+    <script src="assets/plugins/html5shiv.js"></script>
+    <script src="assets/plugins/placeholder-IE-fixes.js"></script>
 <![endif]-->
 
 </body>
