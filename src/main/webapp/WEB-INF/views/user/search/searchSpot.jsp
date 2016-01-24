@@ -79,16 +79,26 @@
 		                    
 		                    <fieldset style="padding: 15px 15px 5px;">
 		                    	<!-- 지역 찾기 -->
-		                    	  <section>
-		                            <label class="input">
-		                            	<!-- 자동완성 input : works in Chrome, Firefox, Opera and IE10. -->
-		                                <input type="text" list="list" name="searchPlace" id="searchPlace" placeholder="지역 검색" value="${searchPlace}">
-		                                <datalist id="list">
-		                                	<c:forEach var="place" items="${placeList}">
-		                                		<option value="${place.code_name}"></option>
-		                                	</c:forEach>
-		                                </datalist>
-		                            </label>
+		                    	<section>
+		                    		<label class="select">
+									<select name="country_code" id="selectCountry" onchange="readCityList(true)">
+										<option value=""> 나라 </option>
+										<c:forEach var="country" items="${countryList}" >
+											<option value="${country.code}">${country.code_name}</option>
+										</c:forEach>
+									</select>
+									<i></i>
+								</label>
+								</section>
+								<!-- Ajax로 도시 받아옴 -->
+								<section>
+									<!-- 도시 -->
+									<label class="select">
+										<select name="city_code" id="selectCity">
+											<option value=""> 도시 </option>
+										</select>
+										<i></i>
+									</label>
 		                        </section>
 		                    	<!-- 명소 검색 -->
 		                        <section>
@@ -114,47 +124,20 @@
 		                    <footer>
 		                    	<div class="text-center">
 		                        	<button type="submit" class="btn-u">검색</button>
-		                        	<button type="button" class="btn-u btn-u-default" onclick="window.history.back();">뒤로</button>
 	                        	</div>
 		                    </footer>
 		                </form>
-		                <!-- 하단 명소 리스트 삭제 -->
-		             <%--  <div class="tag-box tag-box-v4 margin-bottom-20 hidden-xs" style="padding : 0px; border: 1px #bbb;">
-							<ul class="list-unstyled mCustomScrollbar margin-bottom-20 _mCS_1 mCS-autoHide" data-mcs-theme="minimal-dark" id="spotLists" style="position: relative; overflow: visible;">
-								<c:forEach var="spot" items="${searchSpotList}">
-									<li class="notification" style="margin:0px;border:1px solid #eee;padding:5px 5px;height: 48px;overflow:hidden;" id="spotItem">
-										<div id="${spot.spot_no}_item" class="ui-widget-content" style="border:0px;">
-											<i style="margin:0; float:left;"><img alt="" src="/attatchFile/spot/${spot.spot_photoes[0].save_name}.${spot.spot_photoes[0].extension}" style="width:35px;height:35px;margin-right:5px;"></i>
-											<div class="overflow-h">
-												<span>
-													<strong><a href="javascript:spotReadPage('${spot.spot_no}')">${spot.spot_name}</a></strong>
-												</span><br/>
-												<small><c:out value="${spot.spot_note}"/></small>
-											</div>
-										</div>
-									</li>
-								</c:forEach>
-								<div id="mCSB_1_scrollbar_vertical" class="mCSB_scrollTools mCSB_1_scrollbar mCS-minimal-dark mCSB_scrollTools_vertical" style="display: block;">
-									<div class="mCSB_draggerContainer">
-										<div id="mCSB_1_dragger_vertical" class="mCSB_dragger" style="position: absolute; min-height: 50px; display: block; height: 247px; max-height: 286px; top: 0px;" oncontextmenu="return false;">
-											<div class="mCSB_dragger_bar" style="line-height: 50px;">
-											</div>
-										</div>
-										<div class="mCSB_draggerRail">
-										</div>
-									</div>
-								</div>
-							</ul>
-							<button type="button" class="btn-u btn-u-default btn-u-sm btn-block" onclick="selectMoreSpotList()">Load More</button>
-							<!--End Notification-->
-			            </div>
-			            <!-- End Blog Newsletter --> --%>
 		            </div>
 		         </div>
 	         <!-- End sideBar -->
 	         
 	         <!-- 명소 검색 결과 시작 -->
                <div class="col-md-9">
+               <div class="alert alert-info alert-dismissable">
+					<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+					<i class="fa fa-info-circle"></i> 검색된 갯수 : <strong><c:out value="${plannerDto.totalCount}"/></strong>&nbsp;개 
+					<span style="float: right;"><i class="fa fa fa-sort-amount-desc"></i>총페이징 : ${plannerDto.pageCount} / <i class="fa fa-sign-in"></i>현재 페이지 : <strong>${plannerDto.currentPage}</strong></span>
+				</div>
                		<div class="blog_masonry_3col">
 				        <div class="container-fluid content grid-boxes masonry" style="position: relative; height: 2250px; overflow: hidden;">
 				        	<c:forEach var="spot" items="${searchSpotList}">
@@ -163,7 +146,9 @@
 					                <div class="grid-boxes-caption">
 					                    <h3><a href="javascript:spotReadPage('${spot.spot_no}')">${spot.spot_name}</a></h3>
 					                    <ul class="list-inline grid-boxes-news">
+					                    	<!-- 나라 및 지역 표시 -->
 					                    	<li>
+					                    		<i class="fa fa-location-arrow"></i>
 					                    		<c:forEach var="country" items="${countryList}">
 					                    			<c:if test="${country.code==spot.country_code}">
 					                    				${country.code_name}
@@ -172,8 +157,19 @@
 					                    		${spot.city_name}
 					                    	</li>
 					                        <li>|</li>
-					                        <li><span>By </span><a href="/user/myPage/myPage.do?uandMe=S0002&mem_no=${spot.mem_no}">${spot.mem_name}</a></li>
-					                    </ul>                    
+					                        <li><i class="fa fa fa-info"></i></li>
+					                    	<c:forEach var="spotType" items="${spotTypeList}">
+					                    		<c:if test="${spotType.code==spot.spot_type_code}">
+					                    			${spotType.code_name}
+					                    		</c:if>
+					                    	</c:forEach>
+					                    	<li>|</li>
+					                    	<li><span>By </span><a href="/user/myPage/myPage.do?uandMe=S0002&mem_no=${spot.mem_no}">${spot.mem_name}</a></li>
+					                    </ul>
+					                    <ul class="list-inline grid-boxes-news">
+					                    	<li><i class="fa fa-map-marker"></i>
+					                    	${spot.spot_addr}</li>
+					                    </ul>
 					                    <p>${spot.spot_note}</p>
 					                    
 					                    <!-- 별점 출력 -->
