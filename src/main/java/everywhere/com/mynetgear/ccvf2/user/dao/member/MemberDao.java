@@ -177,9 +177,11 @@ public interface MemberDao {
 	 * @param endRow 
 	 * @param startRow 
 	 * @param list_code 
+	 * @param BOOKMARK_SEARC_CODE 
+	 * @param search 
 	 * @return
 	 */
-	public List<PlannerDto> getBookMarkList(int mem_no, int startRow, int endRow, String list_code);
+	public List<PlannerDto> getBookMarkList(int mem_no, int startRow, int endRow, String list_code, String BOOKMARK_SEARC_CODE, String search);
 
 	/**
 	 * @author 김성광
@@ -220,5 +222,15 @@ public interface MemberDao {
 	 * @return
 	 */
 	public List<PlannerDto> getPlannerList(int mem_no, int startRow, int endRow, String MYPAGE_CODE, String search);
+
+	/**
+	 * @author 김성광
+	 * @createDate 2016. 1. 24.
+	 * @described 즐겨찾기 내의 검색된 결과 레코드수 count
+	 * @param mem_no
+	 * @param search 
+	 * @return
+	 */
+	public int getBookMarkSearchCount(int mem_no, String search);
 
 }
