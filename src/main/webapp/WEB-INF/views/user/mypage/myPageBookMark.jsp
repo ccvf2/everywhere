@@ -82,7 +82,7 @@
 									<input type="text" class="form-control" id="search"
 										placeholder="작성자 or 제목" /> <span class="input-group-btn">
 										<button class="btn-u btn-block" type="button"
-											onclick="javascript:location.href='/user/myPage/searchFriends.do?search='+search.value">검색</button>
+											onclick="javascript:location.href='/user/myPage/getBookMarkSearchList.do?search='+search.value">검색</button>
 									</span>
 								</div>
 							</section>
