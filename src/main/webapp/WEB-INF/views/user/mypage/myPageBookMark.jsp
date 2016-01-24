@@ -53,12 +53,11 @@
 			<!-- 메인------------------------------------------------------------------------------------------------------------------------------ -->
 			<div class="col-md-9">
                 <!--Basic Table-->
-                <div class="margin-bottom-60"></div>
-
-               	<div class="alert alert-info alert-dismissable">
-                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                    <i class="fa fa-info-circle"></i>  <strong><c:out value="${mem_object.mem_name}"/>님의 BookMark</strong>
-                </div>
+                <div class="shadow-wrapper">
+		                    <div class="tag-box tag-box-v1 box-shadow shadow-effect-2">
+		                        <h2><c:out value="${mem_object.mem_name}"/>님의 BookMark</h2>
+		                    </div>
+		                </div>
                 <form method="get" id="sky-form3" class="sky-form">
 					<header>빠른검색으로 찾아보세요</header>
 					<div style="float: left;">
@@ -82,7 +81,7 @@
 									<input type="text" class="form-control" id="search"
 										placeholder="작성자 or 제목" /> <span class="input-group-btn">
 										<button class="btn-u btn-block" type="button"
-											onclick="javascript:location.href='/user/myPage/searchFriends.do?search='+search.value">검색</button>
+											onclick="javascript:location.href='/user/myPage/getBookMarkSearchList.do?list_code=${list_code}&mem_no=${mem_object.mem_no}&search='+search.value">검색</button>
 									</span>
 								</div>
 							</section>
@@ -101,15 +100,14 @@
 				                <img class="img-responsive" src="/attatchFile/planner/${list1.attach_file}" alt="${list1.title}" onError="this.src='/attatchFile/spot/no_image.jpg'" height="80%" width="100%">
 				                <div class="grid-boxes-caption">
 				                   <h3><a href="/user/planner/readPlanner.do?planner_no=${list1.planner_no}">${list1.title}</a></h3>
-				                    <ul class="list-inline grid-boxes-news">
-				                        <li><a href="#">${list1.title}</a></li>
-				                        <li>|</li>
-				                        <li><i class="fa fa-clock-o"></i><fmt:formatDate pattern="yyyy-MM-dd" value="${list1.reg_date}"/></li>
-				                    </ul>
-				                    <div align="right" style="margin-right: 15px;">
+				                   
+				                   <div align="left" style="float: left;">
 					                    <a href="#"><i class="fa fa-comments-o"></i><c:out value="${list1.reply_Count}" escapeXml="false"/></a>
 					                    <a href="#"><i class="fa fa-heart-o"></i><c:out value="${list1.sweet_count}" escapeXml="false"/></a>
 					                    <a href="#"><i class="fa fa-bookmark-o"></i><c:out value="${list1.bookmark_Count}" escapeXml="false"/></a>
+				                   </div>
+				                    <div align="right" style="margin-right: 15px;">
+				                    	<i class="fa fa-clock-o"></i><fmt:formatDate pattern="yyyy-MM-dd" value="${list1.reg_date}"/>
 				                    </div>
 				                    <p>
 				                    	<c:out value="${fn:substring(list1.memo, 0,50)}" escapeXml="false"/>
@@ -138,7 +136,7 @@
 			                            <td>${plannerList.title}</td>
 			                            <td>
 				                            <span class="label label-info"><i class="fa fa-share"></i><a href="/user/planner/readPlanner.do?planner_no=${plannerList.planner_no}">이동</a></span>
-				                            <span class="label label-warning"><a href="/user/myPage/myPageDeleteBookMark.do?item_no=${plannerList.planner_no}&mem_no=${mem_object.mem_no}">삭제</a></span>
+				                            <span class="label label-warning"><a href="/user/myPage/myPageDeleteBookMark.do?list_code=${list_code}&item_no=${plannerList.planner_no}&mem_no=${mem_object.mem_no}">삭제</a></span>
 			                            </td>
 			                        </tr>
 		                    	</c:forEach>

@@ -45,7 +45,7 @@
 			<!-- 메인------------------------------------------------------------------------------------------------------------------------------ -->
 			<!--=== News Block ===-->
 	        	<div class="col-md-9">
-		        	<c:if test="${plannerList.size()==0}">
+		        	<c:if test="${count==0}">
 	                     <div class="shadow-wrapper">
 		                    <div class="tag-box tag-box-v1 box-shadow shadow-effect-2">
 		                        <h2>아직 여행계획이 없으시군요.</h2>
@@ -56,21 +56,25 @@
 		                </div>
 					</c:if>
 					<c:if test="${count>0}">
+						<div class="shadow-wrapper">
+		                    <div class="tag-box tag-box-v1 box-shadow shadow-effect-2">
+		                        <h2><c:out value="${memberDto.mem_name}님의 여행"></c:out></h2>
+		                    </div>
+		                </div>
 		            	<c:forEach var="list1" items="${plannerList}">
 				            <div class="col-md-4">
 				            <div class="grid-boxes-in" style="height: 350px; background-color: 	#f0f8ff;">
 				                <img class="img-responsive" src="/attatchFile/planner/${list1.attach_file}" alt="${list1.title}" onError="this.src='/attatchFile/spot/no_image.jpg'" height="80%" width="100%">
 				                <div class="grid-boxes-caption">
 				                   <h3><a href="/user/planner/readPlanner.do?planner_no=${list1.planner_no}">${list1.title}</a></h3>
-				                    <ul class="list-inline grid-boxes-news">
-				                        <li><a href="#">${list1.title}</a></li>
-				                        <li>|</li>
-				                        <li><i class="fa fa-clock-o"></i><fmt:formatDate pattern="yyyy-MM-dd" value="${list1.reg_date}"/></li>
-				                    </ul>
-				                    <div align="right" style="margin-right: 15px;">
+				                   
+				                   <div align="left" style="float: left;">
 					                    <a href="#"><i class="fa fa-comments-o"></i><c:out value="${list1.reply_Count}" escapeXml="false"/></a>
 					                    <a href="#"><i class="fa fa-heart-o"></i><c:out value="${list1.sweet_count}" escapeXml="false"/></a>
 					                    <a href="#"><i class="fa fa-bookmark-o"></i><c:out value="${list1.bookmark_Count}" escapeXml="false"/></a>
+				                   </div>
+				                    <div align="right" style="margin-right: 15px;">
+				                    	<i class="fa fa-clock-o"></i><fmt:formatDate pattern="yyyy-MM-dd" value="${list1.reg_date}"/>
 				                    </div>
 				                    <p>
 				                    	<c:out value="${fn:substring(list1.memo, 0,50)}" escapeXml="false"/>

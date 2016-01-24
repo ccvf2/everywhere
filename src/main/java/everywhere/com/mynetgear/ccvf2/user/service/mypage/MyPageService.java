@@ -85,4 +85,13 @@ public interface MyPageService {
 	 * @return 
 	 */
 	public ModelAndView myPageDeleteBookMark(ModelAndView mav);
+
+	/**
+	 * @author 김성광
+	 * @createDate 2016. 1. 24.
+	 * @described 자신의 북마크리스트 내의 검색
+	 * @param mav
+	 * @return
+	 */
+	public ModelAndView getBookMarkSearchList(ModelAndView mav);
 }

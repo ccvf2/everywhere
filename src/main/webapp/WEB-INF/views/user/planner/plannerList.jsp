@@ -182,7 +182,8 @@
 									</a>
 									<div class="grid-boxes-caption">
 										<h3><a href="/user/planner/readPlanner.do?planner_no=${planner.planner_no}"> ${planner.title}</a></h3>
-										 <span><c:out value="${planner.mem_name}"/></span>
+										 <span style="font-weight: bolder;"><c:out value="${planner.mem_name}"/></span>
+										 <span style="color: #777;float: right;"><i class="fa fa-pencil" title="등록일"><fmt:formatDate pattern="yy-MM-dd" value="${planner.reg_date}"/></i></span>
 										<ul class="list-inline grid-boxes-news">
 											<li><i class="fa fa-comments-o" title="댓글">&nbsp;<c:out value="${planner.reply_Count}" escapeXml="false"/></i></li>
 											<li>|</li>
@@ -190,9 +191,10 @@
 											<li>|</li>
 											<li><i class="fa fa-tags" title="북마크">&nbsp;<c:out value="${planner.bookmark_Count}"/></i></li>
 											<li>|</li>
-											<li><i class="fa fa-pencil" title="등록일"></i><fmt:formatDate pattern="yy-MM-dd" value="${planner.reg_date}"/></li>
+											<li></li>
 											<li>
 												${planner.memo}
+												<br />
 											</li>
 											<li style="border-top: 1px solid;"><div style="margin: 1px auto;"><i class="fa fa-clock-o" title="여행기간"></i>&nbsp;<fmt:formatDate pattern="yyyy-MM-dd" value="${planner.start_date}"/>&nbsp;~&nbsp;<fmt:formatDate pattern="yyyy-MM-dd" value="${planner.end_date}"/></div></li>
 										</ul>
