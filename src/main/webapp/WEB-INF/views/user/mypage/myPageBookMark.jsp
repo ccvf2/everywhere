@@ -43,10 +43,24 @@
             <!--End Left Sidebar-->
 			<script type="text/javascript">
 			    $(function(){
-			    	$(".bookmark_list_style").change(function(){
-			    		var list_code=$(".bookmark_list_style").val();
-			    		
-			    		location.href="/user/myPage/getBookMarkList.do?mem_no=${mem_object.mem_no}&list_code="+list_code;
+			    	$("#bookMark_img").mouseover(function(){
+			    		$(this).css("color","#72c02c"); 
+			    	});
+			    	$("#bookMark_img").mouseout(function(){ 
+			    		$(this).css("color","#555"); 
+			    	});
+			    	$("#bookMark_list").mouseover(function(){
+			    		$(this).css("color","#72c02c"); 
+			    	});
+			    	$("#bookMark_list").mouseout(function(){ 
+			    		$(this).css("color","#555"); 
+			    	});
+			    	
+			    	$("#bookMark_img").click(function(){
+			    		location.href="/user/myPage/getBookMarkList.do?mem_no=${mem_object.mem_no}&list_code=M1030";
+			    	});
+			    	$("#bookMark_list").click(function(){
+			    		location.href="/user/myPage/getBookMarkList.do?mem_no=${mem_object.mem_no}&list_code=M1031";
 			    	});
 			    });
 		    </script>
@@ -55,7 +69,7 @@
                 <!--Basic Table-->
                 <div class="shadow-wrapper">
 		                    <div class="tag-box tag-box-v1 box-shadow shadow-effect-2">
-		                        <h2><c:out value="${mem_object.mem_name}"/>님의 BookMark</h2>
+		                        <h2><c:out value="${mem_object.mem_name}"/>님의 즐겨찾기</h2>
 		                    </div>
 		                </div>
                 <form method="get" id="sky-form3" class="sky-form">
@@ -63,12 +77,9 @@
 					<div style="float: left;">
 						<fieldset>
 							<section>
-								<label class="label">정렬방식변경</label> <label class="select">
-									<select style="width: 200px;" class="bookmark_list_style">
-										<option value="-----">선택</option>
-										<option value="M1030">이미지형</option>
-										<option value="M1031">리스트형</option>
-									</select> <i></i>
+								<label class="label">정렬방식변경</label> 
+								<label class="label">
+									<i id="bookMark_img" class="fa fa-file-image-o"><c:out value="이미지"/></i>&nbsp;&nbsp;<i id="bookMark_list" class="fa fa-bars"><c:out value="리스트"/></i>
 								</label>
 							</section>
 						</fieldset>
@@ -76,10 +87,10 @@
 					<div>
 						<fieldset>
 							<section>
-								<label class="label">BookMark 검색</label>
+								<label class="label">즐겨찾기 검색</label>
 								<div class="input-group">
 									<input type="text" class="form-control" id="search"
-										placeholder="작성자 or 제목" /> <span class="input-group-btn">
+										placeholder="제목 or 내용" /> <span class="input-group-btn">
 										<button class="btn-u btn-block" type="button"
 											onclick="javascript:location.href='/user/myPage/getBookMarkSearchList.do?list_code=${list_code}&mem_no=${mem_object.mem_no}&search='+search.value">검색</button>
 									</span>
