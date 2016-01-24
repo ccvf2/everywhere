@@ -144,5 +144,10 @@
                     </ul>
                 </li>
             </ul>
+<c:if test="${alert_msg!=null}">
+	<script type="text/javascript">
+	alert('${alert_msg}');
+	</script>
+</c:if>
 </body>
 </html>

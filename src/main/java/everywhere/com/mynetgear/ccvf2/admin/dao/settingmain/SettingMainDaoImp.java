@@ -8,6 +8,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.PlatformTransactionManager;
 
 import everywhere.com.mynetgear.ccvf2.admin.dto.settingmain.SettingMainDto;
+import everywhere.com.mynetgear.ccvf2.admin.dto.settingmain.SettingMainDtoExt;
+import everywhere.com.mynetgear.ccvf2.user.dto.planner.PlannerDto;
 
 /**
  * @author 배성욱
@@ -40,6 +42,20 @@ public class SettingMainDaoImp implements SettingMainDao {
 	@Override
 	public List<SettingMainDto> getListBackground() {
 		return sqlTemplate.selectList("select_list_Background_setting");
+	}
+	/**
+	 * @author 배성욱
+	 * @createDate 2016. 1. 23.
+	 * @described 운영자 선택을 위한 플레너 목록&검색값
+	 * @reference class
+	 * @param settingMainDtoExt
+	 * @return
+	 */
+	@Override
+	public List<SettingMainDto> getListChoosePlanner(SettingMainDtoExt settingMainDtoExt) {
+		List<Object> list=sqlTemplate.selectList("select_list_planner_setting_main", settingMainDtoExt);
+		
+		return null;
 	}
 
 }

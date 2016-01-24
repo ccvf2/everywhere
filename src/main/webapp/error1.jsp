@@ -6,7 +6,7 @@
 <!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
 <!--[if !IE]><!--> <html lang="ko"> <!--<![endif]-->
 <head>
-    <title>404 Error Page 3 | Unify - Responsive Website Template</title>
+    <title>405 Error Page</title>
 
     <!-- Meta -->
     <meta charset="utf-8">
@@ -49,11 +49,11 @@
             <div class="col-md-8 col-md-offset-2">
                 <div class="error-v4">
                     <a href="#"><img src="/assets/img/logo2-default.png" alt=""></a>
-                    <h1>404</h1>
+                    <h1>405</h1>
                     <span class="sorry">페이지를 찾을 수 없습니다.<br/> 문제가 계속 될 경우 관리자에 문의하세요.</span>
                     <div class="row">
                         <div class="col-md-6 col-md-offset-3">
-                            <a class="btn-u btn-brd btn-u-light" href="/">메인으로 가기</a>
+                            <a class="btn-u btn-brd btn-u-light" href="/user/main/main.do">메인으로 가기</a>
                         </div>
                     </div>
                 </div>

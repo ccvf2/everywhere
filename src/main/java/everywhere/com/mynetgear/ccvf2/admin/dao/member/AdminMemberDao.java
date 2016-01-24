@@ -31,4 +31,13 @@ public interface AdminMemberDao {
 	 */
 	int updateMemberStatus(MemberDto memberDto);
 
+	/**
+	 * @author 곽성국	
+	 * @createDate 2016. 1. 23.
+	 * @described 사용자 리스트의 개수 리턴
+	 * @param adminMemberDto
+	 * @return
+	 */
+	int getMemberCount(AdminMemberDto adminMemberDto);
+
 }

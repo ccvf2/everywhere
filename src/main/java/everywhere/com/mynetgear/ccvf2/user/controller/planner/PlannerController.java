@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import everywhere.com.mynetgear.ccvf2.comm.util.common.Constant;
@@ -146,16 +147,18 @@ public class PlannerController {
 		plannerDto.setSearchWord1(Constant.SYNB_NULL);
 		plannerDto.setStartRow(1);
 		plannerDto.setEndRow(10);
-		
+		int showRow= 15;
+		mav.addObject("showRow", showRow);
 		mav.addObject("plannerDto", plannerDto);
 		plannerService.getPlannerListForAll(mav);
 		return mav;
 	}
 
 	@RequestMapping(value = "/user/planner/plannerList.do", method = RequestMethod.POST)
-	public ModelAndView getPlannerListPOST(HttpServletRequest request, HttpServletResponse response, PlannerDto plannerDto) {
+	public ModelAndView getPlannerListPOST(HttpServletRequest request, HttpServletResponse response, PlannerDto plannerDto,@RequestParam(value="showRow", defaultValue="9")int showRow) {
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("request", request);
+		mav.addObject("showRow", showRow);
 		mav.addObject("plannerDto", plannerDto);
 		plannerService.getPlannerListForAll(mav);
 		return mav;

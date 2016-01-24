@@ -81,7 +81,9 @@
 			<!-- 로그인 페이지일 경우는 로그인 모달을 띄우지 않는다. -->
 			<c:choose>
 				<c:when test="${ (mem_object.mem_name=='' || mem_object==null)&& (pageContext.request.requestURI!='/WEB-INF/views/common/login/login.jsp')}">
+					<c:if test="${alert_msg!='로그아웃되었습니다.'}">
 					<c:set var="showLoginModal" value="true"/>	
+					</c:if>
 				</c:when>
 				<c:when test="${ (mem_object.mem_name=='' || mem_object==null)&& (pageContext.request.requestURI!='/WEB-INF/views/common/login/login.jsp')}">
 					<c:set var="showLoginModal" value="false"/>	
@@ -114,23 +116,23 @@
 	                <ul class="loginbar pull-right">
 	                	<c:choose>
 	                		<c:when test="${ mem_object.mem_name=='' || mem_object==null }">
-	                    		<li><a href="javascript:loginFormReqiest()">login</a></li>
+	                    		<li><a href="javascript:loginFormReqiest()"><i class="fa fa-sign-in"> login</i></a></li>
 								<li class="topbar-devider"></li>
 	                    		<li>
 	                    			<!-- <a href="/user/member/register.do">회원가입</a> -->
-	                    			<a href="javascript:joinFormReqiest()">회원가입</a>
+	                    			<a href="javascript:joinFormReqiest()"><i class="fa fa-user"> 회원가입</i></a>
 	                    		</li>
 	                		</c:when>
 	                		<c:otherwise>
-			                	<li>${mem_object.mem_name}님 안녕하세요.</li>
+			                	<li><i class="fa fa-globe"> <span style="font-weight: bolder;">${mem_object.mem_name} </span>님 안녕하세요.</i></li>
 			                    <li class="topbar-devider"></li>
-			                    <li><a href="/user/login/loginout.do" style="color: #72c02c;">Logout</a></li>
+			                    <li><a href="/user/login/loginout.do" style="color: #72c02c;"><i class="fa fa-sign-out"> Logout</i></a></li>
 			                    <li class="topbar-devider"></li>
 			                    <c:if test="${mem_object.mem_level_code=='M0001'}">
-			                    <li><a href="/admin/main/main.do" style="color: #72c02c;">관리자페이지</a></li>
+			                    <li><a href="/admin/main/main.do" style="color: #72c02c;"><i class="fa fa-cog"> 관리자페이지</i></a></li>
 			                    <li class="topbar-devider"></li>
 			                    </c:if>
-			                    <li><a href="/user/message/messageBox.do">쪽지함</a></li>
+			                    <li><a href="/user/message/messageBox.do"><i class="fa fa-envelope-o"> 쪽지함</i></a></li>
 	                		</c:otherwise>
 	                	</c:choose>
 	                </ul>
@@ -155,7 +157,8 @@
 	                  	
 	                    <!-- Search Block -->
 	                    <!-- <li>
-	                        <i class="search fa fa-search search-btn"></i>
+	                        <i class="search fa fa-searc
+	                        h search-btn"></i>
 	                        <div class="search-open">
 	                            <div class="input-group animatedfadeInDown ">
 	                                <input type="text" class="form-control" id="searchTotalValue" placeholder="Search">
@@ -205,17 +208,20 @@
 	
 	                    <!-- Blog -->
 	                    <li <c:if test="${ fn:startsWith(path, '/user/member')}">${ on }</c:if>">
-	                        <a href="/user/accompany/accompanyList.do">
-								여행동행구하기
-	                        </a>
-	                     </li>   	                    
+	                        <a href="/user/accompany/accompanyList.do">여행동행구하기</a>
+	                     </li>
 	                    <!-- End Blog -->
 	
 	                    <!-- Portfolio -->
 	                    <li>
-	                        <a href="/user/myPage/myPage.do?uandMe=S0001">
-								마이페이지
-	                        </a>
+	                    	<c:choose>
+	                    		<c:when test="${ mem_object.mem_name=='' || mem_object==null }">
+			                        <a href="javascript:loginFormReqiest()">마이페이지</a>
+	                    		</c:when>
+	                    		<c:otherwise>
+			                        <a href="/user/myPage/myPage.do?uandMe=S0001">마이페이지</a>
+	                    		</c:otherwise>
+	                    	</c:choose>
 	                    </li>
 	                    <!-- End Portfolio -->
 	

@@ -65,32 +65,26 @@ public class AdminMemberServiceImp implements AdminMemberService {
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
-
-		/*
-		 * try { if(StringUtils.equals(memLevel, Constant.SYNB_NULL)) {
-		 * EverywhereAspect.logger.info(EverywhereAspect.logMsg +
-		 * "회원등급이 선택되지 않았습니다."); } else if(StringUtils.equals(memStatus,
-		 * Constant.SYNB_NULL_SPACE)) {
-		 * EverywhereAspect.logger.info(EverywhereAspect.logMsg +
-		 * "회원 상태가 선택되지 않았습니다."); } else if(StringUtils.equals(phoneStatus,
-		 * Constant.SYNB_NULL_SPACE)) {
-		 * EverywhereAspect.logger.info(EverywhereAspect.logMsg +
-		 * "전화 인증 상태가 선택되지 않았습니다."); } else if(start_date==null) {
-		 * EverywhereAspect.logger.info(EverywhereAspect.logMsg +
-		 * "시작일이 선택되지 않았습니다."); } else if(end_date==null) {
-		 * EverywhereAspect.logger.info(EverywhereAspect.logMsg +
-		 * "종료일이 선택되지 않았습니다."); } else if(name==null) {
-		 * EverywhereAspect.logger.info(EverywhereAspect.logMsg +
-		 * "이름이 선택되지 않았습니다."); } else if(email==null) {
-		 * EverywhereAspect.logger.info(EverywhereAspect.logMsg +
-		 * "이메일이 선택되지 않았습니다."); } else {
-		 * adminMemberDto.setMem_level_code(memLevel);
-		 * adminMemberDto.setMem_status_code(memStatus);
-		 * adminMemberDto.setMem_p_status_code(phoneStatus);
-		 * 
-		 * 
-		 * } } catch (Exception e) { e.printStackTrace(); }
-		 */
+		
+		
+		// 한 페이지에 보여줄 회원 수
+		// 페이징 완성 되면 변경 예정
+		adminMemberDto.setPageBlock(999999);
+		
+		// 요청한 페이지
+		String pageNumber = request.getParameter("pageNumber");
+		// 요청한 페이지가 없으면 1로 초기화
+		if(pageNumber == null) {
+			pageNumber = "1";
+		}
+		
+		//현제페이지
+		adminMemberDto.setCurrentPage(Integer.parseInt(pageNumber));
+		//페이징에 필요한 부분 계산
+		adminMemberDto.pageingCalculation(adminMemberDto.getPageBlock());
+		// 검색되 회원 수 가져옴
+		adminMemberDto.setTotalCount(adminMemberDao.getMemberCount(adminMemberDto));
+		
 
 		List<MemberDto> memberList = null;
 		// 회원리스트 가져옴

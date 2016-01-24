@@ -121,20 +121,20 @@ public class SearchServiceImp implements SearchService {
 		Map<String, Object> map = mav.getModelMap();
 		HttpServletRequest request = (HttpServletRequest) map.get("request");
 
-		//처음에 header 에서 요청한 검색어를 받아야함
+		//searchTotal로 요청한 검색어를 받아야함
 		String searchValue = request.getParameter("search");
-		
 		
 		int currentPage = 1;
 		//한 페이지에 보여줄 게시물 수
 		int boardSize = 6;
 		SpotDtoExt spotDto = new SpotDtoExt();
+		
 		spotDto.setStartPage((currentPage-1) * boardSize + 1);
 		spotDto.setEndPage(currentPage*boardSize);
 		spotDto.setSearchWord1(searchValue);
 		spotDto.setSearchWord2(searchValue);
 		
-		//검색된 결과 수 가져옴
+		//검색된 명소 결과 수 가져옴
 		int spotCount = 0;
 		int plannerCount = 0;
 		spotCount = searchDao.getSpotCount(spotDto);

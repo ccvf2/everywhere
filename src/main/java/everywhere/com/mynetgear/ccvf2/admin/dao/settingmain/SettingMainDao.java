@@ -3,6 +3,7 @@ package everywhere.com.mynetgear.ccvf2.admin.dao.settingmain;
 import java.util.List;
 
 import everywhere.com.mynetgear.ccvf2.admin.dto.settingmain.SettingMainDto;
+import everywhere.com.mynetgear.ccvf2.admin.dto.settingmain.SettingMainDtoExt;
 
 /**
  * @author 배성욱
@@ -37,6 +38,15 @@ public interface SettingMainDao {
 	 * @return
 	 */
 	public List<SettingMainDto> getListBackground();
+
+	/**
+	 * @author 배성욱
+	 * @createDate 2016. 1. 23.
+	 * @described 운영자 선택을 위한 플레너 목록&검색값
+	 * @param settingMainDtoExt
+	 * @return
+	 */
+	public List<SettingMainDto> getListChoosePlanner(SettingMainDtoExt settingMainDtoExt);
 	
 	
 }

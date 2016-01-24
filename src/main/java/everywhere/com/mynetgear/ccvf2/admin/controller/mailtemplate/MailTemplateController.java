@@ -29,8 +29,8 @@ public class MailTemplateController {
 	 * @described 관리자메일템플릿 목록을 출력
 	 * @return
 	 */
-	@RequestMapping(value="/admin/mailtemplate/mailTemplateList.do", method=RequestMethod.GET)
-	public ModelAndView mailTemplatList() {
+	@RequestMapping(value="/admin/mailtemplate/mailTemplateList.do")
+	public ModelAndView mailTemplatList(HttpServletRequest request, HttpServletResponse response) {
 		ModelAndView mav= new ModelAndView();
 		mailTemplateService.mailTemplateList(mav);
 		return mav;

@@ -80,6 +80,18 @@ public class MailTemplateServiceImp implements MailTemplateService{
 		HttpServletRequest request= (HttpServletRequest)map.get("request");
 		MailTemplateDto dto = (MailTemplateDto)map.get("matilTemplateDto");
 		int result= mailTemplatedao.insertMailTemplate(dto);
+		String alert_mag="";
+		String return_url="";
+		if(result==1){
+			alert_mag="메일템플릿이 등록되었습니다.";
+			return_url="/admin/mailtemplate/mailTemplateList.do";
+		}else{
+			alert_mag="!오류가 발생하여 메일템플릿이 등록되지 않았습니다.";
+			return_url="/admin/mailtemplate/mailTemplateInsert.do";
+		}
+		mav.addObject(Constant.ALERT_MSG, alert_mag);
+		mav.addObject(Constant.RETURN_URL, return_url);
+		mav.setViewName("/admin/menu/commonMessage");
 	}
 	/**
 	 * @author 배성욱

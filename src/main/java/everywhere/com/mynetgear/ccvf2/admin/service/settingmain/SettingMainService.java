@@ -35,4 +35,11 @@ public interface SettingMainService {
 	 * @param mav
 	 */
 	public void getListBackground(ModelAndView mav);
+	/**
+	 * @author 배성욱
+	 * @createDate 2016. 1. 23.
+	 * @described 서비스 메인의 운영자 추천 선택 화면
+	 * @param mav
+	 */
+	public void getChoosePlannerView(ModelAndView mav);
 }

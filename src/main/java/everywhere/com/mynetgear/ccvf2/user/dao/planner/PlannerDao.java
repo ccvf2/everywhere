@@ -32,4 +32,5 @@ public interface PlannerDao {
 	public int updatePlanner(PlannerDto plannerDto, List<ItemDto> itemList);
 
 	public List<PlannerDto> getListPlanner_main();
+	public List<PlannerDto> getListAdminSuggest();
 }

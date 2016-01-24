@@ -68,8 +68,18 @@ $(document).ready(function () {
 						</div>
 	
 						<div class="panel-heading-v2 overflow-h">
-							<form class="sky-form">
-							<input type="hidden" id="spot_page" value="1"/>
+							<form class="sky-form" onSubmit="return false;">
+								<input type="hidden" id="spot_page" value="1"/>
+								<label class="input-group">
+									<span class="input">
+										<input type="text"  onKeypress="enterSearch(event)" id="searchWord" placeholder="검색할 명소를 입력해주세요"/>
+									</span>
+									<span class="input-group-btn">
+										<button type="button" class="btn-u btn-u-default" style="margin:0px;" onclick="searchSpot()">
+										<i class="fa fa-search"></i>
+										</button>
+									</span>
+								</label>
 								<!-- 나라 -->
 								<label class="select">
 									<select name="country_code" id="selectCountry" onchange="selectSpotList(true)">
@@ -402,6 +412,12 @@ $(document).ready(function () {
 	</div>
 	<!-- 동적 입력창을 위한 HTML 값 finish -->
 
+	<!--=== Footer Version 1 ===-->
+	<div class="footer-v1">
+		<c:import url="/WEB-INF/views/user/common/footer.jsp"/>
+	</div>
+	<!--=== End Footer Version 1 ===-->
+	
 	<!-- JS Page Level -->
 	<script type="text/javascript" src="/assets/plugins/scrollbar/js/jquery.mCustomScrollbar.concat.min.js"></script>
 	

@@ -14,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import everywhere.com.mynetgear.ccvf2.admin.dao.settingmain.SettingMainDao;
 import everywhere.com.mynetgear.ccvf2.admin.dto.settingmain.SettingMainDto;
+import everywhere.com.mynetgear.ccvf2.admin.dto.settingmain.SettingMainDtoExt;
 import everywhere.com.mynetgear.ccvf2.comm.dto.common.CommonFileIODto;
 import everywhere.com.mynetgear.ccvf2.comm.service.common.CommonFileIOService;
 import everywhere.com.mynetgear.ccvf2.comm.util.common.Constant;
@@ -101,6 +102,30 @@ public class SettingMainServiceImp implements SettingMainService {
 	mav.addObject("settingList",list);
 	mav.setViewName("/admin/settingMain/background");
 		
+	}
+
+	/**
+	 * @author 배성욱
+	 * @createDate 2016. 1. 23.
+	 * @described 서비스 메인의 운영자 추천 선택 화면
+	 * @reference class
+	 * @param mav
+	 */
+	@Override
+	public void getChoosePlannerView(ModelAndView mav) {
+		Map<String, Object> map = mav.getModelMap();
+		HttpServletRequest request=(HttpServletRequest)map.get("request");
+		SettingMainDtoExt settingMainDtoExt =null; 
+		if(map.get("settingMainDtoExt")!=null){
+			settingMainDtoExt = (SettingMainDtoExt)map.get("settingMainDtoExt");
+			
+		}else{
+			settingMainDtoExt = new SettingMainDtoExt();
+		}
+		
+		List<SettingMainDto> plannerList= settingMainDao.getListChoosePlanner(settingMainDtoExt);
+		mav.addObject("plannerList",plannerList);
+		mav.setViewName("/admin/settingMain/choosePlanner");
 	}
 
 }

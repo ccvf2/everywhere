@@ -29,7 +29,7 @@ public class AdminMainDaoImp implements AdminMainDao {
 	@Autowired
 	private PlatformTransactionManager transactionManager;
 
-	@Override
+/*	@Override
 	public int test() {
 		// 트랜잭션처리시 필요한 객체
 		TransactionDefinition definition = new DefaultTransactionDefinition();
@@ -46,5 +46,5 @@ public class AdminMainDaoImp implements AdminMainDao {
 		}
 		return result;
 	}
-
+*/
 }

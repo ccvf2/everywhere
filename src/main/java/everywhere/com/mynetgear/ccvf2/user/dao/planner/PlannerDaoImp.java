@@ -191,7 +191,21 @@ public class PlannerDaoImp implements PlannerDao {
 	@Override
 	public List<PlannerDto> getListPlanner_main() {
 		List<PlannerDto> list=null;
-		list=sqlTemplate.selectList("new_planner");
+		list=sqlTemplate.selectList("select_List_more_like");
+		return list;
+	}
+
+	/**
+	 * @author 배성욱
+	 * @createDate 2016. 1. 23.
+	 * @described 운영자 추천 플래너 가져오기 3건
+	 * @reference class
+	 * @return
+	 */
+	@Override
+	public List<PlannerDto> getListAdminSuggest() {
+		List<PlannerDto> list=null;
+		list=sqlTemplate.selectList("select_list_Admin_Suggest");
 		return list;
 	}	
 }

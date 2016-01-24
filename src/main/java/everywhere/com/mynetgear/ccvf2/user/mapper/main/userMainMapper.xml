@@ -65,7 +65,7 @@
 		  FROM
 		    (SELECT t.*
 		    FROM tbl_planner t
-		    WHERE t.USE_YN='Y0002'
+		    WHERE t.USE_YN='Y0001'
 		    ORDER BY t.reg_date DESC
 		    )f
 		  )k
@@ -73,7 +73,133 @@
 		AND <![CDATA[k.rnum  <=3]]>
 	</select>
 	
+	<!-- 좋아요 많은순 -->
+	<select id="select_List_more_like" resultType="everywhere.com.mynetgear.ccvf2.user.dto.planner.PlannerDto">
+		SELECT BB.* FROM
+			(SELECT
+				ROWNUM RNUM
+				,AA.* 
+			FROM
+				(
+				SELECT 
+					PLA.PLANNER_NO
+					, PLA.MEM_NO
+					, (SELECT MEM_NAME FROM TBL_MEMBER WHERE MEM_NO=PLA.MEM_NO )MEM_NAME
+					, PLA.PLANNER_BA_CODE
+					, PLA.TITLE
+					, (select SAVE_NAME||'.'||EXTENSION from TBL_COMMON_FILE where FILE_NO=replace(PLA.ATTACH_FILE,',','')) AS ATTACH_FILE
+					, PLA.MEMO
+					, PLA.START_DATE
+					, PLA.END_DATE
+					, PLA.REG_DATE
+					, PLA.USE_YN
+					,NVL(COUNTTABLE.sweet_count,'0')sweet_count
+					,(SELECT COUNT(*) FROM TBL_COMMON_REPLY WHERE TYPE_CODE='R0002' AND ITEM_NO=PLA.PLANNER_NO)reply_Count
+					,(SELECT COUNT(*) FROM TBL_BOOKMARK WHERE ITEM_NO=PLA.PLANNER_NO AND BOOKMARK_TYPE_CODE=PLA.PLANNER_BA_CODE)bookmark_Count
+				FROM
+					TBL_PLANNER PLA
+				LEFT OUTER JOIN
+					(SELECT PLANNER_NO,COUNT(PLANNER_NO) sweet_count FROM TBL_SWEET GROUP BY PLANNER_NO ORDER BY sweet_count DESC)COUNTTABLE
+				ON
+					PLA.PLANNER_NO=COUNTTABLE.PLANNER_NO
+				WHERE
+					PLA.USE_YN='Y0001'
+				)AA
+			ORDER BY
+			AA.sweet_count
+			DESC
+			)BB
+		WHERE
+		BB.RNUM<![CDATA[>=]]>1 AND BB.RNUM<![CDATA[<=]]>3
+	</select>
 	
+		<select id="select_list_spot_user_Main" resultType="everywhere.com.mynetgear.ccvf2.user.dto.search.SpotDtoExt">
+		SELECT
+			*
+		FROM
+			(SELECT
+				ROWNUM RNUM
+				, RTABLE.*
+			FROM
+				(SELECT 
+						SP.SPOT_NO
+					, SP.MEM_NO
+					, SP.COUNTRY_CODE
+					, (select code_name from TBL_COMMON_CODE where CODE=SP.COUNTRY_CODE) AS COUNTRY_NAME
+					, SP.CITY_CODE
+					, (select code_name from TBL_COMMON_CODE where CODE=SP.CITY_CODE) AS CITY_NAME
+					, SP.SPOT_NAME
+					, SP.SPOT_TYPE_CODE
+					, (select code_name from TBL_COMMON_CODE where CODE=SP.SPOT_TYPE_CODE) AS SPOT_TYPE_NAME
+					, SP.MEM_LEVEL_CODE
+					, SP.SPOT_NOTE
+					, (select SAVE_NAME||'.'||EXTENSION from TBL_COMMON_FILE where FILE_NO=replace(SP.ATTACH_FILE,',','')) AS ATTACH_FILE
+					, SP.SPOT_ADDR
+					, SP.SPOT_LAT
+					, SP.SPOT_LONG
+					, SP.TOTAL_STAR_SCORE
+					, SP.COUNT_STAR_SCORE
+					, SP.OPEN_API_SEQ
+					, SP.SPOT_REGDATE
+					, ROUND( NVL((SP.TOTAL_STAR_SCORE)/DECODE((SP.COUNT_STAR_SCORE),0, NULL,(SP.COUNT_STAR_SCORE)), 0), 1) AS STAR_SCORE
+					FROM
+						TBL_SPOT SP
+					ORDER BY
+						STAR_SCORE
+					DESC
+						,SP.TOTAL_STAR_SCORE 
+					DESC
+					)RTABLE
+				)TOTALTABLE
+		WHERE
+		RNUM<![CDATA[>=1]]> AND RNUM<![CDATA[<=8]]>
+	</select>
+	
+	
+	<select id="select_list_Admin_Suggest" resultType="everywhere.com.mynetgear.ccvf2.user.dto.planner.PlannerDto">
+		SELECT
+			PLA.PLANNER_NO
+			, PLA.MEM_NO
+			, (SELECT MEM_NAME FROM TBL_MEMBER WHERE MEM_NO=PLA.MEM_NO )MEM_NAME
+			, PLA.PLANNER_BA_CODE
+			, PLA.TITLE
+			, (SELECT SAVE_NAME||'.'||EXTENSION FROM TBL_COMMON_FILE WHERE FILE_NO=PLA.ATTACH_FILE)ATTACH_FILE
+			, PLA.MEMO
+			, PLA.START_DATE
+			, PLA.END_DATE
+			, PLA.REG_DATE
+			, PLA.USE_YN
+      ,(SELECT COUNT(*) FROM TBL_COMMON_REPLY WHERE TYPE_CODE='R0002' AND ITEM_NO=PLA.PLANNER_NO)reply_Count
+      ,(SELECT COUNT(*) FROM TBL_SWEET WHERE PLANNER_NO=PLA.PLANNER_NO)sweet_count
+      ,(SELECT COUNT(*) FROM TBL_BOOKMARK WHERE ITEM_NO=PLA.PLANNER_NO AND BOOKMARK_TYPE_CODE=PLA.PLANNER_BA_CODE)bookmark_Count
+		FROM
+			TBL_PLANNER PLA
+		WHERE
+			PLANNER_NO IN
+			(SELECT
+				AA.PLANNER_NO
+			FROM
+				(SELECT
+					ROWNUM RNUM ,
+					PLANNER_NO
+				FROM
+					TBL_ADMIN_MAIN_SETTING
+				WHERE
+					SETTING_SPOT_CODE='M8883'
+				AND
+					SETTING_TYPE_CODE='M9992'
+				AND
+					USE_YN='Y0001'
+				ORDER BY
+					SETTING_DATE
+				DESC
+				)AA
+			WHERE
+				AA.RNUM<![CDATA[>=]]>1
+			AND
+				AA.RNUM<![CDATA[<=]]>3
+		)
+	</select>
 	
 	
 </mapper>

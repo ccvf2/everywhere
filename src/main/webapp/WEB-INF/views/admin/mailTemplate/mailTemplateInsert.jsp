@@ -19,6 +19,7 @@
 	function doTemplateFormSubmit(){
 		//벨리데이션 체크
 		var templateForm= document.getElementById("mailTemplateForm");
+		templateForm.mtemp_content.value = tinyMCE.get("mtemp_content").getContent();
 		var valideCheck=false;
 		
 		if(templateForm.mtemp_group_code.value==''){
@@ -41,7 +42,6 @@
 			templateForm.mtemp_content.focus();
 			return false;
 		}
-		alert(tinyMCE.get("mtemp_content").getContent());
 		valideCheck=true;
 		
 		if(valideCheck==true){
@@ -219,6 +219,78 @@
 									</tr>
 							</table>
 							</form>
+							<h5>치환정보 입니다.</h5>
+							<table class="table table-bordered table-hover">
+								<tr>
+									<th colspan="10" style="text-align: center;">회원정보</th>
+								</tr>
+								<tr>
+									<th>회원이름</th>
+									<td>@[mem_name]</td>
+									<th>회원 이메일</th>
+									<td>@[mem_email]</td>
+									<th>회원 비밀번호</th>
+									<td>@[mem_pwd]</td>
+									<th>회원 전화번호</th>
+									<td>@[mem_phone]</td>
+									<th>회원 등록일</th>
+									<td>@[mem_reg_date]</td>
+								</tr>
+								<tr>
+									<th>회원 관심사항</th>
+									<td>@[mem_interest]</td>
+									<th>회원 계정상태</th>
+									<td>@[mem_status_code]</td>
+									<th>회원 등급</th>
+									<td>@[mem_level_code]</td>
+									<th>회원 인증번호 상태</th>
+									<td>@[mem_p_status_code]</td>
+									<th></th>
+									<td></td>
+								</tr>
+							</table>
+							<table class="table table-bordered table-hover">
+								<tr>
+									<th colspan="10" style="text-align: center;">관리자치환</th>
+								</tr>
+								<tr>
+									<th>시스템날짜(yyyy-MM-DD)</th>
+									<td>@[system_day1]</td>
+									<th>시스템날짜(yy-MM-DD)</th>
+									<td>@[system_day2]</td>
+									<th>시스템날짜(yyyy.MM.DD)</th>
+									<td>@[system_day3]</td>
+									<th>시스템날짜(yy.MM.DD)</th>
+									<td>@[system_day4]</td>
+									<th></th>
+									<td></td>
+								</tr>
+								<tr>
+									<th>시스템시간((시)24:(분)00:(초)00)</th>
+									<td>@[system_time1]</td>
+									<th>시스템시간(AM(시)12:(분)00:(초)00)</th>
+									<td>@[system_time2]</td>
+									<th>시스템시간((시)24:(분)00)</th>
+									<td>@[system_time3]</td>
+									<th>시스템시간(AM(시)12:(분)00)</th>
+									<td>@[system_time4]</td>
+									<th></th>
+									<td></td>
+								</tr>
+								<tr>
+									<th>replace1(지정됨)</th>
+									<td>@[replace1]</td>
+									<th>replace2(지정됨)</th>
+									<td>@[replace2]</td>
+									<th>replace3(지정됨)</th>
+									<td>@[replace3]</td>
+									<th>replace4(지정됨)</th>
+									<td>@[replace4]</td>
+									<th>replace5(지정됨)</th>
+									<td>@[replace5]</td>
+								</tr>
+							</table>
+							
 						</div>
 							
 							

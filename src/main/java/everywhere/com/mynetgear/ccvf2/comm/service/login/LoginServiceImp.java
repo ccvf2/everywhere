@@ -67,6 +67,7 @@ public class LoginServiceImp implements LoginService {
 						mav.clear();
 						returnAddress="redirect:"+ callback_url;
 					}else{
+						returnAddress="redirect:"+ callback_url;
 						if(StringUtils.equals(callback_param, Constant.SYNB_NULL)==false){
 							mav.clear();
 							returnAddress="redirect:"+ callback_url+"?"+callback_param;
