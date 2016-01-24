@@ -23,6 +23,9 @@
     
     <!-- CSS Implementing Plugins -->
     <link rel="stylesheet" href="/assets/plugins/animate.css">
+    
+    <!-- item 3개씩 나오게 -->
+	<link href="/assets/css/pages/blog_masonry_3col.css" rel="stylesheet">
 </head>
 <body>
 <div class="wrapper">
@@ -45,6 +48,7 @@
 			<!-- 메인------------------------------------------------------------------------------------------------------------------------------ -->
 			<!--=== News Block ===-->
 	        	<div class="col-md-9">
+					<div class="blog_masonry_3col">
 		        	<c:if test="${count==0}">
 	                     <div class="shadow-wrapper">
 		                    <div class="tag-box tag-box-v1 box-shadow shadow-effect-2">
@@ -61,32 +65,42 @@
 		                        <h2><c:out value="${memberDto.mem_name}님의 여행"></c:out></h2>
 		                    </div>
 		                </div>
-		            	<c:forEach var="list1" items="${plannerList}">
+						<c:forEach var="planner" items="${plannerList}">
 				            <div class="col-md-4">
-				            <div class="grid-boxes-in" style="height: 350px; background-color: 	#f0f8ff;">
-				                <img class="img-responsive" src="/attatchFile/planner/${list1.attach_file}" alt="${list1.title}" onError="this.src='/attatchFile/spot/no_image.jpg'" height="80%" width="100%">
+				            <div class="grid-boxes-in" style="height: 360px;">
+				                <img class="img-responsive" src="/attatchFile/planner/${planner.attach_file}" alt="${planner.title}" onError="this.src='/attatchFile/spot/no_image.jpg'" height="80%" width="100%" style="min-height: 170px;">
 				                <div class="grid-boxes-caption">
-				                   <h3><a href="/user/planner/readPlanner.do?planner_no=${list1.planner_no}">${list1.title}</a></h3>
-				                   
-				                   <div align="left" style="float: left;">
-					                    <a href="#"><i class="fa fa-comments-o"></i><c:out value="${list1.reply_Count}" escapeXml="false"/></a>
-					                    <a href="#"><i class="fa fa-heart-o"></i><c:out value="${list1.sweet_count}" escapeXml="false"/></a>
-					                    <a href="#"><i class="fa fa-bookmark-o"></i><c:out value="${list1.bookmark_Count}" escapeXml="false"/></a>
-				                   </div>
-				                    <div align="right" style="margin-right: 15px;">
-				                    	<i class="fa fa-clock-o"></i><fmt:formatDate pattern="yyyy-MM-dd" value="${list1.reg_date}"/>
-				                    </div>
-				                    <p>
-				                    	<c:out value="${fn:substring(list1.memo, 0,50)}" escapeXml="false"/>
-				                    	<c:if test="${fn:length(list1.memo) >50}">
-								        	…
-								        </c:if>
-				                    </p>
-				                </div>
+										<h3><a href="/user/planner/readPlanner.do?planner_no=${planner.planner_no}"> 
+												<c:out value="${fn:substring(planner.memo, 0,10)}" escapeXml="false"/>
+						                    	<c:if test="${fn:length(planner.memo) >10}">
+										        	…
+										        </c:if>
+										</a></h3>
+										 <span style="font-weight: bolder;"><c:out value="${memberDto.mem_name}"/></span>
+										 <span style="color: #777;float: right;"><i class="fa fa-pencil" title="등록일"><fmt:formatDate pattern="yy-MM-dd" value="${planner.reg_date}"/></i></span>
+										<ul class="list-inline grid-boxes-news">
+											<li><i class="fa fa-comments-o" title="댓글">&nbsp;<c:out value="${planner.reply_Count}" escapeXml="false"/></i></li>
+											<li>|</li>
+											<li><i class="fa fa-heart" title="좋아요">&nbsp;<c:out value="${planner.sweet_count}"/></i></li>
+											<li>|</li>
+											<li><i class="fa fa-tags" title="북마크">&nbsp;<c:out value="${planner.bookmark_Count}"/></i></li>
+											<li>|</li>
+											<li></li>
+											<li>
+												<c:out value="${fn:substring(planner.memo, 0,19)}" escapeXml="false"/>
+						                    	<c:if test="${fn:length(planner.memo) >19}">
+										        	…
+										        </c:if>
+												<br />
+											</li>
+											<li style="border-top: 1px solid;"><div style="margin: 1px auto;"><i class="fa fa-clock-o" title="여행기간"></i>&nbsp;<fmt:formatDate pattern="yyyy-MM-dd" value="${planner.start_date}"/>&nbsp;~&nbsp;<fmt:formatDate pattern="yyyy-MM-dd" value="${planner.end_date}"/></div></li>
+										</ul>
+									</div>
 				            </div>
 				            </div>
 						</c:forEach>
 					</c:if>
+					</div>
 		        </div>
 		        
 		        <div align="center">

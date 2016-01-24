@@ -165,7 +165,6 @@
 					</div>
 				</div>
 				<!-- 사이드 메뉴  끝 -->
-
 				<!-- 리뷰 뷰 시작 -->
 				<div class="col-md-9">
 					<div class="blog_masonry_3col">
