@@ -29,7 +29,6 @@
 <script type="text/javascript">
 $(document).ready(function () {
 	$('.nav-stacked').width($('.col-sm-3').width());
-	$('.breadcrumbs-v1').css('background-image', 'url(/attatchFile/planner/)');
 });
 </script>
 <body>
@@ -41,7 +40,7 @@ $(document).ready(function () {
 		<!--=== End Header ===-->
 
 		<!--=== Breadcrumbs ===-->
-		<div class="breadcrumbs-v1">
+		<div class="breadcrumbs-v5">
 			<div class="container" style="height: 50px;">
 				<span></span>
 				<h1>${plannerDto.title}</h1>

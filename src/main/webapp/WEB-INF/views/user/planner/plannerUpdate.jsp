@@ -30,7 +30,7 @@
 <script type="text/javascript">
 $(document).ready(function () {
 	$('.nav-stacked').width($('.col-sm-3').width());
-	$('.breadcrumbs-v1').css('background-image', 'url(/attatchFile/planner/)');
+	$('.breadcrumbs-v5').css('background-image', 'url(/attatchFile/planner/${plannerDto.attach_file})');
 });
 </script>
 <body>
@@ -42,7 +42,7 @@ $(document).ready(function () {
 		<!--=== End Header ===-->
 
 		<!--=== Breadcrumbs ===-->
-		<div class="breadcrumbs-v1">
+		<div class="breadcrumbs-v5">
 			<div class="container" style="height: 50px;">
 				<span></span>
 				<h1 id="title">${plannerDto.title} <a href="javascript:renamePlanner()"><i class="fa fa-pencil"></i></a> </h1>

@@ -41,7 +41,7 @@
 		<!--=== End Header ===-->
 
 		<!--=== Breadcrumbs ===-->
-		<div class="breadcrumbs-v1">
+		<div class="breadcrumbs-v5">
 			<div class="container" style="height: 50px;">
 				<c:if test="${plannerDto.planner_ba_code == 'E0001'}">
 					<span>여행 스케줄</span>
@@ -108,10 +108,10 @@
 							<span><i class="fa fa-heart-o" ></i><i class="fa fa-heart" style="color:green"></i><span class="plan-detail-view-like-count"> ${sweet_count }</span></span>
 							<span class="txt-info">좋아요</span>
 						</a><!-- 좋아요 -->
-						<a id="bookmarkBtn" class="btn-bookmark  " title="북마크">
+						<a id="bookmarkBtn" class="btn-bookmark  " title="즐겨찾기">
 							<span><i class="fa fa-bookmark-o" ></i><i class="fa fa-bookmark" style="color:green"></i><span class="plan-detail-view-bookmark-count"> ${bookmark_count }</span></span>
-							<span class="txt-info">북마크</span>
-						</a><!-- 북마크 -->
+							<span class="txt-info">즐겨찾기</span>
+						</a><!-- 즐겨찾기 -->
 					</div>
 
 					<ul class="list-group sidebar-nav-v1 margin-bottom-20 active">

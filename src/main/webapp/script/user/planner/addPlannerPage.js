@@ -95,7 +95,7 @@ function addPlannerPhoto(input){
 			var reader = new FileReader();
 			reader.readAsDataURL(input.files[0]);
 			reader.onloadend = function (e) {
-				$('.breadcrumbs-v1').css('background-image', 'url('+e.target.result +')');
+				$('.breadcrumbs-v5').css('background-image', 'url('+e.target.result +')');
 			}
 		}
 	}
