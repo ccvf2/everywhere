@@ -290,10 +290,23 @@
 		select count(*) from tbl_bookmark where mem_no=#{mem_no}
 	</select>
 	
-	<select id="everywhere.com.mynetgear.ccvf2.user.mapper.member.getPlannerCount" parameterType="int" resultType="int">
+	<select id="everywhere.com.mynetgear.ccvf2.user.mapper.member.getPlannerCount" parameterType="java.util.HashMap" resultType="int">
 		select count(*)
 		from tbl_planner
 		where mem_no=#{mem_no}
+		and PLANNER_BA_CODE=#{SCHEDULE_TYPE}
+		<choose>
+			<when test="MYPAGE_CODE=='S0001'">
+				and (USE_YN='Y0001' or USE_YN='Y0002')
+			</when>
+			<otherwise>
+				and USE_YN='Y0001'
+			</otherwise>
+		</choose>
+		<if test="MYPAGE_SEARCH_CODE=='M1028'">
+			and (title like '%'||#{search, jdbcType=VARCHAR}||'%' 
+												or memo like '%'||#{search, jdbcType=VARCHAR}||'%')
+		</if>
 	</select>
 	
 	<select id="everywhere.com.mynetgear.ccvf2.user.mapper.member.getPlannerList" parameterType="java.util.HashMap" resultType="everywhere.com.mynetgear.ccvf2.user.dto.planner.PlannerDto">
@@ -335,7 +348,7 @@
 									and USE_YN='Y0001'
 								</otherwise>
 							</choose>
-				            <if test="search =='M1028'">
+				            <if test="MYPAGE_SEARCH_CODE=='M1028'">
 				            	and (title like '%'||#{search, jdbcType=VARCHAR}||'%' 
 										or memo like '%'||#{search, jdbcType=VARCHAR}||'%')
 				            </if>

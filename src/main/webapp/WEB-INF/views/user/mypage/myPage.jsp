@@ -65,14 +65,31 @@
 		                        <h2><c:out value="${memberDto.mem_name}님의 여행"></c:out></h2>
 		                    </div>
 		                </div>
+		                <form method="get" id="sky-form3" class="sky-form">
+		                	<c:if test="${SCHEDULE_TYPE=='E0002'}"><header>검색으로 리뷰를 더욱 빠르게 찾아보세요</header></c:if>
+							<c:if test="${SCHEDULE_TYPE=='E0001'}"><header>검색으로 일정을 더욱 빠르게 찾아보세요</header></c:if>
+							<div>
+								<fieldset>
+									<section>
+										<div class="input-group">
+											<input type="text" class="form-control" id="search"
+												placeholder="제목 or 내용" /> <span class="input-group-btn">
+												<button class="btn-u btn-block" type="button"
+													onclick="javascript:location.href='/user/myPage/myPage.do?uandMe=${uandMe}&MYPAGE_SEARCH_CODE=M1028&SCHEDULE_TYPE=${SCHEDULE_TYPE}&list_code=${list_code}&mem_no=${memberDto.mem_no}&search='+search.value">검색</button>
+											</span>
+										</div>
+									</section>
+								</fieldset>
+							</div>
+						</form>
 						<c:forEach var="planner" items="${plannerList}">
 				            <div class="col-md-4">
 				            <div class="grid-boxes-in" style="height: 360px;">
 				                <img class="img-responsive" src="/attatchFile/planner/${planner.attach_file}" alt="${planner.title}" onError="this.src='/attatchFile/spot/no_image.jpg'" height="80%" width="100%" style="min-height: 170px;">
 				                <div class="grid-boxes-caption">
 										<h3><a href="/user/planner/readPlanner.do?planner_no=${planner.planner_no}"> 
-												<c:out value="${fn:substring(planner.memo, 0,8)}" escapeXml="false"/>
-						                    	<c:if test="${fn:length(planner.memo) >8}">
+												<c:out value="${fn:substring(planner.title, 0,8)}" escapeXml="false"/>
+						                    	<c:if test="${fn:length(planner.title) >8}">
 										        	…
 										        </c:if>
 										</a></h3>
@@ -131,14 +148,14 @@
 							  <ul class="pagination">
 							  	<c:if test="${startPage > pageBlock}">
 								  	<li>
-									  	<a href="/user/myPage/myPage.do?${uandMe}&mem_no=${memberDto.mem_no}&pageNumber=${currentPage-pageBlock}" aria-label="Previous">
+									  	<a href="/user/myPage/myPage.do?${uandMe}&mem_no=${memberDto.mem_no}&pageNumber=${currentPage-pageBlock}&SCHEDULE_TYPE=${SCHEDULE_TYPE}&MYPAGE_SEARCH_CODE=${MYPAGE_SEARCH_CODE}" aria-label="Previous">
 									        <span aria-hidden="true">&laquo;</span>
 								     	</a>
 							     	</li>
 								</c:if>
 							    <c:forEach var="i" begin="${startPage}" end="${endPage}">
 									 <c:if test="${i!=currentPage}">
-									 	<li><a href="/user/myPage/myPage.do?${uandMe}&mem_no=${memberDto.mem_no}&pageNumber=${i}" role="button" class="btn btn-default">${i}</a></li>
+									 	<li><a href="/user/myPage/myPage.do?${uandMe}&mem_no=${memberDto.mem_no}&pageNumber=${i}&SCHEDULE_TYPE=${SCHEDULE_TYPE}&MYPAGE_SEARCH_CODE=${MYPAGE_SEARCH_CODE}" role="button" class="btn btn-default">${i}</a></li>
 									 </c:if>
 									 <c:if test="${i==currentPage}">
 									 	<li class="active"><a href="#" role="button" class="btn btn-default">${i}</a></li>
@@ -147,7 +164,7 @@
 								
 						  		<c:if test="${endPage < pageCount }">
 						  			<li>
-								      <a href="/user/myPage/myPage.do?${uandMe}&mem_no=${memberDto.mem_no}&pageNumber=${startPage+pageBlock}" aria-label="Next">
+								      <a href="/user/myPage/myPage.do?${uandMe}&mem_no=${memberDto.mem_no}&pageNumber=${startPage+pageBlock}&SCHEDULE_TYPE=${SCHEDULE_TYPE}&MYPAGE_SEARCH_CODE=${MYPAGE_SEARCH_CODE}" aria-label="Next">
 								        <span aria-hidden="true">&raquo;</span>
 								      </a>
 								    </li>

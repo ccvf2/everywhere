@@ -118,10 +118,10 @@
 				<a data-toggle="collapse" data-parent="#sidebar-nav" href="#collapse-buttons"><i class="fa fa-cubes"></i><c:out value="${memberDto.mem_name}님의 여행"/></a>
 				<ul id="collapse-buttons"  class="collapse in">
 					<li>
-						<a href="/user/myPage/myPage.do?${uandMe}&mem_no=${memberDto.mem_no}&SCHEDULE_TYPE=E0002"><i class="fa fa-home"></i>리뷰</a>
+						<a href="/user/myPage/myPage.do?${uandMe}&mem_no=${memberDto.mem_no}&SCHEDULE_TYPE=E0002&MYPAGE_SEARCH_CODE=M1029"><i class="fa fa-home"></i>리뷰</a>
 					</li>
 					<li>
-						<a href="/user/myPage/myPage.do?${uandMe}&mem_no=${memberDto.mem_no}&SCHEDULE_TYPE=E0001"><i class="fa fa-comments-o"></i>일정</a>
+						<a href="/user/myPage/myPage.do?${uandMe}&mem_no=${memberDto.mem_no}&SCHEDULE_TYPE=E0001&MYPAGE_SEARCH_CODE=M1029"><i class="fa fa-comments-o"></i>일정</a>
 					</li>
 				</ul>
 			</li>

@@ -219,7 +219,7 @@
 			                        <a href="javascript:loginFormReqiest()">마이페이지</a>
 	                    		</c:when>
 	                    		<c:otherwise>
-			                        <a href="/user/myPage/myPage.do?uandMe=S0001&SCHEDULE_TYPE=E0002">마이페이지</a>
+			                        <a href="/user/myPage/myPage.do?uandMe=S0001&SCHEDULE_TYPE=E0002&MYPAGE_SEARCH_CODE=M1029">마이페이지</a>
 	                    		</c:otherwise>
 	                    	</c:choose>
 	                    </li>

@@ -139,6 +139,9 @@ public class MemberDaoImp implements MemberDao {
 		map.put("BOOKMARK_SEARC_CODE", BOOKMARK_SEARC_CODE);
 		map.put("search", search);
 		
+		
+		System.out.println("--------------BOOKMARK_SEARC_CODE : " + BOOKMARK_SEARC_CODE);
+		System.out.println("--------------search : " + search);
 		return sqlTemplate.selectList("getBookMarkList", map);
 	}
 
@@ -156,12 +159,18 @@ public class MemberDaoImp implements MemberDao {
 	}
 
 	@Override
-	public int getPlannerCount(int mem_no) {
-		return sqlTemplate.selectOne("everywhere.com.mynetgear.ccvf2.user.mapper.member.getPlannerCount", mem_no);
+	public int getPlannerCount(int mem_no, String SCHEDULE_TYPE, String MYPAGE_CODE, String MYPAGE_SEARCH_CODE, String search) {
+		HashMap<String, Object> map=new HashMap<String, Object>();
+		map.put("mem_no", mem_no);
+		map.put("SCHEDULE_TYPE", SCHEDULE_TYPE);
+		map.put("MYPAGE_CODE", MYPAGE_CODE);
+		map.put("MYPAGE_SEARCH_CODE", MYPAGE_SEARCH_CODE);
+		map.put("search", search);
+		return sqlTemplate.selectOne("everywhere.com.mynetgear.ccvf2.user.mapper.member.getPlannerCount", map);
 	}
 
 	@Override
-	public List<PlannerDto> getPlannerList(int mem_no, int startRow, int endRow, String MYPAGE_CODE, String search, String SCHEDULE_TYPE) {
+	public List<PlannerDto> getPlannerList(int mem_no, int startRow, int endRow, String MYPAGE_CODE, String search, String SCHEDULE_TYPE, String MYPAGE_SEARCH_CODE) {
 		HashMap<String, Object> map=new HashMap<String, Object>();
 		map.put("startRow", startRow);
 		map.put("endRow", endRow);
@@ -169,6 +178,7 @@ public class MemberDaoImp implements MemberDao {
 		map.put("MYPAGE_CODE", MYPAGE_CODE);
 		map.put("search", search);
 		map.put("SCHEDULE_TYPE", SCHEDULE_TYPE);
+		map.put("MYPAGE_SEARCH_CODE", MYPAGE_SEARCH_CODE);
 		return sqlTemplate.selectList("everywhere.com.mynetgear.ccvf2.user.mapper.member.getPlannerList", map);
 	}
 

@@ -105,40 +105,14 @@
                 <!--Basic Table-->
                 <c:if test="${count>0}">
                 	<c:if test="${list_code=='M1030'}">
-                		<%-- <c:forEach var="list1" items="${plannerList}">
-				            <div class="col-md-4">
-				            <div class="grid-boxes-in" style="height: 350px; background-color: 	#f0f8ff;">
-				                <img class="img-responsive" src="/attatchFile/planner/${list1.attach_file}" alt="${list1.title}" onError="this.src='/attatchFile/spot/no_image.jpg'" height="80%" width="100%">
-				                <div class="grid-boxes-caption">
-				                   <h3><a href="/user/planner/readPlanner.do?planner_no=${list1.planner_no}">${list1.title}</a></h3>
-				                   
-				                   <div align="left" style="float: left;">
-					                    <a href="#"><i class="fa fa-comments-o"></i><c:out value="${list1.reply_Count}" escapeXml="false"/></a>
-					                    <a href="#"><i class="fa fa-heart-o"></i><c:out value="${list1.sweet_count}" escapeXml="false"/></a>
-					                    <a href="#"><i class="fa fa-bookmark-o"></i><c:out value="${list1.bookmark_Count}" escapeXml="false"/></a>
-				                   </div>
-				                    <div align="right" style="margin-right: 15px;">
-				                    	<i class="fa fa-clock-o"></i><fmt:formatDate pattern="yyyy-MM-dd" value="${list1.reg_date}"/>
-				                    </div>
-				                    <p>
-				                    	<c:out value="${fn:substring(list1.memo, 0,50)}" escapeXml="false"/>
-				                    	<c:if test="${fn:length(list1.memo) >50}">
-								        	…
-								        </c:if>
-				                    </p>
-				                </div>
-				            </div>
-				            </div>
-						</c:forEach> --%>
-						
 						<c:forEach var="planner" items="${plannerList}">
 				            <div class="col-md-4">
 				            <div class="grid-boxes-in" style="height: 360px;">
 				                <img class="img-responsive" src="/attatchFile/planner/${planner.attach_file}" alt="${planner.title}" onError="this.src='/attatchFile/spot/no_image.jpg'" height="80%" width="100%" style="min-height: 170px;">
 				                <div class="grid-boxes-caption">
 										<h3><a href="/user/planner/readPlanner.do?planner_no=${planner.planner_no}"> 
-												<c:out value="${fn:substring(planner.memo, 0,8)}" escapeXml="false"/>
-						                    	<c:if test="${fn:length(planner.memo) >8}">
+												<c:out value="${fn:substring(planner.title, 0,8)}" escapeXml="false"/>
+						                    	<c:if test="${fn:length(planner.title) >8}">
 										        	…
 										        </c:if>
 										</a></h3>
