@@ -39,7 +39,7 @@
                 <span>서버내부오류가 발생하였습니다.</span>
                 <p>문제가 계속 될 경우 관리자에 문의하세요. <br /></p>
                         <div class="col-md-6 col-md-offset-3">
-                            <a class="btn-u btn-brd btn-u-light" href="/">메인으로 가기</a>
+                            <a class="btn-u btn-brd btn-u-light" href="/user/main/main.do">메인으로 가기</a>
                         </div>
                         <br />
                         <br />
