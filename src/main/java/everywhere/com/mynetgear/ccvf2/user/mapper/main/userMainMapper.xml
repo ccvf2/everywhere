@@ -152,7 +152,7 @@
 					)RTABLE
 				)TOTALTABLE
 		WHERE
-		RNUM<![CDATA[>=1]]> AND RNUM<![CDATA[<=6]]>
+		RNUM<![CDATA[>=1]]> AND RNUM<![CDATA[<=8]]>
 	</select>
 	
 	
