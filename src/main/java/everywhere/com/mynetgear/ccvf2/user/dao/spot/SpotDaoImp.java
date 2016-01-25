@@ -33,7 +33,6 @@ public class SpotDaoImp implements SpotDao {
 
 	@Override
 	public List<SpotDto> getSpotList(SpotDto spotDto, int currNum, int spotSize) {
-		// 이거
 		int startNum = (currNum-1)*spotSize+1;
 		int endNum = currNum*spotSize;
 		Map <String, Object> hmap = new HashMap<String, Object>();
@@ -59,10 +58,10 @@ public class SpotDaoImp implements SpotDao {
 
 	@Override
 	public int updateSpot(SpotDto spotDto) {
-		if(spotDto.getAttach_file() == null && spotDto.getAttach_file().equals(""))
-			return sqlTemplate.update("update_spot", spotDto);
-		else
+		if(spotDto.getAttach_file() != null && spotDto.getAttach_file().equals("") != true )
 			return sqlTemplate.update("update_spot_with_file", spotDto);
+		else
+			return sqlTemplate.update("update_spot", spotDto);
 	}
 	
 	@Override
@@ -83,6 +82,28 @@ public class SpotDaoImp implements SpotDao {
 	@Override
 	public int ratingSpot(SpotDto spotDto) {
 		return sqlTemplate.update("update_spot_rate", spotDto);
+	}
+	
+	@Override
+	public List<SpotDtoExt> getMySpotList(int mem_no, String search, int currNum, int spotSize) {
+		int startNum = (currNum-1)*spotSize+1;
+		int endNum = currNum*spotSize;
+		Map <String, Object> hmap = new HashMap<String, Object>();
+		hmap.put("mem_no", mem_no);
+		hmap.put("searchWord", search);
+		hmap.put("startNum", startNum);
+		hmap.put("endNum", endNum);
+		
+		return sqlTemplate.selectList("select_my_spot_list", hmap);
+	}
+	
+	@Override
+	public int getTotalMySpotSize(int mem_no, String search) {
+		Map <String, Object> hmap = new HashMap<String, Object>();
+		hmap.put("mem_no", mem_no);
+		hmap.put("searchWord", search);
+		
+		return sqlTemplate.selectOne("select_total_my_spot_count", hmap);
 	}
 
 	/**

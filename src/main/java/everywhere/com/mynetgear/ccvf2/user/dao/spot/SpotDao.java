@@ -24,6 +24,9 @@ public interface SpotDao {
 	public int deleteSpot(int spot_no);
 	public int ratingSpot(SpotDto spotDto);
 	
+	public List<SpotDtoExt> getMySpotList(int mem_no, String search, int currNum, int spotSize);
+	public int getTotalMySpotSize(int mem_no, String search);
+	
 	//메인에 뿌려질 명소목록(6개)
 	public List<SpotDtoExt> getListSpotUserMain();
 }

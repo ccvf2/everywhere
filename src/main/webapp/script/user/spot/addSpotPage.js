@@ -65,3 +65,17 @@ function addSpotForm(form){
 		return false;
 	}
 }
+
+function updateSpotForm(form){
+	if(form.spot_name.value == null || form.spot_name.value.trim()==""){
+		alert("명소명을 입력해주세요.");
+		form.spot_name.focus();
+		return false;
+	}
+	
+	if(form.spot_note.value == null || form.spot_note.value.trim()==""){
+		alert("명소에 대한 간단한 설명을 입력해주세요.");
+		form.spot_note.focus();
+		return false;
+	}
+}

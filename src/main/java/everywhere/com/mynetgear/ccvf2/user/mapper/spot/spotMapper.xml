@@ -105,4 +105,54 @@
 	<update id="update_spot_rate" parameterType="everywhere.com.mynetgear.ccvf2.user.dto.spot.SpotDto">
 		update tbl_spot set total_star_score=#{total_star_score}, count_star_score=#{count_star_score} where spot_no=#{spot_no}
 	</update>
+	
+	<select id="select_my_spot_list" resultType="everywhere.com.mynetgear.ccvf2.user.dto.search.SpotDtoExt" parameterType="java.util.Map">
+		select * from (
+		select rownum rnum, a.* from
+		(select SPOT_NO
+				, MEM_NO
+				, COUNTRY_CODE
+				, (select code_name from TBL_COMMON_CODE where CODE=COUNTRY_CODE) AS COUNTRY_NAME
+				, CITY_CODE
+				, (select code_name from TBL_COMMON_CODE where CODE=CITY_CODE) AS CITY_NAME
+				, SPOT_NAME
+				, SPOT_TYPE_CODE
+				, (select code_name from TBL_COMMON_CODE where CODE=SPOT_TYPE_CODE) AS SPOT_TYPE_NAME
+				, MEM_LEVEL_CODE
+				, SPOT_NOTE
+				, (select SAVE_NAME||'.'||EXTENSION from TBL_COMMON_FILE where FILE_NO=replace(ATTACH_FILE,',','')) AS ATTACH_FILE
+				, SPOT_ADDR
+				, SPOT_LAT
+				, SPOT_LONG
+				, TOTAL_STAR_SCORE
+				, COUNT_STAR_SCORE
+				, OPEN_API_SEQ
+				, SPOT_REGDATE
+				, ROUND( NVL((TOTAL_STAR_SCORE)/DECODE((COUNT_STAR_SCORE),0, NULL,(COUNT_STAR_SCORE)), 0), 1) AS STAR_SCORE
+				from tbl_spot 
+			<where>
+				<choose>
+					<when test="searchWord != '' and searchWord != null">
+					AND (spot_name like '%'||#{searchWord, jdbcType=VARCHAR}||'%' 
+						 OR spot_note like '%'||#{searchWord, jdbcType=VARCHAR}||'%')
+					</when>
+				</choose>
+				AND mem_no = ${mem_no}
+			</where>
+		)a)b
+		where rnum<![CDATA[>=]]>#{startNum} and rnum<![CDATA[<=]]>#{endNum}
+	</select>
+	
+	<select id="select_total_my_spot_count" parameterType="java.util.Map" resultType="int">
+		select count(*) from tbl_spot
+			<where>
+				<choose>
+					<when test="searchWord != '' and searchWord != null">
+					AND (spot_name like '%'||#{searchWord, jdbcType=VARCHAR}||'%' 
+						 OR spot_note like '%'||#{searchWord, jdbcType=VARCHAR}||'%')
+					</when>
+				</choose>
+				AND mem_no = ${mem_no}
+			</where>
+	</select>
 </mapper>

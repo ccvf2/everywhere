@@ -25,6 +25,7 @@ import everywhere.com.mynetgear.ccvf2.comm.service.commoncode.CommonCodeService;
 import everywhere.com.mynetgear.ccvf2.comm.util.common.Constant;
 import everywhere.com.mynetgear.ccvf2.user.dao.spot.SpotDao;
 import everywhere.com.mynetgear.ccvf2.user.dto.member.MemberDto;
+import everywhere.com.mynetgear.ccvf2.user.dto.search.SpotDtoExt;
 import everywhere.com.mynetgear.ccvf2.user.dto.spot.SpotDto;
 
 @Component
@@ -235,6 +236,7 @@ public class SpotServiceImp implements SpotService{
 		HttpServletRequest request = (HttpServletRequest)map.get("request");
 		MemberDto userInfo = (MemberDto)request.getSession().getAttribute(Constant.SYNN_LOGIN_OBJECT);
 		int spot_no = Integer.parseInt(request.getParameter("spot_no"));
+		int page = Integer.parseInt(request.getParameter("page"));
 		
 		SpotDto spotDto = spotDao.getOneSpot(spot_no);
 		
@@ -261,6 +263,7 @@ public class SpotServiceImp implements SpotService{
 		mav.addObject("cityList", cityList);
 		mav.addObject("spotTypeList", spotTypeList);
 		mav.addObject("spotDto", spotDto);
+		mav.addObject("page", page);
 		
 		mav.setViewName("/user/spot/spotUpdate");
 	}
@@ -270,6 +273,7 @@ public class SpotServiceImp implements SpotService{
 		HttpServletRequest request = (HttpServletRequest)map.get("request");
 		MemberDto userInfo = (MemberDto)request.getSession().getAttribute(Constant.SYNN_LOGIN_OBJECT);
 		SpotDto spotDto = (SpotDto)map.get("spotDto");
+		int page = Integer.parseInt(request.getParameter("page"));
 		
 		CommonFileIODto commonFileIODto = commonFileIOService.requestWriteFileAndDTO(request, "spot_image", spotPath);
 		if(commonFileIODto != null){
@@ -284,6 +288,7 @@ public class SpotServiceImp implements SpotService{
 		
 		mav.addObject("result", result);
 		mav.addObject("spot_no", spotDto.getSpot_no());
+		mav.addObject("page", page);
 		mav.setViewName("/user/spot/spotUpdateOk");
 	}
 
@@ -331,5 +336,40 @@ public class SpotServiceImp implements SpotService{
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+
+	@Override
+	public void getMySpotList(ModelAndView mav) {
+		Map<String, Object> map=mav.getModelMap();
+		HttpServletRequest request = (HttpServletRequest)map.get("request");
+		MemberDto userInfo = (MemberDto)request.getSession().getAttribute(Constant.SYNN_LOGIN_OBJECT);
+		String search = request.getParameter("search");
+
+		String spot_page = request.getParameter("spot_page");
+		if(spot_page == null)
+			spot_page = "1";
+		int curr_page = Integer.parseInt(spot_page);
+		int spotSize = 12;
+
+		List<SpotDtoExt> mySpotList = spotDao.getMySpotList(userInfo.getMem_no(), search, curr_page, spotSize);
+		int total = spotDao.getTotalMySpotSize(userInfo.getMem_no(), search);
+		
+		int pageBlock = 5;
+		int pageCount = total/spotSize+(total%spotSize==0?0:1);
+		int startPage=((curr_page-1) / pageBlock) * pageBlock + 1;
+		int endPage = startPage + pageBlock - 1;
+		if(endPage>pageCount){
+			endPage = pageCount;
+		}
+		
+		mav.addObject("mySpotList", mySpotList);
+		mav.addObject("memberDto", userInfo);
+		mav.addObject("search", search);
+		mav.addObject("total", total);
+		mav.addObject("pageCount", pageCount);
+		mav.addObject("currPage", curr_page);
+		mav.addObject("startPage", startPage);
+		mav.addObject("endPage", endPage);
+		mav.setViewName("/user/myPage/myPageSpot");
 	}
 }
