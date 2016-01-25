@@ -206,9 +206,13 @@ public interface MemberDao {
 	 * @createDate 2016. 1. 22.
 	 * @described 마이페이지 플랜 카운트
 	 * @param mem_no
+	 * @param SCHEDULE_TYPE 
+	 * @param MYPAGE_CODE 
+	 * @param search 
+	 * @param MYPAGE_SEARCH_CODE 
 	 * @return
 	 */
-	public int getPlannerCount(int mem_no);
+	public int getPlannerCount(int mem_no, String SCHEDULE_TYPE, String MYPAGE_CODE, String MYPAGE_SEARCH_CODE, String search);
 
 	/**
 	 * @author 김성광
@@ -219,9 +223,11 @@ public interface MemberDao {
 	 * @param endRow
 	 * @param MYPAGE_CODE 
 	 * @param search 
+	 * @param SCHEDULE_TYPE 
+	 * @param mYPAGE_SEARCH_CODE 
 	 * @return
 	 */
-	public List<PlannerDto> getPlannerList(int mem_no, int startRow, int endRow, String MYPAGE_CODE, String search);
+	public List<PlannerDto> getPlannerList(int mem_no, int startRow, int endRow, String MYPAGE_CODE, String search, String SCHEDULE_TYPE, String mYPAGE_SEARCH_CODE);
 
 	/**
 	 * @author 김성광

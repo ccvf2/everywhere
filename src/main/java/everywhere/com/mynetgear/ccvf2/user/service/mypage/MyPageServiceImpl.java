@@ -49,26 +49,34 @@ public class MyPageServiceImpl implements MyPageService {
 		
 		HttpSession session = request.getSession();
 		MemberDto memberDto=(MemberDto) session.getAttribute(Constant.SYNN_LOGIN_OBJECT);
+		String SCHEDULE_TYPE=request.getParameter("SCHEDULE_TYPE");
+		
+		String uandMe=request.getParameter("uandMe");
 		
 		String pageNumber=request.getParameter("pageNumber");
 		if(pageNumber==null) pageNumber="1";
 		
 		int mem_no=memberDto.getMem_no();
-		int boardSize=9;
+		int boardSize=12;
 		
 		int currentPage = Integer.parseInt(pageNumber);
 		int startRow = (currentPage - 1) * boardSize + 1;
 		int endRow = currentPage * boardSize;
 		
+		String MYPAGE_CODE=Constant.MYPAGE_CODE_M;
+		String search="";
+		String MYPAGE_SEARCH_CODE=request.getParameter("MYPAGE_SEARCH_CODE");
+		
+		if(MYPAGE_SEARCH_CODE.equals("M1028")){
+			search=request.getParameter("search");
+		}
 		System.out.println("mem_no : " + mem_no);
-		int count=memberDao.getPlannerCount(mem_no);
+		int count=memberDao.getPlannerCount(mem_no, SCHEDULE_TYPE, MYPAGE_CODE, MYPAGE_SEARCH_CODE, search);
 		
 		System.out.println("----------------getPlannerCount : " + count);
-		String MYPAGE_CODE=Constant.MYPAGE_CODE_M;
-		String search=Constant.SEARCH_N_MYPAGE_CODE;
 		List<PlannerDto> plannerList=null;
 		if(count>0) {
-			plannerList=memberDao.getPlannerList(memberDto.getMem_no(), startRow, endRow, MYPAGE_CODE, search);
+			plannerList=memberDao.getPlannerList(memberDto.getMem_no(), startRow, endRow, MYPAGE_CODE, search, SCHEDULE_TYPE, MYPAGE_SEARCH_CODE);
 			System.out.println("---------------plannerList.size() : " + plannerList.size());
 			
 			for(int i=0; i<plannerList.size(); i++){
@@ -88,6 +96,9 @@ public class MyPageServiceImpl implements MyPageService {
 		mav.addObject("count", count);
 		mav.addObject("boardSize", boardSize);
 		mav.addObject("currentPage", currentPage);
+		mav.addObject("SCHEDULE_TYPE", SCHEDULE_TYPE);
+		mav.addObject("MYPAGE_SEARCH_CODE", MYPAGE_SEARCH_CODE);
+		mav.addObject("uandMe", uandMe);
 		mav.setViewName("/user/myPage/myPage");
 		return mav;
 	}
@@ -97,11 +108,13 @@ public class MyPageServiceImpl implements MyPageService {
 		Map<String, Object> map = mav.getModelMap();
 		HttpServletRequest request= (HttpServletRequest)map.get("request");
 		int mate_no=Integer.parseInt(request.getParameter("mem_no"));
+		String SCHEDULE_TYPE=request.getParameter("SCHEDULE_TYPE");
 		
 		MemberDto memberDto = memberDao.memberRead(mate_no);
 		
 		HttpSession session = request.getSession();
 		MemberDto myDto=(MemberDto) session.getAttribute(Constant.SYNN_LOGIN_OBJECT);
+		String uandMe=request.getParameter("uandMe");
 		
 		int mem_no=myDto.getMem_no();
 		HashMap<String, Integer> mateMap=new HashMap<String, Integer>();
@@ -113,22 +126,27 @@ public class MyPageServiceImpl implements MyPageService {
 		String pageNumber=request.getParameter("pageNumber");
 		if(pageNumber==null) pageNumber="1";
 		
-		int boardSize=9;
+		int boardSize=12;
 		
 		int currentPage = Integer.parseInt(pageNumber);
 		int startRow = (currentPage - 1) * boardSize + 1;
 		int endRow = currentPage * boardSize;
 		
+		String MYPAGE_CODE=Constant.MYPAGE_CODE_U;
+		String search="";
+		String MYPAGE_SEARCH_CODE=request.getParameter("MYPAGE_SEARCH_CODE");
+		
+		if(MYPAGE_SEARCH_CODE.equals("M1028")){
+			search=request.getParameter("search");
+		}
 		System.out.println("mate_no : " + mem_no);
-		int count=memberDao.getPlannerCount(mate_no);
+		int count=memberDao.getPlannerCount(mate_no, SCHEDULE_TYPE, MYPAGE_CODE, MYPAGE_SEARCH_CODE, search);
 		
 		System.out.println("----------------getPlannerCount : " + count);
 		
-		String MYPAGE_CODE=Constant.MYPAGE_CODE_U;
-		String search=Constant.SEARCH_N_MYPAGE_CODE;
 		List<PlannerDto> plannerList=null;
 		if(count>0) {
-			plannerList=memberDao.getPlannerList(mate_no, startRow, endRow, MYPAGE_CODE, search);
+			plannerList=memberDao.getPlannerList(mate_no, startRow, endRow, MYPAGE_CODE, search, SCHEDULE_TYPE, MYPAGE_SEARCH_CODE);
 			
 			for(int i=0; i<plannerList.size(); i++){
 				PlannerDto dto= plannerList.get(i);
@@ -149,6 +167,8 @@ public class MyPageServiceImpl implements MyPageService {
 		mav.addObject("count", count);
 		mav.addObject("boardSize", boardSize);
 		mav.addObject("currentPage", currentPage);
+		mav.addObject("SCHEDULE_TYPE", SCHEDULE_TYPE);
+		mav.addObject("uandMe", uandMe);
 		mav.setViewName("/user/myPage/myPage");
 		
 		return mav;
@@ -327,7 +347,7 @@ public class MyPageServiceImpl implements MyPageService {
 		String pageNumber=request.getParameter("pageNumber");
 		if(pageNumber==null) pageNumber="1";
 		
-		int boardSize=9;
+		int boardSize=12;
 		
 		int currentPage = Integer.parseInt(pageNumber);
 		int startRow = (currentPage - 1) * boardSize + 1;
@@ -337,6 +357,15 @@ public class MyPageServiceImpl implements MyPageService {
 		List<PlannerDto> plannerList=null;
 		if(count>0) {
 			plannerList=memberDao.getBookMarkList(mem_no, startRow, endRow, list_code, BOOKMARK_SEARC_CODE, search);
+			System.out.println("-------------------------plannerList : " + plannerList.size());
+			
+			for(int i=0; i<plannerList.size(); i++){
+				PlannerDto dto= plannerList.get(i);
+				StringUtils.clean(dto.getMemo());
+				dto.setMemo(StringUtils.replace(dto.getMemo(), "<br/>", "\r\n"));
+				System.out.println("dto.toString() : " + dto.toString()); 
+				plannerList.set(i, dto);
+			}
 		}
 	
 		mav.addObject("list_code", list_code);
@@ -404,7 +433,7 @@ public class MyPageServiceImpl implements MyPageService {
 		String pageNumber=request.getParameter("pageNumber");
 		if(pageNumber==null) pageNumber="1";
 		
-		int boardSize=9;
+		int boardSize=12;
 		
 		int currentPage = Integer.parseInt(pageNumber);
 		int startRow = (currentPage - 1) * boardSize + 1;
@@ -416,6 +445,14 @@ public class MyPageServiceImpl implements MyPageService {
 		List<PlannerDto> plannerList=null;
 		if(count>0) {
 			plannerList=memberDao.getBookMarkList(mem_no, startRow, endRow, list_code, BOOKMARK_SEARC_CODE, search);
+			
+			for(int i=0; i<plannerList.size(); i++){
+				PlannerDto dto= plannerList.get(i);
+				StringUtils.clean(dto.getMemo());
+				dto.setMemo(StringUtils.replace(dto.getMemo(), "<br/>", "\r\n"));
+				System.out.println("dto.toString() : " + dto.toString()); 
+				plannerList.set(i, dto);
+			}
 		}
 	
 		mav.addObject("list_code", list_code);

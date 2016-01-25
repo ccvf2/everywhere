@@ -103,12 +103,29 @@
 	<c:if test="${mateCheck==1}">
 		<a href="/user/myPage/mateDelete.do?mem_no=${memberDto.mem_no}">친구삭제</a>
 	</c:if>
-
-    <ul class="list-group sidebar-nav-v1 margin-bottom-40" id="sidebar-nav-1">
+	
+	<c:choose>
+		<c:when test="${memberDto.mem_no==mem_object.mem_no}">
+			<c:set var="uandMe" value="uandMe=S0001"/>		
+		</c:when>
+		<c:otherwise>
+			<c:set var="uandMe" value="uandMe=S0002"/>
+		</c:otherwise>
+	</c:choose>
+    <!-- <ul class="list-group sidebar-nav-v1 margin-bottom-40" id="sidebar-nav-1"> -->
+    <ul class="list-group sidebar-nav-v1 margin-bottom-20">
+    	<li class="list-group-item list-toggle">
+				<a data-toggle="collapse" data-parent="#sidebar-nav" href="#collapse-buttons"><i class="fa fa-cubes"></i><c:out value="${memberDto.mem_name}님의 여행"/></a>
+				<ul id="collapse-buttons"  class="collapse in">
+					<li>
+						<a href="/user/myPage/myPage.do?${uandMe}&mem_no=${memberDto.mem_no}&SCHEDULE_TYPE=E0002&MYPAGE_SEARCH_CODE=M1029"><i class="fa fa-home"></i>리뷰</a>
+					</li>
+					<li>
+						<a href="/user/myPage/myPage.do?${uandMe}&mem_no=${memberDto.mem_no}&SCHEDULE_TYPE=E0001&MYPAGE_SEARCH_CODE=M1029"><i class="fa fa-comments-o"></i>일정</a>
+					</li>
+				</ul>
+			</li>
 	    <c:if test="${memberDto.mem_no==mem_object.mem_no}">
-	        <li class="list-group-item">
-	            <a href="/user/myPage/myPage.do?uandMe=S0001"><i class="fa fa-cubes"></i><c:out value="나의 여행"/></a>
-	        </li>
 	        <li class="list-group-item">
 	            <a href="/user/myPage/friends.do?mem_no=${memberDto.mem_no}"><i class="fa fa-group"></i> 친구</a>
 	        </li>
@@ -118,18 +135,11 @@
 		</c:if>
 		<c:if test="${memberDto.mem_no!=mem_object.mem_no}">
 	        <li class="list-group-item">
-	            <a href="/user/myPage/myPage.do?uandMe=S0002&mem_no=${memberDto.mem_no}"><i class="fa fa-cubes"></i><c:out value="${memberDto.mem_name}님의 여행"/></a>
-	        </li>
-	        <li class="list-group-item">
 	            <a href="/user/visitor/visitorWrite.do?uandMe=S0002&mem_no=${memberDto.mem_no}">
 	            	<i class="fa fa-pencil-square-o"></i><c:out value="${memberDto.mem_name}님의 방명록"/>
 	      		</a>
 	        </li>
 		</c:if>
-        
-        
-        
-        
         <c:if test="${memberDto.mem_no==mem_object.mem_no}">
 	        <li class="list-group-item">
 	            <a href="/user/myPage/getBookMarkList.do?mem_no=${mem_object.mem_no}&list_code=M1030"><i class="fa fa-star-o"></i> 즐겨찾기</a>

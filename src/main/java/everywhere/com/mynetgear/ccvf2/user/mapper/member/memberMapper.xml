@@ -185,11 +185,13 @@
 							, (select save_name||'.'||EXTENSION from tbl_common_file where FILE_NO=pla.ATTACH_FILE)ATTACH_FILE  
 							, pla.MEMO
 							, pla.START_DATE
+							, pla.END_DATE
 							, pla.REG_DATE
 							, pla.USE_YN
-				      ,nvl(book.bookmark_count, 0) as bookmark_Count
-				      ,nvl(sw.sweet_count, 0) as sweet_count
-				      ,nvl(re.re_count, 0) as reply_Count
+					        ,nvl(book.bookmark_count, 0) as bookmark_Count
+					        ,nvl(sw.sweet_count, 0) as sweet_count
+					        ,nvl(re.re_count, 0) as reply_Count
+					        , mem.mem_name as mem_name
 				from 
 				    (select bookmark_search.*
 		            from (SELECT ROWNUM rnum, A.*
@@ -198,7 +200,7 @@
 		                      from tbl_planner
 		                      where planner_no in (select item_no
 		                                           from tbl_bookmark
-		                                           where mem_no=10)
+		                                           where mem_no=#{mem_no})
 		                      ]]>
 		                      <if test="BOOKMARK_SEARC_CODE=='M1032'">
 		                      	and (title like '%'||#{search, jdbcType=VARCHAR}||'%' 
@@ -208,8 +210,8 @@
 		                      ORDER BY planner_no DESC
 		                      ) A
 		                 ) bookmark_search
-		            where bookmark_search.rnum >= 1
-		            AND bookmark_search.rnum <=10) pla,
+		            where bookmark_search.rnum >= #{startRow}
+		            AND bookmark_search.rnum <=#{endRow}) pla,
 				
 				    (select count(bookmark_no) as bookmark_count, item_no as planner_no
 				      from tbl_bookmark
@@ -236,11 +238,21 @@
 				        FROM tbl_bookmark 
 				        WHERE mem_no=#{mem_no}
 				      )
-				      group by item_no) re
+				      group by item_no) re,
+				      
+				      (select mem1.mem_no, mem1.mem_name, mem2.planner_no
+		              from tbl_member mem1,
+		                  (select mem_no, planner_no
+		                  from tbl_planner
+		                  where planner_no in (SELECT item_no
+		                                      FROM tbl_bookmark 
+		                                      WHERE mem_no=#{mem_no})) mem2
+		              where mem1.mem_no=mem2.mem_no) mem
 				      
 				where pla.PLANNER_NO=book.planner_no
 				and pla.PLANNER_NO=sw.planner_no
 				and pla.PLANNER_NO=re.planner_no
+				and pla.planner_no=mem.planner_no
 			]]>
 		</if>
 		<if test="list_code =='M1031'">
@@ -278,10 +290,23 @@
 		select count(*) from tbl_bookmark where mem_no=#{mem_no}
 	</select>
 	
-	<select id="everywhere.com.mynetgear.ccvf2.user.mapper.member.getPlannerCount" parameterType="int" resultType="int">
+	<select id="everywhere.com.mynetgear.ccvf2.user.mapper.member.getPlannerCount" parameterType="java.util.HashMap" resultType="int">
 		select count(*)
 		from tbl_planner
 		where mem_no=#{mem_no}
+		and PLANNER_BA_CODE=#{SCHEDULE_TYPE}
+		<choose>
+			<when test="MYPAGE_CODE=='S0001'">
+				and (USE_YN='Y0001' or USE_YN='Y0002')
+			</when>
+			<otherwise>
+				and USE_YN='Y0001'
+			</otherwise>
+		</choose>
+		<if test="MYPAGE_SEARCH_CODE=='M1028'">
+			and (title like '%'||#{search, jdbcType=VARCHAR}||'%' 
+												or memo like '%'||#{search, jdbcType=VARCHAR}||'%')
+		</if>
 	</select>
 	
 	<select id="everywhere.com.mynetgear.ccvf2.user.mapper.member.getPlannerList" parameterType="java.util.HashMap" resultType="everywhere.com.mynetgear.ccvf2.user.dto.planner.PlannerDto">
@@ -313,6 +338,7 @@
 				      FROM (SELECT *
 				            FROM tbl_planner 
 				            WHERE mem_no=#{mem_no}
+				            and PLANNER_BA_CODE=#{SCHEDULE_TYPE}
 				            ]]>
 							<choose>
 								<when test="MYPAGE_CODE=='S0001'">
@@ -322,7 +348,7 @@
 									and USE_YN='Y0001'
 								</otherwise>
 							</choose>
-				            <if test="search =='M1028'">
+				            <if test="MYPAGE_SEARCH_CODE=='M1028'">
 				            	and (title like '%'||#{search, jdbcType=VARCHAR}||'%' 
 										or memo like '%'||#{search, jdbcType=VARCHAR}||'%')
 				            </if>

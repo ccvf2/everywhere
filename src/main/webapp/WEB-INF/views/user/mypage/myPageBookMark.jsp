@@ -43,10 +43,24 @@
             <!--End Left Sidebar-->
 			<script type="text/javascript">
 			    $(function(){
-			    	$(".bookmark_list_style").change(function(){
-			    		var list_code=$(".bookmark_list_style").val();
-			    		
-			    		location.href="/user/myPage/getBookMarkList.do?mem_no=${mem_object.mem_no}&list_code="+list_code;
+			    	$("#bookMark_img").mouseover(function(){
+			    		$(this).css("color","#72c02c"); 
+			    	});
+			    	$("#bookMark_img").mouseout(function(){ 
+			    		$(this).css("color","#555"); 
+			    	});
+			    	$("#bookMark_list").mouseover(function(){
+			    		$(this).css("color","#72c02c"); 
+			    	});
+			    	$("#bookMark_list").mouseout(function(){ 
+			    		$(this).css("color","#555"); 
+			    	});
+			    	
+			    	$("#bookMark_img").click(function(){
+			    		location.href="/user/myPage/getBookMarkList.do?mem_no=${mem_object.mem_no}&list_code=M1030";
+			    	});
+			    	$("#bookMark_list").click(function(){
+			    		location.href="/user/myPage/getBookMarkList.do?mem_no=${mem_object.mem_no}&list_code=M1031";
 			    	});
 			    });
 		    </script>
@@ -55,7 +69,7 @@
                 <!--Basic Table-->
                 <div class="shadow-wrapper">
 		                    <div class="tag-box tag-box-v1 box-shadow shadow-effect-2">
-		                        <h2><c:out value="${mem_object.mem_name}"/>님의 BookMark</h2>
+		                        <h2><c:out value="${mem_object.mem_name}"/>님의 즐겨찾기</h2>
 		                    </div>
 		                </div>
                 <form method="get" id="sky-form3" class="sky-form">
@@ -63,12 +77,9 @@
 					<div style="float: left;">
 						<fieldset>
 							<section>
-								<label class="label">정렬방식변경</label> <label class="select">
-									<select style="width: 200px;" class="bookmark_list_style">
-										<option value="-----">선택</option>
-										<option value="M1030">이미지형</option>
-										<option value="M1031">리스트형</option>
-									</select> <i></i>
+								<label class="label">정렬방식변경</label> 
+								<label class="label">
+									<i id="bookMark_img" class="fa fa-file-image-o"><c:out value="이미지"/></i>&nbsp;&nbsp;<i id="bookMark_list" class="fa fa-bars"><c:out value="리스트"/></i>
 								</label>
 							</section>
 						</fieldset>
@@ -76,10 +87,10 @@
 					<div>
 						<fieldset>
 							<section>
-								<label class="label">BookMark 검색</label>
+								<label class="label">즐겨찾기 검색</label>
 								<div class="input-group">
 									<input type="text" class="form-control" id="search"
-										placeholder="작성자 or 제목" /> <span class="input-group-btn">
+										placeholder="제목 or 내용" /> <span class="input-group-btn">
 										<button class="btn-u btn-block" type="button"
 											onclick="javascript:location.href='/user/myPage/getBookMarkSearchList.do?list_code=${list_code}&mem_no=${mem_object.mem_no}&search='+search.value">검색</button>
 									</span>
@@ -94,28 +105,37 @@
                 <!--Basic Table-->
                 <c:if test="${count>0}">
                 	<c:if test="${list_code=='M1030'}">
-                		<c:forEach var="list1" items="${plannerList}">
+						<c:forEach var="planner" items="${plannerList}">
 				            <div class="col-md-4">
-				            <div class="grid-boxes-in" style="height: 350px; background-color: 	#f0f8ff;">
-				                <img class="img-responsive" src="/attatchFile/planner/${list1.attach_file}" alt="${list1.title}" onError="this.src='/attatchFile/spot/no_image.jpg'" height="80%" width="100%">
+				            <div class="grid-boxes-in" style="height: 360px;">
+				                <img class="img-responsive" src="/attatchFile/planner/${planner.attach_file}" alt="${planner.title}" onError="this.src='/attatchFile/spot/no_image.jpg'" height="80%" width="100%" style="min-height: 170px;">
 				                <div class="grid-boxes-caption">
-				                   <h3><a href="/user/planner/readPlanner.do?planner_no=${list1.planner_no}">${list1.title}</a></h3>
-				                   
-				                   <div align="left" style="float: left;">
-					                    <a href="#"><i class="fa fa-comments-o"></i><c:out value="${list1.reply_Count}" escapeXml="false"/></a>
-					                    <a href="#"><i class="fa fa-heart-o"></i><c:out value="${list1.sweet_count}" escapeXml="false"/></a>
-					                    <a href="#"><i class="fa fa-bookmark-o"></i><c:out value="${list1.bookmark_Count}" escapeXml="false"/></a>
-				                   </div>
-				                    <div align="right" style="margin-right: 15px;">
-				                    	<i class="fa fa-clock-o"></i><fmt:formatDate pattern="yyyy-MM-dd" value="${list1.reg_date}"/>
-				                    </div>
-				                    <p>
-				                    	<c:out value="${fn:substring(list1.memo, 0,50)}" escapeXml="false"/>
-				                    	<c:if test="${fn:length(list1.memo) >50}">
-								        	…
-								        </c:if>
-				                    </p>
-				                </div>
+										<h3><a href="/user/planner/readPlanner.do?planner_no=${planner.planner_no}"> 
+												<c:out value="${fn:substring(planner.title, 0,8)}" escapeXml="false"/>
+						                    	<c:if test="${fn:length(planner.title) >8}">
+										        	…
+										        </c:if>
+										</a></h3>
+										 <span style="font-weight: bolder;"><c:out value="${planner.mem_name}"/></span>
+										 <span style="color: #777;float: right;"><i class="fa fa-pencil" title="등록일"><fmt:formatDate pattern="yy-MM-dd" value="${planner.reg_date}"/></i></span>
+										<ul class="list-inline grid-boxes-news">
+											<li><i class="fa fa-comments-o" title="댓글">&nbsp;<c:out value="${planner.reply_Count}" escapeXml="false"/></i></li>
+											<li>|</li>
+											<li><i class="fa fa-heart" title="좋아요">&nbsp;<c:out value="${planner.sweet_count}"/></i></li>
+											<li>|</li>
+											<li><i class="fa fa-tags" title="북마크">&nbsp;<c:out value="${planner.bookmark_Count}"/></i></li>
+											<li>|</li>
+											<li></li>
+											<li>
+												<c:out value="${fn:substring(planner.memo, 0,19)}" escapeXml="false"/>
+						                    	<c:if test="${fn:length(planner.memo) >19}">
+										        	…
+										        </c:if>
+												<br />
+											</li>
+											<li style="border-top: 1px solid;"><div style="margin: 1px auto;"><i class="fa fa-clock-o" title="여행기간"></i>&nbsp;<fmt:formatDate pattern="yyyy-MM-dd" value="${planner.start_date}"/>&nbsp;~&nbsp;<fmt:formatDate pattern="yyyy-MM-dd" value="${planner.end_date}"/></div></li>
+										</ul>
+									</div>
 				            </div>
 				            </div>
 						</c:forEach>
