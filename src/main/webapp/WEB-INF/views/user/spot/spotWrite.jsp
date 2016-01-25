@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>타이틀 입력</title>
+<title>명소 추가</title>
 <script type="text/javascript" src="/script/user/spot/selectedCountry.js"></script>
 <script type="text/javascript" src="/script/user/spot/addSpotPage.js"></script>
 <script type="text/javascript" src="/script/user/spot/xhr.js"></script>

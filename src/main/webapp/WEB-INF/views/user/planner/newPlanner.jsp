@@ -6,7 +6,7 @@
 <c:import url="/WEB-INF/views/common/jquery.jsp" />
 <c:import url="/WEB-INF/views/user/common/utilImport.jsp" />
 <meta charset="UTF-8">
-<title>여행스케줄쓰기</title>
+<title>여행계획 추가</title>
 <script type="text/javascript" src="/script/user/planner/newPlanner.js"></script>
 <script type="text/javascript">
 		$(function() { 

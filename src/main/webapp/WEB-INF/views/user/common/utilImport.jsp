@@ -4,7 +4,6 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>타이틀 입력</title>
 <!-- <script src="/script/common/jquery-1.11.3.js"></script> -->
 
 <!-- --------------------------------css Start------------------------------------- -->

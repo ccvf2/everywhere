@@ -4,7 +4,6 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>타이틀 입력</title>
 <link rel="stylesheet" href="/script/common/jquery-ui/jquert_ui(smoothness).css">
 <link rel="stylesheet" href="/script/common/jquery-ui/jquery-ui.theme.css">
  <link rel="stylesheet" href="/script/common/jquery-ui/jquery-ui.css">
