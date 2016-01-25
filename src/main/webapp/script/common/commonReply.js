@@ -17,8 +17,8 @@ var item_no;
 // 댓글부분 초기화 매소드
 function commonReplyInit(type_code,mem_no,item_no,defaultPhotoPath){
 	this.type_code=type_code;
-	this.mem_no=mem_no;
-	this.item_no=item_no;
+	this.mem_no=Number(mem_no);
+	this.item_no=Number(item_no);
 	defaultPhotoPath=defaultPhotoPath;
 	this.defaultPhoto=defaultPhotoPath;
 	if(this.defaultPhoto=="" || this.defaultPhoto==null || this.defaultPhoto==undefined){
