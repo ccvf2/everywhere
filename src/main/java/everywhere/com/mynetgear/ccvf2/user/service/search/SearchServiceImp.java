@@ -48,34 +48,36 @@ public class SearchServiceImp implements SearchService {
 		Map<String, Object> map = mav.getModelMap();
 		HttpServletRequest request = (HttpServletRequest) map.get("request");
 		
-		//처음에 header 에서 요청한 검색어를 받아야함
-		//String search = request.getParameter("search");
+		SpotDtoExt spotDto = new SpotDtoExt();
 		
+		//나라 검색값
+		spotDto.setSearchCondition1(request.getParameter("selectCountry"));
+		//도시 검색값
+		spotDto.setSearchCondition2(request.getParameter("selectCity"));
+		//명소명 검색값
+		spotDto.setSearchWord1(request.getParameter("searchSpot"));
+		
+		//페이징 관련
 		//현재 페이지
 		String spotPage = request.getParameter("spotPage");
 		//넘어온 페이지 값이 없으면 1로
 		if(spotPage == null)
 			spotPage = "1";
 		int currentPage = Integer.parseInt(spotPage);
+		//한페이지에 보여줄 명소 개수
 		int spotSize = 15;
 		
-		//지역 검색값
-		String searchPlace = request.getParameter("searchPlace");
-		//명소명 검색값
-		String searchSpot = request.getParameter("searchSpot");
-		
-		SpotDtoExt spotDto = new SpotDtoExt();
-	
 		spotDto.setCurrentPage(currentPage);
 		spotDto.setStartPage((currentPage-1) * spotSize + 1);
 		spotDto.setEndPage(currentPage*spotSize);
 		
-		spotDto.setSearchWord1(searchPlace);
-		spotDto.setSearchWord2(searchSpot);
-		
-		int count = searchDao.getSpotCount(spotDto);
+		//명소 검색결과 수
+		spotDto.setTotalCount(searchDao.getSpotCount(spotDto));
+		//명소 검색 결과 리스트
 		List<SpotDto> searchSpotList = searchDao.getSpotList(spotDto);
 		EverywhereAspect.logger.info(EverywhereAspect.logMsg + searchSpotList.size());
+		
+		//사진 가져옴
 		for(int i = 0; i < searchSpotList.size(); i++) {
 			if(searchSpotList.get(i).getAttach_file() != null) {
 				String[] attach_no = searchSpotList.get(i).getAttach_file().split(",");
@@ -87,23 +89,16 @@ public class SearchServiceImp implements SearchService {
 			}
 		}
 		
+		//명소 타입
 		List<CommonCodeDto> countryList = commonCodeService.getListCodeGroup("B0000");
-		List<CommonCodeDto> placeList = new ArrayList<CommonCodeDto>();
-		for(int i=0; i<countryList.size(); i++) {
-			placeList.addAll(commonCodeService.getListCodeGroup(countryList.get(i).getCode()));
-		}
-		placeList.addAll(countryList);
-		
-		
+		//나라 타입
 		List<CommonCodeDto> spotTypeList = commonCodeService.getListCodeGroup("T0001");
 		
-		mav.addObject("count", count);
-		mav.addObject("currentPage", currentPage);
+		//한 페이지에 나올 명소 수
 		mav.addObject("boardSize", spotSize);
-		mav.addObject("searchSpot", searchSpot);
-		mav.addObject("searchPlace", searchPlace);
+		
+		mav.addObject("spotDto", spotDto);
 		mav.addObject("searchSpotList", searchSpotList);
-		mav.addObject("placeList", placeList);
 		mav.addObject("countryList", countryList);
 		mav.addObject("spotTypeList", spotTypeList);
 		mav.setViewName("user/search/searchSpot");

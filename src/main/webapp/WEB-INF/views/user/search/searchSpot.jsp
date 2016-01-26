@@ -74,17 +74,24 @@
 		            <!-- Blog Newsletter -->
 		            <div class="blog-newsletter" id="sidebar">
 		            	<div class="headline-v2" style="border: 0px;"></div>
-	            	 	<form action="#" class="sky-form" onsubmit="searchSpotList('${currentPage}')">
+	            	 	<form action="#" class="sky-form" onsubmit="searchSpotList('${spotDto.currentPage}')">
 		                    <header>명소 검색</header>
 		                    
 		                    <fieldset style="padding: 15px 15px 5px;">
 		                    	<!-- 지역 찾기 -->
 		                    	<section>
 		                    		<label class="select">
-									<select name="country_code" id="selectCountry" onchange="readCityList(true)">
+									<select name="selectCountry" id="selectCountry" onchange="readCityList(true)">
 										<option value=""> 나라 </option>
 										<c:forEach var="country" items="${countryList}" >
-											<option value="${country.code}">${country.code_name}</option>
+											<c:choose>
+												<c:when test="${country.code==spotDto.searchCondition1}">
+													<option value="${country.code}" selected="selected">${country.code_name}</option>
+												</c:when>
+												<c:otherwise>
+													<option value="${country.code}">${country.code_name}</option>
+												</c:otherwise>
+											</c:choose>
 										</c:forEach>
 									</select>
 									<i></i>
@@ -94,16 +101,15 @@
 								<section>
 									<!-- 도시 -->
 									<label class="select">
-										<select name="city_code" id="selectCity">
+										<select name="selectCity" id="selectCity">
 											<option value=""> 도시 </option>
 										</select>
-										<i></i>
 									</label>
 		                        </section>
 		                    	<!-- 명소 검색 -->
 		                        <section>
 		                            <label class="input">
-		                                <input type="text" name="searchSpot" id="searchSpot" placeholder="명소 검색" value="${searchSpot}">
+		                                <input type="text" name="searchSpot" id="searchSpot" placeholder="명소 검색" value="${spotDto.searchWord1}">
 		                            </label>
 		                        </section>
 		                    </fieldset>
@@ -135,8 +141,8 @@
                <div class="col-md-9">
                <div class="alert alert-info alert-dismissable">
 					<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-					<i class="fa fa-info-circle"></i> 검색된 갯수 : <strong><c:out value="${plannerDto.totalCount}"/></strong>&nbsp;개 
-					<span style="float: right;"><i class="fa fa fa-sort-amount-desc"></i>총페이징 : ${plannerDto.pageCount} / <i class="fa fa-sign-in"></i>현재 페이지 : <strong>${plannerDto.currentPage}</strong></span>
+					<i class="fa fa-info-circle"></i> 검색된 갯수 :<strong><c:out value=" ${spotDto.totalCount}"/></strong>&nbsp;개 
+					<span style="float: right;"><i class="fa fa fa-sort-amount-desc"></i>총페이징 : ${plannerDto.pageCount} / <i class="fa fa-sign-in"></i>현재 페이지 : <strong>${spotDto.currentPage}</strong></span>
 				</div>
                		<div class="blog_masonry_3col">
 				        <div class="container-fluid content grid-boxes masonry" style="position: relative; height: 2250px; overflow: hidden;">
@@ -191,12 +197,12 @@
 				    
 				    <!-- 페이징 시작 -->
 				    <div class="text-center">
-					    <c:if test="${count>0 }">
+					    <c:if test="${spotDto.totalCount>0 }">
 							<div class="btn-group" role="group" aria-label="First group">
 								<c:set var="pageBlock" value="${5}" />
-								<c:set var="pageCount" value="${count/boardSize+(count%boardSize==0?0:1)}"/>
+								<c:set var="pageCount" value="${spotDto.totalCount/pageBlock+(spotDto.totalCount%pageBlock==0?0:1)}"/>
 								
-								<fmt:parseNumber var="result" value="${(currentPage-1)/pageBlock }" integerOnly="true"/>
+								<fmt:parseNumber var="result" value="${(spotDto.currentPage-1)/pageBlock }" integerOnly="true"/>
 								
 								<c:set var="startPage" value="${result*pageBlock+1}"/>
 								<c:set var="endPage" value="${startPage+pageBlock-1}"/>
@@ -211,22 +217,22 @@
 								  <ul class="pagination">
 								  	<c:if test="${startPage > pageBlock}">
 									  	<li>
-										  	<a href="javascript:searchSpotList('${currentPage-pageBlock}')" aria-label="Previous">
+										  	<a href="javascript:searchSpotList('${spotDto.currentPage-pageBlock}')" aria-label="Previous">
 										        <span aria-hidden="true">«</span>
 									     	</a>
 								     	</li>
 									</c:if>
 								    <c:forEach var="i" begin="${startPage}" end="${endPage}">
-										 <c:if test="${i!=currentPage}">
+										 <c:if test="${i!=spotDto.currentPage}">
 										 	<li><a href="javascript:searchSpotList('${i}')" role="button" class="btn btn-default">${i}</a></li>
 										 </c:if>
-										 <c:if test="${i==currentPage}">
+										 <c:if test="${i==spotDto.currentPage}">
 										 	<li class="active"><a href="javascript:searchSpotList('${i})" role="button" class="btn btn-default">${i}</a></li>
 										 </c:if>
 									</c:forEach>
 							  		<c:if test="${endPage < pageCount }">
 							  			<li>
-									      <a href="javascript:searchSpotList('${currentPage+pageBlock}')" aria-label="Next">
+									      <a href="javascript:searchSpotList('${spotDto.currentPage+pageBlock}')" aria-label="Next">
 									        <span aria-hidden="true">&raquo;</span>
 									      </a>
 									    </li>
