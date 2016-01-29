@@ -80,4 +80,12 @@ public interface SpotService {
 	 * @param mav
 	 */
 	public void ratingSpot(ModelAndView mav);
+	
+	/**
+	 * @author 안희진
+	 * @createDate 2015. 12. 28.
+	 * @described 내가 쓴 명소 목록 가져오는 페이지 처리
+	 * @param mav
+	 */
+	public void getMySpotList(ModelAndView mav);
 }

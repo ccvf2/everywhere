@@ -10,13 +10,13 @@
 	<c:if test="${result>0}">
 		<script type="text/javascript">
 		alert("명소가 수정 되었습니다.");
-		location.href="";
+		location.href="/user/spot/mySpotList.do?spot_page="+${page};
 		</script>
 	</c:if>
 	<c:if test="${result==0}">
 		<script type="text/javascript">
 			alert("명소 수정이 실패하였습니다.");
-			location.href="/user/spot/spotUpdate.do?spot_no=${spot_no}";
+			location.href="/user/spot/spotUpdate.do?spot_no="+${spot_no} + "&page=" + page;
 		</script>
 	</c:if>
 </body>

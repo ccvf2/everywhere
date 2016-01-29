@@ -1,17 +1,11 @@
 package everywhere.com.mynetgear.ccvf2.user.service.search;
 
-import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.lang.StringUtils;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.ModelAndView;
@@ -21,8 +15,10 @@ import everywhere.com.mynetgear.ccvf2.comm.dao.common.CommonFileIODao;
 import everywhere.com.mynetgear.ccvf2.comm.dto.common.CommonFileIODto;
 import everywhere.com.mynetgear.ccvf2.comm.dto.commoncode.CommonCodeDto;
 import everywhere.com.mynetgear.ccvf2.comm.service.commoncode.CommonCodeService;
+import everywhere.com.mynetgear.ccvf2.comm.util.common.Constant;
 import everywhere.com.mynetgear.ccvf2.user.dao.planner.PlannerDao;
 import everywhere.com.mynetgear.ccvf2.user.dao.search.SearchDao;
+import everywhere.com.mynetgear.ccvf2.user.dto.planner.PlannerDto;
 import everywhere.com.mynetgear.ccvf2.user.dto.search.SpotDtoExt;
 import everywhere.com.mynetgear.ccvf2.user.dto.spot.SpotDto;
 
@@ -43,39 +39,44 @@ public class SearchServiceImp implements SearchService {
 	@Autowired
 	private CommonFileIODao commonFileIODao;
 	
+	@Autowired
+	private PlannerDao plannerDao;
+	
 	@Override
 	public void searchSpot(ModelAndView mav) {
 		Map<String, Object> map = mav.getModelMap();
 		HttpServletRequest request = (HttpServletRequest) map.get("request");
 		
-		//처음에 header 에서 요청한 검색어를 받아야함
-		//String search = request.getParameter("search");
+		SpotDtoExt spotDto = new SpotDtoExt();
 		
+		//나라 검색값
+		spotDto.setSearchCondition1(request.getParameter("selectCountry"));
+		//도시 검색값
+		spotDto.setSearchCondition2(request.getParameter("selectCity"));
+		//명소명 검색값
+		spotDto.setSearchWord1(request.getParameter("searchSpot"));
+		
+		//페이징 관련
 		//현재 페이지
 		String spotPage = request.getParameter("spotPage");
 		//넘어온 페이지 값이 없으면 1로
 		if(spotPage == null)
 			spotPage = "1";
 		int currentPage = Integer.parseInt(spotPage);
+		//한페이지에 보여줄 명소 개수
 		int spotSize = 15;
 		
-		//지역 검색값
-		String searchPlace = request.getParameter("searchPlace");
-		//명소명 검색값
-		String searchSpot = request.getParameter("searchSpot");
-		
-		SpotDtoExt spotDto = new SpotDtoExt();
-	
 		spotDto.setCurrentPage(currentPage);
 		spotDto.setStartPage((currentPage-1) * spotSize + 1);
 		spotDto.setEndPage(currentPage*spotSize);
 		
-		spotDto.setSearchWord1(searchPlace);
-		spotDto.setSearchWord2(searchSpot);
-		
-		int count = searchDao.getSpotCount(spotDto);
+		//명소 검색결과 수
+		spotDto.setTotalCount(searchDao.getSpotCount(spotDto));
+		//명소 검색 결과 리스트
 		List<SpotDto> searchSpotList = searchDao.getSpotList(spotDto);
 		EverywhereAspect.logger.info(EverywhereAspect.logMsg + searchSpotList.size());
+		
+		//사진 가져옴
 		for(int i = 0; i < searchSpotList.size(); i++) {
 			if(searchSpotList.get(i).getAttach_file() != null) {
 				String[] attach_no = searchSpotList.get(i).getAttach_file().split(",");
@@ -87,23 +88,16 @@ public class SearchServiceImp implements SearchService {
 			}
 		}
 		
+		//명소 타입
 		List<CommonCodeDto> countryList = commonCodeService.getListCodeGroup("B0000");
-		List<CommonCodeDto> placeList = new ArrayList<CommonCodeDto>();
-		for(int i=0; i<countryList.size(); i++) {
-			placeList.addAll(commonCodeService.getListCodeGroup(countryList.get(i).getCode()));
-		}
-		placeList.addAll(countryList);
-		
-		
+		//나라 타입
 		List<CommonCodeDto> spotTypeList = commonCodeService.getListCodeGroup("T0001");
 		
-		mav.addObject("count", count);
-		mav.addObject("currentPage", currentPage);
+		//한 페이지에 나올 명소 수
 		mav.addObject("boardSize", spotSize);
-		mav.addObject("searchSpot", searchSpot);
-		mav.addObject("searchPlace", searchPlace);
+		
+		mav.addObject("spotDto", spotDto);
 		mav.addObject("searchSpotList", searchSpotList);
-		mav.addObject("placeList", placeList);
 		mav.addObject("countryList", countryList);
 		mav.addObject("spotTypeList", spotTypeList);
 		mav.setViewName("user/search/searchSpot");
@@ -154,6 +148,19 @@ public class SearchServiceImp implements SearchService {
 			}
 		}
 		
+		PlannerDto plannerDto = new PlannerDto();
+		plannerDto.setSearchWord1(searchValue);
+		
+		//스케줄의 글 전체 개수를 가져오는 쿼리
+		int plannerListTotalCount = plannerDao.getPlannerListForAllCount(plannerDto);
+		EverywhereAspect.logger.info(EverywhereAspect.logMsg + plannerListTotalCount);
+		plannerDto.setTotalCount(plannerListTotalCount);
+		plannerDto.setStartRow(1);
+		plannerDto.setEndRow(6);
+		List<PlannerDto> plannerList = plannerDao.getPlannerListForAll(plannerDto);
+		//글종류를 나타내는 코드 목록
+		List<CommonCodeDto> selectCode=commonCodeService.getListCodeGroup(Constant.SCHEDULE_TYPE_GROUP);
+		
 		// 나라 리스트로 도시 리스트를 가져옴
 		List<CommonCodeDto> countryList = commonCodeService.getListCodeGroup("B0000");
 		List<CommonCodeDto> placeList = new ArrayList<CommonCodeDto>();
@@ -165,7 +172,6 @@ public class SearchServiceImp implements SearchService {
 		
 		List<CommonCodeDto> spotTypeList = commonCodeService.getListCodeGroup("T0001");
 		
-//		List<PlannerDao> plannerList = searchDao.getPlannerList(startRow, endRow, searchValue);
 		
 		mav.addObject("searchValue", searchValue);
 		mav.addObject("searchSpotList", searchSpotList);
@@ -173,8 +179,10 @@ public class SearchServiceImp implements SearchService {
 		mav.addObject("spotTypeList", spotTypeList);
 		mav.addObject("countryList", countryList);
 		mav.addObject("spotCount", spotCount);
-		//mav.addObject("plannerList", plannerList);
+		mav.addObject("plannerList", plannerList);
+		mav.addObject("plannerDto", plannerDto);
 		mav.addObject("plannerCount", plannerCount);
+		mav.addObject("selectCode", selectCode);
 		mav.setViewName("user/search/searchTotal");
 	}
 }

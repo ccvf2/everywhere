@@ -126,6 +126,9 @@
 				</ul>
 			</li>
 	    <c:if test="${memberDto.mem_no==mem_object.mem_no}">
+	    	<li class="list-group-item">
+	            <a href="/user/spot/mySpotList.do"><i class="fa fa-map-marker"></i> 내 명소 </a>
+	        </li>
 	        <li class="list-group-item">
 	            <a href="/user/myPage/friends.do?mem_no=${memberDto.mem_no}"><i class="fa fa-group"></i> 친구</a>
 	        </li>

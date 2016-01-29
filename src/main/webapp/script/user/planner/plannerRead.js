@@ -88,7 +88,7 @@ function deleteBookMark(planner_no, checkBookMark){
 }
 
 function setPlanner(image, planner_no, checkSweet, checkBookMark, use_yn){
-	if(image != null){
+	if(image != null && image != ""){
 		$('.breadcrumbs-v5').css('background-image', 'url(/attatchFile/planner/'+image+')');
 	}
 	

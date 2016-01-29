@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
 	<c:import url="/WEB-INF/views/common/jquery.jsp"/>
 	<c:import url="/WEB-INF/views/user/common/utilImport.jsp"/>
@@ -21,9 +21,7 @@
 <body onload="setPlanner('${plannerDto.attach_file}', '${plannerDto.planner_no}','${checkSweet}', '${checkBookMark}', '${plannerDto.use_yn}')">
 	<script type="text/javascript">
 	$(document).ready(function() {
-		var planner_no=${plannerDto.planner_no};
-		var mem_no=${mem_object.mem_no};
-		commonReplyInit('R0002', mem_no, planner_no,"");
+		commonReplyInit('R0002', '${mem_object.mem_no}', '${plannerDto.planner_no}','');
 		$("#formWrap").removeClass();
 		$("#formWrap").addClass("news-v3-in margin-bottom-20");
 		$("#formWrapInner").removeClass();
@@ -61,10 +59,10 @@
 				<div class="col-md-3">
 					<!--글쓴이 정보 -->
 					<c:if test="${plannerWriter.mem_profile_photo != null || plannerWriter.mem_profile_photo != '' }">
-						<img class="img-responsive profile-img margin-bottom-20" src="/attatchFile/member/${plannerWriter.mem_profile_photo}" alt="">
+						<img class="img-responsive profile-img margin-bottom-20" src="/attatchFile/member/${plannerWriter.mem_profile_photo}" alt="" style="min-width: 263px; min-height: 265px">
 					</c:if>
 					<c:if test="${plannerWriter.mem_profile_photo == null || plannerWriter.mem_profile_photo == '' }">
-						<img class="img-responsive profile-img" src="/assets/img/team/img32-md.jpg" alt="">
+						<img class="img-responsive profile-img" src="/assets/img/team/img32-md.jpg" alt="" style="min-width: 263px; min-height: 265px">
 					</c:if>
 					<ul class="list-group sidebar-nav-v1 margin-bottom-20 active">
 						<li class="list-group-item list-toggle">

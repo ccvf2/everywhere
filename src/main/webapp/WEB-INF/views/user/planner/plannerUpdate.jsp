@@ -8,7 +8,7 @@
 <c:import url="/WEB-INF/views/common/jquery.jsp"/>
 <c:import url="/WEB-INF/views/user/common/utilImport.jsp"/>
 <meta charset="UTF-8">
-<title>타이틀 입력</title>
+<title>여행계획 수정</title>
 	<!-- CSS Page Style -->
 	<link rel="stylesheet" href="/assets/css/pages/profile.css">
 
@@ -30,8 +30,12 @@
 <script type="text/javascript">
 $(document).ready(function () {
 	$('.nav-stacked').width($('.col-sm-3').width());
-	$('.breadcrumbs-v5').css('background-image', 'url(/attatchFile/planner/${plannerDto.attach_file})');
+	setBackImg('${plannerDto.attach_file}');
 });
+function setBackImg(image){
+	if(image != null && image != "")
+		$('.breadcrumbs-v5').css('background-image', 'url(/attatchFile/planner/'+image+')');
+}
 </script>
 <body>
 	<div class="wrapper">
@@ -57,7 +61,7 @@ $(document).ready(function () {
 		<!--Left Sidebar-->
 			<nav class="col-sm-3 md-margin-bottom-40" >
 				<!-- 사이드 바 메뉴 고정 -->
-				<div class="nav nav-pills nav-stacked" data-spy="affix" data-offset-top="307">
+				<div class="nav nav-pills nav-stacked" data-spy="affix" data-offset-top="445">
 					<!--Notification-->
 					<div class="tag-box tag-box-v4 rounded-2x margin-bottom-20" style="padding : 7px;">
 						<div class="panel-heading-v2 overflow-h">

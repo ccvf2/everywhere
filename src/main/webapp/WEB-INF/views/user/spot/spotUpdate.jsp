@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>타이틀 입력</title>
+<title>명소 수정</title>
 <script type="text/javascript" src="/script/user/spot/selectedCountry.js"></script>
 <script type="text/javascript" src="/script/user/spot/addSpotPage.js"></script>
 <script type="text/javascript" src="/script/user/spot/xhr.js"></script>
@@ -50,8 +50,9 @@ $(document).ready(function(){
 					</div>
 				</div>
 			</div>
-			<form action="/user/spot/spotUpdate.do" id="sky-form" class="sky-form rounded" onsubmit="return addSpotForm(this)" method="post" enctype="multipart/form-data">
+			<form action="/user/spot/spotUpdate.do" id="sky-form" class="sky-form rounded" onsubmit="return updateSpotForm(this)" method="post" enctype="multipart/form-data">
 				<input type="hidden" name="spot_no" value="${spotDto.spot_no}">
+				<input type="hidden" name="page" value="${page}">
 				<fieldset>
 					<div class="row">
 						<!-- 주소 & 구글맵 -->

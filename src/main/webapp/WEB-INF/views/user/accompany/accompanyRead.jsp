@@ -43,15 +43,8 @@
 		//item_no:댓글이 있는 게시판 글번호
 		//defaultPhotoPath:기본으로 뿌릴 이미지 선택,
 		/* 	commonReplyInit(type_code,mem_no,item_no,defaultPhotoPath); */
-			var accompany_no=${accompanyDto.accompany_no};
 
-			var mem_no=0;
-			
-			<c:if test="${accompanyDto.mem_no!=null}">
-				mem_no=${accompanyDto.mem_no};
-			</c:if>
-
-			commonReplyInit('S0010', mem_no, accompany_no,"");
+			commonReplyInit('S0010', '${accompanyDto.mem_no}', '${accompanyDto.accompany_no}','');
 			$("#formWrap").removeClass();
 			$("#formWrap").addClass("news-v3-in margin-bottom-20");
 			$("#formWrapInner").removeClass();
