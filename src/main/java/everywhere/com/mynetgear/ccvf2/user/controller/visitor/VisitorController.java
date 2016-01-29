@@ -81,9 +81,11 @@ public class VisitorController {
 	 * @return
 	 */
 	@RequestMapping(value="/user/visitor/visitorUpdate.do", method=RequestMethod.GET)
-	public ModelAndView visitorUpdate(HttpServletRequest request, HttpServletResponse response) {
+	public ModelAndView visitorUpdate(HttpServletRequest request, HttpServletResponse response, VisitorDto visitorDto) {
 		ModelAndView mav=new ModelAndView();
 		mav.addObject("request", request);
+		mav.addObject("visitorDto", visitorDto);
+		
 		visitorService.visitorUpdate(mav);
 		
 		return mav;
@@ -118,10 +120,9 @@ public class VisitorController {
 	 * @return
 	 */
 	@RequestMapping(value="/user/visitor/visitorDelete.do", method=RequestMethod.GET)
-	public ModelAndView visitorDelete(HttpServletRequest request, HttpServletResponse response, VisitorDto visitorDto) {
+	public ModelAndView visitorDelete(HttpServletRequest request, HttpServletResponse response) {
 		ModelAndView mav=new ModelAndView();
 		mav.addObject("request", request);
-		mav.addObject("visitorDto", visitorDto);
 		visitorService.visitorDelete(mav);
 		
 		return mav;

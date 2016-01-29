@@ -106,10 +106,10 @@ public class Constant {
 	/** 여행동행구하기 성별: 불문*/
 	public static final String ACCOMPANY_GENDER_BOTH = "G0003";
 	
-	/** 회원 계정 상태: 비활성 */
-	public static final String MEMBER_STATUS_LOCK = "M1001";
 	/** 회원 계정 상태: 활성 */
-	public static final String MEMBER_STATUS_ACTIVE = "M1002";
+	public static final String MEMBER_STATUS_ACTIVE = "M1001";
+	/** 회원 계정 상태: 비활성 */
+	public static final String MEMBER_STATUS_LOCK = "M1002";
 	/** 회원 계정 상태: 삭제 */
 	public static final String MEMBER_STATUS_WITHDRAW = "M1003";
 	/** 회원 계정 상태: 휴면 */

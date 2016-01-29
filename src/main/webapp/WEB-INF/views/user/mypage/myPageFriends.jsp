@@ -67,7 +67,7 @@
 		                            <div class="input-group">
 		                            <input type="text" class="form-control" id="search" placeholder="친구이름 or 이메일">
 		                            <span class="input-group-btn">
-		                                <button class="btn-u btn-block" type="button" onclick="javascript:location.href='/user/myPage/searchFriends.do?search='+search.value">검색</button>
+		                                <button class="btn-u btn-block" type="button" onclick="javascript:location.href='/user/myPage/searchFriends.do?mem_no=${memberDto.mem_no}&search='+search.value">검색</button>
 		                            </span>
 		                    	 	</div>
 		                        </section>

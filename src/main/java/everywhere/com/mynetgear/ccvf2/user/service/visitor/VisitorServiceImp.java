@@ -54,7 +54,7 @@ public class VisitorServiceImp implements VisitorService {
 
 		
 		int count=visitorDao.getVisitorCount(memberDto.getMem_no());
-			
+		
 		List<VisitorDto> visitorList=null;
 		if(count>0) {
 			visitorList=visitorDao.getVisitorList(startRow, endRow, memberDto.getMem_no());
@@ -62,6 +62,7 @@ public class VisitorServiceImp implements VisitorService {
 		
 		memberDto=memberDao.memberRead(memberDto.getMem_no());
 		
+		mav.addObject("uandMe", "S0001");
 		mav.addObject("memberDto", memberDto);
 		mav.addObject("mateCheck", 2);
 		mav.addObject("visitorList", visitorList);
@@ -110,6 +111,7 @@ public class VisitorServiceImp implements VisitorService {
 			visitorList=visitorDao.getVisitorList(startRow, endRow, mate_no);
 		}
 		
+		mav.addObject("uandMe", "S0002");
 		mav.addObject("mateCheck", mateCheck);
 		mav.addObject("memberDto", memberDto);
 		mav.addObject("visitorList", visitorList);
@@ -144,17 +146,37 @@ public class VisitorServiceImp implements VisitorService {
 		Map<String, Object> map=mav.getModelMap();
 		HttpServletRequest request=(HttpServletRequest)map.get("request");
 		VisitorDto visitorDto=(VisitorDto)map.get("visitorDto");
+		int mate_mem_no=visitorDto.getMate_mem_no();
 		
-		int visitor_no=Integer.parseInt(request.getParameter("visitor_no"));
-		int pageNumber=Integer.parseInt(request.getParameter("pageNumber"));
-		System.out.println("VisitorController update visitor_no:"+visitor_no+"&pageNumber:"+pageNumber);
+		MemberDto memberDto=memberDao.memberRead(mate_mem_no);
 		
-		visitorDto=visitorDao.visitorSelect(visitor_no);
-		System.out.println("VisitorController update visitorDto:"+visitorDto);
+		int check=visitorDao.visitorUpdate(visitorDto);
+		System.out.println("VisitorService updateOk check:"+check);
 		
-		mav.addObject("visitorDto", visitorDto);
-		mav.addObject("pageNumber", pageNumber);
-		mav.setViewName("/user/visitor/visitorUpdate");
+		String pageNumber=request.getParameter("pageNumber");
+		if(pageNumber==null) pageNumber="1";
+		
+		int boardSize=3;
+		
+		int currentPage = Integer.parseInt(pageNumber);
+		int startRow = (currentPage - 1) * boardSize + 1;
+		int endRow = currentPage * boardSize;
+		
+		int count=visitorDao.getVisitorCount(mate_mem_no);
+		System.out.println("VisitorService write count:"+count);
+			
+		List<VisitorDto> visitorList=null;
+		if(count>0) {
+			visitorList=visitorDao.getVisitorList(startRow, endRow, mate_mem_no);
+		}
+		
+		mav.addObject("uandMe", "S0002");
+		mav.addObject("memberDto", memberDto);
+		mav.addObject("visitorList", visitorList);
+		mav.addObject("count", count);
+		mav.addObject("boardSize", boardSize);
+		mav.addObject("currentPage", currentPage);
+		mav.setViewName("/user/visitor/visitorWrite");
 		
 	}
 
@@ -178,21 +200,40 @@ public class VisitorServiceImp implements VisitorService {
 	public void visitorDelete(ModelAndView mav) {
 		Map<String, Object> map=mav.getModelMap();
 		HttpServletRequest request=(HttpServletRequest)map.get("request");
-		VisitorDto visitorDto=(VisitorDto)map.get("visitorDto");
 		
 		int visitor_no=Integer.parseInt(request.getParameter("visitor_no"));
-		int pageNumber=Integer.parseInt(request.getParameter("pageNumber"));
-		System.out.println("VisitorController delete visitor_no:"+visitor_no+"&pageNumber:"+pageNumber);
+		int mem_no=Integer.parseInt(request.getParameter("mem_no"));
+		String uandMe=request.getParameter("uandMe");
 		
-		visitorDto=visitorDao.visitorSelect(visitor_no);
-		System.out.println("VisitorController delete visitorDto:"+visitorDto);
+		MemberDto memberDto=memberDao.memberRead(mem_no);
 		
-		visitorDto.setVisitor_status_code(Constant.SYNB_YN_N);
 		
-		int check=visitorDao.visitorDelete(visitorDto);
-		System.out.println("VisitorService delete check:"+check);
+		int check=visitorDao.visitorDelete(visitor_no);
 		
-		mav.addObject("check", check);
-		mav.setViewName("/user/visitor/visitorDelete");
+		String pageNumber=request.getParameter("pageNumber");
+		if(pageNumber==null) pageNumber="1";
+		
+		int boardSize=3;
+		
+		int currentPage = Integer.parseInt(pageNumber);
+		int startRow = (currentPage - 1) * boardSize + 1;
+		int endRow = currentPage * boardSize;
+		
+		int count=visitorDao.getVisitorCount(mem_no);
+		System.out.println("VisitorService write count:"+count);
+			
+		List<VisitorDto> visitorList=null;
+		if(count>0) {
+			visitorList=visitorDao.getVisitorList(startRow, endRow, mem_no);
+		}
+		
+		
+		mav.addObject("uandMe", uandMe);
+		mav.addObject("memberDto", memberDto);
+		mav.addObject("visitorList", visitorList);
+		mav.addObject("count", count);
+		mav.addObject("boardSize", boardSize);
+		mav.addObject("currentPage", currentPage);
+		mav.setViewName("/user/visitor/visitorWrite");
 	}
 }

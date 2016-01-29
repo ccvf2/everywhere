@@ -11,8 +11,11 @@
 		<result property="visitor_status_code" column="visitor_status_code"/>
 	</resultMap>
 	
-	<select id="visitorCount" parameterType="int" resultType="int">
-		select nvl(count(*), 0) from tbl_visitor where mate_mem_no=#{mem_no}
+	<select id="visitorCount" parameterType="java.util.HashMap" resultType="int">
+		select nvl(count(*), 0) 
+		from tbl_visitor 
+		where mate_mem_no=#{mem_no}
+		and visitor_status_code=#{visitor_status_code}
 	</select>
 	
 	<select id="visitorList" parameterType="java.util.HashMap" resultType="everywhere.com.mynetgear.ccvf2.user.dto.visitor.VisitorDto">
@@ -32,10 +35,10 @@
 			           FROM (SELECT * 
 			                 FROM tbl_visitor 
 			                 WHERE mate_mem_no=#{mate_mem_no}
-			                 ORDER BY visitor_no DESC) A)kk    
-			WHERE kk.rnum >= #{startRow}
-			AND kk.rnum <= #{endRow}
-			AND kk.visitor_status_code=#{visitor_status_code})yy
+			                 AND visitor_status_code=#{visitor_status_code}
+			                 ORDER BY visitor_no DESC) A) kk    
+		         WHERE kk.rnum >= #{startRow}
+		         AND kk.rnum <= #{endRow}) yy
 		]]>
 	</select>
 	
@@ -59,7 +62,7 @@
 		update tbl_visitor set visitor_content=#{visitor_content} where visitor_no=#{visitor_no} 
 	</update>
 	
-	<update id="visitorDelete" parameterType="everywhere.com.mynetgear.ccvf2.user.dto.visitor.VisitorDto">
+	<update id="visitorDelete" parameterType="java.util.Map">
 		update tbl_visitor set visitor_status_code=#{visitor_status_code} where visitor_no=#{visitor_no}
 	</update>
 	

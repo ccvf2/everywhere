@@ -155,9 +155,12 @@ public interface MemberDao {
 	 * @createDate 2015. 12. 23.
 	 * @described 친구 검색
 	 * @param search
+	 * @param endRow 
+	 * @param startRow 
+	 * @param mem_no 
 	 * @return
 	 */
-	public List<MemberDto> searchFriends(String search);
+	public List<MemberDto> searchFriends(String search, int startRow, int endRow, int mem_no);
 	
 	
 	/**
@@ -238,5 +241,15 @@ public interface MemberDao {
 	 * @return
 	 */
 	public int getBookMarkSearchCount(int mem_no, String search);
+
+	/**
+	 * @author 김성광
+	 * @createDate 2016. 1. 30.
+	 * @described 검색된 유저 총카운트
+	 * @param search
+	 * @param mem_no
+	 * @return
+	 */
+	public int searchFriendCount(String search, int mem_no);
 
 }

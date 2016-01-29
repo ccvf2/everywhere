@@ -58,8 +58,8 @@ public interface VisitorDao {
 	 * @author 김준호
 	 * @createDate 2015. 12. 11.
 	 * @described 방명록삭제
-	 * @param visitorDto
+	 * @param visitor_no
 	 * @return
 	 */
-	public int visitorDelete(VisitorDto visitorDto);
+	public int visitorDelete(int visitor_no);
 }

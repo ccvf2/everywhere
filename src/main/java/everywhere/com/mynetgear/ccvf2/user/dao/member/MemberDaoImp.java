@@ -114,9 +114,12 @@ public class MemberDaoImp implements MemberDao {
 	}
 
 	@Override
-	public List<MemberDto> searchFriends(String search) {
+	public List<MemberDto> searchFriends(String search, int startRow, int endRow, int mem_no ) {
 		HashMap<String, Object> map=new HashMap<String, Object>();
 		map.put("search", search);
+		map.put("startRow", startRow);
+		map.put("endRow", endRow);
+		map.put("mem_no", mem_no);
 		map.put("MEMBER_STATUS_ACTIVE", Constant.MEMBER_STATUS_ACTIVE);
 		
 		return sqlTemplate.selectList("searchFriends", map);
@@ -189,6 +192,16 @@ public class MemberDaoImp implements MemberDao {
 		map.put("search", search);
 		
 		return sqlTemplate.selectOne("everywhere.com.mynetgear.ccvf2.user.mapper.member.getBookMarkSearchCount", map);
+	}
+
+	@Override
+	public int searchFriendCount(String search, int mem_no) {
+		HashMap<String, Object> map=new HashMap<String, Object>();
+		map.put("mem_no", mem_no);
+		map.put("search", search);
+		map.put("MEMBER_STATUS_ACTIVE", Constant.MEMBER_STATUS_ACTIVE);
+		
+		return sqlTemplate.selectOne("everywhere.com.mynetgear.ccvf2.user.mapper.member.searchFriendCount", map);
 	}
 
 }

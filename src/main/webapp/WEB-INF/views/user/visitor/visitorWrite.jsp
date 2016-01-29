@@ -33,6 +33,20 @@
 
 <c:import url="/WEB-INF/views/common/jquery.jsp" />
 <c:import url="/WEB-INF/views/user/common/utilImport.jsp" />
+<script type="text/javascript">
+	function upViewDisplay(visitor_no){
+		var e=document.getElementById(visitor_no+"_upView");
+		var upbtn=document.getElementById("upbtn_"+visitor_no);
+		
+		if(e.style.display == 'block'){
+			e.style.display = 'none';
+          	upbtn.value="수정";
+		}else{
+          	e.style.display = 'block';
+			upbtn.value="취소";
+        }
+	}
+</script>
 </head>
 <body>
 <div class="wrapper">
@@ -63,6 +77,13 @@
 		                    </div>
 		                </div>
 					</c:if>
+					<c:if test="${count>0}">
+						<div class="shadow-wrapper">
+			                <div class="tag-box tag-box-v1 box-shadow shadow-effect-2">
+			                    <h2><c:out value="${memberDto.mem_name}님의 방명록"/>}</h2>
+			                </div>
+		                </div>
+					</c:if>
 				</c:if>
 				
             	<c:if test="${memberDto.mem_no!=mem_object.mem_no}">
@@ -72,6 +93,7 @@
 		                    <form action="/user/visitor/visitorWrite.do" method="post" onsubmit="return visitorForm(this)">
 		                    	<input type="hidden" name="mem_no" value="${mem_object.mem_no}">	<!-- 보내는사람 no -->
 		                    	<input type="hidden" name="mate_mem_no" value="${memberDto.mem_no}"> <!-- 받는 사람 no -->
+		                    	<input type="hidden" name="uandMe" value="S0002">
 		                    	
 		                    	<p><em><c:out value="from.${memberDto.mem_name} (${memberDto.mem_email})"/></em></p>
 		                        <p><em>
@@ -87,7 +109,7 @@
                 </c:if>
                 
                 <c:if test="${count>0}">
-					<c:forEach var="visitor" items="${visitorList}" >
+					<c:forEach var="visitor" items="${visitorList}">
 						<div class="clearfix margin-bottom-30"></div>
 		                <div class="shadow-wrapper">
 		                    <blockquote class="hero box-shadow shadow-effect-2">
@@ -99,16 +121,45 @@
 		                    				<c:set var="url" value="/user/myPage/myPage.do?uandMe=S0002"/>
 		                    			</c:when>
 		                    		</c:choose>
-			                    	<div align="right" style="float: right; font-size:0.8em;"><fmt:formatDate value="${visitor.visitor_write_date}" type="both"/></div><br/>
-			                        <p><em>
-										<c:out value="${visitor.visitor_content}"/>
-			                        </em></p> 
-			                        <small><em>
-			                        <a href="${url}&mem_no=${visitor.mem_no}">
-				                    	<c:out value="${visitor.mem_name}(${visitor.mem_email})"/>
+			                    	
+			                        <p align="left"><em>
+											<c:out value="${visitor.visitor_content}"/>
+			                        </em></p>
+			                        
+				                        <div align="right">
+				                        	<c:if test="${visitor.mem_no==mem_object.mem_no}">
+					                        	<input type="button" class="btn btn-default" id="upbtn_${visitor.visitor_no}" value="수정" onclick="javascript:upViewDisplay(${visitor.visitor_no})"/>
+					                        </c:if>
+					                        <c:if test="${(visitor.mem_no==mem_object.mem_no) || uandMe=='S0001'}">
+							                	<input type="button" class="btn btn-default" value="삭제" onclick="javascript:location.href='/user/visitor/visitorDelete.do?visitor_no=${visitor.visitor_no}&mem_no=${memberDto.mem_no}&uandMe=${uandMe}'"/>
+					                        </c:if>
+				                        </div> 
+			                        <p align="left" style="float: left;"><em>
+			                        <a href="${url}&mem_no=${visitor.mem_no}&SCHEDULE_TYPE=E0002&MYPAGE_SEARCH_CODE=M1029">
+				                    	&gt;<c:out value="${visitor.mem_name}(${visitor.mem_email})"/>
 				                    </a>
-				                    </em></small>
+				                    </em></p> 
+				                    <div align="right" style="float: right; font-size:0.8em;"><fmt:formatDate value="${visitor.visitor_write_date}" type="both"/></div><br/>
 		                    </blockquote>
+		                    
+		                    <div class="shadow-wrapper" id="${visitor.visitor_no}_upView" style="display:none;">
+			                    <blockquote class="hero box-shadow shadow-effect-2">
+				                    <form action="/user/visitor/visitorUpdate.do" method="get" onsubmit="return visitorForm(this)">
+				                    	<input type="hidden" name="visitor_no" value="${visitor.visitor_no}">	<!-- 글번호 -->
+				                    	<input type="hidden" name="mate_mem_no" value="${memberDto.mem_no}"> <!-- 받는 사람 no -->
+				                    	<input type="hidden" name="uandMe" value="S0002">
+				                    	
+				                    	<p><em><c:out value="from.${memberDto.mem_name} (${memberDto.mem_email})"/></em></p>
+				                        <p><em>
+											<textarea class="form-control" rows="4" cols="65" name="visitor_content" style="resize:none;"><c:out value="${visitor.visitor_content}"/></textarea>
+				                        </em></p> 
+				                        <small><em><c:out value="to.${mem_object.mem_name} (${memberDto.mem_email})"/></em></small>
+				                        <div align="right">
+											<input type="submit" value="수정완료"/>
+										</div>
+									</form>
+			                    </blockquote>
+			                </div>
 		                </div>
 						
 					</c:forEach>

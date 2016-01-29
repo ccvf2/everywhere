@@ -317,18 +317,34 @@ public class MyPageServiceImpl implements MyPageService {
 		search=search.toLowerCase();
 		System.out.println("------------search : " + search);
 		
-		List<MemberDto> friendsList=memberDao.searchFriends(search);
+		int mem_no=Integer.parseInt(request.getParameter("mem_no"));
 		
-		for(int i=0; i<friendsList.size(); i++){
-			System.out.println("-----friendsList : " + friendsList.get(i).toString());
+		String pageNumber=request.getParameter("pageNumber");
+		if(pageNumber==null) pageNumber="1";
+		
+		int boardSize=6;
+		
+		int currentPage = Integer.parseInt(pageNumber);
+		int startRow = (currentPage - 1) * boardSize + 1;
+		int endRow = currentPage * boardSize;
+		
+		int count=memberDao.searchFriendCount(search, mem_no);
+		
+		List<MemberDto> friendsList=null;
+		if(count>0){
+			friendsList=memberDao.searchFriends(search, startRow, endRow, mem_no);
 		}
 		
 		HttpSession session = request.getSession();
 		MemberDto memberDto=(MemberDto) session.getAttribute(Constant.SYNN_LOGIN_OBJECT);
 		
 		memberDto=memberDao.memberRead(memberDto.getMem_no());
+		
 		mav.addObject("memberDto", memberDto);
 		mav.addObject("friendsList", friendsList);
+		mav.addObject("count", count);
+		mav.addObject("boardSize", boardSize);
+		mav.addObject("currentPage", currentPage);
 		mav.setViewName("/user/myPage/myPageFriends");
 		
 		return mav;
