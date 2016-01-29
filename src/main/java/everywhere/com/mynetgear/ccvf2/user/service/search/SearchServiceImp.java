@@ -1,17 +1,11 @@
 package everywhere.com.mynetgear.ccvf2.user.service.search;
 
-import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.lang.StringUtils;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.ModelAndView;
@@ -21,8 +15,10 @@ import everywhere.com.mynetgear.ccvf2.comm.dao.common.CommonFileIODao;
 import everywhere.com.mynetgear.ccvf2.comm.dto.common.CommonFileIODto;
 import everywhere.com.mynetgear.ccvf2.comm.dto.commoncode.CommonCodeDto;
 import everywhere.com.mynetgear.ccvf2.comm.service.commoncode.CommonCodeService;
+import everywhere.com.mynetgear.ccvf2.comm.util.common.Constant;
 import everywhere.com.mynetgear.ccvf2.user.dao.planner.PlannerDao;
 import everywhere.com.mynetgear.ccvf2.user.dao.search.SearchDao;
+import everywhere.com.mynetgear.ccvf2.user.dto.planner.PlannerDto;
 import everywhere.com.mynetgear.ccvf2.user.dto.search.SpotDtoExt;
 import everywhere.com.mynetgear.ccvf2.user.dto.spot.SpotDto;
 
@@ -42,6 +38,9 @@ public class SearchServiceImp implements SearchService {
 	
 	@Autowired
 	private CommonFileIODao commonFileIODao;
+	
+	@Autowired
+	private PlannerDao plannerDao;
 	
 	@Override
 	public void searchSpot(ModelAndView mav) {
@@ -149,6 +148,19 @@ public class SearchServiceImp implements SearchService {
 			}
 		}
 		
+		PlannerDto plannerDto = new PlannerDto();
+		plannerDto.setSearchWord1(searchValue);
+		
+		//스케줄의 글 전체 개수를 가져오는 쿼리
+		int plannerListTotalCount = plannerDao.getPlannerListForAllCount(plannerDto);
+		EverywhereAspect.logger.info(EverywhereAspect.logMsg + plannerListTotalCount);
+		plannerDto.setTotalCount(plannerListTotalCount);
+		plannerDto.setStartRow(1);
+		plannerDto.setEndRow(6);
+		List<PlannerDto> plannerList = plannerDao.getPlannerListForAll(plannerDto);
+		//글종류를 나타내는 코드 목록
+		List<CommonCodeDto> selectCode=commonCodeService.getListCodeGroup(Constant.SCHEDULE_TYPE_GROUP);
+		
 		// 나라 리스트로 도시 리스트를 가져옴
 		List<CommonCodeDto> countryList = commonCodeService.getListCodeGroup("B0000");
 		List<CommonCodeDto> placeList = new ArrayList<CommonCodeDto>();
@@ -160,7 +172,6 @@ public class SearchServiceImp implements SearchService {
 		
 		List<CommonCodeDto> spotTypeList = commonCodeService.getListCodeGroup("T0001");
 		
-//		List<PlannerDao> plannerList = searchDao.getPlannerList(startRow, endRow, searchValue);
 		
 		mav.addObject("searchValue", searchValue);
 		mav.addObject("searchSpotList", searchSpotList);
@@ -168,8 +179,10 @@ public class SearchServiceImp implements SearchService {
 		mav.addObject("spotTypeList", spotTypeList);
 		mav.addObject("countryList", countryList);
 		mav.addObject("spotCount", spotCount);
-		//mav.addObject("plannerList", plannerList);
+		mav.addObject("plannerList", plannerList);
+		mav.addObject("plannerDto", plannerDto);
 		mav.addObject("plannerCount", plannerCount);
+		mav.addObject("selectCode", selectCode);
 		mav.setViewName("user/search/searchTotal");
 	}
 }

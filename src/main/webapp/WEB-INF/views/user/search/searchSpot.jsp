@@ -263,29 +263,28 @@
 	<script type="text/javascript" src="/assets/js/plugins/style-switcher.js"></script>
 	<script type="text/javascript" src="/assets/plugins/scrollbar/js/jquery.mCustomScrollbar.concat.min.js"></script>
 	<script type="text/javascript">
-
-	    //체크박스를 전체 선택하는 함수
-	    function checkAll() {
-	    	checkboxies = document.getElementsByName('spot_type_code');
-	    	for(var i=0, n=checkboxies.length; i<n; i++) {
-	    		checkboxies[i].checked=true;
-	    	}
-	    }
-	    
-	    //전체 선택된 상태에서 전체를 제외한 체크박스를 선택하면 전체가 풀리게 하는 함수
-	    function disableCheckAll(source) {
-	    	document.getElementById("check_all").checked = false;
-	    }
-	    
-	    //전체가 눌리면 나머지도 다 선택됨, 반대도 마찬가지
-	    function toggleCheck(source) {
-	    	checkboxies = document.getElementsByName('spot_type_code');
-	    	for(var i=0, n=checkboxies.length; i<n; i++) {
-	    		checkboxies[i].checked = source.checked;
-	    	}
-	    }
-	    
-	    function spotReadPage(no) {
+		//체크박스를 전체 선택하는 함수
+		function checkAll() {
+			checkboxies = document.getElementsByName('spot_type_code');
+			for(var i=0, n=checkboxies.length; i<n; i++) {
+				checkboxies[i].checked=true;
+			}
+		}
+	
+		//전체 선택된 상태에서 전체를 제외한 체크박스를 선택하면 전체가 풀리게 하는 함수
+		function disableCheckAll(source) {
+			document.getElementById("check_all").checked = false;
+		}
+	
+		//전체가 눌리면 나머지도 다 선택됨, 반대도 마찬가지
+		function toggleCheck(source) {
+			checkboxies = document.getElementsByName('spot_type_code');
+			for(var i=0, n=checkboxies.length; i<n; i++) {
+				checkboxies[i].checked = source.checked;
+			}
+		}
+	
+		function spotReadPage(no) {
 			//alert(no);
 			var makeDiv ="<div id='showModal"+no+"'></div>";
 			var requestURL="/user/spot/spotRead.do?spot_no="+no;
@@ -301,7 +300,8 @@
 					alert("목록 가져오기 실패");
 				}
 			})
-		};
+		}
+
 	</script>
   </body>
 </html>
