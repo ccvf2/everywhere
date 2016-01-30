@@ -30,6 +30,9 @@ public interface PlannerDao {
 	public int deletePlanner(int planner_no);
 
 	public int updatePlanner(PlannerDto plannerDto, List<ItemDto> itemList);
+	
+	public String getPlannerImage(int planner_no);
+	public String getItemImage(int item_no);
 
 	public List<PlannerDto> getListPlanner_main();
 	public List<PlannerDto> getListAdminSuggest();

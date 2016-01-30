@@ -258,4 +258,12 @@
 	<delete id="delete_money_by_money_no" parameterType="int">
 		delete from tbl_money where money_no=#{money_no}
 	</delete>
+	
+	<select id="select_planner_image" parameterType="int" resultType="String">
+		select attach_file from tbl_planner where planner_no=#{planner_no}
+	</select>
+	
+	<select id="select_item_image" parameterType="int" resultType="String">
+		select attach_photoes from tbl_item where item_no=#{item_no}
+	</select>
 </mapper>
