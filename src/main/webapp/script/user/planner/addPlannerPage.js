@@ -200,6 +200,10 @@ function addItem(input_name){
 		$("[onclick*='"+day_label+i+"']").each(function(){
 			$(this).attr('onclick', $(this).attr('onclick').replace(oldExp, newExp));
 		})
+		
+		$("[onchange*='"+day_label+i+"']").each(function(){
+			$(this).attr('onchange', $(this).attr('onchange').replace(oldExp, newExp));
+		})
 	}
 	
 	var copy = day_label+(label_num+1); //d1_item2
@@ -249,6 +253,10 @@ function deleteItem(input_name){
 		
 		$("[onclick*='"+day_label+i+"']").each(function(){
 			$(this).attr('onclick', $(this).attr('onclick').replace(oldExp, newExp));
+		})
+		
+		$("[onchange*='"+day_label+i+"']").each(function(){
+			$(this).attr('onchange', $(this).attr('onchange').replace(oldExp, newExp));
 		})
 	}
 	day_item_count.value = Number(day_item_count.value)-1;
