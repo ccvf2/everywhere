@@ -81,7 +81,7 @@
 				<div class="headline"><h2>${plannerDto.totalCount}개의 리뷰 검색 결과</h2></div>
 			</div>
  			<div class="col-md-2 col-md-offset-0" style="padding-top: 14px;">
- 				<button class="btn-u" type="button">리뷰 더보기 >></button>
+ 				<button class="btn-u" type="button" onclick="searchPlanner()">리뷰 더보기 >></button>
  			</div>
 		</div>
     	<!-- 스케줄 검색 결과 시작 -->
@@ -105,11 +105,14 @@
 							        
 							        <p>
 										<c:choose>
-											<c:when test="${fn:length(planner.memo) >30}">
-												<c:out value="${fn:substring(planner.memo, 0,30)}" escapeXml="false"/>…
+											<c:when test="${fn:length(planner.memo) >20}">
+												<c:out value="${fn:substring(planner.memo, 0,20)}" escapeXml="false"/>…
 											</c:when>
-											<c:when test="${fn:length(planner.memo) <40}">
+											<c:when test="${fn:length(planner.memo) <25}">
 												<c:out value="${planner.memo}" escapeXml="false"/>
+											</c:when>
+											<c:when test="${fn:length(planner.memo)==0}">
+											&nbsp;
 											</c:when>
 										</c:choose>
 									</p>
@@ -204,6 +207,12 @@
 		function searchSpot(searchValue) {
 			location.href="/user/search/searchSpot.do?searchPlace="+searchValue+"&searchSpot="+searchValue;
 		}
+		
+		/* 리뷰 검색창으로 연결 */
+		function searchPlanner() {
+			location.href="/user/planner/plannerList.do";
+		}
+		
 		
     </script> 
     <!-- 쪽지함에서 충돌로 인하 주석처리! -->

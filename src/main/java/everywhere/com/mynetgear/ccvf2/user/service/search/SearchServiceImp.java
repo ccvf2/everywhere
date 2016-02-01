@@ -1,6 +1,7 @@
 package everywhere.com.mynetgear.ccvf2.user.service.search;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -46,8 +47,11 @@ public class SearchServiceImp implements SearchService {
 	public void searchSpot(ModelAndView mav) {
 		Map<String, Object> map = mav.getModelMap();
 		HttpServletRequest request = (HttpServletRequest) map.get("request");
-		
+		String[] spot_type_code = (String[]) map.get("spot_type_code");
 		SpotDtoExt spotDto = new SpotDtoExt();
+		
+		//스트링 배열을 배열 리스트로 변경
+		spotDto.setConditionList1(Arrays.asList(spot_type_code));
 		
 		//나라 검색값
 		spotDto.setSearchCondition1(request.getParameter("selectCountry"));

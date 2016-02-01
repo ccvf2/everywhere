@@ -57,7 +57,6 @@
 	<c:import url="/WEB-INF/views/user/common/utilImport.jsp"/>
   </head>
   <body onload="checkAll()">
-	
    	<div class="wrapper">
 	    <!--=== Header ===-->
 	    <!-- Header가 꼭 imprt 되어 있어야 한다.(안그러면화면이깨짐) -->
@@ -74,7 +73,7 @@
 		            <!-- Blog Newsletter -->
 		            <div class="blog-newsletter" id="sidebar">
 		            	<div class="headline-v2" style="border: 0px;"></div>
-	            	 	<form action="#" class="sky-form" onsubmit="searchSpotList('${spotDto.currentPage}')">
+	            	 	<form action="#" class="sky-form">
 		                    <header>명소 검색</header>
 		                    
 		                    <fieldset style="padding: 15px 15px 5px;">
@@ -129,7 +128,7 @@
 		                    <!-- 명소 검색 버튼 시작 -->
 		                    <footer>
 		                    	<div class="text-center">
-		                        	<button type="submit" class="btn-u">검색</button>
+		                        	<button type="button" class="btn-u" onclick="searchSpotList('${spotDto.currentPage}')">검색</button>
 	                        	</div>
 		                    </footer>
 		                </form>
