@@ -298,8 +298,8 @@
 								<li>|</li>
 								<li title="주소:${list12.spot_addr}">
 									<i class="fa fa-map-marker"></i>
-									<c:out value="${fn:substring(list12.spot_addr, 0,15)}"/>
-									<c:if test="${fn:length(list12.spot_addr) >15}">…</c:if>
+									<c:out value="${fn:substring(list12.spot_addr, 0,10)}"/>
+									<c:if test="${fn:length(list12.spot_addr) >10}">…</c:if>
 								</li>
 							</ul>
 							
