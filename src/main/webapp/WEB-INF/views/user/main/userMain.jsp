@@ -27,11 +27,32 @@
 			if(e.keyCode == 13) { searchTotal();return false; }
 		
 		});
+		
+		
 	})
+		function menuControll1(str){
+			$(document).ready(function() {
+				$('#menu1_sub'+str).css("display","");
+				$('#menu1_sub'+str).css("position","absolute");
+			})
+		}
+		function menuControll2(str){
+			$(document).ready(function() {
+				$('#menu2_sub'+str).css("display","");
+				$('#menu2_sub'+str).css("position","absolute");
+			})
+		}
+
+		function menuClose(){
+			$(document).ready(function() {
+				$('div[id^=menu1_sub]').css("display","none");
+				$('div[id^=menu2_sub]').css("display","none");
+			})
+		}
 	</script>
 </head>
 
-<body>
+<body onclick="menuClose()">
 	<div class="wrapper">
 		<!--=== Header ===-->
 		<div class="header">
@@ -117,7 +138,16 @@
 								<div class="grid-boxes-caption" style="min-height: 180px;">
 									<h3><a href="/user/planner/readPlanner.do?planner_no=${suggetList.planner_no}">${suggetList.title}</a></h3>
 
-									<a href="/user/myPage/myPage.do?uandMe=S0002&mem_no=${suggetList.mem_no}">${suggetList.mem_name}</a>
+									<%-- <a href="/user/myPage/myPage.do?uandMe=S0002&mem_no=${suggetList.mem_no}">${suggetList.mem_name}</a> --%>
+									<a href="javascript:menuControll1('${suggetList.planner_no}')">${suggetList.mem_name}</a>
+									<!-- 서브메뉴 -->
+									<div class="col-md-3" id="menu1_sub${suggetList.planner_no}" style="display: none;">
+										<ul class="dropdown-menu dropdown-show" role="menu">
+											<li><a href="/user/myPage/myPage.do?uandMe=S0002&mem_no=${suggetList.mem_no}"><i class="fa fa-home"></i>${suggetList.mem_name}님 페이지 보기</a></li>
+											<li class="divider"></li>
+											<li><a href="/user/message/messageTalkList.do?recv_mem_no=${suggetList.mem_no}"><i class="fa  fa-comments-o"></i>${suggetList.mem_name}님께 쪽지보내기</a></li>
+										</ul>
+									</div>
 
 									<ul class="list-inline grid-boxes-news">
 										<li title="댓글"><a href="#"><i class="fa fa-comments-o"></i><c:out value="${suggetList.reply_Count}" escapeXml="false"/></a></li>
@@ -177,7 +207,20 @@
 								<div class="grid-boxes-caption" style="min-height: 180px;">
 									<h3><a href="/user/planner/readPlanner.do?planner_no=${moreLikeList.planner_no}">${moreLikeList.title}</a></h3>
 
-									<a href="/user/myPage/myPage.do?uandMe=S0002&mem_no=${moreLikeList.mem_no}">${moreLikeList.mem_name}</a>
+<%-- 									<a href="/user/myPage/myPage.do?uandMe=S0002&mem_no=${moreLikeList.mem_no}">${moreLikeList.mem_name}</a> --%>
+									<a href="javascript:menuControll2('${moreLikeList.planner_no}')">${moreLikeList.mem_name}</a>
+
+
+								<!-- 서브메뉴 -->
+								<div class="col-md-3" id="menu2_sub${moreLikeList.planner_no}" style="display: none;">
+									<ul class="dropdown-menu dropdown-show" role="menu">
+										<li><a href="/user/myPage/myPage.do?uandMe=S0002&mem_no=${moreLikeList.mem_no}"><i class="fa fa-home"></i>${moreLikeList.mem_name}님 페이지 보기</a></li>
+										<li class="divider"></li>
+										<li><a href="/user/message/messageTalkList.do?recv_mem_no=${moreLikeList.mem_no}"><i class="fa  fa-comments-o"></i>${moreLikeList.mem_name}님께 쪽지보내기</a></li>
+									</ul>
+								</div>
+
+
 
 									<ul class="list-inline grid-boxes-news">
 										<li title="댓글"><a href="#"><i class="fa fa-comments-o"></i><c:out value="${moreLikeList.reply_Count}" escapeXml="false"/></a></li>

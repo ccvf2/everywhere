@@ -45,11 +45,26 @@
 			form.method="POST";
 			form.submit();
 		}
+		
+		function menuControll1(str){
+			$(document).ready(function() {
+				$('#menu1_sub'+str).css("display","");
+				$('#menu1_sub'+str).css("position","absolute");
+			})
+		}
+
+		function menuClose(){
+			$(document).ready(function() {
+				$('div[id^=menu1_sub]').css("display","none");
+				$('div[id^=menu2_sub]').css("display","none");
+			})
+		}
+		
 	</script>
 	<c:import url="/WEB-INF/views/common/jquery.jsp"/>
 	<c:import url="/WEB-INF/views/user/common/utilImport.jsp"/>
 </head>
-<body>
+<body onclick="menuClose()">
 
 	<div class="wrapper">
 		<!--=== Header ===-->
@@ -190,8 +205,20 @@
 									</a>
 									<div class="grid-boxes-caption">
 										<h3><a href="/user/planner/readPlanner.do?planner_no=${planner.planner_no}"> ${planner.title}</a></h3>
-										 <span style="font-weight: bolder;"><a href="/user/myPage/myPage.do?uandMe=S0002&mem_no=${planner.mem_no}">${planner.mem_name}</a></span>
-										 <span style="color: #777;float: right;"><i class="fa fa-pencil" title="등록일"><fmt:formatDate pattern="yy-MM-dd" value="${planner.reg_date}"/></i></span>
+										<span style="font-weight: bolder;">
+											<%-- <a href="/user/myPage/myPage.do?uandMe=S0002&mem_no=${planner.mem_no}">${planner.mem_name}</a> --%>
+											<a href="javascript:menuControll1('${planner.planner_no}')">${planner.mem_name}</a>
+												<!-- 서브메뉴 -->
+												<div class="col-md-3" id="menu1_sub${planner.planner_no}" style="display: none;">
+													<ul class="dropdown-menu dropdown-show" role="menu">
+														<li><a href="/user/myPage/myPage.do?uandMe=S0002&mem_no=${planner.mem_no}"><i class="fa fa-home"></i>${planner.mem_name}님 페이지 보기</a></li>
+														<li class="divider"></li>
+														<li><a href="/user/message/messageTalkList.do?recv_mem_no=${planner.mem_no}"><i class="fa  fa-comments-o"></i>${planner.mem_name}님께 쪽지보내기</a></li>
+													</ul>
+												</div>
+										
+										</span>
+										<span style="color: #777;float: right;"><i class="fa fa-pencil" title="등록일"><fmt:formatDate pattern="yy-MM-dd" value="${planner.reg_date}"/></i></span>
 										<ul class="list-inline grid-boxes-news">
 											<li><i class="fa fa-comments-o" title="댓글">&nbsp;<c:out value="${planner.reply_Count}" escapeXml="false"/></i></li>
 											<li>|</li>
