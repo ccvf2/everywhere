@@ -45,7 +45,7 @@ public class MessageServiceImp implements MessageService {
 		//방번호가 있는지 없는지 체크한다.
 		if(dto.getMsg_group_no()==0){
 			//보낼사람 정보가 있는지 확인
-			if(dto.getRecv_mem_no()==0){
+			if(dto.getRecv_mem_no()!=0){
 				//그사람과 대화한 방이 있는지 확인
 				int checkNumber=messageDao.getOneCheckGroupNumber(dto);
 				if(checkNumber==0){
@@ -55,6 +55,9 @@ public class MessageServiceImp implements MessageService {
 				}else{
 					//있으면 그 방번호를 삽입
 					dto.setMsg_group_no(checkNumber);
+					List<MessageDto> list = messageDao.getListParsonTalk(dto);
+					mav.addObject("parsonTalkList",list);
+					System.out.println(Constant.LOG_ID1+ list.size());
 				}
 			}else{
 				//방번호 생성(첫대화)

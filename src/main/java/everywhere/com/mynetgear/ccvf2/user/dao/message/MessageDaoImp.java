@@ -100,6 +100,6 @@ public class MessageDaoImp implements MessageDao {
 	public int getOneCheckGroupNumber(MessageDto dto) {
 		int result =0;
 		result=sqlTemplate.selectOne("select_check_group_number",dto); 
-		return 0;
+		return result;
 	}
 }

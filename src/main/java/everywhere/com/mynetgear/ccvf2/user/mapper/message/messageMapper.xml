@@ -34,7 +34,7 @@
 			uu.*
 			,(SELECT mem_name FROM tbl_member WHERE mem_no=uu.send_mem_no) AS send_mem_name
 			,(SELECT mem_name FROM tbl_member WHERE mem_no=uu.recv_mem_no) AS recv_mem_name
-			,(SELECT COUNT(*) FROM TBL_MESSAGE WHERE RECV_MEM_NO=#{value} AND RECV_TIME IS NULL) AS unreadCount
+			,(SELECT COUNT(*) FROM TBL_MESSAGE WHERE RECV_MEM_NO=uu.recv_mem_no AND RECV_TIME IS NULL and msg_group_no=uu.msg_group_no) AS unreadCount
 		FROM 
 			tbl_message uu
 			, (SELECT
