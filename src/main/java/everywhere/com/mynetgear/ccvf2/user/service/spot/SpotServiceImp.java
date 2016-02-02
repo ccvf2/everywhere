@@ -23,6 +23,7 @@ import everywhere.com.mynetgear.ccvf2.comm.dto.commoncode.CommonCodeDto;
 import everywhere.com.mynetgear.ccvf2.comm.service.common.CommonFileIOService;
 import everywhere.com.mynetgear.ccvf2.comm.service.commoncode.CommonCodeService;
 import everywhere.com.mynetgear.ccvf2.comm.util.common.Constant;
+import everywhere.com.mynetgear.ccvf2.user.dao.member.MemberDao;
 import everywhere.com.mynetgear.ccvf2.user.dao.spot.SpotDao;
 import everywhere.com.mynetgear.ccvf2.user.dto.member.MemberDto;
 import everywhere.com.mynetgear.ccvf2.user.dto.search.SpotDtoExt;
@@ -32,7 +33,8 @@ import everywhere.com.mynetgear.ccvf2.user.dto.spot.SpotDto;
 public class SpotServiceImp implements SpotService{
 	@Autowired
 	private SpotDao spotDao;
-
+	@Autowired
+	private MemberDao memberDao;
 	@Autowired
 	private CommonCodeService commonCodeService;
 	@Autowired
@@ -361,6 +363,7 @@ public class SpotServiceImp implements SpotService{
 		if(endPage>pageCount){
 			endPage = pageCount;
 		}
+		userInfo = memberDao.memberRead(userInfo.getMem_no());
 		
 		mav.addObject("mySpotList", mySpotList);
 		mav.addObject("memberDto", userInfo);
