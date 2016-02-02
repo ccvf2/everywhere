@@ -177,11 +177,20 @@
 							<c:forEach var="planner" items="${plannerList}">
 								<div class="grid-boxes-in masonry-brick" style="position: absolute; width: 300px; top: 40px; left: 15px;">
 									<a href="/user/planner/readPlanner.do?planner_no=${planner.planner_no}">
+										<c:choose>
+											<c:when test="${planner.planner_ba_code eq 'E0001'}">
+												<i class="fa fa-calendar-o" title="일정" style="position: absolute; margin: 7px; font-size: 1.5em; text-shadow: #ffffff 2px 2px 2px;"></i>
+											</c:when>
+											<c:when test="${planner.planner_ba_code eq 'E0002'}">
+												<i class="fa fa-check-circle" title="리뷰" style="position: absolute; margin: 7px; font-size: 1.5em; text-shadow: #ffffff 2px 2px 2px;"></i>
+											</c:when>
+											<c:otherwise></c:otherwise>
+										</c:choose>
 										<img class="img-responsive" src="/attatchFile/planner/${planner.attach_file}" onError="this.src='/attatchFile/spot/no_image.jpg'" alt="${planner.title}" style="min-height: 170px;">
 									</a>
 									<div class="grid-boxes-caption">
 										<h3><a href="/user/planner/readPlanner.do?planner_no=${planner.planner_no}"> ${planner.title}</a></h3>
-										 <span style="font-weight: bolder;"><c:out value="${planner.mem_name}"/></span>
+										 <span style="font-weight: bolder;"><a href="/user/myPage/myPage.do?uandMe=S0002&mem_no=${planner.mem_no}">${planner.mem_name}</a></span>
 										 <span style="color: #777;float: right;"><i class="fa fa-pencil" title="등록일"><fmt:formatDate pattern="yy-MM-dd" value="${planner.reg_date}"/></i></span>
 										<ul class="list-inline grid-boxes-news">
 											<li><i class="fa fa-comments-o" title="댓글">&nbsp;<c:out value="${planner.reply_Count}" escapeXml="false"/></i></li>

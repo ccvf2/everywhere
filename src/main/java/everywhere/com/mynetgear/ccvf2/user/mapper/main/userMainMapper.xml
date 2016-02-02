@@ -3,9 +3,7 @@
 <mapper namespace="everywhere.com.mynetgear.ccvf2.user.mapper.main.userMainMapper">
 	
 	<!-- 슬라이드 이미지의 백그라운드 이미지 셋팅값 -->
-	<select id="select_service_main_slide_back_img" 
-	resultType="everywhere.com.mynetgear.ccvf2.admin.dto.settingmain.SettingMainDto" 
-	parameterType="everywhere.com.mynetgear.ccvf2.admin.dto.settingmain.SettingMainDto">
+	<select id="select_service_main_slide_back_img" resultType="everywhere.com.mynetgear.ccvf2.admin.dto.settingmain.SettingMainDto" parameterType="everywhere.com.mynetgear.ccvf2.admin.dto.settingmain.SettingMainDto">
 		SELECT
 			*
 		FROM

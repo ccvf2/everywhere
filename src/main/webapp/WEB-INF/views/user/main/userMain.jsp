@@ -98,13 +98,14 @@
 
  					<c:forEach var="suggetList" items="${suggetList}">
 						<div class="col-md-4">
-							<span style="position: absolute; margin-left: 8px; font-size: 1.8em; color: #72c02c;" title="운영자 추천"><i class="fa fa-certificate" style="color: #ffb300;"></i>
+							<span style="position: absolute; margin-left: 8px; font-size: 1.8em; color: #72c02c;" title="운영자 추천">
+							<i class="fa fa-certificate" style="color: #ffb300; text-shadow: #ffffff 2px 2px 2px;" ></i>
 							<c:choose>
 								<c:when test="${suggetList.planner_ba_code eq 'E0001'}">
-									<i class="fa fa-calendar-o" title="일정"></i>
+									<i class="fa fa-calendar-o" title="일정" style="text-shadow: #ffffff 2px 2px 2px;"></i>
 								</c:when>
 								<c:when test="${suggetList.planner_ba_code eq 'E0002'}">
-									<i class="fa fa-check-circle" title="리뷰"></i>
+									<i class="fa fa-check-circle" title="리뷰" style="text-shadow: #ffffff 2px 2px 2px;"></i>
 								</c:when>
 								<c:otherwise></c:otherwise>
 							</c:choose>
@@ -162,10 +163,10 @@
 							<div class="col-md-4">
 							<c:choose>
 								<c:when test="${moreLikeList.planner_ba_code eq 'E0001'}">
-									<span style="position: absolute; margin-left: 8px; font-size: 1.8em; color: #72c02c;" title="일정"><i class="fa fa-calendar-o"></i></span>
+									<span style="position: absolute; margin-left: 8px; font-size: 1.8em; color: #72c02c;" title="일정"><i class="fa fa-calendar-o" style="text-shadow: #ffffff 2px 2px 2px;"></i></span>
 								</c:when>
 								<c:when test="${moreLikeList.planner_ba_code eq 'E0002'}">
-									<span style="position: absolute; margin-left: 8px; font-size: 2em; margin-top: -3px; color: #72c02c;" title="리뷰"><i class="fa fa-check-circle"></i></span>
+									<span style="position: absolute; margin-left: 8px; font-size: 2em; margin-top: -3px; color: #72c02c;" title="리뷰"><i class="fa fa-check-circle" style="text-shadow: #ffffff 2px 2px 2px;"></i></span>
 								</c:when>
 								<c:otherwise></c:otherwise>
 							</c:choose>
