@@ -57,6 +57,19 @@
 			//location.href="/user/accompany/accompanyList.do?search="+search;
 		}
 		
+		function menuControll(str){
+			$(document).ready(function() {
+				$('#menu1_sub'+str).css("display","");
+				$('#menu1_sub'+str).css("position","absolute");
+			})
+		}
+		
+		function menuClose(){
+			$(document).ready(function() {
+				$('div[id^=menu1_sub]').css("display","none");
+			})
+		}
+		
 		$(document).ready(function(){
 			$(".nav-tabs a").click(function(){
 				$(this).tab('show');
@@ -73,7 +86,7 @@
 	<c:import url="/WEB-INF/views/common/jquery.jsp"/>
 	<c:import url="/WEB-INF/views/user/common/utilImport.jsp"/>
 </head>
-<body onload="activeFunction()">
+<body onload="activeFunction()" onclick="menuClose()">
 	<!-- 글 작성일 계산을 위한 현제 날짜 -->
 	<jsp:useBean id="now" class="java.util.Date"/>
 	<fmt:formatDate var="nowDate" value="${now}" pattern="yy-MM-dd"/>
@@ -130,7 +143,7 @@
 										<!-- 현재 날짜 보다 과거에 있는 경우 년월일 형태로 뿌려줌 -->
 										<c:if test="${recentWriteDate lt nowDate}"><!-- 과거 -->
 											<fmt:formatDate pattern="yyyy-MM-dd" value="${recentAccompanyDto.write_date}"/>
-										</c:if> / <a href="/user/myPage/myPage.do?uandMe=S0002&mem_no=${recentAccompanyDto.mem_no}&SCHEDULE_TYPE=E0002&MYPAGE_SEARCH_CODE=M1029">${recentAccompanyDto.mem_name}</a>
+										</c:if> / ${recentAccompanyDto.mem_name}
 									</small>
 									<!-- 글 내용 미리보기의 글자가 70자가 넘어갈 경우 뒷 부분을 ... 처리한다. -->
 									<p>${fn:substring(recentAccompanyDto.content, 0, 70)}
@@ -211,7 +224,17 @@
 															<i class="fa fa-picture-o" title="이미지 있음"></i>
 														</c:if>
 												</td>
-												<td><a href="/user/myPage/myPage.do?uandMe=S0002&mem_no=${accompanyDto.mem_no}&SCHEDULE_TYPE=E0002&MYPAGE_SEARCH_CODE=M1029" style="text-decoration: none; color: inherit;">${accompanyDto.mem_name}</a></td>
+												
+												<td>
+													<a href="javascript:menuControll('${accompanyDto.accompany_no}')" style="text=decoration: none; color: inherit;">${accompanyDto.mem_name}</a>
+													<!-- 서브메뉴 -->
+													<div class="col-md-3" id="menu1_sub${accompanyDto.accompany_no}" style="display: none;">
+														<ul class="dropdown-menu dropdown-show" role="menu">
+															<li><a href="/user/myPage/myPage.do?uandMe=S0002&mem_no=${accompanyDto.mem_no}&SCHEDULE_TYPE=E0002&MYPAGE_SEARCH_CODE=M1029"><i class="fa fa-home"></i>${accompanyDto.mem_name}님 페이지 보기</a></li>
+															<li class="divider"></li>
+															<li><a href="/user/message/messageTalkList.do?recv_mem_no=${accompanyDto.mem_no}"><i class="fa  fa-comments-o"></i>${accompanyDto.mem_name}님께 쪽지보내기</a></li>
+														</ul>
+													</div>
 												<td>
 													<fmt:formatDate var="writeDate" value="${accompanyDto.write_date}" pattern="yy-MM-dd"/>
 													<c:if test="${writeDate eq nowDate}"><!-- 현재 -->

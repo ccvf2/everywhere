@@ -227,7 +227,7 @@
 										<!-- 파일 시작 -->
 										<section>
 											<label for="accompany_file" class="input input-file">
-												<div class="button"><input type="file" name="accompany_file" accept="image/*" onchange="this.parentNode.nextSibling.value = this.value">Browse</div><input type="text" placeholder="파일 첨부" readonly="">
+												<div class="button"><input type="file" name="accompany_file" accept="image/*" onchange="this.parentNode.nextSibling.value = this.value">찾아보기</div><input type="text" placeholder="파일 첨부" readonly="">
 											</label>
 										</section>
 										<!-- 파일 끝 -->

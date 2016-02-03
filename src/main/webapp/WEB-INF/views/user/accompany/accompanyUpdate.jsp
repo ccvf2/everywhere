@@ -242,7 +242,7 @@
 		                        <!-- 파일 시작 -->
 	                        	<section>
 		                            <label for="file" class="input input-file">
-		                                <div class="button"><input type="file" name="accompany_file" multiple="" onchange="this.parentNode.nextSibling.value = this.value">Browse</div><input type="text" placeholder="${accompanyDto.attach_file}" readonly="">
+		                                <div class="button"><input type="file" name="accompany_file" multiple="" onchange="this.parentNode.nextSibling.value = this.value">찾아보기</div><input type="text" placeholder="${accompanyDto.attach_file}" readonly="">
 		                            </label>
 		                        </section>
 		                        <!-- 파일 끝 -->

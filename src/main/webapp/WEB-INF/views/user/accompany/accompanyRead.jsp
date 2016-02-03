@@ -34,7 +34,18 @@
 			var search=document.getElementById("search").value;
 			location.href="/user/accompany/accompanyList.do?search="+search;
 		}
+		function menuControll(str){
+			$(document).ready(function() {
+				$('#menu1_sub'+str).css("display","");
+				$('#menu1_sub'+str).css("position","absolute");
+			})
+		}
 		
+		function menuClose(){
+			$(document).ready(function() {
+				$('div[id^=menu1_sub]').css("display","none");
+			})
+		}
 		$(document).ready(function() {
 			
 		//type_code:댓글이 있는 게시판고유코드,
@@ -54,7 +65,7 @@
 	<c:import url="/WEB-INF/views/common/jquery.jsp"/>
 	<c:import url="/WEB-INF/views/user/common/utilImport.jsp"/>	
 </head>
-<body>
+<body onclick="menuClose()">
 	<!-- 글 작성일 계산을 위한 현제 날짜 -->
 	<jsp:useBean id="now" class="java.util.Date"/>
 	<fmt:formatDate var="nowDate" value="${now}" pattern="yy-MM-dd"/>
@@ -125,7 +136,24 @@
 						<div class="news-v3 bg-color-white margin-bottom-30">
 							<div class="news-v3-in">
 								<ul class="list-inline posted-info">
-									<li>By <a href="/user/myPage/myPage.do?uandMe=S0002&mem_no=${accompanyDto.mem_no}&SCHEDULE_TYPE=E0002&MYPAGE_SEARCH_CODE=M1029">${accompanyDto.mem_name}</a></li>
+									<li>By 
+										<a href="javascript:menuControll('${accompanyDto.accompany_no}')" style="text=decoration: none; color: inherit;">${accompanyDto.mem_name}
+											<!-- 서브메뉴 -->
+											<div class="col-md-3" id="menu1_sub${accompanyDto.accompany_no}" style="display: none;">
+												<dl class="dropdown-menu dropdown-show" role="menu">
+													<dt style="margin:7px;"><a href="/user/myPage/myPage.do?uandMe=S0002&mem_no=${accompanyDto.mem_no}&SCHEDULE_TYPE=E0002&MYPAGE_SEARCH_CODE=M1029"><i class="fa fa-home"></i>${accompanyDto.mem_name}님 페이지 보기</a></dt>
+													<dt class="divider"></dt>
+													<dt style="margin:7px;"><a href="/user/message/messageTalkList.do?recv_mem_no=${accompanyDto.mem_no}"><i class="fa fa-comments-o"></i>${accompanyDto.mem_name}님께 쪽지보내기</a></dt>
+												</dl>
+											</div>
+											
+										</a>
+									</li>
+									
+									
+									
+									
+									
 									<li>In <a href="/user/accompany/accompanyList.do?pageNumber=${currentPage}">동행구하기 게시판</a></li>
 									<li>Hits ${accompanyDto.hits}</li>
 									<li>Posted <fmt:formatDate pattern="yyyy-MM-dd hh:mm" value="${accompanyDto.write_date}"/></li>
