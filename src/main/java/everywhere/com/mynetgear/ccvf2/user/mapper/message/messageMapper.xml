@@ -138,7 +138,11 @@
 		FROM
 			tbl_message
 		WHERE
-			(send_mem_no=#{send_mem_no} OR send_mem_no=#{recv_mem_no})
+			(recv_mem_no=#{send_mem_no} OR send_mem_no=#{send_mem_no})
+		<if test="recv_mem_no!=0">
+		AND
+			(recv_mem_no=#{recv_mem_no} OR send_mem_no=#{recv_mem_no})
+		</if>
 		AND
 			REMOVE_MEM_NO IS NULL
 	</select>

@@ -6,6 +6,7 @@
 <meta charset="UTF-8">
 <title>마이페이지 Left</title>
 <script type="text/javascript" src="/assets/plugins/line-icons/icons-lte-ie7.js"></script>
+<link rel="stylesheet" href="/assets/plugins/line-icons/line-icons.css">
 <script type="text/javascript">
 	function memberUpdate(mem_no) {
 		var makeDiv ="<div id='updateMemberInfo'></div>";
@@ -24,11 +25,25 @@
 			}
 		});
 	}
+	
+	function menuControll1(str){
+		$(document).ready(function() {
+			$('#menu1_sub'+str).css("display","");
+			$('#menu1_sub'+str).css("position","absolute");
+		})
+	}
+
+	function menuClose(){
+		$(document).ready(function() {
+			$('div[id^=menu1_sub]').css("display","none");
+			$('div[id^=menu2_sub]').css("display","none");
+		})
+	}
 </script>
-<%-- <c:import url="/WEB-INF/views/common/jquery.jsp"/> --%>
+<c:import url="/WEB-INF/views/common/jquery.jsp"/>
 
 </head>
-<body>
+<body onclick="menuClose()">
 	<script type="text/javascript">
 		$(function() {
 			$("#profileP").toggle(function() {
@@ -80,10 +95,10 @@
 		</c:otherwise>
 	</c:choose>
 	<c:if test="${memberDto.mem_no==mem_object.mem_no}">
-		<a id="profileP"><span>프로필사진변경</span></a>
+		<a id="profileP"><i class="fa fa-file-image-o"></i><span>프로필사진변경</span></a>
 	</c:if>
 	
-	<img id="imgout" class="img-responsive profile-img margin-bottom-20" src="${profile}" alt="">
+	<img id="imgout" class="img-responsive profile-img margin-bottom-20" src="${profile}" alt="자신의 프로필 사진">
 	
 	
 	
@@ -96,14 +111,27 @@
 		</form>
 	</div>
 	
-	<c:out value="${memberDto.mem_name}"/><c:out value="(${memberDto.mem_email})"/>
+	
 	<c:if test="${mateCheck==0}">
-		<a href="/user/myPage/mateInsert.do?mem_no=${memberDto.mem_no}">친구추가</a>
+		<a href="javascript:menuControll1('${memberDto.mem_no}')">
+			<c:out value="${memberDto.mem_name}"/><c:out value="(${memberDto.mem_email})"/>
+		</a>
+		<div class="col-md-3" id="menu1_sub${memberDto.mem_no}" style="display: none;">
+			<ul class="dropdown-menu dropdown-show" role="menu">
+				<li><a href="/user/myPage/mateInsert.do?mem_no=${memberDto.mem_no}"><i class="fa fa-check"></i>친구추가</a></li>
+			</ul>
+		</div>
 	</c:if>
 	<c:if test="${mateCheck==1}">
-		<a href="/user/myPage/mateDelete.do?mem_no=${memberDto.mem_no}">친구삭제</a>
+		<a href="javascript:menuControll1('${memberDto.mem_no}')">
+			<c:out value="${memberDto.mem_name}"/><c:out value="(${memberDto.mem_email})"/>
+		</a>
+		<div class="col-md-3" id="menu1_sub${memberDto.mem_no}" style="display: none;">
+			<ul class="dropdown-menu dropdown-show" role="menu">
+				<li><a href="/user/myPage/mateDelete.do?mem_no=${memberDto.mem_no}"><i class="fa fa-minus"></i>친구삭제</a></li>
+			</ul>
+		</div>
 	</c:if>
-	
 	<c:choose>
 		<c:when test="${memberDto.mem_no==mem_object.mem_no}">
 			<c:set var="uandMe" value="uandMe=S0001"/>		

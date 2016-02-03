@@ -271,10 +271,10 @@
 		                                      WHERE mem_no=#{mem_no})) mem2
 		              where mem1.mem_no=mem2.mem_no) mem
 				      
-				where pla.PLANNER_NO=book.planner_no
-				and pla.PLANNER_NO=sw.planner_no
-				and pla.PLANNER_NO=re.planner_no
-				and pla.planner_no=mem.planner_no
+				where pla.PLANNER_NO=book.planner_no(+)
+				and pla.PLANNER_NO=sw.planner_no(+)
+				and pla.PLANNER_NO=re.planner_no(+)
+				and pla.planner_no=mem.planner_no(+)
 			]]>
 		</if>
 		<if test="list_code =='M1031'">

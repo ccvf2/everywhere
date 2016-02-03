@@ -80,7 +80,7 @@
 					<c:if test="${count>0}">
 						<div class="shadow-wrapper">
 			                <div class="tag-box tag-box-v1 box-shadow shadow-effect-2">
-			                    <h2><c:out value="${memberDto.mem_name}님의 방명록"/>}</h2>
+			                    <h2><c:out value="${memberDto.mem_name}님의 방명록"/></h2>
 			                </div>
 		                </div>
 					</c:if>

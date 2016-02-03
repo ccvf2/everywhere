@@ -105,7 +105,7 @@
 										</c:if>
 										<c:if test="${recentWriteDate lt nowDate}"><!-- 과거 -->
 											<fmt:formatDate pattern="yyyy-MM-dd" value="${recentAccompanyDto.write_date}"/>
-										</c:if> / <a href="/user/myPage/myPage.do?uandMe=S0002&mem_no=${recentAccompanyDto.mem_no}">${recentAccompanyDto.mem_name}</a>
+										</c:if> / <a href="/user/myPage/myPage.do?uandMe=S0002&mem_no=${recentAccompanyDto.mem_no}&SCHEDULE_TYPE=E0002&MYPAGE_SEARCH_CODE=M1029">${recentAccompanyDto.mem_name}</a>
 									</small>
 									<p>${fn:substring(recentAccompanyDto.content, 0, 70)}
 										<c:if test="${fn:length(albumDto.content) >70}">
@@ -125,7 +125,7 @@
 						<div class="news-v3 bg-color-white margin-bottom-30">
 							<div class="news-v3-in">
 								<ul class="list-inline posted-info">
-									<li>By <a href="/user/myPage/myPage.do?uandMe=S0002&mem_no=${accompanyDto.mem_no}">${accompanyDto.mem_name}</a></li>
+									<li>By <a href="/user/myPage/myPage.do?uandMe=S0002&mem_no=${accompanyDto.mem_no}&SCHEDULE_TYPE=E0002&MYPAGE_SEARCH_CODE=M1029">${accompanyDto.mem_name}</a></li>
 									<li>In <a href="/user/accompany/accompanyList.do?pageNumber=${currentPage}">동행구하기 게시판</a></li>
 									<li>Hits ${accompanyDto.hits}</li>
 									<li>Posted <fmt:formatDate pattern="yyyy-MM-dd hh:mm" value="${accompanyDto.write_date}"/></li>
