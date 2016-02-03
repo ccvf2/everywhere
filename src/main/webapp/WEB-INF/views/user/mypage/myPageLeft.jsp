@@ -25,7 +25,7 @@
 		});
 	}
 </script>
-<c:import url="/WEB-INF/views/common/jquery.jsp"/>
+<%-- <c:import url="/WEB-INF/views/common/jquery.jsp"/> --%>
 
 </head>
 <body>

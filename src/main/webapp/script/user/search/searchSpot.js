@@ -17,7 +17,7 @@ function searchSpotList(page){
 	var spot_type_code="";
 	$('input:checkbox[name=spot_type_code]').each(function() {    
 	    if($(this).is(':checked')) {
-	    	spot_type_code = spot_type_code +"&spot_type_code=" + $(this).val() + ",";
+	    	spot_type_code = spot_type_code +"&spot_type_code=" + $(this).val();
 	    }
 	});
 
@@ -60,4 +60,6 @@ function readCityList(check){
 			alert(xhr+","+status+","+errorMsg);
 		}
 	})
+	
+	
 }

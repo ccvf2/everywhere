@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import everywhere.com.mynetgear.ccvf2.user.service.search.SearchService;
@@ -31,9 +32,10 @@ public class SearchController {
 	 * @return
 	 */
 	@RequestMapping(value="/user/search/searchSpot.do", method=RequestMethod.GET)
-	public ModelAndView searchSpot(HttpServletRequest request, HttpServletResponse response) { 
+	public ModelAndView searchSpot(HttpServletRequest request, HttpServletResponse response, @RequestParam (value="spot_type_code", defaultValue= "T0000")String[] spot_type_code) { 
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("request", request);
+		mav.addObject("spot_type_code", spot_type_code);
 		searchService.searchSpot(mav);
 		return mav;
 	}

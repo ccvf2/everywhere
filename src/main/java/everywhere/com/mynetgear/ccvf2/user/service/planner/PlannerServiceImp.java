@@ -651,15 +651,15 @@ public class PlannerServiceImp implements PlannerService {
 		plannerDto.setTitle(request.getParameter("planner_title"));
 		plannerDto.setMemo(request.getParameter("planner_memo").replace("\r\n", "<br/>"));
 
-		if(request.getParameter("attach_file") != null && !request.getParameter("attach_file").equals(plannerDto.getAttach_file())){
+		CommonFileIODto commonFileIODto = commonFileIOService.requestWriteFileAndDTO(request, "attach_file", plannerPath);
+		if(commonFileIODto != null){
 			System.out.println("배경이미지 수정됨!!!!!!");
-			CommonFileIODto commonFileIODto = commonFileIOService.requestWriteFileAndDTO(request, "attach_file", plannerPath);
-			if(commonFileIODto != null){
-				commonFileIODto.setType_code(Constant.FILE_TYPE_SCHEDULE);
-				commonFileIODto.setWrite_no(mem_no);
-				String planner_photo_num = commonFileIOService.insertFileInfo(commonFileIODto) + "";
-				plannerDto.setAttach_file(planner_photo_num);
-			}
+			commonFileIODto.setType_code(Constant.FILE_TYPE_SCHEDULE);
+			commonFileIODto.setWrite_no(mem_no);
+			String planner_photo_num = commonFileIOService.insertFileInfo(commonFileIODto) + "";
+			plannerDto.setAttach_file(planner_photo_num);
+		}else{
+			plannerDto.setAttach_file(plannerDao.getPlannerImage(planner_no));
 		}
 
 		String start_date = request.getParameter("start_date");

@@ -150,12 +150,11 @@
 							<c:set value="${list.send_mem_name}" var="nameTo"/>
 					</c:otherwise>
 				</c:choose>
-                <div class="panel-group acc-v1" id="accordion-1">
-
+                <div class="panel-group acc-v1" id="accordion-${list.msg_group_no}">
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <h4 class="panel-title">
-                                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion-1" href="#collapse-Four">
+                                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion-${list.msg_group_no}" href="#collapse-Four${list.msg_group_no}">
                                     ${nameTo}님과의 대화
                                     <c:if test="${list.unreadCount!=0 }">
                                     	<span class="dropcap-bg rounded-x" style="min-width:25px; line-height:10px; font-size:13px; border: double 1px #23c3f2; margin: 0px;">${list.unreadCount}</span>
@@ -175,7 +174,7 @@
                                 </a>
                             </h4>
                         </div>
-                        <div id="collapse-Four" class="panel-collapse collapse">
+                        <div id="collapse-Four${list.msg_group_no}" class="panel-collapse collapse">
                             <div class="panel-body"><a href="/user/message/messageTalkList.do?recv_mem_no=${recv_no}&msg_group_no=${list.msg_group_no}">${list.message}</a></div>
                         </div>
                     </div>

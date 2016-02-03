@@ -129,10 +129,13 @@ public class PlannerDaoImp implements PlannerDao {
 				if(itemList.get(i).getItem_no() == 0)
 					check = insertItem(itemList.get(i));
 				else{
+					int itemNo = itemList.get(i).getItem_no();
+					if(itemList.get(i).getAttach_photoes() == null)
+						itemList.get(i).setAttach_photoes(getItemImage(itemNo));
 					check = updateItem(itemList.get(i));
 					if(oldItemList.size() > 0){
 						for (ItemDto itemDto : oldItemList) {
-							if(itemDto.getItem_no() == itemList.get(i).getItem_no()){
+							if(itemDto.getItem_no() == itemNo){
 								oldItemList.remove(itemDto);
 								break;
 							}
@@ -207,5 +210,15 @@ public class PlannerDaoImp implements PlannerDao {
 		List<PlannerDto> list=null;
 		list=sqlTemplate.selectList("select_list_Admin_Suggest");
 		return list;
-	}	
+	}
+
+	@Override
+	public String getPlannerImage(int planner_no) {
+		return sqlTemplate.selectOne("select_planner_image", planner_no);
+	}
+	
+	@Override
+	public String getItemImage(int item_no) {
+		return sqlTemplate.selectOne("select_item_image", item_no);
+	}
 }

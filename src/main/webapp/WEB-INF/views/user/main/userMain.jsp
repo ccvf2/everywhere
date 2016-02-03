@@ -27,11 +27,32 @@
 			if(e.keyCode == 13) { searchTotal();return false; }
 		
 		});
+		
+		
 	})
+		function menuControll1(str){
+			$(document).ready(function() {
+				$('#menu1_sub'+str).css("display","");
+				$('#menu1_sub'+str).css("position","absolute");
+			})
+		}
+		function menuControll2(str){
+			$(document).ready(function() {
+				$('#menu2_sub'+str).css("display","");
+				$('#menu2_sub'+str).css("position","absolute");
+			})
+		}
+
+		function menuClose(){
+			$(document).ready(function() {
+				$('div[id^=menu1_sub]').css("display","none");
+				$('div[id^=menu2_sub]').css("display","none");
+			})
+		}
 	</script>
 </head>
 
-<body>
+<body onclick="menuClose()">
 	<div class="wrapper">
 		<!--=== Header ===-->
 		<div class="header">
@@ -98,13 +119,14 @@
 
  					<c:forEach var="suggetList" items="${suggetList}">
 						<div class="col-md-4">
-							<span style="position: absolute; margin-left: 8px; font-size: 1.8em; color: #72c02c;" title="운영자 추천"><i class="fa fa-certificate" style="color: #ffb300;"></i>
+							<span style="position: absolute; margin-left: 8px; font-size: 1.8em; color: #72c02c;" title="운영자 추천">
+							<i class="fa fa-certificate" style="color: #ffb300; text-shadow: #ffffff 2px 2px 2px;" ></i>
 							<c:choose>
 								<c:when test="${suggetList.planner_ba_code eq 'E0001'}">
-									<i class="fa fa-calendar-o" title="일정"></i>
+									<i class="fa fa-calendar-o" title="일정" style="text-shadow: #ffffff 2px 2px 2px;"></i>
 								</c:when>
 								<c:when test="${suggetList.planner_ba_code eq 'E0002'}">
-									<i class="fa fa-check-circle" title="리뷰"></i>
+									<i class="fa fa-check-circle" title="리뷰" style="text-shadow: #ffffff 2px 2px 2px;"></i>
 								</c:when>
 								<c:otherwise></c:otherwise>
 							</c:choose>
@@ -116,7 +138,16 @@
 								<div class="grid-boxes-caption" style="min-height: 180px;">
 									<h3><a href="/user/planner/readPlanner.do?planner_no=${suggetList.planner_no}">${suggetList.title}</a></h3>
 
-									<a href="/user/myPage/myPage.do?uandMe=S0002&mem_no=${suggetList.mem_no}">${suggetList.mem_name}</a>
+									<%-- <a href="/user/myPage/myPage.do?uandMe=S0002&mem_no=${suggetList.mem_no}">${suggetList.mem_name}</a> --%>
+									<a href="javascript:menuControll1('${suggetList.planner_no}')">${suggetList.mem_name}</a>
+									<!-- 서브메뉴 -->
+									<div class="col-md-3" id="menu1_sub${suggetList.planner_no}" style="display: none;">
+										<ul class="dropdown-menu dropdown-show" role="menu">
+											<li><a href="/user/myPage/myPage.do?uandMe=S0002&mem_no=${suggetList.mem_no}"><i class="fa fa-home"></i>${suggetList.mem_name}님 페이지 보기</a></li>
+											<li class="divider"></li>
+											<li><a href="/user/message/messageTalkList.do?recv_mem_no=${suggetList.mem_no}"><i class="fa  fa-comments-o"></i>${suggetList.mem_name}님께 쪽지보내기</a></li>
+										</ul>
+									</div>
 
 									<ul class="list-inline grid-boxes-news">
 										<li title="댓글"><a href="#"><i class="fa fa-comments-o"></i><c:out value="${suggetList.reply_Count}" escapeXml="false"/></a></li>
@@ -162,10 +193,10 @@
 							<div class="col-md-4">
 							<c:choose>
 								<c:when test="${moreLikeList.planner_ba_code eq 'E0001'}">
-									<span style="position: absolute; margin-left: 8px; font-size: 1.8em; color: #72c02c;" title="일정"><i class="fa fa-calendar-o"></i></span>
+									<span style="position: absolute; margin-left: 8px; font-size: 1.8em; color: #72c02c;" title="일정"><i class="fa fa-calendar-o" style="text-shadow: #ffffff 2px 2px 2px;"></i></span>
 								</c:when>
 								<c:when test="${moreLikeList.planner_ba_code eq 'E0002'}">
-									<span style="position: absolute; margin-left: 8px; font-size: 2em; margin-top: -3px; color: #72c02c;" title="리뷰"><i class="fa fa-check-circle"></i></span>
+									<span style="position: absolute; margin-left: 8px; font-size: 2em; margin-top: -3px; color: #72c02c;" title="리뷰"><i class="fa fa-check-circle" style="text-shadow: #ffffff 2px 2px 2px;"></i></span>
 								</c:when>
 								<c:otherwise></c:otherwise>
 							</c:choose>
@@ -176,7 +207,20 @@
 								<div class="grid-boxes-caption" style="min-height: 180px;">
 									<h3><a href="/user/planner/readPlanner.do?planner_no=${moreLikeList.planner_no}">${moreLikeList.title}</a></h3>
 
-									<a href="/user/myPage/myPage.do?uandMe=S0002&mem_no=${moreLikeList.mem_no}">${moreLikeList.mem_name}</a>
+<%-- 									<a href="/user/myPage/myPage.do?uandMe=S0002&mem_no=${moreLikeList.mem_no}">${moreLikeList.mem_name}</a> --%>
+									<a href="javascript:menuControll2('${moreLikeList.planner_no}')">${moreLikeList.mem_name}</a>
+
+
+								<!-- 서브메뉴 -->
+								<div class="col-md-3" id="menu2_sub${moreLikeList.planner_no}" style="display: none;">
+									<ul class="dropdown-menu dropdown-show" role="menu">
+										<li><a href="/user/myPage/myPage.do?uandMe=S0002&mem_no=${moreLikeList.mem_no}"><i class="fa fa-home"></i>${moreLikeList.mem_name}님 페이지 보기</a></li>
+										<li class="divider"></li>
+										<li><a href="/user/message/messageTalkList.do?recv_mem_no=${moreLikeList.mem_no}"><i class="fa  fa-comments-o"></i>${moreLikeList.mem_name}님께 쪽지보내기</a></li>
+									</ul>
+								</div>
+
+
 
 									<ul class="list-inline grid-boxes-news">
 										<li title="댓글"><a href="#"><i class="fa fa-comments-o"></i><c:out value="${moreLikeList.reply_Count}" escapeXml="false"/></a></li>
@@ -298,8 +342,8 @@
 								<li>|</li>
 								<li title="주소:${list12.spot_addr}">
 									<i class="fa fa-map-marker"></i>
-									<c:out value="${fn:substring(list12.spot_addr, 0,15)}"/>
-									<c:if test="${fn:length(list12.spot_addr) >15}">…</c:if>
+									<c:out value="${fn:substring(list12.spot_addr, 0,10)}"/>
+									<c:if test="${fn:length(list12.spot_addr) >10}">…</c:if>
 								</li>
 							</ul>
 							

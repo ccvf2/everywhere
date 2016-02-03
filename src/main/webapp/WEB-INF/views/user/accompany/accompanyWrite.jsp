@@ -48,32 +48,32 @@
 		}
 		
 		var title = document.forms["accompanyForm"]["title"].value;
-	    if (title == null) {
-	        alert("제목을 입력하세요");
-	        document.forms["accompanyForm"]["title"].focus();
-	        return false;
-	    }
-	    
-	    var content = document.forms["accompanyForm"]["content"].value;
-	    if (content == null || content == "") {
-	        alert("제목을 입력하세요");
-	        document.forms["accompanyForm"]["title"].focus();
-	        return false;
-	    }
-	    
-	    var start_date = document.forms["accompanyForm"]["start_date"].value;
-	    if (start_date == null || start_date=="") {
-	    	alert("시작일을 선택해주세요");
-	    	document.forms["accompanyForm"]["start_date"].focus();
-	    	return false;
-	    }
-	    
-	    var end_date = document.forms["accompanyForm"]["end_date"].value;
-	    if (end_date==null || end_date=="") {
-	    	alert("종료일을 선택해주세요");
-	    	document.forms["accompanyForm"]["end_date"].focus();
-	    	return false;
-	    }
+		if (title == null) {
+			alert("제목을 입력하세요");
+			document.forms["accompanyForm"]["title"].focus();
+			return false;
+		}
+		    
+		var content = document.forms["accompanyForm"]["content"].value;
+		if (content == null || content == "") {
+			alert("제목을 입력하세요");
+			document.forms["accompanyForm"]["title"].focus();
+			return false;
+		}
+
+		var start_date = document.forms["accompanyForm"]["start_date"].value;
+		if (start_date == null || start_date=="") {
+			alert("시작일을 선택해주세요");
+			document.forms["accompanyForm"]["start_date"].focus();
+			return false;
+		}
+		
+		var end_date = document.forms["accompanyForm"]["end_date"].value;
+		if (end_date==null || end_date=="") {
+			alert("종료일을 선택해주세요");
+			document.forms["accompanyForm"]["end_date"].focus();
+		return false;
+		}
 	}
 	
 	function searchFun() {
@@ -87,157 +87,162 @@
 <body>
 	<div class="wrapper">
 		<!--=== Header ===-->
-	    <!-- Header가 꼭 import 되어 있어야 한다.(안그러면화면이깨짐) -->
-	    <div class="header">
+		<!-- Header가 꼭 import 되어 있어야 한다.(안그러면화면이깨짐) -->
+		<div class="header">
 			<c:import url="/WEB-INF/views/user/common/header.jsp"/>
-	    </div>
-	    <!--=== End Header ===-->
-	   
-	    <div class="breadcrumbs-v1">
-        <div class="container">
-            <span>사람들과 함께 더 재미있는 여행을 즐기세요</span>
-            <h1><a href="/user/accompany/accompanyList.do" style="color:inherit; text-decoration: none;">동행구하기 게시판</a></h1>
-	        </div>
-	    </div>
-	   <div class="bg-color-light">
-        <div class="container content-sm">
-            <div class="row">
-                <!-- Blog Sidebar -->
-                <div class="col-md-3">
-                
-               	   <div class="headline-v2"><h2>검색</h2></div>
-                    <!-- Blog Newsletter -->
-                    <div class="blog-newsletter">
-                        <p>원하는 동행을 검색을 통해 찾아보세요.</p>
-                       	<div class="input-group">
-                            <input type="text" class="form-control" id="search" placeholder="Search">
-                            <span class="input-group-btn">
-                                <button class="btn-u" type="button" onclick="searchFun()">검색</button>
-                            </span>
-                    	 	</div>
-                        <br/><br/>
-                    </div>
-                    <!-- End Blog Newsletter -->
-                    
-                   <div class="headline-v2"><h2>최근 글</h2></div>
-                    <!-- Latest Links -->
-                    <ul class="list-unstyled blog-latest-posts margin-bottom-50">
-                    	<c:forEach var="recentAccompanyDto" items="${recentAccompanyList}">
-                    		<li>
-                    			<h3><a href="/user/accompany/accompanyRead.do?accompany_no=${recentAccompanyDto.accompany_no}&currentPage=${currentPage}">${recentAccompanyDto.title}</a></h3>
-                    			<small><fmt:formatDate pattern="MM-dd" value="${recentAccompanyDto.write_date}"/> / <a href="#">${recentAccompanyDto.mem_name}</a></small>
-                    			<p>${fn:substring(recentAccompanyDto.content, 0, 70)}
-						        <c:if test="${fn:length(albumDto.content) >70}">
-						        	…
-						        </c:if></p>
-                    		</li>
-                    	</c:forEach>
-                    </ul>
-                    <!-- End Latest Links -->
-                </div>
-                <!-- End Blog Sidebar -->
+		</div>
+		<!--=== End Header ===-->
+		   
+		<div class="breadcrumbs-v1">
+			<div class="container">
+				<span>사람들과 함께 더 재미있는 여행을 즐기세요</span>
+				<h1><a href="/user/accompany/accompanyList.do" style="color:inherit; text-decoration: none;">동행구하기 게시판</a></h1>
+			</div>
+		</div>
+		<div class="bg-color-light">
+			<div class="container content-sm">
+				<div class="row">
+					<!-- Blog Sidebar -->
+					<div class="col-md-3">
+						<div class="headline-v2"><h2>검색</h2></div>
+						<!-- Blog Newsletter -->
+						<div class="blog-newsletter">
+							<p>원하는 동행을 검색을 통해 찾아보세요.</p>
+							<div class="input-group">
+								<input type="text" class="form-control" id="search" placeholder="Search">
+								<span class="input-group-btn">
+									<button class="btn-u" type="button" onclick="searchFun()">검색</button>
+								</span>
+							</div>
+							<br/><br/>
+						</div>
+						<!-- End Blog Newsletter -->
+						
+						<div class="headline-v2"><h2>최근 글</h2></div>
+						<!-- 최근글 시작 -->
+						<ul class="list-unstyled blog-latest-posts margin-bottom-50">
+							<c:forEach var="recentAccompanyDto" items="${recentAccompanyList}">
+								<li>
+									<h3><a href="/user/accompany/accompanyRead.do?accompany_no=${recentAccompanyDto.accompany_no}&currentPage=${currentPage}">${recentAccompanyDto.title}</a></h3>
+									<small><fmt:formatDate pattern="MM-dd" value="${recentAccompanyDto.write_date}"/> / <a href="#">${recentAccompanyDto.mem_name}</a></small>
+									<p>${fn:substring(recentAccompanyDto.content, 0, 70)}
+										<c:if test="${fn:length(albumDto.content) >70}">
+											…
+										</c:if>
+									</p>
+								</li>
+							</c:forEach>
+						</ul>
+						<!-- 최근 글 끝 -->
+					</div>
+					<!-- End Blog Sidebar -->
 
-                <!-- Blog All Posts -->
-                <div class="col-md-9">
-                	<div class="news-v3 bg-color-white margin-bottom-30">
-                        <div class="news-v3-in">
-                        	<form name="accompanyForm" class="sky-form" action="/user/accompany/accompanyWriteOk.do" method="post" onsubmit="return writeCheck()" enctype="multipart/form-data">
-                        		<input type="hidden" value="${mem_object.mem_no}" name="mem_no"/>
-			                    <header>동행구하기 글쓰기</header>
-			                    <fieldset>
-			                    <!-- 글 종류와 구하는 성별 시작 -->
-			                    <div class="row">
-	                               	<section class="col col-6">
-	                               		<label class="label">글 종류</label> 
-		                                <label class="select">
-		                                    <select name="accompany_status_code">
-		                                    	<!-- 어드민인 경우만 공지를 작성 가능 -->
-		                                    	<c:set var="startIndex" value="1"></c:set>
-		                                    	<c:if test="${mem_object.mem_level_code=='M0001'}">
-		                                    		<c:set var="startIndex" value="0"></c:set>
-		                                    	</c:if>
-												<c:forEach begin="${startIndex}" var="postType" items="${postTypeList}">
-													<option value="${postType.code}">${postType.code_name}</option>
-												</c:forEach>
-											</select>
-		                                    <i></i>
-		                                </label>
-		                            </section>
-	                              
-	                                <label class="label">구하는 성별</label>
-									<c:forEach var="gender_code" items="${genderList}">
-										 <div class="col col-2">
-	                                           <label class="radio state-success"><input type="radio" name="gender_code" value="${gender_code.code}"><i class="rounded-x"></i>${gender_code.code_name}</label>
-	                                     </div>
-									</c:forEach>
-	                            </div>
-	                            <!-- 글 종류와 구하는 성별 끝 -->
-	                            <!-- 제목 시작 -->
-	                           <section>
-		                            <label class="label">제목</label>
-		                            <label class="input">
-		                                <i class="icon-append fa fa-tag"></i>
-		                                <input type="text" name="title" id="subject">
-		                            </label>
-		                        </section>
-		                        <!-- 제목 종료 -->     
-			                    <!-- DatePicker 시작 -->
-                                <div class="row">
-                                    <section class="col col-6">
-                                        <label class="input">
-                                            <i class="icon-append fa fa-calendar"></i>
-                                            <input type="text" name="start_date" id="start_date" placeholder="시작일">
-                                        </label>
-                                    </section>
-                                    <section class="col col-6">
-                                        <label class="input">
-                                            <i class="icon-append fa fa-calendar"></i>
-                                            <input type="text" name="end_date" id="end_date" placeholder="종료일">
-                                        </label>
-                                    </section>
-		                        </div>
-		                        <!-- DatePicker 끝 -->
-		                        <!-- 글 내용 시작 -->
-		                        <section>
-		                            <label class="textarea">
-		                                <i class="icon-append fa fa-comment"></i>
-		                                <textarea rows="5" name="content" placeholder="내용을 써주세요"></textarea>
-		                            </label>
-		                        </section>    
-		                        <!-- 글 내용 끝 -->
-		                        <!-- 파일 시작 -->
-	                        	<section>
-		                            <label for="accompany_file" class="input input-file">
-		                                <div class="button"><input type="file" name="accompany_file" accept="image/*" onchange="this.parentNode.nextSibling.value = this.value">Browse</div><input type="text" placeholder="파일 첨부" readonly="">
-		                            </label>
-		                        </section>
-		                        <!-- 파일 끝 -->
-		                        <footer>
-			                        <button type="submit" class="btn-u">글쓰기</button>
-			                        <input class="btn-u btn-u-default" type="button" value="취소" onclick="location.href='/user/accompany/accompanyList.do'" />
-			                        <div class="progress"></div>
-			                    </footer>  
-			                    <div class="message">
-		                        <i class="rounded-x fa fa-check"></i>
-		                    </div>
-		                    </fieldset>
-		                    </form>
-		                    
-		                </div>
-	                </div>
-	                </div>
-	                <!-- End Blog All Posts -->
-	            </div>
-	        </div><!--/end container-->
-	        <!-- End Content Part -->
+					<!-- Blog All Posts -->
+					<div class="col-md-9">
+						<div class="news-v3 bg-color-white margin-bottom-30">
+							<div class="news-v3-in">
+								<form name="accompanyForm" class="sky-form" action="/user/accompany/accompanyWriteOk.do" method="post" onsubmit="return writeCheck()" enctype="multipart/form-data">
+									<input type="hidden" value="${mem_object.mem_no}" name="mem_no"/>
+									<header>동행구하기 글쓰기</header>
+									<fieldset>
+										<!-- 글 종류와 구하는 성별 시작 -->
+										<div class="row">
+											<section class="col col-6">
+												<label class="label">글 종류</label> 
+												<label class="select">
+													<select name="accompany_status_code">
+														<!-- 어드민인 경우만 공지를 작성 가능 -->
+														<c:set var="startIndex" value="1"></c:set>
+														<c:if test="${mem_object.mem_level_code=='M0001'}">
+															<c:set var="startIndex" value="0"></c:set>
+														</c:if>
+														<c:forEach begin="${startIndex}" var="postType" items="${postTypeList}">
+															<option value="${postType.code}">${postType.code_name}</option>
+														</c:forEach>
+													</select>
+												<i></i>
+												</label>
+											</section>
+		
+											<label class="label">구하는 성별</label>
+											<c:forEach var="gender_code" items="${genderList}">
+												<div class="col col-2">
+													<label class="radio state-success"><input type="radio" name="gender_code" value="${gender_code.code}">
+														<i class="rounded-x"></i>${gender_code.code_name}
+													</label>
+												</div>
+											</c:forEach>
+										</div>
+										<!-- 글 종류와 구하는 성별 끝 -->
+		
+										<!-- 제목 시작 -->
+										<section>
+											<label class="label">제목</label>
+											<label class="input">
+												<i class="icon-append fa fa-tag"></i>
+												<input type="text" name="title" id="subject">
+											</label>
+										</section>
+										<!-- 제목 종료 -->     
+										
+										<!-- DatePicker 시작 -->
+										<div class="row">
+											<section class="col col-6">
+												<label class="input">
+													<i class="icon-append fa fa-calendar"></i>
+													<input type="text" name="start_date" id="start_date" placeholder="시작일">
+												</label>
+											</section>
+											<section class="col col-6">
+												<label class="input">
+													<i class="icon-append fa fa-calendar"></i>
+													<input type="text" name="end_date" id="end_date" placeholder="종료일">
+												</label>
+											</section>
+										</div>
+										<!-- DatePicker 끝 -->
+										
+										<!-- 글 내용 시작 -->
+										<section>
+											<label class="textarea">
+												<i class="icon-append fa fa-comment"></i>
+												<textarea rows="5" name="content" placeholder="내용을 써주세요"></textarea>
+											</label>
+										</section>    
+										<!-- 글 내용 끝 -->
+										
+										<!-- 파일 시작 -->
+										<section>
+											<label for="accompany_file" class="input input-file">
+												<div class="button"><input type="file" name="accompany_file" accept="image/*" onchange="this.parentNode.nextSibling.value = this.value">Browse</div><input type="text" placeholder="파일 첨부" readonly="">
+											</label>
+										</section>
+										<!-- 파일 끝 -->
+										
+										<footer>
+											<button type="submit" class="btn-u">글쓰기</button>
+											<input class="btn-u btn-u-default" type="button" value="취소" onclick="location.href='/user/accompany/accompanyList.do'" />
+											<div class="progress"></div>
+										</footer>  
+										<div class="message">
+											<i class="rounded-x fa fa-check"></i>
+										</div>
+									</fieldset>
+								</form>
+							</div>
+						</div>
+					</div>
+					<!-- End Blog All Posts -->
+				</div>
+			</div><!--/end container-->
+			<!-- End Content Part -->
 				
-                 
-		    <!--=== Footer Version 1 ===-->
-		    <div class="footer-v1">
+			<!--=== Footer Version 1 ===-->
+			<div class="footer-v1">
 				<c:import url="/WEB-INF/views/user/common/footer.jsp"/>
-		    </div>
-		    <!--=== End Footer Version 1 ===-->
-	    </div>
+			</div>
+			<!--=== End Footer Version 1 ===-->
+		</div>
 	</div>
 	
 	<script type="text/javascript" src="/script/common/datepicker.js"></script>
@@ -258,11 +263,11 @@
 	<script type="text/javascript" src="/assets/js/plugins/masking.js"></script>
 	<script type="text/javascript" src="/assets/js/plugins/validation.js"></script>
 	<script type="text/javascript">
-	    jQuery(document).ready(function() {
-	        App.init();
-	        Masking.initMasking();
-	        Validation.initValidation();
-	    });
+		jQuery(document).ready(function() {
+			App.init();
+			Masking.initMasking();
+			Validation.initValidation();
+		});
 	</script>
 </body>
 </html>
