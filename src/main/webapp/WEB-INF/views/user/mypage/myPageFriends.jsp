@@ -23,8 +23,23 @@
     
     <!-- brand button css -->
     <link rel="stylesheet" href="/assets/plugins/brand-buttons/brand-buttons.css">
+    <script type="text/javascript">
+	    function menuControll1(str){
+			$(document).ready(function() {
+				$('#menu1_sub'+str).css("display","");
+				$('#menu1_sub'+str).css("position","absolute");
+			})
+		}
+	
+		function menuClose(){
+			$(document).ready(function() {
+				$('div[id^=menu1_sub]').css("display","none");
+				$('div[id^=menu2_sub]').css("display","none");
+			})
+		}
+    </script>
 </head>
-<body>
+<body onclick="menuClose()">
 <div class="wrapper">
     <!--=== Header ===-->
     <div class="header">
@@ -89,7 +104,17 @@
 			                            <div class="profile-blog">
 			                                <img class="rounded-x" src="${friendProfile}" alt="">
 			                                <div class="name-location">
-			                                    <strong><a href="/user/myPage/myPage.do?uandMe=S0002&mem_no=${friendsList.mem_no}&SCHEDULE_TYPE=E0002&MYPAGE_SEARCH_CODE=M1029"><c:out value="${friendsList.mem_name}"/></a></strong>
+			                                	<strong>
+				                                	<a href="javascript:menuControll1('${friendsList.mem_no}')">${friendsList.mem_name}</a>
+													<!-- 서브메뉴 -->
+													<div class="col-md-3" id="menu1_sub${friendsList.mem_no}" style="display: none;">
+														<ul class="dropdown-menu dropdown-show" role="menu">
+															<li><a href="/user/myPage/myPage.do?uandMe=S0002&mem_no=${friendsList.mem_no}&SCHEDULE_TYPE=E0002&MYPAGE_SEARCH_CODE=M1029"><i class="fa fa-home"></i>${friendsList.mem_name}님 페이지 이동</a></li>
+															<li class="divider"></li>
+															<li><a href="/user/message/messageTalkList.do?recv_mem_no=${friendsList.mem_no}"><i class="fa  fa-comments-o"></i>${friendsList.mem_name}님께 쪽지보내기</a></li>
+														</ul>
+													</div>
+			                                    </strong>
 			                                    <span><i class="fa fa-map-marker"></i><a href="/user/message/messageTalkList.do?recv_mem_no=${friendsList.mem_no}"><c:out value="${friendsList.mem_email}"/></a></span>
 			                                </div>
 			                                <div class="clearfix margin-bottom-20"></div>

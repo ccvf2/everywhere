@@ -383,7 +383,10 @@ public class MyPageServiceImpl implements MyPageService {
 				plannerList.set(i, dto);
 			}
 		}
-	
+		
+		MemberDto memberDto = memberDao.memberRead(mem_no);
+		
+		mav.addObject("memberDto", memberDto);
 		mav.addObject("list_code", list_code);
 		mav.addObject("plannerList", plannerList);
 		mav.addObject("count", count);
