@@ -130,7 +130,7 @@
 										<!-- 현재 날짜 보다 과거에 있는 경우 년월일 형태로 뿌려줌 -->
 										<c:if test="${recentWriteDate lt nowDate}"><!-- 과거 -->
 											<fmt:formatDate pattern="yyyy-MM-dd" value="${recentAccompanyDto.write_date}"/>
-										</c:if> / <a href="/user/myPage/myPage.do?uandMe=S0002&mem_no=${recentAccompanyDto.mem_no}">${recentAccompanyDto.mem_name}</a>
+										</c:if> / <a href="/user/myPage/myPage.do?uandMe=S0002&mem_no=${recentAccompanyDto.mem_no}&SCHEDULE_TYPE=E0002&MYPAGE_SEARCH_CODE=M1029">${recentAccompanyDto.mem_name}</a>
 									</small>
 									<!-- 글 내용 미리보기의 글자가 70자가 넘어갈 경우 뒷 부분을 ... 처리한다. -->
 									<p>${fn:substring(recentAccompanyDto.content, 0, 70)}
@@ -211,8 +211,7 @@
 															<i class="fa fa-picture-o" title="이미지 있음"></i>
 														</c:if>
 												</td>
-													
-												<td><a href="/user/myPage/myPage.do?uandMe=S0002&mem_no=${accompanyDto.mem_no}" style="text-decoration: none; color: inherit;">${accompanyDto.mem_name}</a></td>
+												<td><a href="/user/myPage/myPage.do?uandMe=S0002&mem_no=${accompanyDto.mem_no}&SCHEDULE_TYPE=E0002&MYPAGE_SEARCH_CODE=M1029" style="text-decoration: none; color: inherit;">${accompanyDto.mem_name}</a></td>
 												<td>
 													<fmt:formatDate var="writeDate" value="${accompanyDto.write_date}" pattern="yy-MM-dd"/>
 													<c:if test="${writeDate eq nowDate}"><!-- 현재 -->

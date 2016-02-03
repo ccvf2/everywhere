@@ -216,7 +216,11 @@
                                     <tr>
                                         <td><c:out value="${member.mem_no}"/></td>
                                         <td><a href=""><c:out value="${member.mem_email}"/></a></td>
-                                        <td><c:out value="${member.mem_name}"/></td>
+                                        <td>
+                                        	<a href="/user/myPage/myPage.do?uandMe=S0002&mem_no=${member.mem_no}&SCHEDULE_TYPE=E0002&MYPAGE_SEARCH_CODE=M1029">
+                                        		<c:out value="${member.mem_name}"/>
+                                        	</a>
+                                        </td>
                                         <td><c:out value="${member.mem_phone}"/></td>
                        					<td>
 	                       					<c:forEach var="memLevel" items="${memLevelList}">
