@@ -32,7 +32,7 @@
                          2015 &copy; everywhere Developer Team( SeongUk BAE, HeeJin AHN, SeongGook KWAK, SeongGwang KIM, JunHo KIM ).
             				<br/> ALL Rights Reserved.
                             <a target="_blank" href="https://twitter.com/htmlstream">Htmlstream</a> | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a>
-                        <span style="float: right; color: yellow; font-size: 1.2em" title="최종버전.디폴로이버전.날짜"><i class="fa fa-bug"></i> Ver.0.1.160123</span>
+                        <span style="float: right; color: yellow; font-size: 1.2em" title="최종버전.디폴로이버전.날짜"><i class="fa fa-bug"></i> Ver.0.0.151229</span>
                         </p>
                     </div>
                     <!-- Social Links -->
