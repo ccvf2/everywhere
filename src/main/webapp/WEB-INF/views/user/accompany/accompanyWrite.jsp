@@ -123,8 +123,21 @@
 						<ul class="list-unstyled blog-latest-posts margin-bottom-50">
 							<c:forEach var="recentAccompanyDto" items="${recentAccompanyList}">
 								<li>
-									<h3><a href="/user/accompany/accompanyRead.do?accompany_no=${recentAccompanyDto.accompany_no}&currentPage=${currentPage}">${recentAccompanyDto.title}</a></h3>
-									<small><fmt:formatDate pattern="MM-dd" value="${recentAccompanyDto.write_date}"/> / <a href="#">${recentAccompanyDto.mem_name}</a></small>
+									<h3><a href="/user/accompany/accompanyRead.do?accompany_no=${recentAccompanyDto.accompany_no}&currentPage=${currentPage}" title="${recentAccompanyDto.title}">${recentAccompanyDto.title}</a></h3>
+										<small>
+										<!-- 최근글 5개 목록 중에서 글쓴 날짜를 가져온다. -->
+										<fmt:formatDate var="recentWriteDate" value="${recentAccompanyDto.write_date}" pattern="yy-MM-dd"/>
+													
+										<!-- 현재 날짜랑 비교해서 날짜가 동일한 경우 시간을 뿌려줌 -->
+										<c:if test="${recentWriteDate eq nowDate}"><!-- 현재 -->
+											<fmt:formatDate pattern="HH:mm" value="${recentAccompanyDto.write_date}"/>
+										</c:if>
+										<!-- 현재 날짜 보다 과거에 있는 경우 년월일 형태로 뿌려줌 -->
+										<c:if test="${recentWriteDate lt nowDate}"><!-- 과거 -->
+											<fmt:formatDate pattern="yyyy-MM-dd" value="${recentAccompanyDto.write_date}"/>
+										</c:if> / <a href="/user/myPage/myPage.do?uandMe=S0002&mem_no=${recentAccompanyDto.mem_no}&SCHEDULE_TYPE=E0002&MYPAGE_SEARCH_CODE=M1029">${recentAccompanyDto.mem_name}</a>
+									</small>
+									<!-- 글 내용 미리보기의 글자가 70자가 넘어갈 경우 뒷 부분을 ... 처리한다. -->
 									<p>${fn:substring(recentAccompanyDto.content, 0, 70)}
 										<c:if test="${fn:length(albumDto.content) >70}">
 											…
