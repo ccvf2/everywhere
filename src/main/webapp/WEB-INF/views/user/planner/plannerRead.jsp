@@ -70,7 +70,7 @@
 							<c:if test="${mem_object.mem_no != plannerWriter.mem_no}">
 								<ul id="collapse-buttons" class="collapse in">
 									<li>
-										<a href="/user/myPage/myPage.do?uandMe=S0002&mem_no=${plannerWriter.mem_no}"><i class="fa fa-home"></i> 친구페이지 이동</a>
+										<a href="/user/myPage/myPage.do?uandMe=S0002&mem_no=${plannerWriter.mem_no}&SCHEDULE_TYPE=E0002&MYPAGE_SEARCH_CODE=M1029"><i class="fa fa-home"></i> 친구페이지 이동</a>
 									</li>
 									<li>
 										<a href="/user/message/messageTalkList.do?recv_mem_no=${plannerWriter.mem_no}"><i class="fa fa-comments-o"></i> 쪽지 보내기 </a>

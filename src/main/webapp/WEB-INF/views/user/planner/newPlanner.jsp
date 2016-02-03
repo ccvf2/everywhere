@@ -26,7 +26,7 @@
 		<form action="/user/planner/plannerCreate.do" method="post">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-				<h4 class="modal-title"><i class="fa fa-paper-plane-o"></i>새일정 만들기</h4>
+				<h4 class="modal-title"><i class="fa fa-paper-plane-o"></i>일정 작성</h4>
 			</div>
 			<div class="modal-body">
 				<div class="input-group margin-bottom-20">
@@ -44,8 +44,8 @@
 				</div>
 				<div>
 					<div class="input-group radio">
-					  <label><input type="radio" name="planner_ba_code" value="E0001" checked="checked">여행스케쥴</label> &nbsp;&nbsp;
-					  <label><input type="radio" name="planner_ba_code" value="E0002">여행리뷰</label>
+					  <label><input type="radio" name="planner_ba_code" value="E0001" checked="checked">여행스케쥴(여행전)</label> &nbsp;&nbsp;
+					  <label><input type="radio" name="planner_ba_code" value="E0002">여행리뷰(여행후)</label>
 					</div>
 				</div>
 			</div>

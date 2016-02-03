@@ -194,12 +194,12 @@
 	                    	<c:choose>
 	                    		<c:when test="${ mem_object.mem_name=='' || mem_object==null }">
 			                        <a href="javascript:loginFormReqiest()">
-										여행 스케줄 작성
+										일정 작성
 			                        </a>
 	                    		</c:when>
 	                    		<c:otherwise>
 			                        <a href="javascript:plannerCreateReqiest()">
-										여행 스케줄 작성
+										일정 작성
 			                        </a>
 	                    		</c:otherwise>
 	                    	</c:choose>
