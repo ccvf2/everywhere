@@ -25,7 +25,7 @@
 		});
 	}
 </script>
-<%-- <c:import url="/WEB-INF/views/common/jquery.jsp"/> --%>
+<c:import url="/WEB-INF/views/common/jquery.jsp"/>
 
 </head>
 <body>
@@ -83,7 +83,7 @@
 		<a id="profileP"><span>프로필사진변경</span></a>
 	</c:if>
 	
-	<img id="imgout" class="img-responsive profile-img margin-bottom-20" src="${profile}" alt="">
+	<img id="imgout" class="img-responsive profile-img margin-bottom-20" src="${profile}" alt="자신의 프로필 사진">
 	
 	
 	
