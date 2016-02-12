@@ -1,0 +1,2399 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class-diagram version="1.1.9" icons="true" always-add-relationships="false" generalizations="true" realizations="true" 
+  associations="true" dependencies="false" nesting-relationships="true" router="FAN">  
+  <interface id="1" language="java" name="everywhere.com.mynetgear.ccvf2.user.service.search.SearchService" 
+    project="everywhere" 
+    file="/everywhere/src/main/java/everywhere/com/mynetgear/ccvf2/user/service/search/SearchService.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="124" width="299" x="18278" y="1947"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <interface id="2" language="java" name="everywhere.com.mynetgear.ccvf2.user.service.bookmark.BookMarkService" 
+    project="everywhere" 
+    file="/everywhere/src/main/java/everywhere/com/mynetgear/ccvf2/user/service/bookmark/BookMarkService.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="124" width="316" x="8863" y="1947"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="3" language="java" name="everywhere.com.mynetgear.ccvf2.user.service.mypage.MyPageServiceImpl" 
+    project="everywhere" 
+    file="/everywhere/src/main/java/everywhere/com/mynetgear/ccvf2/user/service/mypage/MyPageServiceImpl.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="286" width="354" x="13304" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="4" language="java" name="everywhere.com.mynetgear.ccvf2.user.service.planner.PlannerService" 
+    project="everywhere" 
+    file="/everywhere/src/main/java/everywhere/com/mynetgear/ccvf2/user/service/planner/PlannerService.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="250" width="396" x="13304" y="1947"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <interface id="5" language="java" name="everywhere.com.mynetgear.ccvf2.user.service.main.UserMainService" 
+    project="everywhere" 
+    file="/everywhere/src/main/java/everywhere/com/mynetgear/ccvf2/user/service/main/UserMainService.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="160" width="289" x="30193" y="1947"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <interface id="6" language="java" name="everywhere.com.mynetgear.ccvf2.user.service.spot.SpotService" 
+    project="everywhere" 
+    file="/everywhere/src/main/java/everywhere/com/mynetgear/ccvf2/user/service/spot/SpotService.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="250" width="285" x="27257" y="1947"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <interface id="7" language="java" name="everywhere.com.mynetgear.ccvf2.user.service.member.MemberService" 
+    project="everywhere" 
+    file="/everywhere/src/main/java/everywhere/com/mynetgear/ccvf2/user/service/member/MemberService.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="214" width="308" x="15202" y="1947"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="8" language="java" name="everywhere.com.mynetgear.ccvf2.user.service.accompany.AccompanyServiceImp" 
+    project="everywhere" 
+    file="/everywhere/src/main/java/everywhere/com/mynetgear/ccvf2/user/service/accompany/AccompanyServiceImp.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="232" width="324" x="24875" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="9" language="java" name="everywhere.com.mynetgear.ccvf2.user.service.visitor.VisitorService" 
+    project="everywhere" 
+    file="/everywhere/src/main/java/everywhere/com/mynetgear/ccvf2/user/service/visitor/VisitorService.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="178" width="293" x="6880" y="1947"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="10" language="java" name="everywhere.com.mynetgear.ccvf2.user.service.search.SearchServiceImp" 
+    project="everywhere" 
+    file="/everywhere/src/main/java/everywhere/com/mynetgear/ccvf2/user/service/search/SearchServiceImp.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="142" width="299" x="18692" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="11" language="java" name="everywhere.com.mynetgear.ccvf2.user.service.main.UserMainServiceImp" 
+    project="everywhere" 
+    file="/everywhere/src/main/java/everywhere/com/mynetgear/ccvf2/user/service/main/UserMainServiceImp.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="178" width="289" x="29776" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="12" language="java" name="everywhere.com.mynetgear.ccvf2.user.service.message.MessageServiceImp" 
+    project="everywhere" 
+    file="/everywhere/src/main/java/everywhere/com/mynetgear/ccvf2/user/service/message/MessageServiceImp.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="160" width="314" x="9721" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="13" language="java" name="everywhere.com.mynetgear.ccvf2.user.service.member.MemberServiceImp" 
+    project="everywhere" 
+    file="/everywhere/src/main/java/everywhere/com/mynetgear/ccvf2/user/service/member/MemberServiceImp.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="232" width="308" x="14738" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="14" language="java" name="everywhere.com.mynetgear.ccvf2.user.service.planner.PlannerServiceImp" 
+    project="everywhere" 
+    file="/everywhere/src/main/java/everywhere/com/mynetgear/ccvf2/user/service/planner/PlannerServiceImp.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="340" width="396" x="15814" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="15" language="java" name="everywhere.com.mynetgear.ccvf2.user.service.visitor.VisitorServiceImp" 
+    project="everywhere" 
+    file="/everywhere/src/main/java/everywhere/com/mynetgear/ccvf2/user/service/visitor/VisitorServiceImp.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="196" width="293" x="7156" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="16" language="java" name="everywhere.com.mynetgear.ccvf2.user.service.accompany.AccompanyService" 
+    project="everywhere" 
+    file="/everywhere/src/main/java/everywhere/com/mynetgear/ccvf2/user/service/accompany/AccompanyService.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="196" width="324" x="24325" y="1947"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="17" language="java" name="everywhere.com.mynetgear.ccvf2.user.service.bookmark.BookMarkServiceImp" 
+    project="everywhere" 
+    file="/everywhere/src/main/java/everywhere/com/mynetgear/ccvf2/user/service/bookmark/BookMarkServiceImp.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="142" width="316" x="8507" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="18" language="java" name="everywhere.com.mynetgear.ccvf2.user.service.message.MessageService" 
+    project="everywhere" 
+    file="/everywhere/src/main/java/everywhere/com/mynetgear/ccvf2/user/service/message/MessageService.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="142" width="314" x="9901" y="1947"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="19" language="java" name="everywhere.com.mynetgear.ccvf2.user.service.sweet.SweetServiceImp" 
+    project="everywhere" 
+    file="/everywhere/src/main/java/everywhere/com/mynetgear/ccvf2/user/service/sweet/SweetServiceImp.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="106" width="294" x="11318" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="20" language="java" name="everywhere.com.mynetgear.ccvf2.user.service.sweet.SweetService" 
+    project="everywhere" 
+    file="/everywhere/src/main/java/everywhere/com/mynetgear/ccvf2/user/service/sweet/SweetService.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="88" width="294" x="11652" y="1947"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <interface id="21" language="java" name="everywhere.com.mynetgear.ccvf2.user.service.mypage.MyPageService" 
+    project="everywhere" 
+    file="/everywhere/src/main/java/everywhere/com/mynetgear/ccvf2/user/service/mypage/MyPageService.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="250" width="354" x="12712" y="1947"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="22" language="java" name="everywhere.com.mynetgear.ccvf2.user.service.spot.SpotServiceImp" 
+    project="everywhere" 
+    file="/everywhere/src/main/java/everywhere/com/mynetgear/ccvf2/user/service/spot/SpotServiceImp.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="286" width="285" x="26133" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="23" language="java" name="everywhere.com.mynetgear.ccvf2.comm.service.common.CommonEmailService" 
+    project="everywhere" 
+    file="/everywhere/src/main/java/everywhere/com/mynetgear/ccvf2/comm/service/common/CommonEmailService.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="88" width="321" x="28635" y="1947"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <interface id="24" language="java" name="everywhere.com.mynetgear.ccvf2.user.dao.visitor.VisitorDao" 
+    project="everywhere" 
+    file="/everywhere/src/main/java/everywhere/com/mynetgear/ccvf2/user/dao/visitor/VisitorDao.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="178" width="275" x="7323" y="1947"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <interface id="25" language="java" name="everywhere.com.mynetgear.ccvf2.comm.service.common.CommonFileIOService" 
+    project="everywhere" 
+    file="/everywhere/src/main/java/everywhere/com/mynetgear/ccvf2/comm/service/common/CommonFileIOService.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="142" width="475" x="24829" y="1947"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <interface id="26" language="java" name="everywhere.com.mynetgear.ccvf2.user.dao.main.UserMainDao" 
+    project="everywhere" file="/everywhere/src/main/java/everywhere/com/mynetgear/ccvf2/user/dao/main/UserMainDao.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="106" width="288" x="29865" y="1947"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="27" language="java" name="everywhere.com.mynetgear.ccvf2.comm.service.commoncode.CommonCodeServiceImp" 
+    project="everywhere" 
+    file="/everywhere/src/main/java/everywhere/com/mynetgear/ccvf2/comm/service/commoncode/CommonCodeServiceImp.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="196" width="349" x="22870" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="28" language="java" name="everywhere.com.mynetgear.ccvf2.user.dao.planner.PlannerDao" 
+    project="everywhere" 
+    file="/everywhere/src/main/java/everywhere/com/mynetgear/ccvf2/user/dao/planner/PlannerDao.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="358" width="349" x="15814" y="1947"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="29" language="java" name="everywhere.com.mynetgear.ccvf2.user.controller.sweet.SweetController" 
+    project="everywhere" 
+    file="/everywhere/src/main/java/everywhere/com/mynetgear/ccvf2/user/controller/sweet/SweetController.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="106" width="428" x="11652" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="30" language="java" name="everywhere.com.mynetgear.ccvf2.user.dto.search.SpotDtoExt" project="everywhere" 
+    file="/everywhere/src/main/java/everywhere/com/mynetgear/ccvf2/user/dto/search/SpotDtoExt.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="304" width="277" x="14285" y="2993"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="31" language="java" name="everywhere.com.mynetgear.ccvf2.user.dto.planner.ItemDto" project="everywhere" 
+    file="/everywhere/src/main/java/everywhere/com/mynetgear/ccvf2/user/dto/planner/ItemDto.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="592" width="281" x="11015" y="1947"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="32" language="java" name="everywhere.com.mynetgear.ccvf2.comm.service.common.CommonReplyServiceImp" 
+    project="everywhere" 
+    file="/everywhere/src/main/java/everywhere/com/mynetgear/ccvf2/comm/service/common/CommonReplyServiceImp.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="142" width="430" x="32858" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="33" language="java" name="everywhere.com.mynetgear.ccvf2.user.dao.bookmark.BookMarkDaoImp" 
+    project="everywhere" 
+    file="/everywhere/src/main/java/everywhere/com/mynetgear/ccvf2/user/dao/bookmark/BookMarkDaoImp.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="196" width="331" x="8136" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="34" language="java" name="everywhere.com.mynetgear.ccvf2.user.dao.planner.PlannerDaoImp" 
+    project="everywhere" 
+    file="/everywhere/src/main/java/everywhere/com/mynetgear/ccvf2/user/dao/planner/PlannerDaoImp.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="448" width="349" x="15086" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="35" language="java" name="everywhere.com.mynetgear.ccvf2.user.controller.main.UserMainController" 
+    project="everywhere" 
+    file="/everywhere/src/main/java/everywhere/com/mynetgear/ccvf2/user/controller/main/UserMainController.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="106" width="443" x="30458" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="36" language="java" name="everywhere.com.mynetgear.ccvf2.user.dao.accompany.AccompanyDao" 
+    project="everywhere" 
+    file="/everywhere/src/main/java/everywhere/com/mynetgear/ccvf2/user/dao/accompany/AccompanyDao.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="250" width="380" x="25344" y="1947"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="37" language="java" name="everywhere.com.mynetgear.ccvf2.user.dao.mypage.MyPageDaoImpl" 
+    project="everywhere" 
+    file="/everywhere/src/main/java/everywhere/com/mynetgear/ccvf2/user/dao/mypage/MyPageDaoImpl.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="106" width="287" x="33798" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="38" language="java" name="everywhere.com.mynetgear.ccvf2.user.dao.member.MemberDaoImp" project="everywhere" 
+    file="/everywhere/src/main/java/everywhere/com/mynetgear/ccvf2/user/dao/member/MemberDaoImp.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="538" width="424" x="13698" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="39" language="java" name="everywhere.com.mynetgear.ccvf2.user.dto.bookmark.BookMarkDto" 
+    project="everywhere" 
+    file="/everywhere/src/main/java/everywhere/com/mynetgear/ccvf2/user/dto/bookmark/BookMarkDto.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="304" width="294" x="2928" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="40" language="java" name="everywhere.com.mynetgear.ccvf2.user.dao.spot.SpotDao" project="everywhere" 
+    file="/everywhere/src/main/java/everywhere/com/mynetgear/ccvf2/user/dao/spot/SpotDao.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="286" width="314" x="26104" y="1947"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <interface id="41" language="java" name="everywhere.com.mynetgear.ccvf2.user.dao.mypage.MyPageDao" 
+    project="everywhere" file="/everywhere/src/main/java/everywhere/com/mynetgear/ccvf2/user/dao/mypage/MyPageDao.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="70" width="287" x="33798" y="1947"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="42" language="java" name="everywhere.com.mynetgear.ccvf2.user.controller.planner.PlannerController" 
+    project="everywhere" 
+    file="/everywhere/src/main/java/everywhere/com/mynetgear/ccvf2/user/controller/planner/PlannerController.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="286" width="564" x="12700" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="43" language="java" name="everywhere.com.mynetgear.ccvf2.cron.Scheduler" project="everywhere" 
+    file="/everywhere/src/main/java/everywhere/com/mynetgear/ccvf2/cron/Scheduler.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="178" width="268" x="1126" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="44" language="java" name="everywhere.com.mynetgear.ccvf2.user.dao.sweet.SweetDaoImp" project="everywhere" 
+    file="/everywhere/src/main/java/everywhere/com/mynetgear/ccvf2/user/dao/sweet/SweetDaoImp.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="178" width="276" x="11002" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="45" language="java" name="everywhere.com.mynetgear.ccvf2.comm.util.common.StringUtil" project="everywhere" 
+    file="/everywhere/src/main/java/everywhere/com/mynetgear/ccvf2/comm/util/common/StringUtil.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="1870" width="354" x="5577" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="46" language="java" name="everywhere.com.mynetgear.ccvf2.comm.util.common.MyAuthenticator" 
+    project="everywhere" file="/everywhere/src/main/java/everywhere/com/mynetgear/ccvf2/comm/util/common/MailSend.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="142" width="336" x="2093" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="47" language="java" name="everywhere.com.mynetgear.ccvf2.user.dto.planner.ItemDtoExt" project="everywhere" 
+    file="/everywhere/src/main/java/everywhere/com/mynetgear/ccvf2/user/dto/planner/ItemDtoExt.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="196" width="299" x="10663" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="48" language="java" name="everywhere.com.mynetgear.ccvf2.comm.util.common.Base64Util" project="everywhere" 
+    file="/everywhere/src/main/java/everywhere/com/mynetgear/ccvf2/comm/util/common/Base64Util.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="124" width="298" x="1755" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="49" language="java" name="everywhere.com.mynetgear.ccvf2.user.dao.accompany.AccompanyDaoImp" 
+    project="everywhere" 
+    file="/everywhere/src/main/java/everywhere/com/mynetgear/ccvf2/user/dao/accompany/AccompanyDaoImp.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="304" width="380" x="25713" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="50" language="java" name="everywhere.com.mynetgear.ccvf2.user.dao.visitor.VisitorDaoImp" 
+    project="everywhere" 
+    file="/everywhere/src/main/java/everywhere/com/mynetgear/ccvf2/user/dao/visitor/VisitorDaoImp.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="214" width="275" x="7489" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="51" language="java" name="everywhere.com.mynetgear.ccvf2.user.controller.bookmark.BookMarkController" 
+    project="everywhere" 
+    file="/everywhere/src/main/java/everywhere/com/mynetgear/ccvf2/user/controller/bookmark/BookMarkController.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="124" width="454" x="8863" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="52" language="java" name="everywhere.com.mynetgear.ccvf2.comm.util.common.MailSend" project="everywhere" 
+    file="/everywhere/src/main/java/everywhere/com/mynetgear/ccvf2/comm/util/common/MailSend.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="196" width="298" x="433" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="53" language="java" name="everywhere.com.mynetgear.ccvf2.user.dao.main.UserMainDaoImp" project="everywhere" 
+    file="/everywhere/src/main/java/everywhere/com/mynetgear/ccvf2/user/dao/main/UserMainDaoImp.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="160" width="313" x="30105" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="54" language="java" name="everywhere.com.mynetgear.ccvf2.comm.service.login.LoginService" 
+    project="everywhere" 
+    file="/everywhere/src/main/java/everywhere/com/mynetgear/ccvf2/comm/service/login/LoginService.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="88" width="299" x="16203" y="1947"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="55" language="java" name="everywhere.com.mynetgear.ccvf2.user.dto.planner.PlannerDto" project="everywhere" 
+    file="/everywhere/src/main/java/everywhere/com/mynetgear/ccvf2/user/dto/planner/PlannerDto.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="646" width="281" x="19164" y="2993"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="56" language="java" name="everywhere.com.mynetgear.ccvf2.comm.service.common.CommonReplyService" 
+    project="everywhere" 
+    file="/everywhere/src/main/java/everywhere/com/mynetgear/ccvf2/comm/service/common/CommonReplyService.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="124" width="430" x="32603" y="1947"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <interface id="57" language="java" name="everywhere.com.mynetgear.ccvf2.user.dao.sweet.SweetDao" project="everywhere" 
+    file="/everywhere/src/main/java/everywhere/com/mynetgear/ccvf2/user/dao/sweet/SweetDao.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="142" width="276" x="11336" y="1947"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="58" language="java" name="everywhere.com.mynetgear.ccvf2.user.dto.planner.PlannerDtoExt" 
+    project="everywhere" 
+    file="/everywhere/src/main/java/everywhere/com/mynetgear/ccvf2/user/dto/planner/PlannerDtoExt.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="304" width="281" x="19004" y="1947"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="59" language="java" name="everywhere.com.mynetgear.ccvf2.user.dto.visitor.VisitorDto" project="everywhere" 
+    file="/everywhere/src/main/java/everywhere/com/mynetgear/ccvf2/user/dto/visitor/VisitorDto.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="430" width="271" x="3970" y="1947"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="60" language="java" name="everywhere.com.mynetgear.ccvf2.user.controller.search.SearchController" 
+    project="everywhere" 
+    file="/everywhere/src/main/java/everywhere/com/mynetgear/ccvf2/user/controller/search/SearchController.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="142" width="472" x="19031" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="61" language="java" name="everywhere.com.mynetgear.ccvf2.user.dao.search.SearchDao" 
+    project="everywhere" file="/everywhere/src/main/java/everywhere/com/mynetgear/ccvf2/user/dao/search/SearchDao.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="142" width="295" x="17943" y="1947"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="62" language="java" name="everywhere.com.mynetgear.ccvf2.user.dto.accompany.AccompanyDtoExt" 
+    project="everywhere" 
+    file="/everywhere/src/main/java/everywhere/com/mynetgear/ccvf2/user/dto/accompany/AccompanyDtoExt.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="142" width="302" x="6262" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="63" language="java" name="everywhere.com.mynetgear.ccvf2.comm.util.common.SecurityUtil" 
+    project="everywhere" 
+    file="/everywhere/src/main/java/everywhere/com/mynetgear/ccvf2/comm/util/common/SecurityUtil.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="142" width="298" x="4281" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="64" language="java" name="everywhere.com.mynetgear.ccvf2.comm.util.common.PasswordSecur" 
+    project="everywhere" 
+    file="/everywhere/src/main/java/everywhere/com/mynetgear/ccvf2/comm/util/common/PasswordSecur.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="232" width="434" x="25239" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="65" language="java" name="everywhere.com.mynetgear.ccvf2.user.dao.message.MessageDaoImp" 
+    project="everywhere" 
+    file="/everywhere/src/main/java/everywhere/com/mynetgear/ccvf2/user/dao/message/MessageDaoImp.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="232" width="324" x="9357" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="66" language="java" name="everywhere.com.mynetgear.ccvf2.user.dao.member.MemberDao" 
+    project="everywhere" file="/everywhere/src/main/java/everywhere/com/mynetgear/ccvf2/user/dao/member/MemberDao.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="502" width="424" x="14738" y="1947"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="67" language="java" name="everywhere.com.mynetgear.ccvf2.user.dto.message.MessageDto" project="everywhere" 
+    file="/everywhere/src/main/java/everywhere/com/mynetgear/ccvf2/user/dto/message/MessageDto.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="466" width="292" x="7804" y="1947"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="68" language="java" name="everywhere.com.mynetgear.ccvf2.user.dao.bookmark.BookMarkDao" 
+    project="everywhere" 
+    file="/everywhere/src/main/java/everywhere/com/mynetgear/ccvf2/user/dao/bookmark/BookMarkDao.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="160" width="331" x="8492" y="1947"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="69" language="java" name="everywhere.com.mynetgear.ccvf2.comm.util.common.AuthorityInterceptor" 
+    project="everywhere" 
+    file="/everywhere/src/main/java/everywhere/com/mynetgear/ccvf2/comm/util/common/AuthorityInterceptor.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="124" width="419" x="2469" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="70" language="java" name="everywhere.com.mynetgear.ccvf2.user.dto.sweet.SweetDto" project="everywhere" 
+    file="/everywhere/src/main/java/everywhere/com/mynetgear/ccvf2/user/dto/sweet/SweetDto.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="250" width="272" x="4619" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="71" language="java" name="everywhere.com.mynetgear.ccvf2.user.dto.accompany.AccompanyDto" 
+    project="everywhere" 
+    file="/everywhere/src/main/java/everywhere/com/mynetgear/ccvf2/user/dto/accompany/AccompanyDto.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="808" width="302" x="6262" y="1947"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="72" language="java" name="everywhere.com.mynetgear.ccvf2.user.controller.message.MessageController" 
+    project="everywhere" 
+    file="/everywhere/src/main/java/everywhere/com/mynetgear/ccvf2/user/controller/message/MessageController.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="160" width="548" x="10075" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="73" language="java" name="everywhere.com.mynetgear.ccvf2.user.dto.planner.MoneyDto" project="everywhere" 
+    file="/everywhere/src/main/java/everywhere/com/mynetgear/ccvf2/user/dto/planner/MoneyDto.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="592" width="281" x="10694" y="1947"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="74" language="java" name="everywhere.com.mynetgear.ccvf2.comm.service.login.LoginServiceImp" 
+    project="everywhere" 
+    file="/everywhere/src/main/java/everywhere/com/mynetgear/ccvf2/comm/service/login/LoginServiceImp.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="106" width="299" x="15475" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="75" language="java" name="everywhere.com.mynetgear.ccvf2.user.dto.mate.MateDto" project="everywhere" 
+    file="/everywhere/src/main/java/everywhere/com/mynetgear/ccvf2/user/dto/mate/MateDto.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="196" width="267" x="34125" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="76" language="java" name="everywhere.com.mynetgear.ccvf2.user.controller.visitor.VisitorController" 
+    project="everywhere" 
+    file="/everywhere/src/main/java/everywhere/com/mynetgear/ccvf2/user/controller/visitor/VisitorController.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="178" width="512" x="6604" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="77" language="java" name="everywhere.com.mynetgear.ccvf2.user.dto.message.MessageDtoExt" 
+    project="everywhere" 
+    file="/everywhere/src/main/java/everywhere/com/mynetgear/ccvf2/user/dto/message/MessageDtoExt.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="412" width="292" x="7804" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="78" language="java" name="everywhere.com.mynetgear.ccvf2.user.controller.member.MemberController" 
+    project="everywhere" 
+    file="/everywhere/src/main/java/everywhere/com/mynetgear/ccvf2/user/controller/member/MemberController.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="232" width="536" x="14162" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="79" language="java" name="everywhere.com.mynetgear.ccvf2.comm.service.commoncode.CommonCodeService" 
+    project="everywhere" 
+    file="/everywhere/src/main/java/everywhere/com/mynetgear/ccvf2/comm/service/commoncode/CommonCodeService.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="160" width="348" x="22365" y="1947"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="80" language="java" name="everywhere.com.mynetgear.ccvf2.user.controller.spot.SpotController" 
+    project="everywhere" 
+    file="/everywhere/src/main/java/everywhere/com/mynetgear/ccvf2/user/controller/spot/SpotController.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="268" width="477" x="28381" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="81" language="java" name="everywhere.com.mynetgear.ccvf2.comm.util.common.CommonUtils" project="everywhere" 
+    file="/everywhere/src/main/java/everywhere/com/mynetgear/ccvf2/comm/util/common/CommonUtils.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="268" width="344" x="49" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="82" language="java" name="everywhere.com.mynetgear.ccvf2.user.dto.planner.CheckDto" project="everywhere" 
+    file="/everywhere/src/main/java/everywhere/com/mynetgear/ccvf2/user/dto/planner/CheckDto.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="376" width="281" x="1434" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="83" language="java" name="everywhere.com.mynetgear.ccvf2.user.controller.mypage.MyPageController" 
+    project="everywhere" 
+    file="/everywhere/src/main/java/everywhere/com/mynetgear/ccvf2/user/controller/mypage/MyPageController.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="250" width="540" x="12120" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="84" language="java" name="everywhere.com.mynetgear.ccvf2.user.dao.spot.SpotDaoImp" project="everywhere" 
+    file="/everywhere/src/main/java/everywhere/com/mynetgear/ccvf2/user/dao/spot/SpotDaoImp.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="340" width="314" x="26973" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="85" language="java" name="everywhere.com.mynetgear.ccvf2.cron.SessionListener" project="everywhere" 
+    file="/everywhere/src/main/java/everywhere/com/mynetgear/ccvf2/cron/SessionListener.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="160" width="267" x="4931" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="86" language="java" name="everywhere.com.mynetgear.ccvf2.user.dto.member.MemberDto" project="everywhere" 
+    file="/everywhere/src/main/java/everywhere/com/mynetgear/ccvf2/user/dto/member/MemberDto.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="700" width="286" x="34125" y="1947"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="87" language="java" name="everywhere.com.mynetgear.ccvf2.comm.service.common.CommonEmailServiceImp" 
+    project="everywhere" 
+    file="/everywhere/src/main/java/everywhere/com/mynetgear/ccvf2/comm/service/common/CommonEmailServiceImp.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="124" width="321" x="28020" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="88" language="java" name="everywhere.com.mynetgear.ccvf2.user.dto.visitor.VisitorDtoExt" 
+    project="everywhere" 
+    file="/everywhere/src/main/java/everywhere/com/mynetgear/ccvf2/user/dto/visitor/VisitorDtoExt.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="196" width="271" x="3970" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="89" language="java" name="everywhere.com.mynetgear.ccvf2.user.dao.message.MessageDao" 
+    project="everywhere" 
+    file="/everywhere/src/main/java/everywhere/com/mynetgear/ccvf2/user/dao/message/MessageDao.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="178" width="324" x="9537" y="1947"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="90" language="java" name="everywhere.com.mynetgear.ccvf2.comm.util.common.Constant" project="everywhere" 
+    file="/everywhere/src/main/java/everywhere/com/mynetgear/ccvf2/comm/util/common/Constant.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="1636" width="351" x="3579" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="91" language="java" name="everywhere.com.mynetgear.ccvf2.comm.service.common.CommonFileIOServiceImp" 
+    project="everywhere" 
+    file="/everywhere/src/main/java/everywhere/com/mynetgear/ccvf2/comm/service/common/CommonFileIOServiceImp.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="160" width="475" x="26458" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="92" language="java" name="everywhere.com.mynetgear.ccvf2.user.dao.search.SearchDaoImp" project="everywhere" 
+    file="/everywhere/src/main/java/everywhere/com/mynetgear/ccvf2/user/dao/search/SearchDaoImp.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="178" width="295" x="18357" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="93" language="java" name="everywhere.com.mynetgear.ccvf2.user.controller.accompany.AccompanyController" 
+    project="everywhere" 
+    file="/everywhere/src/main/java/everywhere/com/mynetgear/ccvf2/user/controller/accompany/AccompanyController.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="232" width="485" x="23776" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="94" language="java" name="everywhere.com.mynetgear.ccvf2.user.dto.spot.SpotDto" project="everywhere" 
+    file="/everywhere/src/main/java/everywhere/com/mynetgear/ccvf2/user/dto/spot/SpotDto.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="1006" width="301" x="14397" y="1947"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="95" language="java" name="everywhere.com.mynetgear.ccvf2.comm.dao.common.CommonReplyDaoImp" 
+    project="everywhere" 
+    file="/everywhere/src/main/java/everywhere/com/mynetgear/ccvf2/comm/dao/common/CommonReplyDaoImp.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="178" width="430" x="33328" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="96" language="java" name="everywhere.com.mynetgear.ccvf2.admin.service.member.AdminMemberService" 
+    project="everywhere" 
+    file="/everywhere/src/main/java/everywhere/com/mynetgear/ccvf2/admin/service/member/AdminMemberService.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="106" width="319" x="21817" y="1947"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="97" language="java" name="everywhere.com.mynetgear.ccvf2.comm.dto.commoncode.CommonCodeDtoExt" 
+    project="everywhere" 
+    file="/everywhere/src/main/java/everywhere/com/mynetgear/ccvf2/comm/dto/commoncode/CommonCodeDtoExt.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="196" width="326" x="18638" y="1947"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="98" language="java" name="everywhere.com.mynetgear.ccvf2.comm.controller.common.CommonReplyController" 
+    project="everywhere" 
+    file="/everywhere/src/main/java/everywhere/com/mynetgear/ccvf2/comm/controller/common/CommonReplyController.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="142" width="470" x="32348" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="99" language="java" name="everywhere.com.mynetgear.ccvf2.comm.dao.common.CommonReplyDao" 
+    project="everywhere" 
+    file="/everywhere/src/main/java/everywhere/com/mynetgear/ccvf2/comm/dao/common/CommonReplyDao.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="124" width="430" x="33093" y="1947"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="100" language="java" 
+    name="everywhere.com.mynetgear.ccvf2.admin.service.mailtemplate.MailTemplateServiceImp" project="everywhere" 
+    file="/everywhere/src/main/java/everywhere/com/mynetgear/ccvf2/admin/service/mailtemplate/MailTemplateServiceImp.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="160" width="344" x="30941" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="101" language="java" name="everywhere.com.mynetgear.ccvf2.comm.dto.commoncode.CommonCodeDto" 
+    project="everywhere" 
+    file="/everywhere/src/main/java/everywhere/com/mynetgear/ccvf2/comm/dto/commoncode/CommonCodeDto.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="520" width="326" x="18638" y="2993"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="102" language="java" name="everywhere.com.mynetgear.ccvf2.admin.service.settingmain.SettingMainServiceImp" 
+    project="everywhere" 
+    file="/everywhere/src/main/java/everywhere/com/mynetgear/ccvf2/admin/service/settingmain/SettingMainServiceImp.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="196" width="337" x="17980" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="103" language="java" name="everywhere.com.mynetgear.ccvf2.comm.dao.commoncode.CommonCodeDao" 
+    project="everywhere" 
+    file="/everywhere/src/main/java/everywhere/com/mynetgear/ccvf2/comm/dao/commoncode/CommonCodeDao.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="250" width="477" x="23064" y="1947"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="104" language="java" name="everywhere.com.mynetgear.ccvf2.comm.controller.common.CommonEmailController" 
+    project="everywhere" 
+    file="/everywhere/src/main/java/everywhere/com/mynetgear/ccvf2/comm/controller/common/CommonEmailController.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="124" width="485" x="29251" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="105" language="java" name="everywhere.com.mynetgear.ccvf2.admin.service.chart.ChartService" 
+    project="everywhere" 
+    file="/everywhere/src/main/java/everywhere/com/mynetgear/ccvf2/admin/service/chart/ChartService.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="88" width="299" x="21106" y="1947"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="106" language="java" name="everywhere.com.mynetgear.ccvf2.comm.controller.login.LoginController" 
+    project="everywhere" 
+    file="/everywhere/src/main/java/everywhere/com/mynetgear/ccvf2/comm/controller/login/LoginController.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="160" width="625" x="16250" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="107" language="java" name="everywhere.com.mynetgear.ccvf2.comm.dto.common.CommonFileIODto" 
+    project="everywhere" 
+    file="/everywhere/src/main/java/everywhere/com/mynetgear/ccvf2/comm/dto/common/CommonFileIODto.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="574" width="299" x="14602" y="2993"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="108" language="java" name="everywhere.com.mynetgear.ccvf2.comm.dto.common.EverywhereDefaultDto" 
+    project="everywhere" 
+    file="/everywhere/src/main/java/everywhere/com/mynetgear/ccvf2/comm/dto/common/EverywhereDefaultDto.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="1402" width="299" x="19543" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="109" language="java" name="everywhere.com.mynetgear.ccvf2.comm.dao.commoncode.CommonCodeDaoImp" 
+    project="everywhere" 
+    file="/everywhere/src/main/java/everywhere/com/mynetgear/ccvf2/comm/dao/commoncode/CommonCodeDaoImp.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="304" width="477" x="23259" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="110" language="java" name="everywhere.com.mynetgear.ccvf2.admin.service.main.AdminMainServiceImp" 
+    project="everywhere" 
+    file="/everywhere/src/main/java/everywhere/com/mynetgear/ccvf2/admin/service/main/AdminMainServiceImp.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="106" width="300" x="27327" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="111" language="java" name="everywhere.com.mynetgear.ccvf2.admin.service.member.AdminMemberServiceImp" 
+    project="everywhere" 
+    file="/everywhere/src/main/java/everywhere/com/mynetgear/ccvf2/admin/service/member/AdminMemberServiceImp.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="124" width="319" x="21445" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="112" language="java" name="everywhere.com.mynetgear.ccvf2.comm.aop.EverywhereAspect" project="everywhere" 
+    file="/everywhere/src/main/java/everywhere/com/mynetgear/ccvf2/comm/aop/EverywhereAspect.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="142" width="251" x="5971" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="113" language="java" 
+    name="everywhere.com.mynetgear.ccvf2.admin.service.mailtemplate.MailTemplateService" project="everywhere" 
+    file="/everywhere/src/main/java/everywhere/com/mynetgear/ccvf2/admin/service/mailtemplate/MailTemplateService.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="142" width="344" x="31092" y="1947"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="114" language="java" name="everywhere.com.mynetgear.ccvf2.comm.dto.common.CommonReplyDto" 
+    project="everywhere" 
+    file="/everywhere/src/main/java/everywhere/com/mynetgear/ccvf2/comm/dto/common/CommonReplyDto.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="520" width="299" x="20035" y="1947"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="115" language="java" name="everywhere.com.mynetgear.ccvf2.comm.dao.common.CommonFileIODaoImp" 
+    project="everywhere" 
+    file="/everywhere/src/main/java/everywhere/com/mynetgear/ccvf2/comm/dao/common/CommonFileIODaoImp.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="160" width="313" x="27667" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="116" language="java" name="everywhere.com.mynetgear.ccvf2.comm.controller.common.CommonCodeController" 
+    project="everywhere" 
+    file="/everywhere/src/main/java/everywhere/com/mynetgear/ccvf2/comm/controller/common/CommonCodeController.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="106" width="465" x="22365" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="117" language="java" name="everywhere.com.mynetgear.ccvf2.admin.service.main.AdminMainService" 
+    project="everywhere" 
+    file="/everywhere/src/main/java/everywhere/com/mynetgear/ccvf2/admin/service/main/AdminMainService.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="88" width="300" x="25764" y="1947"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <interface id="118" language="java" name="everywhere.com.mynetgear.ccvf2.comm.dao.common.CommonFileIODao" 
+    project="everywhere" 
+    file="/everywhere/src/main/java/everywhere/com/mynetgear/ccvf2/comm/dao/common/CommonFileIODao.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="106" width="303" x="26458" y="1947"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="119" language="java" name="everywhere.com.mynetgear.ccvf2.admin.service.chart.ChartServiceImpl" 
+    project="everywhere" 
+    file="/everywhere/src/main/java/everywhere/com/mynetgear/ccvf2/admin/service/chart/ChartServiceImpl.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="106" width="299" x="20277" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="120" language="java" name="everywhere.com.mynetgear.ccvf2.admin.service.settingmain.SettingMainService" 
+    project="everywhere" 
+    file="/everywhere/src/main/java/everywhere/com/mynetgear/ccvf2/admin/service/settingmain/SettingMainService.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="142" width="337" x="17126" y="1947"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="121" language="java" name="everywhere.com.mynetgear.ccvf2.comm.dto.common.MailVO" project="everywhere" 
+    file="/everywhere/src/main/java/everywhere/com/mynetgear/ccvf2/comm/dto/common/MailVO.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="718" width="299" x="5238" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="122" language="java" 
+    name="everywhere.com.mynetgear.ccvf2.admin.controller.settingmain.SettingMainController" project="everywhere" 
+    file="/everywhere/src/main/java/everywhere/com/mynetgear/ccvf2/admin/controller/settingmain/SettingMainController.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="178" width="585" x="16915" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="123" language="java" name="everywhere.com.mynetgear.ccvf2.admin.dao.settingmain.SettingMainDaoImp" 
+    project="everywhere" 
+    file="/everywhere/src/main/java/everywhere/com/mynetgear/ccvf2/admin/dao/settingmain/SettingMainDaoImp.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="196" width="400" x="17540" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="124" language="java" name="everywhere.com.mynetgear.ccvf2.admin.dto.mailtemplat.MailTemplateDtoExt" 
+    project="everywhere" 
+    file="/everywhere/src/main/java/everywhere/com/mynetgear/ccvf2/admin/dto/mailtemplat/MailTemplateDtoExt.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="196" width="315" x="19680" y="1947"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="125" language="java" name="everywhere.com.mynetgear.ccvf2.admin.controller.chart.ChartController" 
+    project="everywhere" 
+    file="/everywhere/src/main/java/everywhere/com/mynetgear/ccvf2/admin/controller/chart/ChartController.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="124" width="417" x="20616" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="126" language="java" name="everywhere.com.mynetgear.ccvf2.admin.dao.main.AdminMainDaoImp" 
+    project="everywhere" 
+    file="/everywhere/src/main/java/everywhere/com/mynetgear/ccvf2/admin/dao/main/AdminMainDaoImp.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="124" width="313" x="28898" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="127" language="java" name="everywhere.com.mynetgear.ccvf2.admin.dao.mailtemplat.MailTemplatDaoImp" 
+    project="everywhere" 
+    file="/everywhere/src/main/java/everywhere/com/mynetgear/ccvf2/admin/dao/mailtemplat/MailTemplatDaoImp.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="178" width="382" x="31926" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="128" language="java" name="everywhere.com.mynetgear.ccvf2.admin.dao.settingmain.SettingMainDao" 
+    project="everywhere" 
+    file="/everywhere/src/main/java/everywhere/com/mynetgear/ccvf2/admin/dao/settingmain/SettingMainDao.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="142" width="400" x="17503" y="1947"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="129" language="java" name="everywhere.com.mynetgear.ccvf2.admin.controller.main.AdminMainController" 
+    project="everywhere" 
+    file="/everywhere/src/main/java/everywhere/com/mynetgear/ccvf2/admin/controller/main/AdminMainController.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="196" width="534" x="24301" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="130" language="java" name="everywhere.com.mynetgear.ccvf2.admin.dao.member.AdminMemberDaoImp" 
+    project="everywhere" 
+    file="/everywhere/src/main/java/everywhere/com/mynetgear/ccvf2/admin/dao/member/AdminMemberDaoImp.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="160" width="332" x="21073" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="131" language="java" 
+    name="everywhere.com.mynetgear.ccvf2.admin.controller.mailtemplate.MailTemplateController" project="everywhere" 
+    file="/everywhere/src/main/java/everywhere/com/mynetgear/ccvf2/admin/controller/mailtemplate/MailTemplateController.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="160" width="561" x="31325" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="132" language="java" name="everywhere.com.mynetgear.ccvf2.admin.dto.settingmain.SettingMainDtoExt" 
+    project="everywhere" 
+    file="/everywhere/src/main/java/everywhere/com/mynetgear/ccvf2/admin/dto/settingmain/SettingMainDtoExt.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="646" width="315" x="19325" y="1947"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="133" language="java" name="everywhere.com.mynetgear.ccvf2.admin.dao.mailtemplat.MailTemplatDao" 
+    project="everywhere" 
+    file="/everywhere/src/main/java/everywhere/com/mynetgear/ccvf2/admin/dao/mailtemplat/MailTemplatDao.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="124" width="382" x="31476" y="1947"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <interface id="134" language="java" name="everywhere.com.mynetgear.ccvf2.admin.dao.chart.ChartDao" 
+    project="everywhere" file="/everywhere/src/main/java/everywhere/com/mynetgear/ccvf2/admin/dao/chart/ChartDao.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="142" width="355" x="20711" y="1947"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="135" language="java" name="everywhere.com.mynetgear.ccvf2.admin.dao.chart.ChartDaoImpl" 
+    project="everywhere" 
+    file="/everywhere/src/main/java/everywhere/com/mynetgear/ccvf2/admin/dao/chart/ChartDaoImpl.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="178" width="355" x="19882" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="136" language="java" name="everywhere.com.mynetgear.ccvf2.admin.dao.main.AdminMainDao" 
+    project="everywhere" 
+    file="/everywhere/src/main/java/everywhere/com/mynetgear/ccvf2/admin/dao/main/AdminMainDao.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="70" width="282" x="28112" y="1947"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="137" language="java" name="everywhere.com.mynetgear.ccvf2.admin.dto.chart.ChartDto" project="everywhere" 
+    file="/everywhere/src/main/java/everywhere/com/mynetgear/ccvf2/admin/dto/chart/ChartDto.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="484" width="277" x="3262" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="138" language="java" name="everywhere.com.mynetgear.ccvf2.admin.dto.settingmain.SettingMainDto" 
+    project="everywhere" 
+    file="/everywhere/src/main/java/everywhere/com/mynetgear/ccvf2/admin/dto/settingmain/SettingMainDto.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="466" width="315" x="771" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="139" language="java" name="everywhere.com.mynetgear.ccvf2.admin.dao.member.AdminMemberDao" 
+    project="everywhere" 
+    file="/everywhere/src/main/java/everywhere/com/mynetgear/ccvf2/admin/dao/member/AdminMemberDao.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="124" width="332" x="21445" y="1947"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="140" language="java" name="everywhere.com.mynetgear.ccvf2.admin.controller.member.AdminMemberController" 
+    project="everywhere" 
+    file="/everywhere/src/main/java/everywhere/com/mynetgear/ccvf2/admin/controller/member/AdminMemberController.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="124" width="521" x="21804" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="141" language="java" name="everywhere.com.mynetgear.ccvf2.admin.dto.mailtemplat.MailTemplateDto" 
+    project="everywhere" 
+    file="/everywhere/src/main/java/everywhere/com/mynetgear/ccvf2/admin/dto/mailtemplat/MailTemplateDto.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="412" width="315" x="19680" y="2993"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="142" language="java" name="everywhere.com.mynetgear.ccvf2.admin.dto.member.AdminMemberDto" 
+    project="everywhere" 
+    file="/everywhere/src/main/java/everywhere/com/mynetgear/ccvf2/admin/dto/member/AdminMemberDto.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="304" width="297" x="20374" y="1947"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <association id="143">    
+    <end type="SOURCE" refId="8" navigable="false">      
+      <attribute id="144" name="commonFileIOService"/>      
+      <multiplicity id="145" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="25" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="146">    
+    <end type="SOURCE" refId="122" navigable="false">      
+      <attribute id="147" name="settingMainService"/>      
+      <multiplicity id="148" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="120" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="149">    
+    <end type="SOURCE" refId="35" navigable="false">      
+      <attribute id="150" name="userMainService"/>      
+      <multiplicity id="151" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="5" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="152">    
+    <end type="SOURCE" refId="17" navigable="false">      
+      <attribute id="153" name="bookMarkDao"/>      
+      <multiplicity id="154" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="68" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="155">    
+    <end type="SOURCE" refId="32" navigable="false">      
+      <attribute id="156" name="commonReplyDao"/>      
+      <multiplicity id="157" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="99" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="158">    
+    <end type="SOURCE" refId="111" navigable="false">      
+      <attribute id="159" name="commonCodeService"/>      
+      <multiplicity id="160" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="79" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="161">    
+    <end type="SOURCE" refId="123"/>    
+    <end type="TARGET" refId="128"/>  
+  </realization>  
+  <realization id="162">    
+    <end type="SOURCE" refId="11"/>    
+    <end type="TARGET" refId="5"/>  
+  </realization>  
+  <association id="163">    
+    <end type="SOURCE" refId="74" navigable="false">      
+      <attribute id="164" name="memberDao"/>      
+      <multiplicity id="165" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="66" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="166">    
+    <end type="SOURCE" refId="91" navigable="false">      
+      <attribute id="167" name="commonFileIODao"/>      
+      <multiplicity id="168" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="118" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="169">    
+    <end type="SOURCE" refId="111" navigable="false">      
+      <attribute id="170" name="adminMemberDao"/>      
+      <multiplicity id="171" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="139" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="172">    
+    <end type="SOURCE" refId="22" navigable="false">      
+      <attribute id="173" name="spotDao"/>      
+      <multiplicity id="174" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="40" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="175">    
+    <end type="SOURCE" refId="72" navigable="false">      
+      <attribute id="176" name="messageService"/>      
+      <multiplicity id="177" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="18" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="178">    
+    <end type="SOURCE" refId="38"/>    
+    <end type="TARGET" refId="66"/>  
+  </realization>  
+  <realization id="179">    
+    <end type="SOURCE" refId="110"/>    
+    <end type="TARGET" refId="117"/>  
+  </realization>  
+  <generalization id="180">    
+    <end type="SOURCE" refId="67"/>    
+    <end type="TARGET" refId="77"/>  
+  </generalization>  
+  <realization id="181">    
+    <end type="SOURCE" refId="53"/>    
+    <end type="TARGET" refId="26"/>  
+  </realization>  
+  <realization id="182">    
+    <end type="SOURCE" refId="65"/>    
+    <end type="TARGET" refId="89"/>  
+  </realization>  
+  <association id="183">    
+    <end type="SOURCE" refId="10" navigable="false">      
+      <attribute id="184" name="commonFileIODao"/>      
+      <multiplicity id="185" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="118" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="186">    
+    <end type="SOURCE" refId="104" navigable="false">      
+      <attribute id="187" name="commonEmailService"/>      
+      <multiplicity id="188" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="23" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="189">    
+    <end type="SOURCE" refId="124"/>    
+    <end type="TARGET" refId="108"/>  
+  </generalization>  
+  <association id="190">    
+    <end type="SOURCE" refId="15" navigable="false">      
+      <attribute id="191" name="visitorDao"/>      
+      <multiplicity id="192" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="24" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="193">    
+    <end type="SOURCE" refId="102" navigable="false">      
+      <attribute id="194" name="commonFileIOService"/>      
+      <multiplicity id="195" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="25" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="196">    
+    <end type="SOURCE" refId="114"/>    
+    <end type="TARGET" refId="108"/>  
+  </generalization>  
+  <association id="197">    
+    <end type="SOURCE" refId="42" navigable="false">      
+      <attribute id="198" name="plannerService"/>      
+      <multiplicity id="199" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="4" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="200">    
+    <end type="SOURCE" refId="14" navigable="false">      
+      <attribute id="201" name="plannerDao"/>      
+      <multiplicity id="202" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="28" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="203">    
+    <end type="SOURCE" refId="34"/>    
+    <end type="TARGET" refId="28"/>  
+  </realization>  
+  <association id="204">    
+    <end type="SOURCE" refId="64" navigable="false">      
+      <attribute id="205" name="commonFileIOService"/>      
+      <multiplicity id="206" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="25" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="207">    
+    <end type="SOURCE" refId="33"/>    
+    <end type="TARGET" refId="68"/>  
+  </realization>  
+  <realization id="208">    
+    <end type="SOURCE" refId="92"/>    
+    <end type="TARGET" refId="61"/>  
+  </realization>  
+  <association id="209">    
+    <end type="SOURCE" refId="14" navigable="false">      
+      <attribute id="210" name="spotDao"/>      
+      <multiplicity id="211" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="40" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="212">    
+    <end type="SOURCE" refId="37"/>    
+    <end type="TARGET" refId="41"/>  
+  </realization>  
+  <realization id="213">    
+    <end type="SOURCE" refId="13"/>    
+    <end type="TARGET" refId="7"/>  
+  </realization>  
+  <realization id="214">    
+    <end type="SOURCE" refId="84"/>    
+    <end type="TARGET" refId="40"/>  
+  </realization>  
+  <association id="215">    
+    <end type="SOURCE" refId="131" navigable="false">      
+      <attribute id="216" name="mailTemplateService"/>      
+      <multiplicity id="217" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="113" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="218">    
+    <end type="SOURCE" refId="31"/>    
+    <end type="TARGET" refId="47"/>  
+  </generalization>  
+  <association id="219">    
+    <end type="SOURCE" refId="10" navigable="false">      
+      <attribute id="220" name="searchDao"/>      
+      <multiplicity id="221" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="61" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="222">    
+    <end type="SOURCE" refId="119" navigable="false">      
+      <attribute id="223" name="chartDao"/>      
+      <multiplicity id="224" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="134" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="225">    
+    <end type="SOURCE" refId="11" navigable="false">      
+      <attribute id="226" name="userMainDao"/>      
+      <multiplicity id="227" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="26" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="228">    
+    <end type="SOURCE" refId="15" navigable="false">      
+      <attribute id="229" name="memberDao"/>      
+      <multiplicity id="230" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="66" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="231">    
+    <end type="SOURCE" refId="22" navigable="false">      
+      <attribute id="232" name="commonFileIOService"/>      
+      <multiplicity id="233" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="25" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="234">    
+    <end type="SOURCE" refId="11" navigable="false">      
+      <attribute id="235" name="spotDao"/>      
+      <multiplicity id="236" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="40" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="237">    
+    <end type="SOURCE" refId="74"/>    
+    <end type="TARGET" refId="54"/>  
+  </realization>  
+  <association id="238">    
+    <end type="SOURCE" refId="22" navigable="false">      
+      <attribute id="239" name="commonCodeService"/>      
+      <multiplicity id="240" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="79" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="241">    
+    <end type="SOURCE" refId="22" navigable="false">      
+      <attribute id="242" name="memberDao"/>      
+      <multiplicity id="243" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="66" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="244">    
+    <end type="SOURCE" refId="132"/>    
+    <end type="TARGET" refId="108"/>  
+  </generalization>  
+  <realization id="245">    
+    <end type="SOURCE" refId="44"/>    
+    <end type="TARGET" refId="57"/>  
+  </realization>  
+  <association id="246">    
+    <end type="SOURCE" refId="22" navigable="false">      
+      <attribute id="247" name="commonFileIoDao"/>      
+      <multiplicity id="248" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="118" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="249">    
+    <end type="SOURCE" refId="94" navigable="false">      
+      <attribute id="250" name="spot_photoes"/>      
+      <multiplicity id="251" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="107" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="252">    
+    <end type="SOURCE" refId="116" navigable="false">      
+      <attribute id="253" name="commonCodeService"/>      
+      <multiplicity id="254" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="79" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="255">    
+    <end type="SOURCE" refId="100" navigable="false">      
+      <attribute id="256" name="mailTemplatedao"/>      
+      <multiplicity id="257" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="133" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="258">    
+    <end type="SOURCE" refId="94"/>    
+    <end type="TARGET" refId="108"/>  
+  </generalization>  
+  <generalization id="259">    
+    <end type="SOURCE" refId="97"/>    
+    <end type="TARGET" refId="108"/>  
+  </generalization>  
+  <realization id="260">    
+    <end type="SOURCE" refId="22"/>    
+    <end type="TARGET" refId="6"/>  
+  </realization>  
+  <association id="261">    
+    <end type="SOURCE" refId="102" navigable="false">      
+      <attribute id="262" name="settingMainDao"/>      
+      <multiplicity id="263" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="128" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="264">    
+    <end type="SOURCE" refId="10" navigable="false">      
+      <attribute id="265" name="commonCodeService"/>      
+      <multiplicity id="266" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="79" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="267">    
+    <end type="SOURCE" refId="14" navigable="false">      
+      <attribute id="268" name="commonFileIoDao"/>      
+      <multiplicity id="269" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="118" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="270">    
+    <end type="SOURCE" refId="87"/>    
+    <end type="TARGET" refId="23"/>  
+  </realization>  
+  <realization id="271">    
+    <end type="SOURCE" refId="32"/>    
+    <end type="TARGET" refId="56"/>  
+  </realization>  
+  <realization id="272">    
+    <end type="SOURCE" refId="49"/>    
+    <end type="TARGET" refId="36"/>  
+  </realization>  
+  <realization id="273">    
+    <end type="SOURCE" refId="109"/>    
+    <end type="TARGET" refId="103"/>  
+  </realization>  
+  <association id="274">    
+    <end type="SOURCE" refId="29" navigable="false">      
+      <attribute id="275" name="sweetService"/>      
+      <multiplicity id="276" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="20" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="277">    
+    <end type="SOURCE" refId="13" navigable="false">      
+      <attribute id="278" name="plannerDao"/>      
+      <multiplicity id="279" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="28" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="280">    
+    <end type="SOURCE" refId="93" navigable="false">      
+      <attribute id="281" name="accompanyService"/>      
+      <multiplicity id="282" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="16" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="283">    
+    <end type="SOURCE" refId="51" navigable="false">      
+      <attribute id="284" name="bookMarkService"/>      
+      <multiplicity id="285" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="2" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="286">    
+    <end type="SOURCE" refId="19"/>    
+    <end type="TARGET" refId="20"/>  
+  </realization>  
+  <association id="287">    
+    <end type="SOURCE" refId="129" navigable="false">      
+      <attribute id="288" name="adminMainService"/>      
+      <multiplicity id="289" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="117" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="290">    
+    <end type="SOURCE" refId="17"/>    
+    <end type="TARGET" refId="2"/>  
+  </realization>  
+  <association id="291">    
+    <end type="SOURCE" refId="8" navigable="false">      
+      <attribute id="292" name="accompanyDao"/>      
+      <multiplicity id="293" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="36" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="294">    
+    <end type="SOURCE" refId="76" navigable="false">      
+      <attribute id="295" name="visitorService"/>      
+      <multiplicity id="296" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="9" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="297">    
+    <end type="SOURCE" refId="11" navigable="false">      
+      <attribute id="298" name="plannerDao"/>      
+      <multiplicity id="299" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="28" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="300">    
+    <end type="SOURCE" refId="83" navigable="false">      
+      <attribute id="301" name="myPageService"/>      
+      <multiplicity id="302" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="21" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="303">    
+    <end type="SOURCE" refId="14" navigable="false">      
+      <attribute id="304" name="commonFileIOService"/>      
+      <multiplicity id="305" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="25" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="306">    
+    <end type="SOURCE" refId="115"/>    
+    <end type="TARGET" refId="118"/>  
+  </realization>  
+  <association id="307">    
+    <end type="SOURCE" refId="14" navigable="false">      
+      <attribute id="308" name="commonCodeService"/>      
+      <multiplicity id="309" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="79" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="310">    
+    <end type="SOURCE" refId="141"/>    
+    <end type="TARGET" refId="124"/>  
+  </generalization>  
+  <realization id="311">    
+    <end type="SOURCE" refId="135"/>    
+    <end type="TARGET" refId="134"/>  
+  </realization>  
+  <association id="312">    
+    <end type="SOURCE" refId="3" navigable="false">      
+      <attribute id="313" name="plannerService"/>      
+      <multiplicity id="314" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="4" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="315">    
+    <end type="SOURCE" refId="15"/>    
+    <end type="TARGET" refId="9"/>  
+  </realization>  
+  <association id="316">    
+    <end type="SOURCE" refId="14" navigable="false">      
+      <attribute id="317" name="bookMarkDao"/>      
+      <multiplicity id="318" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="68" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="319">    
+    <end type="SOURCE" refId="127"/>    
+    <end type="TARGET" refId="133"/>  
+  </realization>  
+  <association id="320">    
+    <end type="SOURCE" refId="78" navigable="false">      
+      <attribute id="321" name="memberService"/>      
+      <multiplicity id="322" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="7" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="323">    
+    <end type="SOURCE" refId="119"/>    
+    <end type="TARGET" refId="105"/>  
+  </realization>  
+  <association id="324">    
+    <end type="SOURCE" refId="14" navigable="false">      
+      <attribute id="325" name="sweetDao"/>      
+      <multiplicity id="326" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="57" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="327">    
+    <end type="SOURCE" refId="126"/>    
+    <end type="TARGET" refId="136"/>  
+  </realization>  
+  <association id="328">    
+    <end type="SOURCE" refId="100" navigable="false">      
+      <attribute id="329" name="commonCodeService"/>      
+      <multiplicity id="330" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="79" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="331">    
+    <end type="SOURCE" refId="129" navigable="false">      
+      <attribute id="332" name="commonFileIOService"/>      
+      <multiplicity id="333" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="25" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="334">    
+    <end type="SOURCE" refId="13" navigable="false">      
+      <attribute id="335" name="commonCodeService"/>      
+      <multiplicity id="336" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="79" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="337">    
+    <end type="SOURCE" refId="59"/>    
+    <end type="TARGET" refId="88"/>  
+  </generalization>  
+  <generalization id="338">    
+    <bendpoint x="18607" y="1947"/>    
+    <end type="SOURCE" refId="108"/>    
+    <end type="TARGET" refId="107"/>  
+  </generalization>  
+  <generalization id="339">    
+    <end type="SOURCE" refId="30"/>    
+    <end type="TARGET" refId="94"/>  
+  </generalization>  
+  <association id="340">    
+    <end type="SOURCE" refId="98" navigable="false">      
+      <attribute id="341" name="commonReplyService"/>      
+      <multiplicity id="342" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="56" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="343">    
+    <end type="SOURCE" refId="132" navigable="false">      
+      <attribute id="344" name="plannerDto"/>      
+      <multiplicity id="345" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="55" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="346">    
+    <end type="SOURCE" refId="3" navigable="false">      
+      <attribute id="347" name="commonFileIOService"/>      
+      <multiplicity id="348" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="25" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="349">    
+    <end type="SOURCE" refId="47" navigable="false">      
+      <attribute id="350" name="spot"/>      
+      <multiplicity id="351" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="94" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="352">    
+    <end type="SOURCE" refId="91"/>    
+    <end type="TARGET" refId="25"/>  
+  </realization>  
+  <realization id="353">    
+    <end type="SOURCE" refId="100"/>    
+    <end type="TARGET" refId="113"/>  
+  </realization>  
+  <generalization id="354">    
+    <end type="SOURCE" refId="101"/>    
+    <end type="TARGET" refId="97"/>  
+  </generalization>  
+  <association id="355">    
+    <end type="SOURCE" refId="27" navigable="false">      
+      <attribute id="356" name="commonCodeDao"/>      
+      <multiplicity id="357" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="103" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="358">    
+    <end type="SOURCE" refId="130"/>    
+    <end type="TARGET" refId="139"/>  
+  </realization>  
+  <realization id="359">    
+    <end type="SOURCE" refId="50"/>    
+    <end type="TARGET" refId="24"/>  
+  </realization>  
+  <realization id="360">    
+    <end type="SOURCE" refId="95"/>    
+    <end type="TARGET" refId="99"/>  
+  </realization>  
+  <association id="361">    
+    <end type="SOURCE" refId="47" navigable="false">      
+      <attribute id="362" name="moneyList"/>      
+      <multiplicity id="363" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="73" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="364">    
+    <end type="SOURCE" refId="142"/>    
+    <end type="TARGET" refId="108"/>  
+  </generalization>  
+  <association id="365">    
+    <end type="SOURCE" refId="19" navigable="false">      
+      <attribute id="366" name="sweetDao"/>      
+      <multiplicity id="367" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="57" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="368">    
+    <end type="SOURCE" refId="110" navigable="false">      
+      <attribute id="369" name="adminMainDao"/>      
+      <multiplicity id="370" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="136" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="371">    
+    <end type="SOURCE" refId="12" navigable="false">      
+      <attribute id="372" name="messageDao"/>      
+      <multiplicity id="373" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="89" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="374">    
+    <end type="SOURCE" refId="64" navigable="false">      
+      <attribute id="375" name="spotDao"/>      
+      <multiplicity id="376" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="40" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="377">    
+    <end type="SOURCE" refId="111"/>    
+    <end type="TARGET" refId="96"/>  
+  </realization>  
+  <realization id="378">    
+    <end type="SOURCE" refId="102"/>    
+    <end type="TARGET" refId="120"/>  
+  </realization>  
+  <association id="379">    
+    <end type="SOURCE" refId="87" navigable="false">      
+      <attribute id="380" name="commonFileIODao"/>      
+      <multiplicity id="381" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="118" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="382">    
+    <end type="SOURCE" refId="129" navigable="false">      
+      <attribute id="383" name="chartDao"/>      
+      <multiplicity id="384" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="134" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="385">    
+    <end type="SOURCE" refId="60" navigable="false">      
+      <attribute id="386" name="searchService"/>      
+      <multiplicity id="387" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="1" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="388">    
+    <end type="SOURCE" refId="80" navigable="false">      
+      <attribute id="389" name="spotService"/>      
+      <multiplicity id="390" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="6" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="391">    
+    <end type="SOURCE" refId="14" navigable="false">      
+      <attribute id="392" name="memberDao"/>      
+      <multiplicity id="393" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="66" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="394">    
+    <bendpoint x="10663" y="1947"/>    
+    <end type="SOURCE" refId="47" navigable="false">      
+      <attribute id="395" name="item_photoes"/>      
+      <multiplicity id="396" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="107" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="397">    
+    <end type="SOURCE" refId="106" navigable="false">      
+      <attribute id="398" name="loginService"/>      
+      <multiplicity id="399" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="54" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="400">    
+    <end type="SOURCE" refId="10"/>    
+    <end type="TARGET" refId="1"/>  
+  </realization>  
+  <realization id="401">    
+    <end type="SOURCE" refId="3"/>    
+    <end type="TARGET" refId="21"/>  
+  </realization>  
+  <association id="402">    
+    <end type="SOURCE" refId="3" navigable="false">      
+      <attribute id="403" name="memberDao"/>      
+      <multiplicity id="404" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="66" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="405">    
+    <end type="SOURCE" refId="87" navigable="false">      
+      <attribute id="406" name="commonFileIOService"/>      
+      <multiplicity id="407" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="25" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="408">    
+    <end type="SOURCE" refId="8" navigable="false">      
+      <attribute id="409" name="commonCodeService"/>      
+      <multiplicity id="410" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="79" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="411">    
+    <end type="SOURCE" refId="140" navigable="false">      
+      <attribute id="412" name="adminMemberService"/>      
+      <multiplicity id="413" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="96" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="414">    
+    <end type="SOURCE" refId="71"/>    
+    <end type="TARGET" refId="62"/>  
+  </generalization>  
+  <association id="415">    
+    <end type="SOURCE" refId="13" navigable="false">      
+      <attribute id="416" name="memberDao"/>      
+      <multiplicity id="417" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="66" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="418">    
+    <end type="SOURCE" refId="86"/>    
+    <end type="TARGET" refId="75"/>  
+  </generalization>  
+  <realization id="419">    
+    <end type="SOURCE" refId="14"/>    
+    <end type="TARGET" refId="4"/>  
+  </realization>  
+  <realization id="420">    
+    <end type="SOURCE" refId="12"/>    
+    <end type="TARGET" refId="18"/>  
+  </realization>  
+  <association id="421">    
+    <end type="SOURCE" refId="125" navigable="false">      
+      <attribute id="422" name="service"/>      
+      <multiplicity id="423" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="105" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="424">    
+    <end type="SOURCE" refId="8"/>    
+    <end type="TARGET" refId="16"/>  
+  </realization>  
+  <association id="425">    
+    <end type="SOURCE" refId="64" navigable="false">      
+      <attribute id="426" name="memberService"/>      
+      <multiplicity id="427" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="7" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="428">    
+    <end type="SOURCE" refId="10" navigable="false">      
+      <attribute id="429" name="plannerDao"/>      
+      <multiplicity id="430" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="28" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="431">    
+    <end type="SOURCE" refId="129" navigable="false">      
+      <attribute id="432" name="commonCodeService"/>      
+      <multiplicity id="433" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="79" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="434">    
+    <end type="SOURCE" refId="55"/>    
+    <end type="TARGET" refId="58"/>  
+  </generalization>  
+  <realization id="435">    
+    <end type="SOURCE" refId="27"/>    
+    <end type="TARGET" refId="79"/>  
+  </realization>  
+  <generalization id="436">    
+    <end type="SOURCE" refId="58"/>    
+    <end type="TARGET" refId="108"/>  
+  </generalization>  
+  <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+    sort-features="false" accessors="true" visibility="true">    
+    <attributes public="true" package="true" protected="true" private="true" static="true"/>    
+    <operations public="true" package="true" protected="true" private="true" static="true"/>  
+  </classifier-display>  
+  <association-display labels="true" multiplicity="true"/>
+</class-diagram>
