@@ -108,7 +108,6 @@
 	                  	<div class="col-xs-6 col-sm-2">        
 	                        <div class="form-group">
 	                          <label>핸드폰 인증 상태</label>
-	                          ${adminMemberDto.mem_p_status_code}
 	                          <c:choose>
 	                          	<c:when test="${adminMemberDto.mem_p_status_code!=null}">
 	                          		<select name="phoneStatus" id="phoneStatus" class="form-control" onchange="searchFun()">

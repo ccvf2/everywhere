@@ -52,7 +52,10 @@ function searchFun(pageNumber) {
 		url+="&end_date="+end_date;
 	}
 	
-	url+="&pageNumber="+pageNumber;
+	if(pageNumber != null) {
+		url+="&pageNumber="+pageNumber;
+	}
+	
 			
 	location.href=url;
 }
