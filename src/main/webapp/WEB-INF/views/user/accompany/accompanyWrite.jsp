@@ -56,7 +56,7 @@
 		    
 		var content = document.forms["accompanyForm"]["content"].value;
 		if (content == null || content == "") {
-			alert("제목을 입력하세요");
+			alert("내용을 입력하세요");
 			document.forms["accompanyForm"]["title"].focus();
 			return false;
 		}
