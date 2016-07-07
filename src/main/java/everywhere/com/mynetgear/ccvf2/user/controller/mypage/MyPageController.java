@@ -37,18 +37,21 @@ public class MyPageController {
 	@RequestMapping(value = "/user/myPage/myPage.do", method = RequestMethod.GET)
 	public ModelAndView myPage(HttpServletRequest request, HttpServletResponse response, @RequestParam(value="uandMe", defaultValue="S0001")String uandMe) {
 		ModelAndView mav=new ModelAndView();
+		System.out.println("1");
 		mav.addObject("request", request);
 		mav.addObject("response", response);
-		
+		System.out.println("2");
 		// 코드값에 따라 자신의 페이지 이동 & 타회원 페이지 이동
 		//String uandMe=request.getParameter("uandMe");
 		
 		System.out.println("uandMe : " + uandMe);
 		if(StringUtils.equals(uandMe,Constant.MYPAGE_CODE_M)){
 			System.out.println("마이페이지로 이동");
+			System.out.println("3-0");
 			mav=myPageService.myPage(mav);
 		}else if(StringUtils.equals(uandMe,Constant.MYPAGE_CODE_U)){
 			System.out.println("타회원 페이지로 이동");
+			System.out.println("3-1");
 			mav=myPageService.moveUserPage(mav);
 		}
 		

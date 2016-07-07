@@ -45,6 +45,7 @@ public class MyPageServiceImpl implements MyPageService {
 	@Override
 	public ModelAndView myPage(ModelAndView mav) {
 		Map<String, Object> map = mav.getModelMap();
+		System.out.println("4-0");
 		HttpServletRequest request= (HttpServletRequest)map.get("request");
 		
 		HttpSession session = request.getSession();
@@ -88,8 +89,10 @@ public class MyPageServiceImpl implements MyPageService {
 			}
 		}		
 				
+		System.out.println("5");
 		memberDto=memberDao.memberRead(mem_no);
 		
+		System.out.println("6");
 		mav.addObject("plannerList", plannerList);
 		mav.addObject("mateCheck", 2);
 		mav.addObject("memberDto", memberDto);
@@ -99,16 +102,23 @@ public class MyPageServiceImpl implements MyPageService {
 		mav.addObject("SCHEDULE_TYPE", SCHEDULE_TYPE);
 		mav.addObject("MYPAGE_SEARCH_CODE", MYPAGE_SEARCH_CODE);
 		mav.addObject("uandMe", uandMe);
-		mav.setViewName("/user/myPage/myPage");
+		mav.setViewName("/user/mypage/myPage");
+		System.out.println("7");
 		return mav;
 	}
 	
 	@Override
 	public ModelAndView moveUserPage(ModelAndView mav) {
 		Map<String, Object> map = mav.getModelMap();
+		System.out.println("4-1");
 		HttpServletRequest request= (HttpServletRequest)map.get("request");
 		int mate_no=Integer.parseInt(request.getParameter("mem_no"));
 		String SCHEDULE_TYPE=request.getParameter("SCHEDULE_TYPE");
+		
+		if(StringUtils.isEmpty(SCHEDULE_TYPE)){
+			SCHEDULE_TYPE=Constant.SCHEDULE_TYPE_REVIEW;
+		}
+	
 		
 		MemberDto memberDto = memberDao.memberRead(mate_no);
 		
@@ -136,7 +146,12 @@ public class MyPageServiceImpl implements MyPageService {
 		String search="";
 		String MYPAGE_SEARCH_CODE=request.getParameter("MYPAGE_SEARCH_CODE");
 		
-		if(MYPAGE_SEARCH_CODE.equals("M1028")){
+		if(StringUtils.isEmpty(MYPAGE_SEARCH_CODE)){
+			MYPAGE_SEARCH_CODE=Constant.SEARCH_N_MYPAGE_CODE;
+		}
+		
+		if(StringUtils.equalsIgnoreCase(MYPAGE_SEARCH_CODE, "M1028")){
+		//if(MYPAGE_SEARCH_CODE.equals("M1028")){
 			search=request.getParameter("search");
 		}
 		System.out.println("mate_no : " + mem_no);
@@ -169,7 +184,7 @@ public class MyPageServiceImpl implements MyPageService {
 		mav.addObject("currentPage", currentPage);
 		mav.addObject("SCHEDULE_TYPE", SCHEDULE_TYPE);
 		mav.addObject("uandMe", uandMe);
-		mav.setViewName("/user/myPage/myPage");
+		mav.setViewName("/user/mypage/myPage");
 		
 		return mav;
 	}
@@ -195,7 +210,7 @@ public class MyPageServiceImpl implements MyPageService {
 		
 		mav.addObject("mateCheck", mateCheck);
 		mav.addObject("memberDto", memberDto);
-		mav.setViewName("/user/myPage/myPage");
+		mav.setViewName("/user/mypage/myPage");
 		return mav;
 	}
 
@@ -221,7 +236,7 @@ public class MyPageServiceImpl implements MyPageService {
 		
 		mav.addObject("mateCheck", mateCheck);
 		mav.addObject("memberDto", memberDto);
-		mav.setViewName("/user/myPage/myPage");
+		mav.setViewName("/user/mypage/myPage");
 		return mav;
 	}
 
@@ -271,7 +286,7 @@ public class MyPageServiceImpl implements MyPageService {
 		mav.addObject("count", count);
 		mav.addObject("boardSize", boardSize);
 		mav.addObject("currentPage", currentPage);
-		mav.setViewName("/user/myPage/myPageFriends");
+		mav.setViewName("/user/mypage/myPageFriends");
 		
 		return mav;
 	}
@@ -304,7 +319,7 @@ public class MyPageServiceImpl implements MyPageService {
 		mav.addObject("mateCheck", 2);
 		mav.addObject("memberDto", memberDto);
 		mav.addObject("result", result);
-		mav.setViewName("/user/myPage/myPage");
+		mav.setViewName("/user/mypage/myPage");
 		
 		return mav;
 	}
@@ -345,7 +360,7 @@ public class MyPageServiceImpl implements MyPageService {
 		mav.addObject("count", count);
 		mav.addObject("boardSize", boardSize);
 		mav.addObject("currentPage", currentPage);
-		mav.setViewName("/user/myPage/myPageFriends");
+		mav.setViewName("/user/mypage/myPageFriends");
 		
 		return mav;
 	}
@@ -392,7 +407,7 @@ public class MyPageServiceImpl implements MyPageService {
 		mav.addObject("count", count);
 		mav.addObject("boardSize", boardSize);
 		mav.addObject("currentPage", currentPage);
-		mav.setViewName("/user/myPage/myPageBookMark");
+		mav.setViewName("/user/mypage/myPageBookMark");
 		
 		return mav;
 	}
@@ -433,7 +448,7 @@ public class MyPageServiceImpl implements MyPageService {
 		mav.addObject("count", count);
 		mav.addObject("boardSize", boardSize);
 		mav.addObject("currentPage", currentPage);
-		mav.setViewName("/user/myPage/myPageBookMark");
+		mav.setViewName("/user/mypage/myPageBookMark");
 		
 		return mav;
 	}
@@ -479,7 +494,7 @@ public class MyPageServiceImpl implements MyPageService {
 		mav.addObject("count", count);
 		mav.addObject("boardSize", boardSize);
 		mav.addObject("currentPage", currentPage);
-		mav.setViewName("/user/myPage/myPageBookMark");
+		mav.setViewName("/user/mypage/myPageBookMark");
 		
 		return mav;
 	}
