@@ -5,8 +5,8 @@
 <head>
 <meta charset="UTF-8">
 <title>방명록수정</title>
-<!-- Favicon -->
-<link rel="shortcut icon" href="favicon.ico">
+<!-- Favicon -->\
+<link rel="shortcut icon" href="/assets/favicon.ico">
 
 <!-- Web Fonts -->
 <link rel='stylesheet' type='text/css' href='//fonts.googleapis.com/css?family=Open+Sans:400,300,600&amp;subset=cyrillic,latin'>
