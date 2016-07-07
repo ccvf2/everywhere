@@ -7,7 +7,13 @@
 <c:import url="/WEB-INF/views/common/jquery.jsp" />
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<script src="/assets/plugins/jquery/jquery.min.js"></script>
 <script type="text/javascript">
+	$(document).ready(function() {
+		location.href = "/user/main/main.do";	
+	});
+</script>
+<!-- <script type="text/javascript">
 //alert("☆★로그인시 아이디패스워드 꼭 확인하세요. 성국이서버는@everwhere   제서버는@everywhere 빠진y가 추가 되었습니다. 비밀번호는 동일하게 1234567890 입니다.-성욱-★☆");
 
 	var requestURL="http://api.visitkorea.or.kr/TourAPI2_manual/sample/searchKeyword_sample2.xml";
@@ -28,11 +34,12 @@
 				})
 	})
 
-</script>
+</script> -->
 
 </head>
 
 <body>
+<!--
  <h3>spot 추가※ 절대 누르지마세요.(디비에 마구 쌓여버립니다.)</h3>
 <a href="/a/xmlparse/parse.do?areaCode=1">서울</a>
 <a href="/a/xmlparse/parse.do?areaCode=2">인천</a>
@@ -123,6 +130,7 @@
 		<br/><a href="/user/login/loginout.do">로그아웃</a>
 	</c:otherwise>
 </c:choose>
+ -->
 </body>
 
 </html>
