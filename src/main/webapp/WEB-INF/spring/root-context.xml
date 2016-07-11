@@ -9,11 +9,14 @@
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver" />
 		<!-- 배성욱 서버 -->
-		<!-- <property name="url" value="jdbc:oracle:thin:@ccvf3.mynetgear.com:54321:oracle" /> -->
+		<property name="url" value="jdbc:oracle:thin:@ccvf3.mynetgear.com:54321:ew"/>
+		<property name="username" value="ew"/>
+		<property name="password" value="Kosta108!"/>
+		
 		<!-- 곽성국 서버 -->
-		<property name="url" value="jdbc:oracle:thin:@ksg9155.asuscomm.com:1521:xe" />
+		<!-- <property name="url" value="jdbc:oracle:thin:@ksg9155.asuscomm.com:1521:xe" />
 		<property name="username" value="everywhere01" />
-		<property name="password" value="Zhtmxk2" />
+		<property name="password" value="Zhtmxk2" /> -->
 	</bean>
 	
 	<!-- 쿼리정의 Mapper Bean -->
